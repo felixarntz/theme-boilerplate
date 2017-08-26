@@ -62,3 +62,28 @@ function super_awesome_theme_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'super_awesome_theme_pingback_header' );
+
+/**
+ * Replaces the "[...]" used for automatically generated excerpts with an accessible 'Continue reading' link.
+ *
+ * @since 1.0.0
+ *
+ * @return string Accessible 'Continue reading' link prepended with an ellipsis.
+ */
+function super_awesome_theme_excerpt_more() {
+	$link = sprintf(
+		wp_kses(
+			/* translators: %s: post title */
+			__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'super-awesome-theme' ),
+			array(
+				'span' => array(
+					'class' => array(),
+				),
+			)
+		),
+		get_the_title()
+	);
+
+	return ' &hellip; ' . $link;
+}
+add_filter( 'excerpt_more', 'super_awesome_theme_excerpt_more' );
