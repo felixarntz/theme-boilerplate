@@ -7,7 +7,6 @@
  * @link    https://www.taco-themes.com/themes/super-awesome-theme/
  */
 
-
 $taxonomies = wp_list_filter( get_object_taxonomies( $post, 'objects' ), array(
 	'public' => true,
 ) );
