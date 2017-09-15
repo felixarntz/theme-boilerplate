@@ -2,6 +2,30 @@
 
 var pkg = require( './package.json' );
 
+var tags = [
+	'one-column',
+	'two-columns',
+	'left-sidebar',
+	'right-sidebar',
+	'flexible-header',
+	'accessibility-ready',
+	'custom-background',
+	'custom-colors',
+	'custom-header',
+	'custom-menu',
+	'custom-logo',
+	'editor-style',
+	'featured-image-header',
+	'featured-images',
+	'footer-widgets',
+	'full-width-template',
+	'post-formats',
+	'rtl-language-support',
+	'theme-options',
+	'threaded-comments',
+	'translation-ready'
+];
+
 var config = {
 	textDomain: 'super-awesome-theme',
 	domainPath: '/languages/',
@@ -13,7 +37,7 @@ var config = {
 	version: pkg.version,
 	license: 'GNU General Public License v3 or later',
 	licenseURI: 'https://www.gnu.org/licenses/gpl-3.0.html',
-	tags: pkg.keywords.join( ', ' ),
+	tags: tags.join( ', ' ),
 	contributors: [ 'flixos90', 'philliproth' ].join( ', ' ),
 	minRequired: '4.7',
 	testedUpTo: '4.8',
