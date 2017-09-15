@@ -156,12 +156,12 @@ gulp.task( 'pot', function( done ) {
 		'./template-parts/**/*.php'
 	];
 
-	gulp.src( phpFiles, { base: './' })
+	gulp.src( phpFiles )
 		.pipe( sort() )
 		.pipe( wpPot({
 			domain: config.textDomain,
-			destFile: './languages/' + config.textDomain + '.pot',
 			headers: {
+				'Project-Id-Version': config.themeName + ' ' + config.version,
 				'report-msgid-bugs-to': config.translateURI,
 				'x-generator': 'gulp-wp-pot',
 				'x-poedit-basepath': '.',
@@ -174,7 +174,7 @@ gulp.task( 'pot', function( done ) {
 				'x-textdomain-support': 'yes'
 			}
 		}) )
-		.pipe( gulp.dest( './' ) )
+		.pipe( gulp.dest( './languages/' + config.textDomain + '.pot' ) )
 		.on( 'end', done );
 });
 
