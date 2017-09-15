@@ -47,8 +47,7 @@ var config = {
 /* ---- DO NOT EDIT BELOW THIS LINE ---- */
 
 // WP theme header for style.css
-var themeheader =	'/*!\n' +
-					'Theme Name: ' + config.themeName + '\n' +
+var themeheader =	'Theme Name: ' + config.themeName + '\n' +
 					'Theme URI: ' + config.themeURI + '\n' +
 					'Author: ' + config.author + '\n' +
 					'Author URI: ' + config.authorURI + '\n' +
@@ -61,13 +60,11 @@ var themeheader =	'/*!\n' +
 					'Tags: ' + config.tags;
 
 // WP theme header for readme.txt
-var readmeheader =	'/*\n' +
-					'Contributors: ' + config.contributors + '\n' +
+var readmeheader =	'Contributors: ' + config.contributors + '\n' +
+					'Stable tag: ' + config.version + '\n' +
 					'Version: ' + config.version + '\n' +
 					'Requires at least: ' + config.minRequired + '\n' +
 					'Tested up to: ' + config.testedUpTo + '\n' +
-					'Stable tag: ' + config.version + '\n' +
-					'Version: ' + config.version + '\n' +
 					'License: ' + config.license + '\n' +
 					'License URI: ' + config.licenseURI + '\n' +
 					'Tags: ' + config.tags;
@@ -184,8 +181,8 @@ gulp.task( 'pot', function( done ) {
 // replace the theme header in assets/sass/style.scss
 gulp.task( 'header-replace', function( done ) {
 	gulp.src( './assets/sass/style.scss' )
-		.pipe( replace( /^\/\*!\s(.+)WordPress Theme, Copyright \(C\)/, '/*!\n' + themeheader + '\n\n' + config.themeName + 'WordPress Theme, Copyright (C)' ) )
-		.pipe( gulp.dest( './' ) )
+		.pipe( replace( /^\/\*!\s([\s\S]+)WordPress Theme, Copyright \(C\)/, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C)' ) )
+		.pipe( gulp.dest( './assets/sass/' ) )
 		.on( 'end', done );
 });
 
