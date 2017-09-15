@@ -201,7 +201,10 @@ gulp.task( 'init-replace', function( done ) {
 		'./assets/js/**/*.js',
 		'./assets/sass/style.scss',
 		'./style.css',
-		'./gulpfile.js'
+		'./rtl.css',
+		'./gulpfile.js',
+		'./package.json',
+		'./readme.txt'
 	];
 
 	gulp.src( files, { base: './' })
