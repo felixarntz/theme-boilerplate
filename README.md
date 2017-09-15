@@ -17,6 +17,6 @@ To create your own theme, download this repository. For the next steps, let's as
 9. Check the top of `gulpfile.js`, containing the `tags` and `config` objects. You might wanna update some details to your preferences.
 10. Run `gulp build` once to compile everything.
 
-Now you're good to go!
+Now you're good to go! One more thing: If you want to publish the theme on wordpress.org, it's recommended to remove the `/languages` directory, plus set the `config.domainPath` to `false` and remove the `pot` task in `gulpfile.js`.
 
-TODO: codeclimate.yml
+TODO: codeclimate.yml, PHPCS, PHPMD
