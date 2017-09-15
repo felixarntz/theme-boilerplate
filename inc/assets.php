@@ -16,6 +16,7 @@ function super_awesome_theme_enqueue_assets() {
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '': '.min';
 
 	wp_enqueue_style( 'super-awesome-theme-style', get_stylesheet_uri() );
+	wp_style_add_data( 'super-awesome-theme-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'super-awesome-theme-script', get_theme_file_uri( '/assets/js/theme' . $min . '.js' ), array(), SUPER_AWESOME_THEME_VERSION, true );
 

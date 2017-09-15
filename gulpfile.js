@@ -81,6 +81,7 @@ var jscs     = require( 'gulp-jscs' );
 var jshint   = require( 'gulp-jshint' );
 var rename   = require( 'gulp-rename' );
 var replace  = require( 'gulp-replace' );
+var rtlcss   = require( 'gulp-rtlcss' );
 var sass     = require( 'gulp-sass' );
 var sort     = require( 'gulp-sort' );
 var uglify   = require( 'gulp-uglify' );
@@ -106,6 +107,11 @@ gulp.task( 'sass', function( done ) {
 			outputStyle: 'expanded'
 		}) )
 		.pipe( csscomb() )
+		.pipe( gulp.dest( './' ) )
+		.pipe( rtlcss() )
+		.pipe( rename({
+			suffix: '-rtl'
+		}) )
 		.pipe( gulp.dest( './' ) )
 		.on( 'end', done );
 });

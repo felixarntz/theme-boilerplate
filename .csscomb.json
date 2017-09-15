@@ -117,6 +117,7 @@
     "letter-spacing",
     "text-align",
     "text-decoration",
+    "text-direction",
     "-webkit-text-emphasis",
     "text-emphasis",
     "-webkit-text-emphasis-color",
