@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying a result in a search page
+ * Template part for displaying a post in a search page
  *
  * @package Super_Awesome_Theme
  * @license GPL-3.0
