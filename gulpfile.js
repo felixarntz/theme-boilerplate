@@ -77,6 +77,7 @@ var gulp = require( 'gulp' );
 var cleanCss = require( 'gulp-clean-css' );
 var concat   = require( 'gulp-concat' );
 var csscomb  = require( 'gulp-csscomb' );
+var jscs     = require( 'gulp-jscs' );
 var jshint   = require( 'gulp-jshint' );
 var rename   = require( 'gulp-rename' );
 var replace  = require( 'gulp-replace' );
