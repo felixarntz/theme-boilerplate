@@ -114,8 +114,7 @@ gulp.task( 'sass', function( done ) {
 gulp.task( 'js', function( done ) {
 	var builderFiles = [
 		'./assets/js/**/*.js',
-		'!./assets/js/customize-preview.js',
-		'!./assets/js/customize-preview.min.js',
+		'!./assets/js/customizer.js',
 		'!./assets/js/html5.js',
 		'!./assets/js/theme.js',
 		'!./assets/js/theme.min.js'
@@ -127,26 +126,13 @@ gulp.task( 'js', function( done ) {
 		.pipe( jscs() )
 		.pipe( jscs.reporter() )
 		.pipe( concat( 'theme.js' ) )
-		.pipe( banner( assetheader ) )
 		.pipe( gulp.dest( './assets/js/' ) )
 		.pipe( uglify() )
 		.pipe( rename({
 			extname: '.min.js'
 		}) )
 		.pipe( gulp.dest( './assets/js/' ) )
-		.on( 'end', function() {
-			gulp.src( './assets/js/customize-preview.js' )
-				.pipe( jshint() )
-				.pipe( jshint.reporter( 'default' ) )
-				.pipe( jscs() )
-				.pipe( jscs.reporter() )
-				.pipe( uglify() )
-				.pipe( rename({
-					extname: '.min.js'
-				}) )
-				.pipe( gulp.dest( './assets/js/' ) )
-				.on( 'end', done );
-		});
+		.on( 'end', done );
 });
 
 // generate POT file

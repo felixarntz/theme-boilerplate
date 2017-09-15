@@ -13,8 +13,9 @@
   "undef": true,
   "unused": true,
   "browser": true,
-
   "globals": {
-    "console": true
+    "console": true,
+    "jQuery": true,
+    "wp": true
   }
 }
