@@ -6,7 +6,7 @@ const rootPath = process.cwd();
 
 const config = {
 	entry: {
-		main: [
+		theme: [
 			'./js/theme.js',
 			'./sass/style.scss',
 		],
@@ -21,8 +21,8 @@ const config = {
 	publicPath: `/app/themes/sage/${path.join( rootPath, 'assets/dist' )}/`,
 	manifest: {},
 	open: true,
-	//copy: 'images/**/*',
-	copy: [
+	copy: 'images/**/*',
+	copyFiles: [
 		'./js/html5.js',
 	],
 	proxyUrl: 'http://localhost:3000',

@@ -18,7 +18,9 @@ local.properties
 .cproject
 .buildpath
 nbproject/
+.cache-loader/
 composer.lock
+package-lock.json
 
 ############
 ## Vendor

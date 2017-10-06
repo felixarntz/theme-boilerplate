@@ -74,6 +74,7 @@
     "import-glob": "~1.5",
     "node-sass": "~4.5",
     "postcss-loader": "~2.0",
+    "postcss-csscomb": "~1.0",
     "postcss-safe-parser": "~3.0",
     "rimraf": "~2.6",
     "sass-loader": "~6.0",

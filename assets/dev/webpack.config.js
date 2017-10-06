@@ -11,6 +11,14 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const config = require('./config');
 
+// TODO: This does not work. Path of file is ignored.
+let copy = [];
+for ( let file of config.copyFiles ) {
+	copy.push({
+		from: file,
+	});
+}
+
 let webpackConfig = {
 	context: config.paths.dev,
 	entry: config.entry,
@@ -146,15 +154,9 @@ let webpackConfig = {
 			output: '[path][name].[ext]',
 			manifest: config.manifest,
 		}),*/
-		new CopyWebpackPlugin([
-			{
-				from: config.copy,
-				to: config.paths.dist,
-				toType: 'dir',
-			},
-		]),
+		new CopyWebpackPlugin(copy),
 		new ExtractTextPlugin({
-			filename: 'sass/[name].css',
+			filename: '../../style.css',
 			allChunks: true,
 			disable: config.enabled.watcher,
 		}),
@@ -196,6 +198,8 @@ let webpackConfig = {
 		}),
 	],
 };
+
+// TODO: RTL Styles, Minification Routine, Replacements.
 
 /* eslint-disable global-require */ /** Let's only load dependencies as needed */
 
