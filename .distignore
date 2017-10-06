@@ -1,0 +1,43 @@
+# folders and files to be ignored in distribution
+
+############
+## Package
+############
+
+composer.json
+composer.lock
+package.json
+README.md
+
+############
+## Dev Util
+############
+
+.csscomb.json
+.editorconfig
+.jscsrc
+.jshintrc
+Gruntfile.js
+gulpfile.js
+phpcs.xml
+phpcs.xml.dist
+phpmd.xml
+phpmd.xml.dist
+phpunit.xml
+phpunit.xml.dist
+
+############
+## Tests
+############
+
+tests
+.gitlab-ci.yml
+.travis.yml
+circle.yml
+
+############
+## Misc
+############
+
+.distignore
+.gitignore
