@@ -101,7 +101,7 @@ gulp.task( 'build', [ 'header-replace', 'readme-replace' ], function() {
 
 // compile Sass
 gulp.task( 'sass', function( done ) {
-	gulp.src( './assets/sass/style.scss' )
+	gulp.src( './assets/dev/sass/style.scss' )
 		.pipe( sass({
 			errLogToConsole: true,
 			outputStyle: 'expanded'
@@ -118,26 +118,18 @@ gulp.task( 'sass', function( done ) {
 
 // compile JavaScript
 gulp.task( 'js', function( done ) {
-	var builderFiles = [
-		'./assets/js/**/*.js',
-		'!./assets/js/customizer.js',
-		'!./assets/js/html5.js',
-		'!./assets/js/theme.js',
-		'!./assets/js/theme.min.js'
-	];
-
-	gulp.src( builderFiles )
+	gulp.src( './assets/dev/js/**/*.js' )
 		.pipe( jshint() )
 		.pipe( jshint.reporter( 'default' ) )
 		.pipe( jscs() )
 		.pipe( jscs.reporter() )
 		.pipe( concat( 'theme.js' ) )
-		.pipe( gulp.dest( './assets/js/' ) )
+		.pipe( gulp.dest( './assets/dist/js/' ) )
 		.pipe( uglify() )
 		.pipe( rename({
 			extname: '.min.js'
 		}) )
-		.pipe( gulp.dest( './assets/js/' ) )
+		.pipe( gulp.dest( './assets/dist/js/' ) )
 		.on( 'end', done );
 });
 
@@ -173,9 +165,9 @@ gulp.task( 'pot', function( done ) {
 
 // replace the theme header in assets/sass/style.scss
 gulp.task( 'header-replace', function( done ) {
-	gulp.src( './assets/sass/style.scss' )
+	gulp.src( './assets/dev/sass/style.scss' )
 		.pipe( replace( /^\/\*!\s([\s\S]+)WordPress Theme, Copyright \(C\)/, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C)' ) )
-		.pipe( gulp.dest( './assets/sass/' ) )
+		.pipe( gulp.dest( './assets/dev/sass/' ) )
 		.on( 'end', done );
 });
 
@@ -204,8 +196,9 @@ gulp.task( 'init-replace', function( done ) {
 		'./*.php',
 		'./inc/**/*.php',
 		'./template-parts/**/*.php',
-		'./assets/js/**/*.js',
-		'./assets/sass/style.scss',
+		'./assets/dist/js/**/*.js',
+		'./assets/dev/js/**/*.js',
+		'./assets/dev/sass/style.scss',
 		'./style.css',
 		'./rtl.css',
 		'./gulpfile.js',

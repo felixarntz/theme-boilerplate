@@ -54,6 +54,6 @@ function super_awesome_theme_customize_partial_blogdescription() {
  * @since 1.0.0
  */
 function super_awesome_theme_customize_preview_js() {
-	wp_enqueue_script( 'super-awesome-theme-customizer', get_theme_file_uri( '/assets/js/customizer.js' ), array( 'customize-preview' ), SUPER_AWESOME_THEME_VERSION, true );
+	wp_enqueue_script( 'super-awesome-theme-customizer', get_theme_file_uri( '/assets/dist/js/customizer.js' ), array( 'customize-preview' ), SUPER_AWESOME_THEME_VERSION, true );
 }
 add_action( 'customize_preview_init', 'super_awesome_theme_customize_preview_js' );

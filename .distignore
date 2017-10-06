@@ -17,8 +17,6 @@ README.md
 .editorconfig
 .jscsrc
 .jshintrc
-Gruntfile.js
-gulpfile.js
 phpcs.xml
 phpcs.xml.dist
 phpmd.xml
@@ -34,6 +32,13 @@ tests
 .gitlab-ci.yml
 .travis.yml
 circle.yml
+
+############
+## Vendor
+############
+
+node_modules/
+vendor/
 
 ############
 ## Misc
