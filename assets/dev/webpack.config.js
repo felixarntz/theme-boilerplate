@@ -3,10 +3,11 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const config = require('./config');
 
@@ -91,7 +92,7 @@ let webpackConfig = {
 							options: {
 								config: {
 									path: __dirname,
-									ctx: config
+									ctx: config,
 								},
 								sourceMap: config.enabled.sourceMaps,
 							},
@@ -145,17 +146,19 @@ let webpackConfig = {
 			output: '[path][name].[ext]',
 			manifest: config.manifest,
 		}),*/
+		new CopyWebpackPlugin([
+			{
+				from: config.copy,
+				to: config.paths.dist,
+				toType: 'dir',
+			},
+		]),
 		new ExtractTextPlugin({
 			filename: 'sass/[name].css',
 			allChunks: true,
 			disable: config.enabled.watcher,
 		}),
-		/*new webpack.ProvidePlugin({
-			$: 'jquery',
-			jQuery: 'jquery',
-			'window.jQuery': 'jquery',
-			Popper: 'popper.js/dist/umd/popper.js',
-		}),*/
+		new FriendlyErrorsWebpackPlugin(),
 		new webpack.LoaderOptionsPlugin({
 			minimize: config.enabled.optimize,
 			debug: config.enabled.watcher,
@@ -181,11 +184,16 @@ let webpackConfig = {
 				},
 			},
 		}),
+		/*new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+			'window.jQuery': 'jquery',
+			Popper: 'popper.js/dist/umd/popper.js',
+		}),*/
 		new StyleLintPlugin({
 			failOnError: ! config.enabled.watcher,
 			syntax: 'scss',
 		}),
-		new FriendlyErrorsWebpackPlugin(),
 	],
 };
 

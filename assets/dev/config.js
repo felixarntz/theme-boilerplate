@@ -21,7 +21,10 @@ const config = {
 	publicPath: `/app/themes/sage/${path.join( rootPath, 'assets/dist' )}/`,
 	manifest: {},
 	open: true,
-	copy: 'images/**/*',
+	//copy: 'images/**/*',
+	copy: [
+		'./js/html5.js',
+	],
 	proxyUrl: 'http://localhost:3000',
 	paths: {
 		root: rootPath,
@@ -35,6 +38,8 @@ const config = {
 	},
 	watch: [],
 };
+
+module.exports = config;
 
 if (process.env.NODE_ENV === undefined) {
 	process.env.NODE_ENV = isProduction ? 'production' : 'development';
