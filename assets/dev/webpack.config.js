@@ -20,10 +20,13 @@ for ( let file of config.copyScripts ) {
 		to: './js/[name].[ext]',
 	});
 }
-copy.push({
-	from: './images',
-	to: './images/[name].[ext]',
-})
+if ( config.imagesDir ) {
+	copy.push({
+		from: config.imagesDir,
+		to: config.imagesDir,
+		toType: 'dir',
+	});
+}
 
 let webpackConfig = {
 	context: config.paths.dev,
@@ -61,14 +64,23 @@ let webpackConfig = {
 				include: config.paths.dev,
 				loader: 'import-glob',
 			},
-			/*{
+			{
 				test: /\.js$/,
-				exclude: [/(node_modules|bower_components)(?![/|\\](bootstrap|foundation-sites))/],
-				use: [
-					{ loader: 'cache' },
-					{ loader: 'buble', options: { objectAssign: 'Object.assign' } },
+				exclude: [
+					/(node_modules|bower_components)(?![/|\\](bootstrap|foundation-sites))/,
 				],
-			},*/
+				use: [
+					{
+						loader: 'cache',
+					},
+					{
+						loader: 'buble',
+						options: {
+							objectAssign: 'Object.assign',
+						},
+					},
+				],
+			},
 			{
 				test: /\.css$/,
 				include: config.paths.dev,
@@ -196,12 +208,11 @@ let webpackConfig = {
 				},
 			},
 		}),
-		/*new webpack.ProvidePlugin({
+		new webpack.ProvidePlugin({
 			$: 'jquery',
 			jQuery: 'jquery',
 			'window.jQuery': 'jquery',
-			Popper: 'popper.js/dist/umd/popper.js',
-		}),*/
+		}),
 		new StyleLintPlugin({
 			failOnError: ! config.enabled.watcher,
 			syntax: 'scss',

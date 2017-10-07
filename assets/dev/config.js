@@ -24,6 +24,7 @@ const config = {
 		production: isProduction,
 		development: ! isProduction,
 	},
+	imagesDir: false, // alternative: './images'
 	copyScripts: [
 		'./js/html5.js',
 	],
