@@ -1,21 +1,23 @@
 'use strict'; // eslint-disable-line
 
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const CleanPlugin = require('clean-webpack-plugin');
-const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
+const webpack = require( 'webpack' );
+const merge = require( 'webpack-merge' );
+const CleanPlugin = require( 'clean-webpack-plugin' );
+const CopyGlobsPlugin = require( 'copy-globs-webpack-plugin' );
+const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
+const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
+const FriendlyErrorsWebpackPlugin = require( 'friendly-errors-webpack-plugin' );
+const StyleLintPlugin = require( 'stylelint-webpack-plugin' );
+const { default: ImageminPlugin } = require( 'imagemin-webpack-plugin' );
+const imageminMozjpeg = require( 'imagemin-mozjpeg' );
 
-const config = require('./config');
+const config = require( './config' );
 
-// TODO: This does not work. Path of file is ignored.
 let copy = [];
-for ( let file of config.copyFiles ) {
+for ( let file of config.copyScripts ) {
 	copy.push({
-		from: file,
+		from: './js/' + file,
+		to: config.paths.dist + '/js',
 	});
 }
 
@@ -24,7 +26,7 @@ let webpackConfig = {
 	entry: config.entry,
 	output: {
 		path: config.paths.dist,
-		//publicPath: config.publicPath,
+		publicPath: config.publicPath,
 		filename: 'js/[name].js',
 	},
 	stats: {
@@ -63,23 +65,35 @@ let webpackConfig = {
 					{ loader: 'buble', options: { objectAssign: 'Object.assign' } },
 				],
 			},*/
-			/*{
+			{
 				test: /\.css$/,
 				include: config.paths.dev,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style',
 					use: [
-						{ loader: 'cache' },
-						{ loader: 'css', options: { sourceMap: config.enabled.sourceMaps } },
+						{
+							loader: 'cache'
+						},
+						{
+							loader: 'css',
+							options: {
+								minimize: false,
+								sourceMap: config.enabled.sourceMaps,
+								url: false,
+							},
+						},
 						{
 							loader: 'postcss', options: {
-								config: { path: __dirname, ctx: config },
+								config: {
+									path: __dirname,
+									ctx: config,
+								},
 								sourceMap: config.enabled.sourceMaps,
 							},
 						},
 					],
 				}),
-			},*/
+			},
 			{
 				test: /\.scss$/,
 				include: config.paths.dev,
@@ -92,7 +106,9 @@ let webpackConfig = {
 						{
 							loader: 'css',
 							options: {
+								minimize: false,
 								sourceMap: config.enabled.sourceMaps,
+								url: false,
 							},
 						},
 						{
@@ -140,10 +156,10 @@ let webpackConfig = {
 		jquery: 'jQuery',
 	},
 	plugins: [
-		/*new CleanPlugin([config.paths.dist], {
+		new CleanPlugin([config.paths.dist], {
 			root: config.paths.root,
 			verbose: false,
-		}),*/
+		}),
 		/**
 		 * It would be nice to switch to copy-webpack-plugin, but
 		 * unfortunately it doesn't provide a reliable way of
@@ -162,7 +178,7 @@ let webpackConfig = {
 		}),
 		new FriendlyErrorsWebpackPlugin(),
 		new webpack.LoaderOptionsPlugin({
-			minimize: config.enabled.optimize,
+			minimize: false,
 			debug: config.enabled.watcher,
 			stats: {
 				colors: true,
@@ -196,16 +212,34 @@ let webpackConfig = {
 			failOnError: ! config.enabled.watcher,
 			syntax: 'scss',
 		}),
+		/*new ImageminPlugin({
+			optipng: {
+				optimizationLevel: 7,
+			},
+			gifsicle: {
+				optimizationLevel: 3,
+			},
+			pngquant: {
+				quality: '65-90',
+				speed: 4,
+			},
+			svgo: {
+				removeUnknownsAndDefaults: false,
+				cleanupIDs: false,
+			},
+			plugins: [
+				imageminMozjpeg({
+					quality: 75,
+				}),
+			],
+			disable: config.enabled.watcher,
+		}),*/
 	],
 };
 
 // TODO: RTL Styles, Minification Routine, Replacements.
 
 /* eslint-disable global-require */ /** Let's only load dependencies as needed */
-
-if (config.enabled.optimize) {
-	webpackConfig = merge(webpackConfig, require('./webpack.config.optimize'));
-}
 
 if (config.env.production) {
 	webpackConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
