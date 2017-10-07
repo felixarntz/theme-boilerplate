@@ -24,9 +24,8 @@ const config = {
 		production: isProduction,
 		development: ! isProduction,
 	},
-	copy: 'images/**/*',
 	copyScripts: [
-		'html5.js',
+		'./js/html5.js',
 	],
 	publicPath: '/wp-content/themes/' + getLastPathSegment( rootPath ),
 	proxyUrl: 'http://localhost:3000',

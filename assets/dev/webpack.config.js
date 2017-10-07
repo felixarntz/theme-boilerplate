@@ -16,10 +16,14 @@ const config = require( './config' );
 let copy = [];
 for ( let file of config.copyScripts ) {
 	copy.push({
-		from: './js/' + file,
-		to: config.paths.dist + '/js',
+		from: file,
+		to: './js/[name].[ext]',
 	});
 }
+copy.push({
+	from: './images',
+	to: './images/[name].[ext]',
+})
 
 let webpackConfig = {
 	context: config.paths.dev,
@@ -160,17 +164,7 @@ let webpackConfig = {
 			root: config.paths.root,
 			verbose: false,
 		}),
-		/**
-		 * It would be nice to switch to copy-webpack-plugin, but
-		 * unfortunately it doesn't provide a reliable way of
-		 * tracking the before/after file names
-		 */
-		/*new CopyGlobsPlugin({
-			pattern: config.copy,
-			output: '[path][name].[ext]',
-			manifest: config.manifest,
-		}),*/
-		new CopyWebpackPlugin(copy),
+		new CopyWebpackPlugin( copy ),
 		new ExtractTextPlugin({
 			filename: '../../style.css',
 			allChunks: true,
@@ -212,7 +206,7 @@ let webpackConfig = {
 			failOnError: ! config.enabled.watcher,
 			syntax: 'scss',
 		}),
-		/*new ImageminPlugin({
+		new ImageminPlugin({
 			optipng: {
 				optimizationLevel: 7,
 			},
@@ -233,7 +227,7 @@ let webpackConfig = {
 				}),
 			],
 			disable: config.enabled.watcher,
-		}),*/
+		}),
 	],
 };
 
