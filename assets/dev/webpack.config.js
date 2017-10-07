@@ -8,6 +8,8 @@ const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 const FriendlyErrorsWebpackPlugin = require( 'friendly-errors-webpack-plugin' );
 const StyleLintPlugin = require( 'stylelint-webpack-plugin' );
+const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' );
+const UnminifiedWebpackPlugin = require( 'unminified-webpack-plugin' );
 const { default: ImageminPlugin } = require( 'imagemin-webpack-plugin' );
 const imageminMozjpeg = require( 'imagemin-mozjpeg' );
 
@@ -34,7 +36,7 @@ let webpackConfig = {
 	output: {
 		path: config.paths.dist,
 		publicPath: config.publicPath,
-		filename: 'js/[name].js',
+		filename: 'js/[name].min.js',
 	},
 	stats: {
 		hash: false,
@@ -217,6 +219,14 @@ let webpackConfig = {
 			failOnError: ! config.enabled.watcher,
 			syntax: 'scss',
 		}),
+		new UglifyJSPlugin({
+			uglifyOptions: {
+				warnings: false,
+			},
+		}),
+		new UnminifiedWebpackPlugin({
+			exclude: /\.css$/,
+		}),
 		new ImageminPlugin({
 			optipng: {
 				optimizationLevel: 7,
@@ -242,7 +252,7 @@ let webpackConfig = {
 	],
 };
 
-// TODO: RTL Styles, Minification Routine, Replacements.
+// TODO: RTL Styles, Replacements.
 
 /* eslint-disable global-require */ /** Let's only load dependencies as needed */
 
