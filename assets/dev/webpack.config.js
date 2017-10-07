@@ -252,7 +252,7 @@ let webpackConfig = {
 	],
 };
 
-// TODO: RTL Styles, Replacements.
+// TODO: RTL Styles, Replacements, POT.
 
 /* eslint-disable global-require */ /** Let's only load dependencies as needed */
 
