@@ -13,10 +13,11 @@ README.md
 ## Dev Util
 ############
 
-.csscomb.json
+.cache-loader
+assets/dev
 .editorconfig
-.jscsrc
-.jshintrc
+.eslintrc
+.stylelintrc
 phpcs.xml
 phpcs.xml.dist
 phpmd.xml
@@ -37,8 +38,8 @@ circle.yml
 ## Vendor
 ############
 
-node_modules/
-vendor/
+node_modules
+vendor
 
 ############
 ## Misc
