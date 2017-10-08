@@ -25,10 +25,9 @@ function super_awesome_theme_jetpack_setup() {
 		'post-details' => array(
 			'stylesheet' => 'super-awesome-theme-style',
 			'date'       => '.posted-on',
-			'categories' => '.cat-links',
-			'tags'       => '.tags-links',
+			'categories' => '.category-links',
+			'tags'       => '.tag-links',
 			'author'     => '.byline',
-			'comment'    => '.comments-link',
 		),
 	) );
 }
