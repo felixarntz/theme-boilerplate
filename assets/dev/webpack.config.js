@@ -10,6 +10,7 @@ const StyleLintPlugin = require( 'stylelint-webpack-plugin' );
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' );
 const UnminifiedWebpackPlugin = require( 'unminified-webpack-plugin' );
 const WebpackRTLPlugin = require( 'webpack-rtl-plugin' );
+const StringReplacePlugin = require( 'string-replace-webpack-plugin' );
 const { default: ImageminPlugin } = require( 'imagemin-webpack-plugin' );
 const imageminMozjpeg = require( 'imagemin-mozjpeg' );
 
@@ -65,6 +66,66 @@ let webpackConfig = {
 				test: /\.(js|s?[ca]ss)$/,
 				include: config.paths.dev,
 				loader: 'import-glob',
+			},
+			{
+				enforce: 'pre',
+				test: /style\.scss$/,
+				include: config.paths.dev,
+				loader: StringReplacePlugin.replace({
+					replacements: [
+						{
+							pattern: /^\/\*! \-\-\- Theme header will be inserted here automatically\. \-\-\- \*\//,
+							replacement: function () {
+								let header =	'Theme Name: ' + config.themeData.themeName + '\n' +
+												'Theme URI: ' + config.themeData.themeURI + '\n' +
+												'Author: ' + config.themeData.author + '\n' +
+												'Author URI: ' + config.themeData.authorURI + '\n' +
+												'Description: ' + config.themeData.description + '\n' +
+												'Version: ' + config.themeData.version + '\n' +
+												'License: ' + config.themeData.license + '\n' +
+												'License URI: ' + config.themeData.licenseURI + '\n' +
+												'Text Domain: ' + config.themeData.textDomain + '\n' +
+												( config.themeData.domainPath ? 'Domain Path: ' + config.themeData.domainPath + '\n' : '' ) +
+												'Tags: ' + config.themeData.tags;
+
+								let gplNote =	'This program is free software: you can redistribute it and/or modify\n' +
+												'it under the terms of the GNU General Public License as published by\n' +
+												'the Free Software Foundation, either version 3 of the License, or\n' +
+												'(at your option) any later version.\n\n' +
+												'This program is distributed in the hope that it will be useful,\n' +
+												'but WITHOUT ANY WARRANTY; without even the implied warranty of\n' +
+												'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n' +
+												'GNU General Public License for more details.';
+
+								return '/*!\n' + header + '\n\n' + config.themeData.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.themeData.author + '\n\n' + gplNote + '\n*/';
+							},
+						},
+					],
+				}),
+			},
+			// TODO: The following replacement does not work.
+			{
+				enforce: 'pre',
+				test: /readme\.txt/,
+				include: config.paths.root,
+				loader: StringReplacePlugin.replace({
+					replacements: [
+						{
+							pattern: /^\=\=\= (.+) \=\=\=([\s\S]+)\=\= Description \=\=/m,
+							replacement: function () {
+								let header =	'Contributors: ' + config.themeData.contributors + '\n' +
+												'Stable tag: ' + config.themeData.version + '\n' +
+												'Version: ' + config.themeData.version + '\n' +
+												'Requires at least: ' + config.themeData.minRequired + '\n' +
+												'Tested up to: ' + config.themeData.testedUpTo + '\n' +
+												'License: ' + config.themeData.license + '\n' +
+												'License URI: ' + config.themeData.licenseURI + '\n' +
+												'Tags: ' + config.themeData.tags;
+								return '=== ' + config.themeData.themeName + ' ===\n\n' + header + '\n\n== Description ==';
+							},
+						},
+					],
+				}),
 			},
 			{
 				test: /\.js$/,
@@ -148,15 +209,6 @@ let webpackConfig = {
 					],
 				}),
 			},
-			/*{
-				test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
-				include: config.paths.dev,
-				loader: 'url',
-				options: {
-					limit: 4096,
-					name: '[path][name].[ext]',
-				},
-			},*/
 		],
 	},
 	resolve: {
@@ -231,6 +283,7 @@ let webpackConfig = {
 			filename: '../../style-rtl.css',
 			minify: false,
 		}),
+		new StringReplacePlugin(),
 		new ImageminPlugin({
 			optipng: {
 				optimizationLevel: 7,
@@ -256,7 +309,7 @@ let webpackConfig = {
 	],
 };
 
-// TODO: Replacements, POT.
+// TODO: Initial replacements, POT.
 
 /* eslint-disable global-require */ /** Let's only load dependencies as needed */
 

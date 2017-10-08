@@ -76,6 +76,7 @@
     "postcss-safe-parser": "~3.0",
     "rimraf": "~2.6",
     "sass-loader": "~6.0",
+    "string-replace-webpack-plugin": "~0.1",
     "style-loader": "^0.18.2",
     "stylelint": "~7.12",
     "stylelint-config-standard": "~16.0",

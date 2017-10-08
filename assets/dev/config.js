@@ -10,7 +10,50 @@ function getLastPathSegment( path ) {
 	return parts.pop();
 }
 
+var pkg = require( '../../package.json' );
+
+var tags = [
+	'one-column',
+	'two-columns',
+	'left-sidebar',
+	'right-sidebar',
+	'flexible-header',
+	'accessibility-ready',
+	'custom-background',
+	'custom-colors',
+	'custom-header',
+	'custom-menu',
+	'custom-logo',
+	'editor-style',
+	'featured-image-header',
+	'featured-images',
+	'footer-widgets',
+	'full-width-template',
+	'post-formats',
+	'rtl-language-support',
+	'theme-options',
+	'threaded-comments',
+	'translation-ready'
+];
+
 const config = {
+	themeData: {
+		textDomain: 'super-awesome-theme',
+		domainPath: '/languages/',
+		themeName: 'Super Awesome Theme',
+		themeURI: pkg.homepage,
+		author: pkg.author.name,
+		authorURI: pkg.author.url,
+		description: pkg.description,
+		version: pkg.version,
+		license: 'GNU General Public License v3 or later',
+		licenseURI: 'https://www.gnu.org/licenses/gpl-3.0.html',
+		tags: tags.join( ', ' ),
+		contributors: [ 'flixos90', 'philliproth' ].join( ', ' ),
+		minRequired: '4.7',
+		testedUpTo: '4.9',
+		translateURI: 'https://translate.wordpress.org/projects/wp-themes/super-awesome-theme',
+	},
 	entry: {
 		theme: [
 			'./js/theme.js',
