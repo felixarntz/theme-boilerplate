@@ -23,7 +23,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
 # Normalize
@@ -44,11 +44,11 @@ GNU General Public License for more details.
 # Media
 	## Captions
 	## Galleries
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
+------------------------------------------------------------- */
+/* -------------------------------------------------------------
 # Normalize
 Styles based on Normalize v5.0.0 @link https://github.com/necolas/normalize.css
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 html {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
@@ -115,12 +115,12 @@ dfn {
 }
 
 h1 {
-	margin: 0.67em 0;
+	margin: 0.67em 0; 
 	font-size: 2em;
 }
 
 mark {
-	color: #000;
+	color: #000; 
 	background: #ff0;
 }
 
@@ -169,7 +169,7 @@ code,
 kbd,
 pre,
 samp {
-	font-family: monospace, monospace;
+	font-family: monospace;
 	font-size: 1em;
 }
 
@@ -178,7 +178,7 @@ input,
 optgroup,
 select,
 textarea {
-	margin: 0;
+	margin: 0; 
 	color: inherit;
 	font: inherit;
 }
@@ -207,7 +207,7 @@ html input[disabled] {
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-	padding: 0;
+	padding: 0; 
 	border: 0;
 }
 
@@ -232,13 +232,13 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 fieldset {
-	padding: 0.35em 0.625em 0.75em;
+	padding: 0.35em 0.625em 0.75em; 
 	margin: 0 2px;
 	border: 1px solid #c0c0c0;
 }
 
 legend {
-	padding: 0;
+	padding: 0; 
 	border: 0;
 }
 
@@ -260,9 +260,9 @@ th {
 	padding: 0;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Typography
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 body,
 button,
 input,
@@ -306,7 +306,7 @@ address {
 
 pre {
 	max-width: 100%;
-	padding: 1.6em;
+	padding: 1.6em; 
 	margin-bottom: 1.6em;
 	overflow: auto;
 	font-family: "Courier 10 Pitch", Courier, monospace;
@@ -320,7 +320,7 @@ code,
 kbd,
 tt,
 var {
-	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace; 
 	font-size: 15px;
 	font-size: 0.9375rem;
 }
@@ -333,7 +333,7 @@ acronym {
 
 mark,
 ins {
-	text-decoration: none;
+	text-decoration: none; 
 	background: #fff9c0;
 }
 
@@ -341,9 +341,9 @@ big {
 	font-size: 125%;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Elements
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 html {
 	box-sizing: border-box;
 	text-direction: rtl;
@@ -365,7 +365,6 @@ blockquote,
 q {
 	quotes: "" "";
 }
-
 blockquote:before,
 blockquote:after,
 q:before,
@@ -375,7 +374,7 @@ q:after {
 
 hr {
 	height: 1px;
-	margin-bottom: 1.5em;
+	margin-bottom: 1.5em; 
 	background-color: #ccc;
 	border: 0;
 }
@@ -420,18 +419,18 @@ figure {
 }
 
 table {
-	width: 100%;
+	width: 100%; 
 	margin: 0 0 1.5em;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Forms
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-	padding: 0.6em 1em 0.4em;
+	padding: 0.6em 1em 0.4em; 
 	color: rgba(0, 0, 0, 0.8);
 	font-size: 12px;
 	font-size: 0.75rem;
@@ -441,14 +440,12 @@ input[type="submit"] {
 	border-color: #ccc #ccc #bbb;
 	border-radius: 3px;
 }
-
 button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
 	border-color: #ccc #bbb #aaa;
 }
-
 button:active,
 button:focus,
 input[type="button"]:active,
@@ -476,12 +473,11 @@ input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
 textarea {
-	padding: 3px;
+	padding: 3px; 
 	color: #666;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 }
-
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
@@ -509,85 +505,73 @@ textarea {
 	width: 100%;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Navigation
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
+------------------------------------------------------------- */
+/* -------------------------------------------------------------
 ## Links
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 a {
 	color: royalblue;
 }
-
 a:visited {
 	color: purple;
 }
-
 a:hover,
 a:focus,
 a:active {
 	color: midnightblue;
 }
-
 a:focus {
 	outline: thin dotted;
 }
-
 a:hover,
 a:active {
 	outline: 0;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 ## Menus
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .main-navigation {
 	display: block;
 	float: right;
-	width: 100%;
+	width: 100%; 
 	clear: both;
 }
-
 .main-navigation ul {
 	display: none;
-	padding-right: 0;
+	padding-right: 0; 
 	margin: 0;
 	list-style: none;
 }
-
 .main-navigation ul ul {
 	position: absolute;
 	top: 100%;
 	right: -999em;
-	z-index: 99999;
+	z-index: 99999; 
 	float: right;
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 }
-
 .main-navigation ul ul ul {
-	top: 0;
+	top: 0; 
 	right: -999em;
 }
-
 .main-navigation ul ul li:hover > ul,
 .main-navigation ul ul li.focus > ul {
 	right: 100%;
 }
-
 .main-navigation ul ul a {
 	width: 200px;
 }
-
 .main-navigation ul li:hover > ul,
 .main-navigation ul li.focus > ul {
 	right: auto;
 }
-
 .main-navigation li {
-	position: relative;
+	position: relative; 
 	float: right;
 }
-
 .main-navigation a {
 	display: block;
 	text-decoration: none;
@@ -628,13 +612,13 @@ a:active {
 .posts-navigation .nav-next,
 .post-navigation .nav-next {
 	float: left;
-	width: 50%;
+	width: 50%; 
 	text-align: left;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Accessibility
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 /* Text meant only for screen readers. */
 .screen-reader-text {
 	position: absolute !important;
@@ -645,7 +629,6 @@ a:active {
 	word-wrap: normal !important;
 	/* Many screen reader and browser combinations announce broken words as they would appear visually. */
 }
-
 .screen-reader-text:focus {
 	top: 5px;
 	right: 5px;
@@ -672,9 +655,9 @@ a:active {
 	outline: 0;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Alignments
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .alignleft {
 	display: inline;
 	float: right;
@@ -694,9 +677,9 @@ a:active {
 	clear: both;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Clearings
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .clear:before,
 .clear:after,
 .entry-content:before,
@@ -723,24 +706,23 @@ a:active {
 	clear: both;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Widgets
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .widget {
 	margin: 0 0 1.5em;
 	/* Make sure select elements fit in widgets. */
 }
-
 .widget select {
 	max-width: 100%;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Content
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
+------------------------------------------------------------- */
+/* -------------------------------------------------------------
 ## Posts and pages
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .sticky {
 	display: block;
 }
@@ -760,13 +742,13 @@ a:active {
 }
 
 .page-links {
-	margin: 0 0 1.5em;
+	margin: 0 0 1.5em; 
 	clear: both;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 ## Comments
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .comment-content a {
 	word-wrap: break-word;
 }
@@ -775,9 +757,9 @@ a:active {
 	display: block;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Infinite scroll
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 /* Globally hidden elements when Infinite Scroll is supported and in use. */
 .infinite-scroll .posts-navigation,
 .infinite-scroll.neverending .site-footer {
@@ -790,13 +772,13 @@ a:active {
 	display: block;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 # Media
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .page-content .wp-smiley,
 .entry-content .wp-smiley,
 .comment-content .wp-smiley {
-	padding: 0;
+	padding: 0; 
 	margin-top: 0;
 	margin-bottom: 0;
 	border: none;
@@ -814,20 +796,18 @@ object {
 	display: inline-block;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 ## Captions
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .wp-caption {
-	max-width: 100%;
+	max-width: 100%; 
 	margin-bottom: 1.5em;
 }
-
 .wp-caption img[class*="wp-image-"] {
 	display: block;
-	margin-left: auto;
+	margin-left: auto; 
 	margin-right: auto;
 }
-
 .wp-caption .wp-caption-text {
 	margin: 0.8075em 0;
 }
@@ -836,48 +816,40 @@ object {
 	text-align: center;
 }
 
-/*--------------------------------------------------------------
+/* -------------------------------------------------------------
 ## Galleries
---------------------------------------------------------------*/
+------------------------------------------------------------- */
 .gallery {
 	margin-bottom: 1.5em;
 }
 
 .gallery-item {
 	display: inline-block;
-	width: 100%;
+	width: 100%; 
 	text-align: center;
 	vertical-align: top;
 }
-
 .gallery-columns-2 .gallery-item {
 	max-width: 50%;
 }
-
 .gallery-columns-3 .gallery-item {
 	max-width: 33.33333%;
 }
-
 .gallery-columns-4 .gallery-item {
 	max-width: 25%;
 }
-
 .gallery-columns-5 .gallery-item {
 	max-width: 20%;
 }
-
 .gallery-columns-6 .gallery-item {
 	max-width: 16.66667%;
 }
-
 .gallery-columns-7 .gallery-item {
 	max-width: 14.28571%;
 }
-
 .gallery-columns-8 .gallery-item {
 	max-width: 12.5%;
 }
-
 .gallery-columns-9 .gallery-item {
 	max-width: 11.11111%;
 }

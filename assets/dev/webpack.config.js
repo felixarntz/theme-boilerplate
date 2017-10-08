@@ -3,13 +3,13 @@
 const webpack = require( 'webpack' );
 const merge = require( 'webpack-merge' );
 const CleanPlugin = require( 'clean-webpack-plugin' );
-const CopyGlobsPlugin = require( 'copy-globs-webpack-plugin' );
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 const FriendlyErrorsWebpackPlugin = require( 'friendly-errors-webpack-plugin' );
 const StyleLintPlugin = require( 'stylelint-webpack-plugin' );
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' );
 const UnminifiedWebpackPlugin = require( 'unminified-webpack-plugin' );
+const WebpackRTLPlugin = require( 'webpack-rtl-plugin' );
 const { default: ImageminPlugin } = require( 'imagemin-webpack-plugin' );
 const imageminMozjpeg = require( 'imagemin-mozjpeg' );
 
@@ -227,6 +227,10 @@ let webpackConfig = {
 		new UnminifiedWebpackPlugin({
 			exclude: /\.css$/,
 		}),
+		new WebpackRTLPlugin({
+			filename: '../../style-rtl.css',
+			minify: false,
+		}),
 		new ImageminPlugin({
 			optipng: {
 				optimizationLevel: 7,
@@ -252,7 +256,7 @@ let webpackConfig = {
 	],
 };
 
-// TODO: RTL Styles, Replacements, POT.
+// TODO: Replacements, POT.
 
 /* eslint-disable global-require */ /** Let's only load dependencies as needed */
 
