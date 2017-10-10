@@ -53,4 +53,23 @@
 			}
 		} );
 	} );
+
+	// Sidebar size.
+	wp.customize( 'sidebar_size', function( value ) {
+		value.bind( function( to ) {
+			var classes = Object.keys( themeCustomizeData.sidebarSizeChoices ).map(function(setting) {
+				return 'sidebar-' + setting;
+			});
+			var index;
+
+			to = 'sidebar-' + to;
+			index = classes.indexOf( to );
+
+			if ( index > -1 ) {
+				classes.splice( index, 1 );
+
+				$( 'body' ).removeClass( classes.join( ' ' ) ).addClass( to );
+			}
+		} );
+	} );
 } )( jQuery );

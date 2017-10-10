@@ -50,6 +50,9 @@ function super_awesome_theme_body_classes( $classes ) {
 	// Adds a class to indicate the sidebar mode.
 	$classes[] = get_theme_mod( 'sidebar_mode', 'right-sidebar' );
 
+	// Adds a class to indicate the sidebar size.
+	$classes[] = 'sidebar-' . get_theme_mod( 'sidebar_size', 'medium' );
+
 	return $classes;
 }
 add_filter( 'body_class', 'super_awesome_theme_body_classes' );

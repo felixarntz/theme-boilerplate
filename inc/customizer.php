@@ -48,6 +48,19 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'choices'     => super_awesome_theme_customize_get_sidebar_mode_choices(),
 	) );
 
+	$wp_customize->add_setting( 'sidebar_size', array(
+		'default'           => 'medium',
+		'transport'         => 'postMessage',
+		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_size',
+	) );
+	$wp_customize->add_control( 'sidebar_size', array(
+		'section'     => 'sidebars',
+		'label'       => __( 'Sidebar Size', 'super-awesome-theme' ),
+		'description' => __( 'Specify the width of the sidebar.', 'super-awesome-theme' ),
+		'type'        => 'radio',
+		'choices'     => super_awesome_theme_customize_get_sidebar_size_choices(),
+	) );
+
 	$wp_customize->add_setting( 'blog_sidebar_enabled', array(
 		'default'           => '',
 		'transport'         => 'postMessage',
@@ -119,6 +132,40 @@ function super_awesome_theme_customize_get_sidebar_mode_choices() {
 }
 
 /**
+ * Validates the 'sidebar_size' customizer setting.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Error $validity Error object to add possible errors to.
+ * @param mixed    $value    Value to validate.
+ * @return WP_Error Possibly modified error object.
+ */
+function super_awesome_theme_customize_validate_sidebar_size( $validity, $value ) {
+	$choices = super_awesome_theme_customize_get_sidebar_size_choices();
+
+	if ( ! isset( $choices[ $value ] ) ) {
+		$validity->add( 'invalid_choice', __( 'Invalid choice.', 'super-awesome-theme' ) );
+	}
+
+	return $validity;
+}
+
+/**
+ * Gets the available choices for the 'sidebar_size' customizer setting.
+ *
+ * @since 1.0.0
+ *
+ * @return array Array where values are the keys, and labels are the values.
+ */
+function super_awesome_theme_customize_get_sidebar_size_choices() {
+	return array(
+		'small'  => __( 'Small', 'super-awesome-theme' ),
+		'medium' => __( 'Medium', 'super-awesome-theme' ),
+		'large'  => __( 'Large', 'super-awesome-theme' ),
+	);
+}
+
+/**
  * Renders the primary or blog sidebar for the selective refresh partial.
  *
  * @since 1.0.0
@@ -138,6 +185,7 @@ function super_awesome_theme_customize_preview_js() {
 	wp_enqueue_script( 'super-awesome-theme-customizer', get_theme_file_uri( '/assets/dist/js/customizer' . $min . '.js' ), array( 'customize-preview' ), SUPER_AWESOME_THEME_VERSION, true );
 	wp_localize_script( 'super-awesome-theme-customizer', 'themeCustomizeData', array(
 		'sidebarModeChoices' => super_awesome_theme_customize_get_sidebar_mode_choices(),
+		'sidebarSizeChoices' => super_awesome_theme_customize_get_sidebar_size_choices(),
 	) );
 }
 add_action( 'customize_preview_init', 'super_awesome_theme_customize_preview_js' );
