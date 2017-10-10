@@ -39,4 +39,18 @@
 			}
 		} );
 	} );
+
+	// Sidebar mode.
+	wp.customize( 'sidebar_mode', function( value ) {
+		value.bind( function( to ) {
+			var classes = Object.keys( themeCustomizeData.sidebarModeChoices );
+			var index   = classes.indexOf( to );
+
+			if ( index > -1 ) {
+				classes.splice( index, 1 );
+
+				$( 'body' ).removeClass( classes.join( ' ' ) ).addClass( to );
+			}
+		} );
+	} );
 } )( jQuery );

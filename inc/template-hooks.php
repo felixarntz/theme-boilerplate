@@ -47,6 +47,9 @@ function super_awesome_theme_body_classes( $classes ) {
 		$classes[] = 'hfeed';
 	}
 
+	// Adds a class to indicate the sidebar mode.
+	$classes[] = get_theme_mod( 'sidebar_mode', 'right-sidebar' );
+
 	return $classes;
 }
 add_filter( 'body_class', 'super_awesome_theme_body_classes' );

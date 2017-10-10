@@ -41,5 +41,8 @@ get_header(); ?>
 	</section><!-- #primary -->
 
 <?php
-get_sidebar();
+if ( 'no-sidebar' !== get_theme_mod( 'sidebar_mode', 'right-sidebar' ) || is_customize_preview() ) {
+	get_sidebar( super_awesome_theme_get_current_sidebar_name() );
+}
+
 get_footer();

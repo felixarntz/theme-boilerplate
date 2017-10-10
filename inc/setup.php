@@ -113,9 +113,19 @@ add_action( 'after_setup_theme', 'super_awesome_theme_register_nav_menus', 11 );
  */
 function super_awesome_theme_register_widget_areas() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'super-awesome-theme' ),
+		'name'          => esc_html__( 'Primary Sidebar', 'super-awesome-theme' ),
 		'id'            => 'primary',
-		'description'   => esc_html__( 'The sidebar will be displayed on the side of your main content.', 'super-awesome-theme' ),
+		'description'   => esc_html__( 'The primary sidebar will be displayed on the side of your main content.', 'super-awesome-theme' ),
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => esc_html__( 'Blog Sidebar', 'super-awesome-theme' ),
+		'id'            => 'blog',
+		'description'   => esc_html__( 'If enabled, the blog sidebar will be displayed on the side of your blog content.', 'super-awesome-theme' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
