@@ -130,7 +130,6 @@ function super_awesome_theme_register_widget_areas() {
 		$blog_sidebar_description .= ' ' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' );
 	}
 
-
 	register_sidebar( array(
 		'name'          => __( 'Blog Sidebar', 'super-awesome-theme' ),
 		'id'            => 'blog',
