@@ -12,6 +12,6 @@ if ( ! is_active_sidebar( 'blog' ) ) {
 }
 ?>
 
-<aside id="secondary" class="widget-area">
+<aside id="secondary" class="widget-area" aria-label="<?php esc_attr_e( 'Blog Sidebar', 'super-awesome-theme' ); ?>">
 	<?php dynamic_sidebar( 'blog' ); ?>
 </aside><!-- #secondary -->

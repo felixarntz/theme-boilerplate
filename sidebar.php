@@ -12,6 +12,6 @@ if ( ! is_active_sidebar( 'primary' ) ) {
 }
 ?>
 
-<aside id="secondary" class="widget-area">
+<aside id="secondary" class="widget-area" aria-label="<?php esc_attr_e( 'Primary Sidebar', 'super-awesome-theme' ); ?>">
 	<?php dynamic_sidebar( 'primary' ); ?>
 </aside><!-- #secondary -->
