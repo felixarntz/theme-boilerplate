@@ -101,7 +101,9 @@ add_action( 'after_setup_theme', 'super_awesome_theme_content_width', 0 );
  */
 function super_awesome_theme_register_nav_menus() {
 	register_nav_menus( array(
-		'primary' => esc_html__( 'Primary', 'super-awesome-theme' ),
+		'primary' => __( 'Primary Menu', 'super-awesome-theme' ),
+		'social'  => __( 'Social Links Menu', 'super-awesome-theme' ),
+		'footer'  => __( 'Footer Menu', 'super-awesome-theme' ),
 	) );
 }
 add_action( 'after_setup_theme', 'super_awesome_theme_register_nav_menus', 11 );
@@ -113,24 +115,57 @@ add_action( 'after_setup_theme', 'super_awesome_theme_register_nav_menus', 11 );
  */
 function super_awesome_theme_register_widget_areas() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Primary Sidebar', 'super-awesome-theme' ),
+		'name'          => __( 'Primary Sidebar', 'super-awesome-theme' ),
 		'id'            => 'primary',
-		'description'   => esc_html__( 'The primary sidebar will be displayed on the side of your main content.', 'super-awesome-theme' ),
+		'description'   => __( 'Add widgets here to appear in the sidebar for your main content.', 'super-awesome-theme' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
 
+	$blog_sidebar_description = __( 'Add widgets here to appear in the sidebar for blog posts and archive pages.', 'super-awesome-theme' );
+	if ( ! get_theme_mod( 'blog_sidebar_enabled' ) ) {
+		//$customize_blog_sidebar_enabled_url = admin_url( 'customize.php?autofocus[control]=blog_sidebar_enabled' );
+
+		//$blog_sidebar_description .= ' <a href="' . esc_url( $customize_blog_sidebar_enabled_url ) . '">' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' ) . '</a>';
+		$blog_sidebar_description .= ' ' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' );
+	}
+
+
 	register_sidebar( array(
-		'name'          => esc_html__( 'Blog Sidebar', 'super-awesome-theme' ),
+		'name'          => __( 'Blog Sidebar', 'super-awesome-theme' ),
 		'id'            => 'blog',
-		'description'   => esc_html__( 'If enabled, the blog sidebar will be displayed on the side of your blog content.', 'super-awesome-theme' ),
+		'description'   => $blog_sidebar_description,
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+
+	/**
+	 * Filters the theme's footer widget area count.
+	 *
+	 * This count determines how many footer widget area columns the theme contains.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $count Footer widget area count.
+	 */
+	$footer_widget_area_count = apply_filters( 'super_awesome_theme_footer_widget_area_count', 3 );
+
+	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
+		register_sidebar( array(
+			/* translators: %s: widget area number */
+			'name'          => sprintf( __( 'Footer %s', 'super-awesome-theme' ), number_format_i18n( $i ) ),
+			'id'            => 'footer-' . $i,
+			'description'   => __( 'Add widgets here to appear in your footer.', 'super-awesome-theme' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
+	}
 }
 add_action( 'widgets_init', 'super_awesome_theme_register_widget_areas' );
 
