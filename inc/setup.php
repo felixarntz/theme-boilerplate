@@ -126,9 +126,7 @@ function super_awesome_theme_register_widget_areas() {
 
 	$blog_sidebar_description = __( 'Add widgets here to appear in the sidebar for blog posts and archive pages.', 'super-awesome-theme' );
 	if ( ! get_theme_mod( 'blog_sidebar_enabled' ) ) {
-		//$customize_blog_sidebar_enabled_url = admin_url( 'customize.php?autofocus[control]=blog_sidebar_enabled' );
-
-		//$blog_sidebar_description .= ' <a href="' . esc_url( $customize_blog_sidebar_enabled_url ) . '">' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' ) . '</a>';
+		// If core allowed simple HTML here, a link to the respective customizer control would surely help.
 		$blog_sidebar_description .= ' ' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' );
 	}
 
