@@ -285,7 +285,6 @@ let webpackConfig = {
 		}),
 		new StringReplacePlugin(),
 		new ImageminPlugin({
-			test: /\.(jpg|jpeg|png|gif)/,
 			optipng: {
 				optimizationLevel: 7,
 			},
@@ -297,8 +296,23 @@ let webpackConfig = {
 				speed: 4,
 			},
 			svgo: {
-				removeUnknownsAndDefaults: false,
-				cleanupIDs: false,
+				plugins: [
+					{
+						cleanupIDs: false,
+					},
+					{
+						removeComments: true,
+					},
+					{
+						removeHiddenElems: false,
+					},
+					{
+						removeViewBox: false,
+					},
+					{
+						removeUnknownsAndDefaults: false,
+					},
+				],
 			},
 			plugins: [
 				imageminMozjpeg({
