@@ -140,16 +140,7 @@ function super_awesome_theme_register_widget_areas() {
 		'after_title'   => '</h2>',
 	) );
 
-	/**
-	 * Filters the theme's footer widget area count.
-	 *
-	 * This count determines how many footer widget area columns the theme contains.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int $count Footer widget area count.
-	 */
-	$footer_widget_area_count = apply_filters( 'super_awesome_theme_footer_widget_area_count', 3 );
+	$footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
 
 	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
 		register_sidebar( array(
@@ -165,6 +156,26 @@ function super_awesome_theme_register_widget_areas() {
 	}
 }
 add_action( 'widgets_init', 'super_awesome_theme_register_widget_areas' );
+
+/**
+ * Gets the number of footer widget areas the theme has.
+ *
+ * @since 1.0.0
+ *
+ * @return int Footer widget area count.
+ */
+function super_awesome_theme_get_footer_widget_area_count() {
+	/**
+	 * Filters the theme's footer widget area count.
+	 *
+	 * This count determines how many footer widget area columns the theme contains.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $count Footer widget area count.
+	 */
+	return apply_filters( 'super_awesome_theme_footer_widget_area_count', 3 );
+}
 
 /**
  * Styles the header image and text.
