@@ -1,19 +1,19 @@
 /**
- * File customizer.js.
+ * File customize-preview.js.
  *
- * Theme Customizer enhancements for a better user experience.
- *
- * Contains handlers to make Theme Customizer preview reload changes asynchronously.
+ * Theme Customizer handling for the preview.
  */
 
 ( function( $ ) {
 
-	// Site title and description.
+	// Site title.
 	wp.customize( 'blogname', function( value ) {
 		value.bind( function( to ) {
 			$( '.site-title a' ).text( to );
 		} );
 	} );
+
+	// Site description.
 	wp.customize( 'blogdescription', function( value ) {
 		value.bind( function( to ) {
 			$( '.site-description' ).text( to );

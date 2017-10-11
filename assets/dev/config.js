@@ -59,8 +59,11 @@ const config = {
 			'./js/theme.js',
 			'./sass/style.scss',
 		],
-		customizer: [
-			'./js/customizer.js',
+		'customize-controls': [
+			'./js/customize-controls.js',
+		],
+		'customize-preview': [
+			'./js/customize-preview.js',
 		],
 	},
 	env: {

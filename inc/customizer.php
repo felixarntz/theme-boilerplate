@@ -175,6 +175,18 @@ function super_awesome_theme_customize_partial_blog_sidebar_enabled() {
 }
 
 /**
+ * Enqueues the script for the Customizer controls.
+ *
+ * @since 1.0.0
+ */
+function super_awesome_theme_customize_controls_js() {
+	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '': '.min';
+
+	wp_enqueue_script( 'super-awesome-theme-customize-controls', get_theme_file_uri( '/assets/dist/js/customize-controls' . $min . '.js' ), array(), SUPER_AWESOME_THEME_VERSION, true );
+}
+add_action( 'customize_controls_enqueue_scripts', 'super_awesome_theme_customize_controls_js' );
+
+/**
  * Enqueues the script for the Customizer preview.
  *
  * @since 1.0.0
@@ -182,8 +194,8 @@ function super_awesome_theme_customize_partial_blog_sidebar_enabled() {
 function super_awesome_theme_customize_preview_js() {
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '': '.min';
 
-	wp_enqueue_script( 'super-awesome-theme-customizer', get_theme_file_uri( '/assets/dist/js/customizer' . $min . '.js' ), array( 'customize-preview' ), SUPER_AWESOME_THEME_VERSION, true );
-	wp_localize_script( 'super-awesome-theme-customizer', 'themeCustomizeData', array(
+	wp_enqueue_script( 'super-awesome-theme-customize-preview', get_theme_file_uri( '/assets/dist/js/customize-preview' . $min . '.js' ), array( 'customize-preview' ), SUPER_AWESOME_THEME_VERSION, true );
+	wp_localize_script( 'super-awesome-theme-customize-preview', 'themeCustomizeData', array(
 		'sidebarModeChoices' => super_awesome_theme_customize_get_sidebar_mode_choices(),
 		'sidebarSizeChoices' => super_awesome_theme_customize_get_sidebar_size_choices(),
 	) );
