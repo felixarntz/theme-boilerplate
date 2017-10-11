@@ -285,6 +285,7 @@ let webpackConfig = {
 		}),
 		new StringReplacePlugin(),
 		new ImageminPlugin({
+			test: /\.(jpg|jpeg|png|gif)/,
 			optipng: {
 				optimizationLevel: 7,
 			},
