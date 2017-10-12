@@ -45,12 +45,7 @@ if ( post_password_required() ) {
 		<?php the_comments_navigation(); ?>
 
 		<ol class="comment-list">
-			<?php
-				wp_list_comments( array(
-					'style'      => 'ol',
-					'short_ping' => true,
-				) );
-			?>
+			<?php wp_list_comments( super_awesome_theme_get_list_comments_args() ); ?>
 		</ol><!-- .comment-list -->
 
 		<?php the_comments_navigation();

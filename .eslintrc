@@ -3,6 +3,7 @@
   "extends": "eslint:recommended",
   "globals": {
     "wp": true,
+    "themeData": true,
     "themeCustomizeData": true
   },
   "env": {
