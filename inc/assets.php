@@ -20,12 +20,16 @@ function super_awesome_theme_enqueue_assets() {
 
 	wp_enqueue_script( 'super-awesome-theme-script', get_theme_file_uri( '/assets/dist/js/theme' . $min . '.js' ), array(), SUPER_AWESOME_THEME_VERSION, true );
 	wp_localize_script( 'super-awesome-theme-script', 'themeData', array(
-		'i18n' => array(
-			'processing'   => __( 'Processing...', 'super-awesome-theme' ),
-			'flood'        => sprintf( __( 'Your comment was either a duplicate or you are posting too rapidly. <a href="%s">Edit your comment</a>', 'super-awesome-theme' ), '#comment' ),
-			'error'        => __( 'There were errors in submitting your comment; complete the missing fields and try again!', 'super-awesome-theme' ),
-			'emailInvalid' => __( 'That email appears to be invalid.', 'super-awesome-theme' ),
-			'required'     => __( 'This is a required field.', 'super-awesome-theme' )
+		'comments' => array(
+			'i18n' => array(
+				'processing'   => __( 'Processing...', 'super-awesome-theme' ),
+				'badResponse'  => __( 'Bad response code.', 'super-awesome-theme' ),
+				'invalidJson'  => __( 'Invalid JSON response.', 'super-awesome-theme' ),
+				'flood'        => sprintf( __( 'Your comment was either a duplicate or you are posting too rapidly. <a href="%s">Edit your comment</a>', 'super-awesome-theme' ), '#comment' ),
+				'error'        => __( 'There were errors in submitting your comment; complete the missing fields and try again!', 'super-awesome-theme' ),
+				'emailInvalid' => __( 'This email address appears to be invalid.', 'super-awesome-theme' ),
+				'required'     => __( 'This is a required field.', 'super-awesome-theme' )
+			),
 		),
 	) );
 
