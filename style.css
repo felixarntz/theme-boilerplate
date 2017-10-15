@@ -115,12 +115,12 @@ dfn {
 }
 
 h1 {
-	margin: 0.67em 0; 
+	margin: 0.67em 0;
 	font-size: 2em;
 }
 
 mark {
-	color: #000; 
+	color: #000;
 	background: #ff0;
 }
 
@@ -178,7 +178,7 @@ input,
 optgroup,
 select,
 textarea {
-	margin: 0; 
+	margin: 0;
 	color: inherit;
 	font: inherit;
 }
@@ -207,7 +207,7 @@ html input[disabled] {
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-	padding: 0; 
+	padding: 0;
 	border: 0;
 }
 
@@ -232,13 +232,13 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 fieldset {
-	padding: 0.35em 0.625em 0.75em; 
+	padding: 0.35em 0.625em 0.75em;
 	margin: 0 2px;
 	border: 1px solid #c0c0c0;
 }
 
 legend {
-	padding: 0; 
+	padding: 0;
 	border: 0;
 }
 
@@ -317,7 +317,7 @@ address {
 
 pre {
 	max-width: 100%;
-	padding: 1.6em; 
+	padding: 1.6em;
 	margin-bottom: 1.6em;
 	overflow: auto;
 	font-family: "Courier 10 Pitch", Courier, monospace;
@@ -331,7 +331,7 @@ code,
 kbd,
 tt,
 var {
-	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace; 
+	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 	font-size: 15px;
 	font-size: 0.9375rem;
 }
@@ -344,7 +344,7 @@ acronym {
 
 mark,
 ins {
-	text-decoration: none; 
+	text-decoration: none;
 	background: #fff9c0;
 }
 
@@ -355,17 +355,21 @@ big {
 a {
 	color: royalblue;
 }
+
 a:visited {
 	color: purple;
 }
+
 a:hover,
 a:focus,
 a:active {
 	color: midnightblue;
 }
+
 a:focus {
 	outline: thin dotted;
 }
+
 a:hover,
 a:active {
 	outline: 0;
@@ -395,6 +399,7 @@ blockquote,
 q {
 	quotes: "" "";
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -404,7 +409,7 @@ q:after {
 
 hr {
 	height: 1px;
-	margin-bottom: 1.5em; 
+	margin-bottom: 1.5em;
 	background-color: #ccc;
 	border: 0;
 }
@@ -449,7 +454,7 @@ figure {
 }
 
 table {
-	width: 100%; 
+	width: 100%;
 	margin: 0 0 1.5em;
 }
 
@@ -460,7 +465,7 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-	padding: 0.6em 1em 0.4em; 
+	padding: 0.6em 1em 0.4em;
 	color: rgba(0, 0, 0, 0.8);
 	font-size: 12px;
 	font-size: 0.75rem;
@@ -470,12 +475,14 @@ input[type="submit"] {
 	border-color: #ccc #ccc #bbb;
 	border-radius: 3px;
 }
+
 button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
 	border-color: #ccc #bbb #aaa;
 }
+
 button:active,
 button:focus,
 input[type="button"]:active,
@@ -503,11 +510,12 @@ input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
 textarea {
-	padding: 3px; 
+	padding: 3px;
 	color: #666;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 }
+
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
@@ -548,6 +556,7 @@ textarea {
 	word-wrap: normal !important;
 	/* Many screen reader and browser combinations announce broken words as they would appear visually. */
 }
+
 .screen-reader-text:focus {
 	top: 5px;
 	left: 5px;
@@ -644,22 +653,26 @@ textarea {
 	padding-right: 1rem;
 	padding-left: 1rem;
 	margin-right: auto;
-	margin-bottom: 1rem; 
+	margin-bottom: 1rem;
 	margin-left: auto;
 	text-align: center;
 }
+
 .main-navigation ul {
 	display: inline-block;
-	padding-left: 0; 
+	padding-left: 0;
 	margin: 0;
 	list-style: none;
 }
+
 .main-navigation li {
 	position: relative;
 }
+
 .main-navigation a {
 	text-decoration: none;
 }
+
 .main-navigation .menu-toggle {
 	display: none;
 	padding: 1em;
@@ -669,46 +682,56 @@ textarea {
 	font-size: 0.875rem;
 	font-weight: 800;
 	line-height: 1.5;
-	text-shadow: none; 
+	text-shadow: none;
 	background-color: transparent;
 	box-shadow: none;
 	border: 0;
 }
+
 .main-navigation .menu-toggle:hover,
 .main-navigation .menu-toggle:focus {
-	background-color: transparent; 
+	background-color: transparent;
 	box-shadow: none;
 }
+
 .main-navigation .menu-toggle:focus {
 	outline: thin solid;
 }
+
 .main-navigation .menu-toggle .icon {
 	top: -2px;
 	margin-right: 0.5em;
 }
+
 .main-navigation .menu-toggle .icon-close {
 	display: none;
 }
+
 .js .main-navigation ul.nav-menu {
 	display: none;
 }
+
 @media screen and (min-width: 48rem) {
 	.js .main-navigation ul.nav-menu {
 		display: inline-block;
 	}
 }
+
 .js .main-navigation .menu-toggle {
 	display: inline-block;
 }
+
 @media screen and (min-width: 48rem) {
 	.js .main-navigation .menu-toggle {
 		display: none;
 	}
 }
+
 .js .main-navigation.toggled ul.nav-menu,
 .js .main-navigation.toggled .menu-toggle .icon-close {
 	display: inline-block;
 }
+
 .js .main-navigation.toggled .menu-toggle .icon-bars {
 	display: none;
 }
@@ -724,58 +747,66 @@ textarea {
 	margin-right: auto;
 	margin-left: auto;
 
-	grid-template: auto / auto; 
+	grid-template-columns: auto;
 	justify-items: stretch;
 }
+
 .site-content .content-area,
 .site-content .widget-area {
 	padding-right: 1rem;
 	padding-left: 1rem;
 }
+
 .site-content .content-area {
 	grid-area: site-content-area;
 }
+
 .site-content .widget-area {
 	grid-area: site-widget-area;
 }
+
 body.no-sidebar .site-content {
 	grid-template-areas: "site-content-area";
 }
+
 body.no-sidebar .site-content .widget-area {
 	display: none;
 }
+
 body.left-sidebar .site-content {
 	grid-template-areas: "site-widget-area" "site-content-area";
 }
+
 body.right-sidebar .site-content {
 	grid-template-areas: "site-content-area" "site-widget-area";
 }
+
 @media (min-width: 48rem) {
 	body.left-sidebar .site-content {
-		grid-template: auto / 1fr 2fr; 
 		grid-template-areas: "site-widget-area site-content-area";
+		grid-template-columns: 1fr 2fr;
 	}
 	body.right-sidebar .site-content {
-		grid-template: auto / 2fr 1fr; 
 		grid-template-areas: "site-content-area site-widget-area";
+		grid-template-columns: 2fr 1fr;
 	}
 	body.left-sidebar.sidebar-small .site-content {
-		grid-template: auto / 1fr 3fr;
+		grid-template-columns: 1fr 3fr;
 	}
 	body.right-sidebar.sidebar-small .site-content {
-		grid-template: auto / 3fr 1fr;
+		grid-template-columns: 3fr 1fr;
 	}
 	body.left-sidebar.sidebar-medium .site-content {
-		grid-template: auto / 1fr 2fr;
+		grid-template-columns: 1fr 2fr;
 	}
 	body.right-sidebar.sidebar-medium .site-content {
-		grid-template: auto / 2fr 1fr;
+		grid-template-columns: 2fr 1fr;
 	}
 	body.left-sidebar.sidebar-large .site-content {
-		grid-template: auto / 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
 	}
 	body.right-sidebar.sidebar-large .site-content {
-		grid-template: auto / 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
 	}
 }
 
@@ -799,7 +830,7 @@ body.right-sidebar .site-content {
 .posts-navigation .nav-next,
 .post-navigation .nav-next {
 	float: right;
-	width: 50%; 
+	width: 50%;
 	text-align: right;
 }
 
@@ -825,7 +856,7 @@ body.right-sidebar .site-content {
 }
 
 .page-links {
-	margin: 0 0 1.5em; 
+	margin: 0 0 1.5em;
 	clear: both;
 }
 
@@ -847,6 +878,7 @@ body.right-sidebar .site-content {
 	margin: 0 0 1.5em;
 	/* Make sure select elements fit in widgets. */
 }
+
 .widget select {
 	max-width: 100%;
 }
@@ -857,7 +889,7 @@ body.right-sidebar .site-content {
 	height: auto;
 	clip: auto;
 	font-size: 16px;
-	font-size: 1rem; 
+	font-size: 1rem;
 	font-weight: 400;
 }
 
@@ -871,13 +903,15 @@ body.right-sidebar .site-content {
 	margin-right: auto;
 	margin-left: auto;
 
-	grid-template: auto / auto; 
+	grid-template: auto / auto;
 	justify-items: stretch;
 }
+
 .footer-widgets .widget-column {
 	padding-right: 1rem;
 	padding-left: 1rem;
 }
+
 @media (min-width: 48rem) {
 	.footer-widgets-2 .footer-widgets {
 		grid-template: auto/repeat(2, 1fr);
@@ -898,9 +932,10 @@ body.right-sidebar .site-content {
 	margin-right: auto;
 	margin-left: auto;
 	font-size: 16px;
-	font-size: 1rem; 
+	font-size: 1rem;
 	text-align: center;
 }
+
 .social-navigation ul {
 	display: inline-block;
 	padding-left: 0;
@@ -908,9 +943,11 @@ body.right-sidebar .site-content {
 	margin-left: 0;
 	list-style: none;
 }
+
 .social-navigation li {
 	display: inline;
 }
+
 .social-navigation a {
 	display: inline-block;
 	width: 40px;
@@ -918,35 +955,40 @@ body.right-sidebar .site-content {
 	margin-left: 1rem;
 	color: #fff;
 	text-align: center;
-	background-color: #767676; 
+	background-color: #767676;
 	border-radius: 40px;
 }
+
 .social-navigation a:hover,
 .social-navigation a:focus {
 	background-color: #333;
 }
+
 .social-navigation a:first-child {
 	margin-left: 0;
 }
+
 .social-navigation .icon {
 	top: 12px;
 	width: 16px;
 	height: 16px;
 	vertical-align: top;
 }
+
 .no-svg .social-navigation a {
 	width: auto;
 	height: auto;
 	color: #333;
 	background-color: transparent;
 }
+
 .no-svg .social-navigation a .screen-reader-text {
 	position: relative !important;
 	width: auto;
 	height: auto;
 	clip: auto;
 	font-size: 16px;
-	font-size: 1rem; 
+	font-size: 1rem;
 	font-weight: 400;
 }
 
@@ -959,6 +1001,7 @@ body.right-sidebar .site-content {
 	margin-left: auto;
 	text-align: center;
 }
+
 .footer-navigation ul {
 	display: inline-block;
 	padding-left: 0;
@@ -966,12 +1009,15 @@ body.right-sidebar .site-content {
 	margin-left: 0;
 	list-style: none;
 }
+
 .footer-navigation li {
 	display: inline;
 }
+
 .footer-navigation li:before {
 	content: " | ";
 }
+
 .footer-navigation li:first-child:before {
 	content: none;
 }
@@ -1007,7 +1053,7 @@ body.right-sidebar .site-content {
 .page-content .wp-smiley,
 .entry-content .wp-smiley,
 .comment-content .wp-smiley {
-	padding: 0; 
+	padding: 0;
 	margin-top: 0;
 	margin-bottom: 0;
 	border: none;
@@ -1029,14 +1075,16 @@ object {
 ## Captions
 ------------------------------------------------------------- */
 .wp-caption {
-	max-width: 100%; 
+	max-width: 100%;
 	margin-bottom: 1.5em;
 }
+
 .wp-caption img[class*="wp-image-"] {
 	display: block;
-	margin-right: auto; 
+	margin-right: auto;
 	margin-left: auto;
 }
+
 .wp-caption .wp-caption-text {
 	margin: 0.8075em 0;
 }
@@ -1054,31 +1102,39 @@ object {
 
 .gallery-item {
 	display: inline-block;
-	width: 100%; 
+	width: 100%;
 	text-align: center;
 	vertical-align: top;
 }
+
 .gallery-columns-2 .gallery-item {
 	max-width: 50%;
 }
+
 .gallery-columns-3 .gallery-item {
 	max-width: 33.33333%;
 }
+
 .gallery-columns-4 .gallery-item {
 	max-width: 25%;
 }
+
 .gallery-columns-5 .gallery-item {
 	max-width: 20%;
 }
+
 .gallery-columns-6 .gallery-item {
 	max-width: 16.66667%;
 }
+
 .gallery-columns-7 .gallery-item {
 	max-width: 14.28571%;
 }
+
 .gallery-columns-8 .gallery-item {
 	max-width: 12.5%;
 }
+
 .gallery-columns-9 .gallery-item {
 	max-width: 11.11111%;
 }

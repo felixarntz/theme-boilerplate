@@ -5,7 +5,7 @@
 	display: grid;
 	justify-items: stretch;
 	align-items: stretch;
-	grid-template: auto / auto;
+	grid-template-columns: auto;
 
 	.content-area,
 	.widget-area {
@@ -39,36 +39,36 @@
 	@media (min-width: $site_breakpoint) {
 		body.left-sidebar & {
 			grid-template-areas: "site-widget-area site-content-area";
-			grid-template: auto / 1fr 2fr;
+			grid-template-columns: 1fr 2fr;
 		}
 
 		body.right-sidebar & {
 			grid-template-areas: "site-content-area site-widget-area";
-			grid-template: auto / 2fr 1fr;
+			grid-template-columns: 2fr 1fr;
 		}
 
 		body.left-sidebar.sidebar-small & {
-			grid-template: auto / 1fr 3fr;
+			grid-template-columns: 1fr 3fr;
 		}
 
 		body.right-sidebar.sidebar-small & {
-			grid-template: auto / 3fr 1fr;
+			grid-template-columns: 3fr 1fr;
 		}
 
 		body.left-sidebar.sidebar-medium & {
-			grid-template: auto / 1fr 2fr;
+			grid-template-columns: 1fr 2fr;
 		}
 
 		body.right-sidebar.sidebar-medium & {
-			grid-template: auto / 2fr 1fr;
+			grid-template-columns: 2fr 1fr;
 		}
 
 		body.left-sidebar.sidebar-large & {
-			grid-template: auto / 1fr 1fr;
+			grid-template-columns: 1fr 1fr;
 		}
 
 		body.right-sidebar.sidebar-large & {
-			grid-template: auto / 1fr 1fr;
+			grid-template-columns: 1fr 1fr;
 		}
 	}
 }
