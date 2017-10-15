@@ -83,7 +83,6 @@ var gplNote =	'This program is free software: you can redistribute it and/or mod
 
 var gulp = require( 'gulp' );
 
-var copy      = require( 'gulp-copy' );
 var csscomb   = require( 'gulp-csscomb' );
 var eslint    = require( 'gulp-eslint' );
 var jscs      = require( 'gulp-jscs' );
@@ -94,10 +93,10 @@ var sass      = require( 'gulp-sass' );
 var sort      = require( 'gulp-sort' );
 var stylelint = require( 'gulp-stylelint' );
 var uglify    = require( 'gulp-uglify' );
-var webpack   = require( 'gulp-webpack' );
 var wpPot     = require( 'gulp-wp-pot' );
 
 var named = require( 'vinyl-named' );
+var webpack   = require( 'webpack-stream' );
 
 /* ---- MAIN TASKS ---- */
 
@@ -142,20 +141,27 @@ gulp.task( 'sass', function( done ) {
 
 // compile JavaScript
 gulp.task( 'js', function( done ) {
-	gulp.src( './assets/dev/js/**/*.js' )
+	gulp.src([
+			'./assets/dev/js/**/*.js',
+			'!./assets/dev/js/html5.js',
+		])
 		.pipe( eslint() )
 		.pipe( eslint.format() )
 		.pipe( eslint.failAfterError() )
 		.pipe( jscs() )
 		.pipe( jscs.reporter() )
 		.on( 'end', function() {
-			gulp.src([
-				'./assets/dev/js/theme.js',
-				'./assets/dev/js/customize-controls.js',
-				'./assets/dev/js/customize-preview.js',
-			])
-				.pipe( named() )
-				.pipe( webpack(/* require( './assets/dev/webpack.config.js' ) */) )
+			gulp.src( './assets/dev/js/theme.js' )
+				.pipe( webpack({
+					entry: {
+						theme: './assets/dev/js/theme.js',
+						'customize-controls': './assets/dev/js/customize-controls.js',
+						'customize-preview': './assets/dev/js/customize-preview.js',
+					},
+					output: {
+						filename: '[name].js',
+					},
+				}) )
 				.pipe( gulp.dest( './assets/dist/js/' ) )
 				.pipe( uglify() )
 				.pipe( rename({
@@ -164,7 +170,6 @@ gulp.task( 'js', function( done ) {
 				.pipe( gulp.dest( './assets/dist/js/' ) )
 				.on( 'end', function() {
 					gulp.src( './assets/dev/js/html5.js' )
-						.pipe( copy() )
 						.pipe( gulp.dest( './assets/dist/js/' ) )
 						.on( 'end', done );
 				});
@@ -174,7 +179,6 @@ gulp.task( 'js', function( done ) {
 // minify images
 gulp.task( 'img', function( done ) {
 	gulp.src( './assets/dev/images/**/*.svg' )
-		.pipe( copy() )
 		.pipe( gulp.dest( './assets/dist/images/' ) )
 		.on( 'end', done );
 });

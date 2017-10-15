@@ -57,7 +57,7 @@
 	// Sidebar size.
 	wp.customize( 'sidebar_size', function( value ) {
 		value.bind( function( to ) {
-			var classes = Object.keys( themeCustomizeData.sidebarSizeChoices ).map(function(setting) {
+			var classes = Object.keys( themeCustomizeData.sidebarSizeChoices ).map(function( setting ) {
 				return 'sidebar-' + setting;
 			});
 			var index;
