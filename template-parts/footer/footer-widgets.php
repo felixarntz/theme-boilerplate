@@ -21,7 +21,7 @@ if ( ! $has_active ) {
 	return;
 }
 ?>
-<aside class="widget-area" aria-label="<?php esc_attr_e( 'Footer', 'super-awesome-theme' ); ?>">
+<aside class="footer-widgets" aria-label="<?php esc_attr_e( 'Footer', 'super-awesome-theme' ); ?>">
 	<?php
 	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
 		if ( ! is_active_sidebar( 'footer-' . $i ) ) {

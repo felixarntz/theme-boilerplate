@@ -53,6 +53,11 @@ function super_awesome_theme_body_classes( $classes ) {
 	// Adds a class to indicate the sidebar size.
 	$classes[] = 'sidebar-' . get_theme_mod( 'sidebar_size', 'medium' );
 
+	$footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
+	if ( $footer_widget_area_count > 0 ) {
+		$classes[] = 'footer-widgets-' . $footer_widget_area_count;
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'super_awesome_theme_body_classes' );
