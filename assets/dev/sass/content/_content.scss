@@ -1,26 +1,29 @@
-.site {
-	margin: 0 auto;
-	max-width: $site_maxwidth;
-}
-
 .site-content {
+	@include center-grid();
+	@include limit-width();
+
 	display: grid;
 	justify-items: stretch;
 	align-items: stretch;
 	grid-template: auto / auto;
 
-	> .content-area {
+	.content-area,
+	.widget-area {
+		@include horizontal-padding();
+	}
+
+	.content-area {
 		grid-area: site-content-area;
 	}
 
-	> .widget-area {
+	.widget-area {
 		grid-area: site-widget-area;
 	}
 
 	body.no-sidebar & {
 		grid-template-areas: "site-content-area";
 
-		> .widget-area {
+		.widget-area {
 			display: none;
 		}
 	}
@@ -70,6 +73,26 @@
 	}
 }
 
+.comment-navigation,
+.posts-navigation,
+.post-navigation {
+	.site-main & {
+		margin: 0 0 1.5em;
+		overflow: hidden;
+	}
+
+	.nav-previous {
+		float: left;
+		width: 50%;
+	}
+
+	.nav-next {
+		float: right;
+		text-align: right;
+		width: 50%;
+	}
+}
+
 /* -------------------------------------------------------------
 ## Posts and pages
 ------------------------------------------------------------- */
@@ -79,3 +102,8 @@
 ## Comments
 ------------------------------------------------------------- */
 @import "primary/comments";
+
+/* -------------------------------------------------------------
+# Widgets
+------------------------------------------------------------- */
+@import "secondary/widgets";

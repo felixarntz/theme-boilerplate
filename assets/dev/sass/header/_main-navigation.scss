@@ -1,0 +1,38 @@
+.main-navigation {
+	@include center-block();
+	@include limit-width();
+	@include horizontal-padding();
+	@include text-center();
+
+	margin-bottom: $padding_vertical;
+
+	ul {
+		display: none;
+		list-style: none;
+		margin: 0;
+		padding-left: 0;
+	}
+
+	li {
+		position: relative;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.menu-toggle,
+	&.toggled ul {
+		display: inline-block;
+	}
+
+	@media screen and (min-width: $site_breakpoint) {
+		.menu-toggle {
+			display: none;
+		}
+
+		ul {
+			display: inline-block;
+		}
+	}
+}

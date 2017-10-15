@@ -12,7 +12,7 @@ function comments( themeData ) {
 	}
 
 	commentForm = document.getElementById( 'commentform' );
-	if ( ! $commentForm ) {
+	if ( ! commentForm ) {
 		return;
 	}
 
@@ -139,7 +139,7 @@ function comments( themeData ) {
 
 				commentForm.querySelector( 'textarea[name="content"]' ).value = '';
 			})
-			.catch( function( error ) {
+			.catch( function() {
 				clearStatusNotices( statusDiv );
 				addStatusNotice( statusDiv, 'comment-notice-error', themeData.i18n.flood, true );
 			});
@@ -150,6 +150,7 @@ function comments( themeData ) {
 
 function clearStatusNotices( wrap ) {
 	var notices = wrap.getElementsByClassName( 'comment-notice' );
+	var i;
 
 	for ( i = 0; i < notices.length; i++ ) {
 		notices[ i ].parentElement.removeChild( notices[ i ] );
@@ -158,6 +159,7 @@ function clearStatusNotices( wrap ) {
 
 function clearFieldErrors( form ) {
 	var errors = form.getElementsByClassName( 'comment-field-error' );
+	var i;
 
 	for ( i = 0; i < errors.length; i++ ) {
 		errors[ i ].parentElement.removeChild( errors[ i ] );
@@ -193,7 +195,7 @@ function addFieldError( field, errorMessage ) {
 }
 
 function validateEmail( value ) {
-	var filter = /^([\w-\+.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	var filter = /^([\w-+.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
 	if ( filter.test( value ) ) {
 		return true;

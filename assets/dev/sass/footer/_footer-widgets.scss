@@ -1,0 +1,26 @@
+.footer-widgets {
+	@include center-grid();
+	@include limit-width();
+
+	justify-items: stretch;
+	align-items: stretch;
+	grid-template: auto / auto;
+
+	.widget-column {
+		@include horizontal-padding();
+	}
+
+	@media (min-width: $site_breakpoint) {
+		.footer-widgets-2 & {
+			grid-template: auto / repeat(2, 1fr);
+		}
+
+		.footer-widgets-3 & {
+			grid-template: auto / repeat(3, 1fr);
+		}
+
+		.footer-widgets-4 & {
+			grid-template: auto / repeat(4, 1fr);
+		}
+	}
+}

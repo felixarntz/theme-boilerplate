@@ -11,6 +11,13 @@
 	margin-right: auto;
 }
 
+// Center grid
+@mixin center-grid {
+	display: grid;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 // Clearfix
 @mixin clearfix() {
 	content: "";
@@ -21,4 +28,18 @@
 // Clear after (not all clearfix need this also)
 @mixin clearfix-after() {
 	clear: both;
+}
+
+// Limit maximum width
+@mixin limit-width() {
+	max-width: $site_maxwidth;
+}
+
+// Horizontal padding
+@mixin horizontal-padding() {
+	padding: 0 $padding_horizontal;
+}
+
+@mixin text-center() {
+	text-align: center;
 }

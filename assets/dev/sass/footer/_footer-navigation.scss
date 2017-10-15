@@ -1,0 +1,26 @@
+.footer-navigation {
+	@include center-block();
+	@include limit-width();
+	@include horizontal-padding();
+	@include text-center();
+
+	ul {
+		display: inline-block;
+		margin-bottom: 0;
+		margin-left: 0;
+		padding-left: 0;
+		list-style: none;
+	}
+
+	li {
+		display: inline;
+
+		&:before {
+			content: ' | ';
+		}
+
+		&:first-child:before {
+			content: none;
+		}
+	}
+}

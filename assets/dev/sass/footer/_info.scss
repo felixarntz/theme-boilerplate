@@ -1,0 +1,6 @@
+.site-info {
+	@include center-block();
+	@include limit-width();
+	@include horizontal-padding();
+	@include text-center();
+}
