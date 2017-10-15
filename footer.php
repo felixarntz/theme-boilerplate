@@ -16,6 +16,8 @@
 
 		<?php get_template_part( 'template-parts/footer/social-navigation' ); ?>
 
+		<?php get_template_part( 'template-parts/footer/footer-navigation' ); ?>
+
 		<?php get_template_part( 'template-parts/footer/site-info' ); ?>
 	</footer><!-- #colophon -->
 </div><!-- #page -->
