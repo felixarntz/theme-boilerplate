@@ -69,31 +69,43 @@ var readmeheader =	'Contributors: ' + config.contributors + '\n' +
 					'License URI: ' + config.licenseURI + '\n' +
 					'Tags: ' + config.tags;
 
+var gplNote =	'This program is free software: you can redistribute it and/or modify\n' +
+				'it under the terms of the GNU General Public License as published by\n' +
+				'the Free Software Foundation, either version 3 of the License, or\n' +
+				'(at your option) any later version.\n\n' +
+				'This program is distributed in the hope that it will be useful,\n' +
+				'but WITHOUT ANY WARRANTY; without even the implied warranty of\n' +
+				'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n' +
+				'GNU General Public License for more details.';
+
 
 /* ---- REQUIRED DEPENDENCIES ---- */
 
 var gulp = require( 'gulp' );
 
-var cleanCss = require( 'gulp-clean-css' );
-var concat   = require( 'gulp-concat' );
-var csscomb  = require( 'gulp-csscomb' );
-var jscs     = require( 'gulp-jscs' );
-var jshint   = require( 'gulp-jshint' );
-var rename   = require( 'gulp-rename' );
-var replace  = require( 'gulp-replace' );
-var rtlcss   = require( 'gulp-rtlcss' );
-var sass     = require( 'gulp-sass' );
-var sort     = require( 'gulp-sort' );
-var uglify   = require( 'gulp-uglify' );
-var wpPot    = require( 'gulp-wp-pot' );
+var copy      = require( 'gulp-copy' );
+var csscomb   = require( 'gulp-csscomb' );
+var eslint    = require( 'gulp-eslint' );
+var jscs      = require( 'gulp-jscs' );
+var rename    = require( 'gulp-rename' );
+var replace   = require( 'gulp-replace' );
+var rtlcss    = require( 'gulp-rtlcss' );
+var sass      = require( 'gulp-sass' );
+var sort      = require( 'gulp-sort' );
+var stylelint = require( 'gulp-stylelint' );
+var uglify    = require( 'gulp-uglify' );
+var webpack   = require( 'gulp-webpack' );
+var wpPot     = require( 'gulp-wp-pot' );
+
+var named = require( 'vinyl-named' );
 
 /* ---- MAIN TASKS ---- */
 
-// default task (compile Sass and JavaScript and refresh POT file)
-gulp.task( 'default', [ 'sass', 'js', 'pot' ]);
+// default task
+gulp.task( 'default', [ 'sass', 'js', 'img', 'pot' ]);
 
 // build the theme
-gulp.task( 'build', [ 'header-replace', 'readme-replace' ], function() {
+gulp.task( 'build', [ 'readme-replace' ], function() {
 	gulp.start( 'default' );
 });
 
@@ -101,47 +113,79 @@ gulp.task( 'build', [ 'header-replace', 'readme-replace' ], function() {
 
 // compile Sass
 gulp.task( 'sass', function( done ) {
-	gulp.src( './assets/dev/sass/style.scss' )
-		.pipe( sass({
-			errLogToConsole: true,
-			outputStyle: 'expanded'
+	gulp.src( './assets/dev/sass/**/*.scss' )
+		.pipe( stylelint({
+			reporters: [
+				{
+					formatter: 'string',
+					console: true,
+				},
+			],
 		}) )
-		.pipe( csscomb() )
-		.pipe( gulp.dest( './' ) )
-		.pipe( rtlcss() )
-		.pipe( rename({
-			suffix: '-rtl'
-		}) )
-		.pipe( gulp.dest( './' ) )
-		.on( 'end', done );
+		.on( 'end', function() {
+			gulp.src( './assets/dev/sass/style.scss' )
+				.pipe( replace( /^\/\*! \-\-\- Theme header will be inserted here automatically\. \-\-\- \*\//, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.author + '\n\n' + gplNote + '\n*/' ) )
+				.pipe( sass({
+					errLogToConsole: true,
+					outputStyle: 'expanded',
+				}) )
+				.pipe( csscomb() )
+				.pipe( gulp.dest( './' ) )
+				.pipe( rtlcss() )
+				.pipe( rename({
+					suffix: '-rtl'
+				}) )
+				.pipe( gulp.dest( './' ) )
+				.on( 'end', done );
+		});
 });
 
 // compile JavaScript
 gulp.task( 'js', function( done ) {
 	gulp.src( './assets/dev/js/**/*.js' )
-		.pipe( jshint() )
-		.pipe( jshint.reporter( 'default' ) )
+		.pipe( eslint() )
+		.pipe( eslint.format() )
+		.pipe( eslint.failAfterError() )
 		.pipe( jscs() )
 		.pipe( jscs.reporter() )
-		.pipe( concat( 'theme.js' ) )
-		.pipe( gulp.dest( './assets/dist/js/' ) )
-		.pipe( uglify() )
-		.pipe( rename({
-			extname: '.min.js'
-		}) )
-		.pipe( gulp.dest( './assets/dist/js/' ) )
+		.on( 'end', function() {
+			gulp.src([
+				'./assets/dev/js/theme.js',
+				'./assets/dev/js/customize-controls.js',
+				'./assets/dev/js/customize-preview.js',
+			])
+				.pipe( named() )
+				.pipe( webpack(/* require( './assets/dev/webpack.config.js' ) */) )
+				.pipe( gulp.dest( './assets/dist/js/' ) )
+				.pipe( uglify() )
+				.pipe( rename({
+					extname: '.min.js',
+				}) )
+				.pipe( gulp.dest( './assets/dist/js/' ) )
+				.on( 'end', function() {
+					gulp.src( './assets/dev/js/html5.js' )
+						.pipe( copy() )
+						.pipe( gulp.dest( './assets/dist/js/' ) )
+						.on( 'end', done );
+				});
+		});
+});
+
+// minify images
+gulp.task( 'img', function( done ) {
+	gulp.src( './assets/dev/images/**/*.svg' )
+		.pipe( copy() )
+		.pipe( gulp.dest( './assets/dist/images/' ) )
 		.on( 'end', done );
 });
 
 // generate POT file
 gulp.task( 'pot', function( done ) {
-	var phpFiles = [
+	gulp.src([
 		'./*.php',
 		'./inc/**/*.php',
-		'./template-parts/**/*.php'
-	];
-
-	gulp.src( phpFiles )
+		'./template-parts/**/*.php',
+	])
 		.pipe( sort() )
 		.pipe( wpPot({
 			domain: config.textDomain,
@@ -163,16 +207,8 @@ gulp.task( 'pot', function( done ) {
 		.on( 'end', done );
 });
 
-// replace the theme header in assets/sass/style.scss
-gulp.task( 'header-replace', function( done ) {
-	gulp.src( './assets/dev/sass/style.scss' )
-		.pipe( replace( /^\/\*!\s([\s\S]+)WordPress Theme, Copyright \(C\)/, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C)' ) )
-		.pipe( gulp.dest( './assets/dev/sass/' ) )
-		.on( 'end', done );
-});
-
 // replace the theme header in readme.txt
-gulp.task( 'readme-replace', function( done ) {
+gulp.task( 'readme', function( done ) {
 	gulp.src( './readme.txt' )
 		.pipe( replace( /\=\=\= (.+) \=\=\=([\s\S]+)\=\= Description \=\=/m, '=== ' + config.themeName + ' ===\n\n' + readmeheader + '\n\n== Description ==' ) )
 		.pipe( gulp.dest( './' ) )
@@ -200,7 +236,7 @@ gulp.task( 'init-replace', function( done ) {
 		'./assets/dev/js/**/*.js',
 		'./assets/dev/sass/style.scss',
 		'./style.css',
-		'./rtl.css',
+		'./style-rtl.css',
 		'./gulpfile.js',
 		'./package.json',
 		'./readme.txt'

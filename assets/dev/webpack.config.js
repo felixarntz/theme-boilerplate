@@ -68,66 +68,6 @@ let webpackConfig = {
 				loader: 'import-glob',
 			},
 			{
-				enforce: 'pre',
-				test: /style\.scss$/,
-				include: config.paths.dev,
-				loader: StringReplacePlugin.replace({
-					replacements: [
-						{
-							pattern: /^\/\*! \-\-\- Theme header will be inserted here automatically\. \-\-\- \*\//,
-							replacement: function () {
-								let header =	'Theme Name: ' + config.themeData.themeName + '\n' +
-												'Theme URI: ' + config.themeData.themeURI + '\n' +
-												'Author: ' + config.themeData.author + '\n' +
-												'Author URI: ' + config.themeData.authorURI + '\n' +
-												'Description: ' + config.themeData.description + '\n' +
-												'Version: ' + config.themeData.version + '\n' +
-												'License: ' + config.themeData.license + '\n' +
-												'License URI: ' + config.themeData.licenseURI + '\n' +
-												'Text Domain: ' + config.themeData.textDomain + '\n' +
-												( config.themeData.domainPath ? 'Domain Path: ' + config.themeData.domainPath + '\n' : '' ) +
-												'Tags: ' + config.themeData.tags;
-
-								let gplNote =	'This program is free software: you can redistribute it and/or modify\n' +
-												'it under the terms of the GNU General Public License as published by\n' +
-												'the Free Software Foundation, either version 3 of the License, or\n' +
-												'(at your option) any later version.\n\n' +
-												'This program is distributed in the hope that it will be useful,\n' +
-												'but WITHOUT ANY WARRANTY; without even the implied warranty of\n' +
-												'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n' +
-												'GNU General Public License for more details.';
-
-								return '/*!\n' + header + '\n\n' + config.themeData.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.themeData.author + '\n\n' + gplNote + '\n*/';
-							},
-						},
-					],
-				}),
-			},
-			// TODO: The following replacement does not work.
-			{
-				enforce: 'pre',
-				test: /readme\.txt/,
-				include: config.paths.root,
-				loader: StringReplacePlugin.replace({
-					replacements: [
-						{
-							pattern: /^\=\=\= (.+) \=\=\=([\s\S]+)\=\= Description \=\=/m,
-							replacement: function () {
-								let header =	'Contributors: ' + config.themeData.contributors + '\n' +
-												'Stable tag: ' + config.themeData.version + '\n' +
-												'Version: ' + config.themeData.version + '\n' +
-												'Requires at least: ' + config.themeData.minRequired + '\n' +
-												'Tested up to: ' + config.themeData.testedUpTo + '\n' +
-												'License: ' + config.themeData.license + '\n' +
-												'License URI: ' + config.themeData.licenseURI + '\n' +
-												'Tags: ' + config.themeData.tags;
-								return '=== ' + config.themeData.themeName + ' ===\n\n' + header + '\n\n== Description ==';
-							},
-						},
-					],
-				}),
-			},
-			{
 				test: /\.js$/,
 				exclude: [
 					/(node_modules|bower_components)(?![/|\\](bootstrap|foundation-sites))/,
@@ -143,71 +83,6 @@ let webpackConfig = {
 						},
 					},
 				],
-			},
-			{
-				test: /\.css$/,
-				include: config.paths.dev,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style',
-					use: [
-						{
-							loader: 'cache'
-						},
-						{
-							loader: 'css',
-							options: {
-								minimize: false,
-								sourceMap: config.enabled.sourceMaps,
-								url: false,
-							},
-						},
-						{
-							loader: 'postcss', options: {
-								config: {
-									path: __dirname,
-									ctx: config,
-								},
-								sourceMap: config.enabled.sourceMaps,
-							},
-						},
-					],
-				}),
-			},
-			{
-				test: /\.scss$/,
-				include: config.paths.dev,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style',
-					use: [
-						{
-							loader: 'cache',
-						},
-						{
-							loader: 'css',
-							options: {
-								minimize: false,
-								sourceMap: config.enabled.sourceMaps,
-								url: false,
-							},
-						},
-						{
-							loader: 'postcss',
-							options: {
-								config: {
-									path: __dirname,
-									ctx: config,
-								},
-								sourceMap: config.enabled.sourceMaps,
-							},
-						},
-						{
-							loader: 'sass',
-							options: {
-								sourceMap: config.enabled.sourceMaps,
-							},
-						},
-					],
-				}),
 			},
 		],
 	},
@@ -226,33 +101,7 @@ let webpackConfig = {
 		jquery: 'jQuery',
 	},
 	plugins: [
-		new CleanPlugin([config.paths.dist], {
-			root: config.paths.root,
-			verbose: false,
-		}),
-		new CopyWebpackPlugin( copy ),
-		new ExtractTextPlugin({
-			filename: '../../style.css',
-			allChunks: true,
-			disable: config.enabled.watcher,
-		}),
 		new FriendlyErrorsWebpackPlugin(),
-		new webpack.LoaderOptionsPlugin({
-			minimize: false,
-			debug: config.enabled.watcher,
-			stats: {
-				colors: true,
-			},
-		}),
-		new webpack.LoaderOptionsPlugin({
-			test: /\.s?css$/,
-			options: {
-				output: {
-					path: config.paths.dist,
-				},
-				context: config.paths.dev,
-			},
-		}),
 		new webpack.LoaderOptionsPlugin({
 			test: /\.js$/,
 			options: {
@@ -267,23 +116,6 @@ let webpackConfig = {
 			jQuery: 'jquery',
 			'window.jQuery': 'jquery',
 		}),
-		new StyleLintPlugin({
-			failOnError: ! config.enabled.watcher,
-			syntax: 'scss',
-		}),
-		new UglifyJSPlugin({
-			uglifyOptions: {
-				warnings: false,
-			},
-		}),
-		new UnminifiedWebpackPlugin({
-			exclude: /\.css$/,
-		}),
-		new WebpackRTLPlugin({
-			filename: '../../style-rtl.css',
-			minify: false,
-		}),
-		new StringReplacePlugin(),
 		new ImageminPlugin({
 			optipng: {
 				optimizationLevel: 7,
