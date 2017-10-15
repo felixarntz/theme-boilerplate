@@ -631,7 +631,8 @@ textarea {
 .site-branding {
 	display: block;
 	max-width: 72rem;
-	padding: 0 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -640,14 +641,15 @@ textarea {
 .main-navigation {
 	display: block;
 	max-width: 72rem;
-	padding: 0 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	margin-left: auto;
 	margin-bottom: 1rem; 
 	margin-right: auto;
 	text-align: center;
 }
 .main-navigation ul {
-	display: none;
+	display: inline-block;
 	padding-right: 0; 
 	margin: 0;
 	list-style: none;
@@ -658,17 +660,57 @@ textarea {
 .main-navigation a {
 	text-decoration: none;
 }
-.main-navigation .menu-toggle,
-.main-navigation.toggled ul {
+.main-navigation .menu-toggle {
+	display: none;
+	padding: 1em;
+	margin: 1px auto 2px;
+	color: #333;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: 800;
+	line-height: 1.5;
+	text-shadow: none; 
+	background-color: transparent;
+	box-shadow: none;
+	border: 0;
+}
+.main-navigation .menu-toggle:hover,
+.main-navigation .menu-toggle:focus {
+	background-color: transparent; 
+	box-shadow: none;
+}
+.main-navigation .menu-toggle:focus {
+	outline: thin solid;
+}
+.main-navigation .menu-toggle .icon {
+	top: -2px;
+	margin-left: 0.5em;
+}
+.main-navigation .menu-toggle .icon-close {
+	display: none;
+}
+.js .main-navigation ul.nav-menu {
+	display: none;
+}
+@media screen and (min-width: 48rem) {
+	.js .main-navigation ul.nav-menu {
+		display: inline-block;
+	}
+}
+.js .main-navigation .menu-toggle {
 	display: inline-block;
 }
 @media screen and (min-width: 48rem) {
-	.main-navigation .menu-toggle {
+	.js .main-navigation .menu-toggle {
 		display: none;
 	}
-	.main-navigation ul {
-		display: inline-block;
-	}
+}
+.js .main-navigation.toggled ul.nav-menu,
+.js .main-navigation.toggled .menu-toggle .icon-close {
+	display: inline-block;
+}
+.js .main-navigation.toggled .menu-toggle .icon-bars {
+	display: none;
 }
 
 /* -------------------------------------------------------------
@@ -687,7 +729,8 @@ textarea {
 }
 .site-content .content-area,
 .site-content .widget-area {
-	padding: 0 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 .site-content .content-area {
 	grid-area: site-content-area;
@@ -808,6 +851,16 @@ body.right-sidebar .site-content {
 	max-width: 100%;
 }
 
+.no-svg .search-submit .screen-reader-text {
+	position: relative !important;
+	width: auto;
+	height: auto;
+	clip: auto;
+	font-size: 16px;
+	font-size: 1rem; 
+	font-weight: 400;
+}
+
 /* -------------------------------------------------------------
 # Footer
 ------------------------------------------------------------- */
@@ -822,7 +875,8 @@ body.right-sidebar .site-content {
 	justify-items: stretch;
 }
 .footer-widgets .widget-column {
-	padding: 0 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 @media (min-width: 48rem) {
 	.footer-widgets-2 .footer-widgets {
@@ -839,7 +893,8 @@ body.right-sidebar .site-content {
 .social-navigation {
 	display: block;
 	max-width: 72rem;
-	padding: 0 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 16px;
@@ -898,7 +953,8 @@ body.right-sidebar .site-content {
 .footer-navigation {
 	display: block;
 	max-width: 72rem;
-	padding: 0 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -923,7 +979,8 @@ body.right-sidebar .site-content {
 .site-info {
 	display: block;
 	max-width: 72rem;
-	padding: 0 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;

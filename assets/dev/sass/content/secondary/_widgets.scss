@@ -6,3 +6,7 @@
 		max-width: 100%;
 	}
 }
+
+.no-svg .search-submit .screen-reader-text {
+	@include override-screen-reader-text();
+}

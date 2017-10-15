@@ -52,13 +52,7 @@
 			background-color: transparent;
 
 			.screen-reader-text {
-				position: relative !important;
-				clip: auto;
-				width: auto;
-				height: auto;
-				font-weight: 400;
-
-				@include font-size(1);
+				@include override-screen-reader-text();
 			}
 		}
 	}

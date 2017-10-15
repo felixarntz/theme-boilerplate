@@ -7,7 +7,7 @@
 	margin-bottom: $padding_vertical;
 
 	ul {
-		display: none;
+		display: inline-block;
 		list-style: none;
 		margin: 0;
 		padding-left: 0;
@@ -21,18 +21,66 @@
 		text-decoration: none;
 	}
 
-	.menu-toggle,
-	&.toggled ul {
-		display: inline-block;
-	}
+	.menu-toggle {
+		display: none;
+		margin: 1px auto 2px;
+		padding: 1em;
+		font-size: 14px;
+		font-size: 0.875rem;
+		font-weight: 800;
+		line-height: 1.5;
+		color: #333;
+		background-color: transparent;
+		border: 0;
+		box-shadow: none;
+		text-shadow: none;
 
-	@media screen and (min-width: $site_breakpoint) {
-		.menu-toggle {
-			display: none;
+		&:hover,
+		&:focus {
+			box-shadow: none;
+			background-color: transparent;
 		}
 
-		ul {
+		&:focus {
+			outline: thin solid;
+		}
+
+		.icon {
+			top: -2px;
+			margin-right: 0.5em;
+		}
+
+		.icon-close {
+			display: none;
+		}
+	}
+
+	.js & {
+		ul.nav-menu {
+			display: none;
+
+			@media screen and (min-width: $site_breakpoint) {
+				display: inline-block;
+			}
+		}
+
+		.menu-toggle {
 			display: inline-block;
+
+			@media screen and (min-width: $site_breakpoint) {
+				display: none;
+			}
+		}
+
+		&.toggled {
+			ul.nav-menu,
+			.menu-toggle .icon-close {
+				display: inline-block;
+			}
+
+			.menu-toggle .icon-bars {
+				display: none;
+			}
 		}
 	}
 }

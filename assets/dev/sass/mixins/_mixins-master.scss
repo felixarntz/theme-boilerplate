@@ -30,6 +30,16 @@
 	clear: both;
 }
 
+@mixin override-screen-reader-text() {
+	position: relative !important;
+	clip: auto;
+	width: auto;
+	height: auto;
+	font-weight: 400;
+
+	@include font-size(1);
+}
+
 // Limit maximum width
 @mixin limit-width() {
 	max-width: $site_maxwidth;
@@ -37,7 +47,8 @@
 
 // Horizontal padding
 @mixin horizontal-padding() {
-	padding: 0 $padding_horizontal;
+	padding-right: $padding_horizontal;
+	padding-left: $padding_horizontal;
 }
 
 @mixin text-center() {
