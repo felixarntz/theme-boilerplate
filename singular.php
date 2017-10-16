@@ -25,7 +25,7 @@ get_header(); ?>
 				the_post_navigation();
 			endif;
 
-			if ( post_type_supports( get_post_type(), 'comments' ) && ( comments_open() || get_comments_number() ) ) :
+			if ( super_awesome_theme_display_post_comments() ) :
 				comments_template();
 			endif;
 

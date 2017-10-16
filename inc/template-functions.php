@@ -64,6 +64,10 @@ function super_awesome_theme_use_post_format_templates( $post = null ) {
 
 	$post_type = $post->post_type;
 
+	if ( ! post_type_supports( $post_type, 'post-formats' ) ) {
+		return false;
+	}
+
 	$result = 'post' === $post_type ? true : false;
 
 	/**
@@ -95,20 +99,31 @@ function super_awesome_theme_display_post_navigation( $post = null ) {
 		return false;
 	}
 
+	$post_type_object = get_post_type_object( $post->post_type );
+	if ( ! $post_type_object ) {
+		return false;
+	}
+
+	return (bool) $post_type_object->has_archive;
+}
+
+/**
+ * Checks whether comments should be displayed for a post.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Post|int|null $post Optional. Post to check for. Default is the current post.
+ * @return bool True if comments should be displayed for the post, false otherwise.
+ */
+function super_awesome_theme_display_post_comments( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return false;
+	}
+
 	$post_type = $post->post_type;
 
-	$result = 'post' === $post_type ? true : false;
-
-	/**
-	 * Filters whether to display the navigation to the previous and next post for a post.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool   $result    Whether to display the post navigation. Default is true for type 'post', false otherwise.
-	 * @param string $post_type Post type slug.
-	 * @param int    $post_id   Post ID.
-	 */
-	return apply_filters( 'super_awesome_theme_display_post_navigation', $result, $post_type, $post->ID );
+	return post_type_supports( $post_type, 'comments' ) && ( comments_open( $post ) || get_comments_number( $post ) );
 }
 
 /**
@@ -147,6 +162,10 @@ function super_awesome_theme_display_post_author( $post = null ) {
 	}
 
 	$post_type = $post->post_type;
+
+	if ( ! post_type_supports( $post_type, 'author' ) ) {
+		return false;
+	}
 
 	$default = in_array( $post_type, array( 'post', 'attachment' ), true );
 
@@ -188,6 +207,10 @@ function super_awesome_theme_display_post_authorbox( $post = null ) {
 	}
 
 	$post_type = $post->post_type;
+
+	if ( ! post_type_supports( $post_type, 'author' ) ) {
+		return false;
+	}
 
 	$default = 'post' === $post_type;
 

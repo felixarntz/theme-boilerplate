@@ -107,20 +107,22 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			'container_inclusive' => true,
 		) );
 
-		$wp_customize->add_setting( $post_type->name . '_show_author', array(
-			'default'           => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
-			'transport'         => 'postMessage',
-		) );
-		$wp_customize->add_control( $post_type->name . '_show_author', array(
-			'section' => 'content_type_' . $post_type->name,
-			'label'   => __( 'Show Author Name?', 'super-awesome-theme' ),
-			'type'    => 'checkbox',
-		) );
-		$wp_customize->selective_refresh->add_partial( $post_type->name . '_show_author', array(
-			'selector'            => '.type-' . $post_type->name . ' .entry-meta',
-			'render_callback'     => 'super_awesome_theme_customize_partial_entry_meta',
-			'container_inclusive' => true,
-		) );
+		if ( post_type_supports( $post_type->name, 'author' ) ) {
+			$wp_customize->add_setting( $post_type->name . '_show_author', array(
+				'default'           => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
+				'transport'         => 'postMessage',
+			) );
+			$wp_customize->add_control( $post_type->name . '_show_author', array(
+				'section' => 'content_type_' . $post_type->name,
+				'label'   => __( 'Show Author Name?', 'super-awesome-theme' ),
+				'type'    => 'checkbox',
+			) );
+			$wp_customize->selective_refresh->add_partial( $post_type->name . '_show_author', array(
+				'selector'            => '.type-' . $post_type->name . ' .entry-meta',
+				'render_callback'     => 'super_awesome_theme_customize_partial_entry_meta',
+				'container_inclusive' => true,
+			) );
+		}
 
 		$public_taxonomies = wp_list_filter( get_object_taxonomies( $post_type->name, 'objects' ), array(
 			'public' => true,
@@ -143,20 +145,22 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			) );
 		}
 
-		$wp_customize->add_setting( $post_type->name . '_show_authorbox', array(
-			'default'           => 'post' === $post_type->name ? '1' : '',
-			'transport'         => 'postMessage',
-		) );
-		$wp_customize->add_control( $post_type->name . '_show_authorbox', array(
-			'section' => 'content_type_' . $post_type->name,
-			'label'   => __( 'Show Author Box?', 'super-awesome-theme' ),
-			'type'    => 'checkbox',
-		) );
-		$wp_customize->selective_refresh->add_partial( $post_type->name . '_show_authorbox', array(
-			'selector'            => '.type-' . $post_type->name . ' .entry-authorbox',
-			'render_callback'     => 'super_awesome_theme_customize_partial_entry_authorbox',
-			'container_inclusive' => true,
-		) );
+		if ( post_type_supports( $post_type->name, 'author' ) ) {
+			$wp_customize->add_setting( $post_type->name . '_show_authorbox', array(
+				'default'           => 'post' === $post_type->name ? '1' : '',
+				'transport'         => 'postMessage',
+			) );
+			$wp_customize->add_control( $post_type->name . '_show_authorbox', array(
+				'section' => 'content_type_' . $post_type->name,
+				'label'   => __( 'Show Author Box?', 'super-awesome-theme' ),
+				'type'    => 'checkbox',
+			) );
+			$wp_customize->selective_refresh->add_partial( $post_type->name . '_show_authorbox', array(
+				'selector'            => '.type-' . $post_type->name . ' .entry-authorbox',
+				'render_callback'     => 'super_awesome_theme_customize_partial_entry_authorbox',
+				'container_inclusive' => true,
+			) );
+		}
 	}
 }
 add_action( 'customize_register', 'super_awesome_theme_customize_register' );

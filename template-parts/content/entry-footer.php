@@ -13,7 +13,7 @@
 	<?php get_template_part( 'template-parts/content/entry-terms', get_post_type() ); ?>
 
 	<div class="entry-action-links">
-		<?php if ( ! is_singular() && ! post_password_required() && post_type_supports( get_post_type(), 'comments' ) && ( comments_open() || get_comments_number() ) ) : ?>
+		<?php if ( ! is_singular() && ! post_password_required() && post_type_supports( get_post_type(), 'comments' ) && comments_open() ) : ?>
 			<span class="comments-link">
 				<?php
 				comments_popup_link(
