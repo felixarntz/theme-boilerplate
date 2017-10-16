@@ -83,18 +83,21 @@ var gplNote =	'This program is free software: you can redistribute it and/or mod
 
 var gulp = require( 'gulp' );
 
-var csscomb   = require( 'gulp-csscomb' );
-var eslint    = require( 'gulp-eslint' );
-var jscs      = require( 'gulp-jscs' );
-var rename    = require( 'gulp-rename' );
-var replace   = require( 'gulp-replace' );
-var rtlcss    = require( 'gulp-rtlcss' );
-var sass      = require( 'gulp-sass' );
-var sort      = require( 'gulp-sort' );
-var stylelint = require( 'gulp-stylelint' );
-var uglify    = require( 'gulp-uglify' );
-var wpPot     = require( 'gulp-wp-pot' );
+var autoprefixer = require( 'gulp-autoprefixer' );
+var csscomb      = require( 'gulp-csscomb' );
+var eslint       = require( 'gulp-eslint' );
+var imagemin     = require( 'gulp-imagemin' );
+var jscs         = require( 'gulp-jscs' );
+var rename       = require( 'gulp-rename' );
+var replace      = require( 'gulp-replace' );
+var rtlcss       = require( 'gulp-rtlcss' );
+var sass         = require( 'gulp-sass' );
+var sort         = require( 'gulp-sort' );
+var stylelint    = require( 'gulp-stylelint' );
+var uglify       = require( 'gulp-uglify' );
+var wpPot        = require( 'gulp-wp-pot' );
 
+var imageminMozjpeg = require( 'imagemin-mozjpeg' );
 var named = require( 'vinyl-named' );
 var webpack   = require( 'webpack-stream' );
 
@@ -127,6 +130,14 @@ gulp.task( 'sass', function( done ) {
 				.pipe( sass({
 					errLogToConsole: true,
 					outputStyle: 'expanded',
+				}) )
+				.pipe( autoprefixer({
+					browsers: [
+						'last 4 versions',
+						'android 4',
+						'opera 12',
+					],
+					cascade: false,
 				}) )
 				.pipe( csscomb() )
 				.pipe( gulp.dest( './' ) )
@@ -178,7 +189,42 @@ gulp.task( 'js', function( done ) {
 
 // minify images
 gulp.task( 'img', function( done ) {
-	gulp.src( './assets/dev/images/**/*.svg' )
+	gulp.src([
+			'./assets/dev/images/**/*.gif',
+			'./assets/dev/images/**/*.jpg',
+			'./assets/dev/images/**/*.png',
+			'./assets/dev/images/**/*.svg',
+		])
+		.pipe( imagemin([
+			imagemin.gifsicle({
+				optimizationLevel: 3,
+			}),
+			imagemin.optipng({
+				optimizationLevel: 7,
+			}),
+			imagemin.svgo({
+				plugins: [
+					{
+						cleanupIDs: false,
+					},
+					{
+						removeComments: true,
+					},
+					{
+						removeHiddenElems: false,
+					},
+					{
+						removeViewBox: false,
+					},
+					{
+						removeUnknownsAndDefaults: false,
+					},
+				],
+			}),
+			imageminMozjpeg({
+				quality: 75,
+			})
+		]) )
 		.pipe( gulp.dest( './assets/dist/images/' ) )
 		.on( 'end', done );
 });

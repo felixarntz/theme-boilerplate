@@ -157,7 +157,8 @@ figure {
 }
 
 hr {
-	box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	        box-sizing: content-box;
 	height: 0;
 }
 
@@ -217,7 +218,8 @@ input {
 
 input[type="checkbox"],
 input[type="radio"] {
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding: 0;
 }
 
@@ -379,7 +381,8 @@ a:active {
 # Elements
 ------------------------------------------------------------- */
 html {
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	text-direction: ltr;
 }
 
@@ -387,7 +390,8 @@ html {
 *:before,
 *:after {
 	/* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
-	box-sizing: inherit;
+	-webkit-box-sizing: inherit;
+	        box-sizing: inherit;
 }
 
 body {
@@ -573,7 +577,8 @@ textarea {
 	line-height: normal;
 	text-decoration: none;
 	background-color: #f1f1f1;
-	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	-webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
 	border-radius: 3px;
 	/* Above WP toolbar. */
 }
@@ -684,14 +689,16 @@ textarea {
 	line-height: 1.5;
 	text-shadow: none;
 	background-color: transparent;
-	box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 	border: 0;
 }
 
 .main-navigation .menu-toggle:hover,
 .main-navigation .menu-toggle:focus {
 	background-color: transparent;
-	box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 }
 
 .main-navigation .menu-toggle:focus {
@@ -741,12 +748,14 @@ textarea {
 ------------------------------------------------------------- */
 .site-content {
 	align-items: stretch;
+	-ms-flex-align: stretch;
 	display: grid;
 	display: grid;
 	max-width: 72rem;
 	margin-right: auto;
 	margin-left: auto;
 
+	-webkit-box-align: stretch;
 	grid-template-columns: auto;
 	justify-items: stretch;
 }
@@ -898,11 +907,13 @@ body.right-sidebar .site-content {
 ------------------------------------------------------------- */
 .footer-widgets {
 	align-items: stretch;
+	-ms-flex-align: stretch;
 	display: grid;
 	max-width: 72rem;
 	margin-right: auto;
 	margin-left: auto;
 
+	-webkit-box-align: stretch;
 	grid-template: auto / auto;
 	justify-items: stretch;
 }

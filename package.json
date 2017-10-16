@@ -49,8 +49,10 @@
   },
   "devDependencies": {
     "gulp": "~3.9.1",
+    "gulp-autoprefixer": "~4.0.0",
     "gulp-csscomb": "~3.0.8",
     "gulp-eslint": "~4.0.0",
+    "gulp-imagemin": "~3.4.0",
     "gulp-jscs": "~4.0.0",
     "gulp-rename": "~1.2.2",
     "gulp-replace": "~0.6.1",
@@ -61,6 +63,7 @@
     "gulp-uglify": "~3.0.0",
     "gulp-webpack": "~1.5.0",
     "gulp-wp-pot": "~2.0.6",
+    "imagemin-mozjpeg": "~6.0.0",
     "stylelint-config-standard": "~17.0.0",
     "vinyl-named": "~1.1.0",
     "webpack-stream": "~4.0.0"
