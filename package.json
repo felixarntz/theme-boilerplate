@@ -32,17 +32,10 @@
     "url": "https://github.com/taco-themes/super-awesome-theme/issues"
   },
   "license": "GPL-3.0",
-  "browserslist": [
-    "last 2 versions",
-    "android 4",
-    "opera 12"
-  ],
   "scripts": {
-    "build": "gulp build",
-    "lint": "npm run -s lint:scripts && npm run -s lint:styles",
-    "lint:scripts": "eslint assets/dev",
-    "lint:styles": "stylelint \"assets/dev/**/*.{css,sass,scss,sss,less}\"",
-    "test": "npm run -s lint"
+    "gulp": "gulp",
+    "build": "NODE_ENV=production gulp build",
+    "lint": "gulp lint"
   },
   "engines": {
     "node": ">= 6.9.4"
@@ -65,7 +58,6 @@
     "gulp-wp-pot": "~2.0.6",
     "imagemin-mozjpeg": "~6.0.0",
     "stylelint-config-standard": "~17.0.0",
-    "vinyl-named": "~1.1.0",
     "webpack-stream": "~4.0.0"
   }
 }

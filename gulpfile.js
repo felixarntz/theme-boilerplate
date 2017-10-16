@@ -98,8 +98,7 @@ var uglify       = require( 'gulp-uglify' );
 var wpPot        = require( 'gulp-wp-pot' );
 
 var imageminMozjpeg = require( 'imagemin-mozjpeg' );
-var named = require( 'vinyl-named' );
-var webpack   = require( 'webpack-stream' );
+var webpack         = require( 'webpack-stream' );
 
 /* ---- MAIN TASKS ---- */
 
