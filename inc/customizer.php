@@ -91,7 +91,6 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			'title'    => $post_type->label,
 		) );
 
-		// TODO: Figure out how to pass the respective posts to the partials.
 		$wp_customize->add_setting( $post_type->name . '_show_date', array(
 			'default'           => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
 			'transport'         => 'postMessage',
@@ -264,27 +263,69 @@ function super_awesome_theme_customize_partial_blog_sidebar_enabled() {
  * Renders the entry metadata for a post.
  *
  * @since 1.0.0
+ *
+ * @param WP_Customize_Partial $partial Partial for which the function is invoked.
+ * @param array                $context Context for which to render the entry metadata.
  */
-function super_awesome_theme_customize_partial_entry_meta() {
-	get_template_part( 'template-parts/content/entry-meta', get_post_type() );
+function super_awesome_theme_customize_partial_entry_meta( $partial, $context ) {
+	$post_type = null;
+	if ( ! empty( $context['post_id'] ) ) {
+		$post = get_post( $context['post_id'] );
+		if ( $post ) {
+			$post_type = $post->post_type;
+
+			$GLOBALS['post'] = $post;
+			setup_postdata( $post );
+		}
+	}
+
+	get_template_part( 'template-parts/content/entry-meta', $post_type );
 }
 
 /**
  * Renders the entry terms for a post.
  *
  * @since 1.0.0
+ *
+ * @param WP_Customize_Partial $partial Partial for which the function is invoked.
+ * @param array                $context Context for which to render the entry terms.
  */
-function super_awesome_theme_customize_partial_entry_terms() {
-	get_template_part( 'template-parts/content/entry-terms', get_post_type() );
+function super_awesome_theme_customize_partial_entry_terms( $partial, $context ) {
+	$post_type = null;
+	if ( ! empty( $context['post_id'] ) ) {
+		$post = get_post( $context['post_id'] );
+		if ( $post ) {
+			$post_type = $post->post_type;
+
+			$GLOBALS['post'] = $post;
+			setup_postdata( $post );
+		}
+	}
+
+	get_template_part( 'template-parts/content/entry-terms', $post_type );
 }
 
 /**
  * Renders the entry author box for a post.
  *
  * @since 1.0.0
+ *
+ * @param WP_Customize_Partial $partial Partial for which the function is invoked.
+ * @param array                $context Context for which to render the entry author box.
  */
-function super_awesome_theme_customize_partial_entry_authorbox() {
-	get_template_part( 'template-parts/content/entry-authorbox', get_post_type() );
+function super_awesome_theme_customize_partial_entry_authorbox( $partial, $context ) {
+	$post_type = null;
+	if ( ! empty( $context['post_id'] ) ) {
+		$post = get_post( $context['post_id'] );
+		if ( $post ) {
+			$post_type = $post->post_type;
+
+			$GLOBALS['post'] = $post;
+			setup_postdata( $post );
+		}
+	}
+
+	get_template_part( 'template-parts/content/entry-authorbox', $post_type );
 }
 
 /**

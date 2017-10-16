@@ -38,7 +38,7 @@ if ( super_awesome_theme_display_post_taxonomy_terms( 'post_tag' ) ) {
 }
 
 ?>
-<div class="entry-terms">
+<div class="entry-terms"<?php super_awesome_theme_customize_post_context() ?>>
 	<?php foreach ( $terms as $taxonomy_terms ) : ?>
 		<span class="<?php echo esc_attr( $taxonomy_terms['class'] ); ?>">
 			<?php

@@ -218,6 +218,34 @@ function super_awesome_theme_display_post_authorbox( $post = null ) {
 }
 
 /**
+ * Prints a post context attribute to be used by the Customizer.
+ *
+ * This function should be used on all selectors for selective refresh partials
+ * which need to be aware of their post context.
+ * The attribute is only printed when the current request is a customize preview.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Post|int|null $post Optional. Post to print the attribute for. Default is the current post.
+ */
+function super_awesome_theme_customize_post_context( $post = null ) {
+	if ( ! is_customize_preview() ) {
+		return;
+	}
+
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return;
+	}
+
+	$context = array(
+		'post_id' => (int) $post->ID,
+	);
+
+	printf( ' data-customize-partial-placement-context="%s"', esc_attr( wp_json_encode( $context ) ) );
+}
+
+/**
  * Gets the name of the sidebar to display on the current page.
  *
  * @since 1.0.0
