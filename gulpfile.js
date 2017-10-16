@@ -111,10 +111,19 @@ gulp.task( 'build', [ 'readme-replace' ], function() {
 	gulp.start( 'default' );
 });
 
+// lint Sass and JavaScript
+gulp.task( 'lint', [ 'lint-sass', 'lint-js' ]);
+
+// lint and compile Sass
+gulp.task( 'sass', [ 'lint-sass', 'compile-sass' ]);
+
+// lint and compile JavaScript
+gulp.task( 'js', [ 'lint-js', 'compile-js' ]);
+
 /* ---- SUB TASKS ---- */
 
-// compile Sass
-gulp.task( 'sass', function( done ) {
+// lint Sass
+gulp.task( 'lint-sass', function( done ) {
 	gulp.src( './assets/dev/sass/**/*.scss' )
 		.pipe( stylelint({
 			reporters: [
@@ -124,34 +133,37 @@ gulp.task( 'sass', function( done ) {
 				},
 			],
 		}) )
-		.on( 'end', function() {
-			gulp.src( './assets/dev/sass/style.scss' )
-				.pipe( replace( /^\/\*! \-\-\- Theme header will be inserted here automatically\. \-\-\- \*\//, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.author + '\n\n' + gplNote + '\n*/' ) )
-				.pipe( sass({
-					errLogToConsole: true,
-					outputStyle: 'expanded',
-				}) )
-				.pipe( autoprefixer({
-					browsers: [
-						'last 4 versions',
-						'android 4',
-						'opera 12',
-					],
-					cascade: false,
-				}) )
-				.pipe( csscomb() )
-				.pipe( gulp.dest( './' ) )
-				.pipe( rtlcss() )
-				.pipe( rename({
-					suffix: '-rtl'
-				}) )
-				.pipe( gulp.dest( './' ) )
-				.on( 'end', done );
-		});
+		.on( 'end', done );
 });
 
-// compile JavaScript
-gulp.task( 'js', function( done ) {
+// compile Sass
+gulp.task( 'compile-sass', function( done ) {
+	gulp.src( './assets/dev/sass/style.scss' )
+		.pipe( replace( /^\/\*! \-\-\- Theme header will be inserted here automatically\. \-\-\- \*\//, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.author + '\n\n' + gplNote + '\n*/' ) )
+		.pipe( sass({
+			errLogToConsole: true,
+			outputStyle: 'expanded',
+		}) )
+		.pipe( autoprefixer({
+			browsers: [
+				'last 4 versions',
+				'android 4',
+				'opera 12',
+			],
+			cascade: false,
+		}) )
+		.pipe( csscomb() )
+		.pipe( gulp.dest( './' ) )
+		.pipe( rtlcss() )
+		.pipe( rename({
+			suffix: '-rtl'
+		}) )
+		.pipe( gulp.dest( './' ) )
+		.on( 'end', done );
+});
+
+// lint JavaScript
+gulp.task( 'lint-js', function( done ) {
 	gulp.src([
 			'./assets/dev/js/**/*.js',
 			'!./assets/dev/js/html5.js',
@@ -161,29 +173,32 @@ gulp.task( 'js', function( done ) {
 		.pipe( eslint.failAfterError() )
 		.pipe( jscs() )
 		.pipe( jscs.reporter() )
+		.on( 'end', done );
+});
+
+// compile JavaScript
+gulp.task( 'compile-js', function( done ) {
+	gulp.src( './assets/dev/js/theme.js' )
+		.pipe( webpack({
+			entry: {
+				theme: './assets/dev/js/theme.js',
+				'customize-controls': './assets/dev/js/customize-controls.js',
+				'customize-preview': './assets/dev/js/customize-preview.js',
+			},
+			output: {
+				filename: '[name].js',
+			},
+		}) )
+		.pipe( gulp.dest( './assets/dist/js/' ) )
+		.pipe( uglify() )
+		.pipe( rename({
+			extname: '.min.js',
+		}) )
+		.pipe( gulp.dest( './assets/dist/js/' ) )
 		.on( 'end', function() {
-			gulp.src( './assets/dev/js/theme.js' )
-				.pipe( webpack({
-					entry: {
-						theme: './assets/dev/js/theme.js',
-						'customize-controls': './assets/dev/js/customize-controls.js',
-						'customize-preview': './assets/dev/js/customize-preview.js',
-					},
-					output: {
-						filename: '[name].js',
-					},
-				}) )
+			gulp.src( './assets/dev/js/html5.js' )
 				.pipe( gulp.dest( './assets/dist/js/' ) )
-				.pipe( uglify() )
-				.pipe( rename({
-					extname: '.min.js',
-				}) )
-				.pipe( gulp.dest( './assets/dist/js/' ) )
-				.on( 'end', function() {
-					gulp.src( './assets/dev/js/html5.js' )
-						.pipe( gulp.dest( './assets/dist/js/' ) )
-						.on( 'end', done );
-				});
+				.on( 'end', done );
 		});
 });
 
