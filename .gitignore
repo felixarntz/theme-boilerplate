@@ -23,12 +23,6 @@ composer.lock
 package-lock.json
 
 ############
-## Build
-############
-
-assets/dist/
-
-############
 ## Vendor
 ############
 
