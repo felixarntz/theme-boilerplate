@@ -22,24 +22,28 @@ $time_string = sprintf( $time_string,
 ?>
 <div class="entry-meta">
 
-	<span class="posted-on">
-		<?php
-		printf(
-			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'super-awesome-theme' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' // WPCS: XSS OK.
-		);
-		?>
-	</span>
+	<?php if ( super_awesome_theme_display_post_date() ) : ?>
+		<span class="posted-on">
+			<?php
+			printf(
+				/* translators: %s: post date. */
+				esc_html_x( 'Posted on %s', 'post date', 'super-awesome-theme' ),
+				'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' // WPCS: XSS OK.
+			);
+			?>
+		</span>
+	<?php endif; ?>
 
-	<span class="byline">
-		<?php
-		printf(
-			/* translators: %s: post author. */
-			esc_html_x( 'by %s', 'post author', 'super-awesome-theme' ),
-			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-		);
-		?>
-	</span>
+	<?php if ( super_awesome_theme_display_post_author() ) : ?>
+		<span class="byline">
+			<?php
+			printf(
+				/* translators: %s: post author. */
+				esc_html_x( 'by %s', 'post author', 'super-awesome-theme' ),
+				'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+			);
+			?>
+		</span>
+	<?php endif; ?>
 
 </div><!-- .entry-meta -->

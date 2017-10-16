@@ -18,8 +18,6 @@
 	}
 	?>
 
-	<?php if ( super_awesome_theme_display_entry_meta() ) : ?>
-		<?php get_template_part( 'template-parts/content/entry-meta', get_post_type() ); ?>
-	<?php endif; ?>
+	<?php get_template_part( 'template-parts/content/entry-meta', get_post_type() ); ?>
 
 </header><!-- .entry-header -->

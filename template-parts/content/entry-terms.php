@@ -13,6 +13,10 @@ $taxonomies = wp_list_filter( get_object_taxonomies( $post, 'objects' ), array(
 
 $terms = array();
 foreach ( $taxonomies as $taxonomy ) {
+	if ( ! super_awesome_theme_display_post_taxonomy_terms( $taxonomy->name ) ) {
+		continue;
+	}
+
 	if ( 'post_tag' === $taxonomy->name ) {
 		$class = 'tag-links term-links';
 	} else {
@@ -30,29 +34,35 @@ foreach ( $taxonomies as $taxonomy ) {
 	$separator = _x( ', ', 'list item separator', 'super-awesome-theme' );
 
 	if ( 'category' === $taxonomy->name ) {
-		$list = get_the_category_list( esc_html( $separator ), '', $post->ID );
+		$term_list = get_the_category_list( esc_html( $separator ), '', $post->ID );
 	} elseif ( 'post_tag' === $taxonomy->name ) {
-		$list = get_the_tag_list( '', esc_html( $separator ), '', $post->ID );
+		$term_list = get_the_tag_list( '', esc_html( $separator ), '', $post->ID );
 	} else {
-		$list = get_the_term_list( $post->ID, $taxonomy->name, '', esc_html( $separator ), '' );
+		$term_list = get_the_term_list( $post->ID, $taxonomy->name, '', esc_html( $separator ), '' );
+	}
+
+	if ( empty( $term_list ) ) {
+		continue;
 	}
 
 	$terms[] = array(
 		'slug'             => $taxonomy->name,
 		'class'            => $class,
 		'placeholder_text' => $placeholder_text,
-		'list'             => $list,
+		'list'             => $term_list,
 	);
 }
 
 ?>
-<?php foreach ( $terms as $taxonomy_terms ) : ?>
-	<span class="<?php echo esc_attr( $taxonomy_terms['class'] ); ?>">
-		<?php
-		printf(
-			esc_html( $taxonomy_terms['placeholder_text'] ),
-			$taxonomy_terms['list'] // WPCS: XSS OK.
-		);
-		?>
-	</span>
-<?php endforeach; ?>
+<div class="entry-terms">
+	<?php foreach ( $terms as $taxonomy_terms ) : ?>
+		<span class="<?php echo esc_attr( $taxonomy_terms['class'] ); ?>">
+			<?php
+			printf(
+				esc_html( $taxonomy_terms['placeholder_text'] ),
+				$taxonomy_terms['list'] // WPCS: XSS OK.
+			);
+			?>
+		</span>
+	<?php endforeach; ?>
+</div>

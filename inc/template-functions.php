@@ -112,14 +112,14 @@ function super_awesome_theme_display_post_navigation( $post = null ) {
 }
 
 /**
- * Checks whether entry metadata should be displayed for a post.
+ * Checks whether the date should be displayed for a post.
  *
  * @since 1.0.0
  *
  * @param WP_Post|int|null $post Optional. Post to check for. Default is the current post.
- * @return bool True if entry metadata should be displayed for the post, false otherwise.
+ * @return True if the date should be displayed for the post, false otherwise.
  */
-function super_awesome_theme_display_entry_meta( $post = null ) {
+function super_awesome_theme_display_post_date( $post = null ) {
 	$post = get_post( $post );
 	if ( ! $post ) {
 		return false;
@@ -127,18 +127,71 @@ function super_awesome_theme_display_entry_meta( $post = null ) {
 
 	$post_type = $post->post_type;
 
-	$result = 'post' === $post_type ? true : false;
+	$default = in_array( $post_type, array( 'post', 'attachment' ), true );
 
-	/**
-	 * Filters whether to display entry meta for a post.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool   $result    Whether to display entry meta. Default is true for type 'post', false otherwise.
-	 * @param string $post_type Post type slug.
-	 * @param int    $post_id   Post ID.
-	 */
-	return apply_filters( 'super_awesome_theme_display_entry_meta', $result, $post_type, $post->ID );
+	return get_theme_mod( $post_type . '_show_date', $default );
+}
+
+/**
+ * Checks whether the author name should be displayed for a post.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Post|int|null $post Optional. Post to check for. Default is the current post.
+ * @return True if the author name should be displayed for the post, false otherwise.
+ */
+function super_awesome_theme_display_post_author( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return false;
+	}
+
+	$post_type = $post->post_type;
+
+	$default = in_array( $post_type, array( 'post', 'attachment' ), true );
+
+	return get_theme_mod( $post_type . '_show_author', $default );
+}
+
+/**
+ * Checks whether the terms of a specific taxonomy should be displayed for a post.
+ *
+ * @since 1.0.0
+ *
+ * @param string           $taxonomy Taxonomy slug.
+ * @param WP_Post|int|null $post     Optional. Post to check for. Default is the current post.
+ * @return True if the terms of a specific taxonomy should be displayed for the post, false otherwise.
+ */
+function super_awesome_theme_display_post_taxonomy_terms( $taxonomy, $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return false;
+	}
+
+	$post_type = $post->post_type;
+
+	return get_theme_mod( $post_type . '_show_terms_' . $taxonomy, true );
+}
+
+/**
+ * Checks whether the author box should be displayed for a post.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Post|int|null $post Optional. Post to check for. Default is the current post.
+ * @return True if the author box should be displayed for the post, false otherwise.
+ */
+function super_awesome_theme_display_post_authorbox( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return false;
+	}
+
+	$post_type = $post->post_type;
+
+	$default = 'post' === $post_type;
+
+	return get_theme_mod( $post_type . '_show_authorbox', $default );
 }
 
 /**

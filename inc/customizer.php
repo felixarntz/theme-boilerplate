@@ -76,6 +76,88 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'render_callback'     => 'super_awesome_theme_customize_partial_blog_sidebar_enabled',
 		'container_inclusive' => true,
 	) );
+
+	/* Content Type Settings */
+
+	$wp_customize->add_panel( 'content_types', array(
+		'title'    => __( 'Content Types', 'super-awesome-theme' ),
+		'priority' => 140,
+	) );
+
+	$public_post_types = get_post_types( array( 'public' => true ), 'objects' );
+	foreach ( $public_post_types as $post_type ) {
+		$wp_customize->add_section( 'content_type_' . $post_type->name, array(
+			'panel'    => 'content_types',
+			'title'    => $post_type->label,
+		) );
+
+		// TODO: Figure out how to pass the respective posts to the partials.
+		$wp_customize->add_setting( $post_type->name . '_show_date', array(
+			'default'           => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
+			'transport'         => 'postMessage',
+		) );
+		$wp_customize->add_control( $post_type->name . '_show_date', array(
+			'section' => 'content_type_' . $post_type->name,
+			'label'   => __( 'Show Date?', 'super-awesome-theme' ),
+			'type'    => 'checkbox',
+		) );
+		$wp_customize->selective_refresh->add_partial( $post_type->name . '_show_date', array(
+			'selector'            => '.type-' . $post_type->name . ' .entry-meta',
+			'render_callback'     => 'super_awesome_theme_customize_partial_entry_meta',
+			'container_inclusive' => true,
+		) );
+
+		$wp_customize->add_setting( $post_type->name . '_show_author', array(
+			'default'           => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
+			'transport'         => 'postMessage',
+		) );
+		$wp_customize->add_control( $post_type->name . '_show_author', array(
+			'section' => 'content_type_' . $post_type->name,
+			'label'   => __( 'Show Author Name?', 'super-awesome-theme' ),
+			'type'    => 'checkbox',
+		) );
+		$wp_customize->selective_refresh->add_partial( $post_type->name . '_show_author', array(
+			'selector'            => '.type-' . $post_type->name . ' .entry-meta',
+			'render_callback'     => 'super_awesome_theme_customize_partial_entry_meta',
+			'container_inclusive' => true,
+		) );
+
+		$public_taxonomies = wp_list_filter( get_object_taxonomies( $post_type->name, 'objects' ), array(
+			'public' => true,
+		) );
+		foreach ( $public_taxonomies as $taxonomy ) {
+			$wp_customize->add_setting( $post_type->name . '_show_terms_' . $taxonomy->name, array(
+				'default'           => '1',
+				'transport'         => 'postMessage',
+			) );
+			$wp_customize->add_control( $post_type->name . '_show_terms_' . $taxonomy->name, array(
+				'section' => 'content_type_' . $post_type->name,
+				/* translators: %s: taxonomy plural label */
+				'label'   => sprintf( _x( 'Show %s?', 'taxonomy', 'super-awesome-theme' ), $taxonomy->label ),
+				'type'    => 'checkbox',
+			) );
+			$wp_customize->selective_refresh->add_partial( $post_type->name . '_show_terms_' . $taxonomy->name, array(
+				'selector'            => '.type-' . $post_type->name . ' .entry-terms',
+				'render_callback'     => 'super_awesome_theme_customize_partial_entry_terms',
+				'container_inclusive' => true,
+			) );
+		}
+
+		$wp_customize->add_setting( $post_type->name . '_show_authorbox', array(
+			'default'           => 'post' === $post_type->name ? '1' : '',
+			'transport'         => 'postMessage',
+		) );
+		$wp_customize->add_control( $post_type->name . '_show_authorbox', array(
+			'section' => 'content_type_' . $post_type->name,
+			'label'   => __( 'Show Author Box?', 'super-awesome-theme' ),
+			'type'    => 'checkbox',
+		) );
+		$wp_customize->selective_refresh->add_partial( $post_type->name . '_show_authorbox', array(
+			'selector'            => '.type-' . $post_type->name . ' .entry-authorbox',
+			'render_callback'     => 'super_awesome_theme_customize_partial_entry_authorbox',
+			'container_inclusive' => true,
+		) );
+	}
 }
 add_action( 'customize_register', 'super_awesome_theme_customize_register' );
 
@@ -172,6 +254,33 @@ function super_awesome_theme_customize_get_sidebar_size_choices() {
  */
 function super_awesome_theme_customize_partial_blog_sidebar_enabled() {
 	get_sidebar( super_awesome_theme_get_current_sidebar_name() );
+}
+
+/**
+ * Renders the entry metadata for a post.
+ *
+ * @since 1.0.0
+ */
+function super_awesome_theme_customize_partial_entry_meta() {
+	get_template_part( 'template-parts/content/entry-meta', get_post_type() );
+}
+
+/**
+ * Renders the entry terms for a post.
+ *
+ * @since 1.0.0
+ */
+function super_awesome_theme_customize_partial_entry_terms() {
+	get_template_part( 'template-parts/content/entry-terms', get_post_type() );
+}
+
+/**
+ * Renders the entry author box for a post.
+ *
+ * @since 1.0.0
+ */
+function super_awesome_theme_customize_partial_entry_authorbox() {
+	get_template_part( 'template-parts/content/entry-authorbox', get_post_type() );
 }
 
 /**
