@@ -33,9 +33,6 @@ function super_awesome_theme_enqueue_assets() {
 		),
 	) );
 
-	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/dist/js/html5.js' ), array(), '3.7.3' );
-	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
-
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}

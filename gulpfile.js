@@ -145,7 +145,7 @@ gulp.task( 'compile-sass', function( done ) {
 		}) )
 		.pipe( autoprefixer({
 			browsers: [
-				'last 4 versions',
+				'last 2 versions',
 				'android 4',
 				'opera 12',
 			],
@@ -163,10 +163,7 @@ gulp.task( 'compile-sass', function( done ) {
 
 // lint JavaScript
 gulp.task( 'lint-js', function( done ) {
-	gulp.src([
-			'./assets/dev/js/**/*.js',
-			'!./assets/dev/js/html5.js',
-		])
+	gulp.src( './assets/dev/js/**/*.js' )
 		.pipe( eslint() )
 		.pipe( eslint.format() )
 		.pipe( eslint.failAfterError() )
@@ -194,11 +191,7 @@ gulp.task( 'compile-js', function( done ) {
 			extname: '.min.js',
 		}) )
 		.pipe( gulp.dest( './assets/dist/js/' ) )
-		.on( 'end', function() {
-			gulp.src( './assets/dev/js/html5.js' )
-				.pipe( gulp.dest( './assets/dist/js/' ) )
-				.on( 'end', done );
-		});
+		.on( 'end', done );
 });
 
 // minify images
