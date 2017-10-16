@@ -43,20 +43,8 @@ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:60
+#: comments.php:55
 msgid "Comments are closed."
-msgstr ""
-
-#: footer.php:16
-msgid "https://wordpress.org/"
-msgstr ""
-
-#: footer.php:18
-msgid "Proudly powered by %s"
-msgstr ""
-
-#: footer.php:23
-msgid "Theme: %1$s by %2$s."
 msgstr ""
 
 #: header.php:23
@@ -67,27 +55,182 @@ msgstr ""
 msgid "Search Results for: %s"
 msgstr ""
 
+#: searchform.php:15
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:17
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr ""
+
+#: searchform.php:18
+msgctxt "submit button"
+msgid "Search"
+msgstr ""
+
+#: sidebar-blog.php:15, inc/setup.php:134
+msgid "Blog Sidebar"
+msgstr ""
+
+#: sidebar.php:15, inc/setup.php:118
+msgid "Primary Sidebar"
+msgstr ""
+
+#: inc/assets.php:25
+msgid "Processing..."
+msgstr ""
+
+#: inc/assets.php:26
+msgid "Bad response code."
+msgstr ""
+
+#: inc/assets.php:27
+msgid "Invalid JSON response."
+msgstr ""
+
+#: inc/assets.php:28
+msgid "Your comment was either a duplicate or you are posting too rapidly. <a href=\"%s\">Edit your comment</a>"
+msgstr ""
+
+#: inc/assets.php:29
+msgid "There were errors in submitting your comment; complete the missing fields and try again!"
+msgstr ""
+
+#: inc/assets.php:30
+msgid "This email address appears to be invalid."
+msgstr ""
+
+#: inc/assets.php:31
+msgid "This is a required field."
+msgstr ""
+
+#: inc/assets.php:65
+msgid "Thanks for commenting! Your comment has been sent for moderation and should be approved soon."
+msgstr ""
+
+#: inc/assets.php:100
+msgid "Thanks for commenting! Your comment has been approved. <a href=\"%s\">Read your comment</a>"
+msgstr ""
+
+#: inc/assets.php:107
+msgid "Your comment has been marked as spam."
+msgstr ""
+
+#: inc/assets.php:114
+msgid "An unknown error occurred while trying to post your comment."
+msgstr ""
+
 #: inc/back-compat.php:36, inc/back-compat.php:48, inc/back-compat.php:63
 msgid "Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
 msgstr ""
 
-#: inc/setup.php:104
-msgid "Primary"
+#: inc/customizer.php:34
+msgid "Sidebars"
 msgstr ""
 
-#: inc/setup.php:116
-msgid "Sidebar"
+#: inc/customizer.php:45
+msgid "Sidebar Mode"
 msgstr ""
 
-#: inc/setup.php:118
-msgid "The sidebar will be displayed on the side of your main content."
+#: inc/customizer.php:46
+msgid "Specify if and how the sidebar should be displayed."
 msgstr ""
 
-#: inc/template-hooks.php:77, template-parts/content/content.php:21
+#: inc/customizer.php:58
+msgid "Sidebar Size"
+msgstr ""
+
+#: inc/customizer.php:59
+msgid "Specify the width of the sidebar."
+msgstr ""
+
+#: inc/customizer.php:70
+msgid "Enable Blog Sidebar?"
+msgstr ""
+
+#: inc/customizer.php:71
+msgid "If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar."
+msgstr ""
+
+#: inc/customizer.php:113, inc/customizer.php:147
+msgid "Invalid choice."
+msgstr ""
+
+#: inc/customizer.php:128
+msgid "No Sidebar"
+msgstr ""
+
+#: inc/customizer.php:129
+msgid "Left Sidebar"
+msgstr ""
+
+#: inc/customizer.php:130
+msgid "Right Sidebar"
+msgstr ""
+
+#: inc/customizer.php:162
+msgid "Small"
+msgstr ""
+
+#: inc/customizer.php:163
+msgid "Medium"
+msgstr ""
+
+#: inc/customizer.php:164
+msgid "Large"
+msgstr ""
+
+#: inc/setup.php:104, template-parts/header/site-navigation.php:11
+msgid "Primary Menu"
+msgstr ""
+
+#: inc/setup.php:105, template-parts/footer/social-navigation.php:11
+msgid "Social Links Menu"
+msgstr ""
+
+#: inc/setup.php:106, template-parts/footer/footer-navigation.php:11
+msgid "Footer Menu"
+msgstr ""
+
+#: inc/setup.php:120
+msgid "Add widgets here to appear in the sidebar for your main content."
+msgstr ""
+
+#: inc/setup.php:127
+msgid "Add widgets here to appear in the sidebar for blog posts and archive pages."
+msgstr ""
+
+#: inc/setup.php:130
+msgid "You need to enable the sidebar in the Customizer first."
+msgstr ""
+
+#: inc/setup.php:148
+msgid "Footer %s"
+msgstr ""
+
+#: inc/setup.php:150
+msgid "Add widgets here to appear in your footer."
+msgstr ""
+
+#: inc/template-hooks.php:88, template-parts/content/content-post.php:21, template-parts/content/content.php:21
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: template-parts/content/content.php:32
+#: template-parts/content/comment.php:22
+msgid "%s <span class=\"says\">says:</span>"
+msgstr ""
+
+#: template-parts/content/comment.php:33
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: template-parts/content/comment.php:37, template-parts/content/ping.php:14
+msgid "Edit"
+msgstr ""
+
+#: template-parts/content/content-post.php:32, template-parts/content/content.php:32
 msgid "Pages:"
 msgstr ""
 
@@ -138,6 +281,26 @@ msgstr ""
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/header/site-navigation.php:12
-msgid "Primary Menu"
+#: template-parts/content/ping.php:14
+msgid "Pingback:"
+msgstr ""
+
+#: template-parts/footer/footer-widgets.php:24
+msgid "Footer"
+msgstr ""
+
+#: template-parts/footer/site-info.php:12
+msgid "https://wordpress.org/"
+msgstr ""
+
+#: template-parts/footer/site-info.php:14
+msgid "Proudly powered by %s"
+msgstr ""
+
+#: template-parts/footer/site-info.php:19
+msgid "Theme: %1$s by %2$s."
+msgstr ""
+
+#: template-parts/header/site-navigation.php:16
+msgid "Menu"
 msgstr ""
