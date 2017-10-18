@@ -547,6 +547,80 @@ textarea {
 	width: 100%;
 }
 
+.notice {
+	padding: 0.5em 1em;
+	margin-bottom: 1rem;
+	background-color: #fff;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	border-left: 4px solid #aaa;
+}
+
+.notice.notice-success {
+	background-color: #d4ffd8;
+	border-left-color: #46b450;
+}
+
+.notice.notice-info {
+	background-color: #d1f4ff;
+	border-left-color: #00a0d2;
+}
+
+.notice.notice-warning {
+	background-color: #fff3d2;
+	border-left-color: #ffb900;
+}
+
+.notice.notice-error {
+	background-color: #ffdcdc;
+	border-left-color: #dc3232;
+}
+
+.notice > p:first-child,
+.notice > ul:first-child {
+	margin-top: 0;
+}
+
+.notice > p:last-child,
+.notice > ul:last-child {
+	margin-bottom: 0;
+}
+
+.field-notice.notice-success {
+	color: #46b450;
+}
+
+.field-notice.notice-info {
+	color: #00a0d2;
+}
+
+.field-notice.notice-warning {
+	color: #ffb900;
+}
+
+.field-notice.notice-error {
+	color: #dc3232;
+}
+
+input[type="text"] + span.field-notice,
+input[type="email"] + span.field-notice,
+input[type="url"] + span.field-notice,
+input[type="password"] + span.field-notice,
+input[type="search"] + span.field-notice,
+input[type="number"] + span.field-notice,
+input[type="tel"] + span.field-notice,
+input[type="range"] + span.field-notice,
+input[type="date"] + span.field-notice,
+input[type="month"] + span.field-notice,
+input[type="week"] + span.field-notice,
+input[type="time"] + span.field-notice,
+input[type="datetime"] + span.field-notice,
+input[type="datetime-local"] + span.field-notice,
+input[type="color"] + span.field-notice,
+select + span.field-notice {
+	margin-left: 1rem;
+}
+
 /* -------------------------------------------------------------
 # Accessibility
 ------------------------------------------------------------- */

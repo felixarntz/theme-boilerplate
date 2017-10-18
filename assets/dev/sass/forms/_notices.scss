@@ -1,0 +1,76 @@
+.notice {
+	margin-bottom: $padding_vertical;
+	padding: 0.5em 1em;
+	background-color: #fff;
+	border-left: 4px solid #aaa;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+	&.notice-success {
+		background-color: $color__success-light;
+		border-left-color: $color__success;
+	}
+
+	&.notice-info {
+		background-color: $color__info-light;
+		border-left-color: $color__info;
+	}
+
+	&.notice-warning {
+		background-color: $color__warning-light;
+		border-left-color: $color__warning;
+	}
+
+	&.notice-error {
+		background-color: $color__error-light;
+		border-left-color: $color__error;
+	}
+
+	> p:first-child,
+	> ul:first-child {
+		margin-top: 0;
+	}
+
+	> p:last-child,
+	> ul:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.field-notice {
+	&.notice-success {
+		color: $color__success;
+	}
+
+	&.notice-info {
+		color: $color__info;
+	}
+
+	&.notice-warning {
+		color: $color__warning;
+	}
+
+	&.notice-error {
+		color: $color__error;
+	}
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+select {
+	& + span.field-notice {
+		margin-left: $padding_horizontal;
+	}
+}
