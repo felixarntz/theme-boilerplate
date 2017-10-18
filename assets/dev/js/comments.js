@@ -7,7 +7,7 @@
 function comments( themeData ) {
 	var commentForm, comments, statusDiv, commentReplyLinks, currentList, i;
 
-	if ( 'function' !== typeof window.fetch ) {
+	if ( 'function' !== typeof window.fetch || 'function' !== typeof window.FormData ) {
 		return;
 	}
 
@@ -29,9 +29,9 @@ function comments( themeData ) {
 	statusDiv.setAttribute( 'role', 'status' );
 	statusDiv.setAttribute( 'tabindex', '-1' );
 
-	commentForm.insertBefore( statusDiv, commentForm.childNodes[0] );
+	commentForm.insertBefore( statusDiv, commentForm.childNodes.item( 0 ) );
 
-	commentReplyLinks = document.getElementsByClassName( 'comment-reply-link' );
+	commentReplyLinks = nodeListToArray( document.getElementsByClassName( 'comment-reply-link' ) );
 	for ( i = 0; i < commentReplyLinks.length; i++ ) {
 		commentReplyLinks[ i ].addEventListener( 'click', function() {
 			var elem = this;
@@ -44,57 +44,60 @@ function comments( themeData ) {
 		});
 	}
 
-	commentForm.addEventListener( 'submit', function() {
-		var formData, formUrl, hasError, fields, name, i;
+	commentForm.addEventListener( 'submit', function( evt ) {
+		var formUrl, hasError, fields, field, name, value, i;
 
-		formData = {};
+		evt.preventDefault();
+
 		formUrl = commentForm.getAttribute( 'action' );
+		if ( formUrl.indexOf( '?' ) > -1 ) {
+			formUrl += '&is_ajax=true';
+		} else {
+			formUrl += '?is_ajax=true';
+		}
 
-		clearStatusNotices( statusDiv );
+		clearStatusNotice( statusDiv );
 		clearFieldErrors( commentForm );
 
 		hasError = false;
 
-		fields = commentForm.querySelectorAll( 'input, textarea' );
+		fields = nodeListToArray( commentForm.querySelectorAll( 'input, textarea' ) );
 		for ( i = 0; i < fields.length; i++ ) {
-			name = fields[ i ].getAttribute( 'name' );
+			field = fields[ i ];
 
-			if ( 'textarea' === fields[ i ].tagName.toLowerCase() ) {
-				formData[ name ] = fields[ i ].value;
+			name = field.getAttribute( 'name' );
+			value = field.value;
+
+			if ( 'string' === typeof value ) {
+				value = value.trim();
 			} else {
-				formData[ name ] = fields[ i ].getAttribute( 'value' );
+				value = '';
 			}
 
-			if ( 'string' === typeof formData[ name ] ) {
-				formData[ name ] = formData[ name ].trim();
-			} else {
-				formData[ name ] = '';
-			}
-
-			if ( 'true' === fields[ i ].getAttribute( 'aria-required' ) && ! formData[ name ].length ) {
-				addFieldError( fields[ i ], themeData.i18n.required );
+			if ( 'true' === field.getAttribute( 'aria-required' ) && ! value.length ) {
+				addFieldError( field, themeData.i18n.required );
 
 				hasError = true;
-			} else if ( 'email' === name && formData[ name ].length && ! validateEmail( formData[ name ] ) ) {
-				addFieldError( fields[ i ], themeData.i18n.emailInvalid );
+			} else if ( 'email' === name && value.length && ! validateEmail( value ) ) {
+				addFieldError( field, themeData.i18n.emailInvalid );
 
 				hasError = true;
 			}
 		}
 
 		if ( hasError ) {
-			addStatusNotice( statusDiv, 'comment-notice-error', themeData.i18n.error );
+			addStatusNotice( statusDiv, 'error', themeData.i18n.error );
 
 			return false;
 		}
 
-		addStatusNotice( statusDiv, 'comment-notice-processing', themeData.i18n.processing );
+		addStatusNotice( statusDiv, 'info', themeData.i18n.processing );
 
 		window.fetch( formUrl, {
 			method: 'POST',
 			mode: 'same-origin',
 			credentials: 'same-origin',
-			body: formData, // TODO: Make this work.
+			body: new window.FormData( commentForm ),
 		})
 			.then( function( response ) {
 				var contentType;
@@ -112,12 +115,12 @@ function comments( themeData ) {
 				return response.json();
 			})
 			.then( function( result ) {
-				var commentList;
+				var commentList, commentListHeading;
 
-				clearStatusNotices( statusDiv );
+				clearStatusNotice( statusDiv );
 
 				if ( result.success ) {
-					addStatusNotice( statusDiv, 'comment-notice-success', result.status, true );
+					addStatusNotice( statusDiv, 'success', result.status, true );
 
 					if ( comments.querySelectorAll( 'ol.comment-list' ).length ) {
 						commentList = comments.querySelector( 'ol.comment-list' );
@@ -125,7 +128,13 @@ function comments( themeData ) {
 						commentList = document.createElement( 'ol' );
 						commentList.classList.add( 'comment-list' );
 
-						comments.appendChild( commentList );
+						comments.insertBefore( commentList, comments.childNodes.item( 0 ) );
+
+						commentListHeading = document.createElement( 'h2' );
+						commentListHeading.classList.add( 'comments-title' );
+						commentListHeading.innerHTML = themeData.i18n.commentsTitle;
+
+						comments.insertBefore( commentListHeading, comments.childNodes.item( 0 ) );
 					}
 
 					if ( currentList ) {
@@ -134,31 +143,33 @@ function comments( themeData ) {
 						commentList.innerHTML = commentList.innerHTML + result.response;
 					}
 				} else {
-					addStatusNotice( statusDiv, 'comment-notice-error', result.status, true );
+					addStatusNotice( statusDiv, 'error', result.status, true );
 				}
 
-				commentForm.querySelector( 'textarea[name="content"]' ).value = '';
+				commentForm.querySelector( 'textarea[name="comment"]' ).value = '';
 			})
 			.catch( function() {
-				clearStatusNotices( statusDiv );
-				addStatusNotice( statusDiv, 'comment-notice-error', themeData.i18n.flood, true );
+				clearStatusNotice( statusDiv );
+				addStatusNotice( statusDiv, 'error', themeData.i18n.flood, true );
 			});
 
 		return false;
 	});
 }
 
-function clearStatusNotices( wrap ) {
-	var notices = wrap.getElementsByClassName( 'comment-notice' );
+function clearStatusNotice( wrap ) {
+	var notices = nodeListToArray( wrap.childNodes );
 	var i;
 
 	for ( i = 0; i < notices.length; i++ ) {
 		notices[ i ].parentElement.removeChild( notices[ i ] );
 	}
+
+	wrap.classList.remove( 'notice', 'notice-success', 'notice-info', 'notice-warning', 'notice-error' );
 }
 
 function clearFieldErrors( form ) {
-	var errors = form.getElementsByClassName( 'comment-field-error' );
+	var errors = nodeListToArray( form.getElementsByClassName( 'field-notice' ) );
 	var i;
 
 	for ( i = 0; i < errors.length; i++ ) {
@@ -166,12 +177,13 @@ function clearFieldErrors( form ) {
 	}
 }
 
-function addStatusNotice( wrap, className, message, setFocus ) {
+function addStatusNotice( wrap, type, message, setFocus ) {
+	var className = 'notice-' + type;
 	var notice = document.createElement( 'p' );
 
-	notice.classList.add( 'comment-notice', className );
 	notice.innerHTML = message;
 
+	wrap.classList.add( 'notice', className );
 	wrap.appendChild( notice );
 
 	if ( setFocus ) {
@@ -184,11 +196,11 @@ function addFieldError( field, errorMessage ) {
 
 	id = field.getAttribute( 'id' );
 
-	field.setAttribute( 'aria-describedby', id + '-error' );
+	field.setAttribute( 'aria-describedby', id + '-field-error' );
 
 	error = document.createElement( 'span' );
-	error.setAttribute( 'id', id + '-error' );
-	error.classList.add( 'comment-field-error' );
+	error.setAttribute( 'id', id + '-field-error' );
+	error.classList.add( 'field-notice', 'notice-error' );
 	error.textContent = errorMessage;
 
 	field.parentElement.appendChild( error );
@@ -202,6 +214,17 @@ function validateEmail( value ) {
 	}
 
 	return false;
+}
+
+function nodeListToArray( nodeList ) {
+	var nodeListArray = [];
+	var i;
+
+	for ( i = 0; i < nodeList.length; i++ ) {
+		nodeListArray.push( nodeList.item( i ) );
+	}
+
+	return nodeListArray;
 }
 
 export default comments;

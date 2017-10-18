@@ -22,13 +22,18 @@ function super_awesome_theme_enqueue_assets() {
 	wp_localize_script( 'super-awesome-theme-script', 'themeData', array(
 		'comments' => array(
 			'i18n' => array(
-				'processing'   => __( 'Processing...', 'super-awesome-theme' ),
-				'badResponse'  => __( 'Bad response code.', 'super-awesome-theme' ),
-				'invalidJson'  => __( 'Invalid JSON response.', 'super-awesome-theme' ),
-				'flood'        => sprintf( __( 'Your comment was either a duplicate or you are posting too rapidly. <a href="%s">Edit your comment</a>', 'super-awesome-theme' ), '#comment' ),
-				'error'        => __( 'There were errors in submitting your comment; complete the missing fields and try again!', 'super-awesome-theme' ),
-				'emailInvalid' => __( 'This email address appears to be invalid.', 'super-awesome-theme' ),
-				'required'     => __( 'This is a required field.', 'super-awesome-theme' )
+				'processing'    => __( 'Processing...', 'super-awesome-theme' ),
+				'badResponse'   => __( 'Bad response code.', 'super-awesome-theme' ),
+				'invalidJson'   => __( 'Invalid JSON response.', 'super-awesome-theme' ),
+				'flood'         => sprintf( __( 'Your comment was either a duplicate or you are posting too rapidly. <a href="%s">Edit your comment</a>', 'super-awesome-theme' ), '#comment' ),
+				'error'         => __( 'There were errors in submitting your comment; complete the missing fields and try again!', 'super-awesome-theme' ),
+				'emailInvalid'  => __( 'This email address appears to be invalid.', 'super-awesome-theme' ),
+				'required'      => __( 'This is a required field.', 'super-awesome-theme' ),
+				'commentsTitle' => sprintf(
+					/* translators: 1: title. */
+					__( 'One thought on &ldquo;%1$s&rdquo;', 'super-awesome-theme' ),
+					'<span>' . get_the_title() . '</span>'
+				),
 			),
 		),
 	) );
@@ -48,20 +53,12 @@ add_action( 'wp_enqueue_scripts', 'super_awesome_theme_enqueue_assets' );
  * @param string $status Status of the new comment. Either '0' '1' or 'spam'.
  */
 function super_awesome_theme_handle_ajax_comment( $id, $status ) {
-	if ( empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) || 'xmlhttprequest' !== strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
+	if ( empty( $_GET['is_ajax'] ) || 'true' !== $_GET['is_ajax'] ) {
 		return;
 	}
 
 	switch ( $status ) {
 		case '0':
-			wp_notify_moderator( $id );
-
-			wp_send_json( array(
-				'response' => '',
-				'success'  => 1,
-				'status'   => __( 'Thanks for commenting! Your comment has been sent for moderation and should be approved soon.', 'super-awesome-theme' )
-			) );
-			break;
 		case '1':
 			$comment       = get_comment( $id );
 			$comment_class = comment_class( 'super-awesome-theme-ajax-comment', $comment->comment_ID, $comment->comment_post_ID, false );
@@ -89,28 +86,34 @@ function super_awesome_theme_handle_ajax_comment( $id, $status ) {
 				}
 			}
 
-			wp_notify_postauthor( $id );
+			if ( '0' === (string) $status ) {
+				$message = __( 'Thanks for commenting! Your comment has been sent for moderation and should be approved soon.', 'super-awesome-theme' );
+			} else {
+				$message = sprintf( __( 'Thanks for commenting! Your comment has been approved. <a href="%s">Read your comment</a>', 'super-awesome-theme' ), "#comment-$id" );
+			}
 
 			wp_send_json( array(
 				'response' => $output,
 				'success'  => 1,
-				'status'   => sprintf( __( 'Thanks for commenting! Your comment has been approved. <a href="%s">Read your comment</a>', 'super-awesome-theme' ), "#comment-$id" )
-			) );
+				'status'   => $message,
+			), 200 );
 			break;
 		case 'spam':
 			wp_send_json( array(
 				'response' => '',
 				'success'  => 0,
-				'status'   => __( 'Your comment has been marked as spam.', 'super-awesome-theme' )
-			) );
+				'status'   => __( 'Your comment has been marked as spam.', 'super-awesome-theme' ),
+			), 200 );
 			break;
 		default:
 			wp_send_json( array(
 				'response' => '',
 				'success'  => 0,
-				'status'   => __( 'An unknown error occurred while trying to post your comment.', 'super-awesome-theme' )
-			) );
+				'status'   => __( 'An unknown error occurred while trying to post your comment.', 'super-awesome-theme' ),
+			), 200 );
 	}
+
+	exit;
 }
 add_action( 'comment_post', 'super_awesome_theme_handle_ajax_comment', 20, 2 );
 
@@ -129,12 +132,18 @@ add_action( 'comment_post', 'super_awesome_theme_handle_ajax_comment', 20, 2 );
  * @param bool       $close   Optional. Whether to render the closing tag too. Default false.
  */
 function super_awesome_theme_render_comment( $comment, $args, $depth = 0, $close = false ) {
-	$reset_globals = false;
-	if ( ! isset( $GLOBALS['comment'] ) && ! isset( $GLOBALS['comment_depth'] ) ) {
-		$GLOBALS['comment']       = $comment;
+	$reset_global_comment = false;
+	if ( ! isset( $GLOBALS['comment'] ) ) {
+		$GLOBALS['comment'] = $comment;
+
+		$reset_global_comment = true;
+	}
+
+	$reset_global_comment_depth = false;
+	if ( ! isset( $GLOBALS['comment_depth'] ) ) {
 		$GLOBALS['comment_depth'] = $depth;
 
-		$reset_globals = true;
+		$reset_global_comment_depth = true;
 	}
 
 	$has_children = false;
@@ -158,8 +167,11 @@ function super_awesome_theme_render_comment( $comment, $args, $depth = 0, $close
 		echo '</' . $tag . '><!-- #comment-' . get_comment_ID() . ' -->' . "\n";
 	}
 
-	if ( $reset_globals ) {
+	if ( $reset_global_comment ) {
 		unset( $GLOBALS['comment'] );
+	}
+
+	if ( $reset_global_comment_depth ) {
 		unset( $GLOBALS['comment_depth'] );
 	}
 
