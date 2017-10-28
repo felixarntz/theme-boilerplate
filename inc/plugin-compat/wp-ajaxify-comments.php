@@ -7,7 +7,27 @@
  * @link    https://www.taco-themes.com/themes/super-awesome-theme/
  */
 
+/**
+ * Shows a warning about incompatibility with WP Ajaxify Comments to users that can deactivate plugins.
+ *
+ * @since 1.0.0
+ */
 function super_awesome_theme_ajaxify_comments_warning() {
-	// TODO.
+	// 'deactivate_plugins' is only available in WordPress >= 4.9.
+	if ( version_compare( $GLOBALS['wp_version'], '4.9', '<' ) ) {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+	} else {
+		if ( ! current_user_can( 'deactivate_plugins' ) ) {
+			return;
+		}
+	}
+
+	?>
+	<div class="notice notice-warning">
+		<p><?php _e( 'Super Awesome Theme already handles comment form submissions via AJAX out-of-the-box, so the plugin WP Ajaxify Comments conflicts with it and is not necessary. Please deactivate it.', 'super-awesome-theme' ); ?></p>
+	</div>
+	<?php
 }
 add_action( 'admin_notices', 'super_awesome_theme_ajaxify_comments_warning' );
