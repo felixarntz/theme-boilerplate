@@ -13,7 +13,7 @@
  * @since 1.0.0
  */
 function super_awesome_theme_ajaxify_comments_warning() {
-	// 'deactivate_plugins' is only available in WordPress >= 4.9.
+	// 'deactivate_plugins' is not available in WordPress < 4.9.
 	if ( version_compare( $GLOBALS['wp_version'], '4.9', '<' ) ) {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
