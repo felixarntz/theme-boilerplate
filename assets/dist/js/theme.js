@@ -97,12 +97,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	(function (themeData) {
 		themeData.components = {
+			skipLinkFocusFix: new __WEBPACK_IMPORTED_MODULE_0__skip_link_focus_fix__["a" /* default */](),
 			navigation: new __WEBPACK_IMPORTED_MODULE_1__navigation__["a" /* default */]('site-navigation', themeData.navigation)
 		};
 
-		Object(__WEBPACK_IMPORTED_MODULE_0__skip_link_focus_fix__["a" /* default */])();
 		Object(__WEBPACK_IMPORTED_MODULE_2__comments__["a" /* default */])(themeData.comments || {});
 
+		themeData.components.skipLinkFocusFix.initialize();
 		themeData.components.navigation.initialize();
 	})(window.themeData);
 
@@ -120,34 +121,85 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   * Learn more: https://git.io/vWdr2
   */
 
-	function skipLinkFocusFix() {
-		var isWebkit = navigator.userAgent.toLowerCase().indexOf('webkit') > -1;
-		var isOpera = navigator.userAgent.toLowerCase().indexOf('opera') > -1;
-		var isIe = navigator.userAgent.toLowerCase().indexOf('msie') > -1;
+	function detectUserAgent() {
+		var userAgents = ['webkit', 'opera', 'msie'];
+		var userAgent = void 0;
 
-		if ((isWebkit || isOpera || isIe) && document.getElementById && window.addEventListener) {
-			window.addEventListener('hashchange', function () {
-				var id = location.hash.substring(1),
-				    element;
+		var _iteratorNormalCompletion = true;
+		var _didIteratorError = false;
+		var _iteratorError = undefined;
 
-				if (!/^[A-z0-9_-]+$/.test(id)) {
+		try {
+			for (var _iterator = userAgents[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+				userAgent = _step.value;
+
+				if (navigator.userAgent.toLowerCase().indexOf(userAgent) > -1) {
+					return userAgent;
+				}
+			}
+		} catch (err) {
+			_didIteratorError = true;
+			_iteratorError = err;
+		} finally {
+			try {
+				if (!_iteratorNormalCompletion && _iterator.return) {
+					_iterator.return();
+				}
+			} finally {
+				if (_didIteratorError) {
+					throw _iteratorError;
+				}
+			}
+		}
+
+		return '';
+	}
+
+	var SkipLinkFocusFix = function () {
+		function SkipLinkFocusFix() {
+			_classCallCheck(this, SkipLinkFocusFix);
+
+			this.userAgent = detectUserAgent();
+		}
+
+		_createClass(SkipLinkFocusFix, [{
+			key: 'initialize',
+			value: function initialize() {
+				if (!this.userAgent.length) {
 					return;
 				}
 
-				element = document.getElementById(id);
+				if (!document.getElementById || !window.addEventListener) {
+					return;
+				}
 
-				if (element) {
-					if (!/^(?:a|select|input|button|textarea)$/i.test(element.tagName)) {
-						element.tabIndex = -1;
+				window.addEventListener('hashchange', function () {
+					var id = location.hash.substring(1),
+					    element;
+
+					if (!/^[A-z0-9_-]+$/.test(id)) {
+						return;
 					}
 
-					element.focus();
-				}
-			}, false);
-		}
-	}
+					element = document.getElementById(id);
 
-	/* harmony default export */__webpack_exports__["a"] = skipLinkFocusFix;
+					if (element) {
+						if (!/^(?:a|select|input|button|textarea)$/i.test(element.tagName)) {
+							element.tabIndex = -1;
+						}
+
+						element.focus();
+					}
+				}, false);
+			}
+		}]);
+
+		return SkipLinkFocusFix;
+	}();
+
+	/* harmony default export */
+
+	__webpack_exports__["a"] = SkipLinkFocusFix;
 
 	/***/
 },

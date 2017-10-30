@@ -6,12 +6,33 @@
  * Learn more: https://git.io/vWdr2
  */
 
-function skipLinkFocusFix() {
-	var isWebkit = navigator.userAgent.toLowerCase().indexOf( 'webkit' ) > -1;
-	var isOpera  = navigator.userAgent.toLowerCase().indexOf( 'opera' )  > -1;
-	var isIe     = navigator.userAgent.toLowerCase().indexOf( 'msie' )   > -1;
+function detectUserAgent() {
+	const userAgents = [ 'webkit', 'opera', 'msie' ];
+	let userAgent;
 
-	if ( ( isWebkit || isOpera || isIe ) && document.getElementById && window.addEventListener ) {
+	for ( userAgent of userAgents ) {
+		if ( navigator.userAgent.toLowerCase().indexOf( userAgent ) > -1 ) {
+			return userAgent;
+		}
+	}
+
+	return '';
+}
+
+class SkipLinkFocusFix {
+	constructor() {
+		this.userAgent = detectUserAgent();
+	}
+
+	initialize() {
+		if ( ! this.userAgent.length ) {
+			return;
+		}
+
+		if ( ! document.getElementById || ! window.addEventListener ) {
+			return;
+		}
+
 		window.addEventListener( 'hashchange', function() {
 			var id = location.hash.substring( 1 ),
 				element;
@@ -33,4 +54,4 @@ function skipLinkFocusFix() {
 	}
 }
 
-export default skipLinkFocusFix;
+export default SkipLinkFocusFix;
