@@ -7,6 +7,10 @@
  * @link    https://www.taco-themes.com/themes/super-awesome-theme/
  */
 
+if ( ! has_nav_menu( 'primary' ) ) {
+	return;
+}
+
 ?>
 <nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'super-awesome-theme' ); ?>">
 	<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">

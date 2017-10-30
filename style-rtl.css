@@ -749,7 +749,60 @@ select + span.field-notice {
 }
 
 .main-navigation a {
+	display: block;
+	padding: 0.5rem 0.5rem;
+	text-align: right;
 	text-decoration: none;
+}
+
+.main-navigation .menu-item-has-children > a > .icon,
+.main-navigation .page_item_has_children > a > .icon {
+	display: none;
+}
+
+@media screen and (min-width: 48rem) {
+	.main-navigation .menu-item-has-children > a > .icon,
+	.main-navigation .page_item_has_children > a > .icon {
+		position: relative;
+		top: -1px;
+		right: 5px;
+		display: inline;
+	}
+}
+
+.main-navigation .dropdown-toggle {
+	position: absolute;
+	top: 0;
+	left: -0.5rem;
+	display: none;
+	padding: 0.5rem 0.5rem;
+	margin: 0 auto;
+	color: #333;
+	font-size: 16px;
+	line-height: 1.5;
+	text-shadow: none;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+	border: 0;
+}
+
+.main-navigation .dropdown-toggle:hover,
+.main-navigation .dropdown-toggle:focus {
+	background-color: transparent;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+}
+
+.main-navigation .dropdown-toggle:focus {
+	outline: thin dotted;
+}
+
+.main-navigation .dropdown-toggle.toggled .icon {
+	-webkit-transform: rotate(180deg);
+	        transform: rotate(180deg);
+
+	     -o-transform: rotate(180deg);
 }
 
 .main-navigation .menu-toggle {
@@ -788,33 +841,131 @@ select + span.field-notice {
 	display: none;
 }
 
+.main-navigation ul.nav-menu ul {
+	padding: 0 1.5rem 0 0;
+}
+
+@media screen and (min-width: 48rem) {
+	.main-navigation ul.nav-menu > li {
+		display: inline-block;
+	}
+	.main-navigation ul.nav-menu > li > a {
+		padding: 1rem 1rem;
+	}
+	.main-navigation ul.nav-menu ul {
+		position: absolute;
+		top: 100%;
+		right: -999em;
+		z-index: 99999;
+		display: block;
+		padding: 0;
+		background-color: #fff;
+		border: 1px solid #333;
+	}
+	.main-navigation ul.nav-menu ul a {
+		width: 16em;
+		padding: 0.75rem 1rem;
+	}
+	.main-navigation ul.nav-menu ul .menu-item-has-children > a > .icon,
+	.main-navigation ul.nav-menu ul .page_item_has_children > a > .icon {
+		position: absolute;
+		top: 50%;
+		left: 1rem;
+		right: auto;
+		margin-top: -9px;
+		-webkit-transform: rotate(90deg);
+		        transform: rotate(90deg);
+
+		     -o-transform: rotate(90deg);
+	}
+	.main-navigation ul.nav-menu ul ul {
+		top: 0;
+		right: -999em;
+		margin-top: -1px;
+	}
+	.main-navigation ul.nav-menu ul li:hover > ul,
+	.main-navigation ul.nav-menu ul li.focus > ul {
+		left: auto;
+		right: 100%;
+	}
+	.main-navigation ul.nav-menu li:hover > ul,
+	.main-navigation ul.nav-menu li.focus > ul {
+		left: auto;
+		right: 0.5em;
+	}
+}
+
 .js .main-navigation ul.nav-menu {
 	display: none;
+}
+
+.js .main-navigation ul.nav-menu ul {
+	display: none;
+}
+
+.js .main-navigation ul.nav-menu ul.toggled {
+	display: block;
 }
 
 @media screen and (min-width: 48rem) {
 	.js .main-navigation ul.nav-menu {
 		display: inline-block;
 	}
+	.js .main-navigation ul.nav-menu ul {
+		display: block;
+	}
 }
 
+.js .main-navigation .dropdown-toggle,
 .js .main-navigation .menu-toggle {
 	display: inline-block;
 }
 
 @media screen and (min-width: 48rem) {
+	.js .main-navigation .dropdown-toggle,
 	.js .main-navigation .menu-toggle {
 		display: none;
 	}
 }
 
-.js .main-navigation.toggled ul.nav-menu,
+.js .main-navigation.toggled ul.nav-menu {
+	display: block;
+}
+
 .js .main-navigation.toggled .menu-toggle .icon-close {
 	display: inline-block;
 }
 
 .js .main-navigation.toggled .menu-toggle .icon-bars {
 	display: none;
+}
+
+.no-svg .main-navigation .dropdown-toggle {
+	width: 2em;
+	padding: 0.5em 0 0;
+	text-align: center;
+}
+
+.no-svg .main-navigation .dropdown-toggle .svg-fallback.icon-angle-down {
+	font-size: 20px;
+	font-size: 1.25rem;
+	font-weight: 400;
+	line-height: 1;
+	-webkit-transform: rotate(-180deg);
+	        transform: rotate(-180deg);
+
+	     -o-transform: rotate(-180deg);
+}
+
+.no-svg .main-navigation .dropdown-toggle .svg-fallback.icon-angle-down:before {
+	content: "\005E";
+}
+
+.no-svg .main-navigation .dropdown-toggle.toggled .svg-fallback.icon-angle-down {
+	-webkit-transform: rotate(0);
+	        transform: rotate(0);
+
+	     -o-transform: rotate(0);
 }
 
 /* -------------------------------------------------------------

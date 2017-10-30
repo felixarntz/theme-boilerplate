@@ -1,9 +1,16 @@
 import skipLinkFocusFix from './skip-link-focus-fix';
-import navigation from './navigation';
+import Navigation from './navigation';
 import comments from './comments';
 
+window.themeData = window.themeData || {};
+
 ( function( themeData ) {
+	themeData.components = {
+		navigation: new Navigation( 'site-navigation', themeData.navigation ),
+	};
+
 	skipLinkFocusFix();
-	navigation();
-	comments( themeData.comments );
-})( themeData );
+	comments( themeData.comments || {} );
+
+	themeData.components.navigation.initialize();
+})( window.themeData );

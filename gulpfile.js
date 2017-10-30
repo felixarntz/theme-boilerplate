@@ -84,6 +84,7 @@ var gplNote =	'This program is free software: you can redistribute it and/or mod
 var gulp = require( 'gulp' );
 
 var autoprefixer = require( 'gulp-autoprefixer' );
+var babel        = require( 'gulp-babel' );
 var csscomb      = require( 'gulp-csscomb' );
 var eslint       = require( 'gulp-eslint' );
 var imagemin     = require( 'gulp-imagemin' );
@@ -184,6 +185,11 @@ gulp.task( 'compile-js', function( done ) {
 			output: {
 				filename: '[name].js',
 			},
+		}) )
+		.pipe( babel({
+			presets: [
+				'env',
+			],
 		}) )
 		.pipe( gulp.dest( './assets/dist/js/' ) )
 		.pipe( uglify() )
