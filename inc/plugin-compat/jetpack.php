@@ -20,16 +20,6 @@ function super_awesome_theme_jetpack_setup() {
 	) );
 
 	add_theme_support( 'jetpack-responsive-videos' );
-
-	add_theme_support( 'jetpack-content-options', array(
-		'post-details' => array(
-			'stylesheet' => 'super-awesome-theme-style',
-			'date'       => '.posted-on',
-			'categories' => '.category-links',
-			'tags'       => '.tag-links',
-			'author'     => '.byline',
-		),
-	) );
 }
 add_action( 'after_setup_theme', 'super_awesome_theme_jetpack_setup' );
 
