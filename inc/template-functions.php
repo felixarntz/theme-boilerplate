@@ -246,25 +246,54 @@ function super_awesome_theme_customize_post_context( $post = null ) {
 }
 
 /**
+ * Checks whether the sidebar should be displayed.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if the sidebar should be displayed, false otherwise.
+ */
+function super_awesome_theme_display_sidebar() {
+	$is_customize_preview = is_customize_preview();
+
+	$result = 'no-sidebar' !== get_theme_mod( 'sidebar_mode', 'right-sidebar' ) || $is_customize_preview;
+
+	/**
+	 * Filters whether the sidebar should be displayed.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool $result               Whether to display the sidebar. Default depends on the 'sidebar_mode' theme mod.
+	 * @param bool $is_customize_preview Whether the page is currently being viewed in the Customizer.
+	 */
+	return apply_filters( 'super_awesome_theme_display_sidebar', $result, $is_customize_preview );
+}
+
+/**
  * Gets the name of the sidebar to display on the current page.
  *
  * @since 1.0.0
  *
  * @return string The sidebar name, either 'primary' or 'blog'.
  */
-function super_awesome_theme_get_current_sidebar_name() {
+function super_awesome_theme_get_sidebar_name() {
+	$result = 'primary';
+
 	if ( get_theme_mod( 'blog_sidebar_enabled' ) ) {
 		if ( is_singular() ) {
 			if ( 'post' === get_post_type() ) {
-				return 'blog';
+				$result = 'blog';
 			}
-			return 'primary';
-		}
-
-		if ( is_home() || is_category() || is_tag() || is_date() || 'post' === get_query_var( 'post_type' ) ) {
-			return 'blog';
+		} elseif ( is_home() || is_category() || is_tag() || is_date() || 'post' === get_query_var( 'post_type' ) ) {
+			$result = 'blog';
 		}
 	}
 
-	return 'primary';
+	/**
+	 * Filters the name of the sidebar to display on the current page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $result The identifier of the sidebar to display.
+	 */
+	return apply_filters( 'super_awesome_theme_get_sidebar_name', $result );
 }
