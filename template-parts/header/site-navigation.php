@@ -7,7 +7,7 @@
  * @link    https://www.taco-themes.com/themes/super-awesome-theme/
  */
 
-if ( ! has_nav_menu( 'primary' ) ) {
+if ( ! has_nav_menu( super_awesome_theme_get_navigation_name() ) ) {
 	return;
 }
 
@@ -22,7 +22,7 @@ if ( ! has_nav_menu( 'primary' ) ) {
 	</button>
 	<?php
 	wp_nav_menu( array(
-		'theme_location' => 'primary',
+		'theme_location' => super_awesome_theme_get_navigation_name(),
 		'menu_id'        => 'primary-menu',
 	) );
 	?>

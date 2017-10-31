@@ -7,6 +7,10 @@
  * @link    https://www.taco-themes.com/themes/super-awesome-theme/
  */
 
+if ( super_awesome_theme_is_distraction_free() ) {
+	return;
+}
+
 $footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
 
 $has_active = false;

@@ -257,6 +257,12 @@ function super_awesome_theme_display_sidebar() {
 
 	$result = 'no-sidebar' !== get_theme_mod( 'sidebar_mode', 'right-sidebar' ) || $is_customize_preview;
 
+	if ( super_awesome_theme_is_distraction_free() ) {
+		$result = false;
+	} elseif ( is_page_template( 'templates/full-width.php' ) ) {
+		$result = false;
+	}
+
 	/**
 	 * Filters whether the sidebar should be displayed.
 	 *
@@ -296,4 +302,55 @@ function super_awesome_theme_get_sidebar_name() {
 	 * @param string $result The identifier of the sidebar to display.
 	 */
 	return apply_filters( 'super_awesome_theme_get_sidebar_name', $result );
+}
+
+/**
+ * Gets the name of the primary navigation to display on the current page.
+ *
+ * @since 1.0.0
+ *
+ * @return string The primary navigation name, either 'primary' or 'primary_df'.
+ */
+function super_awesome_theme_get_navigation_name() {
+	$result = 'primary';
+
+	if ( super_awesome_theme_is_distraction_free() ) {
+		$result = 'primary_df';
+	}
+
+	/**
+	 * Filters the name of the primary navigation to display on the current page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $result The identifier of the primary navigation to display.
+	 */
+	return apply_filters( 'super_awesome_theme_get_navigation_name', $result );
+}
+
+/**
+ * Checks whether the current page should be displayed in distraction-free mode.
+ *
+ * By default, distraction-free pages use the special distraction-free navigation,
+ * and they display neither sidebar nor footer widgets.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if the current page should be displayed in distraction-free mode, false otherwise.
+ */
+function super_awesome_theme_is_distraction_free() {
+	$result = false;
+
+	if ( is_page_template( 'templates/distraction-free.php' ) ) {
+		$result = true;
+	}
+
+	/**
+	 * Filters whether the current page should be displayed in distraction-free mode.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool $result Whether to display the page in distraction-free mode. Default depends on the page template.
+	 */
+	return apply_filters( 'super_awesome_theme_is_distraction_free', $result );
 }
