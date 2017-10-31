@@ -15,6 +15,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /**
+ * Easy Digital Downloads compatibility.
+ */
+if ( function_exists( 'EDD' ) ) {
+	require get_template_directory() . '/inc/plugin-compat/easy-digital-downloads.php';
+}
+
+/**
  * WP Subtitle compatibility.
  */
 if ( function_exists( 'the_subtitle' ) ) {

@@ -12,11 +12,11 @@
  *
  * @since 1.0.0
  */
-function super_awesome_theme_print_post_subtitle() {
+function super_awesome_theme_wp_subtitle_print_post_subtitle() {
 	if ( is_singular() ) {
 		the_subtitle( '<p class="entry-subtitle">', '</p>' );
 	} else {
 		the_subtitle( '<p class="entry-subtitle"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></p>' );
 	}
 }
-add_action( 'super_awesome_theme_after_entry_title', 'super_awesome_theme_print_post_subtitle' );
+add_action( 'super_awesome_theme_after_entry_title', 'super_awesome_theme_wp_subtitle_print_post_subtitle' );
