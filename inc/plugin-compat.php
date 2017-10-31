@@ -15,6 +15,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /**
+ * WP Subtitle compatibility.
+ */
+if ( function_exists( 'the_subtitle' ) ) {
+	require get_template_directory() . '/inc/plugin-compat/wp-subtitle.php';
+}
+
+/**
  * WP Ajaxify Comments compatibility.
  */
 if ( defined( 'WPAC_PLUGIN_NAME' ) ) {
