@@ -34,7 +34,11 @@ function super_awesome_theme_infinite_scroll_render() {
 		if ( is_search() ) :
 			get_template_part( 'template-parts/content', 'search' );
 		else :
-			get_template_part( 'template-parts/content', get_post_format() );
+			if ( super_awesome_theme_use_post_format_templates() ) :
+				get_template_part( 'template-parts/content/content-' . get_post_type(), get_post_format() );
+			else :
+				get_template_part( 'template-parts/content/content', get_post_type() );
+			endif;
 		endif;
 	}
 }
