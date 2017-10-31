@@ -4,206 +4,29 @@
  * Handles comment submission via AJAX.
  */
 
-class CommentForm {
-	constructor( commentFormId, commentsId, options ) {
-		this.commentForm = document.getElementById( commentFormId );
-		this.comments    = document.getElementById( commentsId );
-		this.options     = options || {};
-	}
-
-	initialize() {
-		if ( ! this.commentForm ) {
-			return;
-		}
-
-		if ( ! this.comments ) {
-			return;
-		}
-
-		if ( 'function' !== typeof window.fetch || 'function' !== typeof window.FormData ) {
-			return;
-		}
-
-		// TODO.
-	}
-}
-
-/* Old code: function comments( themeData ) {
-	var commentForm, comments, statusDiv, commentReplyLinks, currentList, i;
-
-	if ( 'function' !== typeof window.fetch || 'function' !== typeof window.FormData ) {
-		return;
-	}
-
-	commentForm = document.getElementById( 'commentform' );
-	if ( ! commentForm ) {
-		return;
-	}
-
-	comments = document.getElementById( 'comments' );
-	if ( ! comments ) {
-		return;
-	}
-
-	commentForm.setAttribute( 'aria-live', 'polite' );
-
-	statusDiv = document.createElement( 'div' );
-	statusDiv.setAttribute( 'id', 'comment-status' );
-	statusDiv.setAttribute( 'aria-live', 'assertive' );
-	statusDiv.setAttribute( 'role', 'status' );
-	statusDiv.setAttribute( 'tabindex', '-1' );
-
-	commentForm.insertBefore( statusDiv, commentForm.childNodes.item( 0 ) );
-
-	commentReplyLinks = nodeListToArray( document.getElementsByClassName( 'comment-reply-link' ) );
-	for ( i = 0; i < commentReplyLinks.length; i++ ) {
-		commentReplyLinks[ i ].addEventListener( 'click', function() {
-			var elem = this;
-
-			do {
-				elem = elem.parentElement;
-			} while ( elem && ! elem.classList.contains( 'comment' ) );
-
-			currentList = elem;
-		});
-	}
-
-	commentForm.addEventListener( 'submit', function( evt ) {
-		var formUrl, hasError, fields, field, name, value, i;
-
-		evt.preventDefault();
-
-		formUrl = commentForm.getAttribute( 'action' );
-		if ( formUrl.indexOf( '?' ) > -1 ) {
-			formUrl += '&is_ajax=true';
-		} else {
-			formUrl += '?is_ajax=true';
-		}
-
-		clearStatusNotice( statusDiv );
-		clearFieldErrors( commentForm );
-
-		hasError = false;
-
-		fields = nodeListToArray( commentForm.querySelectorAll( 'input, textarea' ) );
-		for ( i = 0; i < fields.length; i++ ) {
-			field = fields[ i ];
-
-			name = field.getAttribute( 'name' );
-			value = field.value;
-
-			if ( 'string' === typeof value ) {
-				value = value.trim();
-			} else {
-				value = '';
-			}
-
-			if ( 'true' === field.getAttribute( 'aria-required' ) && ! value.length ) {
-				addFieldError( field, themeData.i18n.required );
-
-				hasError = true;
-			} else if ( 'email' === name && value.length && ! validateEmail( value ) ) {
-				addFieldError( field, themeData.i18n.emailInvalid );
-
-				hasError = true;
-			}
-		}
-
-		if ( hasError ) {
-			addStatusNotice( statusDiv, 'error', themeData.i18n.error );
-
-			return false;
-		}
-
-		addStatusNotice( statusDiv, 'info', themeData.i18n.processing );
-
-		window.fetch( formUrl, {
-			method: 'POST',
-			mode: 'same-origin',
-			credentials: 'same-origin',
-			body: new window.FormData( commentForm ),
-		})
-			.then( function( response ) {
-				var contentType;
-
-				if ( 200 !== response.status ) {
-					throw new Error( themeData.i18n.badResponse );
-				}
-
-				contentType = response.headers.get( 'content-type' );
-
-				if ( ! contentType || ! contentType.includes( 'application/json' ) ) {
-					throw new TypeError( themeData.i18n.invalidJson );
-				}
-
-				return response.json();
-			})
-			.then( function( result ) {
-				var commentList, commentListHeading;
-
-				clearStatusNotice( statusDiv );
-
-				if ( result.success ) {
-					addStatusNotice( statusDiv, 'success', result.status, true );
-
-					if ( comments.querySelectorAll( 'ol.comment-list' ).length ) {
-						commentList = comments.querySelector( 'ol.comment-list' );
-					} else {
-						commentList = document.createElement( 'ol' );
-						commentList.classList.add( 'comment-list' );
-
-						comments.insertBefore( commentList, comments.childNodes.item( 0 ) );
-
-						commentListHeading = document.createElement( 'h2' );
-						commentListHeading.classList.add( 'comments-title' );
-						commentListHeading.innerHTML = themeData.i18n.commentsTitle;
-
-						comments.insertBefore( commentListHeading, comments.childNodes.item( 0 ) );
-					}
-
-					if ( currentList ) {
-						currentList.innerHTML = result.response + currentList.innerHTML;
-					} else {
-						commentList.innerHTML = commentList.innerHTML + result.response;
-					}
-				} else {
-					addStatusNotice( statusDiv, 'error', result.status, true );
-				}
-
-				commentForm.querySelector( 'textarea[name="comment"]' ).value = '';
-			})
-			.catch( function() {
-				clearStatusNotice( statusDiv );
-				addStatusNotice( statusDiv, 'error', themeData.i18n.flood, true );
-			});
-
-		return false;
-	});
-}
+let currentList;
 
 function clearStatusNotice( wrap ) {
-	var notices = nodeListToArray( wrap.childNodes );
-	var i;
+	const notices = wrap.childNodes;
 
-	for ( i = 0; i < notices.length; i++ ) {
-		notices[ i ].parentElement.removeChild( notices[ i ] );
-	}
+	Array.from( notices ).forEach( function( notice ) {
+		notice.parentElement.removeChild( notice );
+	});
 
 	wrap.classList.remove( 'notice', 'notice-success', 'notice-info', 'notice-warning', 'notice-error' );
 }
 
 function clearFieldErrors( form ) {
-	var errors = nodeListToArray( form.getElementsByClassName( 'field-notice' ) );
-	var i;
+	const errors = form.getElementsByClassName( 'field-notice' );
 
-	for ( i = 0; i < errors.length; i++ ) {
-		errors[ i ].parentElement.removeChild( errors[ i ] );
-	}
+	Array.from( errors ).forEach( function( error ) {
+		error.parentElement.removeChild( error );
+	});
 }
 
 function addStatusNotice( wrap, type, message, setFocus ) {
-	var className = 'notice-' + type;
-	var notice = document.createElement( 'p' );
+	const className = 'notice-' + type;
+	const notice = document.createElement( 'p' );
 
 	notice.innerHTML = message;
 
@@ -216,13 +39,11 @@ function addStatusNotice( wrap, type, message, setFocus ) {
 }
 
 function addFieldError( field, errorMessage ) {
-	var id, error;
-
-	id = field.getAttribute( 'id' );
+	const error = document.createElement( 'span' );
+	const id = field.getAttribute( 'id' );
 
 	field.setAttribute( 'aria-describedby', id + '-field-error' );
 
-	error = document.createElement( 'span' );
 	error.setAttribute( 'id', id + '-field-error' );
 	error.classList.add( 'field-notice', 'notice-error' );
 	error.textContent = errorMessage;
@@ -231,7 +52,7 @@ function addFieldError( field, errorMessage ) {
 }
 
 function validateEmail( value ) {
-	var filter = /^([\w-+.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	const filter = /^([\w-+.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
 	if ( filter.test( value ) ) {
 		return true;
@@ -240,15 +61,192 @@ function validateEmail( value ) {
 	return false;
 }
 
-function nodeListToArray( nodeList ) {
-	var nodeListArray = [];
-	var i;
-
-	for ( i = 0; i < nodeList.length; i++ ) {
-		nodeListArray.push( nodeList.item( i ) );
+class CommentForm {
+	constructor( commentFormId, commentsId, options ) {
+		this.commentForm = document.getElementById( commentFormId );
+		this.comments    = document.getElementById( commentsId );
+		this.options     = options || {};
 	}
 
-	return nodeListArray;
-}*/
+	initialize() {
+		let statusDiv;
+
+		if ( ! this.commentForm ) {
+			return;
+		}
+
+		if ( ! this.comments ) {
+			return;
+		}
+
+		if ( 'function' !== typeof window.fetch || 'function' !== typeof window.FormData ) {
+			return;
+		}
+
+		statusDiv = this.createStatusDiv();
+
+		this.initializeCommentReplyLinks( this.comments );
+		this.initializeCommentForm( this.commentForm, this.comments, statusDiv );
+	}
+
+	createStatusDiv() {
+		const statusDiv = document.createElement( 'div' );
+
+		statusDiv.setAttribute( 'id', 'comment-status' );
+		statusDiv.setAttribute( 'aria-live', 'assertive' );
+		statusDiv.setAttribute( 'role', 'status' );
+		statusDiv.setAttribute( 'tabindex', '-1' );
+
+		return statusDiv;
+	}
+
+	initializeCommentReplyLinks( comments ) {
+		let commentReplyLinks;
+
+		if ( ! comments ) {
+			return;
+		}
+
+		function setCurrentList() {
+			let element = this;
+
+			do {
+				element = element.parentElement;
+			} while ( element && ! element.classList.contains( 'comment' ) );
+
+			currentList = element;
+		}
+
+		commentReplyLinks = comments.getElementsByClassName( 'comment-reply-link' );
+
+		Array.from( commentReplyLinks ).forEach( function( commentReplyLink ) {
+			commentReplyLink.addEventListener( 'click', setCurrentList );
+		});
+	}
+
+	initializeCommentForm( commentForm, comments, statusDiv ) {
+		const options = this.options;
+
+		if ( ! commentForm ) {
+			return;
+		}
+
+		if ( ! comments ) {
+			return;
+		}
+
+		if ( ! statusDiv ) {
+			return;
+		}
+
+		function preprocessResponse( response ) {
+			let contentType;
+
+			if ( 200 !== response.status ) {
+				throw new Error( options.i18n.badResponse );
+			}
+
+			contentType = response.headers.get( 'content-type' );
+
+			if ( ! contentType || ! contentType.includes( 'application/json' ) ) {
+				throw new TypeError( options.i18n.invalidJson );
+			}
+
+			return response.json();
+		}
+
+		function handleResponseSuccess( result ) {
+			let commentList, commentListHeading;
+
+			clearStatusNotice( statusDiv );
+
+			if ( result.success ) {
+				addStatusNotice( statusDiv, 'success', result.status, true );
+
+				if ( comments.querySelectorAll( 'ol.comment-list' ).length ) {
+					commentList = comments.querySelector( 'ol.comment-list' );
+				} else {
+					commentList = document.createElement( 'ol' );
+					commentList.classList.add( 'comment-list' );
+
+					comments.insertBefore( commentList, comments.childNodes.item( 0 ) );
+
+					commentListHeading = document.createElement( 'h2' );
+					commentListHeading.classList.add( 'comments-title' );
+					commentListHeading.innerHTML = options.i18n.commentsTitle;
+
+					comments.insertBefore( commentListHeading, comments.childNodes.item( 0 ) );
+				}
+
+				if ( currentList ) {
+					currentList.innerHTML = currentList.innerHTML + result.response;
+				} else {
+					commentList.innerHTML = commentList.innerHTML + result.response;
+				}
+			} else {
+				addStatusNotice( statusDiv, 'error', result.status, true );
+			}
+
+			currentList = undefined;
+			commentForm.querySelector( 'textarea[name="comment"]' ).value = '';
+		}
+
+		function handleResponseError() {
+			clearStatusNotice( statusDiv );
+			addStatusNotice( statusDiv, 'error', options.i18n.flood, true );
+		}
+
+		function handleSubmission( e ) {
+			const formUrl = commentForm.getAttribute( 'action' ) + ( commentForm.getAttribute( 'action' ).indexOf( '?' ) > -1 ? '&' : '?' ) + 'is_ajax=true';
+			const fields = commentForm.querySelectorAll( 'input, textarea' );
+
+			let hasError = false;
+
+			e.preventDefault();
+
+			clearStatusNotice( statusDiv );
+			clearFieldErrors( commentForm );
+
+			Array.from( fields ).forEach( function( field ) {
+				const name = field.getAttribute( 'name' );
+				const value = 'string' === typeof field.value ? field.value.trim() : '';
+
+				if ( 'true' === field.getAttribute( 'aria-required' ) && ! value.length ) {
+					addFieldError( field, options.i18n.required );
+
+					hasError = true;
+				} else if ( 'email' === name && value.length && ! validateEmail( value ) ) {
+					addFieldError( field, options.i18n.emailInvalid );
+
+					hasError = true;
+				}
+			});
+
+			if ( hasError ) {
+				addStatusNotice( statusDiv, 'error', options.i18n.error );
+
+				return false;
+			}
+
+			addStatusNotice( statusDiv, 'info', options.i18n.processing );
+
+			window.fetch( formUrl, {
+				method: 'POST',
+				mode: 'same-origin',
+				credentials: 'same-origin',
+				body: new window.FormData( commentForm ),
+			})
+				.then( preprocessResponse )
+				.then( handleResponseSuccess )
+				.catch( handleResponseError );
+
+			return false;
+		}
+
+		commentForm.setAttribute( 'aria-live', 'polite' );
+		commentForm.insertBefore( statusDiv, commentForm.childNodes.item( 0 ) );
+		commentForm.addEventListener( 'submit', handleSubmission );
+	}
+}
 
 export default CommentForm;
