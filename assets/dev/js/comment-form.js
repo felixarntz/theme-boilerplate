@@ -4,7 +4,31 @@
  * Handles comment submission via AJAX.
  */
 
-function comments( themeData ) {
+class CommentForm {
+	constructor( commentFormId, commentsId, options ) {
+		this.commentForm = document.getElementById( commentFormId );
+		this.comments    = document.getElementById( commentsId );
+		this.options     = options || {};
+	}
+
+	initialize() {
+		if ( ! this.commentForm ) {
+			return;
+		}
+
+		if ( ! this.comments ) {
+			return;
+		}
+
+		if ( 'function' !== typeof window.fetch || 'function' !== typeof window.FormData ) {
+			return;
+		}
+
+		// TODO.
+	}
+}
+
+/* Old code: function comments( themeData ) {
 	var commentForm, comments, statusDiv, commentReplyLinks, currentList, i;
 
 	if ( 'function' !== typeof window.fetch || 'function' !== typeof window.FormData ) {
@@ -225,6 +249,6 @@ function nodeListToArray( nodeList ) {
 	}
 
 	return nodeListArray;
-}
+}*/
 
-export default comments;
+export default CommentForm;
