@@ -20,6 +20,7 @@ if ( ! has_nav_menu( 'social' ) ) {
 		'depth'          => 1,
 		'link_before'    => '<span class="screen-reader-text">',
 		'link_after'     => '</span>' . super_awesome_theme_get_svg( 'chain' ),
+		'container'      => false,
 	) );
 	?>
 </nav><!-- .social-navigation -->

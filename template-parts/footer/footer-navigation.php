@@ -18,6 +18,7 @@ if ( ! has_nav_menu( 'footer' ) ) {
 		'theme_location' => 'footer',
 		'menu_class'     => 'footer-menu',
 		'depth'          => 1,
+		'container'      => false,
 	) );
 	?>
 </nav><!-- .footer-navigation -->
