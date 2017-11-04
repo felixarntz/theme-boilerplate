@@ -2,12 +2,10 @@
 	@include center-block();
 	@include limit-width();
 	@include horizontal-padding();
-	@include text-center();
 
 	margin-bottom: $padding_vertical;
 
 	ul {
-		display: inline-block;
 		list-style: none;
 		margin: 0;
 		padding-left: 0;
@@ -21,7 +19,6 @@
 		display: block;
 		padding: (0.5 * $padding_vertical) (0.5 * $padding_horizontal);
 		text-decoration: none;
-		text-align: left;
 	}
 
 	.menu-item-has-children > a > .icon,
@@ -101,6 +98,9 @@
 	}
 
 	ul.nav-menu {
+		display: flex;
+		justify-content: center;
+
 		ul {
 			padding: 0 0 0 (1.5 * $padding_horizontal);
 		}
@@ -177,7 +177,7 @@
 			}
 
 			@media screen and (min-width: $site_breakpoint) {
-				display: inline-block;
+				display: flex;
 
 				ul {
 					display: block;
@@ -185,9 +185,16 @@
 			}
 		}
 
-		.dropdown-toggle,
-		.menu-toggle {
+		.dropdown-toggle {
 			display: inline-block;
+
+			@media screen and (min-width: $site_breakpoint) {
+				display: none;
+			}
+		}
+
+		.menu-toggle {
+			display: block;
 
 			@media screen and (min-width: $site_breakpoint) {
 				display: none;

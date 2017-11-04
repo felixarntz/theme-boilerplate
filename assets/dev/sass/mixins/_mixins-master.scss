@@ -11,6 +11,13 @@
 	margin-right: auto;
 }
 
+// Center flex
+@mixin center-flex {
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 // Center grid
 @mixin center-grid {
 	display: grid;
