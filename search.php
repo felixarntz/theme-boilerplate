@@ -7,42 +7,40 @@
  * @link    https://www.taco-themes.com/themes/super-awesome-theme/
  */
 
-get_header(); ?>
+get_header();
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
+?>
+
+	<main id="main" class="site-main">
+
+	<?php
+	if ( have_posts() ) : ?>
+
+		<header class="page-header">
+			<h1 class="page-title"><?php
+				/* translators: %s: search query. */
+				printf( esc_html__( 'Search Results for: %s', 'super-awesome-theme' ), '<span>' . get_search_query() . '</span>' );
+			?></h1>
+		</header><!-- .page-header -->
 
 		<?php
-		if ( have_posts() ) : ?>
+		while ( have_posts() ) : the_post();
 
-			<header class="page-header">
-				<h1 class="page-title"><?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'super-awesome-theme' ), '<span>' . get_search_query() . '</span>' );
-				?></h1>
-			</header><!-- .page-header -->
+			get_template_part( 'template-parts/content/content-search' );
 
-			<?php
-			while ( have_posts() ) : the_post();
+		endwhile;
 
-				get_template_part( 'template-parts/content/content-search' );
+		the_posts_navigation();
 
-			endwhile;
+	else :
 
-			the_posts_navigation();
+		get_template_part( 'template-parts/content/none' );
 
-		else :
+	endif; ?>
 
-			get_template_part( 'template-parts/content/none' );
-
-		endif; ?>
-
-		</main><!-- #main -->
-	</section><!-- #primary -->
+	</main><!-- #main -->
 
 <?php
-if ( super_awesome_theme_display_sidebar() ) {
-	get_sidebar( super_awesome_theme_get_sidebar_name() );
-}
 
+get_sidebar();
 get_footer();

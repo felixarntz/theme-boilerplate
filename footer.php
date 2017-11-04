@@ -9,9 +9,7 @@
 
 ?>
 
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer">
+	<footer id="footer" class="site-footer">
 		<?php get_template_part( 'template-parts/footer/footer-widgets' ); ?>
 
 		<?php get_template_part( 'template-parts/footer/social-navigation' ); ?>
@@ -19,7 +17,7 @@
 		<?php get_template_part( 'template-parts/footer/footer-navigation' ); ?>
 
 		<?php get_template_part( 'template-parts/footer/site-info' ); ?>
-	</footer><!-- #colophon -->
+	</footer><!-- #footer -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
