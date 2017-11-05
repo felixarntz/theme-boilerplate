@@ -293,26 +293,39 @@ function super_awesome_theme_allow_display_sidebar() {
  * @return string The sidebar name, either 'primary' or 'blog'.
  */
 function super_awesome_theme_get_sidebar_name() {
-	$result = 'primary';
+	if ( get_theme_mod( 'blog_sidebar_enabled' ) && super_awesome_theme_allow_display_blog_sidebar() ) {
+		return 'blog';
+	}
 
-	if ( get_theme_mod( 'blog_sidebar_enabled' ) ) {
-		if ( is_singular() ) {
-			if ( 'post' === get_post_type() ) {
-				$result = 'blog';
-			}
-		} elseif ( is_home() || is_category() || is_tag() || is_date() || 'post' === get_query_var( 'post_type' ) ) {
-			$result = 'blog';
+	return 'primary';
+}
+
+/**
+ * Checks whether the current page does allow the blog sidebar to be displayed.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if the blog sidebar can be displayed, false otherwise.
+ */
+function super_awesome_theme_allow_display_blog_sidebar() {
+	$result = false;
+
+	if ( is_singular() ) {
+		if ( 'post' === get_post_type() ) {
+			$result = true;
 		}
+	} elseif ( is_home() || is_category() || is_tag() || is_date() || 'post' === get_query_var( 'post_type' ) ) {
+		$result = true;
 	}
 
 	/**
-	 * Filters the name of the sidebar to display on the current page.
+	 * Filters whether to allow displaying the blog sidebar on the current page.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $result The identifier of the sidebar to display.
+	 * @param bool $result Whether to allow displaying the blog sidebar on the current page.
 	 */
-	return apply_filters( 'super_awesome_theme_get_sidebar_name', $result );
+	return apply_filters( 'super_awesome_theme_allow_display_blog_sidebar', $result );
 }
 
 /**

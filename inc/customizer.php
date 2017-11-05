@@ -67,13 +67,14 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'transport'         => 'postMessage',
 	) );
 	$wp_customize->add_control( 'blog_sidebar_enabled', array(
-		'section'     => 'sidebars',
-		'label'       => __( 'Enable Blog Sidebar?', 'super-awesome-theme' ),
-		'description' => __( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
-		'type'        => 'checkbox',
+		'section'         => 'sidebars',
+		'label'           => __( 'Enable Blog Sidebar?', 'super-awesome-theme' ),
+		'description'     => __( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
+		'type'            => 'checkbox',
+		'active_callback' => 'super_awesome_theme_allow_display_blog_sidebar',
 	) );
 	$wp_customize->selective_refresh->add_partial( 'blog_sidebar_enabled', array(
-		'selector'            => '#secondary',
+		'selector'            => '#sidebar',
 		'render_callback'     => 'super_awesome_theme_customize_partial_blog_sidebar_enabled',
 		'container_inclusive' => true,
 	) );
@@ -337,7 +338,12 @@ function super_awesome_theme_customize_partial_entry_authorbox( $partial, $conte
 function super_awesome_theme_customize_controls_js() {
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '': '.min';
 
-	wp_enqueue_script( 'super-awesome-theme-customize-controls', get_theme_file_uri( '/assets/dist/js/customize-controls' . $min . '.js' ), array(), SUPER_AWESOME_THEME_VERSION, true );
+	wp_enqueue_script( 'super-awesome-theme-customize-controls', get_theme_file_uri( '/assets/dist/js/customize-controls' . $min . '.js' ), array( 'customize-controls' ), SUPER_AWESOME_THEME_VERSION, true );
+	wp_localize_script( 'super-awesome-theme-customize-controls', 'themeCustomizeData', array(
+		'i18n' => array(
+			'blogSidebarEnabledNotice' => __( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ),
+		),
+	) );
 }
 add_action( 'customize_controls_enqueue_scripts', 'super_awesome_theme_customize_controls_js' );
 
@@ -349,7 +355,7 @@ add_action( 'customize_controls_enqueue_scripts', 'super_awesome_theme_customize
 function super_awesome_theme_customize_preview_js() {
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '': '.min';
 
-	wp_enqueue_script( 'super-awesome-theme-customize-preview', get_theme_file_uri( '/assets/dist/js/customize-preview' . $min . '.js' ), array( 'customize-preview' ), SUPER_AWESOME_THEME_VERSION, true );
+	wp_enqueue_script( 'super-awesome-theme-customize-preview', get_theme_file_uri( '/assets/dist/js/customize-preview' . $min . '.js' ), array( 'customize-preview', 'customize-selective-refresh' ), SUPER_AWESOME_THEME_VERSION, true );
 	wp_localize_script( 'super-awesome-theme-customize-preview', 'themeCustomizeData', array(
 		'sidebarModeChoices' => super_awesome_theme_customize_get_sidebar_mode_choices(),
 		'sidebarSizeChoices' => super_awesome_theme_customize_get_sidebar_size_choices(),
