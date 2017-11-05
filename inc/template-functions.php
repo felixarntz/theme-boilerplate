@@ -253,10 +253,22 @@ function super_awesome_theme_customize_post_context( $post = null ) {
  * @return bool True if the sidebar should be displayed, false otherwise.
  */
 function super_awesome_theme_display_sidebar() {
-	$is_customize_preview = is_customize_preview();
+	if ( ! super_awesome_theme_allow_display_sidebar() ) {
+		return false;
+	}
 
-	$result = 'no-sidebar' !== get_theme_mod( 'sidebar_mode', 'right-sidebar' ) || $is_customize_preview;
+	return 'no-sidebar' !== get_theme_mod( 'sidebar_mode', 'right-sidebar' ) || is_customize_preview();
+}
 
+/**
+ * Checks whether the current page does allow the sidebar to be displayed.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if the sidebar can be displayed, false otherwise.
+ */
+function super_awesome_theme_allow_display_sidebar() {
+	$result = true;
 	if ( super_awesome_theme_is_distraction_free() ) {
 		$result = false;
 	} elseif ( is_page_template( 'templates/full-width.php' ) ) {
@@ -264,14 +276,13 @@ function super_awesome_theme_display_sidebar() {
 	}
 
 	/**
-	 * Filters whether the sidebar should be displayed.
+	 * Filters whether to allow displaying the sidebar on the current page.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param bool $result               Whether to display the sidebar. Default depends on the 'sidebar_mode' theme mod.
-	 * @param bool $is_customize_preview Whether the page is currently being viewed in the Customizer.
+	 * @param bool $result Whether to allow displaying the sidebar on the current page.
 	 */
-	return apply_filters( 'super_awesome_theme_display_sidebar', $result, $is_customize_preview );
+	return apply_filters( 'super_awesome_theme_allow_display_sidebar', $result );
 }
 
 /**

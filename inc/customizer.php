@@ -31,8 +31,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	/* Sidebar Settings */
 
 	$wp_customize->add_section( 'sidebars', array(
-		'title'    => __( 'Sidebars', 'super-awesome-theme' ),
-		'priority' => 105,
+		'title'           => __( 'Sidebars', 'super-awesome-theme' ),
+		'priority'        => 105,
+		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
 	) );
 
 	$wp_customize->add_setting( 'sidebar_mode', array(
