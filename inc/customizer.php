@@ -257,7 +257,7 @@ function super_awesome_theme_customize_get_sidebar_size_choices() {
  * @since 1.0.0
  */
 function super_awesome_theme_customize_partial_blog_sidebar_enabled() {
-	get_sidebar( super_awesome_theme_get_current_sidebar_name() );
+	get_sidebar();
 }
 
 /**
