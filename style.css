@@ -1153,16 +1153,10 @@ body.left-sidebar .site {
 # Footer
 ------------------------------------------------------------- */
 .footer-widgets {
-	align-items: stretch;
-	-ms-flex-align: stretch;
-	display: grid;
+	display: block;
 	max-width: 72rem;
 	margin-right: auto;
 	margin-left: auto;
-
-	-webkit-box-align: stretch;
-	grid-template: auto / auto;
-	justify-items: stretch;
 }
 
 .footer-widgets .widget-column {
@@ -1171,14 +1165,25 @@ body.left-sidebar .site {
 }
 
 @media (min-width: 48rem) {
-	.footer-widgets-2 .footer-widgets {
-		grid-template: auto/repeat(2, 1fr);
+	.footer-widgets {
+		align-items: stretch;
+		-ms-flex-align: stretch;
+		-ms-flex-pack: stretch;
+		justify-content: stretch;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		margin-right: auto;
+		margin-left: auto;
+
+		-webkit-box-align: stretch;
+		-webkit-box-pack: stretch;
 	}
-	.footer-widgets-3 .footer-widgets {
-		grid-template: auto/repeat(3, 1fr);
-	}
-	.footer-widgets-4 .footer-widgets {
-		grid-template: auto/repeat(4, 1fr);
+	.footer-widgets .widget-column {
+		-ms-flex: 1;
+		    flex: 1;
+
+		-webkit-box-flex: 1;
 	}
 }
 
