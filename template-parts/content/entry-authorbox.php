@@ -9,7 +9,7 @@
 
 // TODO: Put some useful content in here.
 ?>
-<div class="entry-authorbox"<?php super_awesome_theme_customize_post_context() ?>>
+<div class="entry-authorbox">
 	<?php if ( super_awesome_theme_display_post_authorbox() ) : ?>
 		This post was written by an incredible author.
 	<?php endif; ?>

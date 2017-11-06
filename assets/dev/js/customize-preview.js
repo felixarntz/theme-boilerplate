@@ -72,4 +72,30 @@
 			}
 		} );
 	} );
+
+	wp.customize.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = wp.customize.selectiveRefresh.Partial.extend({
+		placements: function() {
+			var partial = this, selector;
+
+			selector = partial.params.selector || '';
+			if ( selector ) {
+				selector += ', ';
+			}
+			selector += '[data-customize-partial-id="' + partial.id + '"]';
+
+			return $( selector ).map( function() {
+				var container = $( this ), context;
+
+				context = {
+					post_id: parseInt( container.parents( 'article.hentry' ).attr( 'id' ).replace( 'post-', '' ), 10 ),
+				};
+
+				return new wp.customize.selectiveRefresh.Placement( {
+					partial: partial,
+					container: container,
+					context: context,
+				} );
+			} ).get();
+		},
+	});
 } )( jQuery );

@@ -20,7 +20,7 @@ $time_string = sprintf( $time_string,
 );
 
 ?>
-<div class="entry-meta"<?php super_awesome_theme_customize_post_context() ?>>
+<div class="entry-meta">
 
 	<?php if ( super_awesome_theme_display_post_date() ) : ?>
 		<span class="posted-on">

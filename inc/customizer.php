@@ -106,6 +106,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			'selector'            => '.type-' . $post_type->name . ' .entry-meta',
 			'render_callback'     => 'super_awesome_theme_customize_partial_entry_meta',
 			'container_inclusive' => true,
+			'type'                => 'SuperAwesomeThemePostPartial',
 		) );
 
 		if ( post_type_supports( $post_type->name, 'author' ) ) {
@@ -122,6 +123,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 				'selector'            => '.type-' . $post_type->name . ' .entry-meta',
 				'render_callback'     => 'super_awesome_theme_customize_partial_entry_meta',
 				'container_inclusive' => true,
+				'type'                => 'SuperAwesomeThemePostPartial',
 			) );
 		}
 
@@ -143,6 +145,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 				'selector'            => '.type-' . $post_type->name . ' .entry-terms',
 				'render_callback'     => 'super_awesome_theme_customize_partial_entry_terms',
 				'container_inclusive' => true,
+				'type'                => 'SuperAwesomeThemePostPartial',
 			) );
 		}
 
@@ -160,6 +163,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 				'selector'            => '.type-' . $post_type->name . ' .entry-authorbox',
 				'render_callback'     => 'super_awesome_theme_customize_partial_entry_authorbox',
 				'container_inclusive' => true,
+				'type'                => 'SuperAwesomeThemePostPartial',
 			) );
 		}
 	}
