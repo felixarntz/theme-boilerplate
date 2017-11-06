@@ -11,6 +11,14 @@ i {
 
 blockquote {
 	margin: 0 1.5em;
+	color: $color__text-quote;
+
+	footer {
+		margin-top: 1em;
+		color: $color__text-quote-footer;
+		font-size: 85%;
+		font-style: normal;
+	}
 }
 
 address {

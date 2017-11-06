@@ -34,3 +34,10 @@ if ( function_exists( 'the_subtitle' ) ) {
 if ( defined( 'WPAC_PLUGIN_NAME' ) ) {
 	require get_template_directory() . '/inc/plugin-compat/wp-ajaxify-comments.php';
 }
+
+/**
+ * Gutenberg compatibility.
+ */
+if ( defined( 'GUTENBERG_VERSION' ) ) {
+	require get_template_directory() . '/inc/plugin-compat/gutenberg.php';
+}

@@ -1,23 +1,29 @@
 button,
 input[type="button"],
 input[type="reset"],
-input[type="submit"] {
+input[type="submit"],
+.button {
 	@include font-size(0.75);
 
-	border: 1px solid;
-	border-color: $color__border-button;
-	border-radius: 3px;
-	background: $color__background-button;
-	color: rgba(0, 0, 0, 0.8);
-	line-height: 1;
 	padding: 0.6em 1em 0.4em;
+	color: $color__text-button;
+	background-color: $color__background-button;
+	border-radius: 3px;
+	line-height: 1;
+	text-decoration: none;
 
-	&:hover {
-		border-color: $color__border-button-hover;
+	&:hover,
+	&:focus {
+		background-color: $color__background-button-hover;
 	}
 
-	&:active,
-	&:focus {
-		border-color: $color__border-button-focus;
+	&.button-primary {
+		color: $color__text-button-primary;
+		background-color: $color__background-button-primary;
+
+		&:hover,
+		&:focus {
+			background-color: $color__background-button-primary-hover;
+		}
 	}
 }

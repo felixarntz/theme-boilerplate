@@ -1,0 +1,57 @@
+p.has-background {
+	padding: 1em 1.5em;
+}
+
+.wp-block-quote {
+	margin: 0 0 1.5em;
+	color: $color__text-quote;
+
+	footer {
+		position: relative;
+		margin-top: 1em;
+		color: $color__text-quote-footer;
+		font-size: 85%;
+		font-style: normal;
+	}
+
+	&.blocks-quote-style-1 {
+		padding-left: 1em;
+		border-left: 4px solid $color__border-quote;
+	}
+
+	&.blocks-quote-style-2 {
+		padding: 0 1em;
+
+		p {
+			font-style: italic;
+			font-size: 24px;
+			line-height: 1.6;
+		}
+
+		footer {
+			font-size: 19px;
+			text-align: right;
+		}
+	}
+}
+
+.wp-block-button {
+	position: relative;
+	display: inline-block;
+	padding: 0.6em 1em;
+	height: auto;
+	color: $color__text-button;
+	background-color: $color__background-button;
+	border: 0;
+	border-radius: 3px;
+	font-family: inherit;
+	line-height: 1;
+	text-decoration: none;
+	cursor: default;
+
+	a {
+		color: $color__text-button;
+		text-decoration: none !important;
+		cursor: pointer;
+	}
+}

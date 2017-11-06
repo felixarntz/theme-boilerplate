@@ -311,6 +311,14 @@ i {
 
 blockquote {
 	margin: 0 1.5em;
+	color: #404040;
+}
+
+blockquote footer {
+	margin-top: 1em;
+	color: #8f98a1;
+	font-size: 85%;
+	font-style: normal;
 }
 
 address {
@@ -355,17 +363,17 @@ big {
 }
 
 a {
-	color: royalblue;
+	color: #21759b;
 }
 
 a:visited {
-	color: purple;
+	color: #21759b;
 }
 
 a:hover,
 a:focus,
 a:active {
-	color: midnightblue;
+	color: #1a5c79;
 }
 
 a:focus {
@@ -468,34 +476,51 @@ table {
 button,
 input[type="button"],
 input[type="reset"],
-input[type="submit"] {
+input[type="submit"],
+.button {
 	padding: 0.6em 1em 0.4em;
-	color: rgba(0, 0, 0, 0.8);
+	color: #666;
 	font-size: 12px;
 	font-size: 0.75rem;
 	line-height: 1;
-	background: #e6e6e6;
-	border: 1px solid;
-	border-color: #ccc #ccc #bbb;
+	text-decoration: none;
+	background-color: #e6e6e6;
 	border-radius: 3px;
 }
 
 button:hover,
+button:focus,
 input[type="button"]:hover,
+input[type="button"]:focus,
 input[type="reset"]:hover,
-input[type="submit"]:hover {
-	border-color: #ccc #bbb #aaa;
+input[type="reset"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+.button:hover,
+.button:focus {
+	background-color: #d2d2d2;
 }
 
-button:active,
-button:focus,
-input[type="button"]:active,
-input[type="button"]:focus,
-input[type="reset"]:active,
-input[type="reset"]:focus,
-input[type="submit"]:active,
-input[type="submit"]:focus {
-	border-color: #aaa #bbb #bbb;
+button.button-primary,
+input[type="button"].button-primary,
+input[type="reset"].button-primary,
+input[type="submit"].button-primary,
+.button.button-primary {
+	color: #fff;
+	background-color: #21759b;
+}
+
+button.button-primary:hover,
+button.button-primary:focus,
+input[type="button"].button-primary:hover,
+input[type="button"].button-primary:focus,
+input[type="reset"].button-primary:hover,
+input[type="reset"].button-primary:focus,
+input[type="submit"].button-primary:hover,
+input[type="submit"].button-primary:focus,
+.button.button-primary:hover,
+.button.button-primary:focus {
+	background-color: #1a5c79;
 }
 
 input[type="text"],
@@ -1404,4 +1429,65 @@ object {
 
 .gallery-caption {
 	display: block;
+}
+
+/* -------------------------------------------------------------
+# Plugin Compatibility
+------------------------------------------------------------- */
+p.has-background {
+	padding: 1em 1.5em;
+}
+
+.wp-block-quote {
+	margin: 0 0 1.5em;
+	color: #404040;
+}
+
+.wp-block-quote footer {
+	position: relative;
+	margin-top: 1em;
+	color: #8f98a1;
+	font-size: 85%;
+	font-style: normal;
+}
+
+.wp-block-quote.blocks-quote-style-1 {
+	padding-right: 1em;
+	border-right: 4px solid #666;
+}
+
+.wp-block-quote.blocks-quote-style-2 {
+	padding: 0 1em;
+}
+
+.wp-block-quote.blocks-quote-style-2 p {
+	font-size: 24px;
+	font-style: italic;
+	line-height: 1.6;
+}
+
+.wp-block-quote.blocks-quote-style-2 footer {
+	font-size: 19px;
+	text-align: left;
+}
+
+.wp-block-button {
+	position: relative;
+	display: inline-block;
+	height: auto;
+	padding: 0.6em 1em;
+	color: #666;
+	font-family: inherit;
+	line-height: 1;
+	text-decoration: none;
+	background-color: #e6e6e6;
+	border: 0;
+	border-radius: 3px;
+	cursor: default;
+}
+
+.wp-block-button a {
+	color: #666;
+	text-decoration: none !important;
+	cursor: pointer;
 }
