@@ -4,3 +4,23 @@
 	@include horizontal-padding();
 	@include text-center();
 }
+
+.site-title {
+	@include font-size(2);
+
+	margin: 0 0 $spacing_vertical;
+	padding: 0;
+	clear: both;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+.site-description {
+	@include font-size(1.2);
+
+	margin: 0 0 $spacing_vertical;
+	padding: 0;
+	clear: both;
+	font-weight: 500;
+	line-height: 1.4;
+}
