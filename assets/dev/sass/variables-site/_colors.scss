@@ -29,7 +29,8 @@ $color__text-screen: $color__primary;
 $color__text-button: $color__black;
 $color__text-button-primary: $color__white;
 $color__text-input: $color__black;
-$color__text-input-focus: #111;
+$color__text-input-focus: darken($color__text-input, 8%);
+$color__text-input-placeholder: #333;
 $color__text-quote: $color__text-main;
 $color__text-quote-footer: $color__darkgray;
 $color__link: $color__primary;
@@ -37,6 +38,7 @@ $color__link-visited: $color__link;
 $color__link-hover: darken($color__link, 8%);
 
 $color__border-input: $color__lightgray;
+$color__border-input-focus: darken($color__border-input, 8%);
 $color__border-abbr: $color__black;
 $color__border-quote: $color__black;
 $color__border-table: $color__darkgray;

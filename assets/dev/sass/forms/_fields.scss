@@ -1,3 +1,36 @@
+.form-group {
+	display: block;
+	margin-bottom: $spacing_vertical;
+}
+
+form.form-horizontal .form-group {
+	@media screen and (min-width: $site_breakpoint) {
+		display: flex;
+		align-items: stretch;
+		justify-content: stretch;
+
+		> label {
+			flex: 1;
+			padding: (0.5 * $padding_vertical) (0.5 * $padding_horizontal);
+			text-align: right;
+		}
+
+		> label + * {
+			flex: 3;
+		}
+	}
+}
+
+fieldset {
+	margin-bottom: $spacing_vertical-big;
+}
+
+label {
+	display: block;
+	margin-bottom: (0.5 * $spacing_vertical);
+	font-weight: 800;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="url"],
@@ -14,20 +47,54 @@ input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
 textarea {
+	display: block;
+	padding: (0.5 * $padding_vertical) (0.5 * $padding_horizontal);
+	width: 100%;
 	color: $color__text-input;
 	border: 1px solid $color__border-input;
-	border-radius: 3px;
-	padding: 3px;
+	border-radius: $border-radius;
 
 	&:focus {
 		color: $color__text-input-focus;
+		border-color: $color__border-input-focus;
 	}
 }
 
 select {
+	max-width: 100%;
 	border: 1px solid $color__border-input;
+	border-radius: $border-radius;
 }
 
-textarea {
-	width: 100%;
+input[type="radio"],
+input[type="checkbox"] {
+	margin-right: (0.5 * $spacing_horizontal);
+
+	+ label {
+		font-weight: 400;
+	}
+}
+
+/* Placeholder text color -- selectors need to be separate to work. */
+::-webkit-input-placeholder {
+	color: $color__text-input-placeholder;
+	font-family: $font__main;
+}
+
+:-moz-placeholder {
+	color: $color__text-input-placeholder;
+	font-family: $font__main;
+}
+
+::-moz-placeholder {
+	color: $color__text-input-placeholder;
+	font-family: $font__main;
+
+	/* Since FF19 lowers the opacity of the placeholder by default */
+	opacity: 1;
+}
+
+:-ms-input-placeholder {
+	color: $color__text-input-placeholder;
+	font-family: $font__main;
 }

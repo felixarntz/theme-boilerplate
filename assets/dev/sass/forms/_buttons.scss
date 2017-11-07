@@ -3,10 +3,10 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"],
 .button {
-	padding: 0.6em 1em 0.4em;
+	padding: $padding_vertical $padding_horizontal;
 	color: $color__text-button;
 	background-color: $color__background-button;
-	border-radius: 3px;
+	border-radius: $border-radius;
 	border: 0;
 	text-decoration: none;
 	appearance: none;
