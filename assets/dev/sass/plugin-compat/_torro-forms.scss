@@ -1,0 +1,28 @@
+.torro-pager {
+	display: flex;
+	align-items: stretch;
+	justify-content: stretch;
+
+	> .prev,
+	> .next {
+		flex: 1;
+	}
+
+	> .prev {
+		text-align: left;
+	}
+
+	> .next {
+		text-align: right;
+	}
+}
+
+.torro-evaluations-results {
+	margin: 0 0 $spacing_vertical;
+	padding: $padding_vertical $padding_horizontal;
+	border: 1px solid #ccc;
+}
+
+#torro-email-wrap {
+	display: none;
+}

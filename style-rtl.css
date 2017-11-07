@@ -50,6 +50,8 @@ GNU General Public License for more details.
 	## Captions
 	## Galleries
 # Plugin Compatibility
+	## Gutenberg
+	## Torro Forms
 ------------------------------------------------------------- */
 /* -------------------------------------------------------------
 # Normalize
@@ -969,7 +971,7 @@ input[type="submit"].button-primary:focus,
 		-webkit-box-align: stretch;
 		-webkit-box-pack: stretch;
 	}
-	form.form-horizontal .form-group > label {
+	form.form-horizontal .form-group > label:first-child {
 		-ms-flex: 1;
 		    flex: 1;
 		padding: 0.375rem 0.5rem;
@@ -977,7 +979,7 @@ input[type="submit"].button-primary:focus,
 
 		-webkit-box-flex: 1;
 	}
-	form.form-horizontal .form-group > label + * {
+	form.form-horizontal .form-group > label:first-child + *:last-child {
 		-ms-flex: 3;
 		    flex: 3;
 
@@ -1954,6 +1956,9 @@ object {
 /* -------------------------------------------------------------
 # Plugin Compatibility
 ------------------------------------------------------------- */
+/* -------------------------------------------------------------
+## Gutenberg
+------------------------------------------------------------- */
 p.has-background {
 	padding: 1rem 0.75rem;
 }
@@ -2013,4 +2018,46 @@ p.has-background {
 	color: #404040;
 	text-decoration: none !important;
 	cursor: pointer;
+}
+
+/* -------------------------------------------------------------
+## Torro Forms
+------------------------------------------------------------- */
+.torro-pager {
+	align-items: stretch;
+	-ms-flex-align: stretch;
+	-ms-flex-pack: stretch;
+	justify-content: stretch;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: stretch;
+	-webkit-box-pack: stretch;
+}
+
+.torro-pager > .prev,
+.torro-pager > .next {
+	-ms-flex: 1;
+	    flex: 1;
+
+	-webkit-box-flex: 1;
+}
+
+.torro-pager > .prev {
+	text-align: right;
+}
+
+.torro-pager > .next {
+	text-align: left;
+}
+
+.torro-evaluations-results {
+	padding: 0.75rem 1rem;
+	margin: 0 0 1em;
+	border: 1px solid #ccc;
+}
+
+#torro-email-wrap {
+	display: none;
 }

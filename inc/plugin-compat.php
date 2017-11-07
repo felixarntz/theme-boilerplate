@@ -41,3 +41,10 @@ if ( defined( 'WPAC_PLUGIN_NAME' ) ) {
 if ( defined( 'GUTENBERG_VERSION' ) ) {
 	require get_template_directory() . '/inc/plugin-compat/gutenberg.php';
 }
+
+/**
+ * Torro Forms compatibility.
+ */
+if ( function_exists( 'torro' ) ) {
+	require get_template_directory() . '/inc/plugin-compat/torro-forms.php';
+}

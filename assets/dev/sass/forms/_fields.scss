@@ -9,13 +9,13 @@ form.form-horizontal .form-group {
 		align-items: stretch;
 		justify-content: stretch;
 
-		> label {
+		> label:first-child {
 			flex: 1;
 			padding: (0.5 * $padding_vertical) (0.5 * $padding_horizontal);
 			text-align: right;
 		}
 
-		> label + * {
+		> label:first-child + *:last-child {
 			flex: 3;
 		}
 	}
