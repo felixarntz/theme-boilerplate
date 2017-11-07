@@ -1,5 +1,5 @@
 .notice {
-	margin-bottom: $padding_vertical;
+	margin-bottom: $spacing_vertical;
 	padding: 0.5em 1em;
 	background-color: #fff;
 	border-left: 4px solid #aaa;
@@ -71,6 +71,6 @@ input[type="datetime-local"],
 input[type="color"],
 select {
 	& + span.field-notice {
-		margin-left: $padding_horizontal;
+		margin-left: $spacing_horizontal;
 	}
 }

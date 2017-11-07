@@ -3,7 +3,7 @@
 	@include limit-width();
 	@include horizontal-padding();
 
-	margin-bottom: $padding_vertical;
+	margin-bottom: $spacing_vertical;
 
 	ul {
 		list-style: none;
@@ -125,7 +125,7 @@
 				border: 1px solid #333;
 
 				a {
-					padding: (0.75 * $padding_vertical) $padding_horizontal;
+					padding: $padding_vertical $padding_horizontal;
 					width: 16em;
 				}
 

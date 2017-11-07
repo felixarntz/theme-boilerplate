@@ -4,5 +4,62 @@ h3,
 h4,
 h5,
 h6 {
+	margin: 0 0 $spacing_vertical;
+	padding: $spacing_vertical 0 0;
 	clear: both;
+	line-height: $font__line-height-headings;
+
+	&:first-child {
+		padding: 0;
+	}
+}
+
+h1 {
+	@include font-size(1.5);
+}
+
+h2 {
+	@include font-size(1.25);
+
+	h1 + & {
+		padding: 0;
+	}
+}
+
+h3 {
+	@include font-size(1.125);
+
+	h2 + & {
+		padding: 0;
+	}
+}
+
+h4 {
+	@include font-size(1);
+
+	font-weight: 800;
+
+	h3 + & {
+		padding: 0;
+	}
+}
+
+h5 {
+	@include font-size(0.875);
+
+	font-weight: 800;
+
+	h4 + & {
+		padding: 0;
+	}
+}
+
+h6 {
+	@include font-size(0.75);
+
+	font-weight: 800;
+
+	h5 + & {
+		padding: 0;
+	}
 }

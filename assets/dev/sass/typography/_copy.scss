@@ -1,5 +1,6 @@
 p {
-	margin-bottom: 1.5em;
+	margin: 0 0 $spacing_vertical;
+	padding: 0;
 }
 
 dfn,
@@ -10,9 +11,10 @@ i {
 }
 
 blockquote {
-	margin: 0 1.5em;
+	margin: 0 0 $spacing_vertical;
 	color: $color__text-quote;
 
+	cite,
 	footer {
 		margin-top: 1em;
 		color: $color__text-quote-footer;
@@ -22,7 +24,7 @@ blockquote {
 }
 
 address {
-	margin: 0 0 1.5em;
+	margin: 0 0 $spacing_vertical;
 }
 
 pre {
