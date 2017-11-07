@@ -480,11 +480,12 @@ input[type="submit"],
 .button {
 	padding: 0.6em 1em 0.4em;
 	color: #666;
-	font-size: 12px;
-	font-size: 0.75rem;
-	line-height: 1;
 	text-decoration: none;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+	        appearance: none;
 	background-color: #e6e6e6;
+	border: 0;
 	border-radius: 3px;
 }
 
@@ -1486,7 +1487,9 @@ p.has-background {
 	cursor: default;
 }
 
-.wp-block-button a {
+.wp-block-button a,
+.wp-block-button a:hover,
+.wp-block-button a:focus {
 	color: #666;
 	text-decoration: none !important;
 	cursor: pointer;
