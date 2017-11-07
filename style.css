@@ -30,20 +30,26 @@ GNU General Public License for more details.
 # Typography
 # Elements
 # Forms
-# Navigation
-	## Links
-	## Menus
 # Accessibility
 # Alignments
-# Clearings
-# Widgets
+# Layout
+# Header
+	## Branding
+	## Main Navigation
 # Content
 	## Posts and pages
 	## Comments
+	## Widgets
+# Footer
+	## Footer Widgets
+	## Social Navigation
+	## Footer Navigation
+	## Site Info
 # Infinite scroll
 # Media
 	## Captions
 	## Galleries
+# Plugin Compatibility
 ------------------------------------------------------------- */
 /* -------------------------------------------------------------
 # Normalize
@@ -711,36 +717,115 @@ select + span.field-notice {
 }
 
 /* -------------------------------------------------------------
-# Clearings
+# Layout
 ------------------------------------------------------------- */
-.clear:before,
-.clear:after,
-.entry-content:before,
-.entry-content:after,
-.comment-content:before,
-.comment-content:after,
-.site-header:before,
-.site-header:after,
-.site-content:before,
-.site-content:after,
-.site-footer:before,
-.site-footer:after {
-	display: table;
-	content: "";
-	table-layout: fixed;
+.site {
+	align-items: stretch;
+	-ms-flex-align: stretch;
+	display: grid;
+	display: grid;
+	max-width: 72rem;
+	margin-right: auto;
+	margin-left: auto;
+
+	-webkit-box-align: stretch;
+	grid-template-areas: "header" "main" "sidebar" "footer";
+	grid-template-columns: 1fr;
+	justify-items: stretch;
 }
 
-.clear:after,
-.entry-content:after,
-.comment-content:after,
-.site-header:after,
-.site-content:after,
-.site-footer:after {
-	clear: both;
+.site .site-header {
+	grid-area: header;
+}
+
+.site .site-main {
+	grid-area: main;
+}
+
+.site .site-sidebar {
+	grid-area: sidebar;
+}
+
+.site .site-footer {
+	grid-area: footer;
+}
+
+body.no-sidebar .site {
+	grid-template-areas: "header" "main" "footer";
+}
+
+body.no-sidebar .site .site-sidebar {
+	display: none;
+}
+
+body.left-sidebar .site {
+	grid-template-areas: "header" "sidebar" "main" "footer";
+}
+
+@media (min-width: 48rem) {
+	body.left-sidebar .site {
+		grid-template-areas: "header header" "sidebar main" "footer footer";
+		grid-template-columns: 1fr 2fr;
+	}
+	body.right-sidebar .site {
+		grid-template-areas: "header header" "main sidebar" "footer footer";
+		grid-template-columns: 2fr 1fr;
+	}
+	body.left-sidebar.sidebar-small .site {
+		grid-template-columns: 1fr 3fr;
+	}
+	body.right-sidebar.sidebar-small .site {
+		grid-template-columns: 3fr 1fr;
+	}
+	body.left-sidebar.sidebar-medium .site {
+		grid-template-columns: 1fr 2fr;
+	}
+	body.right-sidebar.sidebar-medium .site {
+		grid-template-columns: 2fr 1fr;
+	}
+	body.left-sidebar.sidebar-large .site {
+		grid-template-columns: 1fr 1fr;
+	}
+	body.right-sidebar.sidebar-large .site {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.site-main,
+.site-sidebar {
+	padding-right: 1rem;
+	padding-left: 1rem;
+}
+
+.site-main .comment-navigation,
+.site-main
+.posts-navigation,
+.site-main
+.post-navigation {
+	margin: 0 0 1.5em;
+	overflow: hidden;
+}
+
+.comment-navigation .nav-previous,
+.posts-navigation .nav-previous,
+.post-navigation .nav-previous {
+	float: left;
+	width: 50%;
+}
+
+.comment-navigation .nav-next,
+.posts-navigation .nav-next,
+.post-navigation .nav-next {
+	float: right;
+	width: 50%;
+	text-align: right;
 }
 
 /* -------------------------------------------------------------
 # Header
+------------------------------------------------------------- */
+/* -------------------------------------------------------------
+## Branding
 ------------------------------------------------------------- */
 .site-branding {
 	display: block;
@@ -752,6 +837,9 @@ select + span.field-notice {
 	text-align: center;
 }
 
+/* -------------------------------------------------------------
+## Main Navigation
+------------------------------------------------------------- */
 .main-navigation {
 	display: block;
 	max-width: 72rem;
@@ -1014,108 +1102,6 @@ select + span.field-notice {
 /* -------------------------------------------------------------
 # Content
 ------------------------------------------------------------- */
-.site {
-	align-items: stretch;
-	-ms-flex-align: stretch;
-	display: grid;
-	display: grid;
-	max-width: 72rem;
-	margin-right: auto;
-	margin-left: auto;
-
-	-webkit-box-align: stretch;
-	grid-template-areas: "header" "main" "sidebar" "footer";
-	grid-template-columns: 1fr;
-	justify-items: stretch;
-}
-
-.site .site-header {
-	grid-area: header;
-}
-
-.site .site-main {
-	grid-area: main;
-}
-
-.site .site-sidebar {
-	grid-area: sidebar;
-}
-
-.site .site-footer {
-	grid-area: footer;
-}
-
-body.no-sidebar .site {
-	grid-template-areas: "header" "main" "footer";
-}
-
-body.no-sidebar .site .site-sidebar {
-	display: none;
-}
-
-body.left-sidebar .site {
-	grid-template-areas: "header" "sidebar" "main" "footer";
-}
-
-@media (min-width: 48rem) {
-	body.left-sidebar .site {
-		grid-template-areas: "header header" "sidebar main" "footer footer";
-		grid-template-columns: 1fr 2fr;
-	}
-	body.right-sidebar .site {
-		grid-template-areas: "header header" "main sidebar" "footer footer";
-		grid-template-columns: 2fr 1fr;
-	}
-	body.left-sidebar.sidebar-small .site {
-		grid-template-columns: 1fr 3fr;
-	}
-	body.right-sidebar.sidebar-small .site {
-		grid-template-columns: 3fr 1fr;
-	}
-	body.left-sidebar.sidebar-medium .site {
-		grid-template-columns: 1fr 2fr;
-	}
-	body.right-sidebar.sidebar-medium .site {
-		grid-template-columns: 2fr 1fr;
-	}
-	body.left-sidebar.sidebar-large .site {
-		grid-template-columns: 1fr 1fr;
-	}
-	body.right-sidebar.sidebar-large .site {
-		grid-template-columns: 1fr 1fr;
-	}
-}
-
-.site-main,
-.site-sidebar {
-	padding-right: 1rem;
-	padding-left: 1rem;
-}
-
-.site-main .comment-navigation,
-.site-main
-.posts-navigation,
-.site-main
-.post-navigation {
-	margin: 0 0 1.5em;
-	overflow: hidden;
-}
-
-.comment-navigation .nav-previous,
-.posts-navigation .nav-previous,
-.post-navigation .nav-previous {
-	float: left;
-	width: 50%;
-}
-
-.comment-navigation .nav-next,
-.posts-navigation .nav-next,
-.post-navigation .nav-next {
-	float: right;
-	width: 50%;
-	text-align: right;
-}
-
 /* -------------------------------------------------------------
 ## Posts and pages
 ------------------------------------------------------------- */
@@ -1178,6 +1164,9 @@ body.left-sidebar .site {
 /* -------------------------------------------------------------
 # Footer
 ------------------------------------------------------------- */
+/* -------------------------------------------------------------
+## Footer Widgets
+------------------------------------------------------------- */
 .footer-widgets {
 	display: block;
 	max-width: 72rem;
@@ -1213,6 +1202,9 @@ body.left-sidebar .site {
 	}
 }
 
+/* -------------------------------------------------------------
+## Social Navigation
+------------------------------------------------------------- */
 .social-navigation {
 	display: block;
 	max-width: 72rem;
@@ -1281,6 +1273,9 @@ body.left-sidebar .site {
 	font-weight: 400;
 }
 
+/* -------------------------------------------------------------
+## Footer Navigation
+------------------------------------------------------------- */
 .footer-navigation {
 	display: block;
 	max-width: 72rem;
@@ -1311,6 +1306,9 @@ body.left-sidebar .site {
 	content: none;
 }
 
+/* -------------------------------------------------------------
+## Site Info
+------------------------------------------------------------- */
 .site-info {
 	display: block;
 	max-width: 72rem;

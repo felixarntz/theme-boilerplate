@@ -7,20 +7,26 @@
 # Typography
 # Elements
 # Forms
-# Navigation
-	## Links
-	## Menus
 # Accessibility
 # Alignments
-# Clearings
-# Widgets
+# Layout
+# Header
+	## Branding
+	## Main Navigation
 # Content
 	## Posts and pages
 	## Comments
+	## Widgets
+# Footer
+	## Footer Widgets
+	## Social Navigation
+	## Footer Navigation
+	## Site Info
 # Infinite scroll
 # Media
 	## Captions
 	## Galleries
+# Plugin Compatibility
 ------------------------------------------------------------- */
 @import "variables-site/variables-site";
 @import "mixins/mixins-master";
@@ -57,9 +63,9 @@ Styles based on Normalize v5.0.0 @link https://github.com/necolas/normalize.css
 @import "modules/alignments";
 
 /* -------------------------------------------------------------
-# Clearings
+# Layout
 ------------------------------------------------------------- */
-@import "modules/clearings";
+@import "layout/layout";
 
 /* -------------------------------------------------------------
 # Header
