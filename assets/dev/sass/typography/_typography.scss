@@ -2,7 +2,6 @@ body,
 button,
 input,
 select,
-optgroup,
 textarea {
 	@include font-size(1);
 
@@ -11,16 +10,264 @@ textarea {
 	line-height: $font__line-height-body;
 }
 
-.icon {
-	position: relative;
-	top: -0.0625em;
-	display: inline-block;
-	width: 1rem;
-	height: 1rem;
-	vertical-align: middle;
-	fill: currentColor;
-}
-
 @import "headings";
 @import "copy";
 @import "links";
+@import "icons";
+
+/* Typography for Arabic Font */
+
+html[lang="ar"],
+html[lang="ary"],
+html[lang="azb"],
+html[lang="fa-IR"],
+html[lang="haz"],
+html[lang="ps"],
+html[lang="ur"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-arabic;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+	}
+}
+
+/* Typography for Chinese Font */
+
+html[lang^="zh-"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-chinese;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+	}
+}
+
+html[lang="zh-CN"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-chinese-cn;
+	}
+}
+
+/* Typography for Cyrillic Font */
+
+html[lang="bg-BG"],
+html[lang="ru-RU"],
+html[lang="uk"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-cyrillic;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+		line-height: 1.2;
+	}
+}
+
+/* Typography for Devanagari Font */
+
+html[lang="bn-BD"],
+html[lang="hi-IN"],
+html[lang="mr-IN"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-devanagari;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+	}
+}
+
+/* Typography for Greek Font */
+
+html[lang="el"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-greek;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+		line-height: 1.3;
+	}
+}
+
+/* Typography for Gujarati Font */
+
+html[lang="gu-IN"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-gujarati;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+	}
+}
+
+/* Typography for Hebrew Font */
+
+html[lang="he-IL"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-hebrew;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+	}
+}
+
+/* Typography for Japanese Font */
+
+html[lang="ja"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-japanese;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+	}
+}
+
+/* Typography for Korean font */
+
+html[lang="ko-KR"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-family: $font__main-korean;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 600;
+	}
+}
+
+/* Typography for Thai Font */
+
+html[lang="th"] {
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		line-height: 1.8;
+		font-family: $font__main-thai;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		line-height: 1.65;
+		font-family: $font__main-thai;
+	}
+}
+
+/* Remove letter-spacing for all non-latin alphabets */
+
+html[lang="ar"] *,
+html[lang="ary"] *,
+html[lang="azb"] *,
+html[lang="haz"] *,
+html[lang="ps"] *,
+html[lang^="zh-"] *,
+html[lang="bg-BG"] *,
+html[lang="ru-RU"] *,
+html[lang="uk"] *,
+html[lang="bn-BD"] *,
+html[lang="hi-IN"] *,
+html[lang="mr-IN"] *,
+html[lang="el"] *,
+html[lang="gu-IN"] *,
+html[lang="he-IL"] *,
+html[lang="ja"] *,
+html[lang="ko-KR"] *,
+html[lang="th"] * {
+	letter-spacing: 0 !important;
+}
