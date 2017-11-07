@@ -3,7 +3,7 @@ p.has-background {
 }
 
 .wp-block-quote {
-	margin: 0 0 1.5em;
+	margin: 0 0 $spacing_vertical;
 	color: $color__text-quote;
 
 	footer {
@@ -38,6 +38,7 @@ p.has-background {
 .wp-block-button {
 	position: relative;
 	display: inline-block;
+	margin: 0 0 $spacing_vertical;
 	padding: 0.6em 1em;
 	height: auto;
 	color: $color__text-button;

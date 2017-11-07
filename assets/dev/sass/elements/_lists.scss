@@ -1,6 +1,6 @@
 ul,
 ol {
-	margin: 0 0 1.5em 3em;
+	margin: 0 0 $spacing_vertical;
 }
 
 ul {
@@ -14,7 +14,7 @@ ol {
 li > ul,
 li > ol {
 	margin-bottom: 0;
-	margin-left: 1.5em;
+	margin-left: $spacing_horizontal;
 }
 
 dt {
@@ -22,5 +22,5 @@ dt {
 }
 
 dd {
-	margin: 0 1.5em 1.5em;
+	margin: 0 $padding_horizontal $padding_vertical;
 }

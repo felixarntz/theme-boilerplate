@@ -3,6 +3,12 @@
 }
 
 .hentry {
+	margin: 0 0 $spacing_vertical-big;
+}
+
+.entry-header,
+.entry-content,
+.entry-footer {
 	margin: 0 0 $spacing_vertical;
 }
 

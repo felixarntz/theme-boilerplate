@@ -1,4 +1,31 @@
 table {
-	margin: 0 0 1.5em;
+	margin: 0 0 $spacing_vertical;
 	width: 100%;
+	border-collapse: collapse;
+}
+
+tr {
+	border-bottom: 1px solid $color__border-table;
+}
+
+th,
+td {
+	padding: (0.5 * $padding_vertical) (0.5 * $padding_horizontal);
+
+	thead & {
+		padding-bottom: $padding_vertical;
+		border-bottom: 2px solid #bbb;
+	}
+
+	&:first-child {
+		padding-left: 0;
+	}
+
+	&:last-child {
+		padding-right: 0;
+	}
+}
+
+th {
+	text-align: left;
 }

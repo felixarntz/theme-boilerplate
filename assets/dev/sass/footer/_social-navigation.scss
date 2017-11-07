@@ -5,6 +5,8 @@
 	@include text-center();
 	@include font-size(1);
 
+	margin-bottom: $spacing_vertical-big;
+
 	ul {
 		display: inline-block;
 		margin-bottom: 0;

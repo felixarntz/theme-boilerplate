@@ -1,3 +1,8 @@
+$color__black: #404040;
+$color__darkgray: #8f98a1;
+$color__lightgray: #ccc;
+$color__white: #fff;
+
 $color__primary: #21759b;
 $color__primary-light: #afe6ff;
 $color__success: #46b450;
@@ -9,9 +14,9 @@ $color__warning-light: #fff3d2;
 $color__error: #dc3232;
 $color__error-light: #ffdcdc;
 
-$color__background-body: #fff;
+$color__background-body: $color__white;
 $color__background-screen: #f1f1f1;
-$color__background-hr: #ccc;
+$color__background-hr: $color__lightgray;
 $color__background-button: #e6e6e6;
 $color__background-button-hover: darken($color__background-button, 8%);
 $color__background-button-primary: $color__primary;
@@ -19,18 +24,19 @@ $color__background-button-primary-hover: darken($color__background-button-primar
 $color__background-pre: #eee;
 $color__background-ins: #fff9c0;
 
-$color__text-main: #404040;
+$color__text-main: $color__black;
 $color__text-screen: $color__primary;
-$color__text-button: #666;
-$color__text-button-primary: #fff;
-$color__text-input: #666;
+$color__text-button: $color__black;
+$color__text-button-primary: $color__white;
+$color__text-input: $color__black;
 $color__text-input-focus: #111;
 $color__text-quote: $color__text-main;
-$color__text-quote-footer: #8f98a1;
+$color__text-quote-footer: $color__darkgray;
 $color__link: $color__primary;
 $color__link-visited: $color__link;
 $color__link-hover: darken($color__link, 8%);
 
-$color__border-input: #ccc;
-$color__border-abbr: #666;
-$color__border-quote: #666;
+$color__border-input: $color__lightgray;
+$color__border-abbr: $color__black;
+$color__border-quote: $color__black;
+$color__border-table: $color__darkgray;
