@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Theme Coding Standards">
+	<description>A custom set of code standard rules for Super Awesome Theme</description>
+
+	<arg value="psvn"/>
+	<arg name="extensions" value="php"/>
+
+	<file>.</file>
+
+	<rule ref="WordPress">
+		<exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" />
+		<exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect" />
+		<exclude name="PEAR.Functions.FunctionCallSignature.Indent" />
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array" value="super-awesome-theme" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.Files.FileName">
+		<properties>
+			<property name="is_theme" value="true" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.WP.DeprecatedFunctions">
+		<properties>
+			<property name="minimum_supported_version" value="4.7" />
+		</properties>
+	</rule>
+
+	<config name="testVersion" value="5.2-99.0"/>
+	<rule ref="PHPCompatibility"/>
+</ruleset>

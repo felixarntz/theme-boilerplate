@@ -107,7 +107,7 @@ var webpack         = require( 'webpack-stream' );
 gulp.task( 'default', [ 'sass', 'js', 'img', 'pot' ]);
 
 // build the theme
-gulp.task( 'build', [ 'readme-replace' ], function() {
+gulp.task( 'build', [ 'readme' ], function() {
 	gulp.start( 'default' );
 });
 
@@ -302,6 +302,7 @@ gulp.task( 'init-replace', function( done ) {
 		'./style-rtl.css',
 		'./gulpfile.js',
 		'./package.json',
+		'./phpcs.xml',
 		'./readme.txt'
 	];
 
