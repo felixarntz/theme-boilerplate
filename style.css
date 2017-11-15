@@ -1217,6 +1217,18 @@ select + span.field-notice {
 	clear: both;
 }
 
+body.no-sidebar .alignfull {
+	margin-right: -1rem;
+	margin-left: -1rem;
+}
+
+@media (min-width: 42rem) {
+	body.no-sidebar .entry-content .alignfull {
+		margin-right: calc(-100vw / 2 + 40rem / 2);
+		margin-left: calc(-100vw / 2 + 40rem / 2);
+	}
+}
+
 /* -------------------------------------------------------------
 # Layout
 ------------------------------------------------------------- */
@@ -1638,6 +1650,15 @@ body.left-sidebar .site {
 .entry-content,
 .entry-footer {
 	margin: 0 0 1em;
+}
+
+body.no-sidebar .entry-header,
+body.no-sidebar
+.entry-content,
+body.no-sidebar
+.entry-footer {
+	max-width: 40rem;
+	margin: 0 auto 1em;
 }
 
 .updated:not(.published) {

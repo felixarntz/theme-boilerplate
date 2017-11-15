@@ -15,3 +15,17 @@
 
 	clear: both;
 }
+
+.alignfull {
+	body.no-sidebar & {
+		margin-right: (- $padding_horizontal);
+		margin-left: (- $padding_horizontal);
+	}
+
+	body.no-sidebar .entry-content & {
+		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
+			margin-right: calc(-100vw / 2 + #{$site_maxwidth-text} / 2);
+			margin-left: calc(-100vw / 2 + #{$site_maxwidth-text} / 2);
+		}
+	}
+}

@@ -10,6 +10,11 @@
 .entry-content,
 .entry-footer {
 	margin: 0 0 $spacing_vertical;
+
+	body.no-sidebar & {
+		margin: 0 auto $spacing_vertical;
+		max-width: $site_maxwidth-text;
+	}
 }
 
 .updated:not(.published) {
