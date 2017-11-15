@@ -104,7 +104,7 @@ var webpack         = require( 'webpack-stream' );
 /* ---- MAIN TASKS ---- */
 
 // default task
-gulp.task( 'default', [ 'sass', 'js', 'img', 'pot' ]);
+gulp.task( 'default', [ 'sass', 'js', 'img', 'pot' ]);
 
 // build the theme
 gulp.task( 'build', [ 'readme' ], function() {
@@ -138,8 +138,11 @@ gulp.task( 'lint-sass', function( done ) {
 
 // compile Sass
 gulp.task( 'compile-sass', function( done ) {
-	gulp.src( './assets/dev/sass/style.scss' )
-		.pipe( replace( /^\/\*! \-\-\- Theme header will be inserted here automatically\. \-\-\- \*\//, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.author + '\n\n' + gplNote + '\n*/' ) )
+	gulp.src([
+		'./assets/dev/sass/style.scss',
+		'./assets/dev/sass/editor-style.scss',
+	])
+		.pipe( replace( /^\/\*! --- Theme header will be inserted here automatically\. --- \*\//, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.author + '\n\n' + gplNote + '\n*/' ) )
 		.pipe( sass({
 			errLogToConsole: true,
 			outputStyle: 'expanded',
@@ -156,7 +159,7 @@ gulp.task( 'compile-sass', function( done ) {
 		.pipe( gulp.dest( './' ) )
 		.pipe( rtlcss() )
 		.pipe( rename({
-			suffix: '-rtl'
+			suffix: '-rtl',
 		}) )
 		.pipe( gulp.dest( './' ) )
 		.on( 'end', done );
@@ -236,7 +239,7 @@ gulp.task( 'img', function( done ) {
 			}),
 			imageminMozjpeg({
 				quality: 75,
-			})
+			}),
 		]) )
 		.pipe( gulp.dest( './assets/dist/images/' ) )
 		.on( 'end', done );
@@ -263,8 +266,8 @@ gulp.task( 'pot', function( done ) {
 				'x-poedit-keywordslist': '__;_e;_x:1,2c;_ex:1,2c;_n:1,2; _nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__; esc_html__;esc_attr_e; esc_html_e;esc_attr_x:1,2c; esc_html_x:1,2c;',
 				'x-poedit-bookmars': '',
 				'x-poedit-searchpath-0': '.',
-				'x-textdomain-support': 'yes'
-			}
+				'x-textdomain-support': 'yes',
+			},
 		}) )
 		.pipe( gulp.dest( './languages/' + config.textDomain + '.pot' ) )
 		.on( 'end', done );
@@ -273,7 +276,7 @@ gulp.task( 'pot', function( done ) {
 // replace the theme header in readme.txt
 gulp.task( 'readme', function( done ) {
 	gulp.src( './readme.txt' )
-		.pipe( replace( /\=\=\= (.+) \=\=\=([\s\S]+)\=\= Description \=\=/m, '=== ' + config.themeName + ' ===\n\n' + readmeheader + '\n\n== Description ==' ) )
+		.pipe( replace( /=== (.+) ===([\s\S]+)== Description ==/m, '=== ' + config.themeName + ' ===\n\n' + readmeheader + '\n\n== Description ==' ) )
 		.pipe( gulp.dest( './' ) )
 		.on( 'end', done );
 });
@@ -288,7 +291,7 @@ gulp.task( 'init-replace', function( done ) {
 		'Super_Awesome_Theme': 'My_New_Theme_Name',
 		'Super Awesome Theme': 'My New Theme Name',
 		'SuperAwesomeTheme'  : 'MyNewThemeName',
-		'superAwesomeTheme'  : 'myNewThemeName'
+		'superAwesomeTheme'  : 'myNewThemeName',
 	};
 
 	var files = [
@@ -303,7 +306,7 @@ gulp.task( 'init-replace', function( done ) {
 		'./gulpfile.js',
 		'./package.json',
 		'./phpcs.xml',
-		'./readme.txt'
+		'./readme.txt',
 	];
 
 	gulp.src( files, { base: './' })

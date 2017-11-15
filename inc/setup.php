@@ -69,7 +69,7 @@ function super_awesome_theme_setup() {
 
 	// TODO: Add image sizes.
 
-	// TODO: Add editor style.
+	add_editor_style();
 }
 add_action( 'after_setup_theme', 'super_awesome_theme_setup' );
 
