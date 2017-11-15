@@ -251,6 +251,7 @@ gulp.task( 'pot', function( done ) {
 		'./*.php',
 		'./inc/**/*.php',
 		'./template-parts/**/*.php',
+		'./templates/**/*.php',
 	])
 		.pipe( sort() )
 		.pipe( wpPot({
@@ -298,6 +299,7 @@ gulp.task( 'init-replace', function( done ) {
 		'./*.php',
 		'./inc/**/*.php',
 		'./template-parts/**/*.php',
+		'./templates/**/*.php',
 		'./assets/dist/js/**/*.js',
 		'./assets/dev/js/**/*.js',
 		'./assets/dev/sass/style.scss',
