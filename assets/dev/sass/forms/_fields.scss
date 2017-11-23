@@ -101,3 +101,56 @@ input[type="checkbox"] {
 	color: $color__text-input-placeholder;
 	font-family: $font__main;
 }
+
+/* Special forms */
+
+input[type="search"].search-field {
+	display: block;
+	padding: (0.5 * $padding_vertical) (0.5 * $padding_horizontal);
+	width: auto;
+	float: left;
+	border: 1px solid $color__background-button;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+button.search-submit {
+	display: block;
+	padding: (0.5 * $padding_vertical) (0.5 * $padding_horizontal);
+	background-color: $color__background-button;
+	border: 1px solid $color__background-button;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.no-svg .search-submit .screen-reader-text {
+	@include override-screen-reader-text();
+}
+
+.page-login-form {
+	@include center-block();
+
+	body.no-sidebar & {
+		max-width: 20rem;
+	}
+
+	#loginform {
+		overflow: hidden;
+
+		.login-remember {
+			float: left;
+		}
+
+		.login-submit input[type="submit"] {
+			float: right;
+		}
+
+		+ .login-links {
+			@include font-size(0.9);
+		}
+	}
+
+	.login-links {
+		text-align: center;
+	}
+}

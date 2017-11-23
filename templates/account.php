@@ -29,7 +29,9 @@ get_header();
 
 					<?php wp_login_form(); ?>
 
-					<p class="login-lost-password">
+					<p class="login-links">
+						<a href="<?php echo esc_url( wp_registration_url() ); ?>"><?php esc_html_e( 'Register', 'super-awesome-theme' ); ?></a>
+						<span class="sep">|</span>
 						<a href="<?php echo esc_url( wp_lostpassword_url( get_permalink() ) ); ?>"><?php esc_html_e( 'Lost your password?', 'super-awesome-theme' ); ?></a>
 					</p>
 				</div>

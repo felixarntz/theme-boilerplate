@@ -1049,6 +1049,67 @@ input[type="checkbox"] + label {
 	font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
 }
 
+/* Special forms */
+input[type="search"].search-field {
+	display: block;
+	float: right;
+	width: auto;
+	padding: 0.375rem 0.5rem;
+	border: 1px solid #e6e6e6;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+button.search-submit {
+	display: block;
+	padding: 0.375rem 0.5rem;
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.no-svg .search-submit .screen-reader-text {
+	position: relative !important;
+	width: auto;
+	height: auto;
+	clip: auto;
+	font-size: 16px;
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.page-login-form {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body.no-sidebar .page-login-form {
+	max-width: 20rem;
+}
+
+.page-login-form #loginform {
+	overflow: hidden;
+}
+
+.page-login-form #loginform .login-remember {
+	float: right;
+}
+
+.page-login-form #loginform .login-submit input[type="submit"] {
+	float: left;
+}
+
+.page-login-form #loginform + .login-links {
+	font-size: 14.4px;
+	font-size: 0.9rem;
+}
+
+.page-login-form .login-links {
+	text-align: center;
+}
+
 .notice {
 	padding: 0.5em 1em;
 	margin-bottom: 1em;

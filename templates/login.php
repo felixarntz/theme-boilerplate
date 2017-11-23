@@ -21,22 +21,30 @@ get_header();
 			if ( ! is_user_logged_in() ) :
 				?>
 				<div class="page-login-form">
+					<?php if ( isset( $_GET['loggedout'] ) && 'true' === $_GET['loggedout'] ) : ?>
+						<div class="notice notice-info">
+							<p><?php esc_html_e( 'You are now logged out.', 'super-awesome-theme' ); ?></p>
+						</div>
+					<?php endif; ?>
+
 					<?php
 					wp_login_form( array(
 						'redirect' => admin_url(),
 					) );
 					?>
 
-					<p class="login-lost-password">
-						<a href="<?php echo esc_url( wp_lostpassword_url( admin_url() ) ); ?>"><?php esc_html_e( 'Lost your password?', 'super-awesome-theme' ); ?></a>
+					<p class="login-links">
+						<a href="<?php echo esc_url( wp_registration_url() ); ?>"><?php esc_html_e( 'Register', 'super-awesome-theme' ); ?></a>
+						<span class="sep">|</span>
+						<a href="<?php echo esc_url( wp_lostpassword_url( get_permalink() ) ); ?>"><?php esc_html_e( 'Lost your password?', 'super-awesome-theme' ); ?></a>
 					</p>
 				</div>
 				<?php
 			else :
 				?>
 				<div class="page-login-form">
-					<p class="login-logout">
-						<a href="<?php echo esc_url( wp_logout_url( get_permalink() ) ); ?>"><?php esc_html_e( 'Lost your password?', 'super-awesome-theme' ); ?></a>
+					<p class="login-links">
+						<a href="<?php echo esc_url( wp_logout_url( add_query_arg( 'loggedout', 'true', get_permalink() ) ) ); ?>"><?php esc_html_e( 'Logout', 'super-awesome-theme' ); ?></a>
 					</p>
 				</div>
 				<?php
