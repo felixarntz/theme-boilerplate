@@ -97,3 +97,19 @@ function super_awesome_theme_excerpt_more() {
 	return ' &hellip; ' . $link;
 }
 add_filter( 'excerpt_more', 'super_awesome_theme_excerpt_more' );
+
+/**
+ * Disable core styles for the special 'wp-signup.php' and 'wp-activate.php' pages.
+ *
+ * @since 1.0.0
+ *
+ * @param string $name Identifier of the header to load.
+ */
+function super_awesome_theme_disable_special_page_styles( $name ) {
+	if ( 'wp-signup' === $name ) {
+		remove_action( 'wp_head', 'wpmu_signup_stylesheet' );
+	} elseif ( 'wp-activate' === $name ) {
+		remove_action( 'wp_head', 'wpmu_activate_stylesheet' );
+	}
+}
+add_action( 'get_header', 'super_awesome_theme_disable_special_page_styles' );
