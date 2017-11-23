@@ -2,7 +2,7 @@
 /**
  * Template Name: Account Page
  *
- * The account page template requires the user to be logged-in.
+ * The account page template requires the user to be logged-in to view the page content.
  *
  * @package Super_Awesome_Theme
  * @license GPL-3.0

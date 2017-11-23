@@ -332,12 +332,22 @@ function super_awesome_theme_get_navigation_name() {
  *
  * @since 1.0.0
  *
+ * @global string $pagenow Current WordPress file.
+ *
  * @return bool True if the current page should be displayed in distraction-free mode, false otherwise.
  */
 function super_awesome_theme_is_distraction_free() {
+	global $pagenow;
+
 	$result = false;
 
 	if ( is_page_template( 'templates/distraction-free.php' ) ) {
+		$result = true;
+	} elseif ( is_page_template( 'templates/login.php' ) ) {
+		$result = true;
+	} elseif ( 'wp-signup.php' === $pagenow ) {
+		$result = true;
+	} elseif ( 'wp-activate.php' === $pagenow ) {
 		$result = true;
 	}
 
