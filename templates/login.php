@@ -34,8 +34,10 @@ get_header();
 					?>
 
 					<p class="login-links">
-						<a href="<?php echo esc_url( wp_registration_url() ); ?>"><?php esc_html_e( 'Register', 'super-awesome-theme' ); ?></a>
-						<span class="sep">|</span>
+						<?php if ( get_option( 'users_can_register' ) ) : ?>
+							<a href="<?php echo esc_url( wp_registration_url() ); ?>"><?php esc_html_e( 'Register', 'super-awesome-theme' ); ?></a>
+							<span class="sep">|</span>
+						<?php endif; ?>
 						<a href="<?php echo esc_url( wp_lostpassword_url( get_permalink() ) ); ?>"><?php esc_html_e( 'Lost your password?', 'super-awesome-theme' ); ?></a>
 					</p>
 				</div>
