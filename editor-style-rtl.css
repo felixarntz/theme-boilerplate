@@ -1020,6 +1020,7 @@ input[type="checkbox"] {
 
 input[type="radio"] + label,
 input[type="checkbox"] + label {
+	display: inline-block;
 	font-weight: 400;
 }
 
