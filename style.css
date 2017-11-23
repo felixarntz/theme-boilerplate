@@ -1186,6 +1186,38 @@ button.search-submit {
 	font-weight: 400;
 }
 
+.post-password-form {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+body.no-sidebar .post-password-form {
+	max-width: 20rem;
+}
+
+.post-password-form input[type="submit"] {
+	color: #fff;
+	background-color: #21759b;
+}
+
+.post-password-form input[type="submit"]:visited {
+	color: #fff;
+}
+
+.post-password-form input[type="submit"]:hover,
+.post-password-form input[type="submit"]:focus {
+	background-color: #1a5c79;
+}
+
+.post-password-form p:last-child {
+	overflow: hidden;
+}
+
+.post-password-form p:last-child input[type="submit"] {
+	float: right;
+}
+
 .page-login-form {
 	display: block;
 	margin-right: auto;

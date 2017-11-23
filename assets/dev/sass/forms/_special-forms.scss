@@ -21,6 +21,36 @@ button.search-submit {
 	@include override-screen-reader-text();
 }
 
+.post-password-form {
+	@include center-block();
+
+	body.no-sidebar & {
+		max-width: 20rem;
+	}
+
+	input[type="submit"] {
+		color: $color__text-button-primary;
+		background-color: $color__background-button-primary;
+
+		&:visited {
+			color: $color__text-button-primary;
+		}
+
+		&:hover,
+		&:focus {
+			background-color: $color__background-button-primary-hover;
+		}
+	}
+
+	p:last-child {
+		overflow: hidden;
+
+		input[type="submit"] {
+			float: right;
+		}
+	}
+}
+
 .page-login-form {
 	@include center-block();
 
