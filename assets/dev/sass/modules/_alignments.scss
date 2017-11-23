@@ -1,19 +1,33 @@
 .alignleft {
 	display: inline;
 	float: left;
-	margin-right: 1.5em;
+	margin-right: $spacing_horizontal;
 }
 
 .alignright {
 	display: inline;
 	float: right;
-	margin-left: 1.5em;
+	margin-left: $spacing_horizontal;
 }
 
 .aligncenter {
 	@include center-block;
 
 	clear: both;
+}
+
+.alignwide {
+	body.no-sidebar .entry-content & {
+		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
+			margin-right: calc(-100vw / 2 + #{$site_maxwidth-text} / 2 + #{$padding_horizontal});
+			margin-left: calc(-100vw / 2 + #{$site_maxwidth-text} / 2 + #{$padding_horizontal});
+		}
+
+		@media (min-width: ($site_maxwidth)) {
+			margin-right: (- ($site_maxwidth - $site_maxwidth-text) / 2 + $padding_horizontal);
+			margin-left: (- ($site_maxwidth - $site_maxwidth-text) / 2 + $padding_horizontal);
+		}
+	}
 }
 
 .alignfull {

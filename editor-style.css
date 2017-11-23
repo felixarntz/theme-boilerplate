@@ -1347,13 +1347,13 @@ body.no-sidebar
 .alignleft {
 	display: inline;
 	float: left;
-	margin-right: 1.5em;
+	margin-right: 1em;
 }
 
 .alignright {
 	display: inline;
 	float: right;
-	margin-left: 1.5em;
+	margin-left: 1em;
 }
 
 .aligncenter {
@@ -1361,6 +1361,20 @@ body.no-sidebar
 	margin-right: auto;
 	margin-left: auto;
 	clear: both;
+}
+
+@media (min-width: 42rem) {
+	body.no-sidebar .entry-content .alignwide {
+		margin-right: calc(-100vw / 2 + 40rem / 2 + 1rem);
+		margin-left: calc(-100vw / 2 + 40rem / 2 + 1rem);
+	}
+}
+
+@media (min-width: 72rem) {
+	body.no-sidebar .entry-content .alignwide {
+		margin-right: -15rem;
+		margin-left: -15rem;
+	}
 }
 
 body.no-sidebar .alignfull {
