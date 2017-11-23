@@ -995,6 +995,7 @@ label {
 	display: block;
 	margin-bottom: 0.5em;
 	font-weight: 800;
+	cursor: pointer;
 }
 
 input[type="text"],
@@ -1050,6 +1051,7 @@ select {
 input[type="radio"],
 input[type="checkbox"] {
 	margin-right: 0.5em;
+	cursor: pointer;
 }
 
 input[type="radio"] + label,

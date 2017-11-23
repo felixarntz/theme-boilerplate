@@ -29,6 +29,7 @@ label {
 	display: block;
 	margin-bottom: (0.5 * $spacing_vertical);
 	font-weight: 800;
+	cursor: pointer;
 }
 
 input[type="text"],
@@ -69,6 +70,7 @@ select {
 input[type="radio"],
 input[type="checkbox"] {
 	margin-right: (0.5 * $spacing_horizontal);
+	cursor: pointer;
 
 	+ label {
 		display: inline-block;
