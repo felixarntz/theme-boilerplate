@@ -25,7 +25,10 @@ Styles based on Normalize v5.0.0 @link https://github.com/necolas/normalize.css
 # Editor
 ------------------------------------------------------------- */
 body {
-	margin: 20px 40px;
+	margin: $padding_vertical auto;
+	padding-right: $padding_horizontal;
+	padding-left: $padding_horizontal;
+	max-width: $site_maxwidth-text;
 }
 
 /* -------------------------------------------------------------

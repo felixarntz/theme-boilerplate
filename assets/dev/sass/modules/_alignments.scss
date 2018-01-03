@@ -17,7 +17,8 @@
 }
 
 .alignwide {
-	body.no-sidebar .entry-content & {
+	body.no-sidebar .entry-content &,
+	body.mce-content-body & {
 		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
 			margin-right: calc(-100vw / 2 + #{$site_maxwidth-text} / 2 + #{$padding_horizontal});
 			margin-left: calc(-100vw / 2 + #{$site_maxwidth-text} / 2 + #{$padding_horizontal});
@@ -31,12 +32,14 @@
 }
 
 .alignfull {
-	body.no-sidebar & {
+	body.no-sidebar &,
+	body.mce-content-body & {
 		margin-right: (- $padding_horizontal);
 		margin-left: (- $padding_horizontal);
 	}
 
-	body.no-sidebar .entry-content & {
+	body.no-sidebar .entry-content &,
+	body.mce-content-body & {
 		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
 			margin-right: calc(-100vw / 2 + #{$site_maxwidth-text} / 2);
 			margin-left: calc(-100vw / 2 + #{$site_maxwidth-text} / 2);
