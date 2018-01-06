@@ -13,7 +13,7 @@
  * @since 1.0.0
  */
 function super_awesome_theme_enqueue_assets() {
-	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '': '.min';
+	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 	wp_enqueue_style( 'super-awesome-theme-style', get_stylesheet_uri(), array(), SUPER_AWESOME_THEME_VERSION );
 	wp_style_add_data( 'super-awesome-theme-style', 'rtl', 'replace' );
@@ -38,6 +38,7 @@ function super_awesome_theme_enqueue_assets() {
 				'processing'    => __( 'Processing...', 'super-awesome-theme' ),
 				'badResponse'   => __( 'Bad response code.', 'super-awesome-theme' ),
 				'invalidJson'   => __( 'Invalid JSON response.', 'super-awesome-theme' ),
+				/* translators: %s: edit comment URL */
 				'flood'         => sprintf( __( 'Your comment was either a duplicate or you are posting too rapidly. <a href="%s">Edit your comment</a>', 'super-awesome-theme' ), '#comment' ),
 				'error'         => __( 'There were errors in submitting your comment; complete the missing fields and try again!', 'super-awesome-theme' ),
 				'emailInvalid'  => __( 'This email address appears to be invalid.', 'super-awesome-theme' ),
@@ -106,6 +107,7 @@ function super_awesome_theme_handle_ajax_comment( $id, $status ) {
 			if ( '0' === (string) $status ) {
 				$message = __( 'Thanks for commenting! Your comment has been sent for moderation and should be approved soon.', 'super-awesome-theme' );
 			} else {
+				/* translators: %s: comment URL */
 				$message = sprintf( __( 'Thanks for commenting! Your comment has been approved. <a href="%s">Read your comment</a>', 'super-awesome-theme' ), "#comment-$id" );
 			}
 
@@ -172,7 +174,7 @@ function super_awesome_theme_render_comment( $comment, $args, $depth = 0, $close
 
 	$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
 
-	echo '<' . $tag . ' id="comment-' . get_comment_ID() . '" ' . comment_class( $has_children ? 'parent' : '', $comment, null, false ) . '>' . "\n";
+	echo '<' . $tag . ' id="' . esc_attr( 'comment-' . get_comment_ID() ) . '" ' . comment_class( $has_children ? 'parent' : '', $comment, null, false ) . '>' . "\n"; // WPCS: XSS OK.
 
 	if ( ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) && $args['short_ping'] ) {
 		get_template_part( 'template-parts/content/ping', $comment->comment_type );
@@ -181,7 +183,7 @@ function super_awesome_theme_render_comment( $comment, $args, $depth = 0, $close
 	}
 
 	if ( $close ) {
-		echo '</' . $tag . '><!-- #comment-' . get_comment_ID() . ' -->' . "\n";
+		echo '</' . $tag . '><!-- #' . esc_attr( 'comment-' . get_comment_ID() ) . ' -->' . "\n"; // WPCS: XSS OK.
 	}
 
 	if ( $reset_global_comment ) {

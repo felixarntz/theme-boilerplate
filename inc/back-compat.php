@@ -33,8 +33,9 @@ add_action( 'after_switch_theme', 'super_awesome_theme_switch_theme' );
  * @global string $wp_version WordPress version.
  */
 function super_awesome_theme_upgrade_notice() {
+	/* translators: %s: WordPress version number */
 	$message = sprintf( __( 'Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'super-awesome-theme' ), $GLOBALS['wp_version'] );
-	printf( '<div class="error"><p>%s</p></div>', $message );
+	printf( '<div class="error"><p>%s</p></div>', esc_html( $message ) );
 }
 
 /**
@@ -45,7 +46,8 @@ function super_awesome_theme_upgrade_notice() {
  * @global string $wp_version WordPress version.
  */
 function super_awesome_theme_customize() {
-	wp_die( sprintf( __( 'Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'super-awesome-theme' ), $GLOBALS['wp_version'] ), '', array(
+	/* translators: %s: WordPress version number */
+	wp_die( esc_html( sprintf( __( 'Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'super-awesome-theme' ), $GLOBALS['wp_version'] ) ), '', array(
 		'back_link' => true,
 	) );
 }
@@ -60,7 +62,8 @@ add_action( 'load-customize.php', 'super_awesome_theme_customize' );
  */
 function super_awesome_theme_preview() {
 	if ( isset( $_GET['preview'] ) ) {
-		wp_die( sprintf( __( 'Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'super-awesome-theme' ), $GLOBALS['wp_version'] ) );
+		/* translators: %s: WordPress version number */
+		wp_die( esc_html( sprintf( __( 'Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'super-awesome-theme' ), $GLOBALS['wp_version'] ) ) );
 	}
 }
 add_action( 'template_redirect', 'super_awesome_theme_preview' );
