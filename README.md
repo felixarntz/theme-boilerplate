@@ -1,6 +1,6 @@
 # Super Awesome Theme (Boilerplate)
 
-This is my personal theme boilerplate, initially based on \_s, partly inspired by Twenty Seventeen, with lots of additional features.
+This is my personal theme boilerplate, initially based on [\_s](http://underscores.me/), partly inspired by [Twenty Seventeen](https://wordpress.org/themes/twentyseventeen/), with lots of additional features.
 
 ## Features
 
@@ -46,12 +46,12 @@ The following is a non-comprehensive list of features in addition to everything 
 * Editor style mimicking the frontend layout
 * Styling of special multisite pages `wp-signup.php` and `wp-activate.php`
 * Plugin support for the following:
-    * Easy Digital Downloads
-    * (Gutenberg, but that will soon not be a plugin anymore)
-    * Jetpack
-    * Torro Forms
-    * WooCommerce
-    * WP Subtitle
+    * [Easy Digital Downloads](https://wordpress.org/plugins/easy-digital-downloads/)
+    * [(Gutenberg, but that will soon not be a plugin anymore)](https://wordpress.org/plugins/gutenberg/)
+    * [Jetpack](https://wordpress.org/plugins/jetpack/)
+    * [Torro Forms](https://wordpress.org/plugins/torro-forms/)
+    * [WooCommerce](https://wordpress.org/plugins/woocommerce/)
+    * [WP Subtitle](https://wordpress.org/plugins/wp-subtitle/)
 
 ## Getting Started
 
