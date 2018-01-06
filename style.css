@@ -2230,6 +2230,27 @@ p.has-background {
 	cursor: pointer;
 }
 
+.wp-block-image.alignwide,
+.wp-block-image.alignfull,
+.wp-block-embed.alignwide,
+.wp-block-embed.alignfull {
+	text-align: center;
+}
+
+.wp-block-embed.is-video {
+	position: relative;
+	height: 0;
+	padding-top: 56.25%;
+}
+
+.wp-block-embed.is-video > iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 /* -------------------------------------------------------------
 ## Torro Forms
 ------------------------------------------------------------- */
