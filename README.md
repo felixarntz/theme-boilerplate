@@ -54,6 +54,10 @@ The following is a non-comprehensive list of features in addition to everything 
     * [WooCommerce](https://wordpress.org/plugins/woocommerce/)
     * [WP Subtitle](https://wordpress.org/plugins/wp-subtitle/)
 
+## Requirements
+
+Minimum WordPress version: 4.7
+
 ## Getting Started
 
 To create your own theme, download this repository. For the next steps, let's assume your theme should be called `Taco World`.
