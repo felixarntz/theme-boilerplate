@@ -39,6 +39,7 @@ The following is a non-comprehensive list of features in addition to everything 
 * Accessible primary navigation with keyboard
 * Granular and organized template part files for easy tweaking / overriding in a child theme
 * Flexible whether template parts should be loaded per post type and/or post format
+* Dedicated template part for comments
 * Graceful fallback if minimum required WordPress version is not being used
 * Easy-to-use Gulp workflow for linting and compiling assets
 * ES6 JavaScript
