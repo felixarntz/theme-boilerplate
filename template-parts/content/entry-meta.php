@@ -4,7 +4,7 @@
  *
  * @package Super_Awesome_Theme
  * @license GPL-3.0
- * @link    https://www.taco-themes.com/themes/super-awesome-theme/
+ * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
 $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';

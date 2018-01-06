@@ -7,23 +7,18 @@
     "theme"
   ],
   "author": {
-    "name": "Taco Themes",
-    "email": "hello@taco-themes.com",
-    "url": "https://www.taco-themes.com"
+    "name": "Super Awesome Author",
+    "email": "info@super-awesome-author.org",
+    "url": "https://super-awesome-author.org"
   },
   "contributors": [
     {
       "name": "Felix Arntz",
       "email": "felix-arntz@leaves-and-love.net",
       "url": "https://leaves-and-love.net"
-    },
-    {
-      "name": "Phillip Roth",
-      "email": "phillip@philliproth.de",
-      "url": "https://www.philliproth.de/"
     }
   ],
-  "homepage": "https://www.taco-themes.com/themes/super-awesome-theme/",
+  "homepage": "https://super-awesome-author.org/themes/super-awesome-theme/",
   "repository": {
     "type": "git",
     "url": "git://github.com/taco-themes/super-awesome-theme.git"

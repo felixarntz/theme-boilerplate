@@ -35,7 +35,7 @@ Super Awesome Theme supports the following plugins:
 
 == Copyright ==
 
-Super Awesome Theme WordPress Theme, Copyright (C) 2017 Taco Themes
+Super Awesome Theme WordPress Theme, Copyright (C) 2017 Super Awesome Author
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

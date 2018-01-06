@@ -1,4 +1,4 @@
-# Copyright (C) 2017 super-awesome-theme
+# Copyright (C) 2018 super-awesome-theme
 # This file is distributed under the same license as the super-awesome-theme package.
 msgid ""
 msgstr ""

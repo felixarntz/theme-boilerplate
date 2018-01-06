@@ -4,7 +4,7 @@
  *
  * @package Super_Awesome_Theme
  * @license GPL-3.0
- * @link    https://www.taco-themes.com/themes/super-awesome-theme/
+ * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
 ?>
@@ -16,6 +16,6 @@
 	<span class="sep"> | </span>
 	<?php
 		/* translators: 1: Theme name, 2: Theme author. */
-		printf( esc_html__( 'Theme: %1$s by %2$s.', 'super-awesome-theme' ), 'Super Awesome Theme', '<a href="https://www.taco-themes.com">Taco Themes</a>' );
+		printf( esc_html__( 'Theme: %1$s by %2$s.', 'super-awesome-theme' ), 'Super Awesome Theme', '<a href="https://super-awesome-author.org">Super Awesome Author</a>' );
 	?>
 </div><!-- .site-info -->

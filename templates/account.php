@@ -6,7 +6,7 @@
  *
  * @package Super_Awesome_Theme
  * @license GPL-3.0
- * @link    https://www.taco-themes.com/themes/super-awesome-theme/
+ * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
 get_header();

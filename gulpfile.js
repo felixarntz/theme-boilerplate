@@ -1,8 +1,8 @@
 /* ---- THE FOLLOWING CONFIG SHOULD BE EDITED ---- */
 
-var pkg = require( './package.json' );
+const pkg = require( './package.json' );
 
-var tags = [
+const tags = [
 	'one-column',
 	'two-columns',
 	'left-sidebar',
@@ -26,7 +26,7 @@ var tags = [
 	'translation-ready'
 ];
 
-var config = {
+const config = {
 	textDomain: 'super-awesome-theme',
 	domainPath: '/languages/',
 	themeName: 'Super Awesome Theme',
@@ -40,14 +40,14 @@ var config = {
 	tags: tags.join( ', ' ),
 	contributors: [ 'flixos90', 'philliproth' ].join( ', ' ),
 	minRequired: '4.7',
-	testedUpTo: '4.8',
+	testedUpTo: '4.9',
 	translateURI: 'https://translate.wordpress.org/projects/wp-themes/super-awesome-theme'
 };
 
 /* ---- DO NOT EDIT BELOW THIS LINE ---- */
 
 // WP theme header for style.css
-var themeheader =	'Theme Name: ' + config.themeName + '\n' +
+const themeheader =	'Theme Name: ' + config.themeName + '\n' +
 					'Theme URI: ' + config.themeURI + '\n' +
 					'Author: ' + config.author + '\n' +
 					'Author URI: ' + config.authorURI + '\n' +
@@ -60,7 +60,7 @@ var themeheader =	'Theme Name: ' + config.themeName + '\n' +
 					'Tags: ' + config.tags;
 
 // WP theme header for readme.txt
-var readmeheader =	'Contributors: ' + config.contributors + '\n' +
+const readmeheader =	'Contributors: ' + config.contributors + '\n' +
 					'Stable tag: ' + config.version + '\n' +
 					'Version: ' + config.version + '\n' +
 					'Requires at least: ' + config.minRequired + '\n' +
@@ -69,7 +69,7 @@ var readmeheader =	'Contributors: ' + config.contributors + '\n' +
 					'License URI: ' + config.licenseURI + '\n' +
 					'Tags: ' + config.tags;
 
-var gplNote =	'This program is free software: you can redistribute it and/or modify\n' +
+const gplNote =	'This program is free software: you can redistribute it and/or modify\n' +
 				'it under the terms of the GNU General Public License as published by\n' +
 				'the Free Software Foundation, either version 3 of the License, or\n' +
 				'(at your option) any later version.\n\n' +
@@ -81,25 +81,25 @@ var gplNote =	'This program is free software: you can redistribute it and/or mod
 
 /* ---- REQUIRED DEPENDENCIES ---- */
 
-var gulp = require( 'gulp' );
+const gulp = require( 'gulp' );
 
-var autoprefixer = require( 'gulp-autoprefixer' );
-var babel        = require( 'gulp-babel' );
-var csscomb      = require( 'gulp-csscomb' );
-var eslint       = require( 'gulp-eslint' );
-var imagemin     = require( 'gulp-imagemin' );
-var jscs         = require( 'gulp-jscs' );
-var rename       = require( 'gulp-rename' );
-var replace      = require( 'gulp-replace' );
-var rtlcss       = require( 'gulp-rtlcss' );
-var sass         = require( 'gulp-sass' );
-var sort         = require( 'gulp-sort' );
-var stylelint    = require( 'gulp-stylelint' );
-var uglify       = require( 'gulp-uglify' );
-var wpPot        = require( 'gulp-wp-pot' );
+const autoprefixer = require( 'gulp-autoprefixer' );
+const babel        = require( 'gulp-babel' );
+const csscomb      = require( 'gulp-csscomb' );
+const eslint       = require( 'gulp-eslint' );
+const imagemin     = require( 'gulp-imagemin' );
+const jscs         = require( 'gulp-jscs' );
+const rename       = require( 'gulp-rename' );
+const replace      = require( 'gulp-replace' );
+const rtlcss       = require( 'gulp-rtlcss' );
+const sass         = require( 'gulp-sass' );
+const sort         = require( 'gulp-sort' );
+const stylelint    = require( 'gulp-stylelint' );
+const uglify       = require( 'gulp-uglify' );
+const wpPot        = require( 'gulp-wp-pot' );
 
-var imageminMozjpeg = require( 'imagemin-mozjpeg' );
-var webpack         = require( 'webpack-stream' );
+const imageminMozjpeg = require( 'imagemin-mozjpeg' );
+const webpack         = require( 'webpack-stream' );
 
 /* ---- MAIN TASKS ---- */
 
@@ -107,7 +107,7 @@ var webpack         = require( 'webpack-stream' );
 gulp.task( 'default', [ 'sass', 'js', 'img', 'pot' ]);
 
 // build the theme
-gulp.task( 'build', [ 'readme' ], function() {
+gulp.task( 'build', [ 'readme' ], () => {
 	gulp.start( 'default' );
 });
 
@@ -123,7 +123,7 @@ gulp.task( 'js', [ 'lint-js', 'compile-js' ]);
 /* ---- SUB TASKS ---- */
 
 // lint Sass
-gulp.task( 'lint-sass', function( done ) {
+gulp.task( 'lint-sass', done => {
 	gulp.src( './assets/dev/sass/**/*.scss' )
 		.pipe( stylelint({
 			reporters: [
@@ -137,7 +137,7 @@ gulp.task( 'lint-sass', function( done ) {
 });
 
 // compile Sass
-gulp.task( 'compile-sass', function( done ) {
+gulp.task( 'compile-sass', done => {
 	gulp.src([
 		'./assets/dev/sass/style.scss',
 		'./assets/dev/sass/editor-style.scss',
@@ -166,7 +166,7 @@ gulp.task( 'compile-sass', function( done ) {
 });
 
 // lint JavaScript
-gulp.task( 'lint-js', function( done ) {
+gulp.task( 'lint-js', done => {
 	gulp.src( './assets/dev/js/**/*.js' )
 		.pipe( eslint() )
 		.pipe( eslint.format() )
@@ -177,7 +177,7 @@ gulp.task( 'lint-js', function( done ) {
 });
 
 // compile JavaScript
-gulp.task( 'compile-js', function( done ) {
+gulp.task( 'compile-js', done => {
 	gulp.src( './assets/dev/js/theme.js' )
 		.pipe( webpack({
 			entry: {
@@ -204,7 +204,7 @@ gulp.task( 'compile-js', function( done ) {
 });
 
 // minify images
-gulp.task( 'img', function( done ) {
+gulp.task( 'img', done => {
 	gulp.src([
 			'./assets/dev/images/**/*.gif',
 			'./assets/dev/images/**/*.jpg',
@@ -246,7 +246,7 @@ gulp.task( 'img', function( done ) {
 });
 
 // generate POT file
-gulp.task( 'pot', function( done ) {
+gulp.task( 'pot', done => {
 	gulp.src([
 		'./*.php',
 		'./inc/**/*.php',
@@ -275,7 +275,7 @@ gulp.task( 'pot', function( done ) {
 });
 
 // replace the theme header in readme.txt
-gulp.task( 'readme', function( done ) {
+gulp.task( 'readme', done => {
 	gulp.src( './readme.txt' )
 		.pipe( replace( /=== (.+) ===([\s\S]+)== Description ==/m, '=== ' + config.themeName + ' ===\n\n' + readmeheader + '\n\n== Description ==' ) )
 		.pipe( gulp.dest( './' ) )
@@ -284,18 +284,21 @@ gulp.task( 'readme', function( done ) {
 
 /* ---- INITIAL SETUP TASK: Change the replacements, run the command once and then delete it from here ---- */
 
-gulp.task( 'init-replace', function( done ) {
-	var replacements = {
-		'super-awesome-theme': 'my-new-theme-name',
-		'SUPER_AWESOME_THEME': 'MY_NEW_THEME_NAME',
-		'super_awesome_theme': 'my_new_theme_name',
-		'Super_Awesome_Theme': 'My_New_Theme_Name',
-		'Super Awesome Theme': 'My New Theme Name',
-		'SuperAwesomeTheme'  : 'MyNewThemeName',
-		'superAwesomeTheme'  : 'myNewThemeName',
+gulp.task( 'init-replace', done => {
+	const replacements = {
+		'super-awesome-theme'             : 'my-new-theme-name',
+		'SUPER_AWESOME_THEME'             : 'MY_NEW_THEME_NAME',
+		'super_awesome_theme'             : 'my_new_theme_name',
+		'Super_Awesome_Theme'             : 'My_New_Theme_Name',
+		'Super Awesome Theme'             : 'My New Theme Name',
+		'SuperAwesomeTheme'               : 'MyNewThemeName',
+		'superAwesomeTheme'               : 'myNewThemeName',
+		'Super Awesome Author'            : 'My Author',
+		'info@super-awesome-author.org'   : 'info@my-author.org',
+		'https://super-awesome-author.org': 'https://my-author.org',
 	};
 
-	var files = [
+	const files = [
 		'./*.php',
 		'./inc/**/*.php',
 		'./template-parts/**/*.php',
@@ -311,14 +314,12 @@ gulp.task( 'init-replace', function( done ) {
 		'./readme.txt',
 	];
 
-	gulp.src( files, { base: './' })
-		.pipe( replace( 'super-awesome-theme', replacements['super-awesome-theme'] ) )
-		.pipe( replace( 'SUPER_AWESOME_THEME', replacements['SUPER_AWESOME_THEME'] ) )
-		.pipe( replace( 'super_awesome_theme', replacements['super_awesome_theme'] ) )
-		.pipe( replace( 'Super_Awesome_Theme', replacements['Super_Awesome_Theme'] ) )
-		.pipe( replace( 'Super Awesome Theme', replacements['Super Awesome Theme'] ) )
-		.pipe( replace( 'SuperAwesomeTheme',   replacements['SuperAwesomeTheme'] ) )
-		.pipe( replace( 'superAwesomeTheme',   replacements['superAwesomeTheme'] ) )
-		.pipe( gulp.dest( './' ) )
+	let task = gulp.src( files, { base: './' });
+
+	Object.keys( replacements ).forEach( key => {
+		task = task.pipe( replace( key, replacements[ key ] ) );
+	});
+
+	task.pipe( gulp.dest( './' ) )
 		.on( 'end', done );
 });
