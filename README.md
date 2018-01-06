@@ -2,6 +2,57 @@
 
 This is my personal theme boilerplate, initially based on \_s, partly inspired by Twenty Seventeen, with lots of additional features.
 
+## Features
+
+The following is a non-comprehensive list of features in addition to everything that \_s supports (or will support soon):
+
+* Very lightweight: No jQuery anywhere, only 1 CSS and 1 JavaScript asset to load in a regular request
+* Usage of CSS Grid and Flexbox, thus less unnecessary `div`s
+* SVG icon set loaded in the footer, with an easy-to-use utility function to print icons in an accessible way
+* Gutenberg supported
+* Full Customizer support, mostly with JavaScript-powered live previews
+* Dynamic detection of post type support for different features and taxonomies
+* Customizer panel for content type options: For each post type, it can be individually decided whether information like date, author, taxonomies etc. should be displayed or not
+* Customizer section for sidebar settings, with three sidebar modes:
+    * No Sidebar
+    * Left Sidebar
+    * Right Sidebar
+* "Distraction Free Mode": Particularly useful for very focused pages (like a login page or a checkout page), the view is rendered with fewer distractions:
+    * No sidebar
+    * No footer widgets
+    * Alternative site navigation menu
+* Templates:
+    * Full Width (no sidebar, regardless of global setting)
+    * Distraction Free (as described above)
+    * Account (page that is restricted to logged-in users)
+    * Login (shows a login form)
+* Menus:
+    * Primary Menu
+    * Primary Menu (Distraction-Free)
+    * Social Links Menu
+    * Footer Menu
+* Sidebars:
+    * Primary Sidebar
+    * Blog Sidebar (can be enabled/disabled)
+    * 3 Footer Widget Areas
+* AJAX-powered comment submissions
+* Accessible primary navigation with keyboard
+* Granular and organized template part files for easy tweaking / overriding in a child theme
+* Flexible whether template parts should be loaded per post type and/or post format
+* Graceful fallback if minimum required WordPress version is not being used
+* Easy-to-use Gulp workflow for linting and compiling assets
+* ES6 JavaScript
+* Reusable CSS classes for typical elements
+* Editor style mimicking the frontend layout
+* Styling of special multisite pages `wp-signup.php` and `wp-activate.php`
+* Plugin support for the following:
+    * Easy Digital Downloads
+    * (Gutenberg, but that will soon not be a plugin anymore)
+    * Jetpack
+    * Torro Forms
+    * WooCommerce
+    * WP Subtitle
+
 ## Getting Started
 
 To create your own theme, download this repository. For the next steps, let's assume your theme should be called `Taco World`.
