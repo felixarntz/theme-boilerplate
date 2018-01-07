@@ -4,13 +4,13 @@ This is my personal theme boilerplate, initially based on [\_s](http://underscor
 
 ## Features
 
-The following is a non-comprehensive list of features in addition to everything that \_s supports (or will support soon):
+The following is a non-comprehensive list of features in addition to everything that \_s supports:
 
+* Gutenberg supported
+* Full Customizer support, mostly with JavaScript-powered live previews
 * Very lightweight: No jQuery anywhere, only 1 CSS and 1 JavaScript asset to load in a regular request
 * Usage of CSS Grid and Flexbox, thus less unnecessary `div`s
 * SVG icon set loaded in the footer, with an easy-to-use utility function to print icons in an accessible way
-* Gutenberg supported
-* Full Customizer support, mostly with JavaScript-powered live previews
 * Dynamic detection of post type support for different features and taxonomies
 * Customizer panel for content type options: For each post type, it can be individually decided whether information like date, author, taxonomies etc. should be displayed or not
 * Customizer section for sidebar settings, with three sidebar modes:
@@ -56,6 +56,8 @@ The following is a non-comprehensive list of features in addition to everything 
     * [Torro Forms](https://wordpress.org/plugins/torro-forms/)
     * [WooCommerce](https://wordpress.org/plugins/woocommerce/)
     * [WP Subtitle](https://wordpress.org/plugins/wp-subtitle/)
+
+This is a work in progress. A few of the above items may be incomplete still.
 
 ## Requirements
 
