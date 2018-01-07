@@ -39,6 +39,7 @@ The following is a non-comprehensive list of features in addition to everything 
 * Accessible primary navigation with keyboard
 * Maximum page width limited, and maximum content width limited further on pages with no sidebar, in order to keep line lengths readable
 * Granular and organized template part files for easy tweaking / overriding in a child theme
+* Solid attachment template support, including display of metadata
 * Flexible whether template parts should be loaded per post type and/or post format
 * Dedicated template part for comments
 * Graceful fallback if minimum required WordPress version is not being used

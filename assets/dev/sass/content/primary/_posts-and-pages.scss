@@ -33,3 +33,17 @@
 .wp-post-image {
 	@include center-block();
 }
+
+.attachment img {
+	display: block;
+	width: 100%;
+}
+
+.wp-audio-shortcode,
+.wp-video-shortcode {
+	display: block;
+
+	.mejs-controls .mejs-time-rail .mejs-time-current {
+		background: $color__background-media-time;
+	}
+}

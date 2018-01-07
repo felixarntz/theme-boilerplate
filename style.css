@@ -1883,6 +1883,21 @@ body.no-sidebar
 	margin-left: auto;
 }
 
+.attachment img {
+	display: block;
+	width: 100%;
+}
+
+.wp-audio-shortcode,
+.wp-video-shortcode {
+	display: block;
+}
+
+.wp-audio-shortcode .mejs-controls .mejs-time-rail .mejs-time-current,
+.wp-video-shortcode .mejs-controls .mejs-time-rail .mejs-time-current {
+	background: #21759b;
+}
+
 /* -------------------------------------------------------------
 ## Comments
 ------------------------------------------------------------- */

@@ -127,6 +127,27 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			) );
 		}
 
+		if ( 'attachment' === $post_type->name ) {
+			foreach ( super_awesome_theme_get_attachment_metadata_fields() as $field => $label ) {
+				$wp_customize->add_setting( 'attachment_show_metadata_' . $field, array(
+					'default'           => '1',
+					'transport'         => 'postMessage',
+				) );
+				$wp_customize->add_control( 'attachment_show_metadata_' . $field, array(
+					'section' => 'content_type_' . $post_type->name,
+					/* translators: %s: metadata field label */
+					'label'   => sprintf( __( 'Show %s?', 'super-awesome-theme' ), $label ),
+					'type'    => 'checkbox',
+				) );
+				$wp_customize->selective_refresh->add_partial( 'attachment_show_metadata_' . $field, array(
+					'selector'            => '.type-' . $post_type->name . ' .entry-attachment-meta',
+					'render_callback'     => 'super_awesome_theme_customize_partial_entry_attachment_meta',
+					'container_inclusive' => true,
+					'type'                => 'SuperAwesomeThemePostPartial',
+				) );
+			}
+		}
+
 		$public_taxonomies = wp_list_filter( get_object_taxonomies( $post_type->name, 'objects' ), array(
 			'public' => true,
 		) );
@@ -286,6 +307,26 @@ function super_awesome_theme_customize_partial_entry_meta( $partial, $context ) 
 	}
 
 	get_template_part( 'template-parts/content/entry-meta', $post_type );
+}
+
+/**
+ * Renders the entry attachment metadata for a post.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Customize_Partial $partial Partial for which the function is invoked.
+ * @param array                $context Context for which to render the entry metadata.
+ */
+function super_awesome_theme_customize_partial_entry_attachment_meta( $partial, $context ) {
+	if ( ! empty( $context['post_id'] ) ) {
+		$post = get_post( $context['post_id'] );
+		if ( $post ) {
+			$GLOBALS['post'] = $post;
+			setup_postdata( $post );
+		}
+	}
+
+	get_template_part( 'template-parts/content/entry-attachment-meta' );
 }
 
 /**
