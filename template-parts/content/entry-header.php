@@ -38,4 +38,10 @@
 
 	<?php get_template_part( 'template-parts/content/entry-meta', get_post_type() ); ?>
 
+	<?php if ( post_type_supports( get_post_type(), 'thumbnail' ) && has_post_thumbnail() ) : ?>
+		<div class="wp-post-image-wrap">
+			<?php the_post_thumbnail(); ?>
+		</div>
+	<?php endif; ?>
+
 </header><!-- .entry-header -->

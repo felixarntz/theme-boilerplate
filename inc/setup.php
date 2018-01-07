@@ -67,7 +67,10 @@ function super_awesome_theme_setup() {
 
 	// TODO: Add theme support for starter content.
 
-	// TODO: Add image sizes.
+	add_image_size( 'site-width', 1152, 9999 ); // Spans the site maximum width of 72rem, with unlimited height.
+	add_image_size( 'content-width', 640, 9999 ); // Spans the content maximum width of 40rem, with unlimited height.
+
+	set_post_thumbnail_size( 640, 360, true ); // 640px is 40rem, which is the site maximum width. 360px makes it 16:9 format.
 
 	add_editor_style();
 }
@@ -90,7 +93,7 @@ function super_awesome_theme_content_width() {
 	 *
 	 * @param int $content_width The theme's content width.
 	 */
-	$content_width = apply_filters( 'super_awesome_theme_content_width', 640 );
+	$content_width = apply_filters( 'super_awesome_theme_content_width', 640 ); // 640px is 40rem, which is the content maximum width.
 }
 add_action( 'after_setup_theme', 'super_awesome_theme_content_width', 0 );
 
