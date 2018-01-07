@@ -32,11 +32,11 @@ msgstr ""
 msgid "Most Used Categories"
 msgstr ""
 
-#: comments.php:31, inc/assets.php:47
+#: comments.php:29, inc/assets.php:48
 msgid "One thought on &ldquo;%1$s&rdquo;"
 msgstr ""
 
-#: comments.php:37
+#: comments.php:35
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
@@ -70,7 +70,7 @@ msgctxt "submit button"
 msgid "Search"
 msgstr ""
 
-#: sidebar.php:27, inc/setup.php:119
+#: sidebar.php:27, inc/setup.php:122
 msgid "Primary Sidebar"
 msgstr ""
 
@@ -94,39 +94,41 @@ msgstr ""
 msgid "Invalid JSON response."
 msgstr ""
 
-#: inc/assets.php:41
+#: inc/assets.php:42
 msgid "Your comment was either a duplicate or you are posting too rapidly. <a href=\"%s\">Edit your comment</a>"
 msgstr ""
 
-#: inc/assets.php:42
+#: inc/assets.php:43
 msgid "There were errors in submitting your comment; complete the missing fields and try again!"
 msgstr ""
 
-#: inc/assets.php:43
+#: inc/assets.php:44
 msgid "This email address appears to be invalid."
 msgstr ""
 
-#: inc/assets.php:44
+#: inc/assets.php:45
 msgid "This is a required field."
 msgstr ""
 
-#: inc/assets.php:107
+#: inc/assets.php:108
 msgid "Thanks for commenting! Your comment has been sent for moderation and should be approved soon."
 msgstr ""
 
-#: inc/assets.php:109
+#. translators: %s: comment URL
+#: inc/assets.php:111
 msgid "Thanks for commenting! Your comment has been approved. <a href=\"%s\">Read your comment</a>"
 msgstr ""
 
-#: inc/assets.php:122
+#: inc/assets.php:124
 msgid "Your comment has been marked as spam."
 msgstr ""
 
-#: inc/assets.php:129
+#: inc/assets.php:131
 msgid "An unknown error occurred while trying to post your comment."
 msgstr ""
 
-#: inc/back-compat.php:36, inc/back-compat.php:48, inc/back-compat.php:63
+#. translators: %s: WordPress version number
+#: inc/back-compat.php:37, inc/back-compat.php:50, inc/back-compat.php:66
 msgid "Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
 msgstr ""
 
@@ -170,85 +172,144 @@ msgstr ""
 msgid "Show Author Name?"
 msgstr ""
 
-#: inc/customizer.php:141
+#: inc/customizer.php:139
+msgid "Show %s?"
+msgstr ""
+
+#: inc/customizer.php:162
 msgctxt "taxonomy"
 msgid "Show %s?"
 msgstr ""
 
-#: inc/customizer.php:159
+#: inc/customizer.php:180
 msgid "Show Author Box?"
 msgstr ""
 
-#: inc/customizer.php:204, inc/customizer.php:238
+#: inc/customizer.php:225, inc/customizer.php:259
 msgid "Invalid choice."
 msgstr ""
 
-#: inc/customizer.php:219
+#: inc/customizer.php:240
 msgid "No Sidebar"
 msgstr ""
 
-#: inc/customizer.php:220
+#: inc/customizer.php:241
 msgid "Left Sidebar"
 msgstr ""
 
-#: inc/customizer.php:221
+#: inc/customizer.php:242
 msgid "Right Sidebar"
 msgstr ""
 
-#: inc/customizer.php:253
+#: inc/customizer.php:274
 msgid "Small"
 msgstr ""
 
-#: inc/customizer.php:254
+#: inc/customizer.php:275
 msgid "Medium"
 msgstr ""
 
-#: inc/customizer.php:255
+#: inc/customizer.php:276
 msgid "Large"
 msgstr ""
 
-#: inc/customizer.php:348
+#: inc/customizer.php:389
 msgid "This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it."
 msgstr ""
 
-#: inc/setup.php:104, template-parts/header/site-navigation.php:17
+#: inc/setup.php:107, template-parts/header/site-navigation.php:17
 msgid "Primary Menu"
 msgstr ""
 
-#: inc/setup.php:105
+#: inc/setup.php:108
 msgid "Primary Menu (Distraction-Free)"
 msgstr ""
 
-#: inc/setup.php:106, template-parts/footer/social-navigation.php:15
+#: inc/setup.php:109, template-parts/footer/social-navigation.php:15
 msgid "Social Links Menu"
 msgstr ""
 
-#: inc/setup.php:107, template-parts/footer/footer-navigation.php:15
+#: inc/setup.php:110, template-parts/footer/footer-navigation.php:15
 msgid "Footer Menu"
 msgstr ""
 
-#: inc/setup.php:121
+#: inc/setup.php:124
 msgid "Add widgets here to appear in the sidebar for your main content."
 msgstr ""
 
-#: inc/setup.php:128
+#: inc/setup.php:131
 msgid "Add widgets here to appear in the sidebar for blog posts and archive pages."
 msgstr ""
 
-#: inc/setup.php:131
+#: inc/setup.php:134
 msgid "You need to enable the sidebar in the Customizer first."
 msgstr ""
 
-#: inc/setup.php:135
+#: inc/setup.php:138
 msgid "Blog Sidebar"
 msgstr ""
 
-#: inc/setup.php:149
+#: inc/setup.php:152
 msgid "Footer %s"
 msgstr ""
 
-#: inc/setup.php:151
+#: inc/setup.php:154
 msgid "Add widgets here to appear in your footer."
+msgstr ""
+
+#: inc/template-functions.php:479
+msgctxt "attachment metadata"
+msgid "Dimensions"
+msgstr ""
+
+#: inc/template-functions.php:480
+msgctxt "attachment metadata"
+msgid "Focal Length"
+msgstr ""
+
+#: inc/template-functions.php:481
+msgctxt "attachment metadata"
+msgid "Shutter Speed"
+msgstr ""
+
+#: inc/template-functions.php:482
+msgctxt "attachment metadata"
+msgid "Aperture"
+msgstr ""
+
+#: inc/template-functions.php:483
+msgctxt "attachment metadata"
+msgid "ISO"
+msgstr ""
+
+#: inc/template-functions.php:484
+msgctxt "attachment metadata"
+msgid "Run Time"
+msgstr ""
+
+#: inc/template-functions.php:485
+msgctxt "attachment metadata"
+msgid "Artist"
+msgstr ""
+
+#: inc/template-functions.php:486
+msgctxt "attachment metadata"
+msgid "Album"
+msgstr ""
+
+#: inc/template-functions.php:487
+msgctxt "attachment metadata"
+msgid "File Format"
+msgstr ""
+
+#: inc/template-functions.php:488
+msgctxt "attachment metadata"
+msgid "File Name"
+msgstr ""
+
+#: inc/template-functions.php:489
+msgctxt "attachment metadata"
+msgid "File Size"
 msgstr ""
 
 #: inc/template-hooks.php:87, template-parts/content/content-post.php:21, template-parts/content/content.php:21
@@ -311,11 +372,11 @@ msgstr ""
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/content/entry-footer.php:23
+#: template-parts/content/entry-footer-attachment.php:25, template-parts/content/entry-footer.php:23
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
-#: template-parts/content/entry-footer.php:42
+#: template-parts/content/entry-footer-attachment.php:44, template-parts/content/entry-footer.php:42
 msgid "Edit<span class=\"screen-reader-text\"> %s</span>"
 msgstr ""
 
