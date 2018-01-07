@@ -124,7 +124,7 @@ gulp.task( 'js', [ 'lint-js', 'compile-js' ]);
 
 // lint Sass
 gulp.task( 'lint-sass', done => {
-	gulp.src( './assets/dev/sass/**/*.scss' )
+	gulp.src( './assets/src/sass/**/*.scss' )
 		.pipe( stylelint({
 			reporters: [
 				{
@@ -139,8 +139,8 @@ gulp.task( 'lint-sass', done => {
 // compile Sass
 gulp.task( 'compile-sass', done => {
 	gulp.src([
-		'./assets/dev/sass/style.scss',
-		'./assets/dev/sass/editor-style.scss',
+		'./assets/src/sass/style.scss',
+		'./assets/src/sass/editor-style.scss',
 	])
 		.pipe( replace( /^\/\*! --- Theme header will be inserted here automatically\. --- \*\//, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.author + '\n\n' + gplNote + '\n*/' ) )
 		.pipe( sass({
@@ -167,7 +167,7 @@ gulp.task( 'compile-sass', done => {
 
 // lint JavaScript
 gulp.task( 'lint-js', done => {
-	gulp.src( './assets/dev/js/**/*.js' )
+	gulp.src( './assets/src/js/**/*.js' )
 		.pipe( eslint() )
 		.pipe( eslint.format() )
 		.pipe( eslint.failAfterError() )
@@ -178,12 +178,12 @@ gulp.task( 'lint-js', done => {
 
 // compile JavaScript
 gulp.task( 'compile-js', done => {
-	gulp.src( './assets/dev/js/theme.js' )
+	gulp.src( './assets/src/js/theme.js' )
 		.pipe( webpack({
 			entry: {
-				theme: './assets/dev/js/theme.js',
-				'customize-controls': './assets/dev/js/customize-controls.js',
-				'customize-preview': './assets/dev/js/customize-preview.js',
+				theme: './assets/src/js/theme.js',
+				'customize-controls': './assets/src/js/customize-controls.js',
+				'customize-preview': './assets/src/js/customize-preview.js',
 			},
 			output: {
 				filename: '[name].js',
@@ -206,10 +206,10 @@ gulp.task( 'compile-js', done => {
 // minify images
 gulp.task( 'img', done => {
 	gulp.src([
-			'./assets/dev/images/**/*.gif',
-			'./assets/dev/images/**/*.jpg',
-			'./assets/dev/images/**/*.png',
-			'./assets/dev/images/**/*.svg',
+			'./assets/src/images/**/*.gif',
+			'./assets/src/images/**/*.jpg',
+			'./assets/src/images/**/*.png',
+			'./assets/src/images/**/*.svg',
 		])
 		.pipe( imagemin([
 			imagemin.gifsicle({
@@ -304,8 +304,8 @@ gulp.task( 'init-replace', done => {
 		'./template-parts/**/*.php',
 		'./templates/**/*.php',
 		'./assets/dist/js/**/*.js',
-		'./assets/dev/js/**/*.js',
-		'./assets/dev/sass/style.scss',
+		'./assets/src/js/**/*.js',
+		'./assets/src/sass/style.scss',
 		'./style.css',
 		'./style-rtl.css',
 		'./gulpfile.js',
