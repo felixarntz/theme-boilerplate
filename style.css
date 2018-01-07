@@ -818,10 +818,9 @@ q:after {
 }
 
 hr {
-	height: 1px;
-	margin-bottom: 1.5em;
-	background-color: #ccc;
+	margin: 1em auto;
 	border: 0;
+	border-bottom: 2px solid #8f98a1;
 }
 
 ul,
@@ -1398,18 +1397,22 @@ body.no-sidebar
 }
 
 @media (min-width: 42rem) {
+	body.no-sidebar .entry-header .alignwide,
 	body.no-sidebar .entry-content .alignwide,
+	body.no-sidebar .entry-footer .alignwide,
 	body.mce-content-body .alignwide {
-		margin-right: calc(-100vw / 2 + 40rem / 2 + 1rem);
-		margin-left: calc(-100vw / 2 + 40rem / 2 + 1rem);
+		margin-right: calc(((100vw - 40rem - 1rem * 2) / 2) * -1 + 8px);
+		margin-left: calc(((100vw - 40rem - 1rem * 2) / 2) * -1 + 7px);
 	}
 }
 
 @media (min-width: 72rem) {
+	body.no-sidebar .entry-header .alignwide,
 	body.no-sidebar .entry-content .alignwide,
+	body.no-sidebar .entry-footer .alignwide,
 	body.mce-content-body .alignwide {
-		margin-right: -15rem;
-		margin-left: -15rem;
+		margin-right: calc(((72rem - 40rem - 1rem * 2) / 2) * -1);
+		margin-left: calc(((72rem - 40rem - 1rem * 2) / 2) * -1);
 	}
 }
 
@@ -1420,10 +1423,12 @@ body.mce-content-body .alignfull {
 }
 
 @media (min-width: 42rem) {
+	body.no-sidebar .entry-header .alignfull,
 	body.no-sidebar .entry-content .alignfull,
+	body.no-sidebar .entry-footer .alignfull,
 	body.mce-content-body .alignfull {
-		margin-right: calc(-100vw / 2 + 40rem / 2);
-		margin-left: calc(-100vw / 2 + 40rem / 2);
+		margin-right: calc(((100vw - 40rem) / 2) * -1 + 8px);
+		margin-left: calc(((100vw - 40rem) / 2) * -1 + 7px);
 	}
 }
 
@@ -1859,6 +1864,10 @@ body.no-sidebar
 	margin: 0 auto 1em;
 }
 
+.entry-meta {
+	margin-bottom: 1em;
+}
+
 .updated:not(.published) {
 	display: none;
 }
@@ -1866,6 +1875,12 @@ body.no-sidebar
 .page-links {
 	margin: 0 0 1em;
 	clear: both;
+}
+
+.wp-post-image {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 /* -------------------------------------------------------------
@@ -2182,7 +2197,8 @@ p.has-background {
 	position: relative;
 	margin-top: 1em;
 	color: #8f98a1;
-	font-size: 85%;
+	font-size: 12.8px;
+	font-size: 0.8rem;
 	font-style: normal;
 }
 
@@ -2197,13 +2213,45 @@ p.has-background {
 
 .wp-block-quote.blocks-quote-style-2 p {
 	font-size: 24px;
+	font-size: 1.5rem;
 	font-style: italic;
 	line-height: 1.6;
 }
 
 .wp-block-quote.blocks-quote-style-2 footer {
-	font-size: 19px;
+	font-size: 19.2px;
+	font-size: 1.2rem;
 	text-align: right;
+}
+
+.wp-block-pullquote {
+	padding: 3rem;
+	color: #404040;
+	text-align: center;
+	border-top: 4px solid #404040;
+	border-bottom: 4px solid #404040;
+}
+
+.wp-block-pullquote > p {
+	font-size: 24px;
+	font-size: 1.5rem;
+	font-weight: 900;
+	line-height: 1.6;
+}
+
+.wp-block-pullquote > cite {
+	position: relative;
+	color: #8f98a1;
+	font-size: 12.8px;
+	font-size: 0.8rem;
+	font-weight: 900;
+	text-transform: uppercase;
+}
+
+.wp-block-separator {
+	max-width: 100px;
+	border: 0;
+	border-bottom: 2px solid #8f98a1;
 }
 
 .wp-block-button {
@@ -2237,13 +2285,45 @@ p.has-background {
 	text-align: center;
 }
 
-.wp-block-embed.is-video {
+.wp-block-image img {
+	display: block;
+	width: 100%;
+}
+
+.wp-block-embed {
 	position: relative;
 	height: 0;
 	padding-top: 56.25%;
 }
 
-.wp-block-embed.is-video > iframe {
+@media (min-width: 42rem) {
+	body.no-sidebar .entry-header .wp-block-embed.alignwide,
+	body.no-sidebar .entry-content .wp-block-embed.alignwide,
+	body.no-sidebar .entry-footer .wp-block-embed.alignwide,
+	body.mce-content-body .wp-block-embed.alignwide {
+		padding-top: calc((100vw - 1rem * 2 - 15px) * 0.5625);
+	}
+}
+
+@media (min-width: 72rem) {
+	body.no-sidebar .entry-header .wp-block-embed.alignwide,
+	body.no-sidebar .entry-content .wp-block-embed.alignwide,
+	body.no-sidebar .entry-footer .wp-block-embed.alignwide,
+	body.mce-content-body .wp-block-embed.alignwide {
+		padding-top: calc((72rem - 1rem * 2) * 0.5625);
+	}
+}
+
+@media (min-width: 42rem) {
+	body.no-sidebar .entry-header .wp-block-embed.alignfull,
+	body.no-sidebar .entry-content .wp-block-embed.alignfull,
+	body.no-sidebar .entry-footer .wp-block-embed.alignfull,
+	body.mce-content-body .wp-block-embed.alignfull {
+		padding-top: calc((100vw - 15px) * 0.5625);
+	}
+}
+
+.wp-block-embed > iframe {
 	position: absolute;
 	top: 0;
 	left: 0;

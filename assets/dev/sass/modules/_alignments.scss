@@ -17,16 +17,18 @@
 }
 
 .alignwide {
+	body.no-sidebar .entry-header &,
 	body.no-sidebar .entry-content &,
+	body.no-sidebar .entry-footer &,
 	body.mce-content-body & {
 		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
-			margin-right: calc(-100vw / 2 + #{$site_maxwidth-text} / 2 + #{$padding_horizontal});
-			margin-left: calc(-100vw / 2 + #{$site_maxwidth-text} / 2 + #{$padding_horizontal});
+			margin-right: calc(((100vw - #{$site_maxwidth-text} - #{$padding_horizontal} * 2) / 2) * -1 + 8px);
+			margin-left: calc(((100vw - #{$site_maxwidth-text} - #{$padding_horizontal} * 2) / 2) * -1 + 7px);
 		}
 
 		@media (min-width: ($site_maxwidth)) {
-			margin-right: (- ($site_maxwidth - $site_maxwidth-text) / 2 + $padding_horizontal);
-			margin-left: (- ($site_maxwidth - $site_maxwidth-text) / 2 + $padding_horizontal);
+			margin-right: calc(((#{$site_maxwidth} - #{$site_maxwidth-text} - #{$padding_horizontal} * 2) / 2) * -1);
+			margin-left: calc(((#{$site_maxwidth} - #{$site_maxwidth-text} - #{$padding_horizontal} * 2) / 2) * -1);
 		}
 	}
 }
@@ -38,11 +40,13 @@
 		margin-left: (- $padding_horizontal);
 	}
 
+	body.no-sidebar .entry-header &,
 	body.no-sidebar .entry-content &,
+	body.no-sidebar .entry-footer &,
 	body.mce-content-body & {
 		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
-			margin-right: calc(-100vw / 2 + #{$site_maxwidth-text} / 2);
-			margin-left: calc(-100vw / 2 + #{$site_maxwidth-text} / 2);
+			margin-right: calc(((100vw - #{$site_maxwidth-text}) / 2) * -1 + 8px);
+			margin-left: calc(((100vw - #{$site_maxwidth-text}) / 2) * -1 + 7px);
 		}
 	}
 }

@@ -17,6 +17,10 @@
 	}
 }
 
+.entry-meta {
+	margin-bottom: $spacing_vertical;
+}
+
 .updated:not(.published) {
 	display: none;
 }
@@ -24,4 +28,8 @@
 .page-links {
 	clear: both;
 	margin: 0 0 $spacing_vertical;
+}
+
+.wp-post-image {
+	@include center-block();
 }

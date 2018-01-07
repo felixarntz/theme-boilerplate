@@ -7,10 +7,11 @@ p.has-background {
 	color: $color__text-quote;
 
 	footer {
+		@include font-size(0.8);
+
 		position: relative;
 		margin-top: 1em;
 		color: $color__text-quote-footer;
-		font-size: 85%;
 		font-style: normal;
 	}
 
@@ -23,16 +24,48 @@ p.has-background {
 		padding: 0 1em;
 
 		p {
+			@include font-size(1.5);
+
 			font-style: italic;
-			font-size: 24px;
 			line-height: 1.6;
 		}
 
 		footer {
-			font-size: 19px;
+			@include font-size(1.2);
+
 			text-align: right;
 		}
 	}
+}
+
+.wp-block-pullquote {
+	padding: ($padding_horizontal * 3);
+	border-top: 4px solid $color__border-quote;
+	border-bottom: 4px solid $color__border-quote;
+	color: $color__text-quote;
+	text-align: center;
+
+	> p {
+		@include font-size(1.5);
+
+		line-height: 1.6;
+		font-weight: 900;
+	}
+
+	> cite {
+		@include font-size(0.8);
+
+		position: relative;
+		color: $color__text-quote-footer;
+		font-weight: 900;
+		text-transform: uppercase;
+	}
+}
+
+.wp-block-separator {
+	border: 0;
+	border-bottom: 2px solid $color__border-separator;
+	max-width: 100px;
 }
 
 .wp-block-button {
@@ -67,10 +100,41 @@ p.has-background {
 	}
 }
 
-.wp-block-embed.is-video {
+.wp-block-image img {
+	display: block;
+	width: 100%;
+}
+
+.wp-block-embed {
 	position: relative;
 	height: 0;
 	padding-top: 56.25%;
+
+	&.alignwide {
+		body.no-sidebar .entry-header &,
+		body.no-sidebar .entry-content &,
+		body.no-sidebar .entry-footer &,
+		body.mce-content-body & {
+			@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
+				padding-top: calc((100vw - #{$padding_horizontal} * 2 - 15px) * 0.5625);
+			}
+
+			@media (min-width: ($site_maxwidth)) {
+				padding-top: calc((#{$site_maxwidth} - #{$padding_horizontal} * 2) * 0.5625);
+			}
+		}
+	}
+
+	&.alignfull {
+		body.no-sidebar .entry-header &,
+		body.no-sidebar .entry-content &,
+		body.no-sidebar .entry-footer &,
+		body.mce-content-body & {
+			@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
+				padding-top: calc((100vw - 15px) * 0.5625);
+			}
+		}
+	}
 
 	> iframe {
 		position: absolute;

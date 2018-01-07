@@ -16,7 +16,6 @@ $color__error-light: #ffdcdc;
 
 $color__background-body: $color__white;
 $color__background-screen: #f1f1f1;
-$color__background-hr: $color__lightgray;
 $color__background-button: #e6e6e6;
 $color__background-button-hover: darken($color__background-button, 8%);
 $color__background-button-primary: $color__primary;
@@ -41,4 +40,5 @@ $color__border-input: $color__lightgray;
 $color__border-input-focus: darken($color__border-input, 8%);
 $color__border-abbr: $color__black;
 $color__border-quote: $color__black;
+$color__border-separator: $color__darkgray;
 $color__border-table: $color__darkgray;

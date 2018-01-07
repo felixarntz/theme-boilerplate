@@ -787,10 +787,9 @@ q:after {
 }
 
 hr {
-	height: 1px;
-	margin-bottom: 1.5em;
-	background-color: #ccc;
+	margin: 1em auto;
 	border: 0;
+	border-bottom: 2px solid #8f98a1;
 }
 
 ul,
@@ -1367,18 +1366,22 @@ body.no-sidebar
 }
 
 @media (min-width: 42rem) {
+	body.no-sidebar .entry-header .alignwide,
 	body.no-sidebar .entry-content .alignwide,
+	body.no-sidebar .entry-footer .alignwide,
 	body.mce-content-body .alignwide {
-		margin-left: calc(-100vw / 2 + 40rem / 2 + 1rem);
-		margin-right: calc(-100vw / 2 + 40rem / 2 + 1rem);
+		margin-left: calc(((100vw - 40rem - 1rem * 2) / 2) * -1 + 8px);
+		margin-right: calc(((100vw - 40rem - 1rem * 2) / 2) * -1 + 7px);
 	}
 }
 
 @media (min-width: 72rem) {
+	body.no-sidebar .entry-header .alignwide,
 	body.no-sidebar .entry-content .alignwide,
+	body.no-sidebar .entry-footer .alignwide,
 	body.mce-content-body .alignwide {
-		margin-left: -15rem;
-		margin-right: -15rem;
+		margin-left: calc(((72rem - 40rem - 1rem * 2) / 2) * -1);
+		margin-right: calc(((72rem - 40rem - 1rem * 2) / 2) * -1);
 	}
 }
 
@@ -1389,10 +1392,12 @@ body.mce-content-body .alignfull {
 }
 
 @media (min-width: 42rem) {
+	body.no-sidebar .entry-header .alignfull,
 	body.no-sidebar .entry-content .alignfull,
+	body.no-sidebar .entry-footer .alignfull,
 	body.mce-content-body .alignfull {
-		margin-left: calc(-100vw / 2 + 40rem / 2);
-		margin-right: calc(-100vw / 2 + 40rem / 2);
+		margin-left: calc(((100vw - 40rem) / 2) * -1 + 8px);
+		margin-right: calc(((100vw - 40rem) / 2) * -1 + 7px);
 	}
 }
 
