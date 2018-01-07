@@ -1,3 +1,10 @@
+.comments-area {
+	body.no-sidebar & {
+		margin: 0 auto $spacing_vertical;
+		max-width: $site_maxwidth-text;
+	}
+}
+
 .comment-content a {
 	word-wrap: break-word;
 }

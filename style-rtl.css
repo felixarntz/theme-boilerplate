@@ -1901,6 +1901,11 @@ body.no-sidebar
 /* -------------------------------------------------------------
 ## Comments
 ------------------------------------------------------------- */
+body.no-sidebar .comments-area {
+	max-width: 40rem;
+	margin: 0 auto 1em;
+}
+
 .comment-content a {
 	word-wrap: break-word;
 }
