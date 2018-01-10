@@ -21,6 +21,34 @@
 	margin: 0 0 $spacing_vertical;
 	padding: $padding_vertical $padding_horizontal;
 	border: 1px solid #ccc;
+
+	.torro-evaluations-subtabs,
+	.torro-evaluations-subcontent {
+		position: relative;
+		display: block;
+		margin: 0;
+		min-height: 1px;
+		box-sizing: border-box;
+	}
+
+	.torro-evaluations-subtabs {
+		border-bottom: 1px solid #eee;
+	}
+
+	.torro-evaluations-subtab {
+		display: inline-block;
+		padding: ($padding_vertical * 0.5) ($padding_horizontal * 0.5);
+
+		&[aria-selected="true"] {
+			color: #555;
+			text-decoration: none;
+			font-weight: bold;
+		}
+	}
+
+	.torro-evaluations-subtab-panel[aria-hidden="true"] {
+		display: none;
+	}
 }
 
 #torro-email-wrap {
