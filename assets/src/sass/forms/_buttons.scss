@@ -25,4 +25,16 @@ input[type="submit"],
 			background-color: $color__background-button-primary-hover;
 		}
 	}
+
+	&.button-link {
+		color: $color__link;
+		background-color: transparent;
+		text-decoration: underline;
+
+		&:hover,
+		&:focus {
+			color: $color__link-hover;
+			background-color: transparent;
+		}
+	}
 }

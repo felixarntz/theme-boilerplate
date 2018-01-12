@@ -921,6 +921,30 @@ input[type="submit"].button-primary:focus,
 	background-color: #1a5c79;
 }
 
+button.button-link,
+input[type="button"].button-link,
+input[type="reset"].button-link,
+input[type="submit"].button-link,
+.button.button-link {
+	color: #21759b;
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+button.button-link:hover,
+button.button-link:focus,
+input[type="button"].button-link:hover,
+input[type="button"].button-link:focus,
+input[type="reset"].button-link:hover,
+input[type="reset"].button-link:focus,
+input[type="submit"].button-link:hover,
+input[type="submit"].button-link:focus,
+.button.button-link:hover,
+.button.button-link:focus {
+	color: #1a5c79;
+	background-color: transparent;
+}
+
 .form-group {
 	display: block;
 	margin-bottom: 1em;
