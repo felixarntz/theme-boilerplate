@@ -92,6 +92,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__skip_link_focus_fix__ = __webpack_require__(1);
 	/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__navigation__ = __webpack_require__(2);
 	/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__comment_form__ = __webpack_require__(3);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__modals__ = __webpack_require__(4);
 
 	window.themeData = window.themeData || {};
 
@@ -99,12 +100,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		themeData.components = {
 			skipLinkFocusFix: new __WEBPACK_IMPORTED_MODULE_0__skip_link_focus_fix__["a" /* default */](),
 			navigation: new __WEBPACK_IMPORTED_MODULE_1__navigation__["a" /* default */]('site-navigation', themeData.navigation),
-			commentForm: new __WEBPACK_IMPORTED_MODULE_2__comment_form__["a" /* default */]('commentform', 'comments', themeData.comments)
+			commentForm: new __WEBPACK_IMPORTED_MODULE_2__comment_form__["a" /* default */]('commentform', 'comments', themeData.comments),
+			modals: new __WEBPACK_IMPORTED_MODULE_3__modals__["a" /* default */]('.modal')
 		};
 
 		themeData.components.skipLinkFocusFix.initialize();
 		themeData.components.navigation.initialize();
 		themeData.components.commentForm.initialize();
+		themeData.components.modals.initialize();
 	})(window.themeData);
 
 	/***/
@@ -676,6 +679,154 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/* harmony default export */
 
 	__webpack_exports__["a"] = CommentForm;
+
+	/***/
+},
+/* 4 */
+/***/function (module, __webpack_exports__, __webpack_require__) {
+
+	"use strict";
+	/**
+  * File modals.js.
+  *
+  * Handles modals in an accessible way.
+  */
+
+	var Modals = function () {
+		function Modals(selector, options) {
+			_classCallCheck(this, Modals);
+
+			this.modals = Array.from(document.querySelectorAll(selector));
+			this.options = options || {};
+		}
+
+		_createClass(Modals, [{
+			key: 'initialize',
+			value: function initialize() {
+				if (!this.modals.length) {
+					return;
+				}
+
+				this.initializeModalOpenButtons();
+				this.initializeModalCloseButtons();
+				this.initializeModalEscape();
+				this.initializeModalTraps();
+			}
+		}, {
+			key: 'initializeModalOpenButtons',
+			value: function initializeModalOpenButtons() {
+				var open = this.openModal;
+
+				this.modals.forEach(function (modal) {
+					var openButtons = Array.from(document.querySelectorAll('[data-toggle="modal"][data-target="#' + modal.getAttribute('id') + '"]'));
+
+					function listenToOpen() {
+						var id = this.getAttribute('id');
+
+						if (id && id.length) {
+							modal.dataset.lastTrigger = '#' + id;
+						}
+
+						open(modal);
+					}
+
+					openButtons.forEach(function (button) {
+						button.addEventListener('click', listenToOpen);
+					});
+				});
+			}
+		}, {
+			key: 'initializeModalCloseButtons',
+			value: function initializeModalCloseButtons() {
+				var close = this.closeModal;
+
+				this.modals.forEach(function (modal) {
+					var closeButtons = Array.from(modal.querySelectorAll('[data-dismiss="modal"]'));
+
+					function listenToClose() {
+						close(modal);
+
+						if (modal.dataset.lastTrigger) {
+							delete modal.dataset.lastTrigger;
+						}
+					}
+
+					closeButtons.forEach(function (button) {
+						button.addEventListener('click', listenToClose);
+					});
+				});
+			}
+		}, {
+			key: 'initializeModalEscape',
+			value: function initializeModalEscape() {
+				var close = this.closeModal;
+
+				this.modals.forEach(function (modal) {
+					modal.addEventListener('keyup', function (event) {
+						if (27 === (event.keyCode || event.which)) {
+							close(modal);
+						}
+					});
+				});
+			}
+		}, {
+			key: 'initializeModalTraps',
+			value: function initializeModalTraps() {
+				this.modals.forEach(function (modal) {
+					var content = modal.querySelector('[role="document"]');
+					var focusables = Array.from(modal.querySelectorAll('button, input, textarea, select'));
+					var firstFocusable = focusables.length ? focusables[0] : undefined;
+					var lastFocusable = focusables.length ? focusables[focusables.length - 1] : undefined;
+
+					if (firstFocusable) {
+						firstFocusable.addEventListener('keydown', function (event) {
+							if (event.shiftKey && 9 === (event.keyCode || event.which)) {
+								content.focus();
+								event.preventDefault();
+							}
+						});
+					}
+
+					if (lastFocusable) {
+						lastFocusable.addEventListener('keydown', function (event) {
+							if (!event.shiftKey && 9 === (event.keyCode || event.which)) {
+								content.focus();
+								event.preventDefault();
+							}
+						});
+					}
+				});
+			}
+		}, {
+			key: 'openModal',
+			value: function openModal(modal) {
+				var focusable = modal.querySelector('button, input, textarea, select');
+
+				modal.setAttribute('aria-hidden', 'false');
+
+				if (focusable) {
+					focusable.focus();
+				}
+			}
+		}, {
+			key: 'closeModal',
+			value: function closeModal(modal) {
+				var trigger = modal.dataset.lastTrigger;
+
+				modal.setAttribute('aria-hidden', 'true');
+
+				if (trigger) {
+					document.querySelector(trigger).focus();
+				}
+			}
+		}]);
+
+		return Modals;
+	}();
+
+	/* harmony default export */
+
+	__webpack_exports__["a"] = Modals;
 
 	/***/
 }]

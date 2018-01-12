@@ -1180,6 +1180,48 @@ select + span.field-notice {
 	margin-left: 1em;
 }
 
+.modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10000;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal[aria-hidden="true"] {
+	display: none;
+}
+
+.modal .modal-dialog {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 1.5rem 2rem;
+	overflow-y: auto;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+
+@media (min-width: 48rem) {
+	.modal .modal-dialog {
+		top: 50%;
+		left: 50%;
+		width: 80%;
+		height: auto;
+		max-width: 40rem;
+		max-height: 95%;
+		border-radius: 10px;
+		-webkit-transform: translate(-50%, -50%);
+		        transform: translate(-50%, -50%);
+
+		     -o-transform: translate(-50%, -50%);
+	}
+}
+
 input[type="search"].search-field {
 	display: block;
 	float: left;
