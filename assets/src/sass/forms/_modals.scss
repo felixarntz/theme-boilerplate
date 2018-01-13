@@ -18,9 +18,6 @@
 		width: 100%;
 		height: 100%;
 		overflow-y: auto;
-		padding: ($padding_vertical * 2) ($padding_horizontal * 2);
-		background-color: $color__white;
-		border: 1px solid $color__lightgray;
 
 		@media (min-width: $site_breakpoint) {
 			top: 50%;
@@ -32,5 +29,47 @@
 			max-height: 95%;
 			border-radius: 10px;
 		}
+	}
+}
+
+.modal-dialog {
+	background-color: $color__white;
+	border: 1px solid $color__lightgray;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+	padding: $padding_vertical $padding_horizontal;
+}
+
+.modal-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	border-bottom: 1px solid $color__lightgray;
+
+	.modal-title {
+		margin-bottom: 0;
+		line-height: 1.5;
+	}
+
+	.modal-close {
+		margin: (-$padding_vertical) (-$padding_horizontal) (-$padding_vertical) auto;
+		padding: $padding_vertical $padding_horizontal;
+		float: right;
+		color: $color__darkgray;
+		background-color: transparent;
+	}
+}
+
+.modal-footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	border-top: 1px solid $color__lightgray;
+
+	> :not(:last-child) {
+		margin-right: ($spacing_horizontal * 0.5);
 	}
 }
