@@ -2502,6 +2502,11 @@ p.has-background {
 	text-align: right;
 }
 
+.torro-required-indicator {
+	color: #21759b;
+	font-weight: bold;
+}
+
 .torro-evaluations-results {
 	padding: 0.75rem 1rem;
 	margin: 0 0 1em;

@@ -17,6 +17,11 @@
 	}
 }
 
+.torro-required-indicator {
+	color: $color__primary;
+	font-weight: bold;
+}
+
 .torro-evaluations-results {
 	margin: 0 0 $spacing_vertical;
 	padding: $padding_vertical $padding_horizontal;
