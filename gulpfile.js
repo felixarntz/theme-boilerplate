@@ -35,10 +35,10 @@ const config = {
 	authorURI: pkg.author.url,
 	description: pkg.description,
 	version: pkg.version,
-	license: 'GNU General Public License v3 or later',
-	licenseURI: 'https://www.gnu.org/licenses/gpl-3.0.html',
+	license: 'GNU General Public License v2 or later',
+	licenseURI: 'https://www.gnu.org/licenses/gpl-2.0.html',
 	tags: tags.join( ', ' ),
-	contributors: [ 'flixos90', 'philliproth' ].join( ', ' ),
+	contributors: [ 'flixos90' ].join( ', ' ),
 	minRequired: '4.7',
 	testedUpTo: '4.9',
 	translateURI: 'https://translate.wordpress.org/projects/wp-themes/super-awesome-theme'
@@ -71,7 +71,7 @@ const readmeheader =	'Contributors: ' + config.contributors + '\n' +
 
 const gplNote =	'This program is free software: you can redistribute it and/or modify\n' +
 				'it under the terms of the GNU General Public License as published by\n' +
-				'the Free Software Foundation, either version 3 of the License, or\n' +
+				'the Free Software Foundation, either version 2 of the License, or\n' +
 				'(at your option) any later version.\n\n' +
 				'This program is distributed in the hope that it will be useful,\n' +
 				'but WITHOUT ANY WARRANTY; without even the implied warranty of\n' +

@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/taco-themes/super-awesome-theme/issues"
   },
-  "license": "GPL-3.0",
+  "license": "GPL-2.0-or-later",
   "scripts": {
     "gulp": "gulp",
     "build": "NODE_ENV=production gulp build",

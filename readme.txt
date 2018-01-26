@@ -1,12 +1,12 @@
 === Super Awesome Theme ===
 
-Contributors: flixos90, philliproth
+Contributors: flixos90
 Stable tag: 1.0.0
 Version: 1.0.0
 Requires at least: 4.7
 Tested up to: 4.9
-License: GNU General Public License v3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: one-column, two-columns, left-sidebar, right-sidebar, flexible-header, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-image-header, featured-images, footer-widgets, full-width-template, post-formats, rtl-language-support, theme-options, threaded-comments, translation-ready
 
 == Description ==
