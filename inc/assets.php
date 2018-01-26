@@ -180,7 +180,7 @@ function super_awesome_theme_render_comment( $comment, $args, $depth = 0, $close
 
 	if ( 'trackback' === $comment->comment_type ) {
 		get_template_part( 'template-parts/content/trackback', $post_type );
-	} elseif ( 'pingback' == $comment->comment_type ) {
+	} elseif ( 'pingback' === $comment->comment_type ) {
 		get_template_part( 'template-parts/content/pingback', $post_type );
 	} else {
 		get_template_part( 'template-parts/content/comment', $post_type );
