@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying a pingback or trackback
+ * Template part for displaying a pingback
  *
  * @package Super_Awesome_Theme
  * @license GPL-3.0

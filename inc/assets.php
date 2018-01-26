@@ -170,16 +170,20 @@ function super_awesome_theme_render_comment( $comment, $args, $depth = 0, $close
 		$has_children = $args['walker']->has_children;
 	}
 
+	$post_type = get_post_type( $comment->comment_post_ID );
+
 	$GLOBALS['comment_args'] = $args;
 
 	$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
 
 	echo '<' . $tag . ' id="' . esc_attr( 'comment-' . get_comment_ID() ) . '" ' . comment_class( $has_children ? 'parent' : '', $comment, null, false ) . '>' . "\n"; // WPCS: XSS OK.
 
-	if ( ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) && $args['short_ping'] ) {
-		get_template_part( 'template-parts/content/ping', $comment->comment_type );
+	if ( 'trackback' === $comment->comment_type ) {
+		get_template_part( 'template-parts/content/trackback', $post_type );
+	} elseif ( 'pingback' == $comment->comment_type ) {
+		get_template_part( 'template-parts/content/pingback', $post_type );
 	} else {
-		get_template_part( 'template-parts/content/comment', $comment->comment_type );
+		get_template_part( 'template-parts/content/comment', $post_type );
 	}
 
 	if ( $close ) {
