@@ -153,14 +153,14 @@ add_action( 'comment_post', 'super_awesome_theme_handle_ajax_comment', 20, 2 );
 function super_awesome_theme_render_comment( $comment, $args, $depth = 0, $close = false ) {
 	$reset_global_comment = false;
 	if ( ! isset( $GLOBALS['comment'] ) ) {
-		$GLOBALS['comment'] = $comment;
+		$GLOBALS['comment'] = $comment; // WPCS: override ok.
 
 		$reset_global_comment = true;
 	}
 
 	$reset_global_comment_depth = false;
 	if ( ! isset( $GLOBALS['comment_depth'] ) ) {
-		$GLOBALS['comment_depth'] = $depth;
+		$GLOBALS['comment_depth'] = $depth; // WPCS: override ok.
 
 		$reset_global_comment_depth = true;
 	}
