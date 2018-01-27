@@ -5,7 +5,7 @@
  * The account page template requires the user to be logged-in to view the page content.
  *
  * @package Super_Awesome_Theme
- * @license GPL-3.0
+ * @license GPL-2.0-or-later
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
