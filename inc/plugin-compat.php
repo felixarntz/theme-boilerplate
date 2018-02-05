@@ -22,6 +22,13 @@ if ( function_exists( 'EDD' ) ) {
 }
 
 /**
+ * WP Site Identity compatibility.
+ */
+if ( function_exists( 'wpsi' ) ) {
+	require get_template_directory() . '/inc/plugin-compat/wp-site-identity.php';
+}
+
+/**
  * WP Subtitle compatibility.
  */
 if ( function_exists( 'the_subtitle' ) ) {
