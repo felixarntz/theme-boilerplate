@@ -262,14 +262,23 @@ function super_awesome_theme_allow_display_sidebar() {
  *
  * @since 1.0.0
  *
- * @return string The sidebar name, either 'primary' or 'blog'.
+ * @return string The sidebar name.
  */
 function super_awesome_theme_get_sidebar_name() {
+	$sidebar_name = 'primary';
+
 	if ( get_theme_mod( 'blog_sidebar_enabled' ) && super_awesome_theme_allow_display_blog_sidebar() ) {
-		return 'blog';
+		$sidebar_name = 'blog';
 	}
 
-	return 'primary';
+	/**
+	 * Filters the name of the sidebar to display on the current page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $sidebar_name The sidebar name. By default either 'primary' or 'blog'.
+	 */
+	return apply_filters( 'super_awesome_theme_get_sidebar_name', $sidebar_name );
 }
 
 /**
