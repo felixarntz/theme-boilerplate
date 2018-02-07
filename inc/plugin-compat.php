@@ -15,6 +15,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /**
+ * WooCommerce compatibility.
+ */
+if ( class_exists( 'WooCommerce' ) ) {
+	require get_template_directory() . '/inc/plugin-compat/woocommerce.php';
+}
+
+/**
  * Easy Digital Downloads compatibility.
  */
 if ( function_exists( 'EDD' ) ) {
