@@ -75,7 +75,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	) );
 	$wp_customize->selective_refresh->add_partial( 'blog_sidebar_enabled', array(
 		'selector'            => '#sidebar',
-		'render_callback'     => 'super_awesome_theme_customize_partial_blog_sidebar_enabled',
+		'render_callback'     => 'get_sidebar',
 		'container_inclusive' => true,
 	) );
 
@@ -275,15 +275,6 @@ function super_awesome_theme_customize_get_sidebar_size_choices() {
 		'medium' => __( 'Medium', 'super-awesome-theme' ),
 		'large'  => __( 'Large', 'super-awesome-theme' ),
 	);
-}
-
-/**
- * Renders the primary or blog sidebar for the selective refresh partial.
- *
- * @since 1.0.0
- */
-function super_awesome_theme_customize_partial_blog_sidebar_enabled() {
-	get_sidebar();
 }
 
 /**
