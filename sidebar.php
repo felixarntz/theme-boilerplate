@@ -31,6 +31,6 @@ if ( isset( $wp_registered_sidebars[ $sidebar_slug ] ) ) {
 
 ?>
 
-	<aside id="sidebar" class="site-sidebar widget-area" aria-label="<?php echo esc_attr( $sidebar_title ); ?>">
-		<?php dynamic_sidebar( $sidebar_slug ); ?>
-	</aside><!-- #sidebar -->
+			<aside id="sidebar" class="site-sidebar widget-area" aria-label="<?php echo esc_attr( $sidebar_title ); ?>">
+				<?php dynamic_sidebar( $sidebar_slug ); ?>
+			</aside><!-- #sidebar -->

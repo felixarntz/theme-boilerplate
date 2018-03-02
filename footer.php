@@ -9,6 +9,7 @@
 
 ?>
 
+		</div>
 	</div><!-- #content -->
 
 	<footer id="footer" class="site-footer">

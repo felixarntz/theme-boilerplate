@@ -29,4 +29,5 @@
 		<?php get_template_part( 'template-parts/header/site-navigation' ); ?>
 	</header><!-- #header -->
 
-	<div id="content" class="site-content">
+	<div id="content" class="site-content site-component is-flex">
+		<div class="site-component-inner">

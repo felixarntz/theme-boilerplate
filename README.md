@@ -13,6 +13,7 @@ The following is a non-comprehensive list of features in addition to everything 
 * SVG icon set loaded in the footer, with an easy-to-use utility function to print icons in an accessible way
 * Dynamic detection of post type support for different features and taxonomies
 * Customizer panel for content type options: For each post type, it can be individually decided whether information like date, author, taxonomies etc. should be displayed or not
+* Support for either a full-width or wrapped layout (by using a `.wrapped-layout` body class)
 * Customizer section for sidebar settings, with three sidebar modes:
     * No Sidebar
     * Left Sidebar

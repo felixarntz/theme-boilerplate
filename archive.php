@@ -11,38 +11,38 @@ get_header();
 
 ?>
 
-		<main id="main" class="site-main">
-
-			<?php
-			if ( have_posts() ) : ?>
-
-				<header class="page-header">
-					<?php
-					the_archive_title( '<h1 class="archive-title">', '</h1>' );
-					the_archive_description( '<div class="archive-description">', '</div>' );
-					?>
-				</header><!-- .page-header -->
+			<main id="main" class="site-main">
 
 				<?php
-				while ( have_posts() ) : the_post();
+				if ( have_posts() ) : ?>
 
-					if ( super_awesome_theme_use_post_format_templates() ) :
-						get_template_part( 'template-parts/content/content-' . get_post_type(), get_post_format() );
-					else :
-						get_template_part( 'template-parts/content/content', get_post_type() );
-					endif;
+					<header class="page-header">
+						<?php
+						the_archive_title( '<h1 class="archive-title">', '</h1>' );
+						the_archive_description( '<div class="archive-description">', '</div>' );
+						?>
+					</header><!-- .page-header -->
 
-				endwhile;
+					<?php
+					while ( have_posts() ) : the_post();
 
-				the_posts_navigation();
+						if ( super_awesome_theme_use_post_format_templates() ) :
+							get_template_part( 'template-parts/content/content-' . get_post_type(), get_post_format() );
+						else :
+							get_template_part( 'template-parts/content/content', get_post_type() );
+						endif;
 
-			else :
+					endwhile;
 
-				get_template_part( 'template-parts/content/none' );
+					the_posts_navigation();
 
-			endif; ?>
+				else :
 
-		</main><!-- #main -->
+					get_template_part( 'template-parts/content/none' );
+
+				endif; ?>
+
+			</main><!-- #main -->
 
 <?php
 

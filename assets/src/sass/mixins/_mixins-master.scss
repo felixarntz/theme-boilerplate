@@ -47,15 +47,16 @@
 	@include font-size(1);
 }
 
-// Limit maximum width
-@mixin limit-width() {
-	max-width: $site_maxwidth;
-}
-
 // Horizontal padding
 @mixin horizontal-padding() {
 	padding-right: $padding_horizontal;
 	padding-left: $padding_horizontal;
+}
+
+// No horizontal padding
+@mixin no-horizontal-padding() {
+	padding-right: 0;
+	padding-left: 0;
 }
 
 @mixin text-center() {

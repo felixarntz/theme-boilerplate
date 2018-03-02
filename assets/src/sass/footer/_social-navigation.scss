@@ -1,11 +1,6 @@
 .social-navigation {
-	@include center-block();
-	@include limit-width();
-	@include horizontal-padding();
 	@include text-center();
 	@include font-size(1);
-
-	margin-bottom: $spacing_vertical-big;
 
 	ul {
 		display: inline-block;

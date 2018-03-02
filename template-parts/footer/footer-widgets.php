@@ -25,17 +25,19 @@ if ( ! $has_active ) {
 	return;
 }
 ?>
-<aside class="footer-widgets" aria-label="<?php esc_attr_e( 'Footer', 'super-awesome-theme' ); ?>">
-	<?php
-	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
-		if ( ! is_active_sidebar( 'footer-' . $i ) ) {
-			continue;
+<aside class="footer-widgets site-component is-flex" aria-label="<?php esc_attr_e( 'Footer', 'super-awesome-theme' ); ?>">
+	<div class="site-component-inner">
+		<?php
+		for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
+			if ( ! is_active_sidebar( 'footer-' . $i ) ) {
+				continue;
+			}
+			?>
+			<div class="widget-column">
+				<?php dynamic_sidebar( 'footer-' . $i ); ?>
+			</div>
+			<?php
 		}
 		?>
-		<div class="widget-column">
-			<?php dynamic_sidebar( 'footer-' . $i ); ?>
-		</div>
-		<?php
-	}
-	?>
+	</div>
 </aside><!-- .widget-area -->

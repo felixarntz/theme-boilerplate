@@ -12,13 +12,15 @@ if ( ! has_nav_menu( 'footer' ) ) {
 }
 
 ?>
-<nav class="footer-navigation" aria-label="<?php esc_attr_e( 'Footer Menu', 'super-awesome-theme' ); ?>">
-	<?php
-	wp_nav_menu( array(
-		'theme_location' => 'footer',
-		'menu_class'     => 'footer-menu',
-		'depth'          => 1,
-		'container'      => false,
-	) );
-	?>
+<nav class="footer-navigation site-component" aria-label="<?php esc_attr_e( 'Footer Menu', 'super-awesome-theme' ); ?>">
+	<div class="site-component-inner">
+		<?php
+		wp_nav_menu( array(
+			'theme_location' => 'footer',
+			'menu_class'     => 'footer-menu',
+			'depth'          => 1,
+			'container'      => false,
+		) );
+		?>
+	</div>
 </nav><!-- .footer-navigation -->

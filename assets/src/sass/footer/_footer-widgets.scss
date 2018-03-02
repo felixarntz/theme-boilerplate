@@ -1,21 +1,12 @@
 .footer-widgets {
-	@include center-block();
-	@include limit-width();
+	.site-component-inner {
+		@media (min-width: $site_breakpoint) {
+			align-items: stretch;
+			justify-content: stretch;
 
-	margin-bottom: $spacing_vertical-big;
-
-	.widget-column {
-		@include horizontal-padding();
-	}
-
-	@media (min-width: $site_breakpoint) {
-		@include center-flex();
-
-		align-items: stretch;
-		justify-content: stretch;
-
-		.widget-column {
-			flex: 1;
+			> * {
+				flex: 1;
+			}
 		}
 	}
 }

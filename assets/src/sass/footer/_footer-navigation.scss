@@ -1,10 +1,5 @@
 .footer-navigation {
-	@include center-block();
-	@include limit-width();
-	@include horizontal-padding();
 	@include text-center();
-
-	margin-bottom: $spacing_vertical;
 
 	ul {
 		display: inline-block;
