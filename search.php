@@ -11,34 +11,34 @@ get_header();
 
 ?>
 
-	<main id="main" class="site-main">
-
-		<?php
-		if ( have_posts() ) : ?>
-
-			<header class="page-header">
-				<h1><?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'super-awesome-theme' ), '<span>' . get_search_query() . '</span>' );
-				?></h1>
-			</header><!-- .page-header -->
+		<main id="main" class="site-main">
 
 			<?php
-			while ( have_posts() ) : the_post();
+			if ( have_posts() ) : ?>
 
-				get_template_part( 'template-parts/content/content-search' );
+				<header class="page-header">
+					<h1><?php
+						/* translators: %s: search query. */
+						printf( esc_html__( 'Search Results for: %s', 'super-awesome-theme' ), '<span>' . get_search_query() . '</span>' );
+					?></h1>
+				</header><!-- .page-header -->
 
-			endwhile;
+				<?php
+				while ( have_posts() ) : the_post();
 
-			the_posts_navigation();
+					get_template_part( 'template-parts/content/content-search' );
 
-		else :
+				endwhile;
 
-			get_template_part( 'template-parts/content/none' );
+				the_posts_navigation();
 
-		endif; ?>
+			else :
 
-	</main><!-- #main -->
+				get_template_part( 'template-parts/content/none' );
+
+			endif; ?>
+
+		</main><!-- #main -->
 
 <?php
 

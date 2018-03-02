@@ -9,6 +9,8 @@
 
 ?>
 
+	</div><!-- #content -->
+
 	<footer id="footer" class="site-footer">
 		<?php get_template_part( 'template-parts/footer/footer-widgets' ); ?>
 

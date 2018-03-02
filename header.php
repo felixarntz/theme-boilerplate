@@ -28,3 +28,5 @@
 
 		<?php get_template_part( 'template-parts/header/site-navigation' ); ?>
 	</header><!-- #header -->
+
+	<div id="content" class="site-content">

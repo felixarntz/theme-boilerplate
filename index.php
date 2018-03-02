@@ -11,37 +11,37 @@ get_header();
 
 ?>
 
-	<main id="main" class="site-main">
+		<main id="main" class="site-main">
 
-		<?php
-		if ( have_posts() ) :
-
-			if ( is_home() && ! is_front_page() ) : ?>
-				<header class="page-header">
-					<h1><?php single_post_title(); ?></h1>
-				</header>
 			<?php
-			endif;
+			if ( have_posts() ) :
 
-			while ( have_posts() ) : the_post();
-
-				if ( super_awesome_theme_use_post_format_templates() ) :
-					get_template_part( 'template-parts/content/content-' . get_post_type(), get_post_format() );
-				else :
-					get_template_part( 'template-parts/content/content', get_post_type() );
+				if ( is_home() && ! is_front_page() ) : ?>
+					<header class="page-header">
+						<h1><?php single_post_title(); ?></h1>
+					</header>
+				<?php
 				endif;
 
-			endwhile;
+				while ( have_posts() ) : the_post();
 
-			the_posts_navigation();
+					if ( super_awesome_theme_use_post_format_templates() ) :
+						get_template_part( 'template-parts/content/content-' . get_post_type(), get_post_format() );
+					else :
+						get_template_part( 'template-parts/content/content', get_post_type() );
+					endif;
 
-		else :
+				endwhile;
 
-			get_template_part( 'template-parts/content/none' );
+				the_posts_navigation();
 
-		endif; ?>
+			else :
 
-	</main><!-- #main -->
+				get_template_part( 'template-parts/content/none' );
+
+			endif; ?>
+
+		</main><!-- #main -->
 
 <?php
 
