@@ -29,7 +29,7 @@ if ( 'attachment' === $support_slug ) {
 	 */
 	do_action( 'super_awesome_theme_before_entry_title', get_post_type() );
 
-	if ( is_singular() ) {
+	if ( is_singular( get_post_type() ) ) {
 		the_title( '<h1 class="entry-title">', '</h1>' );
 	} else {
 		the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );

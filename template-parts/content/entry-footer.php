@@ -13,7 +13,7 @@
 	<?php get_template_part( 'template-parts/content/entry-terms', get_post_type() ); ?>
 
 	<div class="entry-action-links">
-		<?php if ( ! is_singular() && ! post_password_required() && post_type_supports( get_post_type(), 'comments' ) && comments_open() ) : ?>
+		<?php if ( ! is_singular( get_post_type() ) && ! post_password_required() && post_type_supports( get_post_type(), 'comments' ) && comments_open() ) : ?>
 			<span class="comments-link">
 				<?php
 				comments_popup_link(
@@ -54,7 +54,7 @@
 		?>
 	</div>
 
-	<?php if ( is_singular() ) : ?>
+	<?php if ( is_singular( get_post_type() ) ) : ?>
 		<?php get_template_part( 'template-parts/content/entry-authorbox', get_post_type() ); ?>
 	<?php endif; ?>
 
