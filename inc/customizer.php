@@ -15,6 +15,9 @@
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
 function super_awesome_theme_customize_register( $wp_customize ) {
+
+	/* Core Adjustments */
+
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
@@ -27,6 +30,42 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'selector'        => '.site-description',
 		'render_callback' => 'super_awesome_theme_customize_partial_blogdescription',
 	) );
+
+	/* Colors */
+
+	$wp_customize->add_setting( 'text_color', array(
+		'default'              => '#404040',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'text_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Text Color', 'super-awesome-theme' ),
+	) ) );
+
+	$wp_customize->add_setting( 'link_color', array(
+		'default'              => '#21759b',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Link Color', 'super-awesome-theme' ),
+	) ) );
+
+	$wp_customize->add_setting( 'wrap_background_color', array(
+		'default'              => '',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'wrap_background_color', array(
+		'section'         => 'colors',
+		'label'           => __( 'Wrap Background Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_use_wrapped_layout',
+	) ) );
 
 	/* Sidebar Settings */
 
@@ -188,8 +227,79 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			) );
 		}
 	}
+
+	/* Customizer-generated CSS */
+
+	$wp_customize->selective_refresh->add_partial( 'super_awesome_theme_customizer_styles', array(
+		'settings'            => array(
+			'text_color',
+			'link_color',
+			'wrap_background_color',
+		),
+		'selector'            => '#super-awesome-theme-customizer-styles',
+		'render_callback'     => 'super_awesome_theme_customize_partial_styles',
+		'container_inclusive' => false,
+		'fallback_refresh'    => false,
+	) );
 }
 add_action( 'customize_register', 'super_awesome_theme_customize_register' );
+
+/**
+ * Prints styles generated through the Customizer.
+ *
+ * @since 1.0.0
+ */
+function super_awesome_theme_print_customizer_styles() {
+	$text_color            = get_theme_mod( 'text_color', '#404040' );
+	$link_color            = get_theme_mod( 'link_color', '#21759b' );
+	$link_hover_color      = super_awesome_theme_darken_color( $link_color, 8 );
+	$wrap_background_color = get_theme_mod( 'wrap_background_color', '' );
+
+	?>
+	<style id="super-awesome-theme-customizer-styles" type="text/css">
+		<?php if ( ! empty( $text_color ) ) : ?>
+			body,
+			button,
+			input,
+			select,
+			textarea {
+				color: <?php echo esc_attr( $text_color ); ?>;
+			}
+		<?php endif; ?>
+		<?php if ( ! empty( $link_color ) && ! empty( $link_hover_color ) ) : ?>
+			a,
+			a:visited {
+				color: <?php echo esc_attr( $link_color ); ?>;
+			}
+
+			a:hover,
+			a:focus,
+			a:active {
+				color: <?php echo esc_attr( $link_hover_color ); ?>;
+			}
+		<?php endif; ?>
+		<?php if ( super_awesome_theme_use_wrapped_layout() && ! empty( $wrap_background_color ) ) : ?>
+			.site {
+				background-color: <?php echo esc_attr( $wrap_background_color ); ?>;
+			}
+		<?php endif; ?>
+	</style>
+	<?php
+}
+add_action( 'wp_head', 'super_awesome_theme_print_customizer_styles' );
+
+/**
+ * Renders the Customizer styles for the selective refresh partial.
+ *
+ * @since 1.0.0
+ */
+function super_awesome_theme_customize_partial_styles() {
+	ob_start();
+	super_awesome_theme_print_customizer_styles();
+	$output = ob_get_clean();
+
+	echo preg_replace( '#<style[^>]*>(.*)</style>#is', '$1', $output ); // WPCS: XSS OK.
+}
 
 /**
  * Renders the site title for the selective refresh partial.
