@@ -42,6 +42,11 @@ add_action( 'wp_head', 'super_awesome_theme_js_svg_detection', 0 );
  * @return array Modified classes.
  */
 function super_awesome_theme_body_classes( $classes ) {
+	// Adds a class to indicate that a wrapped layout is used.
+	if ( super_awesome_theme_use_wrapped_layout() ) {
+		$classes[] = 'wrapped-layout';
+	}
+
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';

@@ -49,6 +49,28 @@ function super_awesome_theme_get_template_part( $slug, $name = null, $data = nul
 }
 
 /**
+ * Checks whether a wrapped layout should be used.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if a wrapped layout should be used, false otherwise.
+ */
+function super_awesome_theme_use_wrapped_layout() {
+	/**
+	 * Filters whether the theme should use a wrapped layout.
+	 *
+	 * By default, only the actual content has its maximum width limited, but the
+	 * individual site parts themselves scale across full-width. A wrapped layout will
+	 * limit the maximum width of the whole site instead.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool $use_wrapped_layout Whether to use a wrapped layout. Default false.
+	 */
+	return apply_filters( 'super_awesome_theme_use_wrapped_layout', false );
+}
+
+/**
  * Checks whether post format templates should be used for a post.
  *
  * @since 1.0.0

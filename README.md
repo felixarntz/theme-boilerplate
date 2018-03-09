@@ -9,11 +9,10 @@ The following is a non-comprehensive list of features in addition to everything 
 * Gutenberg supported
 * Full Customizer support, mostly with JavaScript-powered live previews
 * Very lightweight: No jQuery anywhere, only 1 CSS and 1 JavaScript asset to load in a regular request
-* Usage of CSS Grid and Flexbox, thus less unnecessary `div`s
 * SVG icon set loaded in the footer, with an easy-to-use utility function to print icons in an accessible way
 * Dynamic detection of post type support for different features and taxonomies
 * Customizer panel for content type options: For each post type, it can be individually decided whether information like date, author, taxonomies etc. should be displayed or not
-* Support for either a full-width or wrapped layout (by using a `.wrapped-layout` body class)
+* Support for either a full-width or wrapped layout (by calling `add_filter( 'super_awesome_theme_use_wrapped_layout', '__return_true' )`)
 * Customizer section for sidebar settings, with three sidebar modes:
     * No Sidebar
     * Left Sidebar
