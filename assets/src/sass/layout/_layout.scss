@@ -96,6 +96,12 @@
 	}
 }
 
+.site-header,
+.site-content,
+.site-footer {
+	overflow-x: hidden;
+}
+
 .comment-navigation,
 .posts-navigation,
 .post-navigation {

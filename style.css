@@ -1520,8 +1520,8 @@ body.no-sidebar
 	body.no-sidebar .entry-content .alignwide,
 	body.no-sidebar .entry-footer .alignwide,
 	body.mce-content-body .alignwide {
-		margin-right: calc(((100vw - 40rem - 1rem * 2) / 2) * -1);
-		margin-left: calc(((100vw - 40rem - 1rem * 2) / 2) * -1);
+		margin-right: calc(40rem / 2 + 1rem - 50vw);
+		margin-left: calc(40rem / 2 + 1rem - 50vw);
 	}
 }
 
@@ -1530,8 +1530,8 @@ body.no-sidebar
 	body.no-sidebar .entry-content .alignwide,
 	body.no-sidebar .entry-footer .alignwide,
 	body.mce-content-body .alignwide {
-		margin-right: calc(((72rem - 40rem - 1rem * 2) / 2) * -1);
-		margin-left: calc(((72rem - 40rem - 1rem * 2) / 2) * -1);
+		margin-right: -15rem;
+		margin-left: -15rem;
 	}
 }
 
@@ -1700,6 +1700,12 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 
 		-webkit-box-flex: 1;
 	}
+}
+
+.site-header,
+.site-content,
+.site-footer {
+	overflow-x: hidden;
 }
 
 .site-main .comment-navigation,
