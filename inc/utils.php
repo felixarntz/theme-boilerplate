@@ -25,10 +25,42 @@ function super_awesome_theme_darken_color( $color, $percentage ) {
 
 	$darkened = array();
 	foreach ( $rgb as $channel ) {
-		$darkened[] = (int) round( $channel * ( 1.0 - $percentage / 100.0 ) );
+		$darkened_channel = (int) round( $channel * ( 1.0 - $percentage / 100.0 ) );
+		if ( $darkened_channel < 0 ) {
+			$darkened_channel = 0;
+		}
+		$darkened[] = $darkened_channel;
 	}
 
 	return super_awesome_theme_rgb_to_hex( $darkened );
+}
+
+/**
+ * Lightens a hex color string about a given percentage.
+ *
+ * @since 1.0.0
+ *
+ * @param string $color      Hex color string.
+ * @param int    $percentage Percentage to darken about.
+ * @return string Lightened hex color string.
+ */
+function super_awesome_theme_lighten_color( $color, $percentage ) {
+	if ( empty( $color ) ) {
+		return $color;
+	}
+
+	$rgb = super_awesome_theme_hex_to_rgb( $color );
+
+	$lightened = array();
+	foreach ( $rgb as $channel ) {
+		$lightened_channel = (int) round( $channel * ( 1.0 + $percentage / 100.0 ) );
+		if ( $lightened_channel > 255 ) {
+			$lightened_channel = 255;
+		}
+		$lightened[] = $lightened_channel;
+	}
+
+	return super_awesome_theme_rgb_to_hex( $lightened );
 }
 
 /**
