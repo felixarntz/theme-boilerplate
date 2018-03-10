@@ -1,0 +1,56 @@
+/* -------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Editor
+# Typography
+# Blocks
+------------------------------------------------------------- */
+@import "variables-site/variables-site";
+@import "mixins/mixins-master";
+
+/* -------------------------------------------------------------
+# Editor
+------------------------------------------------------------- */
+.edit-post-visual-editor {
+	&,
+	p,
+	button,
+	input,
+	select,
+	textarea {
+		@include font-size(1);
+
+		color: $color__text-main;
+		font-family: $font__main;
+		line-height: $font__line-height-body;
+	}
+}
+
+.editor-post-title textarea.editor-post-title__input {
+	font-family: $font__main;
+	line-height: $font__line-height-body;
+}
+
+/* -------------------------------------------------------------
+# Typography
+------------------------------------------------------------- */
+.edit-post-visual-editor {
+	@import "typography/headings";
+	@import "typography/copy";
+	@import "typography/links";
+	@import "typography/icons";
+}
+
+/* -------------------------------------------------------------
+# Blocks
+------------------------------------------------------------- */
+.edit-post-visual-editor {
+	@import "plugin-compat/gutenberg";
+
+	// Reset.
+	.wp-block-embed {
+		position: static;
+		height: auto;
+		padding-top: 0;
+	}
+}

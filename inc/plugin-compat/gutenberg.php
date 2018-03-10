@@ -28,3 +28,14 @@ function super_awesome_theme_gutenberg_setup() {
 	);
 }
 add_action( 'after_setup_theme', 'super_awesome_theme_gutenberg_setup' );
+
+/**
+ * Enqueues the theme's Gutenberg editor stylesheet.
+ *
+ * @since 1.0.0
+ */
+function super_awesome_theme_gutenberg_enqueue_editor_style() {
+	wp_enqueue_style( 'super-awesome-theme-block-editor-style', get_theme_file_uri( '/block-editor-style.css' ), array(), SUPER_AWESOME_THEME_VERSION );
+	wp_style_add_data( 'super-awesome-theme-block-editor-style', 'rtl', 'replace' );
+}
+add_action( 'enqueue_block_editor_assets', 'super_awesome_theme_gutenberg_enqueue_editor_style' );

@@ -2397,6 +2397,7 @@ object {
 .wp-block-cover-image {
 	width: auto;
 	height: 25rem;
+	margin-bottom: 1em;
 }
 
 .wp-block-image.alignwide,

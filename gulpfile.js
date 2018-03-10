@@ -141,6 +141,7 @@ gulp.task( 'compile-sass', done => {
 	gulp.src([
 		'./assets/src/sass/style.scss',
 		'./assets/src/sass/editor-style.scss',
+		'./assets/src/sass/block-editor-style.scss',
 	])
 		.pipe( replace( /^\/\*! --- Theme header will be inserted here automatically\. --- \*\//, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.author + '\n\n' + gplNote + '\n*/' ) )
 		.pipe( sass({
