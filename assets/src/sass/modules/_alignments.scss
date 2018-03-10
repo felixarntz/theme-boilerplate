@@ -31,20 +31,6 @@
 			margin-left: ($site_maxwidth-text / 2 + $padding_horizontal - $site_maxwidth / 2);
 		}
 	}
-
-	body.wrapped-layout.no-sidebar .entry-header &,
-	body.wrapped-layout.no-sidebar .entry-content &,
-	body.wrapped-layout.no-sidebar .entry-footer & {
-		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
-			margin-right: ($site_maxwidth-text / 2 + $padding_horizontal - $site_maxwidth / 2);
-			margin-left: ($site_maxwidth-text / 2 + $padding_horizontal - $site_maxwidth / 2);
-		}
-
-		@media (min-width: ($site_maxwidth)) {
-			margin-right: ($site_maxwidth-text / 2 + $padding_horizontal - $site_maxwidth / 2);
-			margin-left: ($site_maxwidth-text / 2 + $padding_horizontal - $site_maxwidth / 2);
-		}
-	}
 }
 
 .alignfull {
@@ -59,8 +45,8 @@
 	body.no-sidebar .entry-footer &,
 	body.mce-content-body & {
 		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
-			margin-right: calc(((100vw - #{$site_maxwidth-text}) / 2) * -1);
-			margin-left: calc(((100vw - #{$site_maxwidth-text}) / 2) * -1);
+			margin-right: calc(#{$site_maxwidth-text} / 2 - 50vw);
+			margin-left: calc(#{$site_maxwidth-text} / 2 - 50vw);
 		}
 	}
 
@@ -68,8 +54,8 @@
 	body.wrapped-layout.no-sidebar .entry-content &,
 	body.wrapped-layout.no-sidebar .entry-footer & {
 		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
-			margin-right: ((($site_maxwidth - $site_maxwidth-text) / 2) * -1);
-			margin-left: ((($site_maxwidth - $site_maxwidth-text) / 2) * -1);
+			margin-right: ($site_maxwidth-text / 2 - $site_maxwidth / 2);
+			margin-left: ($site_maxwidth-text / 2 - $site_maxwidth / 2);
 		}
 	}
 }

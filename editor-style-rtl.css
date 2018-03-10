@@ -341,15 +341,18 @@ i {
 }
 
 blockquote {
+	padding-right: 1rem;
 	margin: 0 0 1em;
 	color: #404040;
+	border-right: 4px solid #404040;
 }
 
 blockquote cite,
 blockquote footer {
 	margin-top: 1em;
 	color: #8f98a1;
-	font-size: 85%;
+	font-size: 13.6px;
+	font-size: 0.85rem;
 	font-style: normal;
 }
 
@@ -764,14 +767,12 @@ html {
 *,
 *:before,
 *:after {
-	/* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
 	-webkit-box-sizing: inherit;
 	        box-sizing: inherit;
 }
 
 body {
 	background: #fff;
-	/* Fallback for when there is no custom background color defined. */
 }
 
 blockquote,
@@ -821,14 +822,11 @@ dd {
 
 img {
 	height: auto;
-	/* Make sure images are scaled correctly. */
 	max-width: 100%;
-	/* Adhere to container width. */
 }
 
 figure {
 	margin: 1em 0;
-	/* Extra wide images within figure tags don't overflow the content area. */
 }
 
 table {
@@ -1504,24 +1502,6 @@ body.no-sidebar
 	}
 }
 
-@media (min-width: 42rem) {
-	body.wrapped-layout.no-sidebar .entry-header .alignwide,
-	body.wrapped-layout.no-sidebar .entry-content .alignwide,
-	body.wrapped-layout.no-sidebar .entry-footer .alignwide {
-		margin-left: -15rem;
-		margin-right: -15rem;
-	}
-}
-
-@media (min-width: 72rem) {
-	body.wrapped-layout.no-sidebar .entry-header .alignwide,
-	body.wrapped-layout.no-sidebar .entry-content .alignwide,
-	body.wrapped-layout.no-sidebar .entry-footer .alignwide {
-		margin-left: -15rem;
-		margin-right: -15rem;
-	}
-}
-
 body.no-sidebar .alignfull,
 body.mce-content-body .alignfull {
 	margin-left: -1rem;
@@ -1533,8 +1513,8 @@ body.mce-content-body .alignfull {
 	body.no-sidebar .entry-content .alignfull,
 	body.no-sidebar .entry-footer .alignfull,
 	body.mce-content-body .alignfull {
-		margin-left: calc(((100vw - 40rem) / 2) * -1);
-		margin-right: calc(((100vw - 40rem) / 2) * -1);
+		margin-left: calc(40rem / 2 - 50vw);
+		margin-right: calc(40rem / 2 - 50vw);
 	}
 }
 

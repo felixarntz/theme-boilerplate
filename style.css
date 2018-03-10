@@ -372,15 +372,18 @@ i {
 }
 
 blockquote {
+	padding-left: 1rem;
 	margin: 0 0 1em;
 	color: #404040;
+	border-left: 4px solid #404040;
 }
 
 blockquote cite,
 blockquote footer {
 	margin-top: 1em;
 	color: #8f98a1;
-	font-size: 85%;
+	font-size: 13.6px;
+	font-size: 0.85rem;
 	font-style: normal;
 }
 
@@ -795,14 +798,12 @@ html {
 *,
 *:before,
 *:after {
-	/* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
 	-webkit-box-sizing: inherit;
 	        box-sizing: inherit;
 }
 
 body {
 	background: #fff;
-	/* Fallback for when there is no custom background color defined. */
 }
 
 blockquote,
@@ -852,14 +853,11 @@ dd {
 
 img {
 	height: auto;
-	/* Make sure images are scaled correctly. */
 	max-width: 100%;
-	/* Adhere to container width. */
 }
 
 figure {
 	margin: 1em 0;
-	/* Extra wide images within figure tags don't overflow the content area. */
 }
 
 table {
@@ -1535,24 +1533,6 @@ body.no-sidebar
 	}
 }
 
-@media (min-width: 42rem) {
-	body.wrapped-layout.no-sidebar .entry-header .alignwide,
-	body.wrapped-layout.no-sidebar .entry-content .alignwide,
-	body.wrapped-layout.no-sidebar .entry-footer .alignwide {
-		margin-right: -15rem;
-		margin-left: -15rem;
-	}
-}
-
-@media (min-width: 72rem) {
-	body.wrapped-layout.no-sidebar .entry-header .alignwide,
-	body.wrapped-layout.no-sidebar .entry-content .alignwide,
-	body.wrapped-layout.no-sidebar .entry-footer .alignwide {
-		margin-right: -15rem;
-		margin-left: -15rem;
-	}
-}
-
 body.no-sidebar .alignfull,
 body.mce-content-body .alignfull {
 	margin-right: -1rem;
@@ -1564,8 +1544,8 @@ body.mce-content-body .alignfull {
 	body.no-sidebar .entry-content .alignfull,
 	body.no-sidebar .entry-footer .alignfull,
 	body.mce-content-body .alignfull {
-		margin-right: calc(((100vw - 40rem) / 2) * -1);
-		margin-left: calc(((100vw - 40rem) / 2) * -1);
+		margin-right: calc(40rem / 2 - 50vw);
+		margin-left: calc(40rem / 2 - 50vw);
 	}
 }
 
@@ -2345,52 +2325,13 @@ object {
 /* -------------------------------------------------------------
 ## Gutenberg
 ------------------------------------------------------------- */
-p.has-background {
-	padding: 1rem 0.75rem;
-}
-
-.wp-block-quote {
-	margin: 0 0 1em;
-	color: #404040;
-}
-
-.wp-block-quote footer {
-	position: relative;
-	margin-top: 1em;
-	color: #8f98a1;
-	font-size: 12.8px;
-	font-size: 0.8rem;
-	font-style: normal;
-}
-
-.wp-block-quote.blocks-quote-style-1 {
-	padding-left: 1em;
-	border-left: 4px solid #404040;
-}
-
-.wp-block-quote.blocks-quote-style-2 {
-	padding: 0 1em;
-}
-
-.wp-block-quote.blocks-quote-style-2 p {
-	font-size: 24px;
-	font-size: 1.5rem;
-	font-style: italic;
-	line-height: 1.6;
-}
-
-.wp-block-quote.blocks-quote-style-2 footer {
-	font-size: 19.2px;
-	font-size: 1.2rem;
-	text-align: right;
-}
-
 .wp-block-pullquote {
 	padding: 3rem;
 	color: #404040;
 	text-align: center;
 	border-top: 4px solid #404040;
 	border-bottom: 4px solid #404040;
+	border-left: none;
 }
 
 .wp-block-pullquote > p {
@@ -2410,7 +2351,7 @@ p.has-background {
 }
 
 .wp-block-separator {
-	max-width: 100px;
+	max-width: 8rem;
 	border: 0;
 	border-bottom: 2px solid #8f98a1;
 }
@@ -2437,6 +2378,27 @@ p.has-background {
 	background-color: #d2d2d2;
 }
 
+.wp-block-gallery {
+	padding-left: 0;
+	list-style: none;
+}
+
+.wp-block-gallery.aligncenter .blocks-gallery-image,
+.wp-block-gallery.aligncenter .blocks-gallery-item,
+.wp-block-gallery.alignleft .blocks-gallery-image,
+.wp-block-gallery.alignleft .blocks-gallery-item,
+.wp-block-gallery.alignright .blocks-gallery-image,
+.wp-block-gallery.alignright .blocks-gallery-item,
+.wp-block-gallery .blocks-gallery-image,
+.wp-block-gallery .blocks-gallery-item {
+	margin: 0.5em;
+}
+
+.wp-block-cover-image {
+	width: auto;
+	height: 25rem;
+}
+
 .wp-block-image.alignwide,
 .wp-block-image.alignfull,
 .wp-block-embed.alignwide,
@@ -2460,7 +2422,7 @@ p.has-background {
 	body.no-sidebar .entry-content .wp-block-embed.alignwide,
 	body.no-sidebar .entry-footer .wp-block-embed.alignwide,
 	body.mce-content-body .wp-block-embed.alignwide {
-		padding-top: calc((100vw - 1rem * 2 - 15px) * 0.5625);
+		padding-top: calc((100vw - 1rem * 2) * 0.5625);
 	}
 }
 
@@ -2478,7 +2440,15 @@ p.has-background {
 	body.no-sidebar .entry-content .wp-block-embed.alignfull,
 	body.no-sidebar .entry-footer .wp-block-embed.alignfull,
 	body.mce-content-body .wp-block-embed.alignfull {
-		padding-top: calc((100vw - 15px) * 0.5625);
+		padding-top: calc(100vw * 0.5625);
+	}
+}
+
+@media (min-width: 42rem) {
+	body.wrapped-layout.no-sidebar .entry-header .wp-block-embed.alignfull,
+	body.wrapped-layout.no-sidebar .entry-content .wp-block-embed.alignfull,
+	body.wrapped-layout.no-sidebar .entry-footer .wp-block-embed.alignfull {
+		padding-top: calc(72rem * 0.5625);
 	}
 }
 

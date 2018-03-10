@@ -12,13 +12,16 @@ i {
 
 blockquote {
 	margin: 0 0 $spacing_vertical;
+	padding-left: $padding_horizontal;
 	color: $color__text-quote;
+	border-left: 4px solid $color__border-quote;
 
 	cite,
 	footer {
+		@include font-size(0.85);
+
 		margin-top: 1em;
 		color: $color__text-quote-footer;
-		font-size: 85%;
 		font-style: normal;
 	}
 }
