@@ -1083,24 +1083,24 @@ input[type="checkbox"] + label {
 
 /* Placeholder text color -- selectors need to be separate to work. */
 ::-webkit-input-placeholder {
-	color: #333;
+	color: #8f98a1;
 	font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
 }
 
 :-moz-placeholder {
-	color: #333;
+	color: #8f98a1;
 	font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
 }
 
 ::-moz-placeholder {
-	color: #333;
+	color: #8f98a1;
 	font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
 	/* Since FF19 lowers the opacity of the placeholder by default */
 	opacity: 1;
 }
 
 :-ms-input-placeholder {
-	color: #333;
+	color: #8f98a1;
 	font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
 }
 
@@ -2325,6 +2325,15 @@ object {
 /* -------------------------------------------------------------
 ## Gutenberg
 ------------------------------------------------------------- */
+.wp-block-quote cite,
+.wp-block-quote footer {
+	margin-top: 1em;
+	color: #8f98a1;
+	font-size: 13.6px;
+	font-size: 0.85rem;
+	font-style: normal;
+}
+
 .wp-block-pullquote {
 	padding: 3rem;
 	color: #404040;
@@ -2341,7 +2350,8 @@ object {
 	line-height: 1.6;
 }
 
-.wp-block-pullquote > cite {
+.wp-block-pullquote cite,
+.wp-block-pullquote footer {
 	position: relative;
 	color: #8f98a1;
 	font-size: 12.8px;

@@ -1,3 +1,14 @@
+.wp-block-quote {
+	cite,
+	footer {
+		@include font-size(0.85);
+
+		margin-top: 1em;
+		color: $color__text-quote-footer;
+		font-style: normal;
+	}
+}
+
 .wp-block-pullquote {
 	padding: ($padding_horizontal * 3);
 	border-top: 4px solid $color__border-quote;
@@ -13,7 +24,8 @@
 		font-weight: 900;
 	}
 
-	> cite {
+	cite,
+	footer {
 		@include font-size(0.8);
 
 		position: relative;

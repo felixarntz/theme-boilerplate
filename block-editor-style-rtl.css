@@ -209,6 +209,15 @@ h5 + .edit-post-visual-editor h6 {
 /* -------------------------------------------------------------
 # Blocks
 ------------------------------------------------------------- */
+.edit-post-visual-editor .wp-block-quote cite,
+.edit-post-visual-editor .wp-block-quote footer {
+	margin-top: 1em;
+	color: #8f98a1;
+	font-size: 13.6px;
+	font-size: 0.85rem;
+	font-style: normal;
+}
+
 .edit-post-visual-editor .wp-block-pullquote {
 	padding: 3rem;
 	color: #404040;
@@ -225,7 +234,8 @@ h5 + .edit-post-visual-editor h6 {
 	line-height: 1.6;
 }
 
-.edit-post-visual-editor .wp-block-pullquote > cite {
+.edit-post-visual-editor .wp-block-pullquote cite,
+.edit-post-visual-editor .wp-block-pullquote footer {
 	position: relative;
 	color: #8f98a1;
 	font-size: 12.8px;
