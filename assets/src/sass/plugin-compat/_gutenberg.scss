@@ -59,6 +59,19 @@
 			background-color: $color__background-button-hover;
 		}
 	}
+
+	&.button-primary {
+		.wp-block-button__link {
+			color: $color__text-button-primary;
+			background-color: $color__background-button-primary;
+
+			&:hover,
+			&:focus {
+				color: $color__text-button-primary;
+				background-color: $color__background-button-primary-hover;
+			}
+		}
+	}
 }
 
 .wp-block-gallery {

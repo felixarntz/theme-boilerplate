@@ -272,6 +272,17 @@ h5 + .edit-post-visual-editor h6 {
 	background-color: #d2d2d2;
 }
 
+.edit-post-visual-editor .wp-block-button.button-primary .wp-block-button__link {
+	color: #fff;
+	background-color: #21759b;
+}
+
+.edit-post-visual-editor .wp-block-button.button-primary .wp-block-button__link:hover,
+.edit-post-visual-editor .wp-block-button.button-primary .wp-block-button__link:focus {
+	color: #fff;
+	background-color: #1a5c79;
+}
+
 .edit-post-visual-editor .wp-block-gallery {
 	padding-left: 0;
 	list-style: none;

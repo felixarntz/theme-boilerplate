@@ -2388,6 +2388,17 @@ object {
 	background-color: #d2d2d2;
 }
 
+.wp-block-button.button-primary .wp-block-button__link {
+	color: #fff;
+	background-color: #21759b;
+}
+
+.wp-block-button.button-primary .wp-block-button__link:hover,
+.wp-block-button.button-primary .wp-block-button__link:focus {
+	color: #fff;
+	background-color: #1a5c79;
+}
+
 .wp-block-gallery {
 	padding-right: 0;
 	list-style: none;
