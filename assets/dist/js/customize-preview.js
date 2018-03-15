@@ -158,6 +158,20 @@
 				});
 			});
 
+			// Wide footer widget area.
+			wp.customize('wide_footer_widget_area', function (value) {
+				value.bind(function (to) {
+					$('.footer-widget-column').each(function () {
+						var $this = $(this);
+						if ('footer-widget-column-' + to === $this.attr('id')) {
+							$this.addClass('footer-widget-column-wide');
+						} else {
+							$this.removeClass('footer-widget-column-wide');
+						}
+					});
+				});
+			});
+
 			wp.customize.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = wp.customize.selectiveRefresh.Partial.extend({
 				placements: function placements() {
 					var partial = this,

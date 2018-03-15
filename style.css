@@ -2101,11 +2101,17 @@ body.no-sidebar .comments-area {
 		-webkit-box-align: stretch;
 		-webkit-box-pack: stretch;
 	}
-	.footer-widgets .site-component-inner > * {
+	.footer-widgets .site-component-inner .footer-widget-column {
 		-ms-flex: 1;
 		    flex: 1;
 
 		-webkit-box-flex: 1;
+	}
+	.footer-widgets .site-component-inner .footer-widget-column.footer-widget-column-wide {
+		-ms-flex: 2;
+		    flex: 2;
+
+		-webkit-box-flex: 2;
 	}
 }
 

@@ -112,56 +112,11 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	) ) );
 
 	/* Widget Settings */
-	$wp_customize->add_section( 'sidebars', array(
-		'panel'    => 'widgets',
-		'title'    => __( 'Widget Area Settings', 'super-awesome-theme' ),
-		'priority' => -1,
-	) );
-
-	$wp_customize->add_setting( 'sidebar_mode', array(
-		'default'           => 'right-sidebar',
-		'transport'         => 'postMessage',
-		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_mode',
-	) );
-	$wp_customize->add_control( 'sidebar_mode', array(
-		'section'         => 'sidebars',
-		'label'           => __( 'Sidebar Mode', 'super-awesome-theme' ),
-		'description'     => __( 'Specify if and how the sidebar should be displayed.', 'super-awesome-theme' ),
-		'type'            => 'radio',
-		'choices'         => super_awesome_theme_customize_get_sidebar_mode_choices(),
-		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
-	) );
-
-	$wp_customize->add_setting( 'sidebar_size', array(
-		'default'           => 'medium',
-		'transport'         => 'postMessage',
-		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_size',
-	) );
-	$wp_customize->add_control( 'sidebar_size', array(
-		'section'         => 'sidebars',
-		'label'           => __( 'Sidebar Size', 'super-awesome-theme' ),
-		'description'     => __( 'Specify the width of the sidebar.', 'super-awesome-theme' ),
-		'type'            => 'radio',
-		'choices'         => super_awesome_theme_customize_get_sidebar_size_choices(),
-		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
-	) );
-
-	$wp_customize->add_setting( 'blog_sidebar_enabled', array(
-		'default'           => '',
-		'transport'         => 'postMessage',
-	) );
-	$wp_customize->add_control( 'blog_sidebar_enabled', array(
-		'section'         => 'sidebars',
-		'label'           => __( 'Enable Blog Sidebar?', 'super-awesome-theme' ),
-		'description'     => __( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
-		'type'            => 'checkbox',
-		'active_callback' => 'super_awesome_theme_allow_display_blog_sidebar',
-	) );
-	$wp_customize->selective_refresh->add_partial( 'blog_sidebar_enabled', array(
-		'selector'            => '#sidebar',
-		'render_callback'     => 'get_sidebar',
-		'container_inclusive' => true,
-	) );
+	if ( is_admin() ) {
+		super_awesome_theme_customize_register_widget_area_settings();
+	} else {
+		add_action( 'wp', 'super_awesome_theme_customize_register_widget_area_settings' );
+	}
 
 	/* Content Type Settings */
 
@@ -292,6 +247,88 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	) );
 }
 add_action( 'customize_register', 'super_awesome_theme_customize_register' );
+
+/**
+ * Registers additional Customizer functionality for widget areas.
+ *
+ * @since 1.0.0
+ *
+ * @global WP_Customize_Manager $wp_customize Theme Customizer object.
+ */
+function super_awesome_theme_customize_register_widget_area_settings() {
+	global $wp_customize;
+
+	$wp_customize->add_section( 'widget_areas', array(
+		'panel'    => 'widgets',
+		'title'    => __( 'Widget Area Settings', 'super-awesome-theme' ),
+		'priority' => -1,
+	) );
+
+	$wp_customize->add_setting( 'sidebar_mode', array(
+		'default'           => 'right-sidebar',
+		'transport'         => 'postMessage',
+		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_mode',
+	) );
+	$wp_customize->add_control( 'sidebar_mode', array(
+		'section'         => 'widget_areas',
+		'label'           => __( 'Sidebar Mode', 'super-awesome-theme' ),
+		'description'     => __( 'Specify if and how the sidebar should be displayed.', 'super-awesome-theme' ),
+		'type'            => 'radio',
+		'choices'         => super_awesome_theme_customize_get_sidebar_mode_choices(),
+		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
+	) );
+
+	$wp_customize->add_setting( 'sidebar_size', array(
+		'default'           => 'medium',
+		'transport'         => 'postMessage',
+		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_size',
+	) );
+	$wp_customize->add_control( 'sidebar_size', array(
+		'section'         => 'widget_areas',
+		'label'           => __( 'Sidebar Size', 'super-awesome-theme' ),
+		'description'     => __( 'Specify the width of the sidebar.', 'super-awesome-theme' ),
+		'type'            => 'radio',
+		'choices'         => super_awesome_theme_customize_get_sidebar_size_choices(),
+		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
+	) );
+
+	$wp_customize->add_setting( 'blog_sidebar_enabled', array(
+		'default'   => '',
+		'transport' => 'postMessage',
+	) );
+	$wp_customize->add_control( 'blog_sidebar_enabled', array(
+		'section'         => 'widget_areas',
+		'label'           => __( 'Enable Blog Sidebar?', 'super-awesome-theme' ),
+		'description'     => __( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
+		'type'            => 'checkbox',
+		'active_callback' => 'super_awesome_theme_allow_display_blog_sidebar',
+	) );
+	$wp_customize->selective_refresh->add_partial( 'blog_sidebar_enabled', array(
+		'selector'            => '#sidebar',
+		'render_callback'     => 'get_sidebar',
+		'container_inclusive' => true,
+	) );
+
+	$footer_widget_area_count   = super_awesome_theme_get_footer_widget_area_count();
+	$footer_widget_area_choices = array( _x( 'None', 'widget area dropdown', 'super-awesome-theme' ) );
+	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
+		/* translators: %s: widget area number */
+		$footer_widget_area_choices[] = sprintf( __( 'Footer %s', 'super-awesome-theme' ), number_format_i18n( $i ) );
+	}
+	$wp_customize->add_setting( 'wide_footer_widget_area', array(
+		'default'              => 0,
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'absint',
+		'sanitize_js_callback' => 'absint',
+	) );
+	$wp_customize->add_control( 'wide_footer_widget_area', array(
+		'section'     => 'widget_areas',
+		'label'       => __( 'Wide Footer Column', 'super-awesome-theme' ),
+		'description' => __( 'If you like to reserve more space for one of your footer widget columns, you can select that one here.', 'super-awesome-theme' ),
+		'type'        => 'select',
+		'choices'     => $footer_widget_area_choices,
+	) );
+}
 
 /**
  * Prints styles generated through the Customizer.

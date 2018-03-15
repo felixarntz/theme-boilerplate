@@ -4,8 +4,12 @@
 			align-items: stretch;
 			justify-content: stretch;
 
-			> * {
+			.footer-widget-column {
 				flex: 1;
+
+				&.footer-widget-column-wide {
+					flex: 2;
+				}
 			}
 		}
 	}

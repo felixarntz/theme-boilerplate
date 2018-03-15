@@ -12,12 +12,17 @@ if ( super_awesome_theme_is_distraction_free() ) {
 }
 
 $footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
+$wide_footer_widget_area  = (int) get_theme_mod( 'wide_footer_widget_area', 0 );
 
 $has_active = false;
-for( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
-	if ( is_active_sidebar( 'footer-' . $i ) ) {
-		$has_active = true;
-		break;
+if ( is_customize_preview() ) {
+	$has_active = true;
+} else {
+	for( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
+		if ( is_active_sidebar( 'footer-' . $i ) ) {
+			$has_active = true;
+			break;
+		}
 	}
 }
 
@@ -29,11 +34,12 @@ if ( ! $has_active ) {
 	<div class="site-component-inner">
 		<?php
 		for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
+			$class = 'footer-widget-column' . ( $i === $wide_footer_widget_area ? ' footer-widget-column-wide' : '' );
 			if ( ! is_active_sidebar( 'footer-' . $i ) ) {
 				continue;
 			}
 			?>
-			<div class="widget-column">
+			<div id="<?php echo esc_attr( 'footer-widget-column-' . $i ); ?>" class="<?php echo esc_attr( $class ); ?>">
 				<?php dynamic_sidebar( 'footer-' . $i ); ?>
 			</div>
 			<?php
