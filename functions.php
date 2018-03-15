@@ -38,6 +38,11 @@ require get_template_directory() . '/inc/setup.php';
 require get_template_directory() . '/inc/assets.php';
 
 /**
+ * Widget functions.
+ */
+require get_template_directory() . '/inc/widgets.php';
+
+/**
  * Utility functions.
  */
 require get_template_directory() . '/inc/utils.php';
