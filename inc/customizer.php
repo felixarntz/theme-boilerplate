@@ -111,12 +111,11 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'label'   => __( 'Primary Button Background Color', 'super-awesome-theme' ),
 	) ) );
 
-	/* Sidebar Settings */
-
+	/* Widget Settings */
 	$wp_customize->add_section( 'sidebars', array(
-		'title'           => __( 'Sidebars', 'super-awesome-theme' ),
-		'priority'        => 105,
-		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
+		'panel'    => 'widgets',
+		'title'    => __( 'Widget Area Settings', 'super-awesome-theme' ),
+		'priority' => -1,
 	) );
 
 	$wp_customize->add_setting( 'sidebar_mode', array(
@@ -125,11 +124,12 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_mode',
 	) );
 	$wp_customize->add_control( 'sidebar_mode', array(
-		'section'     => 'sidebars',
-		'label'       => __( 'Sidebar Mode', 'super-awesome-theme' ),
-		'description' => __( 'Specify if and how the sidebar should be displayed.', 'super-awesome-theme' ),
-		'type'        => 'radio',
-		'choices'     => super_awesome_theme_customize_get_sidebar_mode_choices(),
+		'section'         => 'sidebars',
+		'label'           => __( 'Sidebar Mode', 'super-awesome-theme' ),
+		'description'     => __( 'Specify if and how the sidebar should be displayed.', 'super-awesome-theme' ),
+		'type'            => 'radio',
+		'choices'         => super_awesome_theme_customize_get_sidebar_mode_choices(),
+		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
 	) );
 
 	$wp_customize->add_setting( 'sidebar_size', array(
@@ -138,11 +138,12 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_size',
 	) );
 	$wp_customize->add_control( 'sidebar_size', array(
-		'section'     => 'sidebars',
-		'label'       => __( 'Sidebar Size', 'super-awesome-theme' ),
-		'description' => __( 'Specify the width of the sidebar.', 'super-awesome-theme' ),
-		'type'        => 'radio',
-		'choices'     => super_awesome_theme_customize_get_sidebar_size_choices(),
+		'section'         => 'sidebars',
+		'label'           => __( 'Sidebar Size', 'super-awesome-theme' ),
+		'description'     => __( 'Specify the width of the sidebar.', 'super-awesome-theme' ),
+		'type'            => 'radio',
+		'choices'         => super_awesome_theme_customize_get_sidebar_size_choices(),
+		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
 	) );
 
 	$wp_customize->add_setting( 'blog_sidebar_enabled', array(
@@ -172,13 +173,13 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	$public_post_types = get_post_types( array( 'public' => true ), 'objects' );
 	foreach ( $public_post_types as $post_type ) {
 		$wp_customize->add_section( 'content_type_' . $post_type->name, array(
-			'panel'    => 'content_types',
-			'title'    => $post_type->label,
+			'panel' => 'content_types',
+			'title' => $post_type->label,
 		) );
 
 		$wp_customize->add_setting( $post_type->name . '_show_date', array(
-			'default'           => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
-			'transport'         => 'postMessage',
+			'default'   => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
+			'transport' => 'postMessage',
 		) );
 		$wp_customize->add_control( $post_type->name . '_show_date', array(
 			'section' => 'content_type_' . $post_type->name,
@@ -194,8 +195,8 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 
 		if ( post_type_supports( $post_type->name, 'author' ) ) {
 			$wp_customize->add_setting( $post_type->name . '_show_author', array(
-				'default'           => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
-				'transport'         => 'postMessage',
+				'default'   => in_array( $post_type->name, array( 'post', 'attachment' ), true ) ? '1' : '',
+				'transport' => 'postMessage',
 			) );
 			$wp_customize->add_control( $post_type->name . '_show_author', array(
 				'section' => 'content_type_' . $post_type->name,
@@ -213,8 +214,8 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		if ( 'attachment' === $post_type->name ) {
 			foreach ( super_awesome_theme_get_attachment_metadata_fields() as $field => $label ) {
 				$wp_customize->add_setting( 'attachment_show_metadata_' . $field, array(
-					'default'           => '1',
-					'transport'         => 'postMessage',
+					'default'   => '1',
+					'transport' => 'postMessage',
 				) );
 				$wp_customize->add_control( 'attachment_show_metadata_' . $field, array(
 					'section' => 'content_type_' . $post_type->name,
@@ -236,8 +237,8 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		) );
 		foreach ( $public_taxonomies as $taxonomy ) {
 			$wp_customize->add_setting( $post_type->name . '_show_terms_' . $taxonomy->name, array(
-				'default'           => '1',
-				'transport'         => 'postMessage',
+				'default'   => '1',
+				'transport' => 'postMessage',
 			) );
 			$wp_customize->add_control( $post_type->name . '_show_terms_' . $taxonomy->name, array(
 				'section' => 'content_type_' . $post_type->name,
@@ -255,8 +256,8 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 
 		if ( post_type_supports( $post_type->name, 'author' ) ) {
 			$wp_customize->add_setting( $post_type->name . '_show_authorbox', array(
-				'default'           => 'post' === $post_type->name ? '1' : '',
-				'transport'         => 'postMessage',
+				'default'   => 'post' === $post_type->name ? '1' : '',
+				'transport' => 'postMessage',
 			) );
 			$wp_customize->add_control( $post_type->name . '_show_authorbox', array(
 				'section' => 'content_type_' . $post_type->name,
