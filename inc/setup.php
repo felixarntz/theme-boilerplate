@@ -178,7 +178,7 @@ function super_awesome_theme_get_footer_widget_area_count() {
 	 *
 	 * @param int $count Footer widget area count.
 	 */
-	return apply_filters( 'super_awesome_theme_footer_widget_area_count', 3 );
+	return apply_filters( 'super_awesome_theme_footer_widget_area_count', 4 );
 }
 
 /**
