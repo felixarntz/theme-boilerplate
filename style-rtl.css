@@ -2147,6 +2147,11 @@ body.no-sidebar .comments-area {
 	.inline-widget ul ul {
 		display: none;
 	}
+	.inline-widget label,
+	.inline-widget input,
+	.inline-widget select {
+		margin: 0;
+	}
 }
 
 @media (min-width: 48rem) {
