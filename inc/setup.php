@@ -144,6 +144,26 @@ function super_awesome_theme_register_widget_areas() {
 		'after_title'   => '</h2>',
 	) );
 
+	register_sidebar( array(
+		'name'          => __( 'Top Bar', 'super-awesome-theme' ),
+		'id'            => 'top',
+		'description'   => __( 'Add widgets here to appear in a narrow bar at the very top of the screen.', 'super-awesome-theme' ),
+		'before_widget' => '<div id="%1$s" class="inline-widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<span style="display:none;">',
+		'after_title'   => '</span>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Bottom Bar', 'super-awesome-theme' ),
+		'id'            => 'bottom',
+		'description'   => __( 'Add widgets here to appear in a narrow bar at the very bottom of the screen.', 'super-awesome-theme' ),
+		'before_widget' => '<div id="%1$s" class="inline-widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<span style="display:none;">',
+		'after_title'   => '</span>',
+	) );
+
 	$footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
 
 	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
@@ -158,6 +178,19 @@ function super_awesome_theme_register_widget_areas() {
 			'after_title'   => '</h2>',
 		) );
 	}
+
+	super_awesome_theme_add_inline_sidebars( array( 'top', 'bottom' ) );
+	super_awesome_theme_add_inline_widgets( array(
+		'categories',
+		'custom_html',
+		'meta',
+		'nav_menu',
+		'pages',
+		'recent-comments',
+		'recent-posts',
+		'search',
+		'text',
+	) );
 }
 add_action( 'widgets_init', 'super_awesome_theme_register_widget_areas' );
 
