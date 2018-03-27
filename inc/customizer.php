@@ -756,7 +756,9 @@ function super_awesome_theme_customize_controls_js() {
 
 	wp_enqueue_script( 'super-awesome-theme-customize-controls', get_theme_file_uri( '/assets/dist/js/customize-controls' . $min . '.js' ), array( 'customize-controls' ), SUPER_AWESOME_THEME_VERSION, true );
 	wp_localize_script( 'super-awesome-theme-customize-controls', 'themeCustomizeData', array(
-		'i18n' => array(
+		'inlineSidebars' => super_awesome_theme_get_inline_sidebars(),
+		'inlineWidgets'  => super_awesome_theme_get_inline_widgets(),
+		'i18n'           => array(
 			'blogSidebarEnabledNotice' => __( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ),
 		),
 	) );

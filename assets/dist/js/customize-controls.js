@@ -92,6 +92,29 @@
 		(function () {
 
 			wp.customize.bind('ready', function () {
+				function updateAvailableWidgets(collection, expanded) {
+					collection.each(function (widget) {
+						if (widget && !themeCustomizeData.inlineWidgets.includes(widget.get('id_base'))) {
+							widget.set('is_disabled', expanded);
+						}
+					});
+				}
+
+				if (themeCustomizeData.inlineSidebars.length) {
+					wp.customize.section.each(function (section) {
+						if ('sidebar' !== section.params.type) {
+							return;
+						}
+
+						if (!themeCustomizeData.inlineSidebars.includes(section.params.sidebarId)) {
+							return;
+						}
+
+						section.expanded.bind(function (expanded) {
+							updateAvailableWidgets(wp.customize.Widgets.availableWidgetsPanel.collection, expanded);
+						});
+					});
+				}
 
 				// Only show sidebar-related controls if a sidebar is enabled.
 				wp.customize('sidebar_mode', function (setting) {
