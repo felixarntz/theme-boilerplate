@@ -35,7 +35,7 @@ if ( ! $has_active ) {
 		<?php
 		for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
 			$class = 'footer-widget-column' . ( $i === $wide_footer_widget_area ? ' footer-widget-column-wide' : '' );
-			if ( ! is_active_sidebar( 'footer-' . $i ) ) {
+			if ( ! is_active_sidebar( 'footer-' . $i ) && ! is_customize_preview() ) {
 				continue;
 			}
 			?>

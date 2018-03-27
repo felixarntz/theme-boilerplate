@@ -20,7 +20,7 @@ if ( ! super_awesome_theme_display_sidebar() ) {
 
 $sidebar_slug = super_awesome_theme_get_sidebar_name();
 
-if ( ! is_active_sidebar( $sidebar_slug ) ) {
+if ( ! is_active_sidebar( $sidebar_slug ) && ! is_customize_preview() ) {
 	return;
 }
 
