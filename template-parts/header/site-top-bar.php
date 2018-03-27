@@ -11,9 +11,11 @@ if ( ! is_active_sidebar( 'top' ) && ! is_customize_preview() ) {
 	return;
 }
 
+$extra_class = get_theme_mod( 'top_bar_justify_content', 'space-between' );
+
 ?>
 
-<div id="site-top-bar" class="site-top-bar inline-widget-area site-component is-flex">
+<div id="site-top-bar" class="site-top-bar inline-widget-area site-component is-flex <?php echo esc_attr( $extra_class ); ?>">
 	<div class="site-component-inner">
 		<?php dynamic_sidebar( 'top' ); ?>
 	</div>

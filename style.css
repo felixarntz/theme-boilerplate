@@ -2161,6 +2161,15 @@ body.no-sidebar .comments-area {
 	}
 }
 
+@media (min-width: 48rem) {
+	.inline-widget-area.site-component.is-flex.centered > .site-component-inner {
+		-ms-flex-pack: center;
+		justify-content: center;
+
+		-webkit-box-pack: center;
+	}
+}
+
 .inline-widget-title {
 	display: none;
 }

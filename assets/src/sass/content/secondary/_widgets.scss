@@ -60,6 +60,12 @@
 	}
 }
 
+.inline-widget-area.site-component.is-flex.centered > .site-component-inner {
+	@media (min-width: $site_breakpoint) {
+		justify-content: center;
+	}
+}
+
 .inline-widget-title {
 	display: none;
 }

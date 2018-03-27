@@ -158,6 +158,34 @@
 				});
 			});
 
+			// Top Bar Justify Content.
+			wp.customize('top_bar_justify_content', function (value) {
+				value.bind(function (to) {
+					var classes = Object.keys(themeCustomizeData.barJustifyContentChoices);
+					var index = classes.indexOf(to);
+
+					if (index > -1) {
+						classes.splice(index, 1);
+
+						$('#site-top-bar').removeClass(classes.join(' ')).addClass(to);
+					}
+				});
+			});
+
+			// Bottom Bar Justify Content.
+			wp.customize('bottom_bar_justify_content', function (value) {
+				value.bind(function (to) {
+					var classes = Object.keys(themeCustomizeData.barJustifyContentChoices);
+					var index = classes.indexOf(to);
+
+					if (index > -1) {
+						classes.splice(index, 1);
+
+						$('#site-bottom-bar').removeClass(classes.join(' ')).addClass(to);
+					}
+				});
+			});
+
 			// Wide footer widget area.
 			wp.customize('wide_footer_widget_area', function (value) {
 				value.bind(function (to) {

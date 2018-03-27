@@ -309,6 +309,32 @@ function super_awesome_theme_customize_register_widget_area_settings() {
 		'container_inclusive' => true,
 	) );
 
+	$wp_customize->add_setting( 'top_bar_justify_content', array(
+		'default'           => 'space-between',
+		'transport'         => 'postMessage',
+		'validate_callback' => 'super_awesome_theme_customize_validate_bar_justify_content',
+	) );
+	$wp_customize->add_control( 'top_bar_justify_content', array(
+		'section'     => 'widget_areas',
+		'label'       => __( 'Top Bar Justify Content', 'super-awesome-theme' ),
+		'description' => __( 'Specify how the widgets in the top bar are aligned.', 'super-awesome-theme' ),
+		'type'        => 'radio',
+		'choices'     => super_awesome_theme_customize_get_bar_justify_content_choices(),
+	) );
+
+	$wp_customize->add_setting( 'bottom_bar_justify_content', array(
+		'default'           => 'space-between',
+		'transport'         => 'postMessage',
+		'validate_callback' => 'super_awesome_theme_customize_validate_bar_justify_content',
+	) );
+	$wp_customize->add_control( 'bottom_bar_justify_content', array(
+		'section'     => 'widget_areas',
+		'label'       => __( 'Bottom Bar Justify Content', 'super-awesome-theme' ),
+		'description' => __( 'Specify how the widgets in the bottom bar are aligned.', 'super-awesome-theme' ),
+		'type'        => 'radio',
+		'choices'     => super_awesome_theme_customize_get_bar_justify_content_choices(),
+	) );
+
 	$footer_widget_area_count   = super_awesome_theme_get_footer_widget_area_count();
 	$footer_widget_area_choices = array( _x( 'None', 'widget area dropdown', 'super-awesome-theme' ) );
 	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
@@ -658,6 +684,39 @@ function super_awesome_theme_customize_get_sidebar_size_choices() {
 }
 
 /**
+ * Validates the 'top_bar_justify_content' and 'bottom_bar_justify_content' customizer settings.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Error $validity Error object to add possible errors to.
+ * @param mixed    $value    Value to validate.
+ * @return WP_Error Possibly modified error object.
+ */
+function super_awesome_theme_customize_validate_bar_justify_content( $validity, $value ) {
+	$choices = super_awesome_theme_customize_get_bar_justify_content_choices();
+
+	if ( ! isset( $choices[ $value ] ) ) {
+		$validity->add( 'invalid_choice', __( 'Invalid choice.', 'super-awesome-theme' ) );
+	}
+
+	return $validity;
+}
+
+/**
+ * Gets the available choices for the 'top_bar_justify_content' and 'bottom_bar_justify_content' customizer settings.
+ *
+ * @since 1.0.0
+ *
+ * @return array Array where values are the keys, and labels are the values.
+ */
+function super_awesome_theme_customize_get_bar_justify_content_choices() {
+	return array(
+		'space-between' => _x( 'Space Between', 'alignment', 'super-awesome-theme' ),
+		'centered'      => _x( 'Centered', 'alignment', 'super-awesome-theme' ),
+	);
+}
+
+/**
  * Renders the entry metadata for a post.
  *
  * @since 1.0.0
@@ -775,8 +834,9 @@ function super_awesome_theme_customize_preview_js() {
 
 	wp_enqueue_script( 'super-awesome-theme-customize-preview', get_theme_file_uri( '/assets/dist/js/customize-preview' . $min . '.js' ), array( 'customize-preview', 'customize-selective-refresh' ), SUPER_AWESOME_THEME_VERSION, true );
 	wp_localize_script( 'super-awesome-theme-customize-preview', 'themeCustomizeData', array(
-		'sidebarModeChoices' => super_awesome_theme_customize_get_sidebar_mode_choices(),
-		'sidebarSizeChoices' => super_awesome_theme_customize_get_sidebar_size_choices(),
+		'sidebarModeChoices'       => super_awesome_theme_customize_get_sidebar_mode_choices(),
+		'sidebarSizeChoices'       => super_awesome_theme_customize_get_sidebar_size_choices(),
+		'barJustifyContentChoices' => super_awesome_theme_customize_get_bar_justify_content_choices(),
 	) );
 }
 add_action( 'customize_preview_init', 'super_awesome_theme_customize_preview_js' );
