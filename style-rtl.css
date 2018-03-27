@@ -2227,8 +2227,13 @@ body.no-sidebar .comments-area {
 	border-radius: 40px;
 }
 
+.social-navigation a:visited {
+	color: #fff;
+}
+
 .social-navigation a:hover,
 .social-navigation a:focus {
+	color: #fff;
 	background-color: #333;
 }
 

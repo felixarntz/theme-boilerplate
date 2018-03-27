@@ -24,8 +24,13 @@
 		color: #fff;
 		background-color: #767676;
 
+		&:visited {
+			color: #fff;
+		}
+
 		&:hover,
 		&:focus {
+			color: #fff;
 			background-color: #333;
 		}
 
