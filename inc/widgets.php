@@ -162,13 +162,13 @@ function super_awesome_theme_ensure_inline_widgets_whitelist( $sidebars_widgets 
 		}
 
 		foreach ( $sidebars_widgets[ $sidebar_id ] as $index => $widget_instance_id ) {
-			if ( ! in_array( $widget_instance_id, $inline_widgets, true ) ) {
-				unset( $sidebars_widgets[ $sidebar_id ][ $index ] );
-			} elseif ( preg_match( '/-(\d+)$/', $widget_instance_id, $matches ) ) {
+			if ( preg_match( '/-(\d+)$/', $widget_instance_id, $matches ) ) {
 				$widget_id = substr( $widget_instance_id, 0, - strlen( $matches[0] ) );
 				if ( ! in_array( $widget_id, $inline_widgets, true ) ) {
 					unset( $sidebars_widgets[ $sidebar_id ][ $index ] );
 				}
+			} elseif ( ! in_array( $widget_instance_id, $inline_widgets, true ) ) {
+				unset( $sidebars_widgets[ $sidebar_id ][ $index ] );
 			}
 		}
 
