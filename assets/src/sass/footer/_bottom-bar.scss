@@ -1,0 +1,20 @@
+.site-bottom-bar {
+	padding-top: (0.5 * $padding_vertical);
+	padding-bottom: (0.5 * $padding_vertical);
+	color: $color__text-bottom-bar;
+	background-color: $color__background-bottom-bar;
+
+	a {
+		color: $color__link-bottom-bar;
+
+		&:visited {
+			color: $color__link-bottom-bar-visited;
+		}
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $color__link-bottom-bar-hover;
+		}
+	}
+}

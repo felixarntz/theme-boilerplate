@@ -150,7 +150,7 @@ function super_awesome_theme_register_widget_areas() {
 		'description'   => __( 'Add widgets here to appear in a narrow bar at the very top of the screen.', 'super-awesome-theme' ),
 		'before_widget' => '<div id="%1$s" class="inline-widget %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<span style="display:none;">',
+		'before_title'  => '<span class="inline-widget-title">',
 		'after_title'   => '</span>',
 	) );
 
@@ -160,7 +160,7 @@ function super_awesome_theme_register_widget_areas() {
 		'description'   => __( 'Add widgets here to appear in a narrow bar at the very bottom of the screen.', 'super-awesome-theme' ),
 		'before_widget' => '<div id="%1$s" class="inline-widget %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<span style="display:none;">',
+		'before_title'  => '<span class="inline-widget-title">',
 		'after_title'   => '</span>',
 	) );
 
