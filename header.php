@@ -7,6 +7,8 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
+$branding_location = get_theme_mod( 'branding_location', 'above_navbar' );
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
@@ -26,9 +28,19 @@
 	<header id="header" class="site-header">
 		<?php get_template_part( 'template-parts/header/site-top-bar' ); ?>
 
-		<?php get_template_part( 'template-parts/header/site-branding' ); ?>
+		<?php
+		if ( 'above_navbar' === $branding_location ) {
+			get_template_part( 'template-parts/header/site-branding' );
+		}
+		?>
 
-		<?php get_template_part( 'template-parts/header/site-navigation' ); ?>
+		<?php get_template_part( 'template-parts/header/site-navbar' ); ?>
+
+		<?php
+		if ( 'below_navbar' === $branding_location ) {
+			get_template_part( 'template-parts/header/site-branding' );
+		}
+		?>
 	</header><!-- #header -->
 
 	<div id="content" class="site-content site-component is-flex">
