@@ -1,5 +1,7 @@
 .footer-navigation {
-	@include text-center();
+	padding-top: $padding_vertical;
+	padding-bottom: $padding_vertical;
+	text-align: center;
 
 	ul {
 		display: inline-block;

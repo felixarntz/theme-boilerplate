@@ -1,6 +1,9 @@
 .social-navigation {
-	@include text-center();
 	@include font-size(1);
+
+	padding-top: $padding_vertical;
+	padding-bottom: $padding_vertical;
+	text-align: center;
 
 	ul {
 		display: inline-block;
