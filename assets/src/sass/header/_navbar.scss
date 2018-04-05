@@ -1,0 +1,19 @@
+.site-navbar {
+	&.site-component > .site-component-inner {
+		min-height: 5rem;
+	}
+
+	&.site-component.is-flex > .site-component-inner {
+		@media (min-width: $site_breakpoint) {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+
+	&.site-component.is-flex.centered > .site-component-inner {
+		@media (min-width: $site_breakpoint) {
+			justify-content: center;
+		}
+	}
+}

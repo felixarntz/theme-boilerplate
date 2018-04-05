@@ -59,8 +59,10 @@
 	}
 }
 
+.inline-widget-area:not(.site-component),
 .inline-widget-area.site-component.is-flex > .site-component-inner {
 	@media (min-width: $site_breakpoint) {
+		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}

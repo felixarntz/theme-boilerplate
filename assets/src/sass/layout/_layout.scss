@@ -96,9 +96,8 @@
 	}
 }
 
-.site-header,
-.site-content,
-.site-footer {
+// This fixes a browser bug with the .alignfull classes.
+.site-content {
 	overflow-x: hidden;
 }
 
