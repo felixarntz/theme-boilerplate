@@ -145,6 +145,16 @@ function super_awesome_theme_register_widget_areas() {
 	) );
 
 	register_sidebar( array(
+		'name'          => __( 'Navbar Extra', 'super-awesome-theme' ),
+		'id'            => 'nav-extra',
+		'description'   => __( 'Add widgets here to appear as additional content in the navbar beside the main navigation menu.', 'super-awesome-theme' ),
+		'before_widget' => '<div id="%1$s" class="inline-widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<span class="inline-widget-title">',
+		'after_title'   => '</span>',
+	) );
+
+	register_sidebar( array(
 		'name'          => __( 'Top Bar', 'super-awesome-theme' ),
 		'id'            => 'top',
 		'description'   => __( 'Add widgets here to appear in a narrow bar at the very top of the screen.', 'super-awesome-theme' ),
@@ -179,7 +189,7 @@ function super_awesome_theme_register_widget_areas() {
 		) );
 	}
 
-	super_awesome_theme_add_inline_sidebars( array( 'top', 'bottom' ) );
+	super_awesome_theme_add_inline_sidebars( array( 'nav-extra', 'top', 'bottom' ) );
 	super_awesome_theme_add_inline_widgets( array(
 		'categories',
 		'custom_html',
