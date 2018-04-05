@@ -1,5 +1,5 @@
 .widget {
-	margin: 0 0 1.5em;
+	margin-bottom: $spacing_vertical;
 
 	/* Make sure select elements fit in widgets. */
 	select {
@@ -8,7 +8,14 @@
 }
 
 .inline-widget {
+	margin-bottom: $spacing_vertical;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
 	@media (min-width: $site_breakpoint) {
+		margin-bottom: 0;
 		padding-right: $padding_horizontal;
 		padding-left: $padding_horizontal;
 

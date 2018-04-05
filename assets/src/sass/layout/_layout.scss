@@ -96,8 +96,10 @@
 	}
 }
 
-// This fixes a browser bug with the .alignfull classes.
 .site-content {
+	padding-top: $padding_vertical;
+
+	// This fixes a browser bug with the .alignfull classes.
 	overflow-x: hidden;
 }
 

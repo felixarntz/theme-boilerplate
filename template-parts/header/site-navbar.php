@@ -9,15 +9,7 @@
 
 $branding_location = get_theme_mod( 'branding_location', 'above_navbar' );
 $menu_slug         = super_awesome_theme_get_navigation_name();
-
-if ( ! in_array( $branding_location, array( 'navbar_left', 'navbar_right' ), true )
-	&& ! has_nav_menu( $menu_slug )
-	&& ! is_active_sidebar( 'nav-extra' )
-	&& ! is_customize_preview() ) {
-	return;
-}
-
-$extra_class = get_theme_mod( 'navbar_justify_content', 'space-between' );
+$extra_class       = get_theme_mod( 'navbar_justify_content', 'space-between' );
 
 ?>
 
@@ -41,30 +33,33 @@ $extra_class = get_theme_mod( 'navbar_justify_content', 'space-between' );
 			<?php endif; ?>
 		<?php endif; ?>
 
-		<?php if ( has_nav_menu( $menu_slug ) || is_customize_preview() ) : ?>
-			<nav id="site-navigation" class="site-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'super-awesome-theme' ); ?>">
-				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-					<?php
-					echo super_awesome_theme_get_svg( 'bars' ); // WPCS: XSS OK.
-					echo super_awesome_theme_get_svg( 'close' ); // WPCS: XSS OK.
-					esc_html_e( 'Menu', 'super-awesome-theme' );
-					?>
-				</button>
+		<nav id="site-navigation" class="site-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'super-awesome-theme' ); ?>">
+			<button class="menu-toggle" aria-controls="site-navigation-content" aria-expanded="false">
 				<?php
-				wp_nav_menu( array(
-					'theme_location' => $menu_slug,
-					'menu_id'        => 'primary-menu',
-					'container'      => false,
-				) );
+				echo super_awesome_theme_get_svg( 'bars' ); // WPCS: XSS OK.
+				echo super_awesome_theme_get_svg( 'close' ); // WPCS: XSS OK.
+				esc_html_e( 'Menu', 'super-awesome-theme' );
 				?>
-			</nav><!-- #site-navigation -->
-		<?php endif; ?>
+			</button>
 
-		<?php if ( is_active_sidebar( 'nav-extra' ) || is_customize_preview() ) : ?>
-			<div id="site-navigation-extra" class="site-navigation-extra inline-widget-area">
-				<?php dynamic_sidebar( 'nav-extra' ); ?>
-			</div><!-- #site-nav-extra -->
-		<?php endif; ?>
+			<div id="site-navigation-content" class="site-navigation-content">
+				<div class="site-navigation-menu">
+					<?php
+					wp_nav_menu( array(
+						'theme_location' => $menu_slug,
+						'menu_id'        => 'primary-menu',
+						'container'      => false,
+					) );
+					?>
+				</div>
+
+				<?php if ( is_active_sidebar( 'nav-extra' ) || is_customize_preview() ) : ?>
+					<div id="site-navigation-extra" class="site-navigation-extra inline-widget-area">
+						<?php dynamic_sidebar( 'nav-extra' ); ?>
+					</div><!-- #site-nav-extra -->
+				<?php endif; ?>
+			</div>
+		</nav><!-- #site-navigation -->
 
 		<?php if ( 'navbar_right' === $branding_location ) : ?>
 			<div class="site-branding">

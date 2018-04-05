@@ -1,4 +1,5 @@
 .site-navbar {
+	position: relative;
 	color: $color__text-navbar;
 	background-color: $color__background-navbar;
 
@@ -21,16 +22,56 @@
 	}
 
 	&.site-component.is-flex > .site-component-inner {
-		@media (min-width: $site_breakpoint) {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-		}
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 
 	&.site-component.is-flex.centered > .site-component-inner {
-		@media (min-width: $site_breakpoint) {
-			justify-content: center;
+		justify-content: center;
+	}
+
+	.site-branding:first-child {
+		text-align: left;
+	}
+
+	.site-branding:last-child {
+		text-align: right;
+	}
+
+	.js & .site-navigation {
+		.site-navigation-content {
+			position: absolute;
+			display: none;
+			top: 100%;
+			right: 0;
+			left: 0;
+			padding: $padding_vertical (0.5 * $padding_horizontal);
+			background-color: $color__background-navbar;
+
+			.site-navigation-extra {
+				padding: 0 (0.5 * $padding_horizontal);
+			}
+
+			@media screen and (min-width: $site_breakpoint) {
+				position: static;
+				display: flex;
+				padding: 0;
+
+				.site-navigation-extra {
+					padding: 0;
+				}
+			}
+		}
+
+		&.toggled {
+			.site-navigation-content {
+				display: block;
+
+				@media screen and (min-width: $site_breakpoint) {
+					display: flex;
+				}
+			}
 		}
 	}
 }

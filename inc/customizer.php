@@ -720,6 +720,10 @@ function super_awesome_theme_print_customizer_styles() {
 				background-color: <?php echo esc_attr( $navbar_background_color ); ?>;
 			}
 
+			.js .site-navbar .site-navigation .site-navigation-content {
+				background-color: <?php echo esc_attr( $navbar_background_color ); ?>;
+			}
+
 			<?php if ( ! empty( $navbar_link_color ) && ! empty( $navbar_link_focus_color ) ) : ?>
 				.site-navbar a,
 				.site-navbar a:visited {

@@ -1685,6 +1685,7 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 }
 
 .site-content {
+	padding-top: 0.75rem;
 	overflow-x: hidden;
 }
 
@@ -1770,6 +1771,7 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 ## Navbar
 ------------------------------------------------------------- */
 .site-navbar {
+	position: relative;
 	color: #404040;
 	background-color: #eee;
 }
@@ -1792,27 +1794,70 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	min-height: 5rem;
 }
 
-@media (min-width: 48rem) {
-	.site-navbar.site-component.is-flex > .site-component-inner {
-		align-items: center;
-		-ms-flex-align: center;
-		-ms-flex-pack: justify;
-		justify-content: space-between;
+.site-navbar.site-component.is-flex > .site-component-inner {
+	align-items: center;
+	-ms-flex-align: center;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: center;
+	-webkit-box-pack: justify;
+}
+
+.site-navbar.site-component.is-flex.centered > .site-component-inner {
+	-ms-flex-pack: center;
+	justify-content: center;
+
+	-webkit-box-pack: center;
+}
+
+.site-navbar .site-branding:first-child {
+	text-align: left;
+}
+
+.site-navbar .site-branding:last-child {
+	text-align: right;
+}
+
+.js .site-navbar .site-navigation .site-navigation-content {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	left: 0;
+	display: none;
+	padding: 0.75rem 0.5rem;
+	background-color: #eee;
+}
+
+.js .site-navbar .site-navigation .site-navigation-content .site-navigation-extra {
+	padding: 0 0.5rem;
+}
+
+@media screen and (min-width: 48rem) {
+	.js .site-navbar .site-navigation .site-navigation-content {
+		position: static;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
-
-		-webkit-box-align: center;
-		-webkit-box-pack: justify;
+		padding: 0;
+	}
+	.js .site-navbar .site-navigation .site-navigation-content .site-navigation-extra {
+		padding: 0;
 	}
 }
 
-@media (min-width: 48rem) {
-	.site-navbar.site-component.is-flex.centered > .site-component-inner {
-		-ms-flex-pack: center;
-		justify-content: center;
+.js .site-navbar .site-navigation.toggled .site-navigation-content {
+	display: block;
+}
 
-		-webkit-box-pack: center;
+@media screen and (min-width: 48rem) {
+	.js .site-navbar .site-navigation.toggled .site-navigation-content {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
 	}
 }
 
@@ -2151,7 +2196,7 @@ body.no-sidebar .comments-area {
 # Widgets
 ------------------------------------------------------------- */
 .widget {
-	margin: 0 0 1.5em;
+	margin-bottom: 1em;
 	/* Make sure select elements fit in widgets. */
 }
 
@@ -2159,10 +2204,19 @@ body.no-sidebar .comments-area {
 	max-width: 100%;
 }
 
+.inline-widget {
+	margin-bottom: 1em;
+}
+
+.inline-widget:last-child {
+	margin-bottom: 0;
+}
+
 @media (min-width: 48rem) {
 	.inline-widget {
 		padding-right: 1rem;
 		padding-left: 1rem;
+		margin-bottom: 0;
 	}
 	.inline-widget p {
 		display: inline-block;
