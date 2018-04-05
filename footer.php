@@ -19,8 +19,6 @@
 
 		<?php get_template_part( 'template-parts/footer/footer-navigation' ); ?>
 
-		<?php get_template_part( 'template-parts/footer/site-info' ); ?>
-
 		<?php get_template_part( 'template-parts/footer/site-bottom-bar' ); ?>
 	</footer><!-- #footer -->
 </div><!-- #page -->
