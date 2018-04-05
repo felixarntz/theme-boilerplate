@@ -40,9 +40,9 @@
     "babel-preset-env": "~1.6.1",
     "gulp": "~3.9.1",
     "gulp-autoprefixer": "~4.0.0",
-    "gulp-babel": "~7.0.0",
+    "gulp-babel": "^7.0.1",
     "gulp-csscomb": "~3.0.8",
-    "gulp-eslint": "~4.0.0",
+    "gulp-eslint": "^4.0.2",
     "gulp-imagemin": "~3.4.0",
     "gulp-jscs": "~4.0.0",
     "gulp-rename": "~1.2.2",
@@ -56,6 +56,6 @@
     "gulp-wp-pot": "~2.0.6",
     "imagemin-mozjpeg": "~6.0.0",
     "stylelint-config-standard": "~17.0.0",
-    "webpack-stream": "~4.0.0"
+    "webpack-stream": "^4.0.3"
   }
 }
