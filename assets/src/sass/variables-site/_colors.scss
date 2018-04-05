@@ -16,6 +16,7 @@ $color__error-light: #ffdcdc;
 
 $color__background-body: $color__white;
 $color__background-screen: #f1f1f1;
+$color__background-navbar: #eee;
 $color__background-top-bar: $color__primary;
 $color__background-bottom-bar: $color__primary;
 $color__background-button: #e6e6e6;
@@ -28,6 +29,7 @@ $color__background-ins: #fff9c0;
 
 $color__text-main: $color__black;
 $color__text-screen: $color__primary;
+$color__text-navbar: $color__black;
 $color__text-top-bar: $color__white;
 $color__text-bottom-bar: $color__white;
 $color__text-button: $color__black;
@@ -40,12 +42,15 @@ $color__text-quote-footer: $color__darkgray;
 $color__link: $color__primary;
 $color__link-visited: $color__link;
 $color__link-hover: darken($color__link, 8%);
+$color__link-navbar: $color__primary;
+$color__link-navbar-visited: $color__link-navbar;
+$color__link-navbar-hover: darken($color__link-navbar, 8%);
 $color__link-top-bar: $color__white;
-$color__link-top-bar-visited: $color__white;
-$color__link-top-bar-hover: darken($color__white, 8%);
+$color__link-top-bar-visited: $color__link-top-bar;
+$color__link-top-bar-hover: darken($color__link-top-bar, 8%);
 $color__link-bottom-bar: $color__white;
-$color__link-bottom-bar-visited: $color__white;
-$color__link-bottom-bar-hover: darken($color__white, 8%);
+$color__link-bottom-bar-visited: $color__link-bottom-bar;
+$color__link-bottom-bar-hover: darken($color__link-bottom-bar, 8%);
 
 $color__border-input: $color__lightgray;
 $color__border-input-focus: darken($color__border-input, 8%);

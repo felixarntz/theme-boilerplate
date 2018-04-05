@@ -111,6 +111,39 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'label'   => __( 'Primary Button Background Color', 'super-awesome-theme' ),
 	) ) );
 
+	$wp_customize->add_setting( 'navbar_text_color', array(
+		'default'              => '#404040',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'navbar_text_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Navbar Text Color', 'super-awesome-theme' ),
+	) ) );
+
+	$wp_customize->add_setting( 'navbar_link_color', array(
+		'default'              => '#21759b',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'navbar_link_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Navbar Link Color', 'super-awesome-theme' ),
+	) ) );
+
+	$wp_customize->add_setting( 'navbar_background_color', array(
+		'default'              => '#eeeeee',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'navbar_background_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Navbar Background Color', 'super-awesome-theme' ),
+	) ) );
+
 	$wp_customize->add_setting( 'top_bar_text_color', array(
 		'default'              => '#ffffff',
 		'transport'            => 'postMessage',
@@ -305,6 +338,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			'button_background_color',
 			'button_primary_text_color',
 			'button_primary_background_color',
+			'navbar_text_color',
+			'navbar_link_color',
+			'navbar_background_color',
 			'top_bar_text_color',
 			'top_bar_link_color',
 			'top_bar_background_color',
@@ -446,6 +482,10 @@ function super_awesome_theme_print_customizer_styles() {
 	$button_primary_text_color             = get_theme_mod( 'button_primary_text_color', '#ffffff' );
 	$button_primary_background_color       = get_theme_mod( 'button_primary_background_color', '#21759b' );
 	$button_primary_background_focus_color = super_awesome_theme_darken_color( $button_primary_background_color, 25 );
+	$navbar_text_color                     = get_theme_mod( 'navbar_text_color', '#404040' );
+	$navbar_link_color                     = get_theme_mod( 'navbar_link_color', '#21759b' );
+	$navbar_link_focus_color               = super_awesome_theme_darken_color( $navbar_link_color, 25 );
+	$navbar_background_color               = get_theme_mod( 'navbar_background_color', '#eeeeee' );
 	$top_bar_text_color                    = get_theme_mod( 'top_bar_text_color', '#ffffff' );
 	$top_bar_link_color                    = get_theme_mod( 'top_bar_link_color', '#ffffff' );
 	$top_bar_link_focus_color              = super_awesome_theme_darken_color( $top_bar_link_color, 25 );
@@ -658,6 +698,25 @@ function super_awesome_theme_print_customizer_styles() {
 				color: <?php echo esc_attr( $button_primary_text_color ); ?>;
 				background-color: <?php echo esc_attr( $button_primary_background_focus_color ); ?>;
 			}
+		<?php endif; ?>
+		<?php if ( ! empty( $navbar_text_color ) && ! empty( $navbar_background_color ) ) : ?>
+			.site-navbar {
+				color: <?php echo esc_attr( $navbar_text_color ); ?>;
+				background-color: <?php echo esc_attr( $navbar_background_color ); ?>;
+			}
+
+			<?php if ( ! empty( $navbar_link_color ) && ! empty( $navbar_link_focus_color ) ) : ?>
+				.site-navbar a,
+				.site-navbar a:visited {
+					color: <?php echo esc_attr( $navbar_link_color ); ?>;
+				}
+
+				.site-navbar a:hover,
+				.site-navbar a:focus,
+				.site-navbar a:active {
+					color: <?php echo esc_attr( $navbar_link_focus_color ); ?>;
+				}
+			<?php endif; ?>
 		<?php endif; ?>
 		<?php if ( ! empty( $top_bar_text_color ) && ! empty( $top_bar_background_color ) ) : ?>
 			.site-top-bar {

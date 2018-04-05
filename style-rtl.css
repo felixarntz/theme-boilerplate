@@ -1748,7 +1748,7 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 
 .site-title {
 	padding: 0;
-	margin: 0 0 1em;
+	margin: 0;
 	clear: both;
 	font-size: 32px;
 	font-size: 2rem;
@@ -1757,8 +1757,8 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 }
 
 .site-description {
-	padding: 0;
-	margin: 0 0 1em;
+	padding: 0.5em 0 0;
+	margin: 0;
 	clear: both;
 	font-size: 19.2px;
 	font-size: 1.2rem;
@@ -1769,6 +1769,25 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 /* -------------------------------------------------------------
 ## Navbar
 ------------------------------------------------------------- */
+.site-navbar {
+	color: #404040;
+	background-color: #eee;
+}
+
+.site-navbar a {
+	color: #21759b;
+}
+
+.site-navbar a:visited {
+	color: #21759b;
+}
+
+.site-navbar a:hover,
+.site-navbar a:focus,
+.site-navbar a:active {
+	color: #1a5c79;
+}
+
 .site-navbar.site-component > .site-component-inner {
 	min-height: 5rem;
 }
