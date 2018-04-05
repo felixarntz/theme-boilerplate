@@ -31,6 +31,21 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'render_callback' => 'super_awesome_theme_customize_partial_blogdescription',
 	) );
 
+	/* Site Identity Settings */
+
+	$wp_customize->add_setting( 'branding_location', array(
+		'default'           => 'above_navbar',
+		'transport'         => 'refresh',
+		'validate_callback' => 'super_awesome_theme_customize_validate_branding_location',
+	) );
+	$wp_customize->add_control( 'branding_location', array(
+		'section'     => 'title_tagline',
+		'label'       => __( 'Display Location', 'super-awesome-theme' ),
+		'description' => __( 'Specify where to display the site logo, title and tagline.', 'super-awesome-theme' ),
+		'type'        => 'radio',
+		'choices'     => super_awesome_theme_customize_get_branding_location_choices(),
+	) );
+
 	/* Colors */
 
 	$wp_customize->add_setting( 'text_color', array(
@@ -790,6 +805,41 @@ function super_awesome_theme_customize_partial_blogname() {
  */
 function super_awesome_theme_customize_partial_blogdescription() {
 	bloginfo( 'description' );
+}
+
+/**
+ * Validates the 'branding_location' customizer setting.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Error $validity Error object to add possible errors to.
+ * @param mixed    $value    Value to validate.
+ * @return WP_Error Possibly modified error object.
+ */
+function super_awesome_theme_customize_validate_branding_location( $validity, $value ) {
+	$choices = super_awesome_theme_customize_get_branding_location_choices();
+
+	if ( ! isset( $choices[ $value ] ) ) {
+		$validity->add( 'invalid_choice', __( 'Invalid choice.', 'super-awesome-theme' ) );
+	}
+
+	return $validity;
+}
+
+/**
+ * Gets the available choices for the 'branding_location' customizer setting.
+ *
+ * @since 1.0.0
+ *
+ * @return array Array where values are the keys, and labels are the values.
+ */
+function super_awesome_theme_customize_get_branding_location_choices() {
+	return array(
+		'above_navbar' => __( 'Above the navbar', 'super-awesome-theme' ),
+		'below_navbar' => __( 'Below the navbar', 'super-awesome-theme' ),
+		'navbar_left'  => __( 'On the left inside the navbar', 'super-awesome-theme' ),
+		'navbar_right' => __( 'On the right inside the navbar', 'super-awesome-theme' ),
+	);
 }
 
 /**
