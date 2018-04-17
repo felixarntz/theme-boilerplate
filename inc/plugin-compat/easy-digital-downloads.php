@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-add_filter( 'edd_get_option_disable_styles', '__return_true' );
+// add_filter( 'edd_get_option_disable_styles', '__return_true' );
 
 /**
  * Ensures that the Easy Digital Downloads checkout page is rendered in distraction-free mode.

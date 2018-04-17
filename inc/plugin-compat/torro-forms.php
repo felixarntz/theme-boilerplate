@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-add_filter( 'torro_load_frontend_css', '__return_false' );
+// add_filter( 'torro_load_frontend_css', '__return_false' );
 
 /**
  * Adjusts the CSS classes to use for forms.
