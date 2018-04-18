@@ -42,24 +42,24 @@ add_action( 'wp_head', 'super_awesome_theme_js_svg_detection', 0 );
  * @return array Modified classes.
  */
 function super_awesome_theme_body_classes( $classes ) {
-	// Adds a class to indicate that a wrapped layout is used.
+	// Add a class to indicate that a wrapped layout is used.
 	if ( super_awesome_theme_use_wrapped_layout() ) {
 		$classes[] = 'wrapped-layout';
 	}
 
-	// Adds a class of hfeed to non-singular pages.
+	// Add a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
 	}
 
-	// Adds a class to indicate the sidebar mode.
+	// Add a class to indicate the sidebar mode.
 	if ( ! super_awesome_theme_display_sidebar() ) {
 		$classes[] = 'no-sidebar';
 	} else {
 		$classes[] = get_theme_mod( 'sidebar_mode', 'right-sidebar' );
 	}
 
-	// Adds a class to indicate the sidebar size.
+	// Add a class to indicate the sidebar size.
 	$classes[] = 'sidebar-' . get_theme_mod( 'sidebar_size', 'medium' );
 
 	return $classes;
