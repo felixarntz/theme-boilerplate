@@ -22,6 +22,20 @@ function super_awesome_theme_enqueue_assets() {
 
 	$theme_data = array();
 
+	$theme_data['sticky'] = array(
+		'stickToTopIds'    => array(),
+		'stickToBottomIds' => array(),
+	);
+	if ( (bool) get_theme_mod( 'sticky_top_bar', false ) ) {
+		$theme_data['sticky']['stickToTopIds'][] = 'site-top-bar';
+	}
+	if ( (bool) get_theme_mod( 'sticky_navbar', false ) ) {
+		$theme_data['sticky']['stickToTopIds'][] = 'site-navbar';
+	}
+	if ( (bool) get_theme_mod( 'sticky_bottom_bar', false ) ) {
+		$theme_data['sticky']['stickToBottomIds'][] = 'site-bottom-bar';
+	}
+
 	if ( has_nav_menu( 'primary' ) ) {
 		$theme_data['navigation'] = array(
 			'icon' => super_awesome_theme_get_svg( 'angle-down', array( 'fallback' => true ) ),

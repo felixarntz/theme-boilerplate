@@ -1,5 +1,7 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -93,6 +95,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__navigation__ = __webpack_require__(2);
 	/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__comment_form__ = __webpack_require__(3);
 	/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__modals__ = __webpack_require__(4);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__sticky__ = __webpack_require__(5);
 
 	window.themeData = window.themeData || {};
 
@@ -101,13 +104,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			skipLinkFocusFix: new __WEBPACK_IMPORTED_MODULE_0__skip_link_focus_fix__["a" /* default */](),
 			navigation: new __WEBPACK_IMPORTED_MODULE_1__navigation__["a" /* default */]('site-navigation', themeData.navigation),
 			commentForm: new __WEBPACK_IMPORTED_MODULE_2__comment_form__["a" /* default */]('commentform', 'comments', themeData.comments),
-			modals: new __WEBPACK_IMPORTED_MODULE_3__modals__["a" /* default */]('.modal')
+			modals: new __WEBPACK_IMPORTED_MODULE_3__modals__["a" /* default */]('.modal'),
+			sticky: new __WEBPACK_IMPORTED_MODULE_4__sticky__["a" /* default */](themeData.sticky)
 		};
 
 		themeData.components.skipLinkFocusFix.initialize();
 		themeData.components.navigation.initialize();
 		themeData.components.commentForm.initialize();
 		themeData.components.modals.initialize();
+		themeData.components.sticky.initialize();
 	})(window.themeData);
 
 	/***/
@@ -827,6 +832,155 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/* harmony default export */
 
 	__webpack_exports__["a"] = Modals;
+
+	/***/
+},
+/* 5 */
+/***/function (module, __webpack_exports__, __webpack_require__) {
+
+	"use strict";
+	/**
+  * File sticky.js.
+  *
+  * Handles stickiness of components which should always be visible by fixing them at the
+  * top or bottom of the screen.
+  */
+
+	var Sticky = function () {
+		function Sticky(options) {
+			_classCallCheck(this, Sticky);
+
+			var stickToTopIds = void 0,
+			    stickToBottomIds = void 0;
+
+			this.options = options || {};
+
+			stickToTopIds = this.options.stickToTopIds || [];
+			stickToBottomIds = this.options.stickToBottomIds || [];
+
+			if ('object' !== (typeof stickToTopIds === 'undefined' ? 'undefined' : _typeof(stickToTopIds)) || 'undefined' === typeof stickToTopIds.length) {
+				stickToTopIds = [stickToTopIds];
+			}
+			if ('object' !== (typeof stickToBottomIds === 'undefined' ? 'undefined' : _typeof(stickToBottomIds)) || 'undefined' === typeof stickToBottomIds.length) {
+				stickToBottomIds = [stickToBottomIds];
+			}
+
+			this.pageWrap = document.getElementById('page');
+			this.stickToTopContainers = stickToTopIds.map(function (id) {
+				return document.getElementById(id);
+			}).filter(function (container) {
+				return container;
+			});
+			this.stickToBottomContainers = stickToBottomIds.reverse().map(function (id) {
+				return document.getElementById(id);
+			}).filter(function (container) {
+				return container;
+			});
+		}
+
+		_createClass(Sticky, [{
+			key: 'initialize',
+			value: function initialize() {
+				var context = this;
+
+				if (!this.stickToTopContainers.length && !this.stickToBottomContainers.length) {
+					return;
+				}
+
+				this.stickToTopOffsets = this.stickToTopContainers.map(function (container) {
+					return container.offsetTop;
+				});
+				this.stickToBottomOffsets = this.stickToBottomContainers.map(function (container) {
+					return container.offsetTop + container.offsetHeight;
+				});
+
+				function checkStickyContainers() {
+					context.checkStickyContainers();
+				}
+
+				this.checkStickyContainers();
+				window.addEventListener('scroll', checkStickyContainers);
+				window.addEventListener('resize', checkStickyContainers);
+			}
+		}, {
+			key: 'checkStickyContainers',
+			value: function checkStickyContainers() {
+				var pageWrap = this.pageWrap;
+				var topOffsets = this.stickToTopOffsets;
+				var bottomOffsets = this.stickToBottomOffsets;
+
+				var toolbarOffset = this.getToolbarOffset();
+				var topOffset = 0;
+				var bottomOffset = 0;
+
+				pageWrap.style.paddingTop = topOffset + 'px';
+
+				this.stickToTopContainers.forEach(function (container, index) {
+					if (window.scrollY >= topOffsets[index] - topOffset) {
+						container.style.top = toolbarOffset + topOffset + 'px';
+						if (!container.classList.contains('is-sticky')) {
+							container.classList.add('is-sticky', 'is-sticky-top');
+						}
+
+						topOffset += container.offsetHeight;
+					} else {
+						if (container.classList.contains('is-sticky')) {
+							container.classList.remove('is-sticky', 'is-sticky-top');
+						}
+						container.style.top = 'auto';
+					}
+
+					pageWrap.style.paddingTop = topOffset + 'px';
+				});
+
+				pageWrap.style.paddingBottom = topOffset + bottomOffset + 'px';
+
+				this.stickToBottomContainers.forEach(function (container, index) {
+					if (window.scrollY <= bottomOffsets[index]) {
+						container.style.bottom = bottomOffset + 'px';
+						if (!container.classList.contains('is-sticky')) {
+							container.classList.add('is-sticky', 'is-sticky-bottom');
+						}
+
+						bottomOffset += container.offsetHeight;
+					} else {
+						if (container.classList.contains('is-sticky')) {
+							container.classList.remove('is-sticky', 'is-sticky-bottom');
+						}
+						container.style.bottom = 'auto';
+					}
+
+					pageWrap.style.paddingBottom = topOffset + bottomOffset + 'px';
+				});
+			}
+		}, {
+			key: 'getToolbarOffset',
+			value: function getToolbarOffset() {
+				var toolbar = document.getElementById('wpadminbar');
+
+				if (!toolbar) {
+					if (document.body.classList.contains('admin-bar')) {
+
+						// If the toolbar is not yet rendered but will be shortly, fall back to WordPress defaults.
+						if (document.body.clientWidth <= 782) {
+							return 46;
+						}
+						return 32;
+					}
+
+					return 0;
+				}
+
+				return toolbar.offsetHeight;
+			}
+		}]);
+
+		return Sticky;
+	}();
+
+	/* harmony default export */
+
+	__webpack_exports__["a"] = Sticky;
 
 	/***/
 }]

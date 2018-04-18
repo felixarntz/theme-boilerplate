@@ -35,6 +35,30 @@
 			}
 		}
 	}
+
+	&.is-sticky {
+		position: fixed;
+		right: 0;
+		left: 0;
+		z-index: 9999;
+
+		&.is-sticky-top {
+			top: 0;
+		}
+
+		&.is-sticky-bottom {
+			bottom: 0;
+		}
+
+		.wrapped-layout & {
+			@media (min-width: ($site_maxwidth)) {
+				right: auto;
+				left: 50%;
+				transform: translateX(-50%);
+				max-width: $site_maxwidth;
+			}
+		}
+	}
 }
 
 .site-content > .site-component-inner {

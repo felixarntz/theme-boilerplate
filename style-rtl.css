@@ -1607,6 +1607,33 @@ body.wrapped-layout .site-component > .site-component-inner {
 	}
 }
 
+.site-component.is-sticky {
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+}
+
+.site-component.is-sticky.is-sticky-top {
+	top: 0;
+}
+
+.site-component.is-sticky.is-sticky-bottom {
+	bottom: 0;
+}
+
+@media (min-width: 72rem) {
+	.wrapped-layout .site-component.is-sticky {
+		left: auto;
+		right: 50%;
+		max-width: 72rem;
+		-webkit-transform: translateX(50%);
+		        transform: translateX(50%);
+
+		     -o-transform: translateX(50%);
+	}
+}
+
 body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	display: none;
 }
