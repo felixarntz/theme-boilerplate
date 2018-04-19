@@ -100,6 +100,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	window.themeData = window.themeData || {};
 
 	(function (themeData) {
+		document.addEventListener('wp-custom-header-video-loaded', function () {
+			document.body.addClass('has-header-video');
+		});
+
 		themeData.components = {
 			skipLinkFocusFix: new __WEBPACK_IMPORTED_MODULE_0__skip_link_focus_fix__["a" /* default */](),
 			navigation: new __WEBPACK_IMPORTED_MODULE_1__navigation__["a" /* default */]('site-navigation', themeData.navigation),

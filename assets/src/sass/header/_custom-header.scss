@@ -1,13 +1,48 @@
 .site-custom-header {
-	&.text-left {
+	position: relative;
+
+	&.text-left > .site-component-inner {
 		text-align: left;
 	}
 
-	&.text-center {
+	&.text-center > .site-component-inner {
 		text-align: center;
 	}
 
-	&.text-right {
+	&.text-right > .site-component-inner {
 		text-align: right;
+	}
+
+	.has-header-image &,
+	.has-header-video & {
+		display: table;
+		width: 100%;
+		height: 16rem;
+
+		> .site-header-media {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 2;
+			overflow: hidden;
+
+			img,
+			video,
+			iframe {
+				// TODO.
+				position: fixed;
+			}
+		}
+
+		> .site-component-inner {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			z-index: 3;
+			transform: translate(-50%, -50%);
+			width: 100%;
+		}
 	}
 }

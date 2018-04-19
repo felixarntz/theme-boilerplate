@@ -1778,16 +1778,60 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 /* -------------------------------------------------------------
 ## Header Media
 ------------------------------------------------------------- */
-.site-custom-header.text-left {
+.site-custom-header {
+	position: relative;
+}
+
+.site-custom-header.text-left > .site-component-inner {
 	text-align: left;
 }
 
-.site-custom-header.text-center {
+.site-custom-header.text-center > .site-component-inner {
 	text-align: center;
 }
 
-.site-custom-header.text-right {
+.site-custom-header.text-right > .site-component-inner {
 	text-align: right;
+}
+
+.has-header-image .site-custom-header,
+.has-header-video .site-custom-header {
+	display: table;
+	width: 100%;
+	height: 16rem;
+}
+
+.has-header-image .site-custom-header > .site-header-media,
+.has-header-video .site-custom-header > .site-header-media {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+	overflow: hidden;
+}
+
+.has-header-image .site-custom-header > .site-header-media img,
+.has-header-image .site-custom-header > .site-header-media video,
+.has-header-image .site-custom-header > .site-header-media iframe,
+.has-header-video .site-custom-header > .site-header-media img,
+.has-header-video .site-custom-header > .site-header-media video,
+.has-header-video .site-custom-header > .site-header-media iframe {
+	position: fixed;
+}
+
+.has-header-image .site-custom-header > .site-component-inner,
+.has-header-video .site-custom-header > .site-component-inner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 3;
+	width: 100%;
+	-webkit-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
+
+	     -o-transform: translate(-50%, -50%);
 }
 
 /* -------------------------------------------------------------

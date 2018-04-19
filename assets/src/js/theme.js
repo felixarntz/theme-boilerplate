@@ -7,6 +7,10 @@ import Sticky from './sticky';
 window.themeData = window.themeData || {};
 
 ( function( themeData ) {
+	document.addEventListener( 'wp-custom-header-video-loaded', () => {
+		document.body.addClass( 'has-header-video' );
+	});
+
 	themeData.components = {
 		skipLinkFocusFix: new SkipLinkFocusFix(),
 		navigation: new Navigation( 'site-navigation', themeData.navigation ),

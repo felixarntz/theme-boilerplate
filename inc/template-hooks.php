@@ -52,6 +52,11 @@ function super_awesome_theme_body_classes( $classes ) {
 		$classes[] = 'hfeed';
 	}
 
+	// Add a class to indicate that a custom header image is set.
+	if ( has_header_image() ) {
+		$classes[] = 'has-header-image';
+	}
+
 	// Add a class to indicate the sidebar mode.
 	if ( ! super_awesome_theme_display_sidebar() ) {
 		$classes[] = 'no-sidebar';
