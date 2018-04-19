@@ -226,6 +226,7 @@ function super_awesome_theme_get_social_links_icons() {
 		'linkedin.com'    => 'linkedin',
 		'medium.com'      => 'medium',
 		'pscp.tv'         => 'periscope',
+		'tel:'            => 'phone',
 		'pinterest.com'   => 'pinterest',
 		'getpocket.com'   => 'pocket',
 		'reddit.com'      => 'reddit',
