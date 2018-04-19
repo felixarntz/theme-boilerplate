@@ -145,7 +145,34 @@ function super_awesome_theme_display_post_comments( $post = null ) {
 
 	$post_type = $post->post_type;
 
-	return post_type_supports( $post_type, 'comments' ) && ( comments_open( $post ) || get_comments_number( $post ) );
+	if ( ! post_type_supports( $post_type, 'comments' ) ) {
+		return false;
+	}
+
+	return comments_open( $post ) || get_comments_number( $post );
+}
+
+/**
+ * Checks whether the excerpt should be used for a post instead of its content.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Post|int|null $post Optional. Post to check for. Default is the current post.
+ * @return bool True if the excerpt should be used for the post, false otherwise.
+ */
+function super_awesome_theme_use_post_excerpt( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return false;
+	}
+
+	$post_type = $post->post_type;
+
+	if ( ! post_type_supports( $post_type, 'author' ) ) {
+		return false;
+	}
+
+	return get_theme_mod( $post_type . '_use_excerpt', false );
 }
 
 /**

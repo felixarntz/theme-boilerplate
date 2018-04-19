@@ -13,27 +13,7 @@
 
 	<?php get_template_part( 'template-parts/content/entry-header', get_post_type() ); ?>
 
-	<div class="entry-content">
-		<?php
-			the_content( sprintf(
-				wp_kses(
-					/* translators: %s: post title */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'super-awesome-theme' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				get_the_title()
-			) );
-
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'super-awesome-theme' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .entry-content -->
+	<?php get_template_part( 'template-parts/content/entry-content', get_post_type() ); ?>
 
 	<?php get_template_part( 'template-parts/content/entry-footer', get_post_type() ); ?>
 

@@ -241,6 +241,24 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 
 	$public_post_types = get_post_types( array( 'public' => true ), 'objects' );
 	foreach ( $public_post_types as $post_type ) {
+		if ( post_type_supports( $post_type->name, 'excerpt' ) ) {
+			$wp_customize->add_setting( $post_type->name . '_use_excerpt', array(
+				'default'   => '',
+				'transport' => 'postMessage',
+			) );
+			$wp_customize->add_control( $post_type->name . '_use_excerpt', array(
+				'section' => 'content_type_' . $post_type->name,
+				'label'   => __( 'Use Excerpt in archives?', 'super-awesome-theme' ),
+				'type'    => 'checkbox',
+			) );
+			$wp_customize->selective_refresh->add_partial( $post_type->name . '_use_excerpt', array(
+				'selector'            => '.type-' . $post_type->name . '.archive-view .entry-content',
+				'render_callback'     => 'super_awesome_theme_customize_partial_entry_excerpt',
+				'container_inclusive' => true,
+				'type'                => 'SuperAwesomeThemePostPartial',
+			) );
+		}
+
 		$wp_customize->add_section( 'content_type_' . $post_type->name, array(
 			'panel' => 'content_types',
 			'title' => $post_type->label,
@@ -945,6 +963,29 @@ function super_awesome_theme_customize_get_bar_justify_content_choices() {
 		'space-between' => _x( 'Space Between', 'alignment', 'super-awesome-theme' ),
 		'centered'      => _x( 'Centered', 'alignment', 'super-awesome-theme' ),
 	);
+}
+
+/**
+ * Renders the excerpt for a post.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Customize_Partial $partial Partial for which the function is invoked.
+ * @param array                $context Context for which to render the entry metadata.
+ */
+function super_awesome_theme_customize_partial_entry_excerpt( $partial, $context ) {
+	$post_type = null;
+	if ( ! empty( $context['post_id'] ) ) {
+		$post = get_post( $context['post_id'] );
+		if ( $post ) {
+			$post_type = $post->post_type;
+
+			$GLOBALS['post'] = $post;
+			setup_postdata( $post );
+		}
+	}
+
+	get_template_part( 'template-parts/content/entry-content', $post_type );
 }
 
 /**

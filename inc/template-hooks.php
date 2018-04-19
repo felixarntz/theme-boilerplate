@@ -67,6 +67,27 @@ function super_awesome_theme_body_classes( $classes ) {
 add_filter( 'body_class', 'super_awesome_theme_body_classes' );
 
 /**
+ * Adds custom classes to the array of post classes.
+ *
+ * @since 1.0.0
+ *
+ * @param array $classes Post classes for the article element.
+ * @param array $class   An array of additional classes added to the post.
+ * @param int   $post_id The post ID.
+ * @return array Modified classes.
+ */
+function super_awesome_theme_post_classes( $classes, $class, $post_id ) {
+	if ( is_singular( get_post_type( $post_id ) ) ) {
+		$classes[] = 'singular-view';
+	} else {
+		$classes[] = 'archive-view';
+	}
+
+	return $classes;
+}
+add_filter( 'post_class', 'super_awesome_theme_post_classes', 10, 3 );
+
+/**
  * Adds a pingback url auto-discovery header for singularly identifiable articles.
  *
  * @since 1.0.0
