@@ -1776,12 +1776,23 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 }
 
 /* -------------------------------------------------------------
-## Branding
+## Header Media
 ------------------------------------------------------------- */
-.site-branding {
+.site-custom-header.text-left {
+	text-align: right;
+}
+
+.site-custom-header.text-center {
 	text-align: center;
 }
 
+.site-custom-header.text-right {
+	text-align: left;
+}
+
+/* -------------------------------------------------------------
+## Branding
+------------------------------------------------------------- */
 .site-title {
 	padding: 0;
 	margin: 0;

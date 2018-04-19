@@ -40,6 +40,20 @@
 		} );
 	} );
 
+	// Header text align.
+	wp.customize( 'header_textalign', function( value ) {
+		value.bind( function( to ) {
+			var classes = Object.keys( themeCustomizeData.headerTextalignChoices );
+			var index   = classes.indexOf( to );
+
+			if ( index > -1 ) {
+				classes.splice( index, 1 );
+
+				$( '.site-custom-header' ).removeClass( classes.join( ' ' ) ).addClass( to );
+			}
+		} );
+	} );
+
 	// Sidebar mode.
 	wp.customize( 'sidebar_mode', function( value ) {
 		value.bind( function( to ) {

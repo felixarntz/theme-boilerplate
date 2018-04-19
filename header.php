@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$branding_location = get_theme_mod( 'branding_location', 'above_navbar' );
+$header_position = get_theme_mod( 'header_position', 'above_navbar' );
 
 ?>
 <!doctype html>
@@ -29,16 +29,16 @@ $branding_location = get_theme_mod( 'branding_location', 'above_navbar' );
 		<?php get_template_part( 'template-parts/header/site-top-bar' ); ?>
 
 		<?php
-		if ( 'above_navbar' === $branding_location ) {
-			get_template_part( 'template-parts/header/site-branding' );
+		if ( 'above_navbar' === $header_position ) {
+			get_template_part( 'template-parts/header/site-custom-header' );
 		}
 		?>
 
 		<?php get_template_part( 'template-parts/header/site-navbar' ); ?>
 
 		<?php
-		if ( 'below_navbar' === $branding_location ) {
-			get_template_part( 'template-parts/header/site-branding' );
+		if ( 'below_navbar' === $header_position ) {
+			get_template_part( 'template-parts/header/site-custom-header' );
 		}
 		?>
 	</header><!-- #header -->
