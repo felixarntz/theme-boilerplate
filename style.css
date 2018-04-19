@@ -1607,6 +1607,10 @@ body.wrapped-layout .site-component > .site-component-inner {
 	}
 }
 
+.site-component .sticky-content {
+	display: none;
+}
+
 .site-component.is-sticky {
 	position: fixed;
 	right: 0;
@@ -1632,6 +1636,10 @@ body.wrapped-layout .site-component > .site-component-inner {
 
 		     -o-transform: translateX(-50%);
 	}
+}
+
+.site-component.is-sticky .sticky-content {
+	display: block;
 }
 
 body.no-sidebar .site-content > .site-component-inner .site-sidebar {

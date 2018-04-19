@@ -21,7 +21,7 @@ $extra_class       = get_theme_mod( 'navbar_justify_content', 'space-between' );
 					<?php get_template_part( 'template-parts/header/logo-and-title' ); ?>
 				</div><!-- .site-branding -->
 			<?php elseif ( (bool) get_theme_mod( 'sticky_navbar', false ) ) : ?>
-				<div class="site-branding sticky-navbar-site-branding" aria-hidden="true">
+				<div class="site-branding sticky-content" aria-hidden="true">
 					<?php
 					super_awesome_theme_get_template_part(
 						'template-parts/header/logo-and-title',
