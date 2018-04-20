@@ -4,16 +4,16 @@
 	background-color: $color__background-header;
 
 	a {
-		color: $color__text-header;
+		color: $color__link-header;
 
 		&:visited {
-			color: $color__text-header;
+			color: $color__link-header-visited;
 		}
 
 		&:hover,
 		&:focus,
 		&:active {
-			color: darken($color__text-header, 8%);
+			color: $color__link-header-hover;
 		}
 	}
 

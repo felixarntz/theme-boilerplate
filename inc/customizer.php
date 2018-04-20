@@ -137,6 +137,17 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 
 	$wp_customize->get_control( 'header_textcolor' )->priority = 9;
 
+	$wp_customize->add_setting( 'header_link_color', array(
+		'default'              => '#404040',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_link_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Header Link Color', 'super-awesome-theme' ),
+	) ) );
+
 	$wp_customize->add_setting( 'header_background_color', array(
 		'default'              => '#ffffff',
 		'transport'            => 'postMessage',
@@ -489,6 +500,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			'button_primary_text_color',
 			'button_primary_background_color',
 			'header_textcolor',
+			'header_link_color',
 			'header_background_color',
 			'footer_text_color',
 			'footer_link_color',
@@ -633,7 +645,8 @@ function super_awesome_theme_print_customizer_styles() {
 	$link_color                            = get_theme_mod( 'link_color', '#21759b' );
 	$link_focus_color                      = super_awesome_theme_darken_color( $link_color, 25 );
 	$header_text_color                     = get_header_textcolor();
-	$header_text_focus_color               = 'blank' !== $header_text_color ? super_awesome_theme_darken_color( $header_text_color, 25 ) : '';
+	$header_link_color                     = get_theme_mod( 'header_link_color', '#404040' );
+	$header_link_focus_color               = super_awesome_theme_darken_color( $header_link_color, 25 );
 	$header_background_color               = get_theme_mod( 'header_background_color', '#ffffff' );
 	$footer_text_color                     = get_theme_mod( 'footer_text_color', '#404040' );
 	$footer_link_color                     = get_theme_mod( 'footer_link_color', '#21759b' );
@@ -866,20 +879,21 @@ function super_awesome_theme_print_customizer_styles() {
 				background-color: <?php echo esc_attr( $button_primary_background_focus_color ); ?>;
 			}
 		<?php endif; ?>
-		<?php if ( ! empty( $header_text_color ) && ! empty( $header_text_focus_color ) ) : ?>
+		<?php if ( ! empty( $header_text_color ) && 'blank' !== $header_text_color ) : ?>
 			.site-custom-header {
 				color: <?php echo esc_attr( $header_text_color ); ?>;
 			}
-
+		<?php endif; ?>
+		<?php if ( ! empty( $header_link_color ) && ! empty( $header_link_focus_color ) ) : ?>
 			.site-custom-header a,
 			.site-custom-header a:visited {
-				color: <?php echo esc_attr( $header_text_color ); ?>;
+				color: <?php echo esc_attr( $header_link_color ); ?>;
 			}
 
 			.site-custom-header a:hover,
 			.site-custom-header a:focus,
 			.site-custom-header a:active {
-				color: <?php echo esc_attr( $header_text_focus_color ); ?>;
+				color: <?php echo esc_attr( $header_link_focus_color ); ?>;
 			}
 		<?php endif; ?>
 		<?php if ( ! empty( $header_background_color ) ) : ?>
