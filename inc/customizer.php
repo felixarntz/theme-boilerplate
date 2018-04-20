@@ -60,6 +60,18 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'priority' => 3,
 	) ) );
 
+	$wp_customize->add_setting( 'link_color', array(
+		'default'              => '#21759b',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+		'section'  => 'colors',
+		'label'    => __( 'Link Color', 'super-awesome-theme' ),
+		'priority' => 3,
+	) ) );
+
 	$wp_customize->get_control( 'background_color' )->priority = 4;
 
 	$wp_customize->add_setting( 'wrap_background_color', array(
@@ -73,18 +85,6 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'label'           => __( 'Wrap Background Color', 'super-awesome-theme' ),
 		'priority'        => 4,
 		'active_callback' => 'super_awesome_theme_use_wrapped_layout',
-	) ) );
-
-	$wp_customize->add_setting( 'link_color', array(
-		'default'              => '#21759b',
-		'transport'            => 'postMessage',
-		'sanitize_callback'    => 'maybe_hash_hex_color',
-		'sanitize_js_callback' => 'maybe_hash_hex_color'
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
-		'section'  => 'colors',
-		'label'    => __( 'Link Color', 'super-awesome-theme' ),
-		'priority' => 5,
 	) ) );
 
 	$wp_customize->add_setting( 'button_text_color', array(
@@ -138,7 +138,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	$wp_customize->get_control( 'header_textcolor' )->priority = 9;
 
 	$wp_customize->add_setting( 'header_background_color', array(
-		'default'              => '',
+		'default'              => '#ffffff',
 		'transport'            => 'postMessage',
 		'sanitize_callback'    => 'maybe_hash_hex_color',
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
@@ -147,6 +147,39 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'section'         => 'colors',
 		'label'           => __( 'Header Background Color', 'super-awesome-theme' ),
 		'active_callback' => 'super_awesome_theme_needs_header_background',
+	) ) );
+
+	$wp_customize->add_setting( 'footer_text_color', array(
+		'default'              => '#404040',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_text_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Footer Text Color', 'super-awesome-theme' ),
+	) ) );
+
+	$wp_customize->add_setting( 'footer_link_color', array(
+		'default'              => '#21759b',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_link_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Footer Link Color', 'super-awesome-theme' ),
+	) ) );
+
+	$wp_customize->add_setting( 'footer_background_color', array(
+		'default'              => '#ffffff',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_background_color', array(
+		'section' => 'colors',
+		'label'   => __( 'Footer Background Color', 'super-awesome-theme' ),
 	) ) );
 
 	$wp_customize->add_setting( 'navbar_text_color', array(
@@ -415,8 +448,6 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 
 	$wp_customize->selective_refresh->add_partial( 'super_awesome_theme_customizer_styles', array(
 		'settings'            => array(
-			'header_textcolor',
-			'header_background_color',
 			'text_color',
 			'link_color',
 			'wrap_background_color',
@@ -424,6 +455,11 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			'button_background_color',
 			'button_primary_text_color',
 			'button_primary_background_color',
+			'header_textcolor',
+			'header_background_color',
+			'footer_text_color',
+			'footer_link_color',
+			'footer_background_color',
 			'navbar_text_color',
 			'navbar_link_color',
 			'navbar_background_color',
@@ -563,7 +599,11 @@ function super_awesome_theme_print_customizer_styles() {
 	$link_focus_color                      = super_awesome_theme_darken_color( $link_color, 25 );
 	$header_text_color                     = get_header_textcolor();
 	$header_text_focus_color               = 'blank' !== $header_text_color ? super_awesome_theme_darken_color( $header_text_color, 25 ) : '';
-	$header_background_color               = get_theme_mod( 'header_background_color', '' );
+	$header_background_color               = get_theme_mod( 'header_background_color', '#ffffff' );
+	$footer_text_color                     = get_theme_mod( 'footer_text_color', '#404040' );
+	$footer_link_color                     = get_theme_mod( 'footer_link_color', '#21759b' );
+	$footer_link_focus_color               = super_awesome_theme_darken_color( $footer_link_color, 25 );
+	$footer_background_color               = get_theme_mod( 'footer_background_color', '#ffffff' );
 	$wrap_background_color                 = get_theme_mod( 'wrap_background_color', '' );
 	$button_text_color                     = get_theme_mod( 'button_text_color', '#404040' );
 	$button_background_color               = get_theme_mod( 'button_background_color', '#e6e6e6' );
@@ -715,27 +755,6 @@ function super_awesome_theme_print_customizer_styles() {
 				color: <?php echo esc_attr( $link_focus_color ); ?>;
 			}
 		<?php endif; ?>
-		<?php if ( ! empty( $header_text_color ) && ! empty( $header_text_focus_color ) ) : ?>
-			.site-custom-header {
-				color: <?php echo esc_attr( $header_text_color ); ?>;
-			}
-
-			.site-custom-header a,
-			.site-custom-header a:visited {
-				color: <?php echo esc_attr( $header_text_color ); ?>;
-			}
-
-			.site-custom-header a:hover,
-			.site-custom-header a:focus,
-			.site-custom-header a:active {
-				color: <?php echo esc_attr( $header_text_focus_color ); ?>;
-			}
-		<?php endif; ?>
-		<?php if ( ! empty( $header_background_color ) ) : ?>
-			.site-custom-header {
-				background-color: <?php echo esc_attr( $header_background_color ); ?>;
-			}
-		<?php endif; ?>
 		<?php if ( super_awesome_theme_use_wrapped_layout() && ! empty( $wrap_background_color ) ) : ?>
 			.site {
 				background-color: <?php echo esc_attr( $wrap_background_color ); ?>;
@@ -808,6 +827,53 @@ function super_awesome_theme_print_customizer_styles() {
 				color: <?php echo esc_attr( $button_primary_text_color ); ?>;
 				background-color: <?php echo esc_attr( $button_primary_background_focus_color ); ?>;
 			}
+		<?php endif; ?>
+		<?php if ( ! empty( $header_text_color ) && ! empty( $header_text_focus_color ) ) : ?>
+			.site-custom-header {
+				color: <?php echo esc_attr( $header_text_color ); ?>;
+			}
+
+			.site-custom-header a,
+			.site-custom-header a:visited {
+				color: <?php echo esc_attr( $header_text_color ); ?>;
+			}
+
+			.site-custom-header a:hover,
+			.site-custom-header a:focus,
+			.site-custom-header a:active {
+				color: <?php echo esc_attr( $header_text_focus_color ); ?>;
+			}
+		<?php endif; ?>
+		<?php if ( ! empty( $header_background_color ) ) : ?>
+			.site-custom-header {
+				background-color: <?php echo esc_attr( $header_background_color ); ?>;
+			}
+		<?php endif; ?>
+		<?php if ( ! empty( $footer_text_color ) && ! empty( $footer_background_color ) ) : ?>
+			.footer-widgets,
+			.social-navigation,
+			.footer-navigation {
+				color: <?php echo esc_attr( $footer_text_color ); ?>;
+				background-color: <?php echo esc_attr( $footer_background_color ); ?>;
+			}
+
+			<?php if ( ! empty( $footer_link_color ) && ! empty( $footer_link_focus_color ) ) : ?>
+				.footer-widgets a,
+				.footer-widgets a:visited,
+				.footer-navigation a,
+				.footer-navigation a:visited {
+					color: <?php echo esc_attr( $footer_link_color ); ?>;
+				}
+
+				.footer-widgets a:hover,
+				.footer-widgets a:focus,
+				.footer-widgets a:active,
+				.footer-navigation a:hover,
+				.footer-navigation a:focus,
+				.footer-navigation a:active {
+					color: <?php echo esc_attr( $footer_link_focus_color ); ?>;
+				}
+			<?php endif; ?>
 		<?php endif; ?>
 		<?php if ( ! empty( $navbar_text_color ) && ! empty( $navbar_background_color ) ) : ?>
 			.site-navbar {

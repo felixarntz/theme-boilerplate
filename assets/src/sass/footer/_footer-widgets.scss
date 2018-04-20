@@ -1,4 +1,21 @@
 .footer-widgets {
+	color: $color__text-footer;
+	background-color: $color__background-footer;
+
+	a {
+		color: $color__link-footer;
+
+		&:visited {
+			color: $color__link-footer-visited;
+		}
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $color__link-footer-hover;
+		}
+	}
+
 	.site-component-inner {
 		@media (min-width: $site_breakpoint) {
 			align-items: stretch;

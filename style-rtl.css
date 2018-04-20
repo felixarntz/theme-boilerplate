@@ -2397,6 +2397,25 @@ body.no-sidebar .comments-area {
 /* -------------------------------------------------------------
 ## Footer Widgets
 ------------------------------------------------------------- */
+.footer-widgets {
+	color: #404040;
+	background-color: #fff;
+}
+
+.footer-widgets a {
+	color: #21759b;
+}
+
+.footer-widgets a:visited {
+	color: #21759b;
+}
+
+.footer-widgets a:hover,
+.footer-widgets a:focus,
+.footer-widgets a:active {
+	color: #1a5c79;
+}
+
 @media (min-width: 48rem) {
 	.footer-widgets .site-component-inner {
 		align-items: stretch;
@@ -2427,9 +2446,11 @@ body.no-sidebar .comments-area {
 .social-navigation {
 	padding-top: 0.75rem;
 	padding-bottom: 0.75rem;
+	color: #404040;
 	font-size: 16px;
 	font-size: 1rem;
 	text-align: center;
+	background-color: #fff;
 }
 
 .social-navigation ul {
@@ -2499,7 +2520,23 @@ body.no-sidebar .comments-area {
 .footer-navigation {
 	padding-top: 0.75rem;
 	padding-bottom: 0.75rem;
+	color: #404040;
 	text-align: center;
+	background-color: #fff;
+}
+
+.footer-navigation a {
+	color: #21759b;
+}
+
+.footer-navigation a:visited {
+	color: #21759b;
+}
+
+.footer-navigation a:hover,
+.footer-navigation a:focus,
+.footer-navigation a:active {
+	color: #1a5c79;
 }
 
 .footer-navigation ul {
