@@ -1780,6 +1780,22 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 ------------------------------------------------------------- */
 .site-custom-header {
 	position: relative;
+	color: #404040;
+	background-color: #fff;
+}
+
+.site-custom-header a {
+	color: #404040;
+}
+
+.site-custom-header a:visited {
+	color: #404040;
+}
+
+.site-custom-header a:hover,
+.site-custom-header a:focus,
+.site-custom-header a:active {
+	color: #2c2c2c;
 }
 
 .site-custom-header.text-left > .site-component-inner {

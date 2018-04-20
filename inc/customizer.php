@@ -55,20 +55,12 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'text_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Text Color', 'super-awesome-theme' ),
+		'section'  => 'colors',
+		'label'    => __( 'Text Color', 'super-awesome-theme' ),
+		'priority' => 3,
 	) ) );
 
-	$wp_customize->add_setting( 'link_color', array(
-		'default'              => '#21759b',
-		'transport'            => 'postMessage',
-		'sanitize_callback'    => 'maybe_hash_hex_color',
-		'sanitize_js_callback' => 'maybe_hash_hex_color'
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Link Color', 'super-awesome-theme' ),
-	) ) );
+	$wp_customize->get_control( 'background_color' )->priority = 4;
 
 	$wp_customize->add_setting( 'wrap_background_color', array(
 		'default'              => '',
@@ -79,7 +71,20 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'wrap_background_color', array(
 		'section'         => 'colors',
 		'label'           => __( 'Wrap Background Color', 'super-awesome-theme' ),
+		'priority'        => 4,
 		'active_callback' => 'super_awesome_theme_use_wrapped_layout',
+	) ) );
+
+	$wp_customize->add_setting( 'link_color', array(
+		'default'              => '#21759b',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+		'section'  => 'colors',
+		'label'    => __( 'Link Color', 'super-awesome-theme' ),
+		'priority' => 5,
 	) ) );
 
 	$wp_customize->add_setting( 'button_text_color', array(
@@ -89,8 +94,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'button_text_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Button Text Color', 'super-awesome-theme' ),
+		'section'  => 'colors',
+		'label'    => __( 'Button Text Color', 'super-awesome-theme' ),
+		'priority' => 5,
 	) ) );
 
 	$wp_customize->add_setting( 'button_background_color', array(
@@ -100,8 +106,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'button_background_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Button Background Color', 'super-awesome-theme' ),
+		'section'  => 'colors',
+		'label'    => __( 'Button Background Color', 'super-awesome-theme' ),
+		'priority' => 5,
 	) ) );
 
 	$wp_customize->add_setting( 'button_primary_text_color', array(
@@ -111,8 +118,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'button_primary_text_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Primary Button Text Color', 'super-awesome-theme' ),
+		'section'  => 'colors',
+		'label'    => __( 'Primary Button Text Color', 'super-awesome-theme' ),
+		'priority' => 5,
 	) ) );
 
 	$wp_customize->add_setting( 'button_primary_background_color', array(
@@ -122,8 +130,23 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'button_primary_background_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Primary Button Background Color', 'super-awesome-theme' ),
+		'section'  => 'colors',
+		'label'    => __( 'Primary Button Background Color', 'super-awesome-theme' ),
+		'priority' => 5,
+	) ) );
+
+	$wp_customize->get_control( 'header_textcolor' )->priority = 9;
+
+	$wp_customize->add_setting( 'header_background_color', array(
+		'default'              => '',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_background_color', array(
+		'section'         => 'colors',
+		'label'           => __( 'Header Background Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_needs_header_background',
 	) ) );
 
 	$wp_customize->add_setting( 'navbar_text_color', array(
@@ -392,6 +415,8 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 
 	$wp_customize->selective_refresh->add_partial( 'super_awesome_theme_customizer_styles', array(
 		'settings'            => array(
+			'header_textcolor',
+			'header_background_color',
 			'text_color',
 			'link_color',
 			'wrap_background_color',
@@ -536,6 +561,9 @@ function super_awesome_theme_print_customizer_styles() {
 	$text_light_color                      = super_awesome_theme_lighten_color( $text_color, 100 );
 	$link_color                            = get_theme_mod( 'link_color', '#21759b' );
 	$link_focus_color                      = super_awesome_theme_darken_color( $link_color, 25 );
+	$header_text_color                     = get_header_textcolor();
+	$header_text_focus_color               = 'blank' !== $header_text_color ? super_awesome_theme_darken_color( $header_text_color, 25 ) : '';
+	$header_background_color               = get_theme_mod( 'header_background_color', '' );
 	$wrap_background_color                 = get_theme_mod( 'wrap_background_color', '' );
 	$button_text_color                     = get_theme_mod( 'button_text_color', '#404040' );
 	$button_background_color               = get_theme_mod( 'button_background_color', '#e6e6e6' );
@@ -685,6 +713,27 @@ function super_awesome_theme_print_customizer_styles() {
 			.button.button-link:hover,
 			.button.button-link:focus {
 				color: <?php echo esc_attr( $link_focus_color ); ?>;
+			}
+		<?php endif; ?>
+		<?php if ( ! empty( $header_text_color ) && ! empty( $header_text_focus_color ) ) : ?>
+			.site-custom-header {
+				color: <?php echo esc_attr( $header_text_color ); ?>;
+			}
+
+			.site-custom-header a,
+			.site-custom-header a:visited {
+				color: <?php echo esc_attr( $header_text_color ); ?>;
+			}
+
+			.site-custom-header a:hover,
+			.site-custom-header a:focus,
+			.site-custom-header a:active {
+				color: <?php echo esc_attr( $header_text_focus_color ); ?>;
+			}
+		<?php endif; ?>
+		<?php if ( ! empty( $header_background_color ) ) : ?>
+			.site-custom-header {
+				background-color: <?php echo esc_attr( $header_background_color ); ?>;
 			}
 		<?php endif; ?>
 		<?php if ( super_awesome_theme_use_wrapped_layout() && ! empty( $wrap_background_color ) ) : ?>
@@ -855,6 +904,19 @@ function super_awesome_theme_customize_partial_blogname() {
  */
 function super_awesome_theme_customize_partial_blogdescription() {
 	bloginfo( 'description' );
+}
+
+/**
+ * Checks whether the header background color control is needed.
+ *
+ * It isn't necessary when either a header image or header video is set.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if header background control should be active, false otherwise.
+ */
+function super_awesome_theme_needs_header_background() {
+	return ! has_header_image() && ! has_header_video();
 }
 
 /**
