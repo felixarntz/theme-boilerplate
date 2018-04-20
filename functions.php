@@ -28,6 +28,11 @@ if ( version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
 }
 
 /**
+ * Library loader.
+ */
+require get_template_directory() . '/inc/library.php';
+
+/**
  * Theme setup.
  */
 require get_template_directory() . '/inc/setup.php';
