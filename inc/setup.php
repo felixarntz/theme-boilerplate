@@ -35,6 +35,9 @@ function super_awesome_theme_setup() {
 		'flex-height' => true,
 	) ) );
 
+	$custom_header_width  = super_awesome_theme_use_wrapped_layout() ? 1152 : 2560;
+	$custom_header_height = super_awesome_theme_use_wrapped_layout() ? 460 : 1024;
+
 	/**
 	 * Filters the arguments for registering custom header support.
 	 *
@@ -45,13 +48,12 @@ function super_awesome_theme_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'super_awesome_theme_custom_header_args', array(
 		'default-image'          => '',
 		'default-text-color'     => '404040',
-		'width'                  => 1000,
-		'height'                 => 250,
+		'width'                  => $custom_header_width,
+		'height'                 => $custom_header_height,
 		'flex-height'            => true,
 		'wp-head-callback'       => 'super_awesome_theme_header_style',
+		'video'                  => true,
 	) ) );
-
-	// TODO: Include video header support.
 
 	/**
 	 * Filters the arguments for registering custom background support.

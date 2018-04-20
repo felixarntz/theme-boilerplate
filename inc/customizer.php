@@ -1050,7 +1050,7 @@ function super_awesome_theme_customize_partial_blogdescription() {
  * @return bool True if header background control should be active, false otherwise.
  */
 function super_awesome_theme_customize_needs_header_background() {
-	return ! has_header_image() && ! has_header_video();
+	return ! has_custom_header();
 }
 
 /**

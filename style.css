@@ -1814,7 +1814,14 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 .has-header-video .site-custom-header {
 	display: table;
 	width: 100%;
-	height: 16rem;
+	height: 10rem;
+}
+
+@media (min-width: 48rem) {
+	.has-header-image .site-custom-header,
+	.has-header-video .site-custom-header {
+		height: 16rem;
+	}
 }
 
 .has-header-image .site-custom-header > .site-header-media,
@@ -1834,7 +1841,15 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 .has-header-video .site-custom-header > .site-header-media img,
 .has-header-video .site-custom-header > .site-header-media video,
 .has-header-video .site-custom-header > .site-header-media iframe {
-	position: fixed;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	display: block;
+	width: 100%;
+	-webkit-transform: translateY(-50%);
+	        transform: translateY(-50%);
+
+	     -o-transform: translateY(-50%);
 }
 
 .has-header-image .site-custom-header > .site-component-inner,
