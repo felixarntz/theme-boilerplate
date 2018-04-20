@@ -146,7 +146,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_background_color', array(
 		'section'         => 'colors',
 		'label'           => __( 'Header Background Color', 'super-awesome-theme' ),
-		'active_callback' => 'super_awesome_theme_needs_header_background',
+		'active_callback' => 'super_awesome_theme_customize_needs_header_background',
 	) ) );
 
 	$wp_customize->add_setting( 'footer_text_color', array(
@@ -180,6 +180,30 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_background_color', array(
 		'section' => 'colors',
 		'label'   => __( 'Footer Background Color', 'super-awesome-theme' ),
+	) ) );
+
+	$wp_customize->add_setting( 'social_text_color', array(
+		'default'              => '#ffffff',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'social_text_color', array(
+		'section'         => 'colors',
+		'label'           => __( 'Social Icons Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_social_colors',
+	) ) );
+
+	$wp_customize->add_setting( 'social_background_color', array(
+		'default'              => '#767676',
+		'transport'            => 'postMessage',
+		'sanitize_callback'    => 'maybe_hash_hex_color',
+		'sanitize_js_callback' => 'maybe_hash_hex_color'
+	) );
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'social_background_color', array(
+		'section'         => 'colors',
+		'label'           => __( 'Social Icons Background Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_social_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'navbar_text_color', array(
@@ -460,6 +484,8 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 			'footer_text_color',
 			'footer_link_color',
 			'footer_background_color',
+			'social_text_color',
+			'social_background_color',
 			'navbar_text_color',
 			'navbar_link_color',
 			'navbar_background_color',
@@ -604,6 +630,9 @@ function super_awesome_theme_print_customizer_styles() {
 	$footer_link_color                     = get_theme_mod( 'footer_link_color', '#21759b' );
 	$footer_link_focus_color               = super_awesome_theme_darken_color( $footer_link_color, 25 );
 	$footer_background_color               = get_theme_mod( 'footer_background_color', '#ffffff' );
+	$social_text_color                     = get_theme_mod( 'social_text_color', '#ffffff' );
+	$social_background_color               = get_theme_mod( 'social_background_color', '#767676' );
+	$social_background_focus_color         = super_awesome_theme_darken_color( $social_background_color, 25 );
 	$wrap_background_color                 = get_theme_mod( 'wrap_background_color', '' );
 	$button_text_color                     = get_theme_mod( 'button_text_color', '#404040' );
 	$button_background_color               = get_theme_mod( 'button_background_color', '#e6e6e6' );
@@ -875,6 +904,22 @@ function super_awesome_theme_print_customizer_styles() {
 				}
 			<?php endif; ?>
 		<?php endif; ?>
+		<?php if ( ! empty( $social_text_color ) && ! empty( $social_background_color ) && ! empty( $social_background_focus_color ) ) : ?>
+			.social-navigation a,
+			.social-navigation a:visited {
+				color: <?php echo esc_attr( $social_text_color ); ?>;
+			}
+
+			.social-navigation a {
+				background-color: <?php echo esc_attr( $social_background_color ); ?>;
+			}
+
+			.social-navigation a:hover,
+			.social-navigation a:focus {
+				color: <?php echo esc_attr( $social_text_color ); ?>;
+				background-color: <?php echo esc_attr( $social_background_focus_color ); ?>;
+			}
+		<?php endif; ?>
 		<?php if ( ! empty( $navbar_text_color ) && ! empty( $navbar_background_color ) ) : ?>
 			.site-navbar {
 				color: <?php echo esc_attr( $navbar_text_color ); ?>;
@@ -981,8 +1026,19 @@ function super_awesome_theme_customize_partial_blogdescription() {
  *
  * @return bool True if header background control should be active, false otherwise.
  */
-function super_awesome_theme_needs_header_background() {
+function super_awesome_theme_customize_needs_header_background() {
 	return ! has_header_image() && ! has_header_video();
+}
+
+/**
+ * Checks whether the social color controls are needed.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if social color controls should be active, false otherwise.
+ */
+function super_awesome_theme_customize_needs_social_colors() {
+	return has_nav_menu( 'social' );
 }
 
 /**

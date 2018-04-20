@@ -26,17 +26,17 @@
 		height: $social_icon_wrap_size;
 		text-align: center;
 		border-radius: 40px;
-		color: #fff;
-		background-color: #767676;
+		color: $color__text-social-icons;
+		background-color: $color__background-social-icons;
 
 		&:visited {
-			color: #fff;
+			color: $color__text-social-icons;
 		}
 
 		&:hover,
 		&:focus {
-			color: #fff;
-			background-color: #333;
+			color: $color__text-social-icons;
+			background-color: darken($color__background-social-icons, 8%);
 		}
 
 		&:first-child {
