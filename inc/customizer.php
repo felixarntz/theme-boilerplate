@@ -156,8 +156,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_text_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Footer Text Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Footer Text Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_footer_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'footer_link_color', array(
@@ -167,8 +168,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_link_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Footer Link Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Footer Link Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_footer_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'footer_background_color', array(
@@ -178,8 +180,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_background_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Footer Background Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Footer Background Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_footer_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'social_text_color', array(
@@ -246,8 +249,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'top_bar_text_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Top Bar Text Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Top Bar Text Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_top_bar_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'top_bar_link_color', array(
@@ -257,8 +261,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'top_bar_link_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Top Bar Link Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Top Bar Link Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_top_bar_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'top_bar_background_color', array(
@@ -268,8 +273,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'top_bar_background_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Top Bar Background Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Top Bar Background Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_top_bar_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'bottom_bar_text_color', array(
@@ -279,8 +285,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bottom_bar_text_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Bottom Bar Text Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Bottom Bar Text Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_bottom_bar_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'bottom_bar_link_color', array(
@@ -290,8 +297,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bottom_bar_link_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Bottom Bar Link Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Bottom Bar Link Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_bottom_bar_colors',
 	) ) );
 
 	$wp_customize->add_setting( 'bottom_bar_background_color', array(
@@ -301,8 +309,9 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 		'sanitize_js_callback' => 'maybe_hash_hex_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bottom_bar_background_color', array(
-		'section' => 'colors',
-		'label'   => __( 'Bottom Bar Background Color', 'super-awesome-theme' ),
+		'section'         => 'colors',
+		'label'           => __( 'Bottom Bar Background Color', 'super-awesome-theme' ),
+		'active_callback' => 'super_awesome_theme_customize_needs_bottom_bar_colors',
 	) ) );
 
 	/* Header Media */
@@ -1031,6 +1040,24 @@ function super_awesome_theme_customize_needs_header_background() {
 }
 
 /**
+ * Checks whether the footer color controls are needed.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if footer color controls should be active, false otherwise.
+ */
+function super_awesome_theme_customize_needs_footer_colors() {
+	$footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
+	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
+		if ( is_active_sidebar( 'footer-' . $i ) ) {
+			return true;
+		}
+	}
+
+	return has_nav_menu( 'social' ) || has_nav_menu( 'footer' );
+}
+
+/**
  * Checks whether the social color controls are needed.
  *
  * @since 1.0.0
@@ -1039,6 +1066,28 @@ function super_awesome_theme_customize_needs_header_background() {
  */
 function super_awesome_theme_customize_needs_social_colors() {
 	return has_nav_menu( 'social' );
+}
+
+/**
+ * Checks whether the top bar color controls are needed.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if top bar color controls should be active, false otherwise.
+ */
+function super_awesome_theme_customize_needs_top_bar_colors() {
+	return is_active_sidebar( 'top' );
+}
+
+/**
+ * Checks whether the bottom bar color controls are needed.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if bottom bar color controls should be active, false otherwise.
+ */
+function super_awesome_theme_customize_needs_bottom_bar_colors() {
+	return is_active_sidebar( 'bottom' );
 }
 
 /**
