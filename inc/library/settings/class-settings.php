@@ -91,11 +91,42 @@ final class Super_Awesome_Theme_Settings extends Super_Awesome_Theme_Theme_Compo
 	}
 
 	/**
+	 * Magic call method.
+	 *
+	 * Handles the Customizer registration action hook callbacks.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $method Method name.
+	 * @param array  $args   Method arguments.
+	 */
+	public function __call( $method, $args ) {
+		if ( 'register_in_customizer' !== $method || empty( $args ) ) {
+			return;
+		}
+
+		$wp_customize = $args[0];
+
+		foreach ( $this->settings as $setting ) {
+			$id   = $setting->get( 'id' );
+			$args = array(
+				'capability'        => $setting->get( 'capability' ),
+				'default'           => $setting->get( 'default' ),
+				'transport'         => 'postMessage',
+				'validate_callback' => array( $setting, 'validate_value' ),
+				'sanitize_callback' => array( $setting, 'sanitize_value' ),
+			);
+
+			$wp_customize->add_setting( $id, $args );
+		}
+	}
+
+	/**
 	 * Adds hooks and runs other processes required to initialize the component.
 	 *
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
-		// Empty method body.
+		add_action( 'customize_register', array( $this, 'register_in_customizer' ), 1, 1 );
 	}
 }

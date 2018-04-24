@@ -85,7 +85,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	/**
 	 * Magic call method.
 	 *
-	 * Handles the enqueue action hook callbacks.
+	 * Handles the register and enqueue action hook callbacks.
 	 *
 	 * @since 1.0.0
 	 *
