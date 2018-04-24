@@ -25,3 +25,12 @@ require get_template_directory() . '/inc/library/settings/class-integer-setting.
 require get_template_directory() . '/inc/library/settings/class-float-setting.php';
 require get_template_directory() . '/inc/library/settings/class-boolean-setting.php';
 require get_template_directory() . '/inc/library/settings/class-enum-string-setting.php';
+
+/**
+ * Theme assets.
+ */
+require get_template_directory() . '/inc/library/assets/class-assets.php';
+require get_template_directory() . '/inc/library/assets/class-asset-not-registered-exception.php';
+require get_template_directory() . '/inc/library/assets/class-asset.php';
+require get_template_directory() . '/inc/library/assets/class-script.php';
+require get_template_directory() . '/inc/library/assets/class-stylesheet.php';
