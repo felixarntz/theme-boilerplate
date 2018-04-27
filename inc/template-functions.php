@@ -278,7 +278,7 @@ function super_awesome_theme_display_sidebar() {
 		return false;
 	}
 
-	return 'no-sidebar' !== get_theme_mod( 'sidebar_mode', 'right-sidebar' ) || is_customize_preview();
+	return 'no-sidebar' !== get_theme_mod( 'sidebar_mode', 'right-sidebar' );
 }
 
 /**

@@ -15,14 +15,10 @@ $footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
 $wide_footer_widget_area  = (int) get_theme_mod( 'wide_footer_widget_area', 0 );
 
 $has_active = false;
-if ( is_customize_preview() ) {
-	$has_active = true;
-} else {
-	for( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
-		if ( is_active_sidebar( 'footer-' . $i ) ) {
-			$has_active = true;
-			break;
-		}
+for( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
+	if ( is_active_sidebar( 'footer-' . $i ) ) {
+		$has_active = true;
+		break;
 	}
 }
 
@@ -35,7 +31,7 @@ if ( ! $has_active ) {
 		<?php
 		for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
 			$class = 'footer-widget-column' . ( $i === $wide_footer_widget_area ? ' footer-widget-column-wide' : '' );
-			if ( ! is_active_sidebar( 'footer-' . $i ) && ! is_customize_preview() ) {
+			if ( ! is_active_sidebar( 'footer-' . $i ) ) {
 				continue;
 			}
 			?>

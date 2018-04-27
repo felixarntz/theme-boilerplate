@@ -53,7 +53,7 @@ $extra_class       = get_theme_mod( 'navbar_justify_content', 'space-between' );
 					?>
 				</div>
 
-				<?php if ( is_active_sidebar( 'nav-extra' ) || is_customize_preview() ) : ?>
+				<?php if ( is_active_sidebar( 'nav-extra' ) ) : ?>
 					<div id="site-navigation-extra" class="site-navigation-extra inline-widget-area">
 						<?php dynamic_sidebar( 'nav-extra' ); ?>
 					</div><!-- #site-nav-extra -->

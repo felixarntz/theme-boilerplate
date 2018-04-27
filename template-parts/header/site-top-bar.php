@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-if ( ! is_active_sidebar( 'top' ) && ! is_customize_preview() ) {
+if ( ! is_active_sidebar( 'top' ) ) {
 	return;
 }
 
