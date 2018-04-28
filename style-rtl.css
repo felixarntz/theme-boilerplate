@@ -1888,6 +1888,16 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	line-height: 1.4;
 }
 
+.custom-logo-link {
+	display: block;
+}
+
+.custom-logo {
+	display: block;
+	width: auto;
+	height: 150px;
+}
+
 /* -------------------------------------------------------------
 ## Navbar
 ------------------------------------------------------------- */

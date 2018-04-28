@@ -29,10 +29,9 @@ function super_awesome_theme_setup() {
 	 * @param array $args Custom logo arguments.
 	 */
 	add_theme_support( 'custom-logo', apply_filters( 'super_awesome_theme_custom_logo_args', array(
-		'height'      => 250,
+		'height'      => 150,
 		'width'       => 250,
 		'flex-width'  => true,
-		'flex-height' => true,
 	) ) );
 
 	$custom_header_width  = super_awesome_theme_use_wrapped_layout() ? 1152 : 2560;
