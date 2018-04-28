@@ -89,5 +89,6 @@ Now you're good to go! One more thing: If you want to publish the theme on wordp
 * `gulp pot`: Refreshes POT file
 * `gulp readme`: Replaces the header and description in the readme with latest data
 * `gulp build`: Runs all of the above tasks
+* `gulp watch`: Watches file changes and automatically executes the above tasks and reloads the browser window (you have to call it like `PROXY=mysite.test gulp watch`, passing the URL of your test site)
 
 TODO: codeclimate.yml, PHPCS, PHPMD
