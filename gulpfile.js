@@ -98,13 +98,46 @@ const stylelint    = require( 'gulp-stylelint' );
 const uglify       = require( 'gulp-uglify' );
 const wpPot        = require( 'gulp-wp-pot' );
 
+const browserSync     = require( 'browser-sync' ).create();
 const imageminMozjpeg = require( 'imagemin-mozjpeg' );
+const PluginError     = require( 'plugin-error' );
 const webpack         = require( 'webpack-stream' );
 
 /* ---- MAIN TASKS ---- */
 
 // default task
 gulp.task( 'default', [ 'sass', 'js', 'img', 'pot' ]);
+
+// browser sync task
+gulp.task( 'browser-sync', done => {
+	if ( ! process.env.PROXY ) {
+		done( new PluginError( 'browser-sync', 'PROXY environment variable not specified' ) );
+		return;
+	}
+
+	browserSync.init({
+		proxy: process.env.PROXY,
+	});
+	done();
+});
+
+// watch task (calling 'js' initially somehow kills the process)
+gulp.task( 'watch', [ 'browser-sync', 'sass', /*'js', */'img' ], () => {
+	gulp.watch( 'assets/src/sass/**/*.scss', [ 'sass' ] );
+	gulp.watch( 'assets/src/js/**/*.js', [ 'js' ] );
+	gulp.watch([
+		'assets/src/images/**/*.gif',
+		'assets/src/images/**/*.jpg',
+		'assets/src/images/**/*.png',
+		'assets/src/images/**/*.svg',
+	], [ 'img' ] );
+	gulp.watch([
+		'*.php',
+		'inc/**/*.php',
+		'template-parts/**/*.php',
+		'templates/**/*.php',
+	]).on( 'change', browserSync.reload );
+});
 
 // build the theme
 gulp.task( 'build', [ 'readme' ], () => {
@@ -138,7 +171,7 @@ gulp.task( 'lint-sass', done => {
 
 // compile Sass
 gulp.task( 'compile-sass', done => {
-	gulp.src([
+	let task = gulp.src([
 		'./assets/src/sass/style.scss',
 		'./assets/src/sass/editor-style.scss',
 		'./assets/src/sass/block-editor-style.scss',
@@ -162,8 +195,13 @@ gulp.task( 'compile-sass', done => {
 		.pipe( rename({
 			suffix: '-rtl',
 		}) )
-		.pipe( gulp.dest( './' ) )
-		.on( 'end', done );
+		.pipe( gulp.dest( './' ) );
+
+	if ( browserSync.active ) {
+		task = task.pipe( browserSync.stream() );
+	}
+
+	task.on( 'end', done );
 });
 
 // lint JavaScript
@@ -179,7 +217,7 @@ gulp.task( 'lint-js', done => {
 
 // compile JavaScript
 gulp.task( 'compile-js', done => {
-	gulp.src( './assets/src/js/theme.js' )
+	let task = gulp.src( './assets/src/js/theme.js' )
 		.pipe( webpack({
 			entry: {
 				theme: './assets/src/js/theme.js',
@@ -200,13 +238,18 @@ gulp.task( 'compile-js', done => {
 		.pipe( rename({
 			extname: '.min.js',
 		}) )
-		.pipe( gulp.dest( './assets/dist/js/' ) )
-		.on( 'end', done );
+		.pipe( gulp.dest( './assets/dist/js/' ) );
+
+	if ( browserSync.active ) {
+		task = task.pipe( browserSync.stream() );
+	}
+
+	task.on( 'end', done );
 });
 
 // minify images
 gulp.task( 'img', done => {
-	gulp.src([
+	let task = gulp.src([
 			'./assets/src/images/**/*.gif',
 			'./assets/src/images/**/*.jpg',
 			'./assets/src/images/**/*.png',
@@ -242,8 +285,13 @@ gulp.task( 'img', done => {
 				quality: 75,
 			}),
 		]) )
-		.pipe( gulp.dest( './assets/dist/images/' ) )
-		.on( 'end', done );
+		.pipe( gulp.dest( './assets/dist/images/' ) );
+
+	if ( browserSync.active ) {
+		task = task.pipe( browserSync.stream() );
+	}
+
+	task.on( 'end', done );
 });
 
 // generate POT file
