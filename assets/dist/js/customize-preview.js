@@ -81,142 +81,146 @@
 /******/{
 
 	/***/7:
-	/***/function _(module, exports) {
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
+		"use strict";
+
+		var _this = this;
+
+		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
 		/**
    * File customize-preview.js.
    *
    * Theme Customizer handling for the preview.
    */
 
-		(function ($) {
+		(function (wp, data) {
+
+			function bindCustomizerValue(id, callback) {
+				wp.customize(id, function (setting) {
+					setting.bind(callback);
+				});
+			}
 
 			// Site title.
-			wp.customize('blogname', function (value) {
-				value.bind(function (to) {
-					$('.site-title a').text(to);
+			bindCustomizerValue('blogname', function (value) {
+				Array.from(document.querySelectorAll('.site-title a')).forEach(function (element) {
+					element.textContent = value;
 				});
 			});
 
 			// Site description.
-			wp.customize('blogdescription', function (value) {
-				value.bind(function (to) {
-					$('.site-description').text(to);
+			bindCustomizerValue('blogdescription', function (value) {
+				Array.from(document.querySelectorAll('.site-description')).forEach(function (element) {
+					element.textContent = value;
 				});
 			});
 
 			// Header text color.
-			wp.customize('header_textcolor', function (value) {
-				value.bind(function (to) {
-					if ('blank' === to) {
-						$('.site-title, .site-description').css({
-							'clip': 'rect(1px, 1px, 1px, 1px)',
-							'position': 'absolute'
-						});
-					} else {
-						$('.site-title, .site-description').css({
-							'clip': 'auto',
-							'position': 'relative'
-						});
-						$('.site-title a, .site-description').css({
-							'color': to
-						});
-					}
-				});
+			bindCustomizerValue('header_textcolor', function (value) {
+				if ('blank' === value) {
+					Array.from(document.querySelectorAll('.site-title, .site-description')).forEach(function (element) {
+						element.style.setProperty('clip', 'rect(1px, 1px, 1px, 1px)');
+						element.style.setProperty('position', 'absolute');
+					});
+				} else {
+					Array.from(document.querySelectorAll('.site-title, .site-description')).forEach(function (element) {
+						element.style.setProperty('clip', 'auto');
+						element.style.setProperty('position', 'relative');
+					});
+					Array.from(document.querySelectorAll('.site-title a, .site-description')).forEach(function (element) {
+						element.style.setProperty('color', value);
+					});
+				}
 			});
 
 			// Header text align.
-			wp.customize('header_textalign', function (value) {
-				value.bind(function (to) {
-					var classes = Object.keys(themeCustomizeData.headerTextalignChoices);
-					var index = classes.indexOf(to);
+			bindCustomizerValue('header_textalign', function (value) {
+				var classes = Object.keys(data.headerTextalignChoices);
+				var index = classes.indexOf(value);
+				var header = document.querySelector('.site-custom-header');
 
-					if (index > -1) {
-						classes.splice(index, 1);
+				if (header && index > -1) {
+					classes.splice(index, 1);
 
-						$('.site-custom-header').removeClass(classes.join(' ')).addClass(to);
-					}
-				});
+					header.classList.remove.apply(undefined, classes);
+					header.classList.add(value);
+				}
 			});
 
 			// Sidebar mode.
-			wp.customize('sidebar_mode', function (value) {
-				value.bind(function (to) {
-					var classes = Object.keys(themeCustomizeData.sidebarModeChoices);
-					var index = classes.indexOf(to);
+			bindCustomizerValue('sidebar_mode', function (value) {
+				var classes = Object.keys(data.sidebarModeChoices);
+				var index = classes.indexOf(value);
 
-					if (index > -1) {
-						classes.splice(index, 1);
+				if (index > -1) {
+					classes.splice(index, 1);
 
-						$('body').removeClass(classes.join(' ')).addClass(to);
-					}
-				});
+					document.body.classList.remove.apply(undefined, classes);
+					document.body.classList.add(value);
+				}
 			});
 
 			// Sidebar size.
-			wp.customize('sidebar_size', function (value) {
-				value.bind(function (to) {
-					var classes = Object.keys(themeCustomizeData.sidebarSizeChoices).map(function (setting) {
-						return 'sidebar-' + setting;
-					});
-					var index;
-
-					to = 'sidebar-' + to;
-					index = classes.indexOf(to);
-
-					if (index > -1) {
-						classes.splice(index, 1);
-
-						$('body').removeClass(classes.join(' ')).addClass(to);
-					}
+			bindCustomizerValue('sidebar_size', function (value) {
+				var classes = Object.keys(data.sidebarSizeChoices).map(function (setting) {
+					return 'sidebar-' + setting;
 				});
+				var index = classes.indexOf('sidebar-' + value);
+
+				value = 'sidebar-' + value;
+
+				if (index > -1) {
+					classes.splice(index, 1);
+
+					document.body.classList.remove.apply(undefined, classes);
+					document.body.classList.add(value);
+				}
 			});
 
 			// Top Bar Justify Content.
-			wp.customize('top_bar_justify_content', function (value) {
-				value.bind(function (to) {
-					var classes = Object.keys(themeCustomizeData.barJustifyContentChoices);
-					var index = classes.indexOf(to);
+			bindCustomizerValue('top_bar_justify_content', function (value) {
+				var classes = Object.keys(data.barJustifyContentChoices);
+				var index = classes.indexOf(value);
+				var topBar = document.getElementById('site-top-bar');
 
-					if (index > -1) {
-						classes.splice(index, 1);
+				if (topBar && index > -1) {
+					classes.splice(index, 1);
 
-						$('#site-top-bar').removeClass(classes.join(' ')).addClass(to);
-					}
-				});
+					topBar.classList.remove.apply(undefined, classes);
+					topBar.classList.add(value);
+				}
 			});
 
 			// Bottom Bar Justify Content.
-			wp.customize('bottom_bar_justify_content', function (value) {
-				value.bind(function (to) {
-					var classes = Object.keys(themeCustomizeData.barJustifyContentChoices);
-					var index = classes.indexOf(to);
+			bindCustomizerValue('bottom_bar_justify_content', function (value) {
+				var classes = Object.keys(data.barJustifyContentChoices);
+				var index = classes.indexOf(value);
+				var bottomBar = document.getElementById('site-bottom-bar');
 
-					if (index > -1) {
-						classes.splice(index, 1);
+				if (bottomBar && index > -1) {
+					classes.splice(index, 1);
 
-						$('#site-bottom-bar').removeClass(classes.join(' ')).addClass(to);
-					}
-				});
+					bottomBar.classList.remove.apply(undefined, classes);
+					bottomBar.classList.add(value);
+				}
 			});
 
 			// Wide footer widget area.
-			wp.customize('wide_footer_widget_area', function (value) {
-				value.bind(function (to) {
-					$('.footer-widget-column').each(function () {
-						var $this = $(this);
-						if ('footer-widget-column-' + to === $this.attr('id')) {
-							$this.addClass('footer-widget-column-wide');
-						} else {
-							$this.removeClass('footer-widget-column-wide');
-						}
-					});
+			bindCustomizerValue('wide_footer_widget_area', function (value) {
+				Array.from(document.querySelectorAll('.footer-widget-column')).forEach(function (element) {
+					if ('footer-widget-column-' + value === element.id) {
+						element.classList.add('footer-widget-column-wide');
+					} else {
+						element.classList.remove('footer-widget-column-wide');
+					}
 				});
 			});
 
 			wp.customize.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = wp.customize.selectiveRefresh.Partial.extend({
 				placements: function placements() {
-					var partial = this,
+					var partial = _this,
 					    selector;
 
 					selector = partial.params.selector || '';
@@ -225,23 +229,72 @@
 					}
 					selector += '[data-customize-partial-id="' + partial.id + '"]';
 
-					return $(selector).map(function () {
-						var container = $(this),
-						    context;
-
-						context = {
-							post_id: parseInt(container.parents('article.hentry').attr('id').replace('post-', ''), 10)
-						};
-
+					return Array.from(document.querySelectorAll(selector)).map(function (element) {
 						return new wp.customize.selectiveRefresh.Placement({
 							partial: partial,
-							container: container,
-							context: context
+							container: element,
+							context: {
+								post_id: parseInt(Object(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* findParent */])(element, 'article.hentry').id.replace('post-', ''), 10)
+							}
 						});
-					}).get();
+					});
 				}
 			});
-		})(jQuery);
+		})(window.wp, window.themeCustomizeData);
+
+		/***/
+	},
+
+	/***/8:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+		/* harmony export (immutable) */
+		__webpack_exports__["a"] = findParent;
+		/* unused harmony export debounce */
+		/**
+   * File utils.js.
+   *
+   * Contains utility functions used by theme functionality.
+   */
+
+		function findParent(element, selector) {
+			while (element && element !== document) {
+				element = element.parentElement;
+
+				if (element.matches(selector)) {
+					return element;
+				}
+			}
+
+			return null;
+		}
+
+		function debounce(func, wait, immediate) {
+			var _this2 = this,
+			    _arguments = arguments;
+
+			var timeout = void 0;
+
+			return function () {
+				var context = _this2;
+				var args = _arguments;
+				var later = function later() {
+					timeout = null;
+					if (!immediate) {
+						func.apply(context, args);
+					}
+				};
+				var callNow = immediate && !timeout;
+
+				clearTimeout(timeout);
+				timeout = setTimeout(later, wait);
+
+				if (callNow) {
+					func.apply(context, args);
+				}
+			};
+		}
 
 		/***/
 	}

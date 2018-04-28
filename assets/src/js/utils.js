@@ -4,6 +4,18 @@
  * Contains utility functions used by theme functionality.
  */
 
+export function findParent( element, selector ) {
+	while ( element && element !== document ) {
+		element = element.parentElement;
+
+		if ( element.matches( selector ) ) {
+			return element;
+		}
+	}
+
+	return null;
+}
+
 export function debounce( func, wait, immediate ) {
 	let timeout;
 

@@ -89,24 +89,54 @@
    * Theme Customizer handling for the interface.
    */
 
-		(function () {
+		(function (wp, data) {
+
+			function updateAvailableWidgets(collection, expanded) {
+				collection.each(function (widget) {
+					if (widget && !data.inlineWidgets.includes(widget.get('id_base'))) {
+						widget.set('is_disabled', expanded);
+					}
+				});
+			}
+
+			function bindCustomizerValueToSections(id, sections, callback) {
+				wp.customize(id, function (setting) {
+					function bindSection(section) {
+						callback(setting.get(), section);
+						setting.bind(function () {
+							callback(setting.get(), section);
+						});
+					}
+
+					sections.forEach(function (section) {
+						wp.customize.section(section, bindSection);
+					});
+				});
+			}
+
+			function bindCustomizerValueToControls(id, controls, callback) {
+				wp.customize(id, function (setting) {
+					function bindControl(control) {
+						callback(setting.get(), control);
+						setting.bind(function () {
+							callback(setting.get(), control);
+						});
+					}
+
+					controls.forEach(function (control) {
+						wp.customize.control(control, bindControl);
+					});
+				});
+			}
 
 			wp.customize.bind('ready', function () {
-				function updateAvailableWidgets(collection, expanded) {
-					collection.each(function (widget) {
-						if (widget && !themeCustomizeData.inlineWidgets.includes(widget.get('id_base'))) {
-							widget.set('is_disabled', expanded);
-						}
-					});
-				}
-
-				if (themeCustomizeData.inlineSidebars.length) {
+				if (data.inlineSidebars.length) {
 					wp.customize.section.each(function (section) {
 						if ('sidebar' !== section.params.type) {
 							return;
 						}
 
-						if (!themeCustomizeData.inlineSidebars.includes(section.params.sidebarId)) {
+						if (!data.inlineSidebars.includes(section.params.sidebarId)) {
 							return;
 						}
 
@@ -117,48 +147,29 @@
 				}
 
 				// Only show sidebar-related controls if a sidebar is enabled.
-				wp.customize('sidebar_mode', function (setting) {
-					var toggleVisibility = function toggleVisibility(control) {
-						var visibility = function visibility() {
-							if ('no-sidebar' === setting.get()) {
-								control.container.slideUp(180);
-							} else {
-								control.container.slideDown(180);
-							}
-						};
-
-						visibility();
-						setting.bind(visibility);
-					};
-
-					wp.customize.control('sidebar_size', toggleVisibility);
-					wp.customize.control('blog_sidebar_enabled', toggleVisibility);
+				bindCustomizerValueToControls('sidebar_mode', ['sidebar_size', 'blog_sidebar_enabled'], function (value, control) {
+					if ('no-sidebar' === value) {
+						control.container.slideUp(180);
+					} else {
+						control.container.slideDown(180);
+					}
 				});
 
 				// Show sidebar section that is enabled.
-				wp.customize('blog_sidebar_enabled', function (setting) {
-					var toggleActive = function toggleActive(section) {
-						var active = function active() {
-							if (setting.get()) {
-								if ('blog' === section.params.sidebarId) {
-									section.activate();
-								} else {
-									section.deactivate();
-								}
-							} else {
-								if ('blog' === section.params.sidebarId) {
-									section.deactivate();
-								} else {
-									section.activate();
-								}
-							}
-						};
-
-						setting.bind(active);
-					};
-
-					wp.customize.section('sidebar-widgets-primary', toggleActive);
-					wp.customize.section('sidebar-widgets-blog', toggleActive);
+				bindCustomizerValueToSections('blog_sidebar_enabled', ['sidebar-widgets-primary', 'sidebar-widgets-blog'], function (value, section) {
+					if (value) {
+						if ('blog' === section.params.sidebarId) {
+							section.activate();
+						} else {
+							section.deactivate();
+						}
+					} else {
+						if ('blog' === section.params.sidebarId) {
+							section.deactivate();
+						} else {
+							section.activate();
+						}
+					}
 				});
 
 				// Disable blog sidebar enabled control when not active.
@@ -175,13 +186,13 @@
 							control.container.find('.description').slideUp(180);
 							control.notifications.add(noticeCode, new wp.customize.Notification(noticeCode, {
 								type: 'info',
-								message: themeCustomizeData.i18n.blogSidebarEnabledNotice
+								message: data.i18n.blogSidebarEnabledNotice
 							}));
 						}
 					};
 				});
 			});
-		})();
+		})(window.wp, window.themeCustomizeData);
 
 		/***/
 	}
