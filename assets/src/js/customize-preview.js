@@ -53,8 +53,7 @@ import { findParent } from './common/utils';
 
 		if ( header && index > -1 ) {
 			classes.splice( index, 1 );
-
-			header.classList.remove.apply( undefined, classes );
+			classes.forEach( cssClass => header.classList.remove( cssClass ) );
 			header.classList.add( value );
 		}
 	});
@@ -66,8 +65,7 @@ import { findParent } from './common/utils';
 
 		if ( index > -1 ) {
 			classes.splice( index, 1 );
-
-			document.body.classList.remove.apply( undefined, classes );
+			classes.forEach( cssClass => document.body.classList.remove( cssClass ) );
 			document.body.classList.add( value );
 		}
 	});
@@ -81,8 +79,7 @@ import { findParent } from './common/utils';
 
 		if ( index > -1 ) {
 			classes.splice( index, 1 );
-
-			document.body.classList.remove.apply( undefined, classes );
+			classes.forEach( cssClass => document.body.classList.remove( cssClass ) );
 			document.body.classList.add( value );
 		}
 	});
@@ -95,8 +92,7 @@ import { findParent } from './common/utils';
 
 		if ( topBar && index > -1 ) {
 			classes.splice( index, 1 );
-
-			topBar.classList.remove.apply( undefined, classes );
+			classes.forEach( cssClass => topBar.classList.remove( cssClass ) );
 			topBar.classList.add( value );
 		}
 	});
@@ -109,8 +105,7 @@ import { findParent } from './common/utils';
 
 		if ( bottomBar && index > -1 ) {
 			classes.splice( index, 1 );
-
-			bottomBar.classList.remove.apply( undefined, classes );
+			classes.forEach( cssClass => bottomBar.classList.remove( cssClass ) );
 			bottomBar.classList.add( value );
 		}
 	});
@@ -127,7 +122,7 @@ import { findParent } from './common/utils';
 	});
 
 	wp.customize.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = wp.customize.selectiveRefresh.Partial.extend({
-		placements: () => {
+		placements: function() {
 			var partial = this, selector;
 
 			selector = partial.params.selector || '';

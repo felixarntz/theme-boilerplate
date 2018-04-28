@@ -160,8 +160,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		"use strict";
 
-		var _this = this;
-
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_util__ = __webpack_require__(0);
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__common_utils__ = __webpack_require__(9);
@@ -217,8 +215,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				if (header && index > -1) {
 					classes.splice(index, 1);
-
-					header.classList.remove.apply(undefined, classes);
+					classes.forEach(function (cssClass) {
+						return header.classList.remove(cssClass);
+					});
 					header.classList.add(value);
 				}
 			});
@@ -230,8 +229,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				if (index > -1) {
 					classes.splice(index, 1);
-
-					document.body.classList.remove.apply(undefined, classes);
+					classes.forEach(function (cssClass) {
+						return document.body.classList.remove(cssClass);
+					});
 					document.body.classList.add(value);
 				}
 			});
@@ -247,8 +247,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				if (index > -1) {
 					classes.splice(index, 1);
-
-					document.body.classList.remove.apply(undefined, classes);
+					classes.forEach(function (cssClass) {
+						return document.body.classList.remove(cssClass);
+					});
 					document.body.classList.add(value);
 				}
 			});
@@ -261,8 +262,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				if (topBar && index > -1) {
 					classes.splice(index, 1);
-
-					topBar.classList.remove.apply(undefined, classes);
+					classes.forEach(function (cssClass) {
+						return topBar.classList.remove(cssClass);
+					});
 					topBar.classList.add(value);
 				}
 			});
@@ -275,8 +277,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				if (bottomBar && index > -1) {
 					classes.splice(index, 1);
-
-					bottomBar.classList.remove.apply(undefined, classes);
+					classes.forEach(function (cssClass) {
+						return bottomBar.classList.remove(cssClass);
+					});
 					bottomBar.classList.add(value);
 				}
 			});
@@ -294,7 +297,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 			wp.customize.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = wp.customize.selectiveRefresh.Partial.extend({
 				placements: function placements() {
-					var partial = _this,
+					var partial = this,
 					    selector;
 
 					selector = partial.params.selector || '';
@@ -345,13 +348,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 
 		function debounce(func, wait, immediate) {
-			var _this2 = this,
+			var _this = this,
 			    _arguments = arguments;
 
 			var timeout = void 0;
 
 			return function () {
-				var context = _this2;
+				var context = _this;
 				var args = _arguments;
 				var later = function later() {
 					timeout = null;
