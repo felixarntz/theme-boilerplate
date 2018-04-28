@@ -1,7 +1,7 @@
 /**
  * File utils.js.
  *
- * Contains utility functions used by theme functionality.
+ * Contains common utility functions.
  */
 
 export function findParent( element, selector ) {

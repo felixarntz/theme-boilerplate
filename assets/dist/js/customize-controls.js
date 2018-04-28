@@ -1,5 +1,9 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /******/(function (modules) {
 	// webpackBootstrap
 	/******/ // The module cache
@@ -74,15 +78,90 @@
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 6);
+	/******/return __webpack_require__(__webpack_require__.s = 7);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/6:
-	/***/function _(module, exports) {
+	/***/0:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
+		"use strict";
+		/**
+   * File customize-util.js.
+   *
+   * Class containing Customizer utility methods.
+   */
+
+		var CustomizeUtil = function () {
+			function CustomizeUtil(wpCustomize) {
+				_classCallCheck(this, CustomizeUtil);
+
+				this.customizer = wpCustomize || window.wp.customize;
+			}
+
+			_createClass(CustomizeUtil, [{
+				key: 'bindSettingValue',
+				value: function bindSettingValue(id, callback) {
+					this.customizer(id, function (setting) {
+						setting.bind(callback);
+					});
+				}
+			}, {
+				key: 'bindSettingValueToPanels',
+				value: function bindSettingValueToPanels(id, panelIds, callback) {
+					this.bindSettingValueToComponents(id, panelIds, callback, 'panel');
+				}
+			}, {
+				key: 'bindSettingValueToSections',
+				value: function bindSettingValueToSections(id, sectionIds, callback) {
+					this.bindSettingValueToComponents(id, sectionIds, callback, 'section');
+				}
+			}, {
+				key: 'bindSettingValueToControls',
+				value: function bindSettingValueToControls(id, controlIds, callback) {
+					this.bindSettingValueToComponents(id, controlIds, callback, 'control');
+				}
+			}, {
+				key: 'bindSettingValueToComponents',
+				value: function bindSettingValueToComponents(id, componentIds, callback, componentType) {
+					var customizer = this.customizer;
+
+					componentType = componentType || 'control';
+
+					this.customizer(id, function (setting) {
+						function bindComponent(component) {
+							callback(setting.get(), component);
+							setting.bind(function () {
+								callback(setting.get(), component);
+							});
+						}
+
+						componentIds.forEach(function (componentId) {
+							customizer[componentType](componentId, bindComponent);
+						});
+					});
+				}
+			}]);
+
+			return CustomizeUtil;
+		}();
+
+		/* harmony default export */
+
+		__webpack_exports__["a"] = CustomizeUtil;
+
+		/***/
+	},
+
+	/***/7:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+
+		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_util__ = __webpack_require__(0);
 		/**
    * File customize-controls.js.
    *
@@ -90,6 +169,8 @@
    */
 
 		(function (wp, data) {
+
+			data = data || {};
 
 			function updateAvailableWidgets(collection, expanded) {
 				collection.each(function (widget) {
@@ -99,37 +180,9 @@
 				});
 			}
 
-			function bindCustomizerValueToSections(id, sections, callback) {
-				wp.customize(id, function (setting) {
-					function bindSection(section) {
-						callback(setting.get(), section);
-						setting.bind(function () {
-							callback(setting.get(), section);
-						});
-					}
-
-					sections.forEach(function (section) {
-						wp.customize.section(section, bindSection);
-					});
-				});
-			}
-
-			function bindCustomizerValueToControls(id, controls, callback) {
-				wp.customize(id, function (setting) {
-					function bindControl(control) {
-						callback(setting.get(), control);
-						setting.bind(function () {
-							callback(setting.get(), control);
-						});
-					}
-
-					controls.forEach(function (control) {
-						wp.customize.control(control, bindControl);
-					});
-				});
-			}
-
 			wp.customize.bind('ready', function () {
+				var customizeUtil = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_util__["a" /* default */](wp.customize);
+
 				if (data.inlineSidebars.length) {
 					wp.customize.section.each(function (section) {
 						if ('sidebar' !== section.params.type) {
@@ -147,7 +200,7 @@
 				}
 
 				// Only show sidebar-related controls if a sidebar is enabled.
-				bindCustomizerValueToControls('sidebar_mode', ['sidebar_size', 'blog_sidebar_enabled'], function (value, control) {
+				customizeUtil.bindSettingValueToControls('sidebar_mode', ['sidebar_size', 'blog_sidebar_enabled'], function (value, control) {
 					if ('no-sidebar' === value) {
 						control.container.slideUp(180);
 					} else {
@@ -156,7 +209,7 @@
 				});
 
 				// Show sidebar section that is enabled.
-				bindCustomizerValueToSections('blog_sidebar_enabled', ['sidebar-widgets-primary', 'sidebar-widgets-blog'], function (value, section) {
+				customizeUtil.bindSettingValueToSections('blog_sidebar_enabled', ['sidebar-widgets-primary', 'sidebar-widgets-blog'], function (value, section) {
 					if (value) {
 						if ('blog' === section.params.sidebarId) {
 							section.activate();

@@ -4,32 +4,31 @@
  * Theme Customizer handling for the preview.
  */
 
-import { findParent } from './utils';
+import CustomizeUtil from './customize/customize-util';
+import { findParent } from './common/utils';
 
 ( ( wp, data ) => {
 
-	function bindCustomizerValue( id, callback ) {
-		wp.customize( id, setting => {
-			setting.bind( callback );
-		});
-	}
+	const customizeUtil = new CustomizeUtil( wp.customize );
+
+	data = data || {};
 
 	// Site title.
-	bindCustomizerValue( 'blogname', value => {
+	customizeUtil.bindSettingValue( 'blogname', value => {
 		Array.from( document.querySelectorAll( '.site-title a' ) ).forEach( element => {
 			element.textContent = value;
 		});
 	});
 
 	// Site description.
-	bindCustomizerValue( 'blogdescription', value => {
+	customizeUtil.bindSettingValue( 'blogdescription', value => {
 		Array.from( document.querySelectorAll( '.site-description' ) ).forEach( element => {
 			element.textContent = value;
 		});
 	});
 
 	// Header text color.
-	bindCustomizerValue( 'header_textcolor', value => {
+	customizeUtil.bindSettingValue( 'header_textcolor', value => {
 		if ( 'blank' === value ) {
 			Array.from( document.querySelectorAll( '.site-title, .site-description' ) ).forEach( element => {
 				element.style.setProperty( 'clip', 'rect(1px, 1px, 1px, 1px)' );
@@ -47,7 +46,7 @@ import { findParent } from './utils';
 	});
 
 	// Header text align.
-	bindCustomizerValue( 'header_textalign', value => {
+	customizeUtil.bindSettingValue( 'header_textalign', value => {
 		const classes = Object.keys( data.headerTextalignChoices );
 		const index   = classes.indexOf( value );
 		const header  = document.querySelector( '.site-custom-header' );
@@ -61,7 +60,7 @@ import { findParent } from './utils';
 	});
 
 	// Sidebar mode.
-	bindCustomizerValue( 'sidebar_mode', value => {
+	customizeUtil.bindSettingValue( 'sidebar_mode', value => {
 		const classes = Object.keys( data.sidebarModeChoices );
 		const index   = classes.indexOf( value );
 
@@ -74,7 +73,7 @@ import { findParent } from './utils';
 	});
 
 	// Sidebar size.
-	bindCustomizerValue( 'sidebar_size', value => {
+	customizeUtil.bindSettingValue( 'sidebar_size', value => {
 		const classes = Object.keys( data.sidebarSizeChoices ).map( setting => 'sidebar-' + setting );
 		const index   = classes.indexOf( 'sidebar-' + value );
 
@@ -89,7 +88,7 @@ import { findParent } from './utils';
 	});
 
 	// Top Bar Justify Content.
-	bindCustomizerValue( 'top_bar_justify_content', value => {
+	customizeUtil.bindSettingValue( 'top_bar_justify_content', value => {
 		const classes = Object.keys( data.barJustifyContentChoices );
 		const index   = classes.indexOf( value );
 		const topBar  = document.getElementById( 'site-top-bar' );
@@ -103,7 +102,7 @@ import { findParent } from './utils';
 	});
 
 	// Bottom Bar Justify Content.
-	bindCustomizerValue( 'bottom_bar_justify_content', value => {
+	customizeUtil.bindSettingValue( 'bottom_bar_justify_content', value => {
 		const classes   = Object.keys( data.barJustifyContentChoices );
 		const index     = classes.indexOf( value );
 		const bottomBar = document.getElementById( 'site-bottom-bar' );
@@ -117,7 +116,7 @@ import { findParent } from './utils';
 	});
 
 	// Wide footer widget area.
-	bindCustomizerValue( 'wide_footer_widget_area', value => {
+	customizeUtil.bindSettingValue( 'wide_footer_widget_area', value => {
 		Array.from( document.querySelectorAll( '.footer-widget-column' ) ).forEach( element => {
 			if ( 'footer-widget-column-' + value === element.id ) {
 				element.classList.add( 'footer-widget-column-wide' );

@@ -4,7 +4,11 @@
  * Theme Customizer handling for the interface.
  */
 
+import CustomizeUtil from './customize/customize-util';
+
 ( ( wp, data ) => {
+
+	data = data || {};
 
 	function updateAvailableWidgets( collection, expanded ) {
 		collection.each( widget => {
@@ -14,37 +18,9 @@
 		});
 	}
 
-	function bindCustomizerValueToSections( id, sections, callback ) {
-		wp.customize( id, setting => {
-			function bindSection( section ) {
-				callback( setting.get(), section );
-				setting.bind( () => {
-					callback( setting.get(), section );
-				});
-			}
-
-			sections.forEach( section => {
-				wp.customize.section( section, bindSection );
-			});
-		});
-	}
-
-	function bindCustomizerValueToControls( id, controls, callback ) {
-		wp.customize( id, setting => {
-			function bindControl( control ) {
-				callback( setting.get(), control );
-				setting.bind( () => {
-					callback( setting.get(), control );
-				});
-			}
-
-			controls.forEach( control => {
-				wp.customize.control( control, bindControl );
-			});
-		});
-	}
-
 	wp.customize.bind( 'ready', () => {
+		const customizeUtil = new CustomizeUtil( wp.customize );
+
 		if ( data.inlineSidebars.length ) {
 			wp.customize.section.each( section => {
 				if ( 'sidebar' !== section.params.type ) {
@@ -65,7 +41,7 @@
 		}
 
 		// Only show sidebar-related controls if a sidebar is enabled.
-		bindCustomizerValueToControls( 'sidebar_mode', [ 'sidebar_size', 'blog_sidebar_enabled' ], ( value, control ) => {
+		customizeUtil.bindSettingValueToControls( 'sidebar_mode', [ 'sidebar_size', 'blog_sidebar_enabled' ], ( value, control ) => {
 			if ( 'no-sidebar' === value ) {
 				control.container.slideUp( 180 );
 			} else {
@@ -74,7 +50,7 @@
 		});
 
 		// Show sidebar section that is enabled.
-		bindCustomizerValueToSections( 'blog_sidebar_enabled', [ 'sidebar-widgets-primary', 'sidebar-widgets-blog' ], ( value, section ) => {
+		customizeUtil.bindSettingValueToSections( 'blog_sidebar_enabled', [ 'sidebar-widgets-primary', 'sidebar-widgets-blog' ], ( value, section ) => {
 			if ( value ) {
 				if ( 'blog' === section.params.sidebarId ) {
 					section.activate();
@@ -110,4 +86,5 @@
 			};
 		});
 	});
+
 } )( window.wp, window.themeCustomizeData );

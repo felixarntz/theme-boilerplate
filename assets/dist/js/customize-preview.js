@@ -1,5 +1,9 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /******/(function (modules) {
 	// webpackBootstrap
 	/******/ // The module cache
@@ -74,13 +78,84 @@
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 7);
+	/******/return __webpack_require__(__webpack_require__.s = 8);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/7:
+	/***/0:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+		/**
+   * File customize-util.js.
+   *
+   * Class containing Customizer utility methods.
+   */
+
+		var CustomizeUtil = function () {
+			function CustomizeUtil(wpCustomize) {
+				_classCallCheck(this, CustomizeUtil);
+
+				this.customizer = wpCustomize || window.wp.customize;
+			}
+
+			_createClass(CustomizeUtil, [{
+				key: 'bindSettingValue',
+				value: function bindSettingValue(id, callback) {
+					this.customizer(id, function (setting) {
+						setting.bind(callback);
+					});
+				}
+			}, {
+				key: 'bindSettingValueToPanels',
+				value: function bindSettingValueToPanels(id, panelIds, callback) {
+					this.bindSettingValueToComponents(id, panelIds, callback, 'panel');
+				}
+			}, {
+				key: 'bindSettingValueToSections',
+				value: function bindSettingValueToSections(id, sectionIds, callback) {
+					this.bindSettingValueToComponents(id, sectionIds, callback, 'section');
+				}
+			}, {
+				key: 'bindSettingValueToControls',
+				value: function bindSettingValueToControls(id, controlIds, callback) {
+					this.bindSettingValueToComponents(id, controlIds, callback, 'control');
+				}
+			}, {
+				key: 'bindSettingValueToComponents',
+				value: function bindSettingValueToComponents(id, componentIds, callback, componentType) {
+					var customizer = this.customizer;
+
+					componentType = componentType || 'control';
+
+					this.customizer(id, function (setting) {
+						function bindComponent(component) {
+							callback(setting.get(), component);
+							setting.bind(function () {
+								callback(setting.get(), component);
+							});
+						}
+
+						componentIds.forEach(function (componentId) {
+							customizer[componentType](componentId, bindComponent);
+						});
+					});
+				}
+			}]);
+
+			return CustomizeUtil;
+		}();
+
+		/* harmony default export */
+
+		__webpack_exports__["a"] = CustomizeUtil;
+
+		/***/
+	},
+
+	/***/8:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -88,7 +163,8 @@
 		var _this = this;
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_util__ = __webpack_require__(0);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__common_utils__ = __webpack_require__(9);
 		/**
    * File customize-preview.js.
    *
@@ -97,28 +173,26 @@
 
 		(function (wp, data) {
 
-			function bindCustomizerValue(id, callback) {
-				wp.customize(id, function (setting) {
-					setting.bind(callback);
-				});
-			}
+			var customizeUtil = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_util__["a" /* default */](wp.customize);
+
+			data = data || {};
 
 			// Site title.
-			bindCustomizerValue('blogname', function (value) {
+			customizeUtil.bindSettingValue('blogname', function (value) {
 				Array.from(document.querySelectorAll('.site-title a')).forEach(function (element) {
 					element.textContent = value;
 				});
 			});
 
 			// Site description.
-			bindCustomizerValue('blogdescription', function (value) {
+			customizeUtil.bindSettingValue('blogdescription', function (value) {
 				Array.from(document.querySelectorAll('.site-description')).forEach(function (element) {
 					element.textContent = value;
 				});
 			});
 
 			// Header text color.
-			bindCustomizerValue('header_textcolor', function (value) {
+			customizeUtil.bindSettingValue('header_textcolor', function (value) {
 				if ('blank' === value) {
 					Array.from(document.querySelectorAll('.site-title, .site-description')).forEach(function (element) {
 						element.style.setProperty('clip', 'rect(1px, 1px, 1px, 1px)');
@@ -136,7 +210,7 @@
 			});
 
 			// Header text align.
-			bindCustomizerValue('header_textalign', function (value) {
+			customizeUtil.bindSettingValue('header_textalign', function (value) {
 				var classes = Object.keys(data.headerTextalignChoices);
 				var index = classes.indexOf(value);
 				var header = document.querySelector('.site-custom-header');
@@ -150,7 +224,7 @@
 			});
 
 			// Sidebar mode.
-			bindCustomizerValue('sidebar_mode', function (value) {
+			customizeUtil.bindSettingValue('sidebar_mode', function (value) {
 				var classes = Object.keys(data.sidebarModeChoices);
 				var index = classes.indexOf(value);
 
@@ -163,7 +237,7 @@
 			});
 
 			// Sidebar size.
-			bindCustomizerValue('sidebar_size', function (value) {
+			customizeUtil.bindSettingValue('sidebar_size', function (value) {
 				var classes = Object.keys(data.sidebarSizeChoices).map(function (setting) {
 					return 'sidebar-' + setting;
 				});
@@ -180,7 +254,7 @@
 			});
 
 			// Top Bar Justify Content.
-			bindCustomizerValue('top_bar_justify_content', function (value) {
+			customizeUtil.bindSettingValue('top_bar_justify_content', function (value) {
 				var classes = Object.keys(data.barJustifyContentChoices);
 				var index = classes.indexOf(value);
 				var topBar = document.getElementById('site-top-bar');
@@ -194,7 +268,7 @@
 			});
 
 			// Bottom Bar Justify Content.
-			bindCustomizerValue('bottom_bar_justify_content', function (value) {
+			customizeUtil.bindSettingValue('bottom_bar_justify_content', function (value) {
 				var classes = Object.keys(data.barJustifyContentChoices);
 				var index = classes.indexOf(value);
 				var bottomBar = document.getElementById('site-bottom-bar');
@@ -208,7 +282,7 @@
 			});
 
 			// Wide footer widget area.
-			bindCustomizerValue('wide_footer_widget_area', function (value) {
+			customizeUtil.bindSettingValue('wide_footer_widget_area', function (value) {
 				Array.from(document.querySelectorAll('.footer-widget-column')).forEach(function (element) {
 					if ('footer-widget-column-' + value === element.id) {
 						element.classList.add('footer-widget-column-wide');
@@ -234,7 +308,7 @@
 							partial: partial,
 							container: element,
 							context: {
-								post_id: parseInt(Object(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* findParent */])(element, 'article.hentry').id.replace('post-', ''), 10)
+								post_id: parseInt(Object(__WEBPACK_IMPORTED_MODULE_1__common_utils__["a" /* findParent */])(element, 'article.hentry').id.replace('post-', ''), 10)
 							}
 						});
 					});
@@ -245,7 +319,7 @@
 		/***/
 	},
 
-	/***/8:
+	/***/9:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -255,7 +329,7 @@
 		/**
    * File utils.js.
    *
-   * Contains utility functions used by theme functionality.
+   * Contains common utility functions.
    */
 
 		function findParent(element, selector) {

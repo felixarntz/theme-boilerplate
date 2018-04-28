@@ -80,48 +80,49 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 0);
+	/******/return __webpack_require__(__webpack_require__.s = 1);
 	/******/
 })(
 /************************************************************************/
-/******/[
+/******/[,
 /* 0 */
+/* 1 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__skip_link_focus_fix__ = __webpack_require__(1);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__navigation__ = __webpack_require__(2);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__comment_form__ = __webpack_require__(3);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__modals__ = __webpack_require__(4);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__sticky__ = __webpack_require__(5);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__theme_skip_link_focus_fix__ = __webpack_require__(2);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__theme_navigation__ = __webpack_require__(3);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__theme_comment_form__ = __webpack_require__(4);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__theme_modals__ = __webpack_require__(5);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__theme_sticky__ = __webpack_require__(6);
 
-	window.themeData = window.themeData || {};
+	(function (data) {
+		data = data || {};
 
-	(function (themeData) {
 		document.addEventListener('wp-custom-header-video-loaded', function () {
 			document.body.addClass('has-header-video');
 		});
 
-		themeData.components = {
-			skipLinkFocusFix: new __WEBPACK_IMPORTED_MODULE_0__skip_link_focus_fix__["a" /* default */](),
-			navigation: new __WEBPACK_IMPORTED_MODULE_1__navigation__["a" /* default */]('site-navigation', themeData.navigation),
-			commentForm: new __WEBPACK_IMPORTED_MODULE_2__comment_form__["a" /* default */]('commentform', 'comments', themeData.comments),
-			modals: new __WEBPACK_IMPORTED_MODULE_3__modals__["a" /* default */]('.modal'),
-			sticky: new __WEBPACK_IMPORTED_MODULE_4__sticky__["a" /* default */](themeData.sticky)
+		data.components = {
+			skipLinkFocusFix: new __WEBPACK_IMPORTED_MODULE_0__theme_skip_link_focus_fix__["a" /* default */](),
+			navigation: new __WEBPACK_IMPORTED_MODULE_1__theme_navigation__["a" /* default */]('site-navigation', data.navigation),
+			commentForm: new __WEBPACK_IMPORTED_MODULE_2__theme_comment_form__["a" /* default */]('commentform', 'comments', data.comments),
+			modals: new __WEBPACK_IMPORTED_MODULE_3__theme_modals__["a" /* default */]('.modal'),
+			sticky: new __WEBPACK_IMPORTED_MODULE_4__theme_sticky__["a" /* default */](data.sticky)
 		};
 
-		themeData.components.skipLinkFocusFix.initialize();
-		themeData.components.navigation.initialize();
-		themeData.components.commentForm.initialize();
-		themeData.components.modals.initialize();
-		themeData.components.sticky.initialize();
+		data.components.skipLinkFocusFix.initialize();
+		data.components.navigation.initialize();
+		data.components.commentForm.initialize();
+		data.components.modals.initialize();
+		data.components.sticky.initialize();
 	})(window.themeData);
 
 	/***/
 },
-/* 1 */
+/* 2 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -215,7 +216,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 2 */
+/* 3 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -422,7 +423,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 3 */
+/* 4 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -691,7 +692,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 4 */
+/* 5 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -839,7 +840,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 5 */
+/* 6 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
