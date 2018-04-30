@@ -66,13 +66,11 @@ final class Super_Awesome_Theme_Settings extends Super_Awesome_Theme_Theme_Compo
 	 * @param string $id Unique string identifier for this setting.
 	 * @return Super_Awesome_Theme_Setting Registered setting instance.
 	 *
-	 * @throws InvalidArgumentException Thrown when $id does not identify a registered setting.
+	 * @throws Super_Awesome_Theme_Setting_Not_Registered_Exception Thrown when $id does not identify a registered setting.
 	 */
 	public function get_registered_setting( $id ) {
 		if ( ! isset( $this->settings[ $id ] ) ) {
-
-			/* translators: %s: setting identifier */
-			throw new InvalidArgumentException( sprintf( __( '%s is not a registered setting.', 'super-awesome-theme' ), $id ) );
+			throw Super_Awesome_Theme_Setting_Not_Registered_Exception::from_id( $id );
 		}
 
 		return $this->settings[ $id ];

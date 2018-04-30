@@ -19,6 +19,7 @@ require get_template_directory() . '/inc/library/class-theme-component-not-provi
  * Theme settings.
  */
 require get_template_directory() . '/inc/library/settings/class-settings.php';
+require get_template_directory() . '/inc/library/settings/class-setting-not-registered-exception.php';
 require get_template_directory() . '/inc/library/settings/class-setting.php';
 require get_template_directory() . '/inc/library/settings/class-string-setting.php';
 require get_template_directory() . '/inc/library/settings/class-integer-setting.php';
@@ -31,6 +32,7 @@ require get_template_directory() . '/inc/library/settings/class-enum-string-sett
  */
 require get_template_directory() . '/inc/library/assets/class-assets.php';
 require get_template_directory() . '/inc/library/assets/class-asset-not-registered-exception.php';
+require get_template_directory() . '/inc/library/assets/class-asset-not-enqueueable-exception.php';
 require get_template_directory() . '/inc/library/assets/class-asset.php';
 require get_template_directory() . '/inc/library/assets/class-script.php';
 require get_template_directory() . '/inc/library/assets/class-stylesheet.php';

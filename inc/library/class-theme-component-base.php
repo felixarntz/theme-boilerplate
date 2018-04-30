@@ -116,13 +116,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 		}
 
 		if ( ! isset( $this->dependencies[ $class_name ] ) ) {
-			throw new Super_Awesome_Theme_Theme_Component_Not_Provided_Exception(
-				sprintf(
-					__( 'Required dependency %1$s for theme component %2$s was not provided.', 'super-awesome-theme' ),
-					$class_name,
-					get_class( $this )
-				)
-			);
+			throw Super_Awesome_Theme_Theme_Component_Not_Provided_Exception::from_dependency_and_component( $class_name, get_class( $this ) );
 		}
 
 		return $this->dependencies[ $class_name ];

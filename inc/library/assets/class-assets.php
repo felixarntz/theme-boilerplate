@@ -58,13 +58,11 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 * @param string $handle Unique string handle for this asset.
 	 * @return Super_Awesome_Theme_Asset Registered asset instance.
 	 *
-	 * @throws InvalidArgumentException Thrown when $handle does not identify a registered asset.
+	 * @throws Super_Awesome_Theme_Asset_Not_Registered_Exception Thrown when $handle does not identify a registered asset.
 	 */
 	public function get_registered_asset( $handle ) {
 		if ( ! isset( $this->assets[ $handle ] ) ) {
-
-			/* translators: %s: asset handle */
-			throw new InvalidArgumentException( sprintf( __( '%s is not a registered asset.', 'super-awesome-theme' ), $handle ) );
+			throw Super_Awesome_Theme_Asset_Not_Registered_Exception::from_handle( $handle );
 		}
 
 		return $this->assets[ $handle ];

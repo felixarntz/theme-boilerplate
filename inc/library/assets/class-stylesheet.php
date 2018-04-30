@@ -52,13 +52,11 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @throws Super_Awesome_Theme_Asset_Not_Registered_Exception Thrown when the asset is not registered.
+	 * @throws Super_Awesome_Theme_Asset_Not_Enqueueable_Exception Thrown when the asset is not registered.
 	 */
 	public function enqueue() {
 		if ( ! $this->is_registered() ) {
-
-			/* translators: %s: asset identifier */
-			throw new Super_Awesome_Theme_Asset_Not_Registered_Exception( sprintf( __( 'Stylesheet %s cannot be enqueued because it is not registered.', 'super-awesome-theme' ), $this->handle ) );
+			throw Super_Awesome_Theme_Asset_Not_Enqueueable_Exception::from_handle( $this->handle );
 		}
 
 		wp_enqueue_style( $this->handle );
