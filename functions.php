@@ -32,6 +32,13 @@ if ( version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
  */
 require get_template_directory() . '/inc/library.php';
 
+super_awesome_theme()
+	->register_component( new Super_Awesome_Theme_Settings() )
+	->register_component( new Super_Awesome_Theme_Assets() )
+	->register_component( new Super_Awesome_Theme_Customizer() )
+	->resolve_dependencies()
+	->initialize();
+
 /**
  * Theme setup.
  */

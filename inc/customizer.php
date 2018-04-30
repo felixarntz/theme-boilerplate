@@ -16,21 +16,6 @@
  */
 function super_awesome_theme_customize_register( $wp_customize ) {
 
-	/* Core Adjustments */
-
-	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-
-	$wp_customize->selective_refresh->add_partial( 'blogname', array(
-		'selector'        => '.site-title a',
-		'render_callback' => 'super_awesome_theme_customize_partial_blogname',
-	) );
-	$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
-		'selector'        => '.site-description',
-		'render_callback' => 'super_awesome_theme_customize_partial_blogdescription',
-	) );
-
 	/* Site Identity Settings */
 
 	$wp_customize->add_setting( 'branding_location', array(
@@ -1067,24 +1052,6 @@ function super_awesome_theme_customize_partial_styles() {
 	$output = ob_get_clean();
 
 	echo preg_replace( '#<style[^>]*>(.*)</style>#is', '$1', $output ); // WPCS: XSS OK.
-}
-
-/**
- * Renders the site title for the selective refresh partial.
- *
- * @since 1.0.0
- */
-function super_awesome_theme_customize_partial_blogname() {
-	bloginfo( 'name' );
-}
-
-/**
- * Renders the site tagline for the selective refresh partial.
- *
- * @since 1.0.0
- */
-function super_awesome_theme_customize_partial_blogdescription() {
-	bloginfo( 'description' );
 }
 
 /**

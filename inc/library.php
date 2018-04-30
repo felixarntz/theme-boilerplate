@@ -43,3 +43,20 @@ require get_template_directory() . '/inc/library/assets/class-stylesheet.php';
 require get_template_directory() . '/inc/library/customizer/class-customizer.php';
 require get_template_directory() . '/inc/library/customizer/class-customize-component-not-registered-exception.php';
 require get_template_directory() . '/inc/library/customizer/class-customizer-not-initialized-exception.php';
+
+/**
+ * Gets the main theme class instance.
+ *
+ * @since 1.0.0
+ *
+ * @return Super_Awesome_Theme_Theme Main theme class instance.
+ */
+function super_awesome_theme() {
+	static $theme = null;
+
+	if ( null === $theme ) {
+		$theme = new Super_Awesome_Theme_Theme();
+	}
+
+	return $theme;
+}
