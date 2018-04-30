@@ -62,3 +62,10 @@ if ( defined( 'GUTENBERG_VERSION' ) ) {
 if ( function_exists( 'torro' ) ) {
 	require get_template_directory() . '/inc/plugin-compat/torro-forms.php';
 }
+
+/**
+ * Yoast SEO compatibility.
+ */
+if ( defined( 'WPSEO_VERSION' ) ) {
+	require get_template_directory() . '/inc/plugin-compat/wordpress-seo.php';
+}
