@@ -36,3 +36,10 @@ require get_template_directory() . '/inc/library/assets/class-asset-not-enqueuea
 require get_template_directory() . '/inc/library/assets/class-asset.php';
 require get_template_directory() . '/inc/library/assets/class-script.php';
 require get_template_directory() . '/inc/library/assets/class-stylesheet.php';
+
+/**
+ * Theme customizer.
+ */
+require get_template_directory() . '/inc/library/customizer/class-customizer.php';
+require get_template_directory() . '/inc/library/customizer/class-customize-component-not-registered-exception.php';
+require get_template_directory() . '/inc/library/customizer/class-customizer-not-initialized-exception.php';
