@@ -15,6 +15,45 @@
 class Super_Awesome_Theme_Float_Setting extends Super_Awesome_Theme_Setting {
 
 	/**
+	 * Minimum allowed value, or false for no restriction.
+	 *
+	 * @since 1.0.0
+	 * @var float|bool
+	 */
+	protected $min;
+
+	/**
+	 * Maximum allowed value, or false for no restriction.
+	 *
+	 * @since 1.0.0
+	 * @var float|bool
+	 */
+	protected $max;
+
+	/**
+	 * Performs default validation for a value for the setting.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Error $validity Error object to add validation errors to.
+	 * @param mixed $value       Value to validate.
+	 * @return WP_Error Error object to add possible errors to.
+	 */
+	protected function default_validation_callback( WP_Error $validity, $value ) {
+		$validity = parent::default_validation_callback( $validity, $value );
+
+		if ( false !== $this->min && (float) $value < $this->min ) {
+			$validity->add( 'value_too_small', sprintf( __( 'Value must not be smaller than %s.', 'super-awesome-theme' ), number_format_i18n( $this->min, 2 ) ) );
+		}
+
+		if ( false !== $this->max && (float) $value > $this->max ) {
+			$validity->add( 'value_too_great', sprintf( __( 'Value must not be greater than %s.', 'super-awesome-theme' ), number_format_i18n( $this->max, 2 ) ) );
+		}
+
+		return $validity;
+	}
+
+	/**
 	 * Performs default sanitization for a value for the setting.
 	 *
 	 * @since 1.0.0
@@ -51,6 +90,8 @@ class Super_Awesome_Theme_Float_Setting extends Super_Awesome_Theme_Setting {
 	protected function get_defaults() {
 		$defaults            = parent::get_defaults();
 		$defaults['default'] = 0.0;
+		$defaults['min']     = false;
+		$defaults['max']     = false;
 
 		return $defaults;
 	}
