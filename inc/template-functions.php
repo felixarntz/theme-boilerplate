@@ -267,6 +267,31 @@ function super_awesome_theme_display_post_authorbox( $post = null ) {
 }
 
 /**
+ * Checks whether a link to the author's posts should be displayed for a post.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Post|int|null $post Optional. Post to check for. Default is the current post.
+ * @return bool True if the author posts link should be displayed for the post, false otherwise.
+ */
+function super_awesome_theme_display_author_posts_link( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return false;
+	}
+
+	/**
+	 * Filters whether a link to the author's posts should be displayed for a post.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool    $result Whether the author posts link should be displayed for the post.
+	 * @param WP_Post $post   Current post object.
+	 */
+	return apply_filters( 'super_awesome_theme_display_author_posts_link', true, $post );
+}
+
+/**
  * Checks whether the sidebar should be displayed.
  *
  * @since 1.0.0
