@@ -197,7 +197,7 @@ class Super_Awesome_Theme_Setting {
 		}
 
 		if ( is_wp_error( $validity ) ) {
-			if ( ! $validity->has_errors() ) {
+			if ( empty( $validity->errors ) ) {
 				$validity = true;
 			}
 			return $validity;

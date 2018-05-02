@@ -47,7 +47,7 @@ final class Super_Awesome_Theme_Settings extends Super_Awesome_Theme_Theme_Compo
 	 * @return bool True on success, false on failure.
 	 */
 	public function register_setting( Super_Awesome_Theme_Setting $setting ) {
-		$id = $setting->get( Super_Awesome_Theme_Setting::PROP_ID );
+		$id = $setting->get_prop( Super_Awesome_Theme_Setting::PROP_ID );
 
 		if ( isset( $this->settings[ $id ] ) ) {
 			return false;
@@ -106,11 +106,11 @@ final class Super_Awesome_Theme_Settings extends Super_Awesome_Theme_Theme_Compo
 		$wp_customize = $args[0];
 
 		foreach ( $this->settings as $setting ) {
-			$id   = $setting->get( Super_Awesome_Theme_Setting::PROP_ID );
+			$id   = $setting->get_prop( Super_Awesome_Theme_Setting::PROP_ID );
 			$args = array(
-				Super_Awesome_Theme_Customize_Setting::PROP_CAPABILITY           => $setting->get( Super_Awesome_Theme_Setting::PROP_CAPABILITY ),
+				Super_Awesome_Theme_Customize_Setting::PROP_CAPABILITY           => $setting->get_prop( Super_Awesome_Theme_Setting::PROP_CAPABILITY ),
 				Super_Awesome_Theme_Customize_Setting::PROP_TYPE                 => Super_Awesome_Theme_Customize_Setting::TYPE_THEME_MOD,
-				Super_Awesome_Theme_Customize_Setting::PROP_DEFAULT              => $setting->get( Super_Awesome_Theme_Setting::PROP_DEFAULT ),
+				Super_Awesome_Theme_Customize_Setting::PROP_DEFAULT              => $setting->get_prop( Super_Awesome_Theme_Setting::PROP_DEFAULT ),
 				Super_Awesome_Theme_Customize_Setting::PROP_TRANSPORT            => Super_Awesome_Theme_Customize_Setting::TRANSPORT_POST_MESSAGE,
 				Super_Awesome_Theme_Customize_Setting::PROP_VALIDATE_CALLBACK    => array( $setting, 'validate_value' ),
 				Super_Awesome_Theme_Customize_Setting::PROP_SANITIZE_CALLBACK    => array( $setting, 'sanitize_value' ),
