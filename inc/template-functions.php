@@ -449,73 +449,7 @@ function super_awesome_theme_is_distraction_free() {
  * @return array|bool Attachment metadata, or false on failure.
  */
 function super_awesome_theme_get_attachment_metadata( $post = null ) {
-	global $super_awesome_theme_attachment_metadata;
-
-	$post = get_post( $post );
-	if ( ! $post ) {
-		return false;
-	}
-
-	if ( 'attachment' !== $post->post_type ) {
-		return false;
-	}
-
-	if ( ! empty( $super_awesome_theme_attachment_metadata ) && ! empty( $super_awesome_theme_attachment_metadata['_id'] ) && (int) $super_awesome_theme_attachment_metadata['_id'] === (int) $post->ID ) {
-		return $super_awesome_theme_attachment_metadata;
-	}
-
-	$meta = wp_get_attachment_metadata( $post->ID );
-	if ( is_array( $meta ) ) {
-		$meta['filename'] = basename( get_attached_file( $post->ID ) );
-
-		if ( ! empty( $meta['filesize'] ) ) {
-			$meta['filesize'] = size_format( strip_tags( $meta['filesize'] ), 2 );
-		}
-
-		if ( empty( $meta['fileformat'] ) && preg_match( '/^.*?\.(\w+)$/', get_attached_file( $post->ID ), $matches ) ) {
-			$meta['fileformat'] = $matches[1];
-		}
-
-		if ( ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
-			$meta['dimensions'] = sprintf( '%1$s &#215; %2$s', number_format_i18n( $meta['width'] ), number_format_i18n( $meta['height'] ) );
-		} else {
-			$meta['dimensions'] = '';
-		}
-
-		if ( ! empty( $meta['image_meta'] ) ) {
-			if ( ! empty( $meta['image_meta']['created_timestamp'] ) ) {
-				$meta['image_meta']['created_timestamp'] = date_i18n( get_option( 'date_format' ), strip_tags( $meta['image_meta']['created_timestamp'] ) );
-			}
-
-			if ( ! empty( $meta['image_meta']['focal_length'] ) ) {
-				$meta['image_meta']['focal_length'] = sprintf( '%smm', absint( $meta['image_meta']['focal_length'] ) );
-			}
-
-			if ( ! empty( $meta['image_meta']['shutter_speed'] ) ) {
-				$meta['image_meta']['shutter_speed'] = floatval( strip_tags( $meta['image_meta']['shutter_speed'] ) );
-
-				$speed = $meta['image_meta']['shutter_speed'];
-				if ( ( 1 / $speed ) > 1 ) {
-					$shutter = sprintf( '<sup>%s</sup>&#8260;', number_format_i18n( 1 ) );
-					if ( number_format( ( 1 / $speed ), 1 ) === number_format( ( 1 / $speed ), 0 ) ) {
-						$shutter .= sprintf( '<sub>%s</sub>', number_format_i18n( ( 1 / $speed ), 0, '.', '' ) );
-					} else {
-						$shutter .= sprintf( '<sub>%s</sub>', number_format_i18n( ( 1 / $speed ), 1, '.', '' ) );
-					}
-				}
-			}
-
-			if ( ! empty( $meta['image_meta']['aperture'] ) ) {
-				$meta['image_meta']['aperture'] = sprintf( '<sup>f</sup>&#8260;<sub>%s</sub>', absint( $meta['image_meta']['aperture'] ) );
-			}
-
-			if ( ! empty( $meta['image_meta']['iso'] ) ) {
-				$meta['image_meta']['iso'] = number_format_i18n( (int) $meta['image_meta']['iso'] );
-			}
-		}
-	}
-
-	return $meta;
+	return super_awesome_theme()->get_component( 'content_types' )->attachment_metadata()->get_for_post( $post );
 }
 
 /**
@@ -528,18 +462,7 @@ function super_awesome_theme_get_attachment_metadata( $post = null ) {
  * @return bool True if the attachment metadata value should be displayed for the post, false otherwise.
  */
 function super_awesome_theme_display_attachment_metadata( $field, $post = null ) {
-	$meta = super_awesome_theme_get_attachment_metadata( $post );
-	if ( ! $meta ) {
-		return false;
-	}
-
-	if ( empty( $meta[ $field ] ) || ! is_string( $meta[ $field ] ) ) {
-		if ( empty( $meta['image_meta'][ $field ] ) || ! is_string( $meta['image_meta'][ $field ] ) ) {
-			return false;
-		}
-	}
-
-	return super_awesome_theme()->get_component( 'settings' )->get( 'attachment_show_metadata_' . $field );
+	return super_awesome_theme()->get_component( 'content_types' )->attachment_metadata()->display_field_for_post( $field, $post );
 }
 
 /**
@@ -550,28 +473,5 @@ function super_awesome_theme_display_attachment_metadata( $field, $post = null )
  * @return array Associative array of `$field => $label` pairs.
  */
 function super_awesome_theme_get_attachment_metadata_fields() {
-	$metadata_fields = array(
-		'dimensions'       => _x( 'Dimensions', 'attachment metadata', 'super-awesome-theme' ),
-		'focal_length'     => _x( 'Focal Length', 'attachment metadata', 'super-awesome-theme' ),
-		'shutter_speed'    => _x( 'Shutter Speed', 'attachment metadata', 'super-awesome-theme' ),
-		'aperture'         => _x( 'Aperture', 'attachment metadata', 'super-awesome-theme' ),
-		'iso'              => _x( 'ISO', 'attachment metadata', 'super-awesome-theme' ),
-		'length_formatted' => _x( 'Run Time', 'attachment metadata', 'super-awesome-theme' ),
-		'artist'           => _x( 'Artist', 'attachment metadata', 'super-awesome-theme' ),
-		'album'            => _x( 'Album', 'attachment metadata', 'super-awesome-theme' ),
-		'fileformat'       => _x( 'File Format', 'attachment metadata', 'super-awesome-theme' ),
-		'filename'         => _x( 'File Name', 'attachment metadata', 'super-awesome-theme' ),
-		'filesize'         => _x( 'File Size', 'attachment metadata', 'super-awesome-theme' ),
-	);
-
-	/**
-	 * Filters the attachment metadata fields that can be rendered in an attachment template.
-	 *
-	 * Each of these fields will furthermore receive a Customizer setting to toggle it.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $metadata_fields Associative array of `$field => $label` pairs.
-	 */
-	return apply_filters( 'super_awesome_theme_attachment_metadata_fields', $metadata_fields );
+	return super_awesome_theme()->get_component( 'content_types' )->attachment_metadata()->get_fields();
 }

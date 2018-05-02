@@ -123,27 +123,3 @@ function super_awesome_theme_disable_special_page_styles( $name ) {
 	}
 }
 add_action( 'get_header', 'super_awesome_theme_disable_special_page_styles' );
-
-/**
- * Sets up global attachment metadata.
- *
- * This is a utility hook to make the super_awesome_theme_get_attachment_metadata() function
- * more performant when in the loop.
- *
- * @since 1.0.0
- *
- * @global array $super_awesome_theme_attachment_metadata Metadata array for the current post.
- *
- * @param WP_Post $post Post object.
- */
-function super_awesome_theme_setup_attachment_metadata( $post ) {
-	global $super_awesome_theme_attachment_metadata;
-
-	if ( 'attachment' === $post->post_type ) {
-		$super_awesome_theme_attachment_metadata = super_awesome_theme_get_attachment_metadata( $post->ID );
-		$super_awesome_theme_attachment_metadata['_id'] = $post->ID;
-	} elseif ( isset( $super_awesome_theme_attachment_metadata ) ) {
-		unset( $super_awesome_theme_attachment_metadata );
-	}
-}
-add_action( 'the_post', 'super_awesome_theme_setup_attachment_metadata' );

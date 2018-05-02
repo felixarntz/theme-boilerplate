@@ -15,6 +15,14 @@
 final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_Component_Base {
 
 	/**
+	 * Attachment metadata handler.
+	 *
+	 * @since 1.0.0
+	 * @var Super_Awesome_Theme_Attachment_Metadata
+	 */
+	private $attachment_metadata;
+
+	/**
 	 * Constructor.
 	 *
 	 * Sets the required dependencies.
@@ -24,6 +32,17 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 	public function __construct() {
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
+	}
+
+	/**
+	 * Retrieves the attachment metadata handler.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Super_Awesome_Theme_Attachment_Metadata Attachment metadata handler.
+	 */
+	public function attachment_metadata() {
+		return $this->attachment_metadata;
 	}
 
 	/**
@@ -81,7 +100,9 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 	 * @since 1.0.0
 	 */
 	protected function register_settings() {
-		$settings         = $this->get_dependency( 'settings' );
+		$settings                  = $this->get_dependency( 'settings' );
+		$this->attachment_metadata = new Super_Awesome_Theme_Attachment_Metadata( $settings );
+
 		$boolean_settings = array();
 
 		$public_post_types = get_post_types( array( 'public' => true ), 'objects' );
@@ -97,7 +118,7 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 			}
 
 			if ( 'attachment' === $post_type->name ) {
-				foreach ( super_awesome_theme_get_attachment_metadata_fields() as $field => $label ) {
+				foreach ( $this->attachment_metadata->get_fields() as $field => $label ) {
 					$boolean_settings[ 'attachment_show_metadata_' . $field ] = true;
 				}
 			}
@@ -161,7 +182,7 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 			}
 
 			if ( 'attachment' === $post_type->name ) {
-				foreach ( super_awesome_theme_get_attachment_metadata_fields() as $field => $label ) {
+				foreach ( $this->attachment_metadata->get_fields() as $field => $label ) {
 					$boolean_controls[ 'attachment_show_metadata_' . $field ] = array(
 						/* translators: %s: metadata field label */
 						'label'           => sprintf( _x( 'Show %s?', 'attachment metadata', 'super-awesome-theme' ), $label ),

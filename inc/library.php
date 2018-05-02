@@ -53,6 +53,7 @@ require get_template_directory() . '/inc/library/customizer/class-customize-part
  * Theme content types.
  */
 require get_template_directory() . '/inc/library/content-types/class-content-types.php';
+require get_template_directory() . '/inc/library/content-types/class-attachment-metadata.php';
 
 /**
  * Gets the main theme class instance.
