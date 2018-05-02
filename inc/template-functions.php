@@ -172,7 +172,7 @@ function super_awesome_theme_use_post_excerpt( $post = null ) {
 		return false;
 	}
 
-	return get_theme_mod( $post_type . '_use_excerpt', false );
+	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_use_excerpt' );
 }
 
 /**
@@ -191,9 +191,7 @@ function super_awesome_theme_display_post_date( $post = null ) {
 
 	$post_type = $post->post_type;
 
-	$default = in_array( $post_type, array( 'post', 'attachment' ), true );
-
-	return get_theme_mod( $post_type . '_show_date', $default );
+	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_show_date' );
 }
 
 /**
@@ -216,9 +214,7 @@ function super_awesome_theme_display_post_author( $post = null ) {
 		return false;
 	}
 
-	$default = in_array( $post_type, array( 'post', 'attachment' ), true );
-
-	return get_theme_mod( $post_type . '_show_author', $default );
+	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_show_author' );
 }
 
 /**
@@ -238,7 +234,7 @@ function super_awesome_theme_display_post_taxonomy_terms( $taxonomy, $post = nul
 
 	$post_type = $post->post_type;
 
-	return get_theme_mod( $post_type . '_show_terms_' . $taxonomy, true );
+	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_show_terms_' . $taxonomy );
 }
 
 /**
@@ -261,9 +257,7 @@ function super_awesome_theme_display_post_authorbox( $post = null ) {
 		return false;
 	}
 
-	$default = 'post' === $post_type;
-
-	return get_theme_mod( $post_type . '_show_authorbox', $default );
+	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_show_authorbox' );
 }
 
 /**
@@ -543,11 +537,9 @@ function super_awesome_theme_display_attachment_metadata( $field, $post = null )
 		if ( empty( $meta['image_meta'][ $field ] ) || ! is_string( $meta['image_meta'][ $field ] ) ) {
 			return false;
 		}
-
-		$meta = $meta['image_meta'];
 	}
 
-	return get_theme_mod( 'attachment_show_metadata_' . $field, true );
+	return super_awesome_theme()->get_component( 'settings' )->get( 'attachment_show_metadata_' . $field );
 }
 
 /**
