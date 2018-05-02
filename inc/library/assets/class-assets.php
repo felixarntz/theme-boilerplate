@@ -113,18 +113,20 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 * @param array  $args   Method arguments.
 	 */
 	public function __call( $method, $args ) {
-		if ( 'register_main_assets' === $method ) {
-			$this->register_main_assets();
-			return;
-		}
+		switch ( $method ) {
+			case 'register_main_assets';
+			case 'disable_special_page_styles':
+			case 'print_detect_js_svg_support_script':
+				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				if ( ! preg_match( '/^(register|enqueue)_([a-z_]+)$/', $method, $matches ) ) {
+					return;
+				}
 
-		if ( ! preg_match( '/^(register|enqueue)_([a-z_]+)$/', $method, $matches ) ) {
-			return;
-		}
-
-		$assets = $this->filter_assets_by_location( $this->assets, $matches[2] );
-		foreach ( $assets as $asset ) {
-			call_user_func( array( $asset, $matches[1] ) );
+				$assets = $this->filter_assets_by_location( $this->assets, $matches[2] );
+				foreach ( $assets as $asset ) {
+					call_user_func( array( $asset, $matches[1] ) );
+				}
 		}
 	}
 
@@ -242,12 +244,57 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	}
 
 	/**
+	 * Disables core styles for the special 'wp-signup.php' and 'wp-activate.php' pages.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $name Identifier of the header to load.
+	 */
+	private function disable_special_page_styles( $name ) {
+		if ( 'wp-signup' === $name ) {
+			remove_action( 'wp_head', 'wpmu_signup_stylesheet' );
+		} elseif ( 'wp-activate' === $name ) {
+			remove_action( 'wp_head', 'wpmu_activate_stylesheet' );
+		}
+	}
+
+	/**
+	 * Handles JavaScript and SVG support detection.
+	 *
+	 * The classes 'no-js' and 'no-svg' on the html tag are replaced with
+	 * 'js' and 'svg' classes as appropriate.
+	 *
+	 * @since 1.0.0
+	 */
+	private function print_detect_js_svg_support_script() {
+		?>
+		<script>
+			(function( html ) {
+				function supportsInlineSVG() {
+					var div = document.createElement( 'div' );
+					div.innerHTML = '<svg/>';
+					return 'http://www.w3.org/2000/svg' === ( 'undefined' !== typeof SVGRect && div.firstChild && div.firstChild.namespaceURI );
+				}
+
+				html.className = html.className.replace( /(\s*)no-js(\s*)/, '$1js$2' );
+
+				if ( true === supportsInlineSVG() ) {
+					html.className = html.className.replace( /(\s*)no-svg(\s*)/, '$1svg$2' );
+				}
+			})( document.documentElement );
+		</script>
+		<?php
+	}
+
+	/**
 	 * Adds hooks and runs other processes required to initialize the component.
 	 *
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_main_assets' ), 10, 0 );
+		add_action( 'get_header', array( $this, 'disable_special_page_styles' ), 10, 1 );
+		add_action( 'wp_head', array( $this, 'print_detect_js_svg_support_script' ), 0, 0 );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_frontend' ), 1, 0 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend' ), 10, 0 );

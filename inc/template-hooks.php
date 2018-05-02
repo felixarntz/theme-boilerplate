@@ -8,32 +8,6 @@
  */
 
 /**
- * Handles JavaScript and SVG detection.
- *
- * @since 1.0.0
- */
-function super_awesome_theme_js_svg_detection() {
-	?>
-	<script>
-		(function( html ) {
-			function supportsInlineSVG() {
-				var div = document.createElement( 'div' );
-				div.innerHTML = '<svg/>';
-				return 'http://www.w3.org/2000/svg' === ( 'undefined' !== typeof SVGRect && div.firstChild && div.firstChild.namespaceURI );
-			}
-
-			html.className = html.className.replace( /(\s*)no-js(\s*)/, '$1js$2' );
-
-			if ( true === supportsInlineSVG() ) {
-				html.className = html.className.replace( /(\s*)no-svg(\s*)/, '$1svg$2' );
-			}
-		})( document.documentElement );
-	</script>
-	<?php
-}
-add_action( 'wp_head', 'super_awesome_theme_js_svg_detection', 0 );
-
-/**
  * Adds custom classes to the array of body classes.
  *
  * @since 1.0.0
@@ -107,19 +81,3 @@ function super_awesome_theme_excerpt_more() {
 	return ' &hellip; ' . $link;
 }
 add_filter( 'excerpt_more', 'super_awesome_theme_excerpt_more' );
-
-/**
- * Disable core styles for the special 'wp-signup.php' and 'wp-activate.php' pages.
- *
- * @since 1.0.0
- *
- * @param string $name Identifier of the header to load.
- */
-function super_awesome_theme_disable_special_page_styles( $name ) {
-	if ( 'wp-signup' === $name ) {
-		remove_action( 'wp_head', 'wpmu_signup_stylesheet' );
-	} elseif ( 'wp-activate' === $name ) {
-		remove_action( 'wp_head', 'wpmu_activate_stylesheet' );
-	}
-}
-add_action( 'get_header', 'super_awesome_theme_disable_special_page_styles' );
