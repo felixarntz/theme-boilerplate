@@ -51,41 +51,6 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	public function __construct() {
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Assets' );
-
-		$this->preview_script = new Super_Awesome_Theme_Script(
-			'super-awesome-theme-customize-preview',
-			get_theme_file_uri( '/assets/dist/js/customize-preview.js' ),
-			array(
-				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview', 'customize-selective-refresh' ),
-				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
-				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
-				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
-				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomizeData',
-			)
-		);
-
-		$this->controls_script = new Super_Awesome_Theme_Script(
-			'super-awesome-theme-customize-controls',
-			get_theme_file_uri( '/assets/dist/js/customize-controls.js' ),
-			array(
-				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls' ),
-				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
-				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
-				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
-				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomizeData',
-			)
-		);
-
-		$this->preview_script->add_data( 'headerTextalignChoices', super_awesome_theme_customize_get_header_textalign_choices() );
-		$this->preview_script->add_data( 'sidebarModeChoices', super_awesome_theme_customize_get_sidebar_mode_choices() );
-		$this->preview_script->add_data( 'sidebarSizeChoices', super_awesome_theme_customize_get_sidebar_size_choices() );
-		$this->preview_script->add_data( 'barJustifyContentChoices', super_awesome_theme_customize_get_bar_justify_content_choices() );
-
-		$this->controls_script->add_data( 'inlineSidebars', super_awesome_theme_get_inline_sidebars() );
-		$this->controls_script->add_data( 'inlineWidgets', super_awesome_theme_get_inline_widgets() );
-		$this->controls_script->add_data( 'i18n', array(
-			'blogSidebarEnabledNotice' => __( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ),
-		) );
 	}
 
 	/**
@@ -347,7 +312,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	 * @return Super_Awesome_Theme_Script Customize preview script.
 	 */
 	public function get_preview_script() {
-		return $this->preview_script;
+		return $this->get_dependency( 'assets' )->get_registered_asset( 'super-awesome-theme-customize-preview' );
 	}
 
 	/**
@@ -358,7 +323,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	 * @return Super_Awesome_Theme_Script Customize controls script.
 	 */
 	public function get_controls_script() {
-		return $this->controls_script;
+		return $this->get_dependency( 'assets' )->get_registered_asset( 'super-awesome-theme-customize-controls' );
 	}
 
 	/**
@@ -395,9 +360,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 				do_action( 'super_awesome_theme_customize_register_controls', $this );
 				break;
 			case 'register_scripts':
-				$assets = $this->get_dependency( 'assets' );
-				$assets->register_asset( $this->preview_script );
-				$assets->register_asset( $this->controls_script );
+				$this->register_scripts();
 				break;
 			case 'partial_blogname':
 				bloginfo( 'name' );
@@ -409,13 +372,61 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	}
 
 	/**
+	 * Registers the Customizer preview and controls scripts.
+	 *
+	 * @since 1.0.0
+	 */
+	private function register_scripts() {
+		$assets = $this->get_dependency( 'assets' );
+
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/customize-preview.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview', 'customize-selective-refresh' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomizeData',
+			)
+		) );
+
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomizeData',
+			)
+		) );
+
+		$preview_script = $assets->get_registered_asset( 'super-awesome-theme-customize-preview' );
+
+		$preview_script->add_data( 'headerTextalignChoices', super_awesome_theme_customize_get_header_textalign_choices() );
+		$preview_script->add_data( 'sidebarModeChoices', super_awesome_theme_customize_get_sidebar_mode_choices() );
+		$preview_script->add_data( 'sidebarSizeChoices', super_awesome_theme_customize_get_sidebar_size_choices() );
+		$preview_script->add_data( 'barJustifyContentChoices', super_awesome_theme_customize_get_bar_justify_content_choices() );
+
+		$controls_script = $assets->get_registered_asset( 'super-awesome-theme-customize-controls' );
+
+		$controls_script->add_data( 'inlineSidebars', super_awesome_theme_get_inline_sidebars() );
+		$controls_script->add_data( 'inlineWidgets', super_awesome_theme_get_inline_widgets() );
+		$controls_script->add_data( 'i18n', array(
+			'blogSidebarEnabledNotice' => __( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ),
+		) );
+	}
+
+	/**
 	 * Modifies core defaults for the Customizer.
 	 *
 	 * The 'blogname' and 'blogdescription' settings are changed to use selective refresh.
 	 *
 	 * @since 1.0.0
 	 */
-	protected function modify_core_defaults() {
+	private function modify_core_defaults() {
 		$core_setting_selectors = array(
 			'blogname'        => '.site-title a',
 			'blogdescription' => '.site-description',
