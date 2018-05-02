@@ -26,6 +26,22 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	private $wp_customize;
 
 	/**
+	 * The Customize preview script asset.
+	 *
+	 * @since 1.0.0
+	 * @var Super_Awesome_Theme_Script
+	 */
+	private $preview_script;
+
+	/**
+	 * The Customize preview script asset.
+	 *
+	 * @since 1.0.0
+	 * @var Super_Awesome_Theme_Script
+	 */
+	private $controls_script;
+
+	/**
 	 * Constructor.
 	 *
 	 * Sets the required dependencies.
@@ -34,6 +50,42 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	 */
 	public function __construct() {
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
+		$this->require_dependency_class( 'Super_Awesome_Theme_Assets' );
+
+		$this->preview_script = new Super_Awesome_Theme_Script(
+			'super-awesome-theme-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/customize-preview.js' ),
+			array(
+				'dependencies'     => array( 'customize-preview', 'customize-selective-refresh' ),
+				'version'          => SUPER_AWESOME_THEME_VERSION,
+				'location'         => 'customize_preview',
+				'min_uri'          => true,
+				'script_data_name' => 'themeCustomizeData',
+			)
+		);
+
+		$this->controls_script = new Super_Awesome_Theme_Script(
+			'super-awesome-theme-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/customize-controls.js' ),
+			array(
+				'dependencies'     => array( 'customize-controls' ),
+				'version'          => SUPER_AWESOME_THEME_VERSION,
+				'location'         => 'customize_controls',
+				'min_uri'          => true,
+				'script_data_name' => 'themeCustomizeData',
+			)
+		);
+
+		$this->preview_script->add_data( 'headerTextalignChoices', super_awesome_theme_customize_get_header_textalign_choices() );
+		$this->preview_script->add_data( 'sidebarModeChoices', super_awesome_theme_customize_get_sidebar_mode_choices() );
+		$this->preview_script->add_data( 'sidebarSizeChoices', super_awesome_theme_customize_get_sidebar_size_choices() );
+		$this->preview_script->add_data( 'barJustifyContentChoices', super_awesome_theme_customize_get_bar_justify_content_choices() );
+
+		$this->controls_script->add_data( 'inlineSidebars', super_awesome_theme_get_inline_sidebars() );
+		$this->controls_script->add_data( 'inlineWidgets', super_awesome_theme_get_inline_widgets() );
+		$this->controls_script->add_data( 'i18n', array(
+			'blogSidebarEnabledNotice' => __( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ),
+		) );
 	}
 
 	/**
@@ -289,6 +341,28 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	}
 
 	/**
+	 * Gets the Customize preview script asset.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Super_Awesome_Theme_Script Customize preview script.
+	 */
+	public function get_preview_script() {
+		return $this->preview_script;
+	}
+
+	/**
+	 * Gets the Customize controls script asset.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Super_Awesome_Theme_Script Customize controls script.
+	 */
+	public function get_controls_script() {
+		return $this->controls_script;
+	}
+
+	/**
 	 * Magic call method.
 	 *
 	 * Handles the Customizer registration action hook callbacks.
@@ -320,6 +394,11 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 				 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
 				 */
 				do_action( 'super_awesome_theme_customize_register_controls', $this );
+				break;
+			case 'register_scripts':
+				$assets = $this->get_dependency( 'assets' );
+				$assets->register_asset( $this->preview_script );
+				$assets->register_asset( $this->controls_script );
 				break;
 			case 'partial_blogname':
 				bloginfo( 'name' );
@@ -360,5 +439,6 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	 */
 	protected function run_initialization() {
 		add_action( 'customize_register', array( $this, 'trigger_init' ), 10, 1 );
+		add_action( 'after_setup_theme', array( $this, 'register_scripts' ), 10, 0 );
 	}
 }
