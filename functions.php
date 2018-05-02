@@ -76,5 +76,6 @@ super_awesome_theme()
 	->register_component( new Super_Awesome_Theme_Settings() )
 	->register_component( new Super_Awesome_Theme_Assets() )
 	->register_component( new Super_Awesome_Theme_Customizer() )
+	->register_component( new Super_Awesome_Theme_Content_Types() )
 	->resolve_dependencies()
 	->initialize();

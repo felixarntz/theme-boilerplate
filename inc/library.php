@@ -50,6 +50,11 @@ require get_template_directory() . '/inc/library/customizer/class-customize-sett
 require get_template_directory() . '/inc/library/customizer/class-customize-partial.php';
 
 /**
+ * Theme content types.
+ */
+require get_template_directory() . '/inc/library/content-types/class-content-types.php';
+
+/**
  * Gets the main theme class instance.
  *
  * @since 1.0.0
