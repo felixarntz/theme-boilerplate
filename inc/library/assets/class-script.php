@@ -20,7 +20,7 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	private $script_data_name;
+	protected $script_data_name;
 
 	/**
 	 * Data to pass to JavaScript in global variable.
@@ -28,7 +28,7 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 	 * @since 1.0.0
 	 * @var array
 	 */
-	private $script_data;
+	protected $script_data;
 
 	/**
 	 * Registers the asset with WordPress.
