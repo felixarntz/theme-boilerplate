@@ -39,7 +39,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 * @return bool True on success, false on failure.
 	 */
 	public function register_asset( Super_Awesome_Theme_Asset $asset ) {
-		$handle = $asset->get( 'handle' );
+		$handle = $asset->get_prop( 'handle' );
 
 		if ( isset( $this->assets[ $handle ] ) ) {
 			return false;
@@ -128,7 +128,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 * @return bool True if the asset should be included, false otherwise.
 	 */
 	private function filter_asset_by_location( $asset ) {
-		return $this->current_location === $asset->get( 'location' );
+		return $this->current_location === $asset->get_prop( 'location' );
 	}
 
 	/**
