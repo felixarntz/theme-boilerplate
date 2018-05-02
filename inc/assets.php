@@ -8,22 +8,6 @@
  */
 
 /**
- * Includes the icon sprite SVG in the footer.
- *
- * @since 1.0.0
- */
-function super_awesome_theme_include_svg_icons() {
-	// Define SVG sprite file.
-	$svg_icons = get_parent_theme_file_path( '/assets/dist/images/icons.svg' );
-
-	// If it exists, include it.
-	if ( file_exists( $svg_icons ) ) {
-		require_once( $svg_icons );
-	}
-}
-add_action( 'wp_footer', 'super_awesome_theme_include_svg_icons', 9999 );
-
-/**
  * Gets SVG markup for a specific icon.
  *
  * @since 1.0.0
@@ -39,46 +23,7 @@ add_action( 'wp_footer', 'super_awesome_theme_include_svg_icons', 9999 );
  * @return string SVG markup for the icon.
  */
 function super_awesome_theme_get_svg( $icon, $args = array() ) {
-	$args = wp_parse_args( $args, array(
-		'title'    => '',
-		'desc'     => '',
-		'fallback' => false,
-	) );
-
-	$unique_id       = '';
-	$aria_hidden     = ' aria-hidden="true"';
-	$aria_labelledby = '';
-
-	if ( ! empty( $args['title'] ) ) {
-		$unique_id       = uniqid();
-		$aria_hidden     = '';
-		$aria_labelledby = ' aria-labelledby="title-' . $unique_id . '"';
-
-		if ( ! empty( $args['desc'] ) ) {
-			$aria_labelledby = ' aria-labelledby="title-' . $unique_id . ' desc-' . $unique_id . '"';
-		}
-	}
-
-	$svg = '<svg class="icon icon-' . esc_attr( $icon ) . '"' . $aria_hidden . $aria_labelledby . ' role="img">';
-
-	if ( ! empty( $args['title'] ) ) {
-		$svg .= '<title id="title-' . $unique_id . '">' . esc_html( $args['title'] ) . '</title>';
-
-		if ( ! empty( $args['desc'] ) ) {
-			$svg .= '<desc id="desc-' . $unique_id . '">' . esc_html( $args['desc'] ) . '</desc>';
-		}
-	}
-
-	// The whitespace is a work around to a keyboard navigation bug in Safari 10. See https://core.trac.wordpress.org/ticket/38387.
-	$svg .= ' <use href="#icon-' . esc_attr( $icon ) . '" xlink:href="#icon-' . esc_attr( $icon ) . '"></use> ';
-
-	if ( $args['fallback'] ) {
-		$svg .= '<span class="svg-fallback icon-' . esc_attr( $icon ) . '"></span>';
-	}
-
-	$svg .= '</svg>';
-
-	return $svg;
+	return super_awesome_theme()->get_component( 'icons' )->get_svg( $icon, $args );
 }
 
 /**
@@ -139,53 +84,5 @@ add_filter( 'nav_menu_item_title', 'super_awesome_theme_dropdown_icon_to_menu_li
  * @return array Array where URL fragment identifiers are the keys, and SVG icon identifiers are the values.
  */
 function super_awesome_theme_get_social_links_icons() {
-	$social_links_icons = array(
-		'behance.net'     => 'behance',
-		'codepen.io'      => 'codepen',
-		'deviantart.com'  => 'deviantart',
-		'digg.com'        => 'digg',
-		'docker.com'      => 'dockerhub',
-		'dribbble.com'    => 'dribbble',
-		'dropbox.com'     => 'dropbox',
-		'mailto:'         => 'envelope',
-		'facebook.com'    => 'facebook',
-		'flickr.com'      => 'flickr',
-		'foursquare.com'  => 'foursquare',
-		'github.com'      => 'github',
-		'plus.google.com' => 'google-plus',
-		'instagram.com'   => 'instagram',
-		'linkedin.com'    => 'linkedin',
-		'medium.com'      => 'medium',
-		'pscp.tv'         => 'periscope',
-		'tel:'            => 'phone',
-		'pinterest.com'   => 'pinterest',
-		'getpocket.com'   => 'pocket',
-		'reddit.com'      => 'reddit',
-		'skype.com'       => 'skype',
-		'skype:'          => 'skype',
-		'slideshare.net'  => 'slideshare',
-		'snapchat.com'    => 'snapchat',
-		'soundcloud.com'  => 'soundcloud',
-		'spotify.com'     => 'spotify',
-		'stumbleupon.com' => 'stumbleupon',
-		'tumblr.com'      => 'tumblr',
-		'twitch.tv'       => 'twitch',
-		'twitter.com'     => 'twitter',
-		'vimeo.com'       => 'vimeo',
-		'vine.co'         => 'vine',
-		'vk.com'          => 'vk',
-		'wordpress.org'   => 'wordpress',
-		'wordpress.com'   => 'wordpress',
-		'yelp.com'        => 'yelp',
-		'youtube.com'     => 'youtube',
-	);
-
-	/**
-	 * Filters the theme's supported social links icons.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $social_links_icons Array where URL fragment identifiers are the keys, and SVG icon identifiers are the values.
-	 */
-	return apply_filters( 'super_awesome_theme_social_links_icons', $social_links_icons );
+	return super_awesome_theme()->get_component( 'icons' )->get_social_links_icons();
 }

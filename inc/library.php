@@ -50,6 +50,11 @@ require get_template_directory() . '/inc/library/customizer/class-customize-sett
 require get_template_directory() . '/inc/library/customizer/class-customize-partial.php';
 
 /**
+ * Theme icons.
+ */
+require get_template_directory() . '/inc/library/icons/class-icons.php';
+
+/**
  * Theme content types.
  */
 require get_template_directory() . '/inc/library/content-types/class-content-types.php';
