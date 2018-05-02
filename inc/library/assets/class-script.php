@@ -15,12 +15,26 @@
 class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 
 	/**
+	 * Script data name property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_DATA_NAME = 'data_name';
+
+	/**
+	 * Script data property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_DATA = 'data';
+
+	/**
 	 * Global JavaScript variable name for data passed from PHP.
 	 *
 	 * @since 1.0.0
 	 * @var string
 	 */
-	protected $script_data_name;
+	protected $data_name;
 
 	/**
 	 * Data to pass to JavaScript in global variable.
@@ -28,7 +42,7 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 	 * @since 1.0.0
 	 * @var array
 	 */
-	protected $script_data;
+	protected $data;
 
 	/**
 	 * Registers the asset with WordPress.
@@ -58,8 +72,8 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 
 		wp_enqueue_script( $this->handle );
 
-		if ( ! empty( $this->script_data_name ) && ! empty( $this->script_data ) ) {
-			wp_localize_script( $this->handle, $this->script_data_name, $this->script_data );
+		if ( ! empty( $this->data_name ) && ! empty( $this->data ) ) {
+			wp_localize_script( $this->handle, $this->data_name, $this->data );
 		}
 	}
 
@@ -74,7 +88,7 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 	 * @param mixed  $value Value for that property.
 	 */
 	public function add_data( $key, $value ) {
-		$this->script_data[ $key ] = $value;
+		$this->data[ $key ] = $value;
 	}
 
 	/**
@@ -110,9 +124,9 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 	 *               is null.
 	 */
 	protected function get_defaults() {
-		$defaults                     = parent::get_defaults();
-		$defaults['script_data_name'] = '';
-		$defaults['script_data']      = array();
+		$defaults                         = parent::get_defaults();
+		$defaults[ self::PROP_DATA_NAME ] = '';
+		$defaults[ self::PROP_DATA ]      = array();
 
 		return $defaults;
 	}

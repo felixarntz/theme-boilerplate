@@ -15,6 +15,20 @@
 class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 
 	/**
+	 * Media property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_MEDIA = 'media';
+
+	/**
+	 * Has RTL property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_HAS_RTL = 'has_rtl';
+
+	/**
 	 * The media for which this stylesheet has been defined.
 	 *
 	 * @since 1.0.0
@@ -95,9 +109,9 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 	 *               is null.
 	 */
 	protected function get_defaults() {
-		$defaults            = parent::get_defaults();
-		$defaults['media']   = 'all';
-		$defaults['has_rtl'] = false;
+		$defaults                       = parent::get_defaults();
+		$defaults[ self::PROP_MEDIA ]   = 'all';
+		$defaults[ self::PROP_HAS_RTL ] = false;
 
 		return $defaults;
 	}

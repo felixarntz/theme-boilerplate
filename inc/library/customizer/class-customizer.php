@@ -1,6 +1,6 @@
 <?php
 /**
- * Super_Awesome_Theme_Settings class
+ * Super_Awesome_Theme_Customizer class
  *
  * @package Super_Awesome_Theme
  * @license GPL-2.0-or-later
@@ -56,11 +56,11 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 			'super-awesome-theme-customize-preview',
 			get_theme_file_uri( '/assets/dist/js/customize-preview.js' ),
 			array(
-				'dependencies'     => array( 'customize-preview', 'customize-selective-refresh' ),
-				'version'          => SUPER_AWESOME_THEME_VERSION,
-				'location'         => 'customize_preview',
-				'min_uri'          => true,
-				'script_data_name' => 'themeCustomizeData',
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview', 'customize-selective-refresh' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomizeData',
 			)
 		);
 
@@ -68,11 +68,11 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 			'super-awesome-theme-customize-controls',
 			get_theme_file_uri( '/assets/dist/js/customize-controls.js' ),
 			array(
-				'dependencies'     => array( 'customize-controls' ),
-				'version'          => SUPER_AWESOME_THEME_VERSION,
-				'location'         => 'customize_controls',
-				'min_uri'          => true,
-				'script_data_name' => 'themeCustomizeData',
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomizeData',
 			)
 		);
 
@@ -219,52 +219,51 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 		$settings = $this->get_dependency( 'settings' );
 		$setting  = $settings->get_registered_setting( $setting_id );
 
-		if ( empty( $control_args['type'] ) ) {
+		if ( empty( $control_args[ Super_Awesome_Theme_Customize_Control::PROP_TYPE ] ) ) {
 			switch ( true ) {
 				case $setting instanceof Super_Awesome_Theme_Boolean_Setting:
-					$control_args['type'] = 'checkbox';
+					$control_args[ Super_Awesome_Theme_Customize_Control::PROP_TYPE ] = Super_Awesome_Theme_Customize_Control::TYPE_CHECKBOX;
 					break;
 				case $setting instanceof Super_Awesome_Theme_Float_Setting:
-				case $setting instanceof Super_Awesome_Theme_Integer_Setting:
-					$control_args['type'] = 'number';
-					if ( empty( $control_args['input_attrs'] ) ) {
-						$control_args['input_attrs'] = array();
+					$control_args[ Super_Awesome_Theme_Customize_Control::PROP_TYPE ] = Super_Awesome_Theme_Customize_Control::TYPE_NUMBER;
+					if ( empty( $control_args[ Super_Awesome_Theme_Customize_Control::PROP_INPUT_ATTRS ] ) ) {
+						$control_args[ Super_Awesome_Theme_Customize_Control::PROP_INPUT_ATTRS ] = array();
 					}
-					$min = $setting->get_prop( 'min' );
-					$max = $setting->get_prop( 'max' );
-					if ( false !== $min && empty( $control_args['input_attrs']['min'] ) ) {
-						$control_args['input_attrs']['min'] = $min;
+					$min = $setting->get_prop( Super_Awesome_Theme_Float_Setting::PROP_MIN );
+					$max = $setting->get_prop( Super_Awesome_Theme_Float_Setting::PROP_MAX );
+					if ( false !== $min && empty( $control_args[ Super_Awesome_Theme_Customize_Control::PROP_INPUT_ATTRS ]['min'] ) ) {
+						$control_args[ Super_Awesome_Theme_Customize_Control::PROP_INPUT_ATTRS ]['min'] = $min;
 					}
-					if ( false !== $max && empty( $control_args['input_attrs']['max'] ) ) {
-						$control_args['input_attrs']['max'] = $max;
+					if ( false !== $max && empty( $control_args[ Super_Awesome_Theme_Customize_Control::PROP_INPUT_ATTRS ]['max'] ) ) {
+						$control_args[ Super_Awesome_Theme_Customize_Control::PROP_INPUT_ATTRS ]['max'] = $max;
 					}
-					if ( is_int( $setting->get_prop( 'default' ) ) && empty( $control_args['input_attrs']['step'] ) ) {
-						$control_args['input_attrs']['step'] = 1;
+					if ( $setting instanceof Super_Awesome_Theme_Integer_Setting ) {
+						$control_args[ Super_Awesome_Theme_Customize_Control::PROP_INPUT_ATTRS ]['step'] = 1;
 					}
 					break;
 				case $setting instanceof Super_Awesome_Theme_Enum_String_Setting:
-					if ( empty( $control_args['choices'] ) ) {
-						$enum                    = $setting->get_prop( 'enum' );
-						$control_args['choices'] = array_combine( $enum, $enum );
+					if ( empty( $control_args[ Super_Awesome_Theme_Customize_Control::PROP_CHOICES ] ) ) {
+						$enum                    = $setting->get_prop( Super_Awesome_Theme_Enum_String_Setting::PROP_ENUM );
+						$control_args[ Super_Awesome_Theme_Customize_Control::PROP_CHOICES ] = array_combine( $enum, $enum );
 					}
-					if ( count( $control_args['choices'] ) <= 5 ) {
-						$control_args['type'] = 'radio';
+					if ( count( $control_args[ Super_Awesome_Theme_Customize_Control::PROP_CHOICES ] ) <= 5 ) {
+						$control_args[ Super_Awesome_Theme_Customize_Control::PROP_TYPE ] = Super_Awesome_Theme_Customize_Control::TYPE_RADIO;
 					} else {
-						$control_args['type'] = 'select';
+						$control_args[ Super_Awesome_Theme_Customize_Control::PROP_TYPE ] = Super_Awesome_Theme_Customize_Control::TYPE_SELECT;
 					}
 					break;
 				default:
-					$control_args['type'] = 'text';
+					$control_args[ Super_Awesome_Theme_Customize_Control::PROP_TYPE ] = Super_Awesome_Theme_Customize_Control::TYPE_TEXT;
 			}
 		}
 
 		$control_class = 'WP_Customize_Control';
-		if ( 'color' === $control_args['type'] ) {
+		if ( Super_Awesome_Theme_Customize_Control::TYPE_COLOR === $control_args[ Super_Awesome_Theme_Customize_Control::PROP_TYPE ] ) {
 			$control_class = 'WP_Customize_Color_Control';
-			unset( $control_args['type'] );
+			unset( $control_args[ Super_Awesome_Theme_Customize_Control::PROP_TYPE ] );
 		}
 
-		$control = new $control_class( $this->wp_customize, $setting->get_prop( 'id' ), $control_args );
+		$control = new $control_class( $this->wp_customize, $setting->get_prop( Super_Awesome_Theme_Setting::PROP_ID ), $control_args );
 
 		return $this->wp_customize->add_control( $control );
 	}
@@ -287,7 +286,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 
 		$settings   = $this->get_dependency( 'settings' );
 		$setting    = $settings->get_registered_setting( $setting_id );
-		$setting_id = $setting->get_prop( 'id' );
+		$setting_id = $setting->get_prop( Super_Awesome_Theme_Setting::PROP_ID );
 
 		$control = $this->wp_customize->get_control( $setting_id );
 
@@ -337,7 +336,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 		$settings = $this->get_dependency( 'settings' );
 		$setting  = $settings->get_registered_setting( $setting_id );
 
-		$this->wp_customize->get_setting( $setting->get_prop( 'id' ) )->transport = $transport;
+		$this->wp_customize->get_setting( $setting->get_prop( Super_Awesome_Theme_Setting::PROP_ID ) )->transport = $transport;
 	}
 
 	/**
@@ -423,11 +422,11 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 		);
 
 		foreach ( $core_setting_selectors as $setting => $selector ) {
-			$this->wp_customize->get_setting( $setting )->transport = 'postMessage';
+			$this->wp_customize->get_setting( $setting )->transport = Super_Awesome_Theme_Customize_Setting::TRANSPORT_POST_MESSAGE;
 
 			$this->wp_customize->selective_refresh->add_partial( $setting, array(
-				'selector'        => $selector,
-				'render_callback' => array( $this, 'partial_' . $setting ),
+				Super_Awesome_Theme_Customize_Partial::PROP_SELECTOR        => $selector,
+				Super_Awesome_Theme_Customize_Partial::PROP_RENDER_CALLBACK => array( $this, 'partial_' . $setting ),
 			) );
 		}
 	}

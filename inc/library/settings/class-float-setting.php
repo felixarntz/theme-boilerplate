@@ -15,6 +15,20 @@
 class Super_Awesome_Theme_Float_Setting extends Super_Awesome_Theme_Setting {
 
 	/**
+	 * Min property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_MIN = 'min';
+
+	/**
+	 * Max property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_MAX = 'max';
+
+	/**
 	 * Minimum allowed value, or false for no restriction.
 	 *
 	 * @since 1.0.0
@@ -88,10 +102,8 @@ class Super_Awesome_Theme_Float_Setting extends Super_Awesome_Theme_Setting {
 	 *               is null.
 	 */
 	protected function get_defaults() {
-		$defaults            = parent::get_defaults();
-		$defaults['default'] = 0.0;
-		$defaults['min']     = false;
-		$defaults['max']     = false;
+		$defaults                       = parent::get_defaults();
+		$defaults[ self::PROP_DEFAULT ] = 0.0;
 
 		return $defaults;
 	}

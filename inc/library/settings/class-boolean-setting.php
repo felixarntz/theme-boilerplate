@@ -55,8 +55,8 @@ class Super_Awesome_Theme_Boolean_Setting extends Super_Awesome_Theme_Setting {
 	 *               is null.
 	 */
 	protected function get_defaults() {
-		$defaults            = parent::get_defaults();
-		$defaults['default'] = false;
+		$defaults                       = parent::get_defaults();
+		$defaults[ self::PROP_DEFAULT ] = false;
 
 		return $defaults;
 	}

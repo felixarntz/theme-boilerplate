@@ -49,8 +49,8 @@ class Super_Awesome_Theme_String_Setting extends Super_Awesome_Theme_Setting {
 	 *               is null.
 	 */
 	protected function get_defaults() {
-		$defaults            = parent::get_defaults();
-		$defaults['default'] = '';
+		$defaults                       = parent::get_defaults();
+		$defaults[ self::PROP_DEFAULT ] = '';
 
 		return $defaults;
 	}

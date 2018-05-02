@@ -15,6 +15,48 @@
 class Super_Awesome_Theme_Setting {
 
 	/**
+	 * ID property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_ID = 'id';
+
+	/**
+	 * Capability property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_CAPABILITY = 'capability';
+
+	/**
+	 * Default property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_DEFAULT = 'default';
+
+	/**
+	 * Validate callback property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_VALIDATE_CALLBACK = 'validate_callback';
+
+	/**
+	 * Sanitize callback property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_SANITIZE_CALLBACK = 'sanitize_callback';
+
+	/**
+	 * Parse callback property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_PARSE_CALLBACK = 'parse_callback';
+
+	/**
 	 * Unique string identifier for the setting.
 	 *
 	 * @since 1.0.0
@@ -253,11 +295,11 @@ class Super_Awesome_Theme_Setting {
 	 */
 	protected function get_defaults() {
 		return array(
-			'capability'        => 'edit_theme_options',
-			'default'           => false,
-			'validate_callback' => null,
-			'sanitize_callback' => null,
-			'parse_callback'    => null,
+			self::PROP_CAPABILITY        => 'edit_theme_options',
+			self::PROP_DEFAULT           => false,
+			self::PROP_VALIDATE_CALLBACK => null,
+			self::PROP_SANITIZE_CALLBACK => null,
+			self::PROP_PARSE_CALLBACK    => null,
 		);
 	}
 }

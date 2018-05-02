@@ -22,8 +22,8 @@ require get_template_directory() . '/inc/library/settings/class-settings.php';
 require get_template_directory() . '/inc/library/settings/class-setting-not-registered-exception.php';
 require get_template_directory() . '/inc/library/settings/class-setting.php';
 require get_template_directory() . '/inc/library/settings/class-string-setting.php';
-require get_template_directory() . '/inc/library/settings/class-integer-setting.php';
 require get_template_directory() . '/inc/library/settings/class-float-setting.php';
+require get_template_directory() . '/inc/library/settings/class-integer-setting.php';
 require get_template_directory() . '/inc/library/settings/class-boolean-setting.php';
 require get_template_directory() . '/inc/library/settings/class-enum-string-setting.php';
 
@@ -43,6 +43,11 @@ require get_template_directory() . '/inc/library/assets/class-stylesheet.php';
 require get_template_directory() . '/inc/library/customizer/class-customizer.php';
 require get_template_directory() . '/inc/library/customizer/class-customize-component-not-registered-exception.php';
 require get_template_directory() . '/inc/library/customizer/class-customizer-not-initialized-exception.php';
+require get_template_directory() . '/inc/library/customizer/class-customize-panel.php';
+require get_template_directory() . '/inc/library/customizer/class-customize-section.php';
+require get_template_directory() . '/inc/library/customizer/class-customize-control.php';
+require get_template_directory() . '/inc/library/customizer/class-customize-setting.php';
+require get_template_directory() . '/inc/library/customizer/class-customize-partial.php';
 
 /**
  * Gets the main theme class instance.

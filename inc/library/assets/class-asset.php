@@ -15,6 +15,76 @@
 abstract class Super_Awesome_Theme_Asset {
 
 	/**
+	 * Handle property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_HANDLE = 'handle';
+
+	/**
+	 * URI property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_URI = 'uri';
+
+	/**
+	 * Dependencies property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_DEPENDENCIES = 'dependencies';
+
+	/**
+	 * Version property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_VERSION = 'version';
+
+	/**
+	 * Location property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_LOCATION = 'location';
+
+	/**
+	 * Minified URI property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_MIN_URI = 'min_uri';
+
+	/**
+	 * Identifier of the frontend location.
+	 *
+	 * @since 1.0.0
+	 */
+	const LOCATION_FRONTEND = 'frontend';
+
+	/**
+	 * Identifier of the admin location.
+	 *
+	 * @since 1.0.0
+	 */
+	const LOCATION_ADMIN = 'admin';
+
+	/**
+	 * Identifier of the Customize preview location.
+	 *
+	 * @since 1.0.0
+	 */
+	const LOCATION_CUSTOMIZE_PREVIEW = 'customize_preview';
+
+	/**
+	 * Identifier of the Customize controls location.
+	 *
+	 * @since 1.0.0
+	 */
+	const LOCATION_CUSTOMIZE_CONTROLS = 'customize_controls';
+
+	/**
 	 * Unique handle for the asset.
 	 *
 	 * @since 1.0.0
@@ -217,10 +287,10 @@ abstract class Super_Awesome_Theme_Asset {
 	 */
 	protected function get_defaults() {
 		return array(
-			'dependencies' => array(),
-			'version'      => null,
-			'location'     => 'frontend',
-			'min_uri'      => false,
+			self::PROP_DEPENDENCIES => array(),
+			self::PROP_VERSION      => null,
+			self::PROP_LOCATION     => self::LOCATION_FRONTEND,
+			self::PROP_MIN_URI      => false,
 		);
 	}
 }

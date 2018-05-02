@@ -15,6 +15,13 @@
 class Super_Awesome_Theme_Enum_String_Setting extends Super_Awesome_Theme_String_Setting {
 
 	/**
+	 * Enum property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_ENUM = 'enum';
+
+	/**
 	 * Whitelist of choices the value can be.
 	 *
 	 * @since 1.0.0
@@ -52,8 +59,8 @@ class Super_Awesome_Theme_Enum_String_Setting extends Super_Awesome_Theme_String
 	 *               is null.
 	 */
 	protected function get_defaults() {
-		$defaults         = parent::get_defaults();
-		$defaults['enum'] = array();
+		$defaults                    = parent::get_defaults();
+		$defaults[ self::PROP_ENUM ] = array();
 
 		return $defaults;
 	}
