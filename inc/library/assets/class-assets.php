@@ -95,7 +95,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 			return;
 		}
 
-		$assets = $this->filter_assets_by_location( $this->assets, $matches[1] );
+		$assets = $this->filter_assets_by_location( $this->assets, $matches[2] );
 		foreach ( $assets as $asset ) {
 			call_user_func( array( $asset, $matches[1] ) );
 		}

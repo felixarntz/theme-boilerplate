@@ -36,7 +36,7 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 	 */
 	public function register() {
 		$uri = $this->uri;
-		if ( $this->min_uri && $this->use_minified ) {
+		if ( $this->min_uri && $this->use_minified() ) {
 			$uri = $this->min_uri;
 		}
 
