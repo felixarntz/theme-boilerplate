@@ -83,7 +83,7 @@ class Super_Awesome_Theme_Setting {
 	/**
 	 * Validation callback for the setting's value.
 	 *
-	 * @since 4.6.0
+	 * @since 1.0.0
 	 * @var callable
 	 */
 	protected $validate_callback;

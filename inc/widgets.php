@@ -7,9 +7,6 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-require get_template_directory() . '/inc/widgets/class-super-awesome-theme-login-links-widget.php';
-require get_template_directory() . '/inc/widgets/class-super-awesome-theme-social-menu-widget.php';
-
 /**
  * Registers the bundled widgets.
  *

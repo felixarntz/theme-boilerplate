@@ -50,6 +50,15 @@ require get_template_directory() . '/inc/library/customizer/class-customize-sett
 require get_template_directory() . '/inc/library/customizer/class-customize-partial.php';
 
 /**
+ * Theme widgets.
+ */
+require get_template_directory() . '/inc/library/widgets/class-widgets.php';
+require get_template_directory() . '/inc/library/widgets/class-widget-area.php';
+require get_template_directory() . '/inc/library/widgets/class-widget.php';
+require get_template_directory() . '/inc/library/widgets/class-login-links-widget.php';
+require get_template_directory() . '/inc/library/widgets/class-social-menu-widget.php';
+
+/**
  * Theme icons.
  */
 require get_template_directory() . '/inc/library/icons/class-icons.php';
