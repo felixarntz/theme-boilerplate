@@ -38,7 +38,7 @@ function super_awesome_theme_get_svg( $icon, $args = array() ) {
  * @return string $item_output The menu item output with social icon.
  */
 function super_awesome_theme_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
-	if ( 'social' === $args->theme_location ) {
+	if ( '</span>' . super_awesome_theme_get_svg( 'chain' ) === $args->link_after ) {
 		$social_icons = super_awesome_theme_get_social_links_icons();
 
 		foreach ( $social_icons as $attr => $value ) {

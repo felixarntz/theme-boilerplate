@@ -65,8 +65,6 @@ class Super_Awesome_Theme_Social_Menu_Widget extends Super_Awesome_Theme_Widget 
 	 * @param array $instance Settings for the current widget instance.
 	 */
 	protected function render( array $instance ) {
-		add_filter( 'walker_nav_menu_start_el', array( $this, 'filter_menu_social_icons' ), 10, 4 );
-
 		wp_nav_menu( array(
 			'menu'        => wp_get_nav_menu_object( (int) $instance['nav_menu'] ),
 			'depth'       => 1,
@@ -74,8 +72,6 @@ class Super_Awesome_Theme_Social_Menu_Widget extends Super_Awesome_Theme_Widget 
 			'link_after'  => '</span>' . $this->manager->get_dependency( 'icons' )->get_svg( 'chain' ),
 			'container'   => false,
 		) );
-
-		remove_filter( 'walker_nav_menu_start_el', array( $this, 'filter_menu_social_icons' ), 10 );
 	}
 
 	/**
@@ -97,28 +93,5 @@ class Super_Awesome_Theme_Social_Menu_Widget extends Super_Awesome_Theme_Widget 
 		}
 
 		return true;
-	}
-
-	/**
-	 * Adjusts the menu to display the accurate SVG icons.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string  $item_output The menu item output.
-	 * @param WP_Post $item        Menu item object.
-	 * @param int     $depth       Depth of the menu.
-	 * @param array   $args        wp_nav_menu() arguments.
-	 * @return string $item_output The menu item output with social icon.
-	 */
-	public function filter_menu_social_icons( $item_output, $item, $depth, $args ) {
-		$social_icons = $this->manager->get_dependency( 'icons' )->get_social_links_icons();
-
-		foreach ( $social_icons as $attr => $value ) {
-			if ( false !== strpos( $item_output, $attr ) ) {
-				return str_replace( $args->link_after, '</span>' . $this->manager->get_dependency( 'icons' )->get_svg( $value ), $item_output );
-			}
-		}
-
-		return $item_output;
 	}
 }
