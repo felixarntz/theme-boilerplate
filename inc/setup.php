@@ -201,6 +201,8 @@ function super_awesome_theme_register_widget_areas() {
 		'recent-posts',
 		'search',
 		'text',
+		'super_awesome_theme_login_links',
+		'super_awesome_theme_social_menu',
 	) );
 }
 add_action( 'widgets_init', 'super_awesome_theme_register_widget_areas' );

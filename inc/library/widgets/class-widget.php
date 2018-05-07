@@ -114,13 +114,25 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 	protected $fields = array();
 
 	/**
+	 * Parent widgets manager instance.
+	 *
+	 * @since 1.0.0
+	 * @var Super_Awesome_Theme_Widgets
+	 */
+	protected $manager;
+
+	/**
 	 * Constructor.
 	 *
 	 * Sets the widget definition arguments.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Widgets $manager Parent widgets manager instance.
 	 */
-	public function __construct() {
+	public function __construct( Super_Awesome_Theme_Widgets $manager ) {
+		$this->manager = $manager;
+
 		$slug        = $this->get_slug_from_classname();
 		$title       = $this->get_title();
 		$description = $this->get_description();
@@ -143,22 +155,26 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 	 *                        'before_widget', and 'after_widget'.
 	 * @param array $instance Settings for the current widget instance.
 	 */
-	public function widget( $args, $instance ) {
+	public final function widget( $args, $instance ) {
 		$instance = $this->parse_defaults( $instance );
+
+		if ( ! $this->can_render( $instance ) ) {
+			return;
+		}
 
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
 
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
 
-		echo $args['before_widget'];
+		echo $args['before_widget']; // WPCS: XSS OK.
 		if ( ! empty( $title ) ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+			echo $args['before_title'] . $title . $args['after_title']; // WPCS: XSS OK.
 		}
 
 		$this->render( $instance );
 
-		echo $args['after_widget'];
+		echo $args['after_widget']; // WPCS: XSS OK.
 	}
 
 	/**
@@ -288,7 +304,7 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 		?>
 		<?php if ( ! empty( $description ) ) : ?>
 			<span id="<?php echo esc_attr( $description_id ); ?>" class="description">
-				<?php wp_kses_data( $description ); ?>
+				<?php echo wp_kses_data( $description ); ?>
 			</span>
 		<?php endif; ?>
 		<?php if ( self::FIELD_TYPE_RADIO === $type ) : ?>
@@ -459,8 +475,9 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 	 */
 	protected function add_title_field() {
 		$this->add_field( 'title', array(
-			self::FIELD_ARG_TYPE  => self::FIELD_TYPE_TEXT,
-			self::FIELD_ARG_TITLE => __( 'Title', 'super-awesome-theme' ),
+			self::FIELD_ARG_TYPE        => self::FIELD_TYPE_TEXT,
+			self::FIELD_ARG_TITLE       => __( 'Title', 'super-awesome-theme' ),
+			self::FIELD_ARG_INPUT_ATTRS => array( 'class' => 'widefat' ),
 		) );
 	}
 
@@ -497,6 +514,18 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 	 * @param array $instance Settings for the current widget instance.
 	 */
 	protected abstract function render( array $instance );
+
+	/**
+	 * Checks whether the widget can be rendered for a given instance.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $instance Settings for the current widget instance.
+	 * @return bool True if the settings qualify the widget to be rendered, false otherwise.
+	 */
+	protected function can_render( array $instance ) {
+		return true;
+	}
 
 	/**
 	 * Gets the widget slug from the class name.

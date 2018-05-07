@@ -8,17 +8,6 @@
  */
 
 /**
- * Registers the bundled widgets.
- *
- * @since 1.0.0
- */
-function super_awesome_theme_register_widgets() {
-	register_widget( 'Super_Awesome_Theme_Login_Links_Widget' );
-	register_widget( 'Super_Awesome_Theme_Social_Menu_Widget' );
-}
-add_action( 'widgets_init', 'super_awesome_theme_register_widgets', 1 );
-
-/**
  * Gets the identifiers for all inline sidebars.
  *
  * @since 1.0.0

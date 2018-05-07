@@ -2478,6 +2478,46 @@ body.no-sidebar .comments-area {
 	display: none;
 }
 
+.widget_login_links ul,
+.widget_social_menu ul {
+	padding-right: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.widget_login_links ul li,
+.widget_social_menu ul li {
+	display: inline-block;
+	margin-left: 1em;
+}
+
+.widget_login_links ul li:last-child,
+.widget_social_menu ul li:last-child {
+	margin-left: 0;
+}
+
+.widget_login_links.inline-widget ul li,
+.widget_social_menu.inline-widget ul li {
+	margin-left: 0;
+}
+
+.widget_social_menu .icon {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+.widget_social_menu ul li {
+	margin-left: 0.5em;
+}
+
+.widget_social_menu ul li a {
+	padding: 0;
+}
+
+.widget_social_menu.inline-widget ul li {
+	padding-right: 0;
+}
+
 /* -------------------------------------------------------------
 # Footer
 ------------------------------------------------------------- */

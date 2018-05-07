@@ -35,6 +35,7 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	public function __construct() {
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
+		$this->require_dependency_class( 'Super_Awesome_Theme_Icons' );
 	}
 
 	/**
@@ -61,6 +62,8 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	 *
 	 * @since 1.0.0
 	 *
+	 * @global WP_Widget_Factory $wp_widget_factory Widget factory instance.
+	 *
 	 * @param Super_Awesome_Theme_Widget|string $widget_class_name Either a widget instance or widget class name.
 	 * @return bool True on success, false on failure.
 	 *
@@ -84,7 +87,14 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 			return false;
 		}
 
-		register_widget( $widget_class_name );
+		if ( is_object( $widget_class_name ) ) {
+			register_widget( $widget_class_name );
+		} else {
+
+			// Do not call register_widget() so we can pass our custom param to the constructor
+			// and still use the class name as widget key.
+			$wp_widget_factory->widgets[ $widget_class_name ] = new $widget_class_name( $this );
+		}
 
 		return true;
 	}
@@ -132,6 +142,9 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	public function __call( $method, $args ) {
 		switch ( $method ) {
 			case 'trigger_init':
+				$this->register_widget( 'Super_Awesome_Theme_Login_Links_Widget' );
+				$this->register_widget( 'Super_Awesome_Theme_Social_Menu_Widget' );
+
 				/**
 				 * Fires when theme widgets and widget areas should be registered.
 				 *

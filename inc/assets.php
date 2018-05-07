@@ -38,12 +38,12 @@ function super_awesome_theme_get_svg( $icon, $args = array() ) {
  * @return string $item_output The menu item output with social icon.
  */
 function super_awesome_theme_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
-	$social_icons = super_awesome_theme_get_social_links_icons();
-
 	if ( 'social' === $args->theme_location ) {
+		$social_icons = super_awesome_theme_get_social_links_icons();
+
 		foreach ( $social_icons as $attr => $value ) {
 			if ( false !== strpos( $item_output, $attr ) ) {
-				$item_output = str_replace( $args->link_after, '</span>' . super_awesome_theme_get_svg( $value ), $item_output );
+				return str_replace( $args->link_after, '</span>' . super_awesome_theme_get_svg( $value ), $item_output );
 			}
 		}
 	}
