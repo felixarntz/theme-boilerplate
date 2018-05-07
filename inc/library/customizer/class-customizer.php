@@ -412,8 +412,6 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 
 		$controls_script = $assets->get_registered_asset( 'super-awesome-theme-customize-controls' );
 
-		$controls_script->add_data( 'inlineSidebars', super_awesome_theme_get_inline_sidebars() );
-		$controls_script->add_data( 'inlineWidgets', super_awesome_theme_get_inline_widgets() );
 		$controls_script->add_data( 'i18n', array(
 			'blogSidebarEnabledNotice' => __( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ),
 		) );

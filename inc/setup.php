@@ -190,20 +190,7 @@ function super_awesome_theme_register_widget_areas() {
 		) );
 	}
 
-	super_awesome_theme_add_inline_sidebars( array( 'nav-extra', 'top', 'bottom' ) );
-	super_awesome_theme_add_inline_widgets( array(
-		'categories',
-		'custom_html',
-		'meta',
-		'nav_menu',
-		'pages',
-		'recent-comments',
-		'recent-posts',
-		'search',
-		'text',
-		'super_awesome_theme_login_links',
-		'super_awesome_theme_social_menu',
-	) );
+	super_awesome_theme()->get_component( 'widgets' )->add_inline_widget_areas( array( 'nav-extra', 'top', 'bottom' ) );
 }
 add_action( 'widgets_init', 'super_awesome_theme_register_widget_areas' );
 

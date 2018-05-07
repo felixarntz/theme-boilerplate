@@ -26,6 +26,30 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	private $widget_areas = array();
 
 	/**
+	 * Inline widget area identifiers.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	private $inline_widget_areas = array();
+
+	/**
+	 * Inline widget identifiers.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	private $inline_widgets = array();
+
+	/**
+	 * Internal Customizer instance storage.
+	 *
+	 * @since 1.0.0
+	 * @var Super_Awesome_Theme_Customizer
+	 */
+	private $customizer;
+
+	/**
 	 * Constructor.
 	 *
 	 * Sets the required dependencies.
@@ -39,14 +63,14 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	}
 
 	/**
-	 * Adds a callback to run on Customizer initialization.
+	 * Adds a callback to run on widgets initialization.
 	 *
-	 * The callback receives the `Super_Awesome_Theme_Customizer` instance
+	 * The callback receives the `Super_Awesome_Theme_Widgets` instance
 	 * as sole parameter.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param callable $callback Callback initializing Customizer functionality.
+	 * @param callable $callback Callback initializing widgets functionality.
 	 */
 	public function on_init( $callback ) {
 		if ( did_action( 'super_awesome_theme_register_widgets' ) ) {
@@ -55,6 +79,25 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 		}
 
 		add_action( 'super_awesome_theme_register_widgets', $callback );
+	}
+
+	/**
+	 * Adds a callback to run on widgets Customizer initialization.
+	 *
+	 * The callback receives the `Super_Awesome_Theme_Customizer` and the
+	 * `Super_Awesome_Theme_Widgets` instances as parameters.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param callable $callback Callback initializing Customizer functionality.
+	 */
+	public function on_customizer_init( $callback ) {
+		if ( did_action( 'super_awesome_theme_widgets_customize_register_controls' ) ) {
+			call_user_func( $callback, $this->customizer, $this );
+			return;
+		}
+
+		add_action( 'super_awesome_theme_widgets_customize_register_controls', $callback );
 	}
 
 	/**
@@ -126,13 +169,95 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 			'after_title'   => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::AFTER_TITLE ),
 		) );
 
+		if ( $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::PROP_INLINE ) ) {
+			$this->add_inline_widget_areas( $id );
+		}
+
 		return true;
+	}
+
+	/**
+	 * Gets the identifiers for all inline widget areas.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array Array of widget area IDs.
+	 */
+	public function get_inline_widget_areas() {
+		return $this->inline_widget_areas;
+	}
+
+	/**
+	 * Makes the given widget areas inline widget areas.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string|array $widget_areas One or more widget area identifiers.
+	 */
+	public function add_inline_widget_areas( $widget_areas ) {
+		$widget_areas = array_values( (array) $widget_areas );
+
+		$this->inline_widget_areas = array_unique( array_merge( $this->inline_widget_areas, $widget_areas ) );
+		sort( $this->inline_widget_areas );
+	}
+
+	/**
+	 * Makes the given inline widget areas default widget areas again.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string|array $widget_areas One or more widget area identifiers.
+	 */
+	public function remove_inline_widget_areas( $widget_areas ) {
+		$widget_areas = array_values( (array) $widget_areas );
+
+		$this->inline_widget_areas = array_diff( $this->inline_widget_areas, $widget_areas );
+		sort( $this->inline_widget_areas );
+	}
+
+	/**
+	 * Gets the identifiers for all widgets that are allowed in inline widget areas.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array Array of widget IDs.
+	 */
+	public function get_inline_widgets() {
+		return $this->inline_widgets;
+	}
+
+	/**
+	 * Adds the given widget identifiers to the list of widgets allowed in inline widget areas.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string|array $widgets One or more widget identifiers.
+	 */
+	public function add_inline_widgets( $widgets ) {
+		$widgets = array_values( (array) $widgets );
+
+		$this->inline_widgets = array_unique( array_merge( $this->inline_widgets, $widgets ) );
+		sort( $this->inline_widgets );
+	}
+
+	/**
+	 * Removes the given widget identifiers from the list of widgets allowed in inline widget areas.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string|array $widgets One or more widget identifiers.
+	 */
+	public function remove_inline_widgets( $widgets ) {
+		$widgets = array_values( (array) $widgets );
+
+		$this->inline_widgets = array_diff( $this->inline_widgets, $widgets );
+		sort( $this->inline_widgets );
 	}
 
 	/**
 	 * Magic call method.
 	 *
-	 * Handles the Customizer registration action hook callbacks.
+	 * Handles the widgets registration action hook callbacks.
 	 *
 	 * @since 1.0.0
 	 *
@@ -141,9 +266,46 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
+			case 'ensure_inline_widgets_whitelist':
+			case 'register_customize_controls':
+				return call_user_func_array( array( $this, $method ), $args );
+			case 'trigger_customizer_init':
+				$this->customizer->add_section( 'widget_areas', array(
+					'panel'    => 'widgets',
+					'title'    => __( 'Widget Area Settings', 'super-awesome-theme' ),
+					'priority' => -1,
+				) );
+
+				/**
+				 * Fires when theme widgets functionality for the Customizer should be registered.
+				 *
+				 * Do not use this hook directly, but instead call provide your callback to
+				 * the Super_Awesome_Theme_Widgets::on_customizer_init() method.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
+				 * @param Super_Awesome_Theme_Widgets    $widgets    Widgets handler instance.
+				 */
+				do_action( 'super_awesome_theme_widgets_customize_register_controls', $this->customizer, $this );
+				break;
 			case 'trigger_init':
 				$this->register_widget( 'Super_Awesome_Theme_Login_Links_Widget' );
 				$this->register_widget( 'Super_Awesome_Theme_Social_Menu_Widget' );
+
+				$this->add_inline_widgets( array(
+					'categories',
+					'custom_html',
+					'meta',
+					'nav_menu',
+					'pages',
+					'recent-comments',
+					'recent-posts',
+					'search',
+					'text',
+					'super_awesome_theme_login_links',
+					'super_awesome_theme_social_menu',
+				) );
 
 				/**
 				 * Fires when theme widgets and widget areas should be registered.
@@ -161,11 +323,73 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	}
 
 	/**
+	 * Ensures that inline sidebars only contain widgets that are allowed within them.
+	 *
+	 * This function essentially filters out all non-inline widgets within these sidebars.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $sidebars_widgets An associative array of sidebars and their widgets.
+	 * @return array Filtered array of sidebars and their widgets.
+	 */
+	protected function ensure_inline_widgets_whitelist( $sidebars_widgets ) {
+		foreach ( $this->inline_widget_areas as $widget_area_id ) {
+			if ( empty( $sidebars_widgets[ $widget_area_id ] ) ) {
+				continue;
+			}
+
+			if ( empty( $this->inline_widgets ) ) {
+				$sidebars_widgets[ $widget_area_id ] = array();
+				continue;
+			}
+
+			foreach ( $sidebars_widgets[ $widget_area_id ] as $index => $widget_instance_id ) {
+				if ( preg_match( '/-(\d+)$/', $widget_instance_id, $matches ) ) {
+					$widget_id = substr( $widget_instance_id, 0, - strlen( $matches[0] ) );
+					if ( ! in_array( $widget_id, $this->inline_widgets, true ) ) {
+						unset( $sidebars_widgets[ $widget_area_id ][ $index ] );
+					}
+				} elseif ( ! in_array( $widget_instance_id, $this->inline_widgets, true ) ) {
+					unset( $sidebars_widgets[ $widget_area_id ][ $index ] );
+				}
+			}
+
+			$sidebars_widgets[ $widget_area_id ] = array_values( $sidebars_widgets[ $widget_area_id ] );
+		}
+
+		return $sidebars_widgets;
+	}
+
+	/**
+	 * Registers Customizer controls, sections and a panel for all registered content types and their behavior.
+	 *
+	 * @since 1.0.0
+	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
+	 */
+	protected function register_customize_controls( $customizer ) {
+		$this->customizer = $customizer;
+
+		$controls_script = $this->customizer->get_controls_script();
+		$controls_script->add_data( 'inlineWidgetAreas', $this->inline_widget_areas );
+		$controls_script->add_data( 'inlineWidgets', $this->inline_widgets );
+
+		if ( is_admin() ) {
+			$this->trigger_customizer_init();
+		} else {
+			add_action( 'wp', array( $this, 'trigger_customizer_init' ), 10, 0 );
+		}
+	}
+
+	/**
 	 * Adds hooks and runs other processes required to initialize the component.
 	 *
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
 		add_action( 'widgets_init', array( $this, 'trigger_init' ), 10, 0 );
+		add_filter( 'sidebars_widgets', array( $this, 'ensure_inline_widgets_whitelist' ), 10, 1 );
+
+		$customizer = $this->get_dependency( 'customizer' );
+		$customizer->on_init( array( $this, 'register_customize_controls' ) );
 	}
 }

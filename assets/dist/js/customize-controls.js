@@ -183,13 +183,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			wp.customize.bind('ready', function () {
 				var customizeUtil = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_util__["a" /* default */](wp.customize);
 
-				if (data.inlineSidebars.length) {
+				if (data.inlineWidgetAreas.length) {
 					wp.customize.section.each(function (section) {
 						if ('sidebar' !== section.params.type) {
 							return;
 						}
 
-						if (!data.inlineSidebars.includes(section.params.sidebarId)) {
+						if (!data.inlineWidgetAreas.includes(section.params.sidebarId)) {
 							return;
 						}
 

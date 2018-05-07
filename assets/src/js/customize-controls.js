@@ -21,13 +21,13 @@ import CustomizeUtil from './customize/customize-util';
 	wp.customize.bind( 'ready', () => {
 		const customizeUtil = new CustomizeUtil( wp.customize );
 
-		if ( data.inlineSidebars.length ) {
+		if ( data.inlineWidgetAreas.length ) {
 			wp.customize.section.each( section => {
 				if ( 'sidebar' !== section.params.type ) {
 					return;
 				}
 
-				if ( ! data.inlineSidebars.includes( section.params.sidebarId ) ) {
+				if ( ! data.inlineWidgetAreas.includes( section.params.sidebarId ) ) {
 					return;
 				}
 

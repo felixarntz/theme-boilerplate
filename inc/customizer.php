@@ -439,12 +439,6 @@ add_action( 'customize_register', 'super_awesome_theme_customize_register' );
 function super_awesome_theme_customize_register_widget_area_settings() {
 	global $wp_customize;
 
-	$wp_customize->add_section( 'widget_areas', array(
-		'panel'    => 'widgets',
-		'title'    => __( 'Widget Area Settings', 'super-awesome-theme' ),
-		'priority' => -1,
-	) );
-
 	$wp_customize->add_setting( 'sidebar_mode', array(
 		'default'           => 'right-sidebar',
 		'transport'         => 'postMessage',
