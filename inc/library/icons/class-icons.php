@@ -45,7 +45,7 @@ final class Super_Awesome_Theme_Icons extends Super_Awesome_Theme_Theme_Componen
 	 * }
 	 * @return string SVG markup for the icon.
 	 */
-	public function get_svg( $icon, $args ) {
+	public function get_svg( $icon, array $args = array() ) {
 		$this->needs_svg = true;
 
 		$args = wp_parse_args( $args, array(
