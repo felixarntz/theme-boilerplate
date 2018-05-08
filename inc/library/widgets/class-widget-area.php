@@ -178,6 +178,26 @@ final class Super_Awesome_Theme_Widget_Area {
 	}
 
 	/**
+	 * Renders the widget area output.
+	 *
+	 * @since 1.0.0
+	 */
+	public final function render() {
+		dynamic_sidebar( $this->id );
+	}
+
+	/**
+	 * Checks whether the widget area is active (i.e. has content).
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if the widget area is active, false otherwise.
+	 */
+	public final function is_active() {
+		return is_active_sidebar( $this->id );
+	}
+
+	/**
 	 * Gets the value for a widget area property.
 	 *
 	 * @since 1.0.0

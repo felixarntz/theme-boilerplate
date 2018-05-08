@@ -53,6 +53,7 @@ require get_template_directory() . '/inc/library/customizer/class-customize-part
  * Theme widgets.
  */
 require get_template_directory() . '/inc/library/widgets/class-widgets.php';
+require get_template_directory() . '/inc/library/settings/class-widget-area-not-registered-exception.php';
 require get_template_directory() . '/inc/library/widgets/class-widget-area.php';
 require get_template_directory() . '/inc/library/widgets/class-widget.php';
 require get_template_directory() . '/inc/library/widgets/class-login-links-widget.php';

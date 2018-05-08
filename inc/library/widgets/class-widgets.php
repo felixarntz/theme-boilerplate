@@ -184,6 +184,36 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	}
 
 	/**
+	 * Gets a registered widget area.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $id Unique string identifier for this widget area.
+	 * @return Super_Awesome_Theme_Widget_Area Registered widget area instance.
+	 *
+	 * @throws Super_Awesome_Theme_Widget_Area_Not_Registered_Exception Thrown when $id does not identify a registered widget area.
+	 */
+	public function get_registered_widget_area( $id ) {
+		if ( ! isset( $this->widget_areas[ $id ] ) ) {
+			throw Super_Awesome_Theme_Widget_Area_Not_Registered_Exception::from_id( $id );
+		}
+
+		return $this->widget_areas[ $id ];
+	}
+
+	/**
+	 * Gets all registered widget areas.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array Array of $key => $widget_area pairs, where each $widget_area is a
+	 *               registered Super_Awesome_Theme_Widget_Area instance.
+	 */
+	public function get_registered_widget_areas() {
+		return $this->widget_areas;
+	}
+
+	/**
 	 * Gets the identifiers for all inline widget areas.
 	 *
 	 * @since 1.0.0

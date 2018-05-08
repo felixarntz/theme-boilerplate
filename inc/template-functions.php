@@ -49,6 +49,29 @@ function super_awesome_theme_get_template_part( $slug, $name = null, $data = nul
 }
 
 /**
+ * Renders a registered widget area.
+ *
+ * @since 1.0.0
+ *
+ * @param string $id Unique string identifier for this widget area.
+ */
+function super_awesome_theme_render_widget_area( $id ) {
+	super_awesome_theme()->get_component( 'widgets' )->get_registered_widget_area( $id )->render();
+}
+
+/**
+ * Checks whether a registered widget area is active (i.e. has content).
+ *
+ * @since 1.0.0
+ *
+ * @param string $id Unique string identifier for this widget area.
+ * @return bool True if the widget area is active, false otherwise.
+ */
+function super_awesome_theme_is_widget_area_active( $id ) {
+	return super_awesome_theme()->get_component( 'widgets' )->get_registered_widget_area( $id )->is_active();
+}
+
+/**
  * Checks whether a wrapped layout should be used.
  *
  * @since 1.0.0

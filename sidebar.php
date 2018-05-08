@@ -20,7 +20,7 @@ if ( ! super_awesome_theme_should_display_sidebar() ) {
 
 $sidebar_slug = super_awesome_theme_get_sidebar_name();
 
-if ( ! is_active_sidebar( $sidebar_slug ) ) {
+if ( ! super_awesome_theme_is_widget_area_active( $sidebar_slug ) ) {
 	return;
 }
 
@@ -32,5 +32,5 @@ if ( isset( $wp_registered_sidebars[ $sidebar_slug ] ) ) {
 ?>
 
 			<aside id="sidebar" class="site-sidebar widget-area" aria-label="<?php echo esc_attr( $sidebar_title ); ?>">
-				<?php dynamic_sidebar( $sidebar_slug ); ?>
+				<?php super_awesome_theme_render_widget_area( $sidebar_slug ); ?>
 			</aside><!-- #sidebar -->
