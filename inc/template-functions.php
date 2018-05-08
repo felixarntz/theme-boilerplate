@@ -72,6 +72,29 @@ function super_awesome_theme_is_widget_area_active( $id ) {
 }
 
 /**
+ * Renders a registered menu.
+ *
+ * @since 1.0.0
+ *
+ * @param string $id Unique string identifier for this menu.
+ */
+function super_awesome_theme_render_menu( $id ) {
+	super_awesome_theme()->get_component( 'menus' )->get_registered_menu( $id )->render();
+}
+
+/**
+ * Checks whether a registered menu is active (i.e. has content).
+ *
+ * @since 1.0.0
+ *
+ * @param string $id Unique string identifier for this menu.
+ * @return bool True if the menu is active, false otherwise.
+ */
+function super_awesome_theme_is_menu_active( $id ) {
+	return super_awesome_theme()->get_component( 'menus' )->get_registered_menu( $id )->is_active();
+}
+
+/**
  * Checks whether a wrapped layout should be used.
  *
  * @since 1.0.0

@@ -53,16 +53,18 @@ require get_template_directory() . '/inc/library/customizer/class-customize-part
  * Theme widgets.
  */
 require get_template_directory() . '/inc/library/widgets/class-widgets.php';
-require get_template_directory() . '/inc/library/settings/class-widget-area-not-registered-exception.php';
+require get_template_directory() . '/inc/library/widgets/class-widget-area-not-registered-exception.php';
 require get_template_directory() . '/inc/library/widgets/class-widget-area.php';
 require get_template_directory() . '/inc/library/widgets/class-widget.php';
 require get_template_directory() . '/inc/library/widgets/class-login-links-widget.php';
 require get_template_directory() . '/inc/library/widgets/class-social-menu-widget.php';
 
 /**
- * Theme sidebar.
+ * Theme menus.
  */
-require get_template_directory() . '/inc/library/sidebar/class-sidebar.php';
+require get_template_directory() . '/inc/library/menus/class-menus.php';
+require get_template_directory() . '/inc/library/menus/class-menu-not-registered-exception.php';
+require get_template_directory() . '/inc/library/menus/class-menu.php';
 
 /**
  * Theme icons.
@@ -74,6 +76,11 @@ require get_template_directory() . '/inc/library/icons/class-icons.php';
  */
 require get_template_directory() . '/inc/library/content-types/class-content-types.php';
 require get_template_directory() . '/inc/library/content-types/class-attachment-metadata.php';
+
+/**
+ * Theme sidebar.
+ */
+require get_template_directory() . '/inc/library/sidebar/class-sidebar.php';
 
 /**
  * Gets the main theme class instance.

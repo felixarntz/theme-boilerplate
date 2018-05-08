@@ -19,8 +19,8 @@ class Super_Awesome_Theme_Widget_Area_Not_Registered_Exception extends InvalidAr
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $id Setting identifier.
-	 * @return Super_Awesome_Theme_Widget_Area_Not_Registered_Exception Exception for the given handle.
+	 * @param string $id Widget area identifier.
+	 * @return Super_Awesome_Theme_Widget_Area_Not_Registered_Exception Exception for the given identifier.
 	 */
 	public static function from_id( $id ) {
 		/* translators: %s: widget area identifier */
