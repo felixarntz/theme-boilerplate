@@ -186,7 +186,16 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 				Super_Awesome_Theme_Stylesheet::PROP_HAS_RTL  => true,
 			)
 		) );
+	}
 
+	/**
+	 * Adds data for the main theme script on the 'wp_loaded' hook.
+	 *
+	 * TODO: Remove this method.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_script_data() {
 		$script = $this->get_registered_asset( 'super-awesome-theme-script' );
 
 		$sticky = array(
@@ -293,6 +302,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 */
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_main_assets' ), 10, 0 );
+		add_action( 'wp_head', array( $this, 'add_script_data' ), 0, 0 );
 		add_action( 'get_header', array( $this, 'disable_special_page_styles' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'print_detect_js_svg_support_script' ), 0, 0 );
 

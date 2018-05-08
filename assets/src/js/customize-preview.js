@@ -60,8 +60,10 @@ import { findParent } from './common/utils';
 
 	// Sidebar mode.
 	customizeUtil.bindSettingValue( 'sidebar_mode', value => {
-		const classes = Object.keys( data.sidebarModeChoices );
-		const index   = classes.indexOf( value );
+		const classes = Object.keys( data.sidebarModeChoices ).map( setting => setting.replace( '_', '-' ) );
+		const index   = classes.indexOf( value.replace( '_', '-' ) );
+
+		value = value.replace( '_', '-' );
 
 		if ( index > -1 ) {
 			classes.splice( index, 1 );

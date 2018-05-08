@@ -14,7 +14,7 @@
  */
 global $wp_registered_sidebars;
 
-if ( ! super_awesome_theme_display_sidebar() ) {
+if ( ! super_awesome_theme_should_display_sidebar() ) {
 	return;
 }
 

@@ -59,6 +59,11 @@ require get_template_directory() . '/inc/library/widgets/class-login-links-widge
 require get_template_directory() . '/inc/library/widgets/class-social-menu-widget.php';
 
 /**
+ * Theme sidebar.
+ */
+require get_template_directory() . '/inc/library/sidebar/class-sidebar.php';
+
+/**
  * Theme icons.
  */
 require get_template_directory() . '/inc/library/icons/class-icons.php';

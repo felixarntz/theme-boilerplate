@@ -439,51 +439,6 @@ add_action( 'customize_register', 'super_awesome_theme_customize_register' );
 function super_awesome_theme_customize_register_widget_area_settings() {
 	global $wp_customize;
 
-	$wp_customize->add_setting( 'sidebar_mode', array(
-		'default'           => 'right-sidebar',
-		'transport'         => 'postMessage',
-		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_mode',
-	) );
-	$wp_customize->add_control( 'sidebar_mode', array(
-		'section'         => 'widget_areas',
-		'label'           => __( 'Sidebar Mode', 'super-awesome-theme' ),
-		'description'     => __( 'Specify if and how the sidebar should be displayed.', 'super-awesome-theme' ),
-		'type'            => 'radio',
-		'choices'         => super_awesome_theme_customize_get_sidebar_mode_choices(),
-		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
-	) );
-
-	$wp_customize->add_setting( 'sidebar_size', array(
-		'default'           => 'medium',
-		'transport'         => 'postMessage',
-		'validate_callback' => 'super_awesome_theme_customize_validate_sidebar_size',
-	) );
-	$wp_customize->add_control( 'sidebar_size', array(
-		'section'         => 'widget_areas',
-		'label'           => __( 'Sidebar Size', 'super-awesome-theme' ),
-		'description'     => __( 'Specify the width of the sidebar.', 'super-awesome-theme' ),
-		'type'            => 'radio',
-		'choices'         => super_awesome_theme_customize_get_sidebar_size_choices(),
-		'active_callback' => 'super_awesome_theme_allow_display_sidebar',
-	) );
-
-	$wp_customize->add_setting( 'blog_sidebar_enabled', array(
-		'default'   => '',
-		'transport' => 'postMessage',
-	) );
-	$wp_customize->add_control( 'blog_sidebar_enabled', array(
-		'section'         => 'widget_areas',
-		'label'           => __( 'Enable Blog Sidebar?', 'super-awesome-theme' ),
-		'description'     => __( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
-		'type'            => 'checkbox',
-		'active_callback' => 'super_awesome_theme_allow_display_blog_sidebar',
-	) );
-	$wp_customize->selective_refresh->add_partial( 'blog_sidebar_enabled', array(
-		'selector'            => '#sidebar',
-		'render_callback'     => 'get_sidebar',
-		'container_inclusive' => true,
-	) );
-
 	$wp_customize->add_setting( 'top_bar_justify_content', array(
 		'default'           => 'space-between',
 		'transport'         => 'postMessage',
@@ -1082,74 +1037,6 @@ function super_awesome_theme_customize_get_header_textalign_choices() {
 		'text-left'   => _x( 'Left', 'alignment', 'super-awesome-theme' ),
 		'text-center' => _x( 'Center', 'alignment', 'super-awesome-theme' ),
 		'text-right'  => _x( 'Right', 'alignment', 'super-awesome-theme' ),
-	);
-}
-
-/**
- * Validates the 'sidebar_mode' customizer setting.
- *
- * @since 1.0.0
- *
- * @param WP_Error $validity Error object to add possible errors to.
- * @param mixed    $value    Value to validate.
- * @return WP_Error Possibly modified error object.
- */
-function super_awesome_theme_customize_validate_sidebar_mode( $validity, $value ) {
-	$choices = super_awesome_theme_customize_get_sidebar_mode_choices();
-
-	if ( ! isset( $choices[ $value ] ) ) {
-		$validity->add( 'invalid_choice', __( 'Invalid choice.', 'super-awesome-theme' ) );
-	}
-
-	return $validity;
-}
-
-/**
- * Gets the available choices for the 'sidebar_mode' customizer setting.
- *
- * @since 1.0.0
- *
- * @return array Array where values are the keys, and labels are the values.
- */
-function super_awesome_theme_customize_get_sidebar_mode_choices() {
-	return array(
-		'no-sidebar'    => __( 'No Sidebar', 'super-awesome-theme' ),
-		'left-sidebar'  => __( 'Left Sidebar', 'super-awesome-theme' ),
-		'right-sidebar' => __( 'Right Sidebar', 'super-awesome-theme' ),
-	);
-}
-
-/**
- * Validates the 'sidebar_size' customizer setting.
- *
- * @since 1.0.0
- *
- * @param WP_Error $validity Error object to add possible errors to.
- * @param mixed    $value    Value to validate.
- * @return WP_Error Possibly modified error object.
- */
-function super_awesome_theme_customize_validate_sidebar_size( $validity, $value ) {
-	$choices = super_awesome_theme_customize_get_sidebar_size_choices();
-
-	if ( ! isset( $choices[ $value ] ) ) {
-		$validity->add( 'invalid_choice', __( 'Invalid choice.', 'super-awesome-theme' ) );
-	}
-
-	return $validity;
-}
-
-/**
- * Gets the available choices for the 'sidebar_size' customizer setting.
- *
- * @since 1.0.0
- *
- * @return array Array where values are the keys, and labels are the values.
- */
-function super_awesome_theme_customize_get_sidebar_size_choices() {
-	return array(
-		'small'  => __( 'Small', 'super-awesome-theme' ),
-		'medium' => __( 'Medium', 'super-awesome-theme' ),
-		'large'  => __( 'Large', 'super-awesome-theme' ),
 	);
 }
 

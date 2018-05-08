@@ -18,6 +18,13 @@
 final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Component_Base {
 
 	/**
+	 * Name of the Customizer section for widget settings.
+	 *
+	 * @since 1.0.0
+	 */
+	const CUSTOMIZER_SECTION = 'widget_areas';
+
+	/**
 	 * Registered widget areas.
 	 *
 	 * @since 1.0.0
@@ -78,7 +85,7 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 			return;
 		}
 
-		add_action( 'super_awesome_theme_register_widgets', $callback );
+		add_action( 'super_awesome_theme_register_widgets', $callback, 10, 1 );
 	}
 
 	/**
@@ -97,7 +104,7 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 			return;
 		}
 
-		add_action( 'super_awesome_theme_widgets_customize_register_controls', $callback );
+		add_action( 'super_awesome_theme_widgets_customize_register_controls', $callback, 10, 2 );
 	}
 
 	/**
@@ -163,10 +170,10 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 			'id'            => $id,
 			'name'          => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::PROP_TITLE ),
 			'description'   => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::PROP_DESCRIPTION ),
-			'before_widget' => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::BEFORE_WIDGET ),
-			'after_widget'  => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::AFTER_WIDGET ),
-			'before_title'  => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::BEFORE_TITLE ),
-			'after_title'   => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::AFTER_TITLE ),
+			'before_widget' => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::PROP_BEFORE_WIDGET ),
+			'after_widget'  => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::PROP_AFTER_WIDGET ),
+			'before_title'  => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::PROP_BEFORE_TITLE ),
+			'after_title'   => $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::PROP_AFTER_TITLE ),
 		) );
 
 		if ( $widget_area->get_prop( Super_Awesome_Theme_Widget_Area::PROP_INLINE ) ) {
@@ -270,7 +277,7 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 			case 'register_customize_controls':
 				return call_user_func_array( array( $this, $method ), $args );
 			case 'trigger_customizer_init':
-				$this->customizer->add_section( 'widget_areas', array(
+				$this->customizer->add_section( self::CUSTOMIZER_SECTION, array(
 					'panel'    => 'widgets',
 					'title'    => __( 'Widget Area Settings', 'super-awesome-theme' ),
 					'priority' => -1,

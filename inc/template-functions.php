@@ -292,37 +292,8 @@ function super_awesome_theme_display_author_posts_link( $post = null ) {
  *
  * @return bool True if the sidebar should be displayed, false otherwise.
  */
-function super_awesome_theme_display_sidebar() {
-	if ( ! super_awesome_theme_allow_display_sidebar() ) {
-		return false;
-	}
-
-	return 'no-sidebar' !== get_theme_mod( 'sidebar_mode', 'right-sidebar' );
-}
-
-/**
- * Checks whether the current page does allow the sidebar to be displayed.
- *
- * @since 1.0.0
- *
- * @return bool True if the sidebar can be displayed, false otherwise.
- */
-function super_awesome_theme_allow_display_sidebar() {
-	$result = true;
-	if ( super_awesome_theme_is_distraction_free() ) {
-		$result = false;
-	} elseif ( is_page_template( 'templates/full-width.php' ) ) {
-		$result = false;
-	}
-
-	/**
-	 * Filters whether to allow displaying the sidebar on the current page.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool $result Whether to allow displaying the sidebar on the current page.
-	 */
-	return apply_filters( 'super_awesome_theme_allow_display_sidebar', $result );
+function super_awesome_theme_should_display_sidebar() {
+	return super_awesome_theme()->get_component( 'sidebar' )->should_display_sidebar();
 }
 
 /**
@@ -333,48 +304,7 @@ function super_awesome_theme_allow_display_sidebar() {
  * @return string The sidebar name.
  */
 function super_awesome_theme_get_sidebar_name() {
-	$sidebar_name = 'primary';
-
-	if ( get_theme_mod( 'blog_sidebar_enabled' ) && super_awesome_theme_allow_display_blog_sidebar() ) {
-		$sidebar_name = 'blog';
-	}
-
-	/**
-	 * Filters the name of the sidebar to display on the current page.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $sidebar_name The sidebar name. By default either 'primary' or 'blog'.
-	 */
-	return apply_filters( 'super_awesome_theme_get_sidebar_name', $sidebar_name );
-}
-
-/**
- * Checks whether the current page does allow the blog sidebar to be displayed.
- *
- * @since 1.0.0
- *
- * @return bool True if the blog sidebar can be displayed, false otherwise.
- */
-function super_awesome_theme_allow_display_blog_sidebar() {
-	$result = false;
-
-	if ( is_singular() ) {
-		if ( 'post' === get_post_type() ) {
-			$result = true;
-		}
-	} elseif ( is_home() || is_category() || is_tag() || is_date() || 'post' === get_query_var( 'post_type' ) ) {
-		$result = true;
-	}
-
-	/**
-	 * Filters whether to allow displaying the blog sidebar on the current page.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool $result Whether to allow displaying the blog sidebar on the current page.
-	 */
-	return apply_filters( 'super_awesome_theme_allow_display_blog_sidebar', $result );
+	return super_awesome_theme()->get_component( 'sidebar' )->get_sidebar_name();
 }
 
 /**

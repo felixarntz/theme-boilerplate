@@ -224,8 +224,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 			// Sidebar mode.
 			customizeUtil.bindSettingValue('sidebar_mode', function (value) {
-				var classes = Object.keys(data.sidebarModeChoices);
-				var index = classes.indexOf(value);
+				var classes = Object.keys(data.sidebarModeChoices).map(function (setting) {
+					return setting.replace('_', '-');
+				});
+				var index = classes.indexOf(value.replace('_', '-'));
+
+				value = value.replace('_', '-');
 
 				if (index > -1) {
 					classes.splice(index, 1);

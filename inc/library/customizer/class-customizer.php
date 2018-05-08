@@ -69,7 +69,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 			return;
 		}
 
-		add_action( 'super_awesome_theme_customize_register_controls', $callback );
+		add_action( 'super_awesome_theme_customize_register_controls', $callback, 10, 1 );
 	}
 
 	/**
@@ -406,15 +406,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 		$preview_script = $assets->get_registered_asset( 'super-awesome-theme-customize-preview' );
 
 		$preview_script->add_data( 'headerTextalignChoices', super_awesome_theme_customize_get_header_textalign_choices() );
-		$preview_script->add_data( 'sidebarModeChoices', super_awesome_theme_customize_get_sidebar_mode_choices() );
-		$preview_script->add_data( 'sidebarSizeChoices', super_awesome_theme_customize_get_sidebar_size_choices() );
 		$preview_script->add_data( 'barJustifyContentChoices', super_awesome_theme_customize_get_bar_justify_content_choices() );
-
-		$controls_script = $assets->get_registered_asset( 'super-awesome-theme-customize-controls' );
-
-		$controls_script->add_data( 'i18n', array(
-			'blogSidebarEnabledNotice' => __( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ),
-		) );
 	}
 
 	/**

@@ -42,7 +42,7 @@ import CustomizeUtil from './customize/customize-util';
 
 		// Only show sidebar-related controls if a sidebar is enabled.
 		customizeUtil.bindSettingValueToControls( 'sidebar_mode', [ 'sidebar_size', 'blog_sidebar_enabled' ], ( value, control ) => {
-			if ( 'no-sidebar' === value ) {
+			if ( 'no_sidebar' === value ) {
 				control.container.slideUp( 180 );
 			} else {
 				control.container.slideDown( 180 );
@@ -80,7 +80,7 @@ import CustomizeUtil from './customize/customize-util';
 					control.container.find( '.description' ).slideUp( 180 );
 					control.notifications.add( noticeCode, new wp.customize.Notification( noticeCode, {
 						type: 'info',
-						message: data.i18n.blogSidebarEnabledNotice,
+						message: data.blogSidebarEnabledNotice,
 					}) );
 				}
 			};

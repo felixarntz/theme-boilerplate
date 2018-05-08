@@ -120,32 +120,6 @@ add_action( 'after_setup_theme', 'super_awesome_theme_register_nav_menus', 11 );
  */
 function super_awesome_theme_register_widget_areas() {
 	register_sidebar( array(
-		'name'          => __( 'Primary Sidebar', 'super-awesome-theme' ),
-		'id'            => 'primary',
-		'description'   => __( 'Add widgets here to appear in the sidebar for your main content.', 'super-awesome-theme' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
-	$blog_sidebar_description = __( 'Add widgets here to appear in the sidebar for blog posts and archive pages.', 'super-awesome-theme' );
-	if ( ! get_theme_mod( 'blog_sidebar_enabled' ) ) {
-		// If core allowed simple HTML here, a link to the respective customizer control would surely help.
-		$blog_sidebar_description .= ' ' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' );
-	}
-
-	register_sidebar( array(
-		'name'          => __( 'Blog Sidebar', 'super-awesome-theme' ),
-		'id'            => 'blog',
-		'description'   => $blog_sidebar_description,
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
 		'name'          => __( 'Navbar Extra', 'super-awesome-theme' ),
 		'id'            => 'nav-extra',
 		'description'   => __( 'Add widgets here to appear as additional content in the navbar beside the main navigation menu.', 'super-awesome-theme' ),
