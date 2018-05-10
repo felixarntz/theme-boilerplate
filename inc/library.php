@@ -50,6 +50,12 @@ require get_template_directory() . '/inc/library/customizer/class-customize-sett
 require get_template_directory() . '/inc/library/customizer/class-customize-partial.php';
 
 /**
+ * Theme colors.
+ */
+require get_template_directory() . '/inc/library/colors/class-colors.php';
+require get_template_directory() . '/inc/library/colors/class-color.php';
+
+/**
  * Theme widgets.
  */
 require get_template_directory() . '/inc/library/widgets/class-widgets.php';

@@ -401,6 +401,7 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	 * Registers Customizer controls, sections and a panel for all registered content types and their behavior.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
 	 */
 	protected function register_customize_controls( $customizer ) {
