@@ -65,13 +65,8 @@ class Super_Awesome_Theme_Social_Menu_Widget extends Super_Awesome_Theme_Widget 
 	 * @param array $instance Settings for the current widget instance.
 	 */
 	protected function render( array $instance ) {
-		wp_nav_menu( array(
-			'menu'        => wp_get_nav_menu_object( (int) $instance['nav_menu'] ),
-			'depth'       => 1,
-			'link_before' => '<span class="screen-reader-text">',
-			'link_after'  => '</span>' . $this->manager->get_dependency( 'icons' )->get_svg( 'chain' ),
-			'container'   => false,
-		) );
+		$menus = $this->manager->get_dependency( 'menus' );
+		$menus->get_registered_menu( 'social' )->render( (int) $instance['nav_menu'] );
 	}
 
 	/**

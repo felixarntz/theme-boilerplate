@@ -23,14 +23,6 @@ final class Super_Awesome_Theme_Icons extends Super_Awesome_Theme_Theme_Componen
 	private $needs_svg = false;
 
 	/**
-	 * Internal storage for available social links icons.
-	 *
-	 * @since 1.0.0
-	 * @var array|null
-	 */
-	private $social_links_icons;
-
-	/**
 	 * Gets SVG markup for a specific icon.
 	 *
 	 * @since 1.0.0
@@ -121,71 +113,6 @@ final class Super_Awesome_Theme_Icons extends Super_Awesome_Theme_Theme_Componen
 		}
 
 		$this->print_svg();
-	}
-
-	/**
-	 * Gets an array of supported social links (URL and icon name).
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array Array where URL fragment identifiers are the keys, and SVG icon identifiers are the values.
-	 */
-	function get_social_links_icons() {
-		if ( is_array( $this->social_links_icons ) ) {
-			return $this->social_links_icons;
-		}
-
-		$this->social_links_icons = array(
-			'behance.net'     => 'behance',
-			'codepen.io'      => 'codepen',
-			'deviantart.com'  => 'deviantart',
-			'digg.com'        => 'digg',
-			'docker.com'      => 'dockerhub',
-			'dribbble.com'    => 'dribbble',
-			'dropbox.com'     => 'dropbox',
-			'mailto:'         => 'envelope',
-			'facebook.com'    => 'facebook',
-			'flickr.com'      => 'flickr',
-			'foursquare.com'  => 'foursquare',
-			'github.com'      => 'github',
-			'plus.google.com' => 'google-plus',
-			'instagram.com'   => 'instagram',
-			'linkedin.com'    => 'linkedin',
-			'medium.com'      => 'medium',
-			'pscp.tv'         => 'periscope',
-			'tel:'            => 'phone',
-			'pinterest.com'   => 'pinterest',
-			'getpocket.com'   => 'pocket',
-			'reddit.com'      => 'reddit',
-			'skype.com'       => 'skype',
-			'skype:'          => 'skype',
-			'slideshare.net'  => 'slideshare',
-			'snapchat.com'    => 'snapchat',
-			'soundcloud.com'  => 'soundcloud',
-			'spotify.com'     => 'spotify',
-			'stumbleupon.com' => 'stumbleupon',
-			'tumblr.com'      => 'tumblr',
-			'twitch.tv'       => 'twitch',
-			'twitter.com'     => 'twitter',
-			'vimeo.com'       => 'vimeo',
-			'vine.co'         => 'vine',
-			'vk.com'          => 'vk',
-			'wordpress.org'   => 'wordpress',
-			'wordpress.com'   => 'wordpress',
-			'yelp.com'        => 'yelp',
-			'youtube.com'     => 'youtube',
-		);
-
-		/**
-		 * Filters the theme's supported social links icons.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array $social_links_icons Array where URL fragment identifiers are the keys, and SVG icon identifiers are the values.
-		 */
-		$this->social_links_icons = apply_filters( 'super_awesome_theme_social_links_icons', $this->social_links_icons );
-
-		return $this->social_links_icons;
 	}
 
 	/**

@@ -63,16 +63,6 @@ final class Super_Awesome_Theme_Menus extends Super_Awesome_Theme_Theme_Componen
 
 		register_nav_menu( $id, $menu->get_prop( Super_Awesome_Theme_Menu::PROP_TITLE ) );
 
-		register_sidebar( array(
-			'id'            => $id,
-			'name'          => $menu->get_prop( Super_Awesome_Theme_Menu::PROP_TITLE ),
-			'description'   => $menu->get_prop( Super_Awesome_Theme_Menu::PROP_DESCRIPTION ),
-			'before_widget' => $menu->get_prop( Super_Awesome_Theme_Menu::PROP_BEFORE_WIDGET ),
-			'after_widget'  => $menu->get_prop( Super_Awesome_Theme_Menu::PROP_AFTER_WIDGET ),
-			'before_title'  => $menu->get_prop( Super_Awesome_Theme_Menu::PROP_BEFORE_TITLE ),
-			'after_title'   => $menu->get_prop( Super_Awesome_Theme_Menu::PROP_AFTER_TITLE ),
-		) );
-
 		return true;
 	}
 

@@ -7,22 +7,13 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-if ( ! has_nav_menu( 'social' ) ) {
+if ( ! super_awesome_theme_is_menu_active( 'social' ) ) {
 	return;
 }
 
 ?>
 <nav class="social-navigation site-component" aria-label="<?php esc_attr_e( 'Social Links Menu', 'super-awesome-theme' ); ?>">
 	<div class="site-component-inner">
-		<?php
-		wp_nav_menu( array(
-			'theme_location' => 'social',
-			'menu_class'     => 'social-links-menu',
-			'depth'          => 1,
-			'link_before'    => '<span class="screen-reader-text">',
-			'link_after'     => '</span>' . super_awesome_theme_get_svg( 'chain' ),
-			'container'      => false,
-		) );
-		?>
+		<?php super_awesome_theme_render_menu( 'social' ); ?>
 	</div>
 </nav><!-- .social-navigation -->

@@ -90,6 +90,11 @@ require get_template_directory() . '/inc/library/content-types/class-attachment-
 require get_template_directory() . '/inc/library/sidebar/class-sidebar.php';
 
 /**
+ * Theme social navigation.
+ */
+require get_template_directory() . '/inc/library/social-navigation/class-social-navigation.php';
+
+/**
  * Gets the main theme class instance.
  *
  * @since 1.0.0

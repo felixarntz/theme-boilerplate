@@ -27,32 +27,6 @@ function super_awesome_theme_get_svg( $icon, $args = array() ) {
 }
 
 /**
- * Adjusts the social links menu to display SVG icons.
- *
- * @since 1.0.0
- *
- * @param string  $item_output The menu item output.
- * @param WP_Post $item        Menu item object.
- * @param int     $depth       Depth of the menu.
- * @param array   $args        wp_nav_menu() arguments.
- * @return string $item_output The menu item output with social icon.
- */
-function super_awesome_theme_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
-	if ( '</span>' . super_awesome_theme_get_svg( 'chain' ) === $args->link_after ) {
-		$social_icons = super_awesome_theme_get_social_links_icons();
-
-		foreach ( $social_icons as $attr => $value ) {
-			if ( false !== strpos( $item_output, $attr ) ) {
-				return str_replace( $args->link_after, '</span>' . super_awesome_theme_get_svg( $value ), $item_output );
-			}
-		}
-	}
-
-	return $item_output;
-}
-add_filter( 'walker_nav_menu_start_el', 'super_awesome_theme_nav_menu_social_icons', 10, 4 );
-
-/**
  * Adds a dropdown icon to a menu item in the primary navigation if it has children.
  *
  * @since 1.0.0
@@ -84,5 +58,5 @@ add_filter( 'nav_menu_item_title', 'super_awesome_theme_dropdown_icon_to_menu_li
  * @return array Array where URL fragment identifiers are the keys, and SVG icon identifiers are the values.
  */
 function super_awesome_theme_get_social_links_icons() {
-	return super_awesome_theme()->get_component( 'icons' )->get_social_links_icons();
+	return super_awesome_theme()->get_component( 'social_navigation' )->get_social_links_icons();
 }
