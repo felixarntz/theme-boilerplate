@@ -148,6 +148,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 	public function __call( $method, $args ) {
 		switch ( $method ) {
 			case 'print_color_style':
+			case 'print_color_style_css':
 			case 'register_customize_controls':
 				call_user_func_array( array( $this, $method ), $args );
 		}
@@ -162,21 +163,27 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 		?>
 		<style id="super-awesome-theme-color-style" type="text/css">
 
-			<?php
-
-			/**
-			 * Fires when the custom color styles are printed inside a style tag.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param Super_Awesome_Theme_Colors $colors The theme colors instance.
-			 */
-			do_action( 'super_awesome_theme_color_style', $this );
-
-			?>
+			<?php $this->print_color_style_css(); ?>
 
 		</style>
 		<?php
+	}
+
+	/**
+	 * Prints the color style CSS definitions.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function print_color_style_css() {
+
+		/**
+		 * Fires when the custom color styles are printed inside a style tag.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Super_Awesome_Theme_Colors $colors The theme colors instance.
+		 */
+		do_action( 'super_awesome_theme_color_style', $this );
 	}
 
 	/**
@@ -227,8 +234,8 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			$customizer->add_partial( 'super_awesome_theme_color_style', array(
 				Super_Awesome_Theme_Customize_Partial::PROP_SETTINGS            => $partial_colors,
 				Super_Awesome_Theme_Customize_Partial::PROP_SELECTOR            => '#super-awesome-theme-color-style',
-				Super_Awesome_Theme_Customize_Partial::PROP_RENDER_CALLBACK     => array( $this, 'print_color_style' ),
-				Super_Awesome_Theme_Customize_Partial::PROP_CONTAINER_INCLUSIVE => true,
+				Super_Awesome_Theme_Customize_Partial::PROP_RENDER_CALLBACK     => array( $this, 'print_color_style_css' ),
+				Super_Awesome_Theme_Customize_Partial::PROP_CONTAINER_INCLUSIVE => false,
 				Super_Awesome_Theme_Customize_Partial::PROP_FALLBACK_REFRESH    => false,
 			) );
 		}
