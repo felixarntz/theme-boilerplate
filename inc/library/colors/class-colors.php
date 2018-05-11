@@ -15,6 +15,14 @@
 final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Component_Base {
 
 	/**
+	 * Utility methods instance.
+	 *
+	 * @since 1.0.0
+	 * @var Super_Awesome_Theme_Color_Util
+	 */
+	private $util;
+
+	/**
 	 * Registered theme color groups as $identifier => $title pairs.
 	 *
 	 * @since 1.0.0
@@ -38,6 +46,8 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$this->util = new Super_Awesome_Theme_Color_Util();
+
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 	}
@@ -112,6 +122,17 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 	 */
 	public function register_color_style_callback( $callback ) {
 		add_action( 'super_awesome_theme_color_style', $callback, 10, 1 );
+	}
+
+	/**
+	 * Returns the color utility methods instance.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Super_Awesome_Theme_Color_Util Utility methods instance.
+	 */
+	public function util() {
+		return $this->util;
 	}
 
 	/**

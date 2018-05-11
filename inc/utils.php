@@ -17,22 +17,7 @@
  * @return string Darkened hex color string.
  */
 function super_awesome_theme_darken_color( $color, $percentage ) {
-	if ( empty( $color ) ) {
-		return $color;
-	}
-
-	$rgb = super_awesome_theme_hex_to_rgb( $color );
-
-	$darkened = array();
-	foreach ( $rgb as $channel ) {
-		$darkened_channel = (int) round( $channel * ( 1.0 - $percentage / 100.0 ) );
-		if ( $darkened_channel < 0 ) {
-			$darkened_channel = 0;
-		}
-		$darkened[] = $darkened_channel;
-	}
-
-	return super_awesome_theme_rgb_to_hex( $darkened );
+	return super_awesome_theme()->get_component( 'colors' )->util()->darken_color( $color, $percentage );
 }
 
 /**
@@ -45,22 +30,7 @@ function super_awesome_theme_darken_color( $color, $percentage ) {
  * @return string Lightened hex color string.
  */
 function super_awesome_theme_lighten_color( $color, $percentage ) {
-	if ( empty( $color ) ) {
-		return $color;
-	}
-
-	$rgb = super_awesome_theme_hex_to_rgb( $color );
-
-	$lightened = array();
-	foreach ( $rgb as $channel ) {
-		$lightened_channel = (int) round( $channel * ( 1.0 + $percentage / 100.0 ) );
-		if ( $lightened_channel > 255 ) {
-			$lightened_channel = 255;
-		}
-		$lightened[] = $lightened_channel;
-	}
-
-	return super_awesome_theme_rgb_to_hex( $lightened );
+	return super_awesome_theme()->get_component( 'colors' )->util()->lighten_color( $color, $percentage );
 }
 
 /**
@@ -72,14 +42,7 @@ function super_awesome_theme_lighten_color( $color, $percentage ) {
  * @return array RGB color array.
  */
 function super_awesome_theme_hex_to_rgb( $color ) {
-	if ( strlen( $color ) === 4 ) {
-		$rgb = str_split( substr( $color, 1 ), 1 );
-		$rgb = array_map( array( $this, 'duplicate_char' ), $rgb );
-	} else {
-		$rgb = str_split( substr( $color, 1 ), 2 );
-	}
-
-	return array_map( 'hexdec', $rgb );
+	return super_awesome_theme()->get_component( 'colors' )->util()->hex_to_rgb( $color );
 }
 
 /**
@@ -91,9 +54,7 @@ function super_awesome_theme_hex_to_rgb( $color ) {
  * @return string Hex color string.
  */
 function super_awesome_theme_rgb_to_hex( $color ) {
-	$hex = array_map( 'zeroise', array_map( 'dechex', $color ), array( 2, 2, 2 ) );
-
-	return '#' . $hex[0] . $hex[1] . $hex[2];
+	return super_awesome_theme()->get_component( 'colors' )->util()->rgb_to_hex( $color );
 }
 
 /**

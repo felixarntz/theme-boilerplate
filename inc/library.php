@@ -53,6 +53,7 @@ require get_template_directory() . '/inc/library/customizer/class-customize-part
  * Theme colors.
  */
 require get_template_directory() . '/inc/library/colors/class-colors.php';
+require get_template_directory() . '/inc/library/colors/class-color-util.php';
 require get_template_directory() . '/inc/library/colors/class-color.php';
 
 /**
