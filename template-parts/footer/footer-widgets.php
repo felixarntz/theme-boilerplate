@@ -11,32 +11,26 @@ if ( super_awesome_theme_is_distraction_free() ) {
 	return;
 }
 
-$footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
-$wide_footer_widget_area  = (int) get_theme_mod( 'wide_footer_widget_area', 0 );
+$footer_widget_areas = super_awesome_theme()->get_component( 'footer_widget_areas' );
 
-$has_active = false;
-for( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
-	if ( is_active_sidebar( 'footer-' . $i ) ) {
-		$has_active = true;
-		break;
-	}
-}
-
-if ( ! $has_active ) {
+if ( ! $footer_widget_areas->has_active() ) {
 	return;
 }
+
 ?>
 <aside class="footer-widgets site-component is-flex" aria-label="<?php esc_attr_e( 'Footer', 'super-awesome-theme' ); ?>">
 	<div class="site-component-inner">
 		<?php
-		for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
-			$class = 'footer-widget-column' . ( $i === $wide_footer_widget_area ? ' footer-widget-column-wide' : '' );
-			if ( ! is_active_sidebar( 'footer-' . $i ) ) {
+		foreach ( $footer_widget_areas->get_widget_area_names() as $name ) {
+			if ( ! super_awesome_theme_is_widget_area_active( $name ) ) {
 				continue;
 			}
+
+			$class = 'footer-widget-column' . ( $footer_widget_areas->is_wide_widget_area( $name ) ? ' footer-widget-column-wide' : '' );
+
 			?>
-			<div id="<?php echo esc_attr( 'footer-widget-column-' . $i ); ?>" class="<?php echo esc_attr( $class ); ?>">
-				<?php dynamic_sidebar( 'footer-' . $i ); ?>
+			<div id="<?php echo esc_attr( $name ); ?>" class="<?php echo esc_attr( $class ); ?>">
+				<?php super_awesome_theme_render_widget_area( $name ); ?>
 			</div>
 			<?php
 		}

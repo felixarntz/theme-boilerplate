@@ -115,7 +115,7 @@ import { findParent } from './common/utils';
 	// Wide footer widget area.
 	customizeUtil.bindSettingValue( 'wide_footer_widget_area', value => {
 		Array.from( document.querySelectorAll( '.footer-widget-column' ) ).forEach( element => {
-			if ( 'footer-widget-column-' + value === element.id ) {
+			if ( value === element.id ) {
 				element.classList.add( 'footer-widget-column-wide' );
 			} else {
 				element.classList.remove( 'footer-widget-column-wide' );

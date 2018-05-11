@@ -77,6 +77,7 @@ super_awesome_theme()
 	->register_component( new Super_Awesome_Theme_Icons() )
 	->register_component( new Super_Awesome_Theme_Content_Types() )
 	->register_component( new Super_Awesome_Theme_Sidebar() )
+	->register_component( new Super_Awesome_Theme_Footer_Widget_Areas() )
 	->register_component( new Super_Awesome_Theme_Social_Navigation() )
 	->resolve_dependencies()
 	->initialize();

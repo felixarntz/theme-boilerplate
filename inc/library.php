@@ -90,6 +90,11 @@ require get_template_directory() . '/inc/library/content-types/class-attachment-
 require get_template_directory() . '/inc/library/sidebar/class-sidebar.php';
 
 /**
+ * Theme footer widget areas.
+ */
+require get_template_directory() . '/inc/library/footer-widget-areas/class-footer-widget-areas.php';
+
+/**
  * Theme social navigation.
  */
 require get_template_directory() . '/inc/library/social-navigation/class-social-navigation.php';

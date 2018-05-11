@@ -424,26 +424,6 @@ function super_awesome_theme_customize_register_widget_area_settings() {
 		'type'        => 'radio',
 		'choices'     => super_awesome_theme_customize_get_bar_justify_content_choices(),
 	) );
-
-	$footer_widget_area_count   = super_awesome_theme_get_footer_widget_area_count();
-	$footer_widget_area_choices = array( _x( 'None', 'widget area dropdown', 'super-awesome-theme' ) );
-	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
-		/* translators: %s: widget area number */
-		$footer_widget_area_choices[] = sprintf( __( 'Footer %s', 'super-awesome-theme' ), number_format_i18n( $i ) );
-	}
-	$wp_customize->add_setting( 'wide_footer_widget_area', array(
-		'default'              => 0,
-		'transport'            => 'postMessage',
-		'sanitize_callback'    => 'absint',
-		'sanitize_js_callback' => 'absint',
-	) );
-	$wp_customize->add_control( 'wide_footer_widget_area', array(
-		'section'     => 'widget_areas',
-		'label'       => __( 'Wide Footer Column', 'super-awesome-theme' ),
-		'description' => __( 'If you like to reserve more space for one of your footer widget columns, you can select that one here.', 'super-awesome-theme' ),
-		'type'        => 'select',
-		'choices'     => $footer_widget_area_choices,
-	) );
 }
 
 /**
@@ -837,11 +817,8 @@ function super_awesome_theme_customize_needs_header_background() {
  * @return bool True if footer color controls should be active, false otherwise.
  */
 function super_awesome_theme_customize_needs_footer_colors() {
-	$footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
-	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
-		if ( is_active_sidebar( 'footer-' . $i ) ) {
-			return true;
-		}
+	if ( super_awesome_theme()->get_component( 'footer_widget_areas' )->has_active() ) {
+		return true;
 	}
 
 	return has_nav_menu( 'social' ) || has_nav_menu( 'footer' );

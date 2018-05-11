@@ -148,44 +148,9 @@ function super_awesome_theme_register_widget_areas() {
 		'after_title'   => '</span>',
 	) );
 
-	$footer_widget_area_count = super_awesome_theme_get_footer_widget_area_count();
-
-	for ( $i = 1; $i <= $footer_widget_area_count; $i++ ) {
-		register_sidebar( array(
-			/* translators: %s: widget area number */
-			'name'          => sprintf( __( 'Footer %s', 'super-awesome-theme' ), number_format_i18n( $i ) ),
-			'id'            => 'footer-' . $i,
-			'description'   => __( 'Add widgets here to appear in your footer.', 'super-awesome-theme' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		) );
-	}
-
 	super_awesome_theme()->get_component( 'widgets' )->add_inline_widget_areas( array( 'nav-extra', 'top', 'bottom' ) );
 }
 add_action( 'widgets_init', 'super_awesome_theme_register_widget_areas' );
-
-/**
- * Gets the number of footer widget areas the theme has.
- *
- * @since 1.0.0
- *
- * @return int Footer widget area count.
- */
-function super_awesome_theme_get_footer_widget_area_count() {
-	/**
-	 * Filters the theme's footer widget area count.
-	 *
-	 * This count determines how many footer widget area columns the theme contains.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int $count Footer widget area count.
-	 */
-	return apply_filters( 'super_awesome_theme_footer_widget_area_count', 4 );
-}
 
 /**
  * Styles the header image and text.
