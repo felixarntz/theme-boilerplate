@@ -7,20 +7,13 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-if ( ! has_nav_menu( 'footer' ) ) {
+if ( ! super_awesome_theme_is_menu_active( 'footer' ) ) {
 	return;
 }
 
 ?>
 <nav class="footer-navigation site-component" aria-label="<?php esc_attr_e( 'Footer Menu', 'super-awesome-theme' ); ?>">
 	<div class="site-component-inner">
-		<?php
-		wp_nav_menu( array(
-			'theme_location' => 'footer',
-			'menu_class'     => 'footer-menu',
-			'depth'          => 1,
-			'container'      => false,
-		) );
-		?>
+		<?php super_awesome_theme_render_menu( 'footer' ); ?>
 	</div>
 </nav><!-- .footer-navigation -->

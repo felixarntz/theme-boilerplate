@@ -107,7 +107,6 @@ function super_awesome_theme_register_nav_menus() {
 	register_nav_menus( array(
 		'primary'    => __( 'Primary Menu', 'super-awesome-theme' ),
 		'primary_df' => __( 'Primary Menu (Distraction-Free)', 'super-awesome-theme' ),
-		'footer'     => __( 'Footer Menu', 'super-awesome-theme' ),
 	) );
 }
 add_action( 'after_setup_theme', 'super_awesome_theme_register_nav_menus', 11 );

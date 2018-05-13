@@ -100,6 +100,11 @@ require get_template_directory() . '/inc/library/footer-widget-areas/class-foote
 require get_template_directory() . '/inc/library/social-navigation/class-social-navigation.php';
 
 /**
+ * Theme footer navigation.
+ */
+require get_template_directory() . '/inc/library/footer-navigation/class-footer-navigation.php';
+
+/**
  * Gets the main theme class instance.
  *
  * @since 1.0.0
