@@ -169,6 +169,11 @@ final class Super_Awesome_Theme_Social_Navigation extends Super_Awesome_Theme_Th
 		) ) );
 	}
 
+	/**
+	 * Registers social colors.
+	 *
+	 * @since 1.0.0
+	 */
 	protected function register_colors() {
 		$colors = $this->get_dependency( 'colors' );
 
