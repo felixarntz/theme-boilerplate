@@ -99,34 +99,11 @@ function super_awesome_theme_content_width() {
 add_action( 'after_setup_theme', 'super_awesome_theme_content_width', 0 );
 
 /**
- * Registers the theme's nav menus.
- *
- * @since 1.0.0
- */
-function super_awesome_theme_register_nav_menus() {
-	register_nav_menus( array(
-		'primary'    => __( 'Primary Menu', 'super-awesome-theme' ),
-		'primary_df' => __( 'Primary Menu (Distraction-Free)', 'super-awesome-theme' ),
-	) );
-}
-add_action( 'after_setup_theme', 'super_awesome_theme_register_nav_menus', 11 );
-
-/**
  * Registers the theme's widget areas.
  *
  * @since 1.0.0
  */
 function super_awesome_theme_register_widget_areas() {
-	register_sidebar( array(
-		'name'          => __( 'Navbar Extra', 'super-awesome-theme' ),
-		'id'            => 'nav-extra',
-		'description'   => __( 'Add widgets here to appear as additional content in the navbar beside the main navigation menu.', 'super-awesome-theme' ),
-		'before_widget' => '<div id="%1$s" class="inline-widget %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<span class="inline-widget-title">',
-		'after_title'   => '</span>',
-	) );
-
 	register_sidebar( array(
 		'name'          => __( 'Top Bar', 'super-awesome-theme' ),
 		'id'            => 'top',
@@ -147,7 +124,7 @@ function super_awesome_theme_register_widget_areas() {
 		'after_title'   => '</span>',
 	) );
 
-	super_awesome_theme()->get_component( 'widgets' )->add_inline_widget_areas( array( 'nav-extra', 'top', 'bottom' ) );
+	super_awesome_theme()->get_component( 'widgets' )->add_inline_widget_areas( array( 'top', 'bottom' ) );
 }
 add_action( 'widgets_init', 'super_awesome_theme_register_widget_areas' );
 

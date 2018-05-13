@@ -33,44 +33,6 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 
 	/* Colors */
 
-	$wp_customize->add_section( 'navbar_colors', array(
-		'panel' => 'colors',
-		'title' => __( 'Navbar Colors', 'super-awesome-theme' ),
-	) );
-
-	$wp_customize->add_setting( 'navbar_text_color', array(
-		'default'              => '#404040',
-		'transport'            => 'postMessage',
-		'sanitize_callback'    => 'maybe_hash_hex_color',
-		'sanitize_js_callback' => 'maybe_hash_hex_color'
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'navbar_text_color', array(
-		'section' => 'navbar_colors',
-		'label'   => __( 'Navbar Text Color', 'super-awesome-theme' ),
-	) ) );
-
-	$wp_customize->add_setting( 'navbar_link_color', array(
-		'default'              => '#21759b',
-		'transport'            => 'postMessage',
-		'sanitize_callback'    => 'maybe_hash_hex_color',
-		'sanitize_js_callback' => 'maybe_hash_hex_color'
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'navbar_link_color', array(
-		'section' => 'navbar_colors',
-		'label'   => __( 'Navbar Link Color', 'super-awesome-theme' ),
-	) ) );
-
-	$wp_customize->add_setting( 'navbar_background_color', array(
-		'default'              => '#eeeeee',
-		'transport'            => 'postMessage',
-		'sanitize_callback'    => 'maybe_hash_hex_color',
-		'sanitize_js_callback' => 'maybe_hash_hex_color'
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'navbar_background_color', array(
-		'section' => 'navbar_colors',
-		'label'   => __( 'Navbar Background Color', 'super-awesome-theme' ),
-	) ) );
-
 	$wp_customize->add_section( 'top_bar_colors', array(
 		'panel'           => 'colors',
 		'title'           => __( 'Top Bar Colors', 'super-awesome-theme' ),
@@ -194,9 +156,6 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 
 	$wp_customize->selective_refresh->add_partial( 'super_awesome_theme_customizer_styles', array(
 		'settings'            => array(
-			'navbar_text_color',
-			'navbar_link_color',
-			'navbar_background_color',
 			'top_bar_text_color',
 			'top_bar_link_color',
 			'top_bar_background_color',
@@ -255,44 +214,17 @@ function super_awesome_theme_customize_register_widget_area_settings() {
  * @since 1.0.0
  */
 function super_awesome_theme_print_customizer_styles() {
-	$navbar_text_color                     = get_theme_mod( 'navbar_text_color', '#404040' );
-	$navbar_link_color                     = get_theme_mod( 'navbar_link_color', '#21759b' );
-	$navbar_link_focus_color               = super_awesome_theme_darken_color( $navbar_link_color, 25 );
-	$navbar_background_color               = get_theme_mod( 'navbar_background_color', '#eeeeee' );
-	$top_bar_text_color                    = get_theme_mod( 'top_bar_text_color', '#ffffff' );
-	$top_bar_link_color                    = get_theme_mod( 'top_bar_link_color', '#ffffff' );
-	$top_bar_link_focus_color              = super_awesome_theme_darken_color( $top_bar_link_color, 25 );
-	$top_bar_background_color              = get_theme_mod( 'top_bar_background_color', '#21759b' );
-	$bottom_bar_text_color                 = get_theme_mod( 'bottom_bar_text_color', '#ffffff' );
-	$bottom_bar_link_color                 = get_theme_mod( 'bottom_bar_link_color', '#ffffff' );
-	$bottom_bar_link_focus_color           = super_awesome_theme_darken_color( $bottom_bar_link_color, 25 );
-	$bottom_bar_background_color           = get_theme_mod( 'bottom_bar_background_color', '#21759b' );
+	$top_bar_text_color          = get_theme_mod( 'top_bar_text_color', '#ffffff' );
+	$top_bar_link_color          = get_theme_mod( 'top_bar_link_color', '#ffffff' );
+	$top_bar_link_focus_color    = super_awesome_theme_darken_color( $top_bar_link_color, 25 );
+	$top_bar_background_color    = get_theme_mod( 'top_bar_background_color', '#21759b' );
+	$bottom_bar_text_color       = get_theme_mod( 'bottom_bar_text_color', '#ffffff' );
+	$bottom_bar_link_color       = get_theme_mod( 'bottom_bar_link_color', '#ffffff' );
+	$bottom_bar_link_focus_color = super_awesome_theme_darken_color( $bottom_bar_link_color, 25 );
+	$bottom_bar_background_color = get_theme_mod( 'bottom_bar_background_color', '#21759b' );
 
 	?>
 	<style id="super-awesome-theme-customizer-styles" type="text/css">
-		<?php if ( ! empty( $navbar_text_color ) && ! empty( $navbar_background_color ) ) : ?>
-			.site-navbar {
-				color: <?php echo esc_attr( $navbar_text_color ); ?>;
-				background-color: <?php echo esc_attr( $navbar_background_color ); ?>;
-			}
-
-			.js .site-navbar .site-navigation .site-navigation-content {
-				background-color: <?php echo esc_attr( $navbar_background_color ); ?>;
-			}
-
-			<?php if ( ! empty( $navbar_link_color ) && ! empty( $navbar_link_focus_color ) ) : ?>
-				.site-navbar a,
-				.site-navbar a:visited {
-					color: <?php echo esc_attr( $navbar_link_color ); ?>;
-				}
-
-				.site-navbar a:hover,
-				.site-navbar a:focus,
-				.site-navbar a:active {
-					color: <?php echo esc_attr( $navbar_link_focus_color ); ?>;
-				}
-			<?php endif; ?>
-		<?php endif; ?>
 		<?php if ( ! empty( $top_bar_text_color ) && ! empty( $top_bar_background_color ) ) : ?>
 			.site-top-bar {
 				color: <?php echo esc_attr( $top_bar_text_color ); ?>;

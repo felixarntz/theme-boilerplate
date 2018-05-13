@@ -27,30 +27,6 @@ function super_awesome_theme_get_svg( $icon, $args = array() ) {
 }
 
 /**
- * Adds a dropdown icon to a menu item in the primary navigation if it has children.
- *
- * @since 1.0.0
- *
- * @param string  $title The menu item's title.
- * @param WP_Post $item  The current menu item.
- * @param array   $args  An array of wp_nav_menu() arguments.
- * @return string $title The menu item's title with dropdown icon.
- */
-function super_awesome_theme_dropdown_icon_to_menu_link( $title, $item, $args ) {
-	if ( 'primary' === $args->theme_location ) {
-		foreach ( $item->classes as $value ) {
-			if ( 'menu-item-has-children' === $value || 'page_item_has_children' === $value ) {
-				$title .= super_awesome_theme_get_svg( 'angle-down' );
-				break;
-			}
-		}
-	}
-
-	return $title;
-}
-add_filter( 'nav_menu_item_title', 'super_awesome_theme_dropdown_icon_to_menu_link', 10, 3 );
-
-/**
  * Gets an array of supported social links (URL and icon name).
  *
  * @since 1.0.0

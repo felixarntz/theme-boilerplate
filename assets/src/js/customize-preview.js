@@ -86,6 +86,19 @@ import { findParent } from './common/utils';
 		}
 	});
 
+	// Navbar Justify Content.
+	customizeUtil.bindSettingValue( 'navbar_justify_content', value => {
+		const classes = Object.keys( data.navbarJustifyContentChoices );
+		const index   = classes.indexOf( value );
+		const navbar  = document.getElementById( 'site-navbar' );
+
+		if ( navbar && index > -1 ) {
+			classes.splice( index, 1 );
+			classes.forEach( cssClass => navbar.classList.remove( cssClass ) );
+			navbar.classList.add( value );
+		}
+	});
+
 	// Top Bar Justify Content.
 	customizeUtil.bindSettingValue( 'top_bar_justify_content', value => {
 		const classes = Object.keys( data.barJustifyContentChoices );

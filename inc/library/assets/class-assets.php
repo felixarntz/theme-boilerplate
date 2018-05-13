@@ -214,16 +214,6 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 
 		$script->add_data( 'sticky', $sticky );
 
-		if ( has_nav_menu( 'primary' ) ) {
-			$script->add_data( 'navigation', array(
-				'icon' => super_awesome_theme_get_svg( 'angle-down', array( 'fallback' => true ) ),
-				'i18n' => array(
-					'expand'   => __( 'Expand child menu', 'super-awesome-theme' ),
-					'collapse' => __( 'Collapse child menu', 'super-awesome-theme' ),
-				),
-			) );
-		}
-
 		if ( is_singular() && comments_open() ) {
 			$script->add_data( 'comments', array(
 				'i18n' => array(

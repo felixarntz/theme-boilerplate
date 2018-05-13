@@ -95,6 +95,11 @@ require get_template_directory() . '/inc/library/content-types/class-attachment-
 require get_template_directory() . '/inc/library/sidebar/class-sidebar.php';
 
 /**
+ * Theme navbar.
+ */
+require get_template_directory() . '/inc/library/navbar/class-navbar.php';
+
+/**
  * Theme footer widget areas.
  */
 require get_template_directory() . '/inc/library/footer-widget-areas/class-footer-widget-areas.php';

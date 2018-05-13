@@ -312,20 +312,7 @@ function super_awesome_theme_get_sidebar_name() {
  * @return string The primary navigation name, either 'primary' or 'primary_df'.
  */
 function super_awesome_theme_get_navigation_name() {
-	$result = 'primary';
-
-	if ( super_awesome_theme_is_distraction_free() ) {
-		$result = 'primary_df';
-	}
-
-	/**
-	 * Filters the name of the primary navigation to display on the current page.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $result The identifier of the primary navigation to display.
-	 */
-	return apply_filters( 'super_awesome_theme_get_navigation_name', $result );
+	return super_awesome_theme()->get_component( 'navbar' )->get_navigation_name();
 }
 
 /**

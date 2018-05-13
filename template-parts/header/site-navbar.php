@@ -9,7 +9,7 @@
 
 $branding_location = get_theme_mod( 'branding_location', 'header' );
 $menu_slug         = super_awesome_theme_get_navigation_name();
-$extra_class       = get_theme_mod( 'navbar_justify_content', 'space-between' );
+$extra_class       = super_awesome_theme()->get_component( 'settings' )->get( 'navbar_justify_content' );
 
 ?>
 
@@ -44,18 +44,12 @@ $extra_class       = get_theme_mod( 'navbar_justify_content', 'space-between' );
 
 			<div id="site-navigation-content" class="site-navigation-content">
 				<div class="site-navigation-menu">
-					<?php
-					wp_nav_menu( array(
-						'theme_location' => $menu_slug,
-						'menu_id'        => 'primary-menu',
-						'container'      => false,
-					) );
-					?>
+					<?php super_awesome_theme_render_menu( $menu_slug ); ?>
 				</div>
 
-				<?php if ( is_active_sidebar( 'nav-extra' ) ) : ?>
+				<?php if ( super_awesome_theme_is_widget_area_active( 'nav-extra' ) ) : ?>
 					<div id="site-navigation-extra" class="site-navigation-extra inline-widget-area">
-						<?php dynamic_sidebar( 'nav-extra' ); ?>
+						<?php super_awesome_theme_render_widget_area( 'nav-extra' ); ?>
 					</div><!-- #site-nav-extra -->
 				<?php endif; ?>
 			</div>
