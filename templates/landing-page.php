@@ -1,9 +1,9 @@
 <?php
 /**
- * Template Name: Distraction Free Page
+ * Template Name: Landing Page
  *
- * Distraction-free template that uses the distraction-free primary navigation
- * and displays neither a sidebar nor footer widgets.
+ * Landing page template that uses a simplified layout with a separate
+ * navigation menu, no sidebar and a reduced footer.
  *
  * @package Super_Awesome_Theme
  * @license GPL-2.0-or-later

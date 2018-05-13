@@ -36,7 +36,7 @@ final class Super_Awesome_Theme_Distraction_Free_Mode extends Super_Awesome_Them
 
 		$result = false;
 
-		if ( is_page_template( 'templates/distraction-free.php' ) ) {
+		if ( is_page_template( 'templates/landing-page.php' ) ) {
 			$result = true;
 		} elseif ( is_page_template( 'templates/login.php' ) ) {
 			$result = true;
