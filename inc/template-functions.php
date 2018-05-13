@@ -130,27 +130,7 @@ function super_awesome_theme_use_post_format_templates( $post = null ) {
 		return false;
 	}
 
-	$post_type = $post->post_type;
-
-	if ( ! post_type_supports( $post_type, 'post-formats' ) ) {
-		return false;
-	}
-
-	$result = 'post' === $post_type ? true : false;
-
-	/**
-	 * Filters whether to use post format templates for a post.
-	 *
-	 * If you set this to true, you must ensure there is at least a `template-parts/content/content-{$posttype}.php` file
-	 * present in the theme.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool   $result    Whether to use post format templates. Default is true for type 'post', false otherwise.
-	 * @param string $post_type Post type slug.
-	 * @param int    $post_id   Post ID.
-	 */
-	return apply_filters( 'super_awesome_theme_use_post_format_templates', $result, $post_type, $post->ID );
+	return super_awesome_theme()->get_component( 'content_types' )->should_use_post_format_templates( $post->post_type );
 }
 
 /**
@@ -167,12 +147,7 @@ function super_awesome_theme_display_post_navigation( $post = null ) {
 		return false;
 	}
 
-	$post_type_object = get_post_type_object( $post->post_type );
-	if ( ! $post_type_object ) {
-		return false;
-	}
-
-	return (bool) $post_type_object->has_archive;
+	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_navigation( $post->post_type );
 }
 
 /**
@@ -189,9 +164,7 @@ function super_awesome_theme_display_post_comments( $post = null ) {
 		return false;
 	}
 
-	$post_type = $post->post_type;
-
-	if ( ! post_type_supports( $post_type, 'comments' ) ) {
+	if ( ! super_awesome_theme()->get_component( 'content_types' )->should_display_post_comments( $post->post_type ) ) {
 		return false;
 	}
 
@@ -212,13 +185,7 @@ function super_awesome_theme_use_post_excerpt( $post = null ) {
 		return false;
 	}
 
-	$post_type = $post->post_type;
-
-	if ( ! post_type_supports( $post_type, 'author' ) ) {
-		return false;
-	}
-
-	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_use_excerpt' );
+	return super_awesome_theme()->get_component( 'content_types' )->should_use_post_excerpt( $post->post_type );
 }
 
 /**
@@ -235,9 +202,7 @@ function super_awesome_theme_display_post_date( $post = null ) {
 		return false;
 	}
 
-	$post_type = $post->post_type;
-
-	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_show_date' );
+	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_date( $post->post_type );
 }
 
 /**
@@ -254,13 +219,7 @@ function super_awesome_theme_display_post_author( $post = null ) {
 		return false;
 	}
 
-	$post_type = $post->post_type;
-
-	if ( ! post_type_supports( $post_type, 'author' ) ) {
-		return false;
-	}
-
-	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_show_author' );
+	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_author( $post->post_type );
 }
 
 /**
@@ -278,9 +237,7 @@ function super_awesome_theme_display_post_taxonomy_terms( $taxonomy, $post = nul
 		return false;
 	}
 
-	$post_type = $post->post_type;
-
-	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_show_terms_' . $taxonomy );
+	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_taxonomy_terms( $taxonomy, $post->post_type );
 }
 
 /**
@@ -297,13 +254,7 @@ function super_awesome_theme_display_post_authorbox( $post = null ) {
 		return false;
 	}
 
-	$post_type = $post->post_type;
-
-	if ( ! post_type_supports( $post_type, 'author' ) ) {
-		return false;
-	}
-
-	return super_awesome_theme()->get_component( 'settings' )->get( $post_type . '_show_authorbox' );
+	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_authorbox( $post->post_type );
 }
 
 /**

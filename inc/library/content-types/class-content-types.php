@@ -35,6 +35,137 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 	}
 
 	/**
+	 * Checks whether post format templates should be used for a post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool True if post format templates should be used, false otherwise.
+	 */
+	public function should_use_post_format_templates( $post_type ) {
+		if ( ! post_type_supports( $post_type, 'post-formats' ) ) {
+			return false;
+		}
+
+		$result = 'post' === $post_type ? true : false;
+
+		/**
+		 * Filters whether to use post format templates for a post type.
+		 *
+		 * If you set this to true, you must ensure there is at least a `template-parts/content/content-{$posttype}.php` file
+		 * present in the theme.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool   $result    Whether to use post format templates. Default is true for type 'post', false otherwise.
+		 * @param string $post_type Post type slug.
+		 */
+		return apply_filters( 'super_awesome_theme_use_post_format_templates', $result, $post_type );
+	}
+
+	/**
+	 * Checks whether the navigation to the previous and next post should be displayed for a post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool True if the post navigation should be displayed, false otherwise.
+	 */
+	public function should_display_post_navigation( $post_type ) {
+		$post_type_object = get_post_type_object( $post_type );
+		if ( ! $post_type_object ) {
+			return false;
+		}
+
+		return (bool) $post_type_object->has_archive;
+	}
+
+	/**
+	 * Checks whether comments should be displayed for a post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool True if comments should be displayed, false otherwise.
+	 */
+	public function should_display_post_comments( $post_type ) {
+		return post_type_supports( $post_type, 'comments' );
+	}
+
+	/**
+	 * Checks whether the excerpt should be used for a post instead of its content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool True if the excerpt should be used, false otherwise.
+	 */
+	public function should_use_post_excerpt( $post_type ) {
+		if ( ! post_type_supports( $post_type, 'excerpt' ) ) {
+			return false;
+		}
+
+		return $this->get_dependency( 'settings' )->get( $post_type . '_use_excerpt' );
+	}
+
+	/**
+	 * Checks whether the date should be displayed for a post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool True if the date should be displayed, false otherwise.
+	 */
+	public function should_display_post_date( $post_type ) {
+		return $this->get_dependency( 'settings' )->get( $post_type . '_show_date' );
+	}
+
+	/**
+	 * Checks whether the author name should be displayed for a post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool True if the author name should be displayed, false otherwise.
+	 */
+	public function should_display_post_author( $post_type ) {
+		if ( ! post_type_supports( $post_type, 'author' ) ) {
+			return false;
+		}
+
+		return $this->get_dependency( 'settings' )->get( $post_type . '_show_author' );
+	}
+
+	/**
+	 * Checks whether the terms of a specific taxonomy should be displayed for a post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string           $taxonomy Taxonomy slug.
+	 * @param WP_Post|int|null $post     Optional. Post to check for. Default is the current post.
+	 * @return bool True if the terms of a specific taxonomy should be displayed, false otherwise.
+	 */
+	public function should_display_post_taxonomy_terms( $taxonomy, $post_type ) {
+		return $this->get_dependency( 'settings' )->get( $post_type . '_show_terms_' . $taxonomy );
+	}
+
+	/**
+	 * Checks whether the author box should be displayed for a post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool True if the author box should be displayed, false otherwise.
+	 */
+	public function should_display_post_authorbox( $post_type ) {
+		if ( ! post_type_supports( $post_type, 'author' ) ) {
+			return false;
+		}
+
+		return $this->get_dependency( 'settings' )->get( $post_type . '_show_authorbox' );
+	}
+
+	/**
 	 * Retrieves the attachment metadata handler.
 	 *
 	 * @since 1.0.0
