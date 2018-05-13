@@ -336,33 +336,10 @@ function super_awesome_theme_get_navigation_name() {
  *
  * @since 1.0.0
  *
- * @global string $pagenow Current WordPress file.
- *
  * @return bool True if the current page should be displayed in distraction-free mode, false otherwise.
  */
 function super_awesome_theme_is_distraction_free() {
-	global $pagenow;
-
-	$result = false;
-
-	if ( is_page_template( 'templates/distraction-free.php' ) ) {
-		$result = true;
-	} elseif ( is_page_template( 'templates/login.php' ) ) {
-		$result = true;
-	} elseif ( 'wp-signup.php' === $pagenow ) {
-		$result = true;
-	} elseif ( 'wp-activate.php' === $pagenow ) {
-		$result = true;
-	}
-
-	/**
-	 * Filters whether the current page should be displayed in distraction-free mode.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool $result Whether to display the page in distraction-free mode. Default depends on the page template.
-	 */
-	return apply_filters( 'super_awesome_theme_is_distraction_free', $result );
+	return super_awesome_theme()->get_component( 'distraction_free_mode' )->is_distraction_free();
 }
 
 /**

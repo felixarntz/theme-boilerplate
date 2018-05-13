@@ -57,6 +57,11 @@ require get_template_directory() . '/inc/library/colors/class-color-util.php';
 require get_template_directory() . '/inc/library/colors/class-color.php';
 
 /**
+ * Theme distraction-free mode.
+ */
+require get_template_directory() . '/inc/library/distraction-free-mode/class-distraction-free-mode.php';
+
+/**
  * Theme widgets.
  */
 require get_template_directory() . '/inc/library/widgets/class-widgets.php';
