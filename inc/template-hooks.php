@@ -71,22 +71,3 @@ function super_awesome_theme_excerpt_more() {
 	return ' &hellip; ' . $link;
 }
 add_filter( 'excerpt_more', 'super_awesome_theme_excerpt_more' );
-
-/**
- * Filters whether the current page does allow the sidebar to be displayed.
- *
- * @since 1.0.0
- *
- * @param bool $result Whether to allow displaying the sidebar on the current page.
- * @return bool True if the sidebar can be displayed, false otherwise.
- */
-function super_awesome_theme_filter_allow_display_sidebar( $result ) {
-	if ( super_awesome_theme_is_distraction_free() ) {
-		$result = false;
-	} elseif ( is_page_template( 'templates/full-width.php' ) ) {
-		$result = false;
-	}
-
-	return $result;
-}
-add_filter( 'super_awesome_theme_allow_display_sidebar', 'super_awesome_theme_filter_allow_display_sidebar' );

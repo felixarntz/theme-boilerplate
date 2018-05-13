@@ -25,6 +25,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Widgets' );
+		$this->require_dependency_class( 'Super_Awesome_Theme_Distraction_Free_Mode' );
 	}
 
 	/**
@@ -74,6 +75,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	 * @return bool True if the sidebar can be displayed, false otherwise.
 	 */
 	public function allow_display_sidebar() {
+		$result = ! $this->get_dependency( 'distraction_free_mode' )->is_distraction_free();
 
 		/**
 		 * Filters whether to allow displaying the sidebar on the current page.
@@ -82,7 +84,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 		 *
 		 * @param bool $result Whether to allow displaying the sidebar on the current page.
 		 */
-		return apply_filters( 'super_awesome_theme_allow_display_sidebar', true );
+		return apply_filters( 'super_awesome_theme_allow_display_sidebar', $result );
 	}
 
 	/**

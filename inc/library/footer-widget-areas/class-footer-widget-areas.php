@@ -33,6 +33,7 @@ class Super_Awesome_Theme_Footer_Widget_Areas extends Super_Awesome_Theme_Theme_
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Widgets' );
+		$this->require_dependency_class( 'Super_Awesome_Theme_Distraction_Free_Mode' );
 
 		/**
 		 * Filters the theme's footer widget area count.
@@ -61,6 +62,21 @@ class Super_Awesome_Theme_Footer_Widget_Areas extends Super_Awesome_Theme_Theme_
 		}
 
 		return $names;
+	}
+
+	/**
+	 * Checks whether the footer widget areas should be displayed.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if the footer widget areas should be displayed, false otherwise.
+	 */
+	public function should_display() {
+		if ( $this->get_dependency( 'distraction_free_mode' )->is_distraction_free() ) {
+			return false;
+		}
+
+		return $this->has_active();
 	}
 
 	/**

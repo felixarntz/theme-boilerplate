@@ -7,13 +7,9 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-if ( super_awesome_theme_is_distraction_free() ) {
-	return;
-}
-
 $footer_widget_areas = super_awesome_theme()->get_component( 'footer_widget_areas' );
 
-if ( ! $footer_widget_areas->has_active() ) {
+if ( ! $footer_widget_areas->should_display() ) {
 	return;
 }
 
