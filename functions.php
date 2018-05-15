@@ -68,6 +68,7 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/plugin-compat.php';
 
 super_awesome_theme()
+	->register_component( new Super_Awesome_Theme_Theme_Support() )
 	->register_component( new Super_Awesome_Theme_Settings() )
 	->register_component( new Super_Awesome_Theme_Assets() )
 	->register_component( new Super_Awesome_Theme_Customizer() )

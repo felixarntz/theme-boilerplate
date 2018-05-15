@@ -16,6 +16,13 @@ require get_template_directory() . '/inc/library/class-theme-component-base.php'
 require get_template_directory() . '/inc/library/class-theme-component-not-provided-exception.php';
 
 /**
+ * Theme support.
+ */
+require get_template_directory() . '/inc/library/theme-support/class-theme-support.php';
+require get_template_directory() . '/inc/library/theme-support/class-theme-feature.php';
+require get_template_directory() . '/inc/library/theme-support/class-args-theme-feature.php';
+
+/**
  * Theme settings.
  */
 require get_template_directory() . '/inc/library/settings/class-settings.php';

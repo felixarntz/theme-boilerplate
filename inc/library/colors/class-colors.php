@@ -48,6 +48,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 	public function __construct() {
 		$this->util = new Super_Awesome_Theme_Color_Util();
 
+		$this->require_dependency_class( 'Super_Awesome_Theme_Theme_Support' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 	}
@@ -296,11 +297,20 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => 'super_awesome_theme_use_wrapped_layout',
 		) ) );
 
+		$default_background_color  = '#ffffff';
+		$custom_background_feature = $this->get_dependency( 'theme_support' )->get_feature( 'custom-background' );
+		if ( $custom_background_feature->is_supported() ) {
+			$custom_background_args = $custom_background_feature->get_support();
+			if ( ! empty( $custom_background_args['default-color'] ) ) {
+				$default_background_color = '#' . $custom_background_args['default-color'];
+			}
+		}
+
 		// This color is part of core.
 		$this->register_color( new Super_Awesome_Theme_Color( 'background_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'general_colors',
 			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Background Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT => current_theme_supports( 'custom-background' ) ? '#' . get_theme_support( 'custom-background', 'default-color' ) : '#ffffff',
+			Super_Awesome_Theme_Color::PROP_DEFAULT => $default_background_color,
 		) ) );
 
 		$this->register_color_style_callback( array( $this, 'print_base_color_style_general' ) );
@@ -349,11 +359,20 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 	protected function register_base_colors_header() {
 		$this->register_group( 'header_colors', __( 'Header Colors', 'super-awesome-theme' ) );
 
+		$default_header_textcolor = '#404040';
+		$custom_header_feature    = $this->get_dependency( 'theme_support' )->get_feature( 'custom-header' );
+		if ( $custom_header_feature->is_supported() ) {
+			$custom_header_args = $custom_header_feature->get_support();
+			if ( ! empty( $custom_header_args['default-text-color'] ) ) {
+				$default_header_textcolor = '#' . $custom_header_args['default-text-color'];
+			}
+		}
+
 		// This color is part of core.
 		$this->register_color( new Super_Awesome_Theme_Color( 'header_textcolor', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'header_colors',
 			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Text Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT => current_theme_supports( 'custom-header' ) ? '#' . get_theme_support( 'custom-header', 'default-text-color' ) : '#404040',
+			Super_Awesome_Theme_Color::PROP_DEFAULT => $default_header_textcolor,
 		) ) );
 
 		$this->register_color( new Super_Awesome_Theme_Color( 'header_link_color', array(
