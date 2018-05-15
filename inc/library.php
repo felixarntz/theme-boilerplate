@@ -62,6 +62,11 @@ require get_template_directory() . '/inc/library/colors/class-color.php';
 require get_template_directory() . '/inc/library/distraction-free-mode/class-distraction-free-mode.php';
 
 /**
+ * Theme comments.
+ */
+require get_template_directory() . '/inc/library/comments/class-comments.php';
+
+/**
  * Theme widgets.
  */
 require get_template_directory() . '/inc/library/widgets/class-widgets.php';

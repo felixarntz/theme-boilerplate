@@ -213,33 +213,6 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 		}
 
 		$script->add_data( 'sticky', $sticky );
-
-		if ( is_singular() && comments_open() ) {
-			$script->add_data( 'comments', array(
-				'i18n' => array(
-					'processing'    => __( 'Processing...', 'super-awesome-theme' ),
-					'badResponse'   => __( 'Bad response code.', 'super-awesome-theme' ),
-					'invalidJson'   => __( 'Invalid JSON response.', 'super-awesome-theme' ),
-					/* translators: %s: edit comment URL */
-					'flood'         => sprintf( __( 'Your comment was either a duplicate or you are posting too rapidly. <a href="%s">Edit your comment</a>', 'super-awesome-theme' ), '#comment' ),
-					'error'         => __( 'There were errors in submitting your comment; complete the missing fields and try again!', 'super-awesome-theme' ),
-					'emailInvalid'  => __( 'This email address appears to be invalid.', 'super-awesome-theme' ),
-					'required'      => __( 'This is a required field.', 'super-awesome-theme' ),
-					'commentsTitle' => sprintf(
-						/* translators: 1: title. */
-						__( 'One thought on &ldquo;%1$s&rdquo;', 'super-awesome-theme' ),
-						'<span>' . get_the_title() . '</span>'
-					),
-				),
-			) );
-
-			if ( get_option( 'thread_comments' ) ) {
-				// TODO: Hook this in at an appropriate location.
-				add_action( 'wp_enqueue_scripts', function() {
-					wp_enqueue_script( 'comment-reply' );
-				});
-			}
-		}
 	}
 
 	/**
