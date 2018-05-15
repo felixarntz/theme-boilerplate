@@ -57,7 +57,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	}
 
 	/**
-	 * Gets the available choices for the 'sidebar_size' setting.
+	 * Gets the available choices for the 'navbar_justify_content' setting.
 	 *
 	 * @since 1.0.0
 	 *
@@ -96,7 +96,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	}
 
 	/**
-	 * Registers settings for sidebar behavior.
+	 * Registers settings for navbar behavior.
 	 *
 	 * @since 1.0.0
 	 */
@@ -113,7 +113,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	}
 
 	/**
-	 * Registers widget areas for the sidebar.
+	 * Registers widget areas for the navbar.
 	 *
 	 * @since 1.0.0
 	 * @param Super_Awesome_Theme_Widgets $widgets Widgets handler instance.
@@ -181,7 +181,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	}
 
 	/**
-	 * Registers Customizer controls for sidebar behavior.
+	 * Registers Customizer controls for navbar behavior.
 	 *
 	 * @since 1.0.0
 	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
