@@ -122,20 +122,27 @@ gulp.task( 'browser-sync', done => {
 });
 
 // watch task (calling 'js' initially somehow kills the process)
-gulp.task( 'watch', [ 'browser-sync', 'sass', /*'js', */'img' ], () => {
-	gulp.watch( 'assets/src/sass/**/*.scss', [ 'sass' ] );
-	gulp.watch( 'assets/src/js/**/*.js', [ 'js' ] );
+gulp.task( 'watch', [ 'browser-sync', 'sass', 'img' ], () => {
+	gulp.watch( 'assets/src/sass/**/*.scss', [ 'compile-sass' ] );
+	gulp.watch( 'assets/src/js/**/*.js', [ 'compile-js' ] );
 	gulp.watch([
 		'assets/src/images/**/*.gif',
 		'assets/src/images/**/*.jpg',
 		'assets/src/images/**/*.png',
 		'assets/src/images/**/*.svg',
 	], [ 'img' ] );
+
 	gulp.watch([
 		'*.php',
 		'inc/**/*.php',
 		'template-parts/**/*.php',
 		'templates/**/*.php',
+		'*.css',
+		'assets/dist/js/**/*.js',
+		'assets/dist/images/**/*.gif',
+		'assets/dist/images/**/*.jpg',
+		'assets/dist/images/**/*.png',
+		'assets/dist/images/**/*.svg',
 	]).on( 'change', browserSync.reload );
 });
 
@@ -171,7 +178,7 @@ gulp.task( 'lint-sass', done => {
 
 // compile Sass
 gulp.task( 'compile-sass', done => {
-	let task = gulp.src([
+	gulp.src([
 		'./assets/src/sass/style.scss',
 		'./assets/src/sass/editor-style.scss',
 		'./assets/src/sass/block-editor-style.scss',
@@ -195,13 +202,8 @@ gulp.task( 'compile-sass', done => {
 		.pipe( rename({
 			suffix: '-rtl',
 		}) )
-		.pipe( gulp.dest( './' ) );
-
-	if ( browserSync.active ) {
-		task = task.pipe( browserSync.stream() );
-	}
-
-	task.on( 'end', done );
+		.pipe( gulp.dest( './' ) )
+		.on( 'end', done );
 });
 
 // lint JavaScript
@@ -217,7 +219,7 @@ gulp.task( 'lint-js', done => {
 
 // compile JavaScript
 gulp.task( 'compile-js', done => {
-	let task = gulp.src( './assets/src/js/theme.js' )
+	gulp.src( './assets/src/js/theme.js' )
 		.pipe( webpack({
 			entry: {
 				theme: './assets/src/js/theme.js',
@@ -238,18 +240,13 @@ gulp.task( 'compile-js', done => {
 		.pipe( rename({
 			extname: '.min.js',
 		}) )
-		.pipe( gulp.dest( './assets/dist/js/' ) );
-
-	if ( browserSync.active ) {
-		task = task.pipe( browserSync.stream() );
-	}
-
-	task.on( 'end', done );
+		.pipe( gulp.dest( './assets/dist/js/' ) )
+		.on( 'end', done );
 });
 
 // minify images
 gulp.task( 'img', done => {
-	let task = gulp.src([
+	gulp.src([
 			'./assets/src/images/**/*.gif',
 			'./assets/src/images/**/*.jpg',
 			'./assets/src/images/**/*.png',
@@ -285,13 +282,8 @@ gulp.task( 'img', done => {
 				quality: 75,
 			}),
 		]) )
-		.pipe( gulp.dest( './assets/dist/images/' ) );
-
-	if ( browserSync.active ) {
-		task = task.pipe( browserSync.stream() );
-	}
-
-	task.on( 'end', done );
+		.pipe( gulp.dest( './assets/dist/images/' ) )
+		.on( 'end', done );
 });
 
 // generate POT file
