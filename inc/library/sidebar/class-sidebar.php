@@ -232,8 +232,12 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 				$blog_sidebar_description .= ' <a href="" onclick="wp.customize.control( \'blog_sidebar_enabled\' ).focus();return false;">' . __( 'You need to enable the sidebar first.', 'super-awesome-theme' ) . '</a>';
 			} else {
 
-				// If core allowed simple HTML here, a link to the respective customizer control would surely help.
-				$blog_sidebar_description .= ' ' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' );
+				// WordPress only allows arbitrary HTML here since version 4.9.7.
+				if ( version_compare( $GLOBALS['wp_version'], '4.9.7', '>=' ) ) {
+					$blog_sidebar_description .= ' <a href="' . esc_url( admin_url( 'customize.php?autofocus[control]=blog_sidebar_enabled' ) ) . '">' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' ) . '</a>';
+				} else {
+					$blog_sidebar_description .= ' ' . __( 'You need to enable the sidebar in the Customizer first.', 'super-awesome-theme' );
+				}
 			}
 		}
 
