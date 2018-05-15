@@ -189,33 +189,6 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	}
 
 	/**
-	 * Adds data for the main theme script on the 'wp_loaded' hook.
-	 *
-	 * TODO: Remove this method.
-	 *
-	 * @since 1.0.0
-	 */
-	public function add_script_data() {
-		$script = $this->get_registered_asset( 'super-awesome-theme-script' );
-
-		$sticky = array(
-			'stickToTopIds'    => array(),
-			'stickToBottomIds' => array(),
-		);
-		if ( (bool) get_theme_mod( 'sticky_top_bar', false ) ) {
-			$sticky['stickToTopIds'][] = 'site-top-bar';
-		}
-		if ( (bool) get_theme_mod( 'sticky_navbar', false ) ) {
-			$sticky['stickToTopIds'][] = 'site-navbar';
-		}
-		if ( (bool) get_theme_mod( 'sticky_bottom_bar', false ) ) {
-			$sticky['stickToBottomIds'][] = 'site-bottom-bar';
-		}
-
-		$script->add_data( 'sticky', $sticky );
-	}
-
-	/**
 	 * Disables core styles for the special 'wp-signup.php' and 'wp-activate.php' pages.
 	 *
 	 * @since 1.0.0
@@ -265,7 +238,6 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 */
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_main_assets' ), 10, 0 );
-		add_action( 'wp_head', array( $this, 'add_script_data' ), 0, 0 );
 		add_action( 'get_header', array( $this, 'disable_special_page_styles' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'print_detect_js_svg_support_script' ), 0, 0 );
 

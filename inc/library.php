@@ -62,6 +62,13 @@ require get_template_directory() . '/inc/library/colors/class-color.php';
 require get_template_directory() . '/inc/library/distraction-free-mode/class-distraction-free-mode.php';
 
 /**
+ * Theme sticky frontend elements.
+ */
+require get_template_directory() . '/inc/library/sticky-elements/class-sticky-elements.php';
+require get_template_directory() . '/inc/library/sticky-elements/class-sticky-element-not-registered-exception.php';
+require get_template_directory() . '/inc/library/sticky-elements/class-sticky-element.php';
+
+/**
  * Theme comments.
  */
 require get_template_directory() . '/inc/library/comments/class-comments.php';

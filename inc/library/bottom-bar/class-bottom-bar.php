@@ -25,6 +25,7 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Colors' );
+		$this->require_dependency_class( 'Super_Awesome_Theme_Sticky_Elements' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Widgets' );
 	}
 
@@ -54,6 +55,7 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
+			case 'register_sticky':
 			case 'register_settings':
 			case 'register_widget_areas':
 			case 'register_colors':
@@ -63,6 +65,24 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 			case 'needs_colors':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
+	}
+
+	/**
+	 * Registers the bottom bar as a sticky frontend element.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function register_sticky() {
+		$sticky_elements = $this->get_dependency( 'sticky_elements' );
+
+		$sticky_elements->register_sticky_element( new Super_Awesome_Theme_Sticky_Element(
+			'bottom_bar',
+			array(
+				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR => '#site-bottom-bar',
+				Super_Awesome_Theme_Sticky_Element::PROP_LABEL    => __( 'Stick the bottom bar to the bottom of the page when scrolling?', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION => Super_Awesome_Theme_Sticky_Element::LOCATION_BOTTOM,
+			)
+		) );
 	}
 
 	/**
@@ -223,6 +243,7 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
+		add_action( 'init', array( $this, 'register_sticky' ), 0, 0 );
 		add_action( 'init', array( $this, 'register_settings' ), 0, 0 );
 		add_action( 'init', array( $this, 'register_colors' ), 7, 0 );
 		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
