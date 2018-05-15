@@ -404,9 +404,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 		) );
 
 		$preview_script = $assets->get_registered_asset( 'super-awesome-theme-customize-preview' );
-
 		$preview_script->add_data( 'headerTextalignChoices', super_awesome_theme_customize_get_header_textalign_choices() );
-		$preview_script->add_data( 'barJustifyContentChoices', super_awesome_theme_customize_get_bar_justify_content_choices() );
 	}
 
 	/**

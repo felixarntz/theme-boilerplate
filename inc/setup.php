@@ -99,36 +99,6 @@ function super_awesome_theme_content_width() {
 add_action( 'after_setup_theme', 'super_awesome_theme_content_width', 0 );
 
 /**
- * Registers the theme's widget areas.
- *
- * @since 1.0.0
- */
-function super_awesome_theme_register_widget_areas() {
-	register_sidebar( array(
-		'name'          => __( 'Top Bar', 'super-awesome-theme' ),
-		'id'            => 'top',
-		'description'   => __( 'Add widgets here to appear in a narrow bar at the very top of the screen.', 'super-awesome-theme' ),
-		'before_widget' => '<div id="%1$s" class="inline-widget %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<span class="inline-widget-title">',
-		'after_title'   => '</span>',
-	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Bottom Bar', 'super-awesome-theme' ),
-		'id'            => 'bottom',
-		'description'   => __( 'Add widgets here to appear in a narrow bar at the very bottom of the screen.', 'super-awesome-theme' ),
-		'before_widget' => '<div id="%1$s" class="inline-widget %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<span class="inline-widget-title">',
-		'after_title'   => '</span>',
-	) );
-
-	super_awesome_theme()->get_component( 'widgets' )->add_inline_widget_areas( array( 'top', 'bottom' ) );
-}
-add_action( 'widgets_init', 'super_awesome_theme_register_widget_areas' );
-
-/**
  * Styles the header image and text.
  *
  * Header text color is handled manually with the other Customizer colors.

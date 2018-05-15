@@ -101,7 +101,7 @@ import { findParent } from './common/utils';
 
 	// Top Bar Justify Content.
 	customizeUtil.bindSettingValue( 'top_bar_justify_content', value => {
-		const classes = Object.keys( data.barJustifyContentChoices );
+		const classes = Object.keys( data.topBarJustifyContentChoices );
 		const index   = classes.indexOf( value );
 		const topBar  = document.getElementById( 'site-top-bar' );
 
@@ -114,7 +114,7 @@ import { findParent } from './common/utils';
 
 	// Bottom Bar Justify Content.
 	customizeUtil.bindSettingValue( 'bottom_bar_justify_content', value => {
-		const classes   = Object.keys( data.barJustifyContentChoices );
+		const classes   = Object.keys( data.bottomBarJustifyContentChoices );
 		const index     = classes.indexOf( value );
 		const bottomBar = document.getElementById( 'site-bottom-bar' );
 

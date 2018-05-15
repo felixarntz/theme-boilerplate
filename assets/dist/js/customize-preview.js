@@ -275,7 +275,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 			// Top Bar Justify Content.
 			customizeUtil.bindSettingValue('top_bar_justify_content', function (value) {
-				var classes = Object.keys(data.barJustifyContentChoices);
+				var classes = Object.keys(data.topBarJustifyContentChoices);
 				var index = classes.indexOf(value);
 				var topBar = document.getElementById('site-top-bar');
 
@@ -290,7 +290,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 			// Bottom Bar Justify Content.
 			customizeUtil.bindSettingValue('bottom_bar_justify_content', function (value) {
-				var classes = Object.keys(data.barJustifyContentChoices);
+				var classes = Object.keys(data.bottomBarJustifyContentChoices);
 				var index = classes.indexOf(value);
 				var bottomBar = document.getElementById('site-bottom-bar');
 
