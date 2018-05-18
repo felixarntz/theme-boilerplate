@@ -60,7 +60,6 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 			case 'register_customize_controls':
 			case 'add_customizer_script_data':
 			case 'print_color_style':
-			case 'needs_colors':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
 	}
@@ -110,24 +109,21 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 		$colors->register_group( 'bottom_bar_colors', __( 'Bottom Bar Colors', 'super-awesome-theme' ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'bottom_bar_text_color', array(
-			Super_Awesome_Theme_Color::PROP_GROUP           => 'bottom_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Text Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#ffffff',
-			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_colors' ),
+			Super_Awesome_Theme_Color::PROP_GROUP   => 'bottom_bar_colors',
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Text Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_DEFAULT => '#ffffff',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'bottom_bar_link_color', array(
-			Super_Awesome_Theme_Color::PROP_GROUP           => 'bottom_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Link Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#ffffff',
-			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_colors' ),
+			Super_Awesome_Theme_Color::PROP_GROUP   => 'bottom_bar_colors',
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Link Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_DEFAULT => '#ffffff',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'bottom_bar_background_color', array(
-			Super_Awesome_Theme_Color::PROP_GROUP           => 'bottom_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Background Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#21759b',
-			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_colors' ),
+			Super_Awesome_Theme_Color::PROP_GROUP   => 'bottom_bar_colors',
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Background Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_DEFAULT => '#21759b',
 		) ) );
 
 		$colors->register_color_style_callback( array( $this, 'print_color_style' ) );
@@ -203,18 +199,6 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 			color: <?php echo esc_attr( $bottom_bar_link_focus_color ); ?>;
 		}
 		<?php
-	}
-
-	/**
-	 * Checks whether the bottom bar colors need to be used.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool True if the bottom bar colors need to be used, false otherwise.
-	 */
-	protected function needs_colors() {
-		$widgets = $this->get_dependency( 'widgets' );
-		return $widgets->get_registered_widget_area( 'bottom' )->is_active();
 	}
 
 	/**
