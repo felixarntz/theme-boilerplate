@@ -21,6 +21,7 @@ require get_template_directory() . '/inc/library/class-theme-component-not-provi
 require get_template_directory() . '/inc/library/theme-support/class-theme-support.php';
 require get_template_directory() . '/inc/library/theme-support/class-theme-feature.php';
 require get_template_directory() . '/inc/library/theme-support/class-args-theme-feature.php';
+require get_template_directory() . '/inc/library/theme-support/class-list-theme-feature.php';
 
 /**
  * Theme settings.
