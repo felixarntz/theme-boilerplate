@@ -227,7 +227,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 		) );
 
 		$blog_sidebar_description = __( 'Add widgets here to appear in the sidebar for blog posts and archive pages.', 'super-awesome-theme' );
-		if ( ! get_theme_mod( 'blog_sidebar_enabled' ) ) {
+		if ( ! $this->get_dependency( 'settings' )->get( 'blog_sidebar_enabled' ) ) {
 			if ( 'customize.php' === $GLOBALS['pagenow'] ) {
 				$blog_sidebar_description .= ' <a href="" onclick="wp.customize.control( \'blog_sidebar_enabled\' ).focus();return false;">' . __( 'You need to enable the sidebar first.', 'super-awesome-theme' ) . '</a>';
 			} else {

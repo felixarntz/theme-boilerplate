@@ -8,7 +8,7 @@
  */
 
 $bottom_bar  = super_awesome_theme()->get_component( 'widgets' )->get_registered_widget_area( 'bottom' );
-$extra_class = get_theme_mod( 'bottom_bar_justify_content', 'space-between' );
+$extra_class = super_awesome_theme_get_setting( 'bottom_bar_justify_content' );
 
 ?>
 

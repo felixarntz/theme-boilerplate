@@ -49,6 +49,18 @@ function super_awesome_theme_get_template_part( $slug, $name = null, $data = nul
 }
 
 /**
+ * Gets the value for a theme setting.
+ *
+ * @since 1.0.0
+ *
+ * @param string $id Unique string identifier for this setting.
+ * @return mixed Value for the setting, or null if setting is not registered.
+ */
+function super_awesome_theme_get_setting( $id ) {
+	return super_awesome_theme()->get_component( 'settings' )->get( $id );
+}
+
+/**
  * Renders a registered widget area.
  *
  * @since 1.0.0

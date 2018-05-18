@@ -20,7 +20,7 @@ $extra_class       = super_awesome_theme()->get_component( 'settings' )->get( 'n
 				<div class="site-branding">
 					<?php get_template_part( 'template-parts/header/logo-and-title' ); ?>
 				</div><!-- .site-branding -->
-			<?php elseif ( (bool) get_theme_mod( 'sticky_navbar', false ) ) : ?>
+			<?php elseif ( super_awesome_theme_get_setting( 'sticky_navbar' ) ) : ?>
 				<div class="site-branding sticky-content" aria-hidden="true">
 					<?php
 					super_awesome_theme_get_template_part(
