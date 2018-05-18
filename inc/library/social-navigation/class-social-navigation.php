@@ -262,7 +262,7 @@ final class Super_Awesome_Theme_Social_Navigation extends Super_Awesome_Theme_Th
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
-		add_action( 'init', array( $this, 'register_colors' ), 20, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_colors' ), 20, 0 );
 		add_filter( 'walker_nav_menu_start_el', array( $this, 'add_menu_social_icons' ), 10, 4 );
 
 		$menus = $this->get_dependency( 'menus' );

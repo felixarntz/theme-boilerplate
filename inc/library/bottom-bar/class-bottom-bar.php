@@ -55,33 +55,15 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
-			case 'register_sticky':
 			case 'register_settings':
 			case 'register_widget_areas':
 			case 'register_colors':
+			case 'register_sticky':
 			case 'register_customize_controls':
 			case 'add_customizer_script_data':
 			case 'print_color_style':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
-	}
-
-	/**
-	 * Registers the bottom bar as a sticky frontend element.
-	 *
-	 * @since 1.0.0
-	 */
-	protected function register_sticky() {
-		$sticky_elements = $this->get_dependency( 'sticky_elements' );
-
-		$sticky_elements->register_sticky_element( new Super_Awesome_Theme_Sticky_Element(
-			'bottom_bar',
-			array(
-				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR => '#site-bottom-bar',
-				Super_Awesome_Theme_Sticky_Element::PROP_LABEL    => __( 'Stick the bottom bar to the bottom of the page when scrolling?', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION => Super_Awesome_Theme_Sticky_Element::LOCATION_BOTTOM,
-			)
-		) );
 	}
 
 	/**
@@ -147,6 +129,24 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 		) ) );
 
 		$colors->register_color_style_callback( array( $this, 'print_color_style' ) );
+	}
+
+	/**
+	 * Registers the bottom bar as a sticky frontend element.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function register_sticky() {
+		$sticky_elements = $this->get_dependency( 'sticky_elements' );
+
+		$sticky_elements->register_sticky_element( new Super_Awesome_Theme_Sticky_Element(
+			'bottom_bar',
+			array(
+				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR => '#site-bottom-bar',
+				Super_Awesome_Theme_Sticky_Element::PROP_LABEL    => __( 'Stick the bottom bar to the bottom of the page when scrolling?', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION => Super_Awesome_Theme_Sticky_Element::LOCATION_BOTTOM,
+			)
+		) );
 	}
 
 	/**
@@ -227,9 +227,9 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
-		add_action( 'init', array( $this, 'register_sticky' ), 0, 0 );
-		add_action( 'init', array( $this, 'register_settings' ), 0, 0 );
-		add_action( 'init', array( $this, 'register_colors' ), 7, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 0, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_colors' ), 7, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_sticky' ), 0, 0 );
 		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 
 		$widgets = $this->get_dependency( 'widgets' );

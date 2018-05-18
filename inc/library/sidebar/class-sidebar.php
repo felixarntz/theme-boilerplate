@@ -313,7 +313,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
-		add_action( 'init', array( $this, 'register_settings' ), 0, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 10, 0 );
 		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 		add_filter( 'body_class', array( $this, 'add_sidebar_body_classes' ), 10, 1 );
 

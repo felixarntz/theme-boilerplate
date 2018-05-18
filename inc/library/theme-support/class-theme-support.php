@@ -58,7 +58,7 @@ final class Super_Awesome_Theme_Theme_Support extends Super_Awesome_Theme_Theme_
 	 * @param Super_Awesome_Theme_Theme_Feature $feature Theme feature to add.
 	 */
 	public function add_feature( Super_Awesome_Theme_Theme_Feature $feature ) {
-		$id = $feature->get_prop( Super_Awesome_Theme_Theme_Feature::PROP_ID );
+		$id = $feature->get_id();
 
 		$this->features[ $id ] = $feature;
 		$this->features[ $id ]->add_support();

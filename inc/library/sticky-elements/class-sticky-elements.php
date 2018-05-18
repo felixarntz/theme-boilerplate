@@ -200,8 +200,8 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
-		add_action( 'init', array( $this, 'register_settings' ), 100, 0 );
-		add_action( 'init', array( $this, 'add_customizer_script_data' ), 100, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 100, 0 );
+		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 		add_action( 'wp_head', array( $this, 'add_main_script_data' ), 0, 0 );
 
 		$customizer = $this->get_dependency( 'customizer' );

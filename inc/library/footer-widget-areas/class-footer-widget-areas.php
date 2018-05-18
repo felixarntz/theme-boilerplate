@@ -208,7 +208,7 @@ class Super_Awesome_Theme_Footer_Widget_Areas extends Super_Awesome_Theme_Theme_
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
-		add_action( 'init', array( $this, 'register_settings' ), 0, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 10, 0 );
 
 		$widgets = $this->get_dependency( 'widgets' );
 		$widgets->on_init( array( $this, 'register_widget_areas' ) );

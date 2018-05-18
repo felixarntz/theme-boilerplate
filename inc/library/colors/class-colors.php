@@ -792,10 +792,10 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
-		add_action( 'init', array( $this, 'register_base_colors_general' ), 5, 0 );
-		add_action( 'init', array( $this, 'register_base_colors_button' ), 5, 0 );
-		add_action( 'init', array( $this, 'register_base_colors_header' ), 5, 0 );
-		add_action( 'init', array( $this, 'register_base_colors_footer' ), 5, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_base_colors_general' ), 5, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_base_colors_button' ), 5, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_base_colors_header' ), 5, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_base_colors_footer' ), 5, 0 );
 		add_action( 'wp_head', array( $this, 'print_color_style' ), 10, 0 );
 
 		$customizer = $this->get_dependency( 'customizer' );

@@ -83,11 +83,11 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
-			case 'register_sticky':
 			case 'register_settings':
 			case 'register_widget_areas':
 			case 'register_menus':
 			case 'register_colors':
+			case 'register_sticky':
 			case 'register_customize_controls':
 			case 'add_customizer_script_data':
 			case 'add_main_script_data':
@@ -95,24 +95,6 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 			case 'add_dropdown_icon_to_menu_link':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
-	}
-
-	/**
-	 * Registers the navbar as a sticky frontend element.
-	 *
-	 * @since 1.0.0
-	 */
-	protected function register_sticky() {
-		$sticky_elements = $this->get_dependency( 'sticky_elements' );
-
-		$sticky_elements->register_sticky_element( new Super_Awesome_Theme_Sticky_Element(
-			'navbar',
-			array(
-				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR => '#site-navbar',
-				Super_Awesome_Theme_Sticky_Element::PROP_LABEL    => __( 'Stick the navbar to the top of the page when scrolling?', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
-			)
-		) );
 	}
 
 	/**
@@ -198,6 +180,24 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 		) ) );
 
 		$colors->register_color_style_callback( array( $this, 'print_color_style' ) );
+	}
+
+	/**
+	 * Registers the navbar as a sticky frontend element.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function register_sticky() {
+		$sticky_elements = $this->get_dependency( 'sticky_elements' );
+
+		$sticky_elements->register_sticky_element( new Super_Awesome_Theme_Sticky_Element(
+			'navbar',
+			array(
+				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR => '#site-navbar',
+				Super_Awesome_Theme_Sticky_Element::PROP_LABEL    => __( 'Stick the navbar to the top of the page when scrolling?', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
+			)
+		) );
 	}
 
 	/**
@@ -325,9 +325,9 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	 * @since 1.0.0
 	 */
 	protected function run_initialization() {
-		add_action( 'init', array( $this, 'register_sticky' ), 0, 0 );
-		add_action( 'init', array( $this, 'register_settings' ), 0, 0 );
-		add_action( 'init', array( $this, 'register_colors' ), 6, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 0, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_colors' ), 6, 0 );
+		add_action( 'after_setup_theme', array( $this, 'register_sticky' ), 0, 0 );
 		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 		add_action( 'wp_head', array( $this, 'add_main_script_data' ), 0, 0 );
 		add_filter( 'nav_menu_item_title', array( $this, 'add_dropdown_icon_to_menu_link' ), 10, 3 );
