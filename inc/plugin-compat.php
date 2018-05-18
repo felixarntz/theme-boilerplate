@@ -52,7 +52,7 @@ if ( defined( 'WPAC_PLUGIN_NAME' ) ) {
 /**
  * Gutenberg compatibility.
  */
-if ( defined( 'GUTENBERG_VERSION' ) ) {
+if ( function_exists( 'register_block_type' ) ) {
 	require get_template_directory() . '/inc/plugin-compat/gutenberg.php';
 }
 

@@ -13,28 +13,30 @@
  * @since 1.0.0
  */
 function super_awesome_theme_gutenberg_setup() {
+	$colors        = super_awesome_theme()->get_component( 'colors' );
+	$theme_support = super_awesome_theme()->get_component( 'theme_support' );
+
 	$theme_colors = array(
-		get_theme_mod( 'text_color', '#404040' ),
-		super_awesome_theme_darken_color( get_theme_mod( 'text_color', '#404040' ), 25 ),
-		super_awesome_theme_lighten_color( get_theme_mod( 'text_color', '#404040' ), 100 ),
-		get_theme_mod( 'link_color', '#21759b' ),
-		super_awesome_theme_darken_color( get_theme_mod( 'link_color', '#21759b' ), 25 ),
-		get_theme_mod( 'wrap_background_color', '' ),
-		get_theme_mod( 'button_text_color', '#404040' ),
-		get_theme_mod( 'button_background_color', '#e6e6e6' ),
-		super_awesome_theme_darken_color( get_theme_mod( 'button_background_color', '#e6e6e6' ), 25 ),
-		get_theme_mod( 'button_primary_text_color', '#ffffff' ),
-		get_theme_mod( 'button_primary_background_color', '#21759b' ),
-		super_awesome_theme_darken_color( get_theme_mod( 'button_primary_background_color', '#21759b' ), 25 ),
+		$colors->get( 'text_color' ),
+		$colors->util()->darken_color( $colors->get( 'text_color' ), 25 ),
+		$colors->util()->lighten_color( $colors->get( 'text_color' ), 100 ),
+		$colors->get( 'link_color' ),
+		$colors->util()->darken_color( $colors->get( 'link_color' ), 25 ),
+		$colors->get( 'wrap_background_color' ),
+		$colors->get( 'button_text_color' ),
+		$colors->get( 'button_background_color' ),
+		$colors->util()->darken_color( $colors->get( 'button_background_color' ), 25 ),
+		$colors->get( 'button_primary_text_color' ),
+		$colors->get( 'button_primary_background_color' ),
+		$colors->util()->darken_color( $colors->get( 'button_primary_background_color' ), 25 ),
 	);
-	$theme_colors = array_unique( $theme_colors );
+	$theme_colors = array_unique( array_filter( $theme_colors ) );
 
-	add_theme_support( 'align-wide' );
-	add_theme_support( 'disable-custom-colors' );
-
-	call_user_func_array( 'add_theme_support', array_merge( array( 'editor-color-palette' ), $theme_colors ) );
+	$theme_support->add_feature( new Super_Awesome_Theme_Theme_Feature( 'align-wide' ) );
+	$theme_support->add_feature( new Super_Awesome_Theme_Theme_Feature( 'disable-custom-colors' ) );
+	$theme_support->add_feature( new Super_Awesome_Theme_List_Theme_Feature( 'editor-color-palette', $theme_colors ) );
 }
-add_action( 'after_setup_theme', 'super_awesome_theme_gutenberg_setup' );
+add_action( 'after_setup_theme', 'super_awesome_theme_gutenberg_setup', 100 );
 
 /**
  * Enqueues the theme's Gutenberg editor stylesheet.
@@ -42,7 +44,20 @@ add_action( 'after_setup_theme', 'super_awesome_theme_gutenberg_setup' );
  * @since 1.0.0
  */
 function super_awesome_theme_gutenberg_enqueue_editor_style() {
-	wp_enqueue_style( 'super-awesome-theme-block-editor-style', get_theme_file_uri( '/block-editor-style.css' ), array(), SUPER_AWESOME_THEME_VERSION );
-	wp_style_add_data( 'super-awesome-theme-block-editor-style', 'rtl', 'replace' );
+	$assets = super_awesome_theme()->get_component( 'assets' );
+
+	$assets->register_asset( new Super_Awesome_Theme_Stylesheet(
+		'super-awesome-theme-block-editor-style',
+		get_theme_file_uri( '/block-editor-style.css' ),
+		array(
+			Super_Awesome_Theme_Stylesheet::PROP_VERSION  => SUPER_AWESOME_THEME_VERSION,
+			Super_Awesome_Theme_Stylesheet::PROP_LOCATION => 'block_editor',
+			Super_Awesome_Theme_Stylesheet::PROP_HAS_RTL  => true,
+		)
+	) );
+
+	$stylesheet = $assets->get_registered_asset( 'super-awesome-theme-block-editor-style' );
+	$stylesheet->register();
+	$stylesheet->enqueue();
 }
 add_action( 'enqueue_block_editor_assets', 'super_awesome_theme_gutenberg_enqueue_editor_style' );
