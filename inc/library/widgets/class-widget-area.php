@@ -198,6 +198,27 @@ final class Super_Awesome_Theme_Widget_Area {
 	}
 
 	/**
+	 * Renders a single arbitrary widget as if it was part of this widget area.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $widget   The widget's PHP class name that was used for register_widget().
+	 * @param array  $instance Optional. The widget's instance settings. Default empty array.
+	 */
+	public final function render_single_widget( $widget, $instance = array() ) {
+		the_widget(
+			$widget,
+			$instance,
+			array(
+				'before_widget' => str_replace( array( ' id="%1$s"', '%2$s' ), array( '', '%s' ), $this->before_widget ),
+				'after_widget'  => $this->after_widget,
+				'before_title'  => $this->before_title,
+				'after_title'   => $this->after_title,
+			)
+		);
+	}
+
+	/**
 	 * Gets the value for a widget area property.
 	 *
 	 * @since 1.0.0
