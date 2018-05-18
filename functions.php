@@ -68,11 +68,17 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/plugin-compat.php';
 
 super_awesome_theme()
+	->register_component( new Super_Awesome_Theme_Theme_Support() )
 	->register_component( new Super_Awesome_Theme_Settings() )
 	->register_component( new Super_Awesome_Theme_Assets() )
 	->register_component( new Super_Awesome_Theme_Customizer() )
 	->register_component( new Super_Awesome_Theme_Colors() )
+	->register_component( new Super_Awesome_Theme_Custom_Logo() )
+	->register_component( new Super_Awesome_Theme_Custom_Header() )
+	->register_component( new Super_Awesome_Theme_Custom_Background() )
 	->register_component( new Super_Awesome_Theme_Distraction_Free_Mode() )
+	->register_component( new Super_Awesome_Theme_Sticky_Elements() )
+	->register_component( new Super_Awesome_Theme_Comments() )
 	->register_component( new Super_Awesome_Theme_Widgets() )
 	->register_component( new Super_Awesome_Theme_Menus() )
 	->register_component( new Super_Awesome_Theme_Icons() )

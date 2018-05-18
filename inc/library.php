@@ -16,6 +16,13 @@ require get_template_directory() . '/inc/library/class-theme-component-base.php'
 require get_template_directory() . '/inc/library/class-theme-component-not-provided-exception.php';
 
 /**
+ * Theme support.
+ */
+require get_template_directory() . '/inc/library/theme-support/class-theme-support.php';
+require get_template_directory() . '/inc/library/theme-support/class-theme-feature.php';
+require get_template_directory() . '/inc/library/theme-support/class-args-theme-feature.php';
+
+/**
  * Theme settings.
  */
 require get_template_directory() . '/inc/library/settings/class-settings.php';
@@ -57,9 +64,36 @@ require get_template_directory() . '/inc/library/colors/class-color-util.php';
 require get_template_directory() . '/inc/library/colors/class-color.php';
 
 /**
+ * Theme custom logo.
+ */
+require get_template_directory() . '/inc/library/custom-logo/class-custom-logo.php';
+
+/**
+ * Theme custom header.
+ */
+require get_template_directory() . '/inc/library/custom-header/class-custom-header.php';
+
+/**
+ * Theme custom background.
+ */
+require get_template_directory() . '/inc/library/custom-background/class-custom-background.php';
+
+/**
  * Theme distraction-free mode.
  */
 require get_template_directory() . '/inc/library/distraction-free-mode/class-distraction-free-mode.php';
+
+/**
+ * Theme sticky frontend elements.
+ */
+require get_template_directory() . '/inc/library/sticky-elements/class-sticky-elements.php';
+require get_template_directory() . '/inc/library/sticky-elements/class-sticky-element-not-registered-exception.php';
+require get_template_directory() . '/inc/library/sticky-elements/class-sticky-element.php';
+
+/**
+ * Theme comments.
+ */
+require get_template_directory() . '/inc/library/comments/class-comments.php';
 
 /**
  * Theme widgets.

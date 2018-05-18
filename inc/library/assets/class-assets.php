@@ -189,60 +189,6 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	}
 
 	/**
-	 * Adds data for the main theme script on the 'wp_loaded' hook.
-	 *
-	 * TODO: Remove this method.
-	 *
-	 * @since 1.0.0
-	 */
-	public function add_script_data() {
-		$script = $this->get_registered_asset( 'super-awesome-theme-script' );
-
-		$sticky = array(
-			'stickToTopIds'    => array(),
-			'stickToBottomIds' => array(),
-		);
-		if ( (bool) get_theme_mod( 'sticky_top_bar', false ) ) {
-			$sticky['stickToTopIds'][] = 'site-top-bar';
-		}
-		if ( (bool) get_theme_mod( 'sticky_navbar', false ) ) {
-			$sticky['stickToTopIds'][] = 'site-navbar';
-		}
-		if ( (bool) get_theme_mod( 'sticky_bottom_bar', false ) ) {
-			$sticky['stickToBottomIds'][] = 'site-bottom-bar';
-		}
-
-		$script->add_data( 'sticky', $sticky );
-
-		if ( is_singular() && comments_open() ) {
-			$script->add_data( 'comments', array(
-				'i18n' => array(
-					'processing'    => __( 'Processing...', 'super-awesome-theme' ),
-					'badResponse'   => __( 'Bad response code.', 'super-awesome-theme' ),
-					'invalidJson'   => __( 'Invalid JSON response.', 'super-awesome-theme' ),
-					/* translators: %s: edit comment URL */
-					'flood'         => sprintf( __( 'Your comment was either a duplicate or you are posting too rapidly. <a href="%s">Edit your comment</a>', 'super-awesome-theme' ), '#comment' ),
-					'error'         => __( 'There were errors in submitting your comment; complete the missing fields and try again!', 'super-awesome-theme' ),
-					'emailInvalid'  => __( 'This email address appears to be invalid.', 'super-awesome-theme' ),
-					'required'      => __( 'This is a required field.', 'super-awesome-theme' ),
-					'commentsTitle' => sprintf(
-						/* translators: 1: title. */
-						__( 'One thought on &ldquo;%1$s&rdquo;', 'super-awesome-theme' ),
-						'<span>' . get_the_title() . '</span>'
-					),
-				),
-			) );
-
-			if ( get_option( 'thread_comments' ) ) {
-				// TODO: Hook this in at an appropriate location.
-				add_action( 'wp_enqueue_scripts', function() {
-					wp_enqueue_script( 'comment-reply' );
-				});
-			}
-		}
-	}
-
-	/**
 	 * Disables core styles for the special 'wp-signup.php' and 'wp-activate.php' pages.
 	 *
 	 * @since 1.0.0
@@ -292,7 +238,6 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 */
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_main_assets' ), 10, 0 );
-		add_action( 'wp_head', array( $this, 'add_script_data' ), 0, 0 );
 		add_action( 'get_header', array( $this, 'disable_special_page_styles' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'print_detect_js_svg_support_script' ), 0, 0 );
 

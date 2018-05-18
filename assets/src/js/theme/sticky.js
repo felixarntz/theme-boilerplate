@@ -7,27 +7,29 @@
 
 class Sticky {
 	constructor( options ) {
-		let stickToTopIds, stickToBottomIds;
+		let stickToTopSelectors = [], stickToBottomSelectors = [], selectors;
 
-		this.options   = options || {};
+		this.options = options || {};
 
-		stickToTopIds    = this.options.stickToTopIds || [];
-		stickToBottomIds = this.options.stickToBottomIds || [];
-
-		if ( 'object' !== typeof stickToTopIds || 'undefined' === typeof stickToTopIds.length ) {
-			stickToTopIds = [ stickToTopIds ];
-		}
-		if ( 'object' !== typeof stickToBottomIds || 'undefined' === typeof stickToBottomIds.length ) {
-			stickToBottomIds = [ stickToBottomIds ];
-		}
+		selectors = Object.keys( this.options );
+		selectors.forEach( selector => {
+			switch ( true ) {
+				case 'top' === this.options[ selector ]:
+					stickToTopSelectors.push( selector );
+					break;
+				case 'bottom' === this.options[ selector ]:
+					stickToBottomSelectors.push( selector );
+					break;
+			}
+		});
 
 		this.pageWrap                = document.getElementById( 'page' );
-		this.stickToTopContainers    = stickToTopIds
-			.map( id => document.getElementById( id ) )
+		this.stickToTopContainers    = stickToTopSelectors
+			.map( selector => document.querySelector( selector ) )
 			.filter( container => container );
-		this.stickToBottomContainers = stickToBottomIds
+		this.stickToBottomContainers = stickToBottomSelectors
 			.reverse()
-			.map( id => document.getElementById( id ) )
+			.map( selector => document.querySelector( selector ) )
 			.filter( container => container );
 	}
 
