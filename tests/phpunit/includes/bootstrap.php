@@ -14,10 +14,12 @@ if ( function_exists( 'xdebug_disable' ) ) {
 
 $needs_custom_theme_dir = false;
 
+$theme_slug = false !== getenv( 'THEME_SLUG' ) ? getenv( 'THEME_SLUG' ) : 'super-awesome-theme';
+
 if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 	$test_root = getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit';
 
-	if ( ! file_exists( getenv( 'WP_DEVELOP_DIR' ) . '/src/wp-content/themes/super-awesome-theme/functions.php' ) ) {
+	if ( ! file_exists( getenv( 'WP_DEVELOP_DIR' ) . '/src/wp-content/themes/' . $theme_slug . '/functions.php' ) ) {
 		$needs_custom_theme_dir = true;
 	}
 } elseif ( file_exists( '/tmp/wordpress-tests-lib/includes/bootstrap.php' ) ) {
@@ -29,8 +31,8 @@ if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 }
 
 $GLOBALS['wp_tests_options'] = array(
-	'template'   => 'super-awesome-theme',
-	'stylesheet' => 'super-awesome-theme',
+	'template'   => $theme_slug,
+	'stylesheet' => $theme_slug,
 );
 
 if ( $needs_custom_theme_dir ) {
@@ -51,6 +53,3 @@ if ( $needs_custom_theme_dir ) {
 require_once $test_root . '/includes/bootstrap.php';
 
 require_once dirname( __FILE__ ) . '/testcase.php';
-
-var_dump( STYLESHEETPATH );
-require_once STYLESHEETPATH . '/functions.php';
