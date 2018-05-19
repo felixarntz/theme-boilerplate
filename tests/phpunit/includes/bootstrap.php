@@ -14,7 +14,7 @@ if ( function_exists( 'xdebug_disable' ) ) {
 
 $needs_custom_theme_dir = false;
 
-$theme_slug = false !== getenv( 'THEME_SLUG' ) ? getenv( 'THEME_SLUG' ) : 'super-awesome-theme';
+$theme_slug = false !== getenv( 'WP_CURRENT_THEME' ) ? getenv( 'WP_CURRENT_THEME' ) : 'super-awesome-theme';
 
 if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 	$test_root = getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit';
@@ -53,7 +53,3 @@ if ( $needs_custom_theme_dir ) {
 require_once $test_root . '/includes/bootstrap.php';
 
 require_once dirname( __FILE__ ) . '/testcase.php';
-
-var_dump( STYLESHEETPATH );
-var_dump( $GLOBALS['wp_version'] );
-require_once STYLESHEETPATH . '/functions.php';
