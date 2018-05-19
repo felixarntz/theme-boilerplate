@@ -68,6 +68,8 @@ class Tests_Setting extends Super_Awesome_Theme_UnitTestCase {
 	 * Tests retrieving all setting properties.
 	 *
 	 * @covers Super_Awesome_Theme_Setting::get_props
+	 * @covers Super_Awesome_Theme_Setting::__construct
+	 * @covers Super_Awesome_Theme_Setting::get_defaults
 	 */
 	public function test_get_props() {
 		$this->assertSameSets( $this->get_expected_props(), $this->setting->get_props() );
@@ -99,6 +101,7 @@ class Tests_Setting extends Super_Awesome_Theme_UnitTestCase {
 	 * Tests validating a setting value without any validation callback.
 	 *
 	 * @covers Super_Awesome_Theme_Setting::validate_value
+	 * @covers Super_Awesome_Theme_Setting::default_validation_callback
 	 */
 	public function test_validate_value_without_callback() {
 		$this->assertTrue( $this->setting->validate_value( new WP_Error(), 'hello' ) );
@@ -162,6 +165,7 @@ class Tests_Setting extends Super_Awesome_Theme_UnitTestCase {
 	 * Tests sanitizing a setting value.
 	 *
 	 * @covers Super_Awesome_Theme_Setting::sanitize_value
+	 * @covers Super_Awesome_Theme_Setting::default_sanitization_callback
 	 */
 	public function test_sanitize_value() {
 		$this->assertSame( 4, $this->setting->sanitize_value( '4' ) );
@@ -171,6 +175,7 @@ class Tests_Setting extends Super_Awesome_Theme_UnitTestCase {
 	 * Tests parsing a setting value.
 	 *
 	 * @covers Super_Awesome_Theme_Setting::parse_value
+	 * @covers Super_Awesome_Theme_Setting::default_parsing_callback
 	 */
 	public function test_parse_value() {
 		$this->assertSame( 4, $this->setting->parse_value( '4' ) );
