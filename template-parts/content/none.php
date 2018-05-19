@@ -16,9 +16,11 @@
 
 	<div class="page-content">
 		<?php
-		if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
+		if ( is_home() && current_user_can( 'publish_posts' ) ) {
+			?>
 
-			<p><?php
+			<p>
+				<?php
 				printf(
 					wp_kses(
 						/* translators: 1: link to WP admin new post page. */
@@ -31,20 +33,25 @@
 					),
 					esc_url( admin_url( 'post-new.php' ) )
 				);
-			?></p>
+				?>
+			</p>
 
-		<?php elseif ( is_search() ) : ?>
+			<?php
+		} elseif ( is_search() ) {
+			?>
 
 			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'super-awesome-theme' ); ?></p>
-			<?php
-				get_search_form();
 
-		else : ?>
+			<?php
+			get_search_form();
+		} else {
+			?>
 
 			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'super-awesome-theme' ); ?></p>
-			<?php
-				get_search_form();
 
-		endif; ?>
+			<?php
+			get_search_form();
+		}
+		?>
 	</div><!-- .page-content -->
 </section><!-- .no-results -->

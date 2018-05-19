@@ -109,7 +109,6 @@ final class Super_Awesome_Theme_Menus extends Super_Awesome_Theme_Theme_Componen
 	public function __call( $method, $args ) {
 		switch ( $method ) {
 			case 'trigger_init':
-
 				/**
 				 * Fires when theme menus should be registered.
 				 *

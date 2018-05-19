@@ -114,7 +114,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
-			case 'register_main_assets';
+			case 'register_main_assets':
 			case 'disable_special_page_styles':
 			case 'print_detect_js_svg_support_script':
 				return call_user_func_array( array( $this, $method ), $args );

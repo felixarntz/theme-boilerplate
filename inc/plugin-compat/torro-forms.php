@@ -7,14 +7,14 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-// add_filter( 'torro_load_frontend_css', '__return_false' );
+/* TODO: add_filter( 'torro_load_frontend_css', '__return_false' ); */
 
 /**
  * Adjusts the CSS classes to use for forms.
  *
  * @since 1.0.0
  *
- * @param array $wrap_classes Original form classes.
+ * @param array $form_classes Original form classes.
  * @return array Modified form classes.
  */
 function super_awesome_theme_torro_forms_adjust_form_class( $form_classes ) {

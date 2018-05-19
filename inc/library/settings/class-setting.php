@@ -252,7 +252,7 @@ class Super_Awesome_Theme_Setting {
 	 * @since 1.0.0
 	 *
 	 * @param WP_Error $validity Error object to add validation errors to.
-	 * @param mixed $value       Value to validate.
+	 * @param mixed    $value    Value to validate.
 	 * @return WP_Error Error object to add possible errors to.
 	 */
 	protected function default_validation_callback( WP_Error $validity, $value ) {

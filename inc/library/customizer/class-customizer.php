@@ -292,6 +292,8 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	 * @param string $setting_id Setting identifier. Must reference a registered theme setting.
 	 * @param string $transport  Transport mode. Either 'refresh' or 'postMessage'. By default,
 	 *                           all settings are registered with 'postMessage'.
+	 *
+	 * @throws Super_Awesome_Theme_Customizer_Not_Loaded_Exception Thrown when the Customizer is not initialized yet.
 	 */
 	public function set_setting_transport( $setting_id, $transport ) {
 		if ( ! isset( $this->wp_customize ) ) {

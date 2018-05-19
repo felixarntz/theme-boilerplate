@@ -14,7 +14,8 @@ get_header();
 			<main id="main" class="site-main">
 
 				<?php
-				if ( have_posts() ) : ?>
+				if ( have_posts() ) {
+					?>
 
 					<header class="page-header">
 						<?php
@@ -24,23 +25,21 @@ get_header();
 					</header><!-- .page-header -->
 
 					<?php
-					while ( have_posts() ) : the_post();
+					while ( have_posts() ) {
+						the_post();
 
-						if ( super_awesome_theme_use_post_format_templates() ) :
+						if ( super_awesome_theme_use_post_format_templates() ) {
 							get_template_part( 'template-parts/content/content-' . get_post_type(), get_post_format() );
-						else :
+						} else {
 							get_template_part( 'template-parts/content/content', get_post_type() );
-						endif;
-
-					endwhile;
+						}
+					}
 
 					the_posts_navigation();
-
-				else :
-
+				} else {
 					get_template_part( 'template-parts/content/none' );
-
-				endif; ?>
+				}
+				?>
 
 			</main><!-- #main -->
 

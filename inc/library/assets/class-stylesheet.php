@@ -39,7 +39,9 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 	/**
 	 * Whether the stylesheet has a right-to-left version indicated
 	 * by a '-rtl' suffix before the file extension.
-	 * @var [type]
+	 *
+	 * @since 1.0.0
+	 * @var bool
 	 */
 	protected $has_rtl;
 

@@ -147,7 +147,6 @@ final class Super_Awesome_Theme_Theme_Support extends Super_Awesome_Theme_Theme_
 		}
 
 		// TODO: Add theme support for starter content.
-
 		add_editor_style();
 	}
 

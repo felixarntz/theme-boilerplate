@@ -39,7 +39,7 @@ global $comment, $comment_depth, $comment_args;
 
 		<?php if ( '0' == $comment->comment_approved ) : ?>
 			<div class="notice notice-info">
-				<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.' ); ?></p>
+				<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'super-awesome-theme' ); ?></p>
 			</div>
 		<?php endif; ?>
 	</footer><!-- .comment-meta -->
@@ -54,7 +54,7 @@ global $comment, $comment_depth, $comment_args;
 		'depth'     => $comment_depth,
 		'max_depth' => $comment_args['max_depth'],
 		'before'    => '<div class="reply">',
-		'after'     => '</div>'
+		'after'     => '</div>',
 	) ) );
 	?>
 </article><!-- .comment-body -->

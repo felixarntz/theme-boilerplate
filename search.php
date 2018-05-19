@@ -14,29 +14,34 @@ get_header();
 			<main id="main" class="site-main">
 
 				<?php
-				if ( have_posts() ) : ?>
+				if ( have_posts() ) {
+					?>
 
 					<header class="page-header">
-						<h1><?php
+						<h1>
+							<?php
 							/* translators: %s: search query. */
 							printf( esc_html__( 'Search Results for: %s', 'super-awesome-theme' ), '<span>' . get_search_query() . '</span>' );
-						?></h1>
+							?>
+						</h1>
 					</header><!-- .page-header -->
 
 					<?php
-					while ( have_posts() ) : the_post();
+					while ( have_posts() ) {
+						the_post();
 
-						get_template_part( 'template-parts/content/content', get_post_type() );
-
-					endwhile;
+						if ( super_awesome_theme_use_post_format_templates() ) {
+							get_template_part( 'template-parts/content/content-' . get_post_type(), get_post_format() );
+						} else {
+							get_template_part( 'template-parts/content/content', get_post_type() );
+						}
+					}
 
 					the_posts_navigation();
-
-				else :
-
+				} else {
 					get_template_part( 'template-parts/content/none' );
-
-				endif; ?>
+				}
+				?>
 
 			</main><!-- #main -->
 

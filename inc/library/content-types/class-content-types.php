@@ -141,8 +141,8 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string           $taxonomy Taxonomy slug.
-	 * @param WP_Post|int|null $post     Optional. Post to check for. Default is the current post.
+	 * @param string $taxonomy  Taxonomy slug.
+	 * @param string $post_type Post type to check.
 	 * @return bool True if the terms of a specific taxonomy should be displayed, false otherwise.
 	 */
 	public function should_display_post_taxonomy_terms( $taxonomy, $post_type ) {
