@@ -53,3 +53,7 @@ if ( $needs_custom_theme_dir ) {
 require_once $test_root . '/includes/bootstrap.php';
 
 require_once dirname( __FILE__ ) . '/testcase.php';
+
+var_dump( STYLESHEETPATH );
+var_dump( $GLOBALS['wp_version'] );
+require_once STYLESHEETPATH . '/functions.php';
