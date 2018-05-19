@@ -344,15 +344,18 @@ gulp.task( 'init-replace', done => {
 		'./inc/**/*.php',
 		'./template-parts/**/*.php',
 		'./templates/**/*.php',
+		'./tests/**/*.php',
 		'./assets/dist/js/**/*.js',
 		'./assets/src/js/**/*.js',
 		'./assets/src/sass/style.scss',
 		'./style.css',
 		'./style-rtl.css',
 		'./gulpfile.js',
+		'./composer.json',
 		'./package.json',
 		'./phpcs.xml',
 		'./readme.txt',
+		'./README.md',
 	];
 
 	let task = gulp.src( files, { base: './' });

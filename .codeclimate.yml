@@ -1,0 +1,26 @@
+---
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - php
+  fixme:
+    enabled: true
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php"
+      standard: "phpcs.xml"
+      ignore_warnings: true
+      encoding: utf-8
+  phpmd:
+    enabled: false
+ratings:
+  paths:
+  - "**.php"
+exclude_paths:
+- "assets/dist/*"
+- "node_modules/*"
+- "tests/*"
+- "vendor/*"

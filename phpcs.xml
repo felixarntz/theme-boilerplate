@@ -3,14 +3,15 @@
 	<description>A custom set of code standard rules for Super Awesome Theme</description>
 
 	<arg value="psvn"/>
-	<arg name="extensions" value="php"/>
+	<arg name="extensions" value="php" />
 
 	<file>.</file>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
 
-	<rule ref="WordPress">
-		<exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" />
-		<exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect" />
-		<exclude name="PEAR.Functions.FunctionCallSignature.Indent" />
+	<rule ref="WordPress-Core" />
+	<rule ref="WordPress-Docs">
+		<exclude-pattern>*/tests/*</exclude-pattern>
 	</rule>
 
 	<rule ref="WordPress.WP.I18n">
@@ -32,6 +33,6 @@
 		</properties>
 	</rule>
 
-	<config name="testVersion" value="5.2-99.0"/>
-	<rule ref="PHPCompatibility"/>
+	<config name="testVersion" value="5.2-99.0" />
+	<rule ref="PHPCompatibility" />
 </ruleset>
