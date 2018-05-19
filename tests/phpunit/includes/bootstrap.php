@@ -17,7 +17,9 @@ $needs_custom_theme_dir = false;
 if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 	$test_root = getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit';
 
-	$needs_custom_theme_dir = true;
+	if ( ! file_exists( getenv( 'WP_DEVELOP_DIR' ) . '/src/wp-content/themes/super-awesome-theme/functions.php' ) ) {
+		$needs_custom_theme_dir = true;
+	}
 } elseif ( file_exists( '/tmp/wordpress-tests-lib/includes/bootstrap.php' ) ) {
 	$test_root = '/tmp/wordpress-tests-lib';
 
