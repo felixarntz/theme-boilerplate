@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-// disable xdebug backtrace
+// Disable xdebug backtrace.
 if ( function_exists( 'xdebug_disable' ) ) {
 	xdebug_disable();
 }
@@ -32,6 +32,9 @@ $GLOBALS['wp_tests_options'] = array(
 
 require_once $test_root . '/includes/functions.php';
 
+/**
+ * Registers the custom theme directory.
+ */
 function test_register_theme_directory() {
 	register_theme_directory( WP_THEME_DIR );
 }

@@ -7,6 +7,9 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
+/**
+ * Base class for theme unit tests.
+ */
 class Super_Awesome_Theme_UnitTestCase extends WP_UnitTestCase {
 
 	/**

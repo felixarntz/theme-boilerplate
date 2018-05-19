@@ -10,9 +10,7 @@
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 
 	<rule ref="WordPress-Core" />
-	<rule ref="WordPress-Docs">
-		<exclude-pattern>*/tests/*</exclude-pattern>
-	</rule>
+	<rule ref="WordPress-Docs" />
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>

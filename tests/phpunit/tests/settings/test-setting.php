@@ -8,6 +8,8 @@
  */
 
 /**
+ * Tests for the Super_Awesome_Theme_Setting class.
+ *
  * @group settings
  */
 class Tests_Setting extends Super_Awesome_Theme_UnitTestCase {
@@ -38,6 +40,9 @@ class Tests_Setting extends Super_Awesome_Theme_UnitTestCase {
 	 *
 	 * @covers Super_Awesome_Theme_Setting::get_prop
 	 * @dataProvider data_get_prop
+	 *
+	 * @param string $prop  Setting property.
+	 * @param mixed  $value Setting property value.
 	 */
 	public function test_get_prop( $prop, $value ) {
 		$this->assertSame( $value, $this->setting->get_prop( $prop ) );

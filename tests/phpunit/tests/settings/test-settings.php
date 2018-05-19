@@ -8,6 +8,8 @@
  */
 
 /**
+ * Tests for the Super_Awesome_Theme_Settings class.
+ *
  * @group settings
  */
 class Tests_Settings extends Super_Awesome_Theme_UnitTestCase {
@@ -89,7 +91,7 @@ class Tests_Settings extends Super_Awesome_Theme_UnitTestCase {
 
 		$test_settings = array(
 			'test_setting'   => new Super_Awesome_Theme_Boolean_Setting( 'test_setting' ),
-			'test_setting_2' => new Super_Awesome_Theme_String_Setting( 'test_setting_2' )
+			'test_setting_2' => new Super_Awesome_Theme_String_Setting( 'test_setting_2' ),
 		);
 
 		foreach ( $test_settings as $test_setting ) {
