@@ -28,8 +28,6 @@ if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 	$test_root = '../../../../../../tests/phpunit';
 }
 
-define( 'WP_DEFAULT_THEME', 'super-awesome-theme' );
-
 $GLOBALS['wp_tests_options'] = array(
 	'template'   => 'super-awesome-theme',
 	'stylesheet' => 'super-awesome-theme',
@@ -53,3 +51,6 @@ if ( $needs_custom_theme_dir ) {
 require_once $test_root . '/includes/bootstrap.php';
 
 require_once dirname( __FILE__ ) . '/testcase.php';
+
+var_dump( STYLESHEETPATH );
+require_once STYLESHEETPATH . '/functions.php';
