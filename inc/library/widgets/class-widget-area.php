@@ -182,7 +182,7 @@ final class Super_Awesome_Theme_Widget_Area {
 	 *
 	 * @since 1.0.0
 	 */
-	public final function render() {
+	final public function render() {
 		dynamic_sidebar( $this->id );
 	}
 
@@ -193,7 +193,7 @@ final class Super_Awesome_Theme_Widget_Area {
 	 *
 	 * @return bool True if the widget area is active, false otherwise.
 	 */
-	public final function is_active() {
+	final public function is_active() {
 		return is_active_sidebar( $this->id );
 	}
 
@@ -205,7 +205,7 @@ final class Super_Awesome_Theme_Widget_Area {
 	 * @param string $widget   The widget's PHP class name that was used for register_widget().
 	 * @param array  $instance Optional. The widget's instance settings. Default empty array.
 	 */
-	public final function render_single_widget( $widget, $instance = array() ) {
+	final public function render_single_widget( $widget, $instance = array() ) {
 		the_widget(
 			$widget,
 			$instance,
@@ -228,7 +228,7 @@ final class Super_Awesome_Theme_Widget_Area {
 	 *
 	 * @throws InvalidArgumentException Thrown when $prop is invalid.
 	 */
-	public final function get_prop( $prop ) {
+	final public function get_prop( $prop ) {
 		$props = $this->get_props();
 
 		if ( ! array_key_exists( $prop, $props ) ) {
@@ -247,7 +247,7 @@ final class Super_Awesome_Theme_Widget_Area {
 	 *
 	 * @return array Widget area properties including ID as $prop => $value pairs.
 	 */
-	public final function get_props() {
+	final public function get_props() {
 		$props = array( 'id' => $this->id );
 
 		$default_props = array_keys( $this->get_defaults() );

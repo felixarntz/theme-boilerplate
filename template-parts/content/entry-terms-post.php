@@ -44,7 +44,7 @@ if ( super_awesome_theme_display_post_taxonomy_terms( 'post_tag' ) ) {
 			<?php
 			printf(
 				esc_html( $taxonomy_terms['placeholder_text'] ),
-				$taxonomy_terms['list'] // WPCS: XSS OK.
+				$taxonomy_terms['list'] // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 			);
 			?>
 		</span>

@@ -174,7 +174,7 @@ abstract class Super_Awesome_Theme_Asset {
 	 *
 	 * @throws InvalidArgumentException Thrown when $prop is invalid.
 	 */
-	public final function get_prop( $prop ) {
+	final public function get_prop( $prop ) {
 		$props = $this->get_props();
 
 		if ( ! array_key_exists( $prop, $props ) ) {
@@ -193,7 +193,7 @@ abstract class Super_Awesome_Theme_Asset {
 	 *
 	 * @return array Asset properties including handle and URI as $prop => $value pairs.
 	 */
-	public final function get_props() {
+	final public function get_props() {
 		$props = array(
 			'handle' => $this->handle,
 			'uri'    => $this->uri,
@@ -212,14 +212,14 @@ abstract class Super_Awesome_Theme_Asset {
 	 *
 	 * @since 1.0.0
 	 */
-	public abstract function register();
+	abstract public function register();
 
 	/**
 	 * Enqueues the asset in WordPress.
 	 *
 	 * @since 1.0.0
 	 */
-	public abstract function enqueue();
+	abstract public function enqueue();
 
 	/**
 	 * Checks whether the asset is registered with WordPress.
@@ -228,7 +228,7 @@ abstract class Super_Awesome_Theme_Asset {
 	 *
 	 * @return bool True if registered, false otherwise.
 	 */
-	public abstract function is_registered();
+	abstract public function is_registered();
 
 	/**
 	 * Checks whether the asset is enqueued in WordPress.
@@ -237,7 +237,7 @@ abstract class Super_Awesome_Theme_Asset {
 	 *
 	 * @return bool True if enqueued, false otherwise.
 	 */
-	public abstract function is_enqueued();
+	abstract public function is_enqueued();
 
 	/**
 	 * Gets the minified URI from a regular URI.
@@ -249,7 +249,7 @@ abstract class Super_Awesome_Theme_Asset {
 	 * @param string $uri Base URI to an asset.
 	 * @return string Minified URI based on $uri.
 	 */
-	protected final function get_minified_uri( $uri ) {
+	final protected function get_minified_uri( $uri ) {
 		$parts    = explode( '/', $uri );
 		$filename = array_pop( $parts );
 		$query    = '';

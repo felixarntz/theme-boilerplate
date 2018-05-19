@@ -28,7 +28,7 @@ $time_string = sprintf( $time_string,
 			printf(
 				/* translators: %s: post date. */
 				esc_html_x( 'Posted on %s', 'post date', 'super-awesome-theme' ),
-				'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' // WPCS: XSS OK.
+				'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 			);
 			?>
 		</span>

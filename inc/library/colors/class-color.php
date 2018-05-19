@@ -150,7 +150,7 @@ final class Super_Awesome_Theme_Color {
 	 *
 	 * @throws InvalidArgumentException Thrown when $prop is invalid.
 	 */
-	public final function get_prop( $prop ) {
+	final public function get_prop( $prop ) {
 		$props = $this->get_props();
 
 		if ( ! array_key_exists( $prop, $props ) ) {
@@ -169,7 +169,7 @@ final class Super_Awesome_Theme_Color {
 	 *
 	 * @return array Color properties including ID as $prop => $value pairs.
 	 */
-	public final function get_props() {
+	final public function get_props() {
 		$props = array( 'id' => $this->id );
 
 		$default_props = array_keys( $this->get_defaults() );
@@ -187,7 +187,7 @@ final class Super_Awesome_Theme_Color {
 	 *
 	 * @return mixed Current value for the color setting.
 	 */
-	public final function get_value() {
+	final public function get_value() {
 		return $this->setting->get_value();
 	}
 
@@ -198,7 +198,7 @@ final class Super_Awesome_Theme_Color {
 	 *
 	 * @return Super_Awesome_Theme_Setting Theme color setting.
 	 */
-	public final function get_setting() {
+	final public function get_setting() {
 		return $this->setting;
 	}
 

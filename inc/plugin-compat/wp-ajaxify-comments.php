@@ -26,7 +26,7 @@ function super_awesome_theme_ajaxify_comments_warning() {
 
 	?>
 	<div class="notice notice-warning">
-		<p><?php _e( 'Super Awesome Theme already handles comment form submissions via AJAX out-of-the-box, so the plugin WP Ajaxify Comments conflicts with it and is not necessary. Please deactivate it.', 'super-awesome-theme' ); ?></p>
+		<p><?php esc_html_e( 'Super Awesome Theme already handles comment form submissions via AJAX out-of-the-box, so the plugin WP Ajaxify Comments conflicts with it and is not necessary. Please deactivate it.', 'super-awesome-theme' ); ?></p>
 	</div>
 	<?php
 }

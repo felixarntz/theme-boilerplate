@@ -30,7 +30,7 @@ function super_awesome_theme_get_template_part( $slug, $name = null, $data = nul
 
 		$query_set = true;
 		if ( ! isset( $wp_query ) ) {
-			$wp_query = new WP_Query();
+			$wp_query = new WP_Query(); // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited
 			$query_set = false;
 		}
 

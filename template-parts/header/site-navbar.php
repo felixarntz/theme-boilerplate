@@ -36,8 +36,8 @@ $extra_class       = super_awesome_theme()->get_component( 'settings' )->get( 'n
 		<nav id="site-navigation" class="site-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'super-awesome-theme' ); ?>">
 			<button class="menu-toggle" aria-controls="site-navigation-content" aria-expanded="false">
 				<?php
-				echo super_awesome_theme_get_svg( 'bars' ); // WPCS: XSS OK.
-				echo super_awesome_theme_get_svg( 'close' ); // WPCS: XSS OK.
+				echo super_awesome_theme_get_svg( 'bars' ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+				echo super_awesome_theme_get_svg( 'close' ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 				esc_html_e( 'Menu', 'super-awesome-theme' );
 				?>
 			</button>

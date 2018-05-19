@@ -136,7 +136,7 @@ class Super_Awesome_Theme_Sticky_Element {
 	 *
 	 * @throws InvalidArgumentException Thrown when $prop is invalid.
 	 */
-	public final function get_prop( $prop ) {
+	final public function get_prop( $prop ) {
 		$props = $this->get_props();
 
 		if ( ! array_key_exists( $prop, $props ) ) {
@@ -155,7 +155,7 @@ class Super_Awesome_Theme_Sticky_Element {
 	 *
 	 * @return array Sticky element properties including ID as $prop => $value pairs.
 	 */
-	public final function get_props() {
+	final public function get_props() {
 		$props = array( 'id' => $this->id );
 
 		$default_props = array_keys( $this->get_defaults() );

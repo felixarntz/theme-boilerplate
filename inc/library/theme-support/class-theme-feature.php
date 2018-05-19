@@ -40,7 +40,7 @@ class Super_Awesome_Theme_Theme_Feature {
 	 *
 	 * @return string Theme feature identifier.
 	 */
-	public final function get_id() {
+	final public function get_id() {
 		return $this->id;
 	}
 
@@ -51,7 +51,7 @@ class Super_Awesome_Theme_Theme_Feature {
 	 *
 	 * @return bool True if supported, false otherwise.
 	 */
-	public final function is_supported() {
+	final public function is_supported() {
 		return current_theme_supports( $this->id );
 	}
 

@@ -47,7 +47,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 	 *
 	 * @throws Super_Awesome_Theme_Theme_Component_Not_Provided_Exception Thrown when a dependency was not provided.
 	 */
-	public final function initialize() {
+	final public function initialize() {
 		if ( $this->initialized ) {
 			return false;
 		}
@@ -56,6 +56,8 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 			if ( ! $component ) {
 				throw new Super_Awesome_Theme_Theme_Component_Not_Provided_Exception(
 					sprintf(
+
+						/* translators: 1: theme component identifier, 2: dependency identifier */
 						__( 'Cannot initialize theme component %1$s because required dependency %2$s was not provided.', 'super-awesome-theme' ),
 						get_class( $this ),
 						$class_name
@@ -79,7 +81,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 	 * @param Super_Awesome_Theme_Theme_Component $component Component that implements a dependency.
 	 * @return bool True if the dependency was set, false if it is not a dependency.
 	 */
-	public final function provide_dependency( Super_Awesome_Theme_Theme_Component $component ) {
+	final public function provide_dependency( Super_Awesome_Theme_Theme_Component $component ) {
 		$component_class_name = get_class( $component );
 
 		if ( array_key_exists( $component_class_name, $this->dependencies ) ) {
@@ -108,7 +110,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 	 *
 	 * @throws Super_Awesome_Theme_Theme_Component_Not_Provided_Exception Thrown when a dependency was not provided.
 	 */
-	public final function get_dependency( $class_name ) {
+	final public function get_dependency( $class_name ) {
 		if ( isset( $this->shorthands[ $class_name ] ) ) {
 			$class_name = $this->shorthands[ $class_name ];
 		} else {
@@ -132,7 +134,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 	 *
 	 * @return array List of class names.
 	 */
-	public final function get_dependency_classes() {
+	final public function get_dependency_classes() {
 		return array_keys( $this->dependencies );
 	}
 
@@ -141,7 +143,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 	 *
 	 * @since 1.0.0
 	 */
-	protected abstract function run_initialization();
+	abstract protected function run_initialization();
 
 	/**
 	 * Requires a class as a dependency.
@@ -156,7 +158,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 	 * @param string $class_name Class name of the dependency, or shortened class name, with the
 	 *                           theme prefix stripped.
 	 */
-	protected final function require_dependency_class( $class_name ) {
+	final protected function require_dependency_class( $class_name ) {
 		$class_name = $this->normalize_dependency_class_name( $class_name );
 
 		if ( ! array_key_exists( $class_name, $this->dependencies ) ) {
@@ -176,7 +178,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 	 *                           theme prefix stripped.
 	 * @return string Full class name.
 	 */
-	private final function normalize_dependency_class_name( $class_name ) {
+	final private function normalize_dependency_class_name( $class_name ) {
 		if ( 0 !== strpos( $class_name, 'Super_Awesome_Theme_' ) ) {
 			$class_name = 'Super_Awesome_Theme_' . $class_name;
 		}
@@ -192,7 +194,7 @@ abstract class Super_Awesome_Theme_Theme_Component_Base implements Super_Awesome
 	 * @param string $class_name Full class name.
 	 * @return string Short-hand identifier.
 	 */
-	private final function make_shorthand_identifier( $class_name ) {
+	final private function make_shorthand_identifier( $class_name ) {
 		return strtolower( str_replace( 'Super_Awesome_Theme_', '', $class_name ) );
 	}
 }

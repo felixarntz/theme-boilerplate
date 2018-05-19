@@ -155,7 +155,7 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 	 *                        'before_widget', and 'after_widget'.
 	 * @param array $instance Settings for the current widget instance.
 	 */
-	public final function widget( $args, $instance ) {
+	final public function widget( $args, $instance ) {
 		$instance = $this->parse_defaults( $instance );
 
 		if ( ! $this->can_render( $instance ) ) {
@@ -488,7 +488,7 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 	 *
 	 * @return string Title for the widget.
 	 */
-	protected abstract function get_title();
+	abstract protected function get_title();
 
 	/**
 	 * Gets the description of the widget.
@@ -497,14 +497,14 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 	 *
 	 * @return string Description for the widget.
 	 */
-	protected abstract function get_description();
+	abstract protected function get_description();
 
 	/**
 	 * Adds the available widget form fields.
 	 *
 	 * @since 1.0.0
 	 */
-	protected abstract function add_fields();
+	abstract protected function add_fields();
 
 	/**
 	 * Renders the widget for a given instance.
@@ -513,7 +513,7 @@ abstract class Super_Awesome_Theme_Widget extends WP_Widget {
 	 *
 	 * @param array $instance Settings for the current widget instance.
 	 */
-	protected abstract function render( array $instance );
+	abstract protected function render( array $instance );
 
 	/**
 	 * Checks whether the widget can be rendered for a given instance.

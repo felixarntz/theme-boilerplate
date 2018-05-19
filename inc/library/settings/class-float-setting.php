@@ -57,10 +57,14 @@ class Super_Awesome_Theme_Float_Setting extends Super_Awesome_Theme_Setting {
 		$validity = parent::default_validation_callback( $validity, $value );
 
 		if ( false !== $this->min && (float) $value < $this->min ) {
+
+			/* translators: %s: value compared to */
 			$validity->add( 'value_too_small', sprintf( __( 'Value must not be smaller than %s.', 'super-awesome-theme' ), number_format_i18n( $this->min, 2 ) ) );
 		}
 
 		if ( false !== $this->max && (float) $value > $this->max ) {
+
+			/* translators: %s: value compared to */
 			$validity->add( 'value_too_great', sprintf( __( 'Value must not be greater than %s.', 'super-awesome-theme' ), number_format_i18n( $this->max, 2 ) ) );
 		}
 

@@ -60,7 +60,7 @@ foreach ( $taxonomies as $taxonomy ) {
 			<?php
 			printf(
 				esc_html( $taxonomy_terms['placeholder_text'] ),
-				$taxonomy_terms['list'] // WPCS: XSS OK.
+				$taxonomy_terms['list'] // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 			);
 			?>
 		</span>

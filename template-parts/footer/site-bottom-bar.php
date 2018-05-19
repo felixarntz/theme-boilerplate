@@ -18,7 +18,11 @@ $extra_class = super_awesome_theme_get_setting( 'bottom_bar_justify_content' );
 		if ( $bottom_bar->is_active() ) {
 			$bottom_bar->render();
 		} else {
-			$credits_text = '<a href="' . esc_url( __( 'https://wordpress.org/', 'super-awesome-theme' ) ) . '">' . sprintf( __( 'Proudly powered by %s', 'super-awesome-theme' ), 'WordPress' ) . '</a>';
+			$credits_text = '<a href="' . esc_url( __( 'https://wordpress.org/', 'super-awesome-theme' ) ) . '">';
+
+			/* translators: %s: WordPress */
+			$credits_text .= sprintf( __( 'Proudly powered by %s', 'super-awesome-theme' ), 'WordPress' );
+			$credits_text .= '</a>';
 
 			/* translators: 1: theme name, 2: theme author name with link */
 			$credits_text .= ' | ' . sprintf( __( 'Theme: %1$s by %2$s', 'super-awesome-theme' ), 'Super Awesome Theme', '<a href="' . esc_url( __( 'https://super-awesome-author.org', 'super-awesome-theme' ) ) . '">Super Awesome Author</a>' );

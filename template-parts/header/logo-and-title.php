@@ -20,13 +20,13 @@ $skip_h1 = isset( $data ) && ! empty( $data['skip_h1'] );
 <div class="site-branding-text">
 	<?php if ( ! empty( $title ) || is_customize_preview() ) : ?>
 		<?php if ( is_front_page() && is_home() && ! $skip_h1 ) : ?>
-			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo $title; /* WPCS: XSS OK. */ ?></a></h1>
+			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo $title; /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?></a></h1>
 		<?php else : ?>
-			<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo $title; /* WPCS: XSS OK. */ ?></a></p>
+			<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo $title; /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?></a></p>
 		<?php endif; ?>
 	<?php endif; ?>
 
 	<?php if ( ! empty( $description ) || is_customize_preview() ) : ?>
-		<p class="site-description"><?php echo $description; /* WPCS: XSS OK. */ ?></p>
+		<p class="site-description"><?php echo $description; /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?></p>
 	<?php endif; ?>
 </div><!-- .site-branding-text -->

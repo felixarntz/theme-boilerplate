@@ -18,9 +18,12 @@ global $comment, $comment_depth, $comment_args;
 				echo get_avatar( $comment, $comment_args['avatar_size'] );
 			}
 
-			/* translators: %s: comment author link */
-			printf( __( '%s <span class="says">says:</span>', 'super-awesome-theme' ),
-				sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) )
+			echo wp_kses(
+				/* translators: %s: comment author link */
+				sprintf( __( '%s <span class="says">says:</span>', 'super-awesome-theme' ),
+					sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) )
+				),
+				'comment_author_intro'
 			);
 			?>
 		</div><!-- .comment-author -->
@@ -30,7 +33,7 @@ global $comment, $comment_depth, $comment_args;
 				<time datetime="<?php comment_time( 'c' ); ?>">
 					<?php
 					/* translators: 1: comment date, 2: comment time */
-					printf( __( '%1$s at %2$s', 'super-awesome-theme' ), get_comment_date( '', $comment ), get_comment_time() );
+					echo esc_html( sprintf( __( '%1$s at %2$s', 'super-awesome-theme' ), get_comment_date( '', $comment ), get_comment_time() ) );
 					?>
 				</time>
 			</a>
@@ -39,7 +42,7 @@ global $comment, $comment_depth, $comment_args;
 
 		<?php if ( '0' == $comment->comment_approved ) : ?>
 			<div class="notice notice-info">
-				<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'super-awesome-theme' ); ?></p>
+				<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'super-awesome-theme' ); ?></p>
 			</div>
 		<?php endif; ?>
 	</footer><!-- .comment-meta -->

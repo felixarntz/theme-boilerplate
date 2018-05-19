@@ -11,5 +11,5 @@ global $comment, $comment_depth, $comment_args;
 
 ?>
 <div class="comment-body">
-	<?php _e( 'Pingback:', 'super-awesome-theme' ); ?> <?php comment_author_link( $comment ); ?> <?php edit_comment_link( __( 'Edit', 'super-awesome-theme' ), '<span class="edit-link">', '</span>' ); ?>
+	<?php esc_html_e( 'Pingback:', 'super-awesome-theme' ); ?> <?php comment_author_link( $comment ); ?> <?php edit_comment_link( __( 'Edit', 'super-awesome-theme' ), '<span class="edit-link">', '</span>' ); ?>
 </div>

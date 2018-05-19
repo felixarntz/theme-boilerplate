@@ -137,7 +137,7 @@ class Super_Awesome_Theme_Setting {
 	 *
 	 * @throws InvalidArgumentException Thrown when $prop is invalid.
 	 */
-	public final function get_prop( $prop ) {
+	final public function get_prop( $prop ) {
 		$props = $this->get_props();
 
 		if ( ! array_key_exists( $prop, $props ) ) {
@@ -156,7 +156,7 @@ class Super_Awesome_Theme_Setting {
 	 *
 	 * @return array Setting properties including ID as $prop => $value pairs.
 	 */
-	public final function get_props() {
+	final public function get_props() {
 		$props = array( 'id' => $this->id );
 
 		$default_props = array_keys( $this->get_defaults() );
@@ -174,7 +174,7 @@ class Super_Awesome_Theme_Setting {
 	 *
 	 * @return mixed Current value for the setting, or the default value.
 	 */
-	public final function get_value() {
+	final public function get_value() {
 		$value = get_theme_mod( $this->id, $this->default );
 
 		return $this->parse_value( $value );
@@ -189,7 +189,7 @@ class Super_Awesome_Theme_Setting {
 	 * @param mixed    $value    Value to validate.
 	 * @return bool|WP_Error True on success, error object on failure.
 	 */
-	public final function validate_value( WP_Error $validity, $value ) {
+	final public function validate_value( WP_Error $validity, $value ) {
 		$validity = $this->default_validation_callback( $validity, $value );
 
 		if ( null !== $this->validate_callback ) {
@@ -218,7 +218,7 @@ class Super_Awesome_Theme_Setting {
 	 * @param mixed $value Value to sanitize.
 	 * @return mixed Sanitized value.
 	 */
-	public final function sanitize_value( $value ) {
+	final public function sanitize_value( $value ) {
 		$value = $this->default_sanitization_callback( $value );
 
 		if ( null !== $this->sanitize_callback ) {
@@ -236,7 +236,7 @@ class Super_Awesome_Theme_Setting {
 	 * @param mixed $value Value to parse.
 	 * @return mixed Parsed value.
 	 */
-	public final function parse_value( $value ) {
+	final public function parse_value( $value ) {
 		$value = $this->default_parsing_callback( $value );
 
 		if ( null !== $this->parse_callback ) {
