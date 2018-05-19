@@ -1,5 +1,5 @@
 {
-  "name": "super-awesome-theme",
+  "name": "felixarntz/super-awesome-theme",
   "version": "1.0.0",
   "description": "Super Awesome Theme theme for WordPress.",
   "type": "wordpress-theme",
@@ -21,7 +21,7 @@
   ],
   "homepage": "https://super-awesome-author.org/themes/super-awesome-theme/",
   "support": {
-    "issues": "https://github.com/taco-themes/super-awesome-theme/issues"
+    "issues": "https://github.com/felixarntz/super-awesome-theme/issues"
   },
   "license": "GPL-2.0-or-later",
   "require": {

@@ -1,3 +1,6 @@
+[![Build Status](https://api.travis-ci.org/felixarntz/theme-boilerplate.png?branch=master)](https://travis-ci.org/felixarntz/theme-boilerplate)
+[![Test Coverage](https://codeclimate.com/github/felixarntz/theme-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/felixarntz/theme-boilerplate/coverage)
+
 # Super Awesome Theme (Boilerplate)
 
 This is my personal theme boilerplate, initially based on [\_s](http://underscores.me/), partly inspired by [Twenty Seventeen](https://wordpress.org/themes/twentyseventeen/), with lots of additional features.
