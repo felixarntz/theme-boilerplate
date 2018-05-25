@@ -75,6 +75,25 @@
 	display: none;
 }
 
+.navigation {
+	margin-bottom: $spacing_vertical;
+	text-align: center;
+}
+
+.nav-links {
+	display: inline-block;
+	border: 1px solid $color__lightgray;
+
+	.page-numbers {
+		display: inline-block;
+		padding: $padding_vertical $padding_horizontal;
+
+		&.current {
+			font-weight: $font__weight-strong;
+		}
+	}
+}
+
 .page-links {
 	clear: both;
 	margin: 0 0 $spacing_vertical;

@@ -7,6 +7,7 @@ h6 {
 	margin: 0 0 $spacing_vertical;
 	padding: $spacing_vertical 0 0;
 	clear: both;
+	font-weight: $font__weight-headings;
 	line-height: $font__line-height-headings;
 
 	&:first-child {

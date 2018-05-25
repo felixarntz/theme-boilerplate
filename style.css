@@ -284,6 +284,7 @@ textarea {
 	font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
 	font-size: 16px;
 	font-size: 1rem;
+	font-weight: 400;
 	line-height: 1.5;
 }
 
@@ -296,6 +297,7 @@ h6 {
 	padding: 1em 0 0;
 	margin: 0 0 1em;
 	clear: both;
+	font-weight: 700;
 	line-height: 1.4;
 }
 
@@ -364,6 +366,10 @@ h5 + h6 {
 p {
 	padding: 0;
 	margin: 0 0 1em;
+}
+
+strong {
+	font-weight: 700;
 }
 
 dfn,
@@ -2341,6 +2347,25 @@ body.no-sidebar
 
 .updated:not(.published) {
 	display: none;
+}
+
+.navigation {
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+.nav-links {
+	display: inline-block;
+	border: 1px solid #ccc;
+}
+
+.nav-links .page-numbers {
+	display: inline-block;
+	padding: 0.75rem 1rem;
+}
+
+.nav-links .page-numbers.current {
+	font-weight: 700;
 }
 
 .page-links {

@@ -38,6 +38,7 @@
 	padding: 1em 0 0;
 	margin: 0 0 1em;
 	clear: both;
+	font-weight: 700;
 	line-height: 1.4;
 }
 
@@ -106,6 +107,10 @@ h5 + .edit-post-visual-editor h6 {
 .edit-post-visual-editor p {
 	padding: 0;
 	margin: 0 0 1em;
+}
+
+.edit-post-visual-editor strong {
+	font-weight: 700;
 }
 
 .edit-post-visual-editor dfn,
