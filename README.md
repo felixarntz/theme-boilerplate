@@ -60,6 +60,7 @@ The following is a non-comprehensive list of features in addition to everything 
     * [Torro Forms](https://wordpress.org/plugins/torro-forms/)
     * [WooCommerce](https://wordpress.org/plugins/woocommerce/)
     * [WP Subtitle](https://wordpress.org/plugins/wp-subtitle/)
+    * [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/)
 
 This is a work in progress. A few of the above items may be incomplete still.
 
