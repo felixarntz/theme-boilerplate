@@ -151,6 +151,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			case 'print_color_style':
 			case 'print_color_style_css':
 			case 'register_customize_controls':
+			case 'add_editor_color_palette_support':
 			case 'register_base_colors_general':
 			case 'register_base_colors_button':
 			case 'register_base_colors_header':
@@ -195,6 +196,82 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 		 * @param Super_Awesome_Theme_Colors $colors The theme colors instance.
 		 */
 		do_action( 'super_awesome_theme_color_style', $this );
+
+		foreach ( $this->colors as $id => $color ) {
+			$value        = $color->get_value();
+			$shaded_value = $this->util()->darken_color( $value, 25 );
+
+			if ( empty( $value ) ) {
+				continue;
+			}
+
+			$color_class            = 'has-' . str_replace( '_', '-', $id ) . '-color';
+			$background_color_class = 'has-' . str_replace( '_', '-', $id ) . '-background-color';
+
+			?>
+			.<?php echo esc_attr( $color_class ); ?> {
+				color: <?php echo esc_attr( $value ); ?>;
+			}
+
+			.<?php echo esc_attr( $background_color_class ); ?> {
+				background-color: <?php echo esc_attr( $value ); ?>;
+			}
+
+			a.<?php echo esc_attr( $color_class ); ?>,
+			button.<?php echo esc_attr( $color_class ); ?>,
+			input[type="button"].<?php echo esc_attr( $color_class ); ?>,
+			input[type="reset"].<?php echo esc_attr( $color_class ); ?>,
+			input[type="submit"].<?php echo esc_attr( $color_class ); ?>,
+			.button.<?php echo esc_attr( $color_class ); ?>,
+			.wp-block-button .wp-block-button__link.<?php echo esc_attr( $color_class ); ?> {
+				color: <?php echo esc_attr( $value ); ?>;
+			}
+
+			a.<?php echo esc_attr( $background_color_class ); ?>,
+			button.<?php echo esc_attr( $background_color_class ); ?>,
+			input[type="button"].<?php echo esc_attr( $background_color_class ); ?>,
+			input[type="reset"].<?php echo esc_attr( $background_color_class ); ?>,
+			input[type="submit"].<?php echo esc_attr( $background_color_class ); ?>,
+			.button.<?php echo esc_attr( $background_color_class ); ?>,
+			.wp-block-button .wp-block-button__link.<?php echo esc_attr( $background_color_class ); ?> {
+				background-color: <?php echo esc_attr( $value ); ?>;
+			}
+
+			a.<?php echo esc_attr( $color_class ); ?>:hover,
+			a.<?php echo esc_attr( $color_class ); ?>:focus,
+			button.<?php echo esc_attr( $color_class ); ?>:hover,
+			button.<?php echo esc_attr( $color_class ); ?>:focus,
+			input[type="button"].<?php echo esc_attr( $color_class ); ?>:hover,
+			input[type="button"].<?php echo esc_attr( $color_class ); ?>:focus,
+			input[type="reset"].<?php echo esc_attr( $color_class ); ?>:hover,
+			input[type="reset"].<?php echo esc_attr( $color_class ); ?>:focus,
+			input[type="submit"].<?php echo esc_attr( $color_class ); ?>:hover,
+			input[type="submit"].<?php echo esc_attr( $color_class ); ?>:focus,
+			.button.<?php echo esc_attr( $color_class ); ?>:hover,
+			.button.<?php echo esc_attr( $color_class ); ?>:focus,
+			.wp-block-button .wp-block-button__link.<?php echo esc_attr( $color_class ); ?>:hover,
+			.wp-block-button .wp-block-button__link.<?php echo esc_attr( $color_class ); ?>:focus {
+				color: <?php echo esc_attr( $shaded_value ); ?>;
+			}
+
+			a.<?php echo esc_attr( $background_color_class ); ?>:hover,
+			a.<?php echo esc_attr( $background_color_class ); ?>:focus,
+			button.<?php echo esc_attr( $background_color_class ); ?>:hover,
+			button.<?php echo esc_attr( $background_color_class ); ?>:focus,
+			input[type="button"].<?php echo esc_attr( $background_color_class ); ?>:hover,
+			input[type="button"].<?php echo esc_attr( $background_color_class ); ?>:focus,
+			input[type="reset"].<?php echo esc_attr( $background_color_class ); ?>:hover,
+			input[type="reset"].<?php echo esc_attr( $background_color_class ); ?>:focus,
+			input[type="submit"].<?php echo esc_attr( $background_color_class ); ?>:hover,
+			input[type="submit"].<?php echo esc_attr( $background_color_class ); ?>:focus,
+			.button.<?php echo esc_attr( $background_color_class ); ?>:hover,
+			.button.<?php echo esc_attr( $background_color_class ); ?>:focus,
+			.wp-block-button .wp-block-button__link.<?php echo esc_attr( $background_color_class ); ?>:hover,
+			.wp-block-button .wp-block-button__link.<?php echo esc_attr( $background_color_class ); ?>:focus {
+				background-color: <?php echo esc_attr( $shaded_value ); ?>;
+			}
+			<?php
+		}
 	}
 
 	/**
@@ -268,6 +345,35 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 				Super_Awesome_Theme_Customize_Partial::PROP_FALLBACK_REFRESH    => false,
 			) );
 		}
+	}
+
+	/**
+	 * Adds the registered colors to the editor color palette.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function add_editor_color_palette_support() {
+		$theme_support = $this->get_dependency( 'theme_support' );
+
+		$color_palette = array();
+		foreach ( $this->colors as $id => $color ) {
+			$title = $color->get_prop( Super_Awesome_Theme_Color::PROP_TITLE );
+			$value = $color->get_value();
+
+			if ( empty( $value ) ) {
+				continue;
+			}
+
+			$color_palette[] = array(
+
+				// Use the ID to ensure it is language-independent. Bug in Gutenberg.
+				'name'  => $id,
+				'color' => $value,
+			);
+		}
+
+		$theme_support->add_feature( new Super_Awesome_Theme_List_Theme_Feature( 'editor-color-palette', $color_palette ) );
+		$theme_support->add_feature( new Super_Awesome_Theme_Theme_Feature( 'disable-custom-colors' ) );
 	}
 
 	/**
@@ -796,6 +902,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 		add_action( 'after_setup_theme', array( $this, 'register_base_colors_button' ), 5, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_base_colors_header' ), 5, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_base_colors_footer' ), 5, 0 );
+		add_action( 'after_setup_theme', array( $this, 'add_editor_color_palette_support' ), PHP_INT_MAX, 0 );
 		add_action( 'wp_head', array( $this, 'print_color_style' ), 10, 0 );
 
 		$customizer = $this->get_dependency( 'customizer' );

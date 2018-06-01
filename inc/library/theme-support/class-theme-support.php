@@ -131,6 +131,7 @@ final class Super_Awesome_Theme_Theme_Support extends Super_Awesome_Theme_Theme_
 			'title-tag',
 			'post-thumbnails',
 			'customize-selective-refresh-widgets',
+			'align-wide',
 		);
 
 		foreach ( $boolean_features as $feature_id ) {
