@@ -147,8 +147,7 @@ final class Super_Awesome_Theme_Theme_Support extends Super_Awesome_Theme_Theme_
 			$this->add_feature( new Super_Awesome_Theme_Args_Theme_Feature( $feature_id, $feature_args ) );
 		}
 
-		// TODO: Add theme support for starter content.
-		add_editor_style();
+		/* TODO: Add theme support for starter content. */
 	}
 
 	/**

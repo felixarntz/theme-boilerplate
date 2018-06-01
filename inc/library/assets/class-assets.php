@@ -186,6 +186,8 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 				Super_Awesome_Theme_Stylesheet::PROP_HAS_RTL  => true,
 			)
 		) );
+
+		add_editor_style();
 	}
 
 	/**
