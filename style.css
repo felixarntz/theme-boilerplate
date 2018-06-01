@@ -2124,6 +2124,12 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	.site-navigation ul.nav-menu > li > a {
 		padding: 0.75rem 1rem;
 	}
+	.site-navigation ul.nav-menu > li:first-child > a {
+		padding-left: 0;
+	}
+	.site-navigation ul.nav-menu > li:last-child > a {
+		padding-right: 0;
+	}
 	.site-navigation ul.nav-menu ul {
 		position: absolute;
 		top: 100%;

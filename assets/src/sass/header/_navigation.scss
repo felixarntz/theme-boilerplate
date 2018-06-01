@@ -106,6 +106,18 @@
 				> a {
 					padding: $padding_vertical $padding_horizontal;
 				}
+
+				&:first-child {
+					> a {
+						padding-left: 0;
+					}
+				}
+
+				&:last-child {
+					> a {
+						padding-right: 0;
+					}
+				}
 			}
 
 			ul {
