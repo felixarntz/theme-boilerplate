@@ -25,6 +25,17 @@ $header_position = get_theme_mod( 'header_position', 'above_navbar' );
 <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'super-awesome-theme' ); ?></a>
 
 <div id="page" class="site">
+
+	<?php
+
+	/**
+	 * Fires before the theme's header is printed.
+	 *
+	 * @since 1.0.0
+	 */
+	do_action( 'super_awesome_theme_before_header' );
+	?>
+
 	<header id="header" class="site-header">
 		<?php get_template_part( 'template-parts/header/site-top-bar' ); ?>
 
@@ -42,6 +53,16 @@ $header_position = get_theme_mod( 'header_position', 'above_navbar' );
 		}
 		?>
 	</header><!-- #header -->
+
+	<?php
+
+	/**
+	 * Fires after the theme's header has been printed.
+	 *
+	 * @since 1.0.0
+	 */
+	do_action( 'super_awesome_theme_after_header' );
+	?>
 
 	<div id="content" class="site-content site-component is-flex">
 		<div class="site-component-inner">
