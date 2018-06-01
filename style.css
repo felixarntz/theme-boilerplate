@@ -2279,13 +2279,16 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	margin: 0 0 2em;
 }
 
+.page-header,
 .entry-header,
 .entry-content,
 .entry-footer {
 	margin: 0 0 1em;
 }
 
-body.no-sidebar .entry-header,
+body.no-sidebar .page-header,
+body.no-sidebar
+.entry-header,
 body.no-sidebar
 .entry-content,
 body.no-sidebar
