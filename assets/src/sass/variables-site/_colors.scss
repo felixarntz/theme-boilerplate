@@ -42,7 +42,7 @@ $color__text-top-bar: $color__white;
 $color__text-bottom-bar: $color__white;
 $color__text-input: $color__black;
 $color__text-input-focus: darken($color__text-input, 8%);
-$color__text-input-placeholder: $color__darkgray;
+$color__text-input-placeholder: lighten($color__text-input, 40%);
 $color__text-quote: $color__black;
 $color__text-quote-footer: $color__darkgray;
 $color__link: $color__primary;
