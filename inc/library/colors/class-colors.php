@@ -50,6 +50,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 
 		$this->require_dependency_class( 'Super_Awesome_Theme_Theme_Support' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
+		$this->require_dependency_class( 'Super_Awesome_Theme_Assets' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 	}
 
@@ -149,6 +150,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 	public function __call( $method, $args ) {
 		switch ( $method ) {
 			case 'print_color_style':
+			case 'add_block_editor_color_style':
 			case 'print_color_style_css':
 			case 'register_customize_controls':
 			case 'add_editor_color_palette_support':
@@ -179,6 +181,24 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 
 		</style>
 		<?php
+	}
+
+	/**
+	 * Adds the color style CSS definitions to the block editor as inline CSS.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function add_block_editor_color_style() {
+		$assets     = $this->get_dependency( 'assets' );
+		$stylesheet = $assets->get_registered_asset( 'super-awesome-theme-block-editor-style' );
+
+		ob_start();
+		$this->print_color_style_css();
+		$style = ob_get_clean();
+
+		$style = preg_replace( '/^(\s*)([a-z0-9\-\.\#\[\]"=: >+]+)(,| \{)$/mi', "$1.edit-post-visual-editor $2$3", $style );
+
+		$stylesheet->add_inline_style( $style, 'after' );
 	}
 
 	/**
@@ -902,6 +922,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 		add_action( 'after_setup_theme', array( $this, 'register_base_colors_footer' ), 5, 0 );
 		add_action( 'after_setup_theme', array( $this, 'add_editor_color_palette_support' ), PHP_INT_MAX, 0 );
 		add_action( 'wp_head', array( $this, 'print_color_style' ), 10, 0 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'add_block_editor_color_style' ), 0, 0 );
 
 		$customizer = $this->get_dependency( 'customizer' );
 		$customizer->on_init( array( $this, 'register_customize_controls' ) );
