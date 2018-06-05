@@ -55,7 +55,6 @@ The following is a non-comprehensive list of features in addition to everything 
 * Compliant with code and documentation standards
 * Plugin support for the following:
     * [Easy Digital Downloads](https://wordpress.org/plugins/easy-digital-downloads/)
-    * [(Gutenberg, but that will soon not be a plugin anymore)](https://wordpress.org/plugins/gutenberg/)
     * [Jetpack](https://wordpress.org/plugins/jetpack/)
     * [Torro Forms](https://wordpress.org/plugins/torro-forms/)
     * [WooCommerce](https://wordpress.org/plugins/woocommerce/)

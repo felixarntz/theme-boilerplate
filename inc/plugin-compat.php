@@ -50,13 +50,6 @@ if ( defined( 'WPAC_PLUGIN_NAME' ) ) {
 }
 
 /**
- * Gutenberg compatibility.
- */
-if ( function_exists( 'register_block_type' ) ) {
-	require get_template_directory() . '/inc/plugin-compat/gutenberg.php';
-}
-
-/**
  * Torro Forms compatibility.
  */
 if ( function_exists( 'torro' ) ) {

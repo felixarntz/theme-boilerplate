@@ -187,6 +187,16 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 			)
 		) );
 
+		$this->register_asset( new Super_Awesome_Theme_Stylesheet(
+			'super-awesome-theme-block-editor-style',
+			get_theme_file_uri( '/block-editor-style.css' ),
+			array(
+				Super_Awesome_Theme_Stylesheet::PROP_VERSION  => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Stylesheet::PROP_LOCATION => Super_Awesome_Theme_Stylesheet::LOCATION_BLOCK_EDITOR,
+				Super_Awesome_Theme_Stylesheet::PROP_HAS_RTL  => true,
+			)
+		) );
+
 		add_editor_style();
 	}
 
@@ -247,6 +257,8 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend' ), 10, 0 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin' ), 1, 0 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin' ), 10, 0 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'register_block_editor' ), 1, 0 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor' ), 10, 0 );
 		add_action( 'customize_preview_init', array( $this, 'register_customize_preview' ), 1, 0 );
 		add_action( 'customize_preview_init', array( $this, 'enqueue_customize_preview' ), 10, 0 );
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'register_customize_controls' ), 1, 0 );
