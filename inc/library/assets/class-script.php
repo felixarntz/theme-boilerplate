@@ -29,6 +29,14 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 	const PROP_DATA = 'data';
 
 	/**
+	 * Inline scripts to print before or after the main script.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	protected $inline_scripts = array();
+
+	/**
 	 * Global JavaScript variable name for data passed from PHP.
 	 *
 	 * @since 1.0.0
@@ -42,7 +50,7 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 	 * @since 1.0.0
 	 * @var array
 	 */
-	protected $data;
+	protected $data = array();
 
 	/**
 	 * Registers the asset with WordPress.
@@ -75,6 +83,25 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 		if ( ! empty( $this->data_name ) && ! empty( $this->data ) ) {
 			wp_localize_script( $this->handle, $this->data_name, $this->data );
 		}
+
+		foreach ( $this->inline_scripts as $inline_script ) {
+			wp_add_inline_script( $this->handle, $inline_script['script'], $inline_script['position'] );
+		}
+	}
+
+	/**
+	 * Adds an inline script to print before or after the main script.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $script   JavaScript code to be printed. Must not contain the script tags.
+	 * @param string $position Optional. Either 'before' or 'after'. Default 'after'.
+	 */
+	public function add_inline_script( $script, $position = 'after' ) {
+		$this->inline_scripts[] = array(
+			'script'   => $script,
+			'position' => $position,
+		);
 	}
 
 	/**

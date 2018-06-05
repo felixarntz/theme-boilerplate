@@ -46,6 +46,14 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 	protected $has_rtl;
 
 	/**
+	 * Inline styles to print before or after the main stylesheet.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	protected $inline_styles = array();
+
+	/**
 	 * Registers the asset with WordPress.
 	 *
 	 * @since 1.0.0
@@ -76,6 +84,23 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 		}
 
 		wp_enqueue_style( $this->handle );
+
+		foreach ( $this->inline_styles as $inline_style ) {
+			wp_add_inline_style( $this->handle, $inline_style['style'] );
+		}
+	}
+
+	/**
+	 * Adds an inline style to print before or after the main stylesheet.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $style CSS code to be printed. Must not contain the style tags.
+	 */
+	public function add_inline_style( $style ) {
+		$this->inline_styles[] = array(
+			'style' => $style,
+		);
 	}
 
 	/**
