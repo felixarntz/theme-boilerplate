@@ -163,19 +163,19 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'navbar_text_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'navbar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Text Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Navbar Text Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT => '#404040',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'navbar_link_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'navbar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Link Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Navbar Link Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT => '#21759b',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'navbar_background_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'navbar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Background Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Navbar Background Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT => '#eeeeee',
 		) ) );
 

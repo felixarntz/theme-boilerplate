@@ -112,19 +112,19 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'bottom_bar_text_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'bottom_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Text Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Bottom Bar Text Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT => '#ffffff',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'bottom_bar_link_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'bottom_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Link Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Bottom Bar Link Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT => '#ffffff',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'bottom_bar_background_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'bottom_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Background Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Bottom Bar Background Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT => '#21759b',
 		) ) );
 

@@ -495,19 +495,19 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 		// This color is part of core.
 		$this->register_color( new Super_Awesome_Theme_Color( 'header_textcolor', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'header_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Text Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Header Text Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT => $default_header_textcolor,
 		) ) );
 
 		$this->register_color( new Super_Awesome_Theme_Color( 'header_link_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP   => 'header_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Link Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Header Link Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT => '#404040',
 		) ) );
 
 		$this->register_color( new Super_Awesome_Theme_Color( 'header_background_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP           => 'header_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Background Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Header Background Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#ffffff',
 			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_header_background_color' ),
 		) ) );
@@ -525,21 +525,21 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 
 		$this->register_color( new Super_Awesome_Theme_Color( 'footer_text_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP           => 'footer_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Text Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Footer Text Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#404040',
 			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_footer_colors' ),
 		) ) );
 
 		$this->register_color( new Super_Awesome_Theme_Color( 'footer_link_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP           => 'footer_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Link Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Footer Link Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#21759b',
 			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_footer_colors' ),
 		) ) );
 
 		$this->register_color( new Super_Awesome_Theme_Color( 'footer_background_color', array(
 			Super_Awesome_Theme_Color::PROP_GROUP           => 'footer_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Background Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Footer Background Color', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#ffffff',
 			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_footer_colors' ),
 		) ) );
