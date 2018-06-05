@@ -365,15 +365,13 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			}
 
 			$color_palette[] = array(
-
-				// Use the ID to ensure it is language-independent. Bug in Gutenberg.
-				'name'  => $id,
+				'slug'  => $id,
+				'name'  => $title,
 				'color' => $value,
 			);
 		}
 
 		$theme_support->add_feature( new Super_Awesome_Theme_List_Theme_Feature( 'editor-color-palette', $color_palette ) );
-		$theme_support->add_feature( new Super_Awesome_Theme_Theme_Feature( 'disable-custom-colors' ) );
 	}
 
 	/**
