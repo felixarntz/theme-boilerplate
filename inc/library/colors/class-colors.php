@@ -380,18 +380,18 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			$title = $color->get_prop( Super_Awesome_Theme_Color::PROP_TITLE );
 			$value = $color->get_value();
 
-			if ( empty( $value ) ) {
+			if ( empty( $value ) || 'blank' === $value || isset( $color_palette[ $value ] ) ) {
 				continue;
 			}
 
-			$color_palette[] = array(
+			$color_palette[ $value ] = array(
 				'slug'  => $id,
 				'name'  => $title,
 				'color' => $value,
 			);
 		}
 
-		$theme_support->add_feature( new Super_Awesome_Theme_List_Theme_Feature( 'editor-color-palette', $color_palette ) );
+		$theme_support->add_feature( new Super_Awesome_Theme_List_Theme_Feature( 'editor-color-palette', array_values( $color_palette ) ) );
 	}
 
 	/**

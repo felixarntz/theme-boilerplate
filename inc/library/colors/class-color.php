@@ -188,7 +188,13 @@ final class Super_Awesome_Theme_Color {
 	 * @return mixed Current value for the color setting.
 	 */
 	final public function get_value() {
-		return $this->setting->get_value();
+		$value = $this->setting->get_value();
+
+		if ( ! empty( $value ) && 'blank' !== $value && '#' !== substr( $value, 0, 1 ) ) {
+			$value = '#' . $value;
+		}
+
+		return $value;
 	}
 
 	/**
