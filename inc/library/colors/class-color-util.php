@@ -102,4 +102,16 @@ final class Super_Awesome_Theme_Color_Util {
 
 		return '#' . $hex[0] . $hex[1] . $hex[2];
 	}
+
+	/**
+	 * Duplicates a character.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $char Character to duplicate.
+	 * @return string The character duplicated.
+	 */
+	protected function duplicate_char( $char ) {
+		return $char . $char;
+	}
 }
