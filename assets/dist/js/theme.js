@@ -878,12 +878,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				return document.querySelector(selector);
 			}).filter(function (container) {
 				return container;
+			}).sort(function (a, b) {
+				return a.offsetTop < b.offsetTop ? -1 : 1;
 			});
-			this.stickToBottomContainers = stickToBottomSelectors.reverse().map(function (selector) {
+			this.stickToBottomContainers = stickToBottomSelectors.map(function (selector) {
 				return document.querySelector(selector);
 			}).filter(function (container) {
 				return container;
-			});
+			}).sort(function (a, b) {
+				return a.offsetTop < b.offsetTop ? -1 : 1;
+			}).reverse();
 		}
 
 		_createClass(Sticky, [{

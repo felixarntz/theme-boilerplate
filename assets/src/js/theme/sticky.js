@@ -26,11 +26,13 @@ class Sticky {
 		this.pageWrap                = document.getElementById( 'page' );
 		this.stickToTopContainers    = stickToTopSelectors
 			.map( selector => document.querySelector( selector ) )
-			.filter( container => container );
+			.filter( container => container )
+			.sort( ( a, b ) => a.offsetTop < b.offsetTop ? -1 : 1 );
 		this.stickToBottomContainers = stickToBottomSelectors
-			.reverse()
 			.map( selector => document.querySelector( selector ) )
-			.filter( container => container );
+			.filter( container => container )
+			.sort( ( a, b ) => a.offsetTop < b.offsetTop ? -1 : 1 )
+			.reverse();
 	}
 
 	initialize() {

@@ -140,7 +140,10 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 		) );
 
 		foreach ( $this->sticky_elements as $sticky ) {
-			$customizer->add_control( 'sticky_' . $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_ID ), array(
+			$setting_id = 'sticky_' . $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_ID );
+
+			$customizer->set_setting_transport( $setting_id, Super_Awesome_Theme_Customize_Setting::TRANSPORT_REFRESH );
+			$customizer->add_control( $setting_id, array(
 				Super_Awesome_Theme_Customize_Control::PROP_SECTION => 'layout',
 				Super_Awesome_Theme_Customize_Control::PROP_TITLE   => $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_LABEL ),
 				Super_Awesome_Theme_Customize_Control::PROP_TYPE    => Super_Awesome_Theme_Customize_Control::TYPE_CHECKBOX,
