@@ -30,7 +30,8 @@
 	}
 
 	.has-header-image &,
-	.has-header-video & {
+	.has-header-video &,
+	.has-page-header & {
 		display: table;
 		width: 100%;
 		height: 10rem;
@@ -67,6 +68,23 @@
 			z-index: 3;
 			transform: translate(-50%, -50%);
 			width: 100%;
+		}
+	}
+
+	.site-page-header-content {
+		h1 {
+			@include font-size(1.8);
+
+			margin: 0;
+
+			& + * {
+				padding: (0.5 * $spacing_vertical) 0 0;
+			}
+		}
+
+		.entry-title,
+		.entry-meta {
+			margin: 0;
 		}
 	}
 }

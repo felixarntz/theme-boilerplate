@@ -15,16 +15,8 @@ get_header();
 
 				<?php
 				if ( have_posts() ) {
-					?>
+					get_template_part( 'template-parts/header/generic-page-header' );
 
-					<header class="page-header">
-						<?php
-						the_archive_title( '<h1 class="archive-title">', '</h1>' );
-						the_archive_description( '<div class="archive-description">', '</div>' );
-						?>
-					</header><!-- .page-header -->
-
-					<?php
 					while ( have_posts() ) {
 						the_post();
 

@@ -21,6 +21,11 @@ function super_awesome_theme_body_classes( $classes ) {
 		$classes[] = 'wrapped-layout';
 	}
 
+	// Add a class to indicate that a page header is present.
+	if ( super_awesome_theme_use_page_header() ) {
+		$classes[] = 'has-page-header';
+	}
+
 	// Add a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';

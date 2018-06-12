@@ -11,6 +11,10 @@ $branding_location = super_awesome_theme_get_setting( 'branding_location' );
 $menu_slug         = super_awesome_theme_get_navigation_name();
 $extra_class       = super_awesome_theme_get_setting( 'navbar_justify_content' );
 
+if ( 'header' === $branding_location && super_awesome_theme_use_page_header() ) {
+	$branding_location = 'navbar_left';
+}
+
 ?>
 
 <div id="site-navbar" class="site-navbar site-component is-flex <?php echo esc_attr( $extra_class ); ?>">

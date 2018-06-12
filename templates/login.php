@@ -52,7 +52,7 @@ get_header();
 						</div>
 						<?php
 					}
-				} // End of the loop.
+				}
 				?>
 
 			</main><!-- #main -->

@@ -14,9 +14,9 @@
  */
 function super_awesome_theme_wp_subtitle_print_post_subtitle() {
 	if ( is_singular() ) {
-		the_subtitle( '<p class="entry-subtitle">', '</p>' );
+		the_subtitle( '<div class="entry-subtitle">', '</div>' );
 	} else {
-		the_subtitle( '<p class="entry-subtitle"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></p>' );
+		the_subtitle( '<div class="entry-subtitle"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></div>' );
 	}
 }
 add_action( 'super_awesome_theme_after_entry_title', 'super_awesome_theme_wp_subtitle_print_post_subtitle' );

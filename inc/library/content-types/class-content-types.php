@@ -35,6 +35,18 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 	}
 
 	/**
+	 * Checks whether page headers should be used for a post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool True if page headers should be used, false otherwise.
+	 */
+	public function should_use_page_header( $post_type ) {
+		return $this->get_dependency( 'settings' )->get( $post_type . '_use_page_header' );
+	}
+
+	/**
 	 * Checks whether post format templates should be used for a post type.
 	 *
 	 * @since 1.0.0
@@ -238,6 +250,8 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 
 		$public_post_types = get_post_types( array( 'public' => true ), 'objects' );
 		foreach ( $public_post_types as $post_type ) {
+			$boolean_settings[ $post_type->name . '_use_page_header' ] = false;
+
 			if ( post_type_supports( $post_type->name, 'excerpt' ) ) {
 				$boolean_settings[ $post_type->name . '_use_excerpt' ] = false;
 			}
@@ -289,6 +303,11 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 		$public_post_types = get_post_types( array( 'public' => true ), 'objects' );
 		foreach ( $public_post_types as $post_type ) {
 			$boolean_controls = array();
+
+			$boolean_controls[ $post_type->name . '_use_page_header' ] = array(
+				'label'     => __( 'Use Page Header?', 'super-awesome-theme' ),
+				'transport' => Super_Awesome_Theme_Customize_Setting::TRANSPORT_REFRESH,
+			);
 
 			if ( post_type_supports( $post_type->name, 'excerpt' ) ) {
 				$boolean_controls[ $post_type->name . '_use_excerpt' ] = array(
@@ -355,12 +374,18 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 					Super_Awesome_Theme_Customize_Control::PROP_TYPE    => Super_Awesome_Theme_Customize_Control::TYPE_CHECKBOX,
 				) );
 
-				$customizer->add_partial( $id, array(
-					Super_Awesome_Theme_Customize_Partial::PROP_SELECTOR            => $args['selector'],
-					Super_Awesome_Theme_Customize_Partial::PROP_RENDER_CALLBACK     => $args['render_callback'],
-					Super_Awesome_Theme_Customize_Partial::PROP_CONTAINER_INCLUSIVE => true,
-					Super_Awesome_Theme_Customize_Partial::PROP_TYPE                => 'SuperAwesomeThemePostPartial',
-				) );
+				if ( ! empty( $args['transport'] ) ) {
+					$customizer->set_setting_transport( $id, $args['transport'] );
+				}
+
+				if ( ! empty( $args['selector'] ) && ! empty( $args['render_callback'] ) ) {
+					$customizer->add_partial( $id, array(
+						Super_Awesome_Theme_Customize_Partial::PROP_SELECTOR            => $args['selector'],
+						Super_Awesome_Theme_Customize_Partial::PROP_RENDER_CALLBACK     => $args['render_callback'],
+						Super_Awesome_Theme_Customize_Partial::PROP_CONTAINER_INCLUSIVE => true,
+						Super_Awesome_Theme_Customize_Partial::PROP_TYPE                => 'SuperAwesomeThemePostPartial',
+					) );
+				}
 			}
 		}
 	}

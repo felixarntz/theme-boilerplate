@@ -13,6 +13,7 @@
  * @since 1.0.0
  */
 function super_awesome_theme_setup() {
+	add_image_size( 'full-width', 2560, 9999 ); // Spans the full width for large screens.
 	add_image_size( 'site-width', 1152, 9999 ); // Spans the site maximum width of 72rem, with unlimited height.
 	add_image_size( 'content-width', 640, 9999 ); // Spans the content maximum width of 40rem, with unlimited height.
 

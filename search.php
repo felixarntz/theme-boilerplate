@@ -15,18 +15,8 @@ get_header();
 
 				<?php
 				if ( have_posts() ) {
-					?>
+					get_template_part( 'template-parts/header/generic-page-header' );
 
-					<header class="page-header">
-						<h1>
-							<?php
-							/* translators: %s: search query. */
-							printf( esc_html__( 'Search Results for: %s', 'super-awesome-theme' ), '<span>' . get_search_query() . '</span>' );
-							?>
-						</h1>
-					</header><!-- .page-header -->
-
-					<?php
 					while ( have_posts() ) {
 						the_post();
 

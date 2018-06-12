@@ -20,10 +20,8 @@ get_header();
 					the_post();
 
 					if ( ! is_user_logged_in() ) {
+						get_template_part( 'template-parts/header/generic-page-header' );
 						?>
-						<header class="page-header">
-							<?php the_title( '<h1>', '</h1>' ); ?>
-						</header><!-- .page-header -->
 
 						<div class="page-login-form">
 							<p><?php esc_html_e( 'You must be logged in to view the content of this page.', 'super-awesome-theme' ); ?></p>
@@ -54,7 +52,7 @@ get_header();
 							comments_template();
 						}
 					}
-				} // End of the loop.
+				}
 				?>
 
 			</main><!-- #main -->

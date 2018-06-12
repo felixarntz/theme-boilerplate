@@ -34,7 +34,7 @@ get_header();
 					if ( super_awesome_theme_display_post_comments() ) {
 						comments_template();
 					}
-				} // End of the loop.
+				}
 				?>
 
 			</main><!-- #main -->

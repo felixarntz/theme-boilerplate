@@ -129,6 +129,60 @@ function super_awesome_theme_use_wrapped_layout() {
 }
 
 /**
+ * Checks whether a page header should be used for the current context.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if a page header should be used, false otherwise.
+ */
+function super_awesome_theme_use_page_header() {
+	$post_type = '';
+
+	switch ( true ) {
+		case is_front_page():
+			break;
+		case is_singular();
+			$post_type = get_post_type();
+			break;
+		case is_home():
+			$post_type = 'post';
+			break;
+		case is_category():
+		case is_tag():
+		case is_tax():
+			$term = get_queried_object();
+			if ( $term ) {
+				$taxonomy = get_taxonomy( $term->taxonomy );
+				if ( $taxonomy && ! empty( $taxonomy->object_type ) ) {
+					$post_type = reset( $taxonomy->object_type );
+				}
+			}
+			break;
+		default:
+			$post_type = get_query_var( 'post_type' );
+			if ( is_array( $post_type ) ) {
+				$post_type = reset( $post_type );
+			}
+	}
+
+	$use_page_header = false;
+	if ( ! empty( $post_type ) ) {
+		$use_page_header = super_awesome_theme()->get_component( 'content_types' )->should_use_page_header( $post_type );
+	}
+
+	/**
+	 * Filters whether a page header should be used for the current context.
+	 *
+	 * By default, this depends on the setting for the post type currently queried.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool $use_page_header Whether to use a page header.
+	 */
+	return apply_filters( 'super_awesome_theme_use_page_header', $use_page_header );
+}
+
+/**
  * Checks whether post format templates should be used for a post.
  *
  * @since 1.0.0
