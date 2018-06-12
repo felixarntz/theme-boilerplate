@@ -34,7 +34,7 @@ function super_awesome_theme_customize_register( $wp_customize ) {
 	/* Header Media */
 
 	$wp_customize->add_setting( 'header_position', array(
-		'default'           => 'above_navbar',
+		'default'           => 'below_navbar',
 		'transport'         => 'refresh',
 		'validate_callback' => 'super_awesome_theme_customize_validate_header_position',
 	) );

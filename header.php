@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$header_position = get_theme_mod( 'header_position', 'above_navbar' );
+$header_position = get_theme_mod( 'header_position', 'below_navbar' );
 
 ?>
 <!doctype html>
