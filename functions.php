@@ -58,11 +58,6 @@ require get_template_directory() . '/inc/template-hooks.php';
 require get_template_directory() . '/inc/template-functions.php';
 
 /**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
  * Plugin compatibility.
  */
 require get_template_directory() . '/inc/plugin-compat.php';

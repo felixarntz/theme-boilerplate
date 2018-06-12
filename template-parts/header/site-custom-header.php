@@ -7,8 +7,8 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$header_textalign  = get_theme_mod( 'header_textalign', 'text-center' );
-$branding_location = get_theme_mod( 'branding_location', 'header' );
+$header_textalign  = super_awesome_theme_get_setting( 'header_textalign' );
+$branding_location = super_awesome_theme_get_setting( 'branding_location' );
 
 ?>
 <div class="site-custom-header site-component <?php echo esc_attr( $header_textalign ); ?>">

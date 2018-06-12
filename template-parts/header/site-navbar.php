@@ -7,9 +7,9 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$branding_location = get_theme_mod( 'branding_location', 'header' );
+$branding_location = super_awesome_theme_get_setting( 'branding_location' );
 $menu_slug         = super_awesome_theme_get_navigation_name();
-$extra_class       = super_awesome_theme()->get_component( 'settings' )->get( 'navbar_justify_content' );
+$extra_class       = super_awesome_theme_get_setting( 'navbar_justify_content' );
 
 ?>
 
