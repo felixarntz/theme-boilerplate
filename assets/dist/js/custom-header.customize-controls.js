@@ -97,7 +97,7 @@
 
 
 			api.bind('ready', function () {
-				api.setting.when('branding_location', 'header_position', function (brandingLocation, headerPosition) {
+				api.when('branding_location', 'header_position', function (brandingLocation, headerPosition) {
 					brandingLocation.transport = 'refresh';
 					headerPosition.transport = 'refresh';
 				});

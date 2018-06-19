@@ -69,6 +69,10 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 		if ( $this->has_rtl ) {
 			wp_style_add_data( $this->handle, 'rtl', 'replace' );
 		}
+
+		foreach ( $this->inline_styles as $inline_style ) {
+			wp_add_inline_style( $this->handle, $inline_style['style'] );
+		}
 	}
 
 	/**
@@ -84,10 +88,6 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 		}
 
 		wp_enqueue_style( $this->handle );
-
-		foreach ( $this->inline_styles as $inline_style ) {
-			wp_add_inline_style( $this->handle, $inline_style['style'] );
-		}
 	}
 
 	/**

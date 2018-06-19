@@ -121,6 +121,9 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 				return call_user_func_array( array( $this, $method ), $args );
 			case 'register':
 				foreach ( $this->assets as $asset ) {
+					if ( $asset->is_registered() ) {
+						continue;
+					}
 					$asset->register();
 				}
 				break;

@@ -9,7 +9,7 @@
 	const { __, _x } = wp.i18n;
 
 	api.bind( 'ready', () => {
-		api.setting.when( 'branding_location', 'header_position', ( brandingLocation, headerPosition ) => {
+		api.when( 'branding_location', 'header_position', ( brandingLocation, headerPosition ) => {
 			brandingLocation.transport = 'refresh';
 			headerPosition.transport   = 'refresh';
 		});

@@ -64,6 +64,14 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 		}
 
 		wp_register_script( $this->handle, $uri, $this->dependencies, $this->version, true );
+
+		if ( ! empty( $this->data_name ) && ! empty( $this->data ) ) {
+			wp_localize_script( $this->handle, $this->data_name, $this->data );
+		}
+
+		foreach ( $this->inline_scripts as $inline_script ) {
+			wp_add_inline_script( $this->handle, $inline_script['script'], $inline_script['position'] );
+		}
 	}
 
 	/**
@@ -79,14 +87,6 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 		}
 
 		wp_enqueue_script( $this->handle );
-
-		if ( ! empty( $this->data_name ) && ! empty( $this->data ) ) {
-			wp_localize_script( $this->handle, $this->data_name, $this->data );
-		}
-
-		foreach ( $this->inline_scripts as $inline_script ) {
-			wp_add_inline_script( $this->handle, $inline_script['script'], $inline_script['position'] );
-		}
 	}
 
 	/**
