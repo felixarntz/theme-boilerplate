@@ -21,10 +21,10 @@
   "homepage": "https://super-awesome-author.org/themes/super-awesome-theme/",
   "repository": {
     "type": "git",
-    "url": "git://github.com/taco-themes/super-awesome-theme.git"
+    "url": "git://github.com/felixarntz/super-awesome-theme.git"
   },
   "bugs": {
-    "url": "https://github.com/taco-themes/super-awesome-theme/issues"
+    "url": "https://github.com/felixarntz/super-awesome-theme/issues"
   },
   "license": "GPL-2.0-or-later",
   "scripts": {
@@ -33,12 +33,17 @@
     "lint": "gulp lint"
   },
   "engines": {
-    "node": ">= 6.9.4"
+    "node": ">= 8.0.0"
+  },
+  "dependencies": {
+    "@wordpress/i18n": "1.1.0"
   },
   "devDependencies": {
+    "@wordpress/babel-plugin-makepot": "1.0.1",
     "babel-core": "^6.26.3",
     "babel-preset-env": "~1.6.1",
     "browser-sync": "~2.23.7",
+    "del": "~3.0.0",
     "gulp": "~3.9.1",
     "gulp-autoprefixer": "~4.0.0",
     "gulp-babel": "^7.0.1",
@@ -49,6 +54,7 @@
     "gulp-rename": "~1.2.2",
     "gulp-replace": "~0.6.1",
     "gulp-rtlcss": "~1.0.0",
+    "gulp-run": "~1.7.1",
     "gulp-sass": "~3.1.0",
     "gulp-sort": "~2.0.0",
     "gulp-stylelint": "~5.0.0",

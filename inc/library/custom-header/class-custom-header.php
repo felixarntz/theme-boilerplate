@@ -84,7 +84,8 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 			case 'register_feature':
 			case 'print_header_style':
 			case 'register_settings':
-			case 'register_customize_controls':
+			case 'register_customize_controls_js':
+			case 'register_customize_preview_js':
 			case 'add_customizer_script_data':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
@@ -179,49 +180,53 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 	}
 
 	/**
-	 * Registers Customizer controls for custom header behavior.
+	 * Registers scripts for the Customizer controls.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function register_customize_controls( $customizer ) {
-		$customizer->set_setting_transport( 'branding_location', Super_Awesome_Theme_Customize_Setting::TRANSPORT_REFRESH );
-		$customizer->add_control( 'branding_location', array(
-			Super_Awesome_Theme_Customize_Control::PROP_SECTION     => 'title_tagline',
-			Super_Awesome_Theme_Customize_Control::PROP_TITLE       => __( 'Display Location', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION => __( 'Specify where to display the site logo, title and tagline.', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_TYPE        => Super_Awesome_Theme_Customize_Control::TYPE_RADIO,
-			Super_Awesome_Theme_Customize_Control::PROP_CHOICES     => $this->get_branding_location_choices(),
-		) );
-
-		$customizer->set_setting_transport( 'header_position', Super_Awesome_Theme_Customize_Setting::TRANSPORT_REFRESH );
-		$customizer->add_control( 'header_position', array(
-			Super_Awesome_Theme_Customize_Control::PROP_SECTION     => 'header_image',
-			Super_Awesome_Theme_Customize_Control::PROP_TITLE       => _x( 'Position', 'custom header', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION => __( 'Specify where to display the header image or video.', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_TYPE        => Super_Awesome_Theme_Customize_Control::TYPE_RADIO,
-			Super_Awesome_Theme_Customize_Control::PROP_CHOICES     => $this->get_header_position_choices(),
-		) );
-
-		$customizer->add_control( 'header_textalign', array(
-			Super_Awesome_Theme_Customize_Control::PROP_SECTION => 'header_image',
-			Super_Awesome_Theme_Customize_Control::PROP_TITLE   => _x( 'Text Alignment', 'custom header', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_TYPE    => Super_Awesome_Theme_Customize_Control::TYPE_RADIO,
-			Super_Awesome_Theme_Customize_Control::PROP_CHOICES => $this->get_header_textalign_choices(),
+	protected function register_customize_controls_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-custom-header-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/custom-header.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls', 'wp-i18n' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomHeaderControlsData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'brandingLocationChoices' => $this->get_branding_location_choices(),
+					'headerPositionChoices'   => $this->get_header_position_choices(),
+					'headerTextalignChoices'  => $this->get_header_textalign_choices(),
+				),
+			)
 		) );
 	}
 
 	/**
-	 * Adds script data for Customizer functionality.
+	 * Registers scripts for the Customizer preview.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function add_customizer_script_data() {
-		$customizer = $this->get_dependency( 'customizer' );
-
-		$preview_script = $customizer->get_preview_script();
-		$preview_script->add_data( 'headerTextalignChoices', $this->get_header_textalign_choices() );
+	protected function register_customize_preview_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-custom-header-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/custom-header.customize-preview.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomHeaderPreviewData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'headerTextalignChoices' => $this->get_header_textalign_choices(),
+				),
+			)
+		) );
 	}
 
 	/**
@@ -232,9 +237,9 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_feature' ), 10, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 0, 0 );
-		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 
 		$customizer = $this->get_dependency( 'customizer' );
-		$customizer->on_init( array( $this, 'register_customize_controls' ) );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
+		$customizer->on_js_preview_init( array( $this, 'register_customize_preview_js' ) );
 	}
 }

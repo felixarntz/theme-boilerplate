@@ -71,6 +71,13 @@ abstract class Super_Awesome_Theme_Asset {
 	const LOCATION_ADMIN = 'admin';
 
 	/**
+	 * Identifier of the login location.
+	 *
+	 * @since 1.0.0
+	 */
+	const LOCATION_LOGIN = 'login';
+
+	/**
 	 * Identifier of the block editor location.
 	 *
 	 * @since 1.0.0

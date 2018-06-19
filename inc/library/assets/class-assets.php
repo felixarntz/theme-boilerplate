@@ -117,7 +117,13 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 			case 'register_main_assets':
 			case 'disable_special_page_styles':
 			case 'print_detect_js_svg_support_script':
+			case 'set_jed_locale_data':
 				return call_user_func_array( array( $this, $method ), $args );
+			case 'register':
+				foreach ( $this->assets as $assets ) {
+					$asset->register();
+				}
+				break;
 			default:
 				if ( ! preg_match( '/^(register|enqueue)_([a-z_]+)$/', $method, $matches ) ) {
 					return;
@@ -166,6 +172,16 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	 * @since 1.0.0
 	 */
 	private function register_main_assets() {
+		$this->register_asset( new Super_Awesome_Theme_Script(
+			'wp-i18n',
+			get_theme_file_uri( '/assets/dist/js/wp-i18n.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_VERSION   => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION  => '',
+				Super_Awesome_Theme_Script::PROP_MIN_URI   => true,
+			)
+		) );
+
 		$this->register_asset( new Super_Awesome_Theme_Script(
 			'super-awesome-theme-script',
 			get_theme_file_uri( '/assets/dist/js/theme.js' ),
@@ -244,6 +260,47 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	}
 
 	/**
+	 * Sets locale data on the wp-i18n script.
+	 *
+	 * @since 1.0.0
+	 */
+	private function set_jed_locale_data() {
+		$locale_data = $this->get_jed_locale_data_for_domain( 'super-awesome-theme' );
+
+		$wp_i18n = $this->get_registered_asset( 'wp-i18n' );
+		$wp_i18n->add_inline_script( 'wp.i18n.setLocaleData( ' . json_encode( $locale_data ) . ' );' );
+	}
+
+	/**
+	 * Gets JED-formatted locale data.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $domain Textdomain to get loale data for.
+	 * @return array Locale data.
+	 */
+	private function get_jed_locale_data_for_domain( $domain ) {
+		$translations = get_translations_for_domain( $domain );
+
+		$locale = array(
+			'' => array(
+				'domain' => $domain,
+				'lang'   => is_admin() ? get_user_locale() : get_locale(),
+			),
+		);
+
+		if ( ! empty( $translations->headers['Plural-Forms'] ) ) {
+			$locale['']['plural_forms'] = $translations->headers['Plural-Forms'];
+		}
+
+		foreach ( $translations->entries as $msgid => $entry ) {
+			$locale[ $msgid ] = $entry->translations;
+		}
+
+		return $locale;
+	}
+
+	/**
 	 * Adds hooks and runs other processes required to initialize the component.
 	 *
 	 * @since 1.0.0
@@ -252,16 +309,20 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 		add_action( 'after_setup_theme', array( $this, 'register_main_assets' ), 10, 0 );
 		add_action( 'get_header', array( $this, 'disable_special_page_styles' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'print_detect_js_svg_support_script' ), 0, 0 );
+		add_action( 'init', array( $this, 'set_jed_locale_data' ), 10, 0 );
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_frontend' ), 1, 0 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend' ), 10, 0 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin' ), 1, 0 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin' ), 10, 0 );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'register_block_editor' ), 1, 0 );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor' ), 10, 0 );
-		add_action( 'customize_preview_init', array( $this, 'register_customize_preview' ), 1, 0 );
-		add_action( 'customize_preview_init', array( $this, 'enqueue_customize_preview' ), 10, 0 );
-		add_action( 'customize_controls_enqueue_scripts', array( $this, 'register_customize_controls' ), 1, 0 );
-		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_customize_controls' ), 10, 0 );
+		$location_hooks = array(
+			Super_Awesome_Theme_Asset::LOCATION_FRONTEND           => 'wp_enqueue_scripts',
+			Super_Awesome_Theme_Asset::LOCATION_ADMIN              => 'admin_enqueue_scripts',
+			Super_Awesome_Theme_Asset::LOCATION_LOGIN              => 'login_enqueue_scripts',
+			Super_Awesome_Theme_Asset::LOCATION_BLOCK_EDITOR       => 'enqueue_block_editor_assets',
+			Super_Awesome_Theme_Asset::LOCATION_CUSTOMIZE_PREVIEW  => 'customize_preview_init',
+			Super_Awesome_Theme_Asset::LOCATION_CUSTOMIZE_CONTROLS => 'customize_controls_enqueue_scripts',
+		);
+
+		foreach ( $location_hooks as $location => $hookname ) {
+			add_action( $hookname, array( $this, 'register' ), 1, 0 );
+			add_action( $hookname, array( $this, 'enqueue_' . $location ), 10, 0 );
+		}
 	}
 }

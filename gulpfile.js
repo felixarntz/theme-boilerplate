@@ -92,6 +92,7 @@ const jscs         = require( 'gulp-jscs' );
 const rename       = require( 'gulp-rename' );
 const replace      = require( 'gulp-replace' );
 const rtlcss       = require( 'gulp-rtlcss' );
+const run          = require( 'gulp-run' );
 const sass         = require( 'gulp-sass' );
 const sort         = require( 'gulp-sort' );
 const stylelint    = require( 'gulp-stylelint' );
@@ -99,6 +100,7 @@ const uglify       = require( 'gulp-uglify' );
 const wpPot        = require( 'gulp-wp-pot' );
 
 const browserSync     = require( 'browser-sync' ).create();
+const del             = require( 'del' );
 const imageminMozjpeg = require( 'imagemin-mozjpeg' );
 const PluginError     = require( 'plugin-error' );
 const webpack         = require( 'webpack-stream' );
@@ -178,11 +180,7 @@ gulp.task( 'lint-sass', done => {
 
 // compile Sass
 gulp.task( 'compile-sass', done => {
-	gulp.src([
-		'./assets/src/sass/style.scss',
-		'./assets/src/sass/editor-style.scss',
-		'./assets/src/sass/block-editor-style.scss',
-	])
+	gulp.src( 'assets/src/sass/*.scss' )
 		.pipe( replace( /^\/\*! --- Theme header will be inserted here automatically\. --- \*\//, '/*!\n' + themeheader + '\n\n' + config.themeName + ' WordPress Theme, Copyright (C) ' + (new Date()).getFullYear() + ' ' + config.author + '\n\n' + gplNote + '\n*/' ) )
 		.pipe( sass({
 			errLogToConsole: true,
@@ -219,15 +217,24 @@ gulp.task( 'lint-js', done => {
 
 // compile JavaScript
 gulp.task( 'compile-js', done => {
+	const files = {
+		theme: './assets/src/js/theme.js',
+		'customize-controls': './assets/src/js/customize-controls.js',
+		'customize-preview': './assets/src/js/customize-preview.js',
+		'custom-header.customize-controls': './assets/src/js/custom-header.customize-controls.js',
+		'custom-header.customize-preview': './assets/src/js/custom-header.customize-preview.js',
+		'wp-i18n': './node_modules/@wordpress/i18n',
+	};
 	gulp.src( './assets/src/js/theme.js' )
 		.pipe( webpack({
-			entry: {
-				theme: './assets/src/js/theme.js',
-				'customize-controls': './assets/src/js/customize-controls.js',
-				'customize-preview': './assets/src/js/customize-preview.js',
-			},
+			entry: files,
 			output: {
 				filename: '[name].js',
+			},
+			externals: {
+				'@wordpress/i18n': {
+					this: [ 'wp', 'i18n' ],
+				},
 			},
 		}) )
 		.pipe( babel({
@@ -288,31 +295,53 @@ gulp.task( 'img', done => {
 
 // generate POT file
 gulp.task( 'pot', done => {
-	gulp.src([
-		'./*.php',
-		'./inc/**/*.php',
-		'./template-parts/**/*.php',
-		'./templates/**/*.php',
-	])
-		.pipe( sort() )
-		.pipe( wpPot({
-			domain: config.textDomain,
-			headers: {
-				'Project-Id-Version': config.themeName + ' ' + config.version,
-				'report-msgid-bugs-to': config.translateURI,
-				'x-generator': 'gulp-wp-pot',
-				'x-poedit-basepath': '.',
-				'x-poedit-language': 'English',
-				'x-poedit-country': 'UNITED STATES',
-				'x-poedit-sourcecharset': 'uft-8',
-				'x-poedit-keywordslist': '__;_e;_x:1,2c;_ex:1,2c;_n:1,2; _nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__; esc_html__;esc_attr_e; esc_html_e;esc_attr_x:1,2c; esc_html_x:1,2c;',
-				'x-poedit-bookmars': '',
-				'x-poedit-searchpath-0': '.',
-				'x-textdomain-support': 'yes',
-			},
+	gulp.src( './assets/src/js/**/*.js' )
+		.pipe( babel({
+			plugins: [
+				[
+					'@wordpress/babel-plugin-makepot',
+					{
+						'output': 'languages/' + config.textDomain + '.js.pot',
+					},
+				],
+			],
 		}) )
-		.pipe( gulp.dest( './languages/' + config.textDomain + '.pot' ) )
-		.on( 'end', done );
+		.on( 'end', () => {
+			run( 'npx pot-to-php ./languages/' + config.textDomain + '.js.pot ./inc/js-i18n.php ' + config.textDomain ).exec()
+				.pipe( gulp.dest( 'output' ) )
+				.on( 'end', () => {
+					window.console.log( 'bello' );
+					gulp.src([
+						'./*.php',
+						'./inc/**/*.php',
+						'./template-parts/**/*.php',
+						'./templates/**/*.php',
+					])
+						.pipe( sort() )
+						.pipe( wpPot({
+							domain: config.textDomain,
+							headers: {
+								'Project-Id-Version': config.themeName + ' ' + config.version,
+								'report-msgid-bugs-to': config.translateURI,
+								'x-generator': 'gulp-wp-pot',
+								'x-poedit-basepath': '.',
+								'x-poedit-language': 'English',
+								'x-poedit-country': 'UNITED STATES',
+								'x-poedit-sourcecharset': 'uft-8',
+								'x-poedit-keywordslist': '__;_e;_x:1,2c;_ex:1,2c;_n:1,2; _nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__; esc_html__;esc_attr_e; esc_html_e;esc_attr_x:1,2c; esc_html_x:1,2c;',
+								'x-poedit-bookmars': '',
+								'x-poedit-searchpath-0': '.',
+								'x-textdomain-support': 'yes',
+							},
+						}) )
+						.pipe( gulp.dest( './languages/' + config.textDomain + '.pot' ) )
+						.on( 'end', () => {
+							del([
+								'/languages/' + config.textDomain + '.js.pot',
+							]).then( done );
+						});
+				});
+		});
 });
 
 // replace the theme header in readme.txt

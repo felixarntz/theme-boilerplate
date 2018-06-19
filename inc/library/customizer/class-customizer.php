@@ -73,6 +73,48 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	}
 
 	/**
+	 * Adds a callback to run on Customizer preview initialization.
+	 *
+	 * Should be used to register scripts to use for the Customizer preview.
+	 *
+	 * The callback receives the `Super_Awesome_Theme_Assets` instance
+	 * as sole parameter.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param callable $callback Callback initializing Customizer functionality.
+	 */
+	public function on_js_preview_init( $callback ) {
+		if ( did_action( 'super_awesome_theme_customize_register_preview_scripts' ) ) {
+			call_user_func( $callback, $this->get_dependency( 'assets' ) );
+			return;
+		}
+
+		add_action( 'super_awesome_theme_customize_register_preview_scripts', $callback, 10, 1 );
+	}
+
+	/**
+	 * Adds a callback to run on Customizer controls initialization.
+	 *
+	 * Should be used to register scripts to use for the Customizer controls.
+	 *
+	 * The callback receives the `Super_Awesome_Theme_Assets` instance
+	 * as sole parameter.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param callable $callback Callback initializing Customizer functionality.
+	 */
+	public function on_js_controls_init( $callback ) {
+		if ( did_action( 'super_awesome_theme_customize_register_controls_scripts' ) ) {
+			call_user_func( $callback, $this->get_dependency( 'assets' ) );
+			return;
+		}
+
+		add_action( 'super_awesome_theme_customize_register_controls_scripts', $callback, 10, 1 );
+	}
+
+	/**
 	 * Registers a new Customizer panel.
 	 *
 	 * @since 1.0.0
@@ -362,7 +404,9 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 				do_action( 'super_awesome_theme_customize_register_controls', $this );
 				break;
 			case 'register_scripts':
-				$this->register_scripts();
+			case 'register_preview_scripts':
+			case 'register_controls_scripts':
+				call_user_func_array( array( $this, $method ), $args );
 				break;
 			case 'partial_blogname':
 				bloginfo( 'name' );
@@ -407,6 +451,40 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	}
 
 	/**
+	 * Registers the Customizer preview scripts.
+	 *
+	 * @since 1.0.0
+	 */
+	private function register_preview_scripts() {
+
+		/**
+		 * Fires when Customizer preview scripts should be registered.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Super_Awesome_Theme_Assets $assets Assets instance.
+		 */
+		do_action( 'super_awesome_theme_customize_register_preview_scripts', $this->get_dependency( 'assets' ) );
+	}
+
+	/**
+	 * Registers the Customizer controls scripts.
+	 *
+	 * @since 1.0.0
+	 */
+	private function register_controls_scripts() {
+
+		/**
+		 * Fires when Customizer controls scripts should be registered.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Super_Awesome_Theme_Assets $assets Assets instance.
+		 */
+		do_action( 'super_awesome_theme_customize_register_controls_scripts', $this->get_dependency( 'assets' ) );
+	}
+
+	/**
 	 * Modifies core defaults for the Customizer.
 	 *
 	 * The 'blogname' and 'blogdescription' settings are changed to use selective refresh.
@@ -437,5 +515,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	protected function run_initialization() {
 		add_action( 'customize_register', array( $this, 'trigger_init' ), 10, 1 );
 		add_action( 'after_setup_theme', array( $this, 'register_scripts' ), 10, 0 );
+		add_action( 'customize_preview_init', array( $this, 'register_preview_scripts' ), 0, 0 );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'register_controls_scripts' ), 0, 0 );
 	}
 }
