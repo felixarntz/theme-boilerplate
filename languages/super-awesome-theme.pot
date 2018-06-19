@@ -20,22 +20,13 @@ msgstr ""
 "x-textdomain-support: yes\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 404.php:17
-msgid "Oops! That page can&rsquo;t be found."
-msgstr ""
-
-#: 404.php:21
-msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
-msgstr ""
-
-#: 404.php:26
-msgid "Most Used Categories"
-msgstr ""
-
-#: comments.php:29, inc/assets.php:48
+#. translators: 1: title.
+#. translators: 1: title.
+#: comments.php:29, inc/library/comments/class-comments.php:224
 msgid "One thought on &ldquo;%1$s&rdquo;"
 msgstr ""
 
+#. translators: 1: comment count number, 2: title.
 #: comments.php:35
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
@@ -47,12 +38,8 @@ msgstr[1] ""
 msgid "Comments are closed."
 msgstr ""
 
-#: header.php:23
+#: header.php:25
 msgid "Skip to content"
-msgstr ""
-
-#: search.php:22
-msgid "Search Results for: %s"
 msgstr ""
 
 #: searchform.php:15
@@ -65,326 +52,164 @@ msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr ""
 
-#: searchform.php:18
+#: searchform.php:20
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
 
-#: sidebar.php:27, inc/setup.php:122
+#: sidebar.php:27, inc/library/sidebar/class-sidebar.php:224
 msgid "Primary Sidebar"
 msgstr ""
 
-#: inc/assets.php:29
-msgid "Expand child menu"
-msgstr ""
-
-#: inc/assets.php:30
-msgid "Collapse child menu"
-msgstr ""
-
-#: inc/assets.php:38
-msgid "Processing..."
-msgstr ""
-
-#: inc/assets.php:39
-msgid "Bad response code."
-msgstr ""
-
-#: inc/assets.php:40
-msgid "Invalid JSON response."
-msgstr ""
-
-#: inc/assets.php:42
-msgid "Your comment was either a duplicate or you are posting too rapidly. <a href=\"%s\">Edit your comment</a>"
-msgstr ""
-
-#: inc/assets.php:43
-msgid "There were errors in submitting your comment; complete the missing fields and try again!"
-msgstr ""
-
-#: inc/assets.php:44
-msgid "This email address appears to be invalid."
-msgstr ""
-
-#: inc/assets.php:45
-msgid "This is a required field."
-msgstr ""
-
-#: inc/assets.php:108
-msgid "Thanks for commenting! Your comment has been sent for moderation and should be approved soon."
-msgstr ""
-
-#. translators: %s: comment URL
-#: inc/assets.php:111
-msgid "Thanks for commenting! Your comment has been approved. <a href=\"%s\">Read your comment</a>"
-msgstr ""
-
-#: inc/assets.php:124
-msgid "Your comment has been marked as spam."
-msgstr ""
-
-#: inc/assets.php:131
-msgid "An unknown error occurred while trying to post your comment."
-msgstr ""
-
+#. translators: %s: WordPress version number
+#. translators: %s: WordPress version number
 #. translators: %s: WordPress version number
 #: inc/back-compat.php:37, inc/back-compat.php:50, inc/back-compat.php:66
 msgid "Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
 msgstr ""
 
-#: inc/customizer.php:34
-msgid "Sidebars"
-msgstr ""
-
-#: inc/customizer.php:46
-msgid "Sidebar Mode"
-msgstr ""
-
-#: inc/customizer.php:47
-msgid "Specify if and how the sidebar should be displayed."
-msgstr ""
-
-#: inc/customizer.php:59
-msgid "Sidebar Size"
-msgstr ""
-
-#: inc/customizer.php:60
-msgid "Specify the width of the sidebar."
-msgstr ""
-
-#: inc/customizer.php:71
-msgid "Enable Blog Sidebar?"
-msgstr ""
-
-#: inc/customizer.php:72
-msgid "If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar."
-msgstr ""
-
-#: inc/customizer.php:85
-msgid "Content Types"
-msgstr ""
-
-#: inc/customizer.php:102
-msgid "Show Date?"
-msgstr ""
-
-#: inc/customizer.php:119
-msgid "Show Author Name?"
-msgstr ""
-
-#: inc/customizer.php:139
-msgid "Show %s?"
-msgstr ""
-
-#: inc/customizer.php:162
-msgctxt "taxonomy"
-msgid "Show %s?"
-msgstr ""
-
-#: inc/customizer.php:180
-msgid "Show Author Box?"
-msgstr ""
-
-#: inc/customizer.php:225, inc/customizer.php:259
-msgid "Invalid choice."
-msgstr ""
-
-#: inc/customizer.php:240
-msgid "No Sidebar"
-msgstr ""
-
-#: inc/customizer.php:241
-msgid "Left Sidebar"
-msgstr ""
-
-#: inc/customizer.php:242
-msgid "Right Sidebar"
-msgstr ""
-
-#: inc/customizer.php:274
-msgid "Small"
-msgstr ""
-
-#: inc/customizer.php:275
-msgid "Medium"
-msgstr ""
-
-#: inc/customizer.php:276
-msgid "Large"
-msgstr ""
-
-#: inc/customizer.php:389
-msgid "This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it."
-msgstr ""
-
-#: inc/setup.php:107, template-parts/header/site-navigation.php:17
-msgid "Primary Menu"
-msgstr ""
-
-#: inc/setup.php:108
-msgid "Primary Menu (Distraction-Free)"
-msgstr ""
-
-#: inc/setup.php:109, template-parts/footer/social-navigation.php:15
-msgid "Social Links Menu"
-msgstr ""
-
-#: inc/setup.php:110, template-parts/footer/footer-navigation.php:15
-msgid "Footer Menu"
-msgstr ""
-
-#: inc/setup.php:124
-msgid "Add widgets here to appear in the sidebar for your main content."
-msgstr ""
-
-#: inc/setup.php:131
-msgid "Add widgets here to appear in the sidebar for blog posts and archive pages."
-msgstr ""
-
-#: inc/setup.php:134
-msgid "You need to enable the sidebar in the Customizer first."
-msgstr ""
-
-#: inc/setup.php:138
-msgid "Blog Sidebar"
-msgstr ""
-
-#: inc/setup.php:152
-msgid "Footer %s"
-msgstr ""
-
-#: inc/setup.php:154
-msgid "Add widgets here to appear in your footer."
-msgstr ""
-
-#: inc/template-functions.php:479
-msgctxt "attachment metadata"
-msgid "Dimensions"
-msgstr ""
-
-#: inc/template-functions.php:480
-msgctxt "attachment metadata"
-msgid "Focal Length"
-msgstr ""
-
-#: inc/template-functions.php:481
-msgctxt "attachment metadata"
-msgid "Shutter Speed"
-msgstr ""
-
-#: inc/template-functions.php:482
-msgctxt "attachment metadata"
-msgid "Aperture"
-msgstr ""
-
-#: inc/template-functions.php:483
-msgctxt "attachment metadata"
-msgid "ISO"
-msgstr ""
-
-#: inc/template-functions.php:484
-msgctxt "attachment metadata"
-msgid "Run Time"
-msgstr ""
-
-#: inc/template-functions.php:485
-msgctxt "attachment metadata"
-msgid "Artist"
-msgstr ""
-
-#: inc/template-functions.php:486
-msgctxt "attachment metadata"
-msgid "Album"
-msgstr ""
-
-#: inc/template-functions.php:487
-msgctxt "attachment metadata"
-msgid "File Format"
-msgstr ""
-
-#: inc/template-functions.php:488
-msgctxt "attachment metadata"
-msgid "File Name"
-msgstr ""
-
-#: inc/template-functions.php:489
-msgctxt "attachment metadata"
-msgid "File Size"
-msgstr ""
-
-#: inc/template-hooks.php:87, template-parts/content/content-post.php:21, template-parts/content/content.php:21
+#. translators: %s: post title
+#. translators: %s: post title
+#: inc/template-hooks.php:66, template-parts/content/entry-content.php:19
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: templates/account.php:2
+#: templates/account.php:3
 msgid "Account Page"
 msgstr ""
 
-#: templates/account.php:28
+#: templates/account.php:27
 msgid "You must be logged in to view the content of this page."
 msgstr ""
 
-#: templates/account.php:34, templates/login.php:38
+#: templates/account.php:33, templates/login.php:39
 msgid "Register"
 msgstr ""
 
-#: templates/account.php:37, templates/login.php:41
+#: templates/account.php:36, templates/login.php:42
 msgid "Lost your password?"
 msgstr ""
 
-#: templates/distraction-free.php:2
-msgid "Distraction Free Page"
-msgstr ""
-
-#: templates/full-width.php:2
+#: templates/full-width.php:3
 msgid "Full Width Page"
 msgstr ""
 
-#: templates/login.php:2
+#: templates/landing-page.php:3
+msgid "Landing Page"
+msgstr ""
+
+#: templates/login.php:3
 msgid "Login Page"
 msgstr ""
 
-#: templates/login.php:26
+#: templates/login.php:27
 msgid "You are now logged out."
 msgstr ""
 
-#: templates/login.php:49
+#: templates/login.php:50
 msgid "Logout"
+msgstr ""
+
+#. translators: 1: theme component identifier, 2: dependency identifier
+#: inc/library/class-theme-component-base.php:61
+msgid "Cannot initialize theme component %1$s because required dependency %2$s was not provided."
+msgstr ""
+
+#. translators: 1: dependency class name, 2: component class name
+#: inc/library/class-theme-component-not-provided-exception.php:28
+msgid "Required dependency %1$s for theme component %2$s was not provided."
+msgstr ""
+
+#: inc/plugin-compat/woocommerce.php:31
+msgid "Add widgets here to appear in the sidebar for shop content."
+msgstr ""
+
+#: inc/plugin-compat/woocommerce.php:34, inc/library/sidebar/class-sidebar.php:237, inc/library/sidebar/class-sidebar.php:239
+msgid "You need to enable the sidebar in the Customizer first."
+msgstr ""
+
+#: inc/plugin-compat/woocommerce.php:38
+msgid "Shop Sidebar"
+msgstr ""
+
+#: inc/plugin-compat/woocommerce.php:85
+msgid "Enable Shop Sidebar?"
+msgstr ""
+
+#: inc/plugin-compat/woocommerce.php:86
+msgid "If you enable the shop sidebar, it will be shown beside your shop content instead of the primary sidebar."
+msgstr ""
+
+#: inc/plugin-compat/woocommerce.php:267
+msgid "View your shopping cart"
+msgstr ""
+
+#. translators: %s: number of items in the cart
+#: inc/plugin-compat/woocommerce.php:275
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/plugin-compat/wordpress-seo.php:17
+msgctxt "breadcrumbs"
+msgid "You are here:"
 msgstr ""
 
 #: inc/plugin-compat/wp-ajaxify-comments.php:29
 msgid "Super Awesome Theme already handles comment form submissions via AJAX out-of-the-box, so the plugin WP Ajaxify Comments conflicts with it and is not necessary. Please deactivate it."
 msgstr ""
 
-#: template-parts/content/comment.php:22
+#. translators: %s: comment author link
+#: template-parts/content/comment.php:23
 msgid "%s <span class=\"says\">says:</span>"
 msgstr ""
 
-#: template-parts/content/comment.php:33
+#. translators: 1: comment date, 2: comment time
+#: template-parts/content/comment.php:36
 msgid "%1$s at %2$s"
 msgstr ""
 
-#: template-parts/content/comment.php:37, template-parts/content/ping.php:14
+#: template-parts/content/comment.php:40, template-parts/content/pingback.php:14, template-parts/content/trackback.php:14
 msgid "Edit"
 msgstr ""
 
-#: template-parts/content/content-post.php:32, template-parts/content/content.php:32
+#: template-parts/content/comment.php:45
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: template-parts/content/entry-authorbox.php:72
+msgid "Author:"
+msgstr ""
+
+#. translators: %s: author name
+#: template-parts/content/entry-authorbox.php:83
+msgid "View all posts by %s"
+msgstr ""
+
+#: template-parts/content/entry-content.php:31
 msgid "Pages:"
 msgstr ""
 
+#. translators: %s: post title
+#. translators: %s: post title
 #: template-parts/content/entry-footer-attachment.php:25, template-parts/content/entry-footer.php:23
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
+#. translators: %s: post title
+#. translators: %s: post title
 #: template-parts/content/entry-footer-attachment.php:44, template-parts/content/entry-footer.php:42
 msgid "Edit<span class=\"screen-reader-text\"> %s</span>"
 msgstr ""
 
+#. translators: %s: post date.
 #: template-parts/content/entry-meta.php:30
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr ""
 
+#. translators: %s: post author.
 #: template-parts/content/entry-meta.php:42
 msgctxt "post author"
 msgid "by %s"
@@ -395,50 +220,729 @@ msgctxt "list item separator"
 msgid ", "
 msgstr ""
 
+#. translators: %s: list of terms
+#. translators: %s: list of terms
 #: template-parts/content/entry-terms-post.php:21, template-parts/content/entry-terms.php:28
 msgid "Posted in %s"
 msgstr ""
 
+#. translators: %s: list of terms
+#. translators: %s: list of terms
 #: template-parts/content/entry-terms-post.php:34, template-parts/content/entry-terms.php:31
 msgid "Tagged %s"
 msgstr ""
 
-#: template-parts/content/none.php:14
-msgid "Nothing Found"
-msgstr ""
-
-#: template-parts/content/none.php:25
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content/none.php:24
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
-#: template-parts/content/none.php:38
+#: template-parts/content/none.php:40
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: template-parts/content/none.php:44
+#: template-parts/content/none.php:47
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content/ping.php:14
+#: template-parts/content/pingback.php:14
 msgid "Pingback:"
 msgstr ""
 
-#: template-parts/footer/footer-widgets.php:28
+#: template-parts/content/trackback.php:14
+msgid "Trackback:"
+msgstr ""
+
+#: template-parts/footer/footer-navigation.php:15, inc/library/footer-navigation/class-footer-navigation.php:65
+msgid "Footer Menu"
+msgstr ""
+
+#: template-parts/footer/footer-widgets.php:17
 msgid "Footer"
 msgstr ""
 
-#: template-parts/footer/site-info.php:12
+#: template-parts/footer/site-bottom-bar.php:21
 msgid "https://wordpress.org/"
 msgstr ""
 
-#: template-parts/footer/site-info.php:14
+#. translators: %s: WordPress
+#: template-parts/footer/site-bottom-bar.php:24
 msgid "Proudly powered by %s"
 msgstr ""
 
-#: template-parts/footer/site-info.php:19
-msgid "Theme: %1$s by %2$s."
+#. translators: 1: theme name, 2: theme author name with link
+#: template-parts/footer/site-bottom-bar.php:28
+msgid "Theme: %1$s by %2$s"
 msgstr ""
 
-#: template-parts/header/site-navigation.php:22
+#: template-parts/footer/site-bottom-bar.php:28
+msgid "https://super-awesome-author.org"
+msgstr ""
+
+#: template-parts/footer/social-navigation.php:15, inc/library/social-navigation/class-social-navigation.php:164
+msgid "Social Links Menu"
+msgstr ""
+
+#: template-parts/header/page-header-content.php:13
+msgid "Not Found"
+msgstr ""
+
+#. translators: %s: search query.
+#: template-parts/header/page-header-content.php:22
+msgid "Search Results for: %s"
+msgstr ""
+
+#: template-parts/header/page-header-content.php:55
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/header/site-navbar.php:40, inc/library/navbar/class-navbar.php:143
+msgid "Primary Menu"
+msgstr ""
+
+#: template-parts/header/site-navbar.php:45
 msgid "Menu"
+msgstr ""
+
+#. translators: %s: asset handle
+#: inc/library/assets/class-asset-not-enqueueable-exception.php:27
+msgid "Asset %s cannot be enqueued because it is not registered."
+msgstr ""
+
+#. translators: %s: asset handle
+#: inc/library/assets/class-asset-not-registered-exception.php:27
+msgid "%s is not a registered asset."
+msgstr ""
+
+#. translators: 1: property name, 2: asset identifier
+#: inc/library/assets/class-asset.php:197
+msgid "%1$s is not a valid property of the %2$s asset."
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:41, inc/library/navbar/class-navbar.php:69, inc/library/top-bar/class-top-bar.php:41
+msgctxt "alignment"
+msgid "Space Between"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:42, inc/library/navbar/class-navbar.php:70, inc/library/top-bar/class-top-bar.php:42
+msgctxt "alignment"
+msgid "Centered"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:96
+msgid "Bottom Bar"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:97
+msgid "Add widgets here to appear in a narrow bar at the very bottom of the screen."
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:111
+msgid "Bottom Bar Colors"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:115
+msgid "Bottom Bar Text Color"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:121
+msgid "Bottom Bar Link Color"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:127
+msgid "Bottom Bar Background Color"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:146
+msgid "Stick the bottom bar to the bottom of the page when scrolling?"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:162
+msgid "Bottom Bar Justify Content"
+msgstr ""
+
+#: inc/library/bottom-bar/class-bottom-bar.php:163
+msgid "Specify how the widgets in the bottom bar are aligned."
+msgstr ""
+
+#. translators: 1: property name, 2: color identifier
+#: inc/library/colors/class-color.php:159
+msgid "%1$s is not a valid property of the %2$s color."
+msgstr ""
+
+#: inc/library/colors/class-colors.php:307
+msgid "Colors"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:314
+msgid "Other Colors"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:403
+msgid "General Colors"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:407
+msgid "Text Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:413
+msgid "Link Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:419
+msgid "Wrap Background Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:436
+msgid "Background Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:449
+msgid "Button Colors"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:453
+msgid "Button Text Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:459
+msgid "Button Background Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:465
+msgid "Primary Button Text Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:471
+msgid "Primary Button Background Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:484
+msgid "Header Colors"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:498
+msgid "Header Text Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:504
+msgid "Header Link Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:510
+msgid "Header Background Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:524
+msgid "Footer Colors"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:528
+msgid "Footer Text Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:535
+msgid "Footer Link Color"
+msgstr ""
+
+#: inc/library/colors/class-colors.php:542
+msgid "Footer Background Color"
+msgstr ""
+
+#: inc/library/comments/class-comments.php:172
+msgid "Thanks for commenting! Your comment has been sent for moderation and should be approved soon."
+msgstr ""
+
+#. translators: %s: comment URL
+#: inc/library/comments/class-comments.php:175
+msgid "Thanks for commenting! Your comment has been approved. <a href=\"%s\">Read your comment</a>"
+msgstr ""
+
+#: inc/library/comments/class-comments.php:188
+msgid "Your comment has been marked as spam."
+msgstr ""
+
+#: inc/library/comments/class-comments.php:195
+msgid "An unknown error occurred while trying to post your comment."
+msgstr ""
+
+#: inc/library/comments/class-comments.php:214
+msgid "Processing..."
+msgstr ""
+
+#: inc/library/comments/class-comments.php:215
+msgid "Bad response code."
+msgstr ""
+
+#: inc/library/comments/class-comments.php:216
+msgid "Invalid JSON response."
+msgstr ""
+
+#. translators: %s: edit comment URL
+#: inc/library/comments/class-comments.php:218
+msgid "Your comment was either a duplicate or you are posting too rapidly. <a href=\"%s\">Edit your comment</a>"
+msgstr ""
+
+#: inc/library/comments/class-comments.php:219
+msgid "There were errors in submitting your comment; complete the missing fields and try again!"
+msgstr ""
+
+#: inc/library/comments/class-comments.php:220
+msgid "This email address appears to be invalid."
+msgstr ""
+
+#: inc/library/comments/class-comments.php:221
+msgid "This is a required field."
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:54
+msgctxt "attachment metadata"
+msgid "Dimensions"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:55
+msgctxt "attachment metadata"
+msgid "Focal Length"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:56
+msgctxt "attachment metadata"
+msgid "Shutter Speed"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:57
+msgctxt "attachment metadata"
+msgid "Aperture"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:58
+msgctxt "attachment metadata"
+msgid "ISO"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:59
+msgctxt "attachment metadata"
+msgid "Run Time"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:60
+msgctxt "attachment metadata"
+msgid "Artist"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:61
+msgctxt "attachment metadata"
+msgid "Album"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:62
+msgctxt "attachment metadata"
+msgid "File Format"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:63
+msgctxt "attachment metadata"
+msgid "File Name"
+msgstr ""
+
+#: inc/library/content-types/class-attachment-metadata.php:64
+msgctxt "attachment metadata"
+msgid "File Size"
+msgstr ""
+
+#: inc/library/content-types/class-content-types.php:299
+msgid "Content Types"
+msgstr ""
+
+#: inc/library/content-types/class-content-types.php:308
+msgid "Use Page Header?"
+msgstr ""
+
+#: inc/library/content-types/class-content-types.php:314
+msgid "Use Excerpt in archives?"
+msgstr ""
+
+#: inc/library/content-types/class-content-types.php:321
+msgid "Show Date?"
+msgstr ""
+
+#: inc/library/content-types/class-content-types.php:328
+msgid "Show Author Name?"
+msgstr ""
+
+#. translators: %s: metadata field label
+#: inc/library/content-types/class-content-types.php:338
+msgctxt "attachment metadata"
+msgid "Show %s?"
+msgstr ""
+
+#. translators: %s: taxonomy plural label
+#: inc/library/content-types/class-content-types.php:351
+msgctxt "taxonomy"
+msgid "Show %s?"
+msgstr ""
+
+#: inc/library/content-types/class-content-types.php:359
+msgid "Show Author Box?"
+msgstr ""
+
+#: inc/library/custom-header/class-custom-header.php:39
+msgid "In front of the header image"
+msgstr ""
+
+#: inc/library/custom-header/class-custom-header.php:40
+msgid "On the left inside the navigation bar"
+msgstr ""
+
+#: inc/library/custom-header/class-custom-header.php:41
+msgid "On the right inside the navigation bar"
+msgstr ""
+
+#: inc/library/custom-header/class-custom-header.php:54
+msgid "Above the navigation bar"
+msgstr ""
+
+#: inc/library/custom-header/class-custom-header.php:55
+msgid "Below the navigation bar"
+msgstr ""
+
+#: inc/library/custom-header/class-custom-header.php:68
+msgctxt "alignment"
+msgid "Left"
+msgstr ""
+
+#: inc/library/custom-header/class-custom-header.php:69
+msgctxt "alignment"
+msgid "Center"
+msgstr ""
+
+#: inc/library/custom-header/class-custom-header.php:70
+msgctxt "alignment"
+msgid "Right"
+msgstr ""
+
+#. translators: %s: panel identifier
+#: inc/library/customizer/class-customize-component-not-registered-exception.php:27
+msgid "%s is not a registered Customizer panel."
+msgstr ""
+
+#. translators: %s: section identifier
+#: inc/library/customizer/class-customize-component-not-registered-exception.php:42
+msgid "%s is not a registered Customizer section."
+msgstr ""
+
+#. translators: %s: control identifier
+#: inc/library/customizer/class-customize-component-not-registered-exception.php:57
+msgid "%s is not a registered Customizer control."
+msgstr ""
+
+#. translators: 1: method name, 2: identifier
+#: inc/library/customizer/class-customizer-not-initialized-exception.php:28
+msgid "Customizer method %1$s with ID %2$s cannot be called before Customizer initialization."
+msgstr ""
+
+#: inc/library/footer-widget-areas/class-footer-widget-areas.php:122
+msgctxt "widget area dropdown"
+msgid "None"
+msgstr ""
+
+#. translators: %s: widget area number
+#. translators: %s: widget area number
+#: inc/library/footer-widget-areas/class-footer-widget-areas.php:127, inc/library/footer-widget-areas/class-footer-widget-areas.php:181
+msgid "Footer %s"
+msgstr ""
+
+#: inc/library/footer-widget-areas/class-footer-widget-areas.php:182
+msgid "Add widgets here to appear in your footer."
+msgstr ""
+
+#: inc/library/footer-widget-areas/class-footer-widget-areas.php:198
+msgid "Wide Footer Column"
+msgstr ""
+
+#: inc/library/footer-widget-areas/class-footer-widget-areas.php:199
+msgid "If you like to reserve more space for one of your footer widget columns, you can select that one here."
+msgstr ""
+
+#. translators: %s: menu identifier
+#: inc/library/menus/class-menu-not-registered-exception.php:27
+msgid "%s is not a registered menu."
+msgstr ""
+
+#. translators: 1: property name, 2: menu identifier
+#: inc/library/menus/class-menu.php:250
+msgid "%1$s is not a valid property of the %2$s menu."
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:127
+msgid "Navbar Extra"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:128
+msgid "Add widgets here to appear as additional content in the navbar beside the main navigation menu."
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:149
+msgid "Primary Menu (Distraction-Free)"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:162
+msgid "Navbar Colors"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:166
+msgid "Navbar Text Color"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:172
+msgid "Navbar Link Color"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:178
+msgid "Navbar Background Color"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:197
+msgid "Stick the navbar to the top of the page when scrolling?"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:213
+msgid "Navbar Justify Content"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:214
+msgid "Specify how the widgets in the navbar are aligned."
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:245
+msgid "Expand child menu"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:246
+msgid "Collapse child menu"
+msgstr ""
+
+#: inc/library/settings/class-enum-string-setting.php:45
+msgid "Invalid choice."
+msgstr ""
+
+#. translators: %s: value compared to
+#: inc/library/settings/class-float-setting.php:62
+msgid "Value must not be smaller than %s."
+msgstr ""
+
+#. translators: %s: value compared to
+#: inc/library/settings/class-float-setting.php:68
+msgid "Value must not be greater than %s."
+msgstr ""
+
+#. translators: %s: setting identifier
+#: inc/library/settings/class-setting-not-registered-exception.php:27
+msgid "%s is not a registered setting."
+msgstr ""
+
+#. translators: 1: property name, 2: setting identifier
+#: inc/library/settings/class-setting.php:146
+msgid "%1$s is not a valid property of the %2$s setting."
+msgstr ""
+
+#: inc/library/settings/class-setting.php:207
+msgid "Invalid value."
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:127
+msgid "No Sidebar"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:128
+msgid "Left Sidebar"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:129
+msgid "Right Sidebar"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:142
+msgid "Small"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:143
+msgid "Medium"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:144
+msgid "Large"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:225
+msgid "Add widgets here to appear in the sidebar for your main content."
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:229
+msgid "Add widgets here to appear in the sidebar for blog posts and archive pages."
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:232
+msgid "You need to enable the sidebar first."
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:247
+msgid "Blog Sidebar"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:263
+msgid "Sidebar Mode"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:264
+msgid "Specify if and how the sidebar should be displayed."
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:272
+msgid "Sidebar Size"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:273
+msgid "Specify the width of the sidebar."
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:281
+msgid "Enable Blog Sidebar?"
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:282
+msgid "If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar."
+msgstr ""
+
+#: inc/library/sidebar/class-sidebar.php:307
+msgid "This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it."
+msgstr ""
+
+#: inc/library/social-navigation/class-social-navigation.php:180
+msgid "Social Icon Colors"
+msgstr ""
+
+#: inc/library/social-navigation/class-social-navigation.php:184
+msgid "Social Icons Color"
+msgstr ""
+
+#: inc/library/social-navigation/class-social-navigation.php:191
+msgid "Social Icons Background Color"
+msgstr ""
+
+#. translators: %s: sticky element identifier
+#: inc/library/sticky-elements/class-sticky-element-not-registered-exception.php:27
+msgid "%s is not a registered sticky element."
+msgstr ""
+
+#. translators: 1: property name, 2: sticky element identifier
+#: inc/library/sticky-elements/class-sticky-element.php:145
+msgid "%1$s is not a valid property of the %2$s sticky element."
+msgstr ""
+
+#: inc/library/sticky-elements/class-sticky-elements.php:138
+msgid "Layout"
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:97
+msgid "Top Bar"
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:98
+msgid "Add widgets here to appear in a narrow bar at the very top of the screen."
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:112
+msgid "Top Bar Colors"
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:116
+msgid "Top Bar Text Color"
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:123
+msgid "Top Bar Link Color"
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:130
+msgid "Top Bar Background Color"
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:150
+msgid "Stick the top bar to the top of the page when scrolling?"
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:166
+msgid "Top Bar Justify Content"
+msgstr ""
+
+#: inc/library/top-bar/class-top-bar.php:167
+msgid "Specify how the widgets in the top bar are aligned."
+msgstr ""
+
+#: inc/library/widgets/class-login-links-widget.php:25
+msgid "Login Links"
+msgstr ""
+
+#: inc/library/widgets/class-login-links-widget.php:36
+msgid "Displays a login link and optionally a registration link with icons."
+msgstr ""
+
+#: inc/library/widgets/class-login-links-widget.php:49
+msgid "Show registration link?"
+msgstr ""
+
+#: inc/library/widgets/class-login-links-widget.php:68
+msgctxt "action"
+msgid "Log in"
+msgstr ""
+
+#: inc/library/widgets/class-login-links-widget.php:72
+msgctxt "action"
+msgid "Register"
+msgstr ""
+
+#: inc/library/widgets/class-login-links-widget.php:76
+msgctxt "action"
+msgid "Log out"
+msgstr ""
+
+#: inc/library/widgets/class-social-menu-widget.php:25
+msgid "Social Menu"
+msgstr ""
+
+#: inc/library/widgets/class-social-menu-widget.php:36
+msgid "Displays a social menu with icons."
+msgstr ""
+
+#: inc/library/widgets/class-social-menu-widget.php:48
+msgid "&mdash; Select &mdash;"
+msgstr ""
+
+#: inc/library/widgets/class-social-menu-widget.php:55
+msgid "Select Menu"
+msgstr ""
+
+#. translators: %s: widget area identifier
+#: inc/library/widgets/class-widget-area-not-registered-exception.php:27
+msgid "%s is not a registered widget area."
+msgstr ""
+
+#. translators: 1: property name, 2: widget area identifier
+#: inc/library/widgets/class-widget-area.php:237
+msgid "%1$s is not a valid property of the %2$s widget area."
+msgstr ""
+
+#: inc/library/widgets/class-widget.php:479
+msgid "Title"
+msgstr ""
+
+#. translators: %s: widget class name
+#: inc/library/widgets/class-widgets.php:131
+msgid "%s is not a valid widget class."
+msgstr ""
+
+#: inc/library/widgets/class-widgets.php:312
+msgid "Widget Area Settings"
 msgstr ""

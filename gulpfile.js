@@ -223,7 +223,7 @@ gulp.task( 'compile-js', done => {
 		'customize-preview': './assets/src/js/customize-preview.js',
 		'custom-header.customize-controls': './assets/src/js/custom-header.customize-controls.js',
 		'custom-header.customize-preview': './assets/src/js/custom-header.customize-preview.js',
-		'wp-i18n': './node_modules/@wordpress/i18n',
+		'wp-i18n': './assets/src/js/wp-i18n.js',
 	};
 	gulp.src( './assets/src/js/theme.js' )
 		.pipe( webpack({
@@ -231,15 +231,18 @@ gulp.task( 'compile-js', done => {
 			output: {
 				filename: '[name].js',
 			},
-			externals: {
-				'@wordpress/i18n': {
-					this: [ 'wp', 'i18n' ],
-				},
-			},
 		}) )
 		.pipe( babel({
 			presets: [
 				'env',
+			],
+			plugins: [
+				[
+					'@wordpress/babel-plugin-makepot',
+					{
+						'output': './languages/' + config.textDomain + '.js.pot',
+					},
+				],
 			],
 		}) )
 		.pipe( gulp.dest( './assets/dist/js/' ) )
@@ -248,7 +251,17 @@ gulp.task( 'compile-js', done => {
 			extname: '.min.js',
 		}) )
 		.pipe( gulp.dest( './assets/dist/js/' ) )
-		.on( 'end', done );
+		.on( 'end', () => {
+			gulp.src( './languages/' + config.textDomain + '.js.pot' )
+				.pipe( run( 'npx pot-to-php ./languages/' + config.textDomain + '.js.pot ./inc/js-i18n.php ' + config.textDomain ) )
+				.pipe( gulp.dest( './languages/' ) )
+				.on( 'end', () => {
+					del([
+						'./languages/' + config.textDomain + '.js.pot',
+					]);
+					done();
+				});
+		});
 });
 
 // minify images
@@ -295,53 +308,31 @@ gulp.task( 'img', done => {
 
 // generate POT file
 gulp.task( 'pot', done => {
-	gulp.src( './assets/src/js/**/*.js' )
-		.pipe( babel({
-			plugins: [
-				[
-					'@wordpress/babel-plugin-makepot',
-					{
-						'output': 'languages/' + config.textDomain + '.js.pot',
-					},
-				],
-			],
+	gulp.src([
+		'./*.php',
+		'./inc/**/*.php',
+		'./template-parts/**/*.php',
+		'./templates/**/*.php',
+	])
+		.pipe( sort() )
+		.pipe( wpPot({
+			domain: config.textDomain,
+			headers: {
+				'Project-Id-Version': config.themeName + ' ' + config.version,
+				'report-msgid-bugs-to': config.translateURI,
+				'x-generator': 'gulp-wp-pot',
+				'x-poedit-basepath': '.',
+				'x-poedit-language': 'English',
+				'x-poedit-country': 'UNITED STATES',
+				'x-poedit-sourcecharset': 'uft-8',
+				'x-poedit-keywordslist': '__;_e;_x:1,2c;_ex:1,2c;_n:1,2; _nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__; esc_html__;esc_attr_e; esc_html_e;esc_attr_x:1,2c; esc_html_x:1,2c;',
+				'x-poedit-bookmars': '',
+				'x-poedit-searchpath-0': '.',
+				'x-textdomain-support': 'yes',
+			},
 		}) )
-		.on( 'end', () => {
-			run( 'npx pot-to-php ./languages/' + config.textDomain + '.js.pot ./inc/js-i18n.php ' + config.textDomain ).exec()
-				.pipe( gulp.dest( 'output' ) )
-				.on( 'end', () => {
-					window.console.log( 'bello' );
-					gulp.src([
-						'./*.php',
-						'./inc/**/*.php',
-						'./template-parts/**/*.php',
-						'./templates/**/*.php',
-					])
-						.pipe( sort() )
-						.pipe( wpPot({
-							domain: config.textDomain,
-							headers: {
-								'Project-Id-Version': config.themeName + ' ' + config.version,
-								'report-msgid-bugs-to': config.translateURI,
-								'x-generator': 'gulp-wp-pot',
-								'x-poedit-basepath': '.',
-								'x-poedit-language': 'English',
-								'x-poedit-country': 'UNITED STATES',
-								'x-poedit-sourcecharset': 'uft-8',
-								'x-poedit-keywordslist': '__;_e;_x:1,2c;_ex:1,2c;_n:1,2; _nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__; esc_html__;esc_attr_e; esc_html_e;esc_attr_x:1,2c; esc_html_x:1,2c;',
-								'x-poedit-bookmars': '',
-								'x-poedit-searchpath-0': '.',
-								'x-textdomain-support': 'yes',
-							},
-						}) )
-						.pipe( gulp.dest( './languages/' + config.textDomain + '.pot' ) )
-						.on( 'end', () => {
-							del([
-								'/languages/' + config.textDomain + '.js.pot',
-							]).then( done );
-						});
-				});
-		});
+		.pipe( gulp.dest( './languages/' + config.textDomain + '.pot' ) )
+		.on( 'end', done );
 });
 
 // replace the theme header in readme.txt

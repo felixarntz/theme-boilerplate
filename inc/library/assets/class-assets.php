@@ -120,7 +120,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 			case 'set_jed_locale_data':
 				return call_user_func_array( array( $this, $method ), $args );
 			case 'register':
-				foreach ( $this->assets as $assets ) {
+				foreach ( $this->assets as $asset ) {
 					$asset->register();
 				}
 				break;
@@ -294,6 +294,13 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 		}
 
 		foreach ( $translations->entries as $msgid => $entry ) {
+			if ( ! empty( $entry->references ) ) {
+				$js_references = preg_grep( '/^inc\/js-i18n.php:(\d+)$/', $entry->references );
+				if ( empty( $js_references ) ) {
+					continue;
+				}
+			}
+
 			$locale[ $msgid ] = $entry->translations;
 		}
 
