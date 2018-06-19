@@ -58,6 +58,22 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	}
 
 	/**
+	 * Gets the available choices for the 'navbar_position' setting.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array Array where values are the keys, and labels are the values.
+	 */
+	public function get_navbar_position_choices() {
+		return array(
+			'above-header' => _x( 'Top of the page, above header', 'navbar position', 'super-awesome-theme' ),
+			'below-header' => _x( 'Top of the page, below header', 'super-awesome-theme' ),
+			'left'         => _x( 'Left side of the page', 'navbar position', 'super-awesome-theme' ),
+			'right'        => _x( 'Right side of the page', 'navbar position', 'super-awesome-theme' ),
+		);
+	}
+
+	/**
 	 * Gets the available choices for the 'navbar_justify_content' setting.
 	 *
 	 * @since 1.0.0
@@ -94,6 +110,20 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 			case 'print_color_style':
 			case 'add_dropdown_icon_to_menu_link':
 				return call_user_func_array( array( $this, $method ), $args );
+			case 'add_navbar_body_classes':
+				if ( empty( $args ) ) {
+					return;
+				}
+
+				$settings = $this->get_dependency( 'settings' );
+
+				$classes   = $args[0];
+				$classes[] = 'navbar-' . $settings->get( 'navbar_position' );
+
+				return $classes;
+			case 'can_be_sticky':
+				$settings = $this->get_dependency( 'settings' );
+				return ! in_array( $settings->get( 'navbar_position' ), array( 'left', 'right' ), true );
 		}
 	}
 
@@ -104,6 +134,14 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	 */
 	protected function register_settings() {
 		$settings = $this->get_dependency( 'settings' );
+
+		$settings->register_setting( new Super_Awesome_Theme_Enum_String_Setting(
+			'navbar_position',
+			array(
+				Super_Awesome_Theme_Enum_String_Setting::PROP_ENUM    => array_keys( $this->get_navbar_position_choices() ),
+				Super_Awesome_Theme_Enum_String_Setting::PROP_DEFAULT => 'above-header',
+			)
+		) );
 
 		$settings->register_setting( new Super_Awesome_Theme_Enum_String_Setting(
 			'navbar_justify_content',
@@ -126,7 +164,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 			array(
 				Super_Awesome_Theme_Widget_Area::PROP_TITLE       => __( 'Navbar Extra', 'super-awesome-theme' ),
 				Super_Awesome_Theme_Widget_Area::PROP_DESCRIPTION => __( 'Add widgets here to appear as additional content in the navbar beside the main navigation menu.', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Widget_Area::PROP_INLINE      => true,
+				Super_Awesome_Theme_Widget_Area::PROP_INLINE      => $this->can_be_sticky(),
 			)
 		) );
 	}
@@ -193,9 +231,10 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 		$sticky_elements->register_sticky_element( new Super_Awesome_Theme_Sticky_Element(
 			'navbar',
 			array(
-				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR => '#site-navbar',
-				Super_Awesome_Theme_Sticky_Element::PROP_LABEL    => __( 'Stick the navbar to the top of the page when scrolling?', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
+				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR        => '#site-navbar',
+				Super_Awesome_Theme_Sticky_Element::PROP_LABEL           => __( 'Stick the navbar to the top of the page when scrolling?', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION        => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
+				Super_Awesome_Theme_Sticky_Element::PROP_ACTIVE_CALLBACK => array( $this, 'can_be_sticky' ),
 			)
 		) );
 	}
@@ -208,6 +247,13 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	 * @param Super_Awesome_Theme_Widgets    $widgets    Widgets handler instance.
 	 */
 	protected function register_customize_controls( $customizer, $widgets ) {
+		$customizer->add_control( 'navbar_position', array(
+			Super_Awesome_Theme_Customize_Control::PROP_SECTION => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
+			Super_Awesome_Theme_Customize_Control::PROP_TITLE   => __( 'Navbar Position', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Customize_Control::PROP_TYPE    => Super_Awesome_Theme_Customize_Control::TYPE_SELECT,
+			Super_Awesome_Theme_Customize_Control::PROP_CHOICES => $this->get_navbar_position_choices(),
+		) );
+
 		$customizer->add_control( 'navbar_justify_content', array(
 			Super_Awesome_Theme_Customize_Control::PROP_SECTION     => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
 			Super_Awesome_Theme_Customize_Control::PROP_TITLE       => __( 'Navbar Justify Content', 'super-awesome-theme' ),
@@ -226,6 +272,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 		$customizer = $this->get_dependency( 'customizer' );
 
 		$preview_script = $customizer->get_preview_script();
+		$preview_script->add_data( 'navbarPositionChoices', $this->get_navbar_position_choices() );
 		$preview_script->add_data( 'navbarJustifyContentChoices', $this->get_navbar_justify_content_choices() );
 	}
 
@@ -329,6 +376,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 		add_action( 'after_setup_theme', array( $this, 'register_colors' ), 6, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_sticky' ), 0, 0 );
 		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
+		add_filter( 'body_class', array( $this, 'add_navbar_body_classes' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'add_main_script_data' ), 0, 0 );
 		add_filter( 'nav_menu_item_title', array( $this, 'add_dropdown_icon_to_menu_link' ), 10, 3 );
 

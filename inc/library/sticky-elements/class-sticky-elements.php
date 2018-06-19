@@ -183,7 +183,7 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 
 		$stickies = array();
 		foreach ( $this->sticky_elements as $sticky ) {
-			if ( ! $settings->get( 'sticky_' . $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_ID ) ) ) {
+			if ( ! $sticky->is_active() || ! $settings->get( 'sticky_' . $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_ID ) ) ) {
 				continue;
 			}
 

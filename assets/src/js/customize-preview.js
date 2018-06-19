@@ -55,6 +55,20 @@ import { findParent } from './common/utils';
 		}
 	});
 
+	// Navbar position.
+	customizeUtil.bindSettingValue( 'navbar_position', value => {
+		const classes = Object.keys( data.navbarPositionChoices ).map( setting => 'navbar-' + setting );
+		const index   = classes.indexOf( 'navbar-' + value );
+
+		value = 'navbar-' + value;
+
+		if ( index > -1 ) {
+			classes.splice( index, 1 );
+			classes.forEach( cssClass => document.body.classList.remove( cssClass ) );
+			document.body.classList.add( value );
+		}
+	});
+
 	// Navbar Justify Content.
 	customizeUtil.bindSettingValue( 'navbar_justify_content', value => {
 		const classes = Object.keys( data.navbarJustifyContentChoices );

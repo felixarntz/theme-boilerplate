@@ -43,20 +43,6 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 	}
 
 	/**
-	 * Gets the available choices for the 'header_position' setting.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array Array where values are the keys, and labels are the values.
-	 */
-	public function get_header_position_choices() {
-		return array(
-			'above_navbar' => __( 'Above the navigation bar', 'super-awesome-theme' ),
-			'below_navbar' => __( 'Below the navigation bar', 'super-awesome-theme' ),
-		);
-	}
-
-	/**
 	 * Gets the available choices for the 'header_textalign' setting.
 	 *
 	 * @since 1.0.0
@@ -163,14 +149,6 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 		) );
 
 		$settings->register_setting( new Super_Awesome_Theme_Enum_String_Setting(
-			'header_position',
-			array(
-				Super_Awesome_Theme_Enum_String_Setting::PROP_ENUM    => array_keys( $this->get_header_position_choices() ),
-				Super_Awesome_Theme_Enum_String_Setting::PROP_DEFAULT => 'below_navbar',
-			)
-		) );
-
-		$settings->register_setting( new Super_Awesome_Theme_Enum_String_Setting(
 			'header_textalign',
 			array(
 				Super_Awesome_Theme_Enum_String_Setting::PROP_ENUM    => array_keys( $this->get_header_textalign_choices() ),
@@ -198,7 +176,6 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomHeaderControlsData',
 				Super_Awesome_Theme_Script::PROP_DATA         => array(
 					'brandingLocationChoices' => $this->get_branding_location_choices(),
-					'headerPositionChoices'   => $this->get_header_position_choices(),
 					'headerTextalignChoices'  => $this->get_header_textalign_choices(),
 				),
 			)

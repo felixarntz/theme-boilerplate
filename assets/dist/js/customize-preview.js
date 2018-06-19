@@ -225,6 +225,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			});
 
+			// Navbar position.
+			customizeUtil.bindSettingValue('navbar_position', function (value) {
+				var classes = Object.keys(data.navbarPositionChoices).map(function (setting) {
+					return 'navbar-' + setting;
+				});
+				var index = classes.indexOf('navbar-' + value);
+
+				value = 'navbar-' + value;
+
+				if (index > -1) {
+					classes.splice(index, 1);
+					classes.forEach(function (cssClass) {
+						return document.body.classList.remove(cssClass);
+					});
+					document.body.classList.add(value);
+				}
+			});
+
 			// Navbar Justify Content.
 			customizeUtil.bindSettingValue('navbar_justify_content', function (value) {
 				var classes = Object.keys(data.navbarJustifyContentChoices);

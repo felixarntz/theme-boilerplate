@@ -1,10 +1,114 @@
 .site {
-	display: block;
+	display: grid;
+	grid-template:
+		"top-bar" auto
+		"header" auto
+		"content" auto
+		"footer" auto
+		"bottom-bar" auto
+		/ 1fr;
+
+	body.navbar-above-header & {
+		grid-template:
+			"top-bar" auto
+			"navbar" auto
+			"header" auto
+			"content" auto
+			"footer" auto
+			"bottom-bar" auto
+			/ 1fr;
+	}
+
+	body.navbar-below-header & {
+		grid-template:
+			"top-bar" auto
+			"header" auto
+			"navbar" auto
+			"content" auto
+			"footer" auto
+			"bottom-bar" auto
+			/ 1fr;
+	}
+
+	body.navbar-left &,
+	body.navbar-right & {
+		.site-navbar {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			z-index: 100;
+			overflow: hidden;
+			width: $site_navbar-vertical-width-collapsed;
+
+			@media (min-width: $site_breakpoint) {
+				width: $site_navbar-vertical-width;
+			}
+		}
+	}
+
+	body.admin-bar.navbar-left &,
+	body.admin-bar.navbar-right & {
+		.site-navbar {
+			top: 46px;
+
+			@media (min-width: 783px) {
+				top: 32px;
+			}
+		}
+	}
+
+	body.navbar-left & {
+		margin-left: $site_navbar-vertical-width-collapsed;
+
+		@media (min-width: $site_breakpoint) {
+			margin-left: $site_navbar-vertical-width;
+		}
+
+		.site-navbar {
+			left: 0;
+		}
+	}
+
+	body.navbar-right & {
+		margin-right: $site_navbar-vertical-width-collapsed;
+
+		@media (min-width: $site_breakpoint) {
+			margin-right: $site_navbar-vertical-width;
+		}
+
+		.site-navbar {
+			right: 0;
+		}
+	}
 
 	body.wrapped-layout & {
 		@include center-block();
 
 		max-width: $site_maxwidth;
+	}
+
+	.site-header {
+		grid-area: header;
+	}
+
+	.site-content {
+		grid-area: content;
+	}
+
+	.site-footer {
+		grid-area: footer;
+	}
+
+	.site-navbar {
+		grid-area: navbar;
+	}
+
+	.site-top-bar {
+		grid-area: top-bar;
+	}
+
+	.site-bottom-bar {
+		grid-area: bottom-bar;
 	}
 }
 
@@ -65,6 +169,22 @@
 
 		.sticky-content {
 			display: block;
+		}
+	}
+
+	body.navbar-left &.is-sticky {
+		left: $site_navbar-vertical-width-collapsed;
+
+		@media (min-width: $site_breakpoint) {
+			left: $site_navbar-vertical-width;
+		}
+	}
+
+	body.navbar-right &.is-sticky {
+		right: $site_navbar-vertical-width-collapsed;
+
+		@media (min-width: $site_breakpoint) {
+			right: $site_navbar-vertical-width;
 		}
 	}
 }

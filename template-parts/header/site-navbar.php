@@ -7,9 +7,16 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
+$navbar_position   = super_awesome_theme_get_setting( 'navbar_position' );
 $branding_location = super_awesome_theme_get_setting( 'branding_location' );
 $menu_slug         = super_awesome_theme_get_navigation_name();
-$extra_class       = super_awesome_theme_get_setting( 'navbar_justify_content' );
+
+$extra_class         = super_awesome_theme_get_setting( 'navbar_justify_content' );
+$widgets_extra_class = '';
+if ( ! in_array( $navbar_position, array( 'left', 'right' ), true ) ) {
+	$extra_class          = 'is-flex ' . $extra_class;
+	$widgets_extra_class .= ' inline-widget-area';
+}
 
 if ( 'header' === $branding_location && super_awesome_theme_use_page_header() ) {
 	$branding_location = 'navbar_left';
@@ -17,14 +24,14 @@ if ( 'header' === $branding_location && super_awesome_theme_use_page_header() ) 
 
 ?>
 
-<div id="site-navbar" class="site-navbar site-component is-flex <?php echo esc_attr( $extra_class ); ?>">
+<div id="site-navbar" class="site-navbar site-component <?php echo esc_attr( $extra_class ); ?>">
 	<div class="site-component-inner">
 		<?php if ( 'navbar_right' !== $branding_location ) : ?>
 			<?php if ( 'navbar_left' === $branding_location ) : ?>
 				<div class="site-branding">
 					<?php get_template_part( 'template-parts/header/logo-and-title' ); ?>
 				</div><!-- .site-branding -->
-			<?php elseif ( super_awesome_theme_get_setting( 'sticky_navbar' ) ) : ?>
+			<?php elseif ( ! in_array( $navbar_position, array( 'left', 'right' ), true ) && super_awesome_theme_get_setting( 'sticky_navbar' ) ) : ?>
 				<div class="site-branding sticky-content" aria-hidden="true">
 					<?php
 					super_awesome_theme_get_template_part(
@@ -52,7 +59,7 @@ if ( 'header' === $branding_location && super_awesome_theme_use_page_header() ) 
 				</div>
 
 				<?php if ( super_awesome_theme_is_widget_area_active( 'nav-extra' ) ) : ?>
-					<div id="site-navigation-extra" class="site-navigation-extra inline-widget-area">
+					<div id="site-navigation-extra" class="site-navigation-extra<?php echo esc_attr( $widgets_extra_class ); ?>">
 						<?php super_awesome_theme_render_widget_area( 'nav-extra' ); ?>
 					</div><!-- #site-nav-extra -->
 				<?php endif; ?>

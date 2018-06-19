@@ -7,8 +7,6 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$header_position = super_awesome_theme_get_setting( 'header_position' );
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
@@ -26,43 +24,33 @@ $header_position = super_awesome_theme_get_setting( 'header_position' );
 
 <div id="page" class="site">
 
-	<?php
-
-	/**
-	 * Fires before the theme's header is printed.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'super_awesome_theme_before_header' );
-	?>
+	<?php get_template_part( 'template-parts/header/site-top-bar' ); ?>
 
 	<header id="header" class="site-header">
-		<?php get_template_part( 'template-parts/header/site-top-bar' ); ?>
-
 		<?php
-		if ( 'above_navbar' === $header_position ) {
-			get_template_part( 'template-parts/header/site-custom-header' );
-		}
+
+		/**
+		 * Fires before the theme's header is printed.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'super_awesome_theme_before_header' );
 		?>
 
-		<?php get_template_part( 'template-parts/header/site-navbar' ); ?>
+		<?php get_template_part( 'template-parts/header/site-custom-header' ); ?>
 
 		<?php
-		if ( 'below_navbar' === $header_position ) {
-			get_template_part( 'template-parts/header/site-custom-header' );
-		}
+
+		/**
+		 * Fires after the theme's header has been printed.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'super_awesome_theme_after_header' );
 		?>
 	</header><!-- #header -->
 
-	<?php
-
-	/**
-	 * Fires after the theme's header has been printed.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'super_awesome_theme_after_header' );
-	?>
+	<?php get_template_part( 'template-parts/header/site-navbar' ); ?>
 
 	<div id="content" class="site-content site-component is-flex">
 		<div class="site-component-inner">

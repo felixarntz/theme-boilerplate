@@ -17,6 +17,8 @@
 }
 
 .alignwide {
+	width: auto;
+
 	body.no-sidebar .entry-header &,
 	body.no-sidebar .entry-content &,
 	body.no-sidebar .entry-footer &,
@@ -31,9 +33,23 @@
 			margin-left: ($site_maxwidth-text / 2 + $padding_horizontal - $site_maxwidth / 2);
 		}
 	}
+
+	body.navbar-left.no-sidebar .entry-header &,
+	body.navbar-left.no-sidebar .entry-content &,
+	body.navbar-left.no-sidebar .entry-footer &,
+	body.navbar-right.no-sidebar .entry-header &,
+	body.navbar-right.no-sidebar .entry-content &,
+	body.navbar-right.no-sidebar .entry-footer & {
+		@media (min-width: ($site_maxwidth)) {
+			margin-right: ($site_maxwidth-text / 2 + $padding_horizontal - ($site_maxwidth - $site_navbar-vertical-width) / 2);
+			margin-left: ($site_maxwidth-text / 2 + $padding_horizontal - ($site_maxwidth - $site_navbar-vertical-width) / 2);
+		}
+	}
 }
 
 .alignfull {
+	width: auto;
+
 	body.no-sidebar &,
 	body.mce-content-body & {
 		margin-right: (- $padding_horizontal);
@@ -56,6 +72,30 @@
 		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
 			margin-right: ($site_maxwidth-text / 2 - $site_maxwidth / 2);
 			margin-left: ($site_maxwidth-text / 2 - $site_maxwidth / 2);
+		}
+	}
+
+	body.navbar-left.no-sidebar .entry-header &,
+	body.navbar-left.no-sidebar .entry-content &,
+	body.navbar-left.no-sidebar .entry-footer &,
+	body.navbar-right.no-sidebar .entry-header &,
+	body.navbar-right.no-sidebar .entry-content &,
+	body.navbar-right.no-sidebar .entry-footer & {
+		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
+			margin-right: calc(#{$site_maxwidth-text} / 2 - (50vw - #{$site_navbar-vertical-width} / 2));
+			margin-left: calc(#{$site_maxwidth-text} / 2 - (50vw - #{$site_navbar-vertical-width} / 2));
+		}
+	}
+
+	body.navbar-left.wrapped-layout.no-sidebar .entry-header &,
+	body.navbar-left.wrapped-layout.no-sidebar .entry-content &,
+	body.navbar-left.wrapped-layout.no-sidebar .entry-footer &,
+	body.navbar-right.wrapped-layout.no-sidebar .entry-header &,
+	body.navbar-right.wrapped-layout.no-sidebar .entry-content &,
+	body.navbar-right.wrapped-layout.no-sidebar .entry-footer & {
+		@media (min-width: ($site_maxwidth-text + $padding_horizontal * 2)) {
+			margin-right: ($site_maxwidth-text / 2 - ($site_maxwidth - $site_navbar-vertical-width) / 2);
+			margin-left: ($site_maxwidth-text / 2 - ($site_maxwidth - $site_navbar-vertical-width) / 2);
 		}
 	}
 }

@@ -97,9 +97,8 @@
 
 
 			api.bind('ready', function () {
-				api.when('branding_location', 'header_position', function (brandingLocation, headerPosition) {
+				api.when('branding_location', function (brandingLocation) {
 					brandingLocation.transport = 'refresh';
-					headerPosition.transport = 'refresh';
 				});
 
 				api.control.add(new api.Control('branding_location', {
@@ -108,14 +107,6 @@
 					description: __('Specify where to display the site logo, title and tagline.', 'super-awesome-theme'),
 					type: 'radio',
 					choices: data.brandingLocationChoices
-				}));
-
-				api.control.add(new api.Control('header_position', {
-					section: 'header_image',
-					label: _x('Position', 'custom header', 'super-awesome-theme'),
-					description: __('Specify where to display the header image or video.', 'super-awesome-theme'),
-					type: 'radio',
-					choices: data.headerPositionChoices
 				}));
 
 				api.control.add(new api.Control('header_textalign', {
