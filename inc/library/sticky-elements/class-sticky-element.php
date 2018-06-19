@@ -119,6 +119,14 @@ class Super_Awesome_Theme_Sticky_Element {
 	protected $active_callback;
 
 	/**
+	 * Setting instance for this color.
+	 *
+	 * @since 1.0.0
+	 * @var Super_Awesome_Theme_Setting
+	 */
+	protected $setting;
+
+	/**
 	 * Constructor.
 	 *
 	 * Sets the sticky element definition.
@@ -139,6 +147,10 @@ class Super_Awesome_Theme_Sticky_Element {
 				$this->$prop = $default_value;
 			}
 		}
+
+		$this->setting = new Super_Awesome_Theme_Boolean_Setting( $this->id, array(
+			Super_Awesome_Theme_Boolean_Setting::PROP_DEFAULT => $this->default,
+		) );
 	}
 
 	/**
@@ -179,6 +191,28 @@ class Super_Awesome_Theme_Sticky_Element {
 		}
 
 		return $props;
+	}
+
+	/**
+	 * Gets the setting instance for this color.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Super_Awesome_Theme_Setting Theme color setting.
+	 */
+	final public function get_setting() {
+		return $this->setting;
+	}
+
+	/**
+	 * Checks whether the sticky element is currently sticky.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if element is sticky, false otherwise.
+	 */
+	final public function is_sticky() {
+		return $this->setting->get_value();
 	}
 
 	/**

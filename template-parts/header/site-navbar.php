@@ -7,13 +7,14 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$navbar_position   = super_awesome_theme_get_setting( 'navbar_position' );
+$navbar = super_awesome_theme()->get_component( 'navbar' );
+
 $branding_location = super_awesome_theme_get_setting( 'branding_location' );
-$menu_slug         = super_awesome_theme_get_navigation_name();
+$menu_slug         = $navbar->get_navigation_name();
 
 $extra_class         = super_awesome_theme_get_setting( 'navbar_justify_content' );
 $widgets_extra_class = '';
-if ( ! in_array( $navbar_position, array( 'left', 'right' ), true ) ) {
+if ( $navbar->is_sticky_allowed() ) {
 	$extra_class          = 'is-flex ' . $extra_class;
 	$widgets_extra_class .= ' inline-widget-area';
 }
@@ -31,7 +32,7 @@ if ( 'header' === $branding_location && super_awesome_theme_use_page_header() ) 
 				<div class="site-branding">
 					<?php get_template_part( 'template-parts/header/logo-and-title' ); ?>
 				</div><!-- .site-branding -->
-			<?php elseif ( ! in_array( $navbar_position, array( 'left', 'right' ), true ) && super_awesome_theme_get_setting( 'sticky_navbar' ) ) : ?>
+			<?php elseif ( $navbar->is_sticky_allowed() && $navbar->is_sticky() ) : ?>
 				<div class="site-branding sticky-content" aria-hidden="true">
 					<?php
 					super_awesome_theme_get_template_part(

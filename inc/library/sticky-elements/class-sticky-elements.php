@@ -114,12 +114,7 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 		$settings = $this->get_dependency( 'settings' );
 
 		foreach ( $this->sticky_elements as $sticky ) {
-			$settings->register_setting( new Super_Awesome_Theme_Boolean_Setting(
-				'sticky_' . $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_ID ),
-				array(
-					Super_Awesome_Theme_Boolean_Setting::PROP_DEFAULT => $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_DEFAULT ),
-				)
-			) );
+			$settings->register_setting( $sticky->get_setting() );
 		}
 	}
 

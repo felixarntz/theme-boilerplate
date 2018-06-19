@@ -58,6 +58,34 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	}
 
 	/**
+	 * Checks whether the navbar is currently sticky.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if navbar is sticky, false otherwise.
+	 */
+	public function is_sticky() {
+		$sticky_elements = $this->get_dependency( 'sticky_elements' );
+
+		$navbar = $sticky_elements->get_registered_sticky_element( 'navbar' );
+
+		return $navbar->is_sticky();
+	}
+
+	/**
+	 * Checks whether the navbar can be sticky, given the current circumstances.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return boolean True if navbar can be sticky, false otherwise.
+	 */
+	public function is_sticky_allowed() {
+		$settings = $this->get_dependency( 'settings' );
+
+		return ! in_array( $settings->get( 'navbar_position' ), array( 'left', 'right' ), true );
+	}
+
+	/**
 	 * Gets the available choices for the 'navbar_position' setting.
 	 *
 	 * @since 1.0.0
@@ -121,9 +149,6 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 				$classes[] = 'navbar-' . $settings->get( 'navbar_position' );
 
 				return $classes;
-			case 'can_be_sticky':
-				$settings = $this->get_dependency( 'settings' );
-				return ! in_array( $settings->get( 'navbar_position' ), array( 'left', 'right' ), true );
 		}
 	}
 
@@ -164,7 +189,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 			array(
 				Super_Awesome_Theme_Widget_Area::PROP_TITLE       => __( 'Navbar Extra', 'super-awesome-theme' ),
 				Super_Awesome_Theme_Widget_Area::PROP_DESCRIPTION => __( 'Add widgets here to appear as additional content in the navbar beside the main navigation menu.', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Widget_Area::PROP_INLINE      => $this->can_be_sticky(),
+				Super_Awesome_Theme_Widget_Area::PROP_INLINE      => $this->is_sticky_allowed(),
 			)
 		) );
 	}
@@ -234,7 +259,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR        => '#site-navbar',
 				Super_Awesome_Theme_Sticky_Element::PROP_LABEL           => __( 'Stick the navbar to the top of the page when scrolling?', 'super-awesome-theme' ),
 				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION        => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
-				Super_Awesome_Theme_Sticky_Element::PROP_ACTIVE_CALLBACK => array( $this, 'can_be_sticky' ),
+				Super_Awesome_Theme_Sticky_Element::PROP_ACTIVE_CALLBACK => array( $this, 'is_sticky_allowed' ),
 			)
 		) );
 	}

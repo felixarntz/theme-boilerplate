@@ -30,6 +30,32 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 	}
 
 	/**
+	 * Checks whether the top bar is currently sticky.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if top bar is sticky, false otherwise.
+	 */
+	public function is_sticky() {
+		$sticky_elements = $this->get_dependency( 'sticky_elements' );
+
+		$top_bar = $sticky_elements->get_registered_sticky_element( 'top_bar' );
+
+		return $top_bar->is_sticky();
+	}
+
+	/**
+	 * Checks whether the top bar can be sticky, given the current circumstances.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return boolean True if top bar can be sticky, false otherwise.
+	 */
+	public function is_sticky_allowed() {
+		return true;
+	}
+
+	/**
 	 * Gets the available choices for the 'top_bar_justify_content' setting.
 	 *
 	 * @since 1.0.0
@@ -96,7 +122,7 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 			array(
 				Super_Awesome_Theme_Widget_Area::PROP_TITLE       => __( 'Top Bar', 'super-awesome-theme' ),
 				Super_Awesome_Theme_Widget_Area::PROP_DESCRIPTION => __( 'Add widgets here to appear in a narrow bar at the very top of the screen.', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Widget_Area::PROP_INLINE      => true,
+				Super_Awesome_Theme_Widget_Area::PROP_INLINE      => $this->is_sticky_allowed(),
 			)
 		) );
 	}
@@ -146,9 +172,10 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 		$sticky_elements->register_sticky_element( new Super_Awesome_Theme_Sticky_Element(
 			'top_bar',
 			array(
-				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR => '#site-top-bar',
-				Super_Awesome_Theme_Sticky_Element::PROP_LABEL    => __( 'Stick the top bar to the top of the page when scrolling?', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
+				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR        => '#site-top-bar',
+				Super_Awesome_Theme_Sticky_Element::PROP_LABEL           => __( 'Stick the top bar to the top of the page when scrolling?', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION        => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
+				Super_Awesome_Theme_Sticky_Element::PROP_ACTIVE_CALLBACK => array( $this, 'is_sticky_allowed' ),
 			)
 		) );
 	}
