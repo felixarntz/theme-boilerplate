@@ -73,6 +73,8 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 		foreach ( $this->inline_styles as $inline_style ) {
 			wp_add_inline_style( $this->handle, $inline_style['style'] );
 		}
+
+		$this->inline_styles = array();
 	}
 
 	/**
@@ -98,6 +100,11 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 	 * @param string $style CSS code to be printed. Must not contain the style tags.
 	 */
 	public function add_inline_style( $style ) {
+		if ( $this->is_registered() ) {
+			wp_add_inline_style( $this->handle, $style );
+			return;
+		}
+
 		$this->inline_styles[] = array(
 			'style' => $style,
 		);
