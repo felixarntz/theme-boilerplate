@@ -969,6 +969,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			value: function initialize() {
 				var context = this;
 
+				this.initializeHeaderSiteBranding();
+
 				if (!this.stickToTopContainers.length && !this.stickToBottomContainers.length) {
 					return;
 				}
@@ -987,6 +989,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				this.checkStickyContainers();
 				window.addEventListener('scroll', checkStickyContainers);
 				window.addEventListener('resize', checkStickyContainers);
+			}
+		}, {
+			key: 'initializeHeaderSiteBranding',
+			value: function initializeHeaderSiteBranding() {
+				var headerSiteBranding = document.querySelector('.site-custom-header .site-branding');
+				var offset = headerSiteBranding ? headerSiteBranding.offsetTop ? headerSiteBranding.offsetTop : headerSiteBranding.offsetParent ? headerSiteBranding.offsetParent.offsetTop : 0 : 0;
+
+				if (!headerSiteBranding) {
+					return;
+				}
+
+				function checkHeaderSiteBranding() {
+					if (window.scrollY >= offset) {
+						document.body.classList.add('scrolled-past-header-site-branding');
+						return;
+					}
+
+					document.body.classList.remove('scrolled-past-header-site-branding');
+				}
+
+				checkHeaderSiteBranding();
+				window.addEventListener('scroll', checkHeaderSiteBranding);
+				window.addEventListener('resize', checkHeaderSiteBranding);
 			}
 		}, {
 			key: 'checkStickyContainers',

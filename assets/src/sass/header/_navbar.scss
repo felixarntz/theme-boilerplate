@@ -21,14 +21,43 @@
 		min-height: 5rem;
 	}
 
-	&.site-component.is-flex > .site-component-inner {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+	&.site-component.is-flex {
+		> .site-component-inner {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		@media screen and (min-width: $site_breakpoint) {
+			.site-navigation {
+				flex: 1;
+			}
+
+			.site-navigation-content {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
 	}
 
-	&.site-component.is-flex.centered > .site-component-inner {
-		justify-content: center;
+	&.site-component.is-flex.centered {
+		> .site-component-inner {
+			justify-content: center;
+		}
+
+		@media screen and (min-width: $site_breakpoint) {
+			.site-navigation-content {
+				justify-content: center;
+			}
+		}
+	}
+
+	.site-branding.sticky-content {
+		display: none;
+
+		body.scrolled-past-header-site-branding & {
+			display: block;
+		}
 	}
 
 	.site-branding:first-child {

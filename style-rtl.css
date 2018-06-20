@@ -2069,11 +2069,46 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	-webkit-box-pack: justify;
 }
 
+@media screen and (min-width: 48rem) {
+	.site-navbar.site-component.is-flex .site-navigation {
+		-ms-flex: 1;
+		    flex: 1;
+
+		-webkit-box-flex: 1;
+	}
+	.site-navbar.site-component.is-flex .site-navigation-content {
+		-ms-flex-pack: justify;
+		justify-content: space-between;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+
+		-webkit-box-pack: justify;
+	}
+}
+
 .site-navbar.site-component.is-flex.centered > .site-component-inner {
 	-ms-flex-pack: center;
 	justify-content: center;
 
 	-webkit-box-pack: center;
+}
+
+@media screen and (min-width: 48rem) {
+	.site-navbar.site-component.is-flex.centered .site-navigation-content {
+		-ms-flex-pack: center;
+		justify-content: center;
+
+		-webkit-box-pack: center;
+	}
+}
+
+.site-navbar .site-branding.sticky-content {
+	display: none;
+}
+
+body.scrolled-past-header-site-branding .site-navbar .site-branding.sticky-content {
+	display: block;
 }
 
 .site-navbar .site-branding:first-child {
