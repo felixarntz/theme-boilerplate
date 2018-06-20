@@ -58,6 +58,19 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	}
 
 	/**
+	 * Checks whether the navbar should be displayed on the side of the page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if navbar should be displayed vertically on the side, false otherwise.
+	 */
+	public function is_side() {
+		$settings = $this->get_dependency( 'settings' );
+
+		return in_array( $settings->get( 'navbar_position' ), array( 'left', 'right' ), true );
+	}
+
+	/**
 	 * Checks whether the navbar is currently sticky.
 	 *
 	 * @since 1.0.0
@@ -80,9 +93,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	 * @return boolean True if navbar can be sticky, false otherwise.
 	 */
 	public function is_sticky_allowed() {
-		$settings = $this->get_dependency( 'settings' );
-
-		return ! in_array( $settings->get( 'navbar_position' ), array( 'left', 'right' ), true );
+		return ! $this->is_side();
 	}
 
 	/**

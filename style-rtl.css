@@ -1627,63 +1627,6 @@ body.navbar-below-header .site {
 	grid-template: "top-bar" auto "header" auto "navbar" auto "content" auto "footer" auto "bottom-bar" auto / 1fr;
 }
 
-body.navbar-left .site .site-navbar,
-body.navbar-right .site .site-navbar {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	z-index: 100;
-	width: 3rem;
-	overflow: hidden;
-}
-
-@media (min-width: 48rem) {
-	body.navbar-left .site .site-navbar,
-	body.navbar-right .site .site-navbar {
-		width: 20rem;
-	}
-}
-
-body.admin-bar.navbar-left .site .site-navbar,
-body.admin-bar.navbar-right .site .site-navbar {
-	top: 46px;
-}
-
-@media (min-width: 783px) {
-	body.admin-bar.navbar-left .site .site-navbar,
-	body.admin-bar.navbar-right .site .site-navbar {
-		top: 32px;
-	}
-}
-
-body.navbar-left .site {
-	margin-right: 3rem;
-}
-
-@media (min-width: 48rem) {
-	body.navbar-left .site {
-		margin-right: 20rem;
-	}
-}
-
-body.navbar-left .site .site-navbar {
-	right: 0;
-}
-
-body.navbar-right .site {
-	margin-left: 3rem;
-}
-
-@media (min-width: 48rem) {
-	body.navbar-right .site {
-		margin-left: 20rem;
-	}
-}
-
-body.navbar-right .site .site-navbar {
-	left: 0;
-}
-
 body.wrapped-layout .site {
 	display: block;
 	max-width: 72rem;
@@ -2136,6 +2079,158 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	text-align: left;
 }
 
+.site-navbar .site-navbar-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	z-index: 110;
+	display: none;
+	width: 3rem;
+	background-color: rgba(0, 0, 0, 0.065);
+}
+
+.site-navbar .site-navbar-toggle:hover,
+.site-navbar .site-navbar-toggle:focus {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.site-navbar .site-navbar-toggle .icon-close {
+	display: none;
+}
+
+.site-navbar .site-navbar-toggle .toggle-text {
+	display: block;
+	-webkit-transform: rotate(-90deg);
+	        transform: rotate(-90deg);
+	-webkit-transform-origin: center;
+	        transform-origin: center;
+
+	     -o-transform: rotate(-90deg);
+	     -o-transform-origin: center;
+}
+
+body.navbar-left .site-navbar,
+body.navbar-right .site-navbar {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	z-index: 100;
+	width: 20rem;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+body.navbar-left .site-navbar .site-navbar-toggle,
+body.navbar-right .site-navbar .site-navbar-toggle {
+	display: block;
+}
+
+@media (min-width: 48rem) {
+	body.navbar-left .site-navbar .site-navbar-toggle,
+	body.navbar-right .site-navbar .site-navbar-toggle {
+		display: none;
+	}
+}
+
+body.navbar-left .site-navbar {
+	right: 0;
+}
+
+body.navbar-left .site-navbar > .site-component-inner {
+	padding-left: 4rem;
+}
+
+@media (min-width: 48rem) {
+	body.navbar-left .site-navbar > .site-component-inner {
+		padding-left: 1rem;
+	}
+}
+
+body.navbar-left .site-navbar .site-navbar-toggle {
+	left: 0;
+}
+
+body.navbar-right .site-navbar {
+	left: 0;
+}
+
+body.navbar-right .site-navbar > .site-component-inner {
+	padding-right: 4rem;
+}
+
+@media (min-width: 48rem) {
+	body.navbar-right .site-navbar > .site-component-inner {
+		padding-right: 1rem;
+	}
+}
+
+body.navbar-right .site-navbar .site-navbar-toggle {
+	right: 0;
+}
+
+body.admin-bar.navbar-left .site-navbar,
+body.admin-bar.navbar-right .site-navbar {
+	top: 46px;
+}
+
+@media (min-width: 783px) {
+	body.admin-bar.navbar-left .site-navbar,
+	body.admin-bar.navbar-right .site-navbar {
+		top: 32px;
+	}
+}
+
+.js body.navbar-left .site-navbar,
+.js body.navbar-right .site-navbar {
+	width: 3rem;
+}
+
+@media (min-width: 48rem) {
+	.js body.navbar-left .site-navbar,
+	.js body.navbar-right .site-navbar {
+		width: 20rem;
+	}
+}
+
+.js body.navbar-left .site-navbar > .site-component-inner,
+.js body.navbar-right .site-navbar > .site-component-inner {
+	display: none;
+}
+
+@media screen and (min-width: 48rem) {
+	.js body.navbar-left .site-navbar > .site-component-inner,
+	.js body.navbar-right .site-navbar > .site-component-inner {
+		display: block;
+	}
+}
+
+.js body.navbar-left .site-navbar.toggled,
+.js body.navbar-right .site-navbar.toggled {
+	width: 20rem;
+}
+
+.js body.navbar-left .site-navbar.toggled > .site-component-inner,
+.js body.navbar-right .site-navbar.toggled > .site-component-inner {
+	display: block;
+}
+
+@media screen and (min-width: 48rem) {
+	.js body.navbar-left .site-navbar.toggled > .site-component-inner,
+	.js body.navbar-right .site-navbar.toggled > .site-component-inner {
+		display: block;
+	}
+}
+
+.js body.navbar-left .site-navbar.toggled .site-navbar-toggle .icon-close,
+.js body.navbar-right .site-navbar.toggled .site-navbar-toggle .icon-close {
+	display: inline-block;
+}
+
+.js body.navbar-left .site-navbar.toggled .site-navbar-toggle .icon-bars,
+.js body.navbar-right .site-navbar.toggled .site-navbar-toggle .icon-bars {
+	display: none;
+}
+
 .js .site-navbar .site-navigation .site-navigation-content {
 	position: absolute;
 	top: 100%;
@@ -2175,14 +2270,14 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	}
 }
 
-body.navbar-left .site-navbar .site-navigation ul.nav-menu,
-body.navbar-right .site-navbar .site-navigation ul.nav-menu {
+body.navbar-left .site-navbar .site-navigation ul.menu,
+body.navbar-right .site-navbar .site-navigation ul.menu {
 	display: block;
 }
 
 @media screen and (min-width: 48rem) {
-	body.navbar-left .site-navbar .site-navigation ul.nav-menu > li,
-	body.navbar-right .site-navbar .site-navigation ul.nav-menu > li {
+	body.navbar-left .site-navbar .site-navigation ul.menu > li,
+	body.navbar-right .site-navbar .site-navigation ul.menu > li {
 		display: block;
 	}
 }
@@ -2217,20 +2312,40 @@ body.navbar-right .site-navbar .site-navigation ul.nav-menu {
 	}
 }
 
-.js body.navbar-left .site-navbar .site-navigation.toggled ul.nav-menu,
-.js body.navbar-right .site-navbar .site-navigation.toggled ul.nav-menu {
+.js body.navbar-left .site-navbar .site-navigation.toggled ul.menu,
+.js body.navbar-right .site-navbar .site-navigation.toggled ul.menu {
 	display: block;
 }
 
-.js body.navbar-left .site-navbar .site-navigation ul.nav-menu,
-.js body.navbar-right .site-navbar .site-navigation ul.nav-menu {
+.js body.navbar-left .site-navbar .site-navigation ul.menu,
+.js body.navbar-right .site-navbar .site-navigation ul.menu {
 	display: none;
 }
 
 @media screen and (min-width: 48rem) {
-	.js body.navbar-left .site-navbar .site-navigation ul.nav-menu,
-	.js body.navbar-right .site-navbar .site-navigation ul.nav-menu {
+	.js body.navbar-left .site-navbar .site-navigation ul.menu,
+	.js body.navbar-right .site-navbar .site-navigation ul.menu {
 		display: block;
+	}
+}
+
+body.navbar-left .site {
+	margin-right: 3rem;
+}
+
+@media (min-width: 48rem) {
+	body.navbar-left .site {
+		margin-right: 20rem;
+	}
+}
+
+body.navbar-right .site {
+	margin-left: 3rem;
+}
+
+@media (min-width: 48rem) {
+	body.navbar-right .site {
+		margin-left: 20rem;
 	}
 }
 
@@ -2339,7 +2454,7 @@ body.navbar-right .site-navbar .site-navigation ul.nav-menu {
 	display: none;
 }
 
-.site-navigation ul.nav-menu {
+.site-navigation ul.menu {
 	-ms-flex-pack: center;
 	justify-content: center;
 	display: -webkit-box;
@@ -2349,24 +2464,24 @@ body.navbar-right .site-navbar .site-navigation ul.nav-menu {
 	-webkit-box-pack: center;
 }
 
-.site-navigation ul.nav-menu ul {
+.site-navigation ul.menu ul {
 	padding: 0 1.5rem 0 0;
 }
 
 @media screen and (min-width: 48rem) {
-	.site-navigation ul.nav-menu > li {
+	.site-navigation ul.menu > li {
 		display: inline-block;
 	}
-	.site-navigation ul.nav-menu > li > a {
+	.site-navigation ul.menu > li > a {
 		padding: 0.75rem 1rem;
 	}
-	.site-navigation ul.nav-menu > li:first-child > a {
+	.site-navigation ul.menu > li:first-child > a {
 		padding-right: 0;
 	}
-	.site-navigation ul.nav-menu > li:last-child > a {
+	.site-navigation ul.menu > li:last-child > a {
 		padding-left: 0;
 	}
-	.site-navigation ul.nav-menu ul {
+	.site-navigation ul.menu ul {
 		position: absolute;
 		top: 100%;
 		right: -999em;
@@ -2376,12 +2491,12 @@ body.navbar-right .site-navbar .site-navigation ul.nav-menu {
 		background-color: #fff;
 		border: 1px solid #333;
 	}
-	.site-navigation ul.nav-menu ul a {
+	.site-navigation ul.menu ul a {
 		width: 16em;
 		padding: 0.75rem 1rem;
 	}
-	.site-navigation ul.nav-menu ul .menu-item-has-children > a > .icon,
-	.site-navigation ul.nav-menu ul .page_item_has_children > a > .icon {
+	.site-navigation ul.menu ul .menu-item-has-children > a > .icon,
+	.site-navigation ul.menu ul .page_item_has_children > a > .icon {
 		position: absolute;
 		top: 50%;
 		left: 1rem;
@@ -2392,42 +2507,42 @@ body.navbar-right .site-navbar .site-navigation ul.nav-menu {
 
 		     -o-transform: rotate(90deg);
 	}
-	.site-navigation ul.nav-menu ul ul {
+	.site-navigation ul.menu ul ul {
 		top: 0;
 		right: -999em;
 		margin-top: -1px;
 	}
-	.site-navigation ul.nav-menu ul li:hover > ul,
-	.site-navigation ul.nav-menu ul li.focus > ul {
+	.site-navigation ul.menu ul li:hover > ul,
+	.site-navigation ul.menu ul li.focus > ul {
 		left: auto;
 		right: 100%;
 	}
-	.site-navigation ul.nav-menu li:hover > ul,
-	.site-navigation ul.nav-menu li.focus > ul {
+	.site-navigation ul.menu li:hover > ul,
+	.site-navigation ul.menu li.focus > ul {
 		left: auto;
 		right: 0.5em;
 	}
 }
 
-.js .site-navigation ul.nav-menu {
+.js .site-navigation ul.menu {
 	display: none;
 }
 
-.js .site-navigation ul.nav-menu ul {
+.js .site-navigation ul.menu ul {
 	display: none;
 }
 
-.js .site-navigation ul.nav-menu ul.toggled {
+.js .site-navigation ul.menu ul.toggled {
 	display: block;
 }
 
 @media screen and (min-width: 48rem) {
-	.js .site-navigation ul.nav-menu {
+	.js .site-navigation ul.menu {
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
 	}
-	.js .site-navigation ul.nav-menu ul {
+	.js .site-navigation ul.menu ul {
 		display: block;
 	}
 }
@@ -2452,7 +2567,7 @@ body.navbar-right .site-navbar .site-navigation ul.nav-menu {
 	}
 }
 
-.js .site-navigation.toggled ul.nav-menu {
+.js .site-navigation.toggled ul.menu {
 	display: block;
 }
 

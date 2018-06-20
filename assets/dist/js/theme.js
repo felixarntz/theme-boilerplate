@@ -102,9 +102,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__theme_skip_link_focus_fix__ = __webpack_require__(12);
 	/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__theme_navigation__ = __webpack_require__(13);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__theme_comment_form__ = __webpack_require__(14);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__theme_modals__ = __webpack_require__(15);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__theme_sticky__ = __webpack_require__(16);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__theme_navbar__ = __webpack_require__(14);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__theme_comment_form__ = __webpack_require__(15);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__theme_modals__ = __webpack_require__(16);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_5__theme_sticky__ = __webpack_require__(17);
 
 	(function (data) {
 		data = data || {};
@@ -116,13 +117,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		data.components = {
 			skipLinkFocusFix: new __WEBPACK_IMPORTED_MODULE_0__theme_skip_link_focus_fix__["a" /* default */](),
 			navigation: new __WEBPACK_IMPORTED_MODULE_1__theme_navigation__["a" /* default */]('site-navigation', data.navigation),
-			commentForm: new __WEBPACK_IMPORTED_MODULE_2__theme_comment_form__["a" /* default */]('commentform', 'comments', data.comments),
-			modals: new __WEBPACK_IMPORTED_MODULE_3__theme_modals__["a" /* default */]('.modal'),
-			sticky: new __WEBPACK_IMPORTED_MODULE_4__theme_sticky__["a" /* default */](data.sticky)
+			navbar: new __WEBPACK_IMPORTED_MODULE_2__theme_navbar__["a" /* default */]('site-navbar', data.navbar),
+			commentForm: new __WEBPACK_IMPORTED_MODULE_3__theme_comment_form__["a" /* default */]('commentform', 'comments', data.comments),
+			modals: new __WEBPACK_IMPORTED_MODULE_4__theme_modals__["a" /* default */]('.modal'),
+			sticky: new __WEBPACK_IMPORTED_MODULE_5__theme_sticky__["a" /* default */](data.sticky)
 		};
 
 		data.components.skipLinkFocusFix.initialize();
 		data.components.navigation.initialize();
+		data.components.navbar.initialize();
 		data.components.commentForm.initialize();
 		data.components.modals.initialize();
 		data.components.sticky.initialize();
@@ -239,7 +242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		function Navigation(containerId, options) {
 			_classCallCheck(this, Navigation);
 
-			this.container = document.getElementById(containerId);
+			this.container = document.querySelector('#' + containerId);
 			this.options = options || {};
 		}
 
@@ -250,8 +253,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					return;
 				}
 
-				var menu = this.container.getElementsByTagName('ul')[0];
-				var button = this.container.getElementsByTagName('button')[0];
+				var menu = this.container.querySelector('ul.menu');
+				var button = this.container.querySelector('button.menu-toggle');
 
 				this.initializeMenuFocus(menu);
 				this.initializeSubmenuFocus(menu);
@@ -263,7 +266,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			value: function initializeMenuFocus(menu) {
 				var links = void 0;
 
-				if ('undefined' === typeof menu) {
+				if (!menu) {
 					return;
 				}
 
@@ -295,7 +298,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			value: function initializeSubmenuFocus(menu) {
 				var parentLinks = void 0;
 
-				if ('undefined' === typeof menu) {
+				if (!menu) {
 					return;
 				}
 
@@ -339,7 +342,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				var parentLinks = void 0;
 
-				if ('undefined' === typeof menu) {
+				if (!menu) {
 					return;
 				}
 
@@ -401,11 +404,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			value: function initializeMenuToggle(button, menu) {
 				var container = this.container;
 
-				if ('undefined' === typeof button) {
+				if (!button) {
+					container.classList.add('toggled');
 					return;
 				}
 
-				if ('undefined' === typeof menu) {
+				if (!menu) {
 					button.style.display = 'none';
 					return;
 				}
@@ -432,6 +436,66 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/***/
 },
 /* 14 */
+/***/function (module, __webpack_exports__, __webpack_require__) {
+
+	"use strict";
+	/**
+  * File navbar.js.
+  *
+  * Handles toggling the navbar.
+  */
+
+	var Navbar = function () {
+		function Navbar(containerId, options) {
+			_classCallCheck(this, Navbar);
+
+			this.container = document.querySelector('#' + containerId);
+			this.options = options || {};
+		}
+
+		_createClass(Navbar, [{
+			key: 'initialize',
+			value: function initialize() {
+				if (!this.container) {
+					return;
+				}
+
+				var button = this.container.querySelector('button.site-navbar-toggle');
+
+				this.initializeNavbarToggle(button);
+			}
+		}, {
+			key: 'initializeNavbarToggle',
+			value: function initializeNavbarToggle(button) {
+				var container = this.container;
+
+				if (!button) {
+					container.classList.add('toggled');
+					return;
+				}
+
+				button.onclick = function () {
+					var result = container.classList.toggle('toggled');
+
+					if (result) {
+						button.setAttribute('aria-expanded', 'true');
+					} else {
+						button.setAttribute('aria-expanded', 'false');
+					}
+				};
+			}
+		}]);
+
+		return Navbar;
+	}();
+
+	/* harmony default export */
+
+	__webpack_exports__["a"] = Navbar;
+
+	/***/
+},
+/* 15 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -700,7 +764,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 15 */
+/* 16 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -848,7 +912,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 16 */
+/* 17 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";

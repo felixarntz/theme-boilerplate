@@ -148,7 +148,7 @@ class Super_Awesome_Theme_Sticky_Element {
 			}
 		}
 
-		$this->setting = new Super_Awesome_Theme_Boolean_Setting( $this->id, array(
+		$this->setting = new Super_Awesome_Theme_Boolean_Setting( 'sticky_' . $this->id, array(
 			Super_Awesome_Theme_Boolean_Setting::PROP_DEFAULT => $this->default,
 		) );
 	}

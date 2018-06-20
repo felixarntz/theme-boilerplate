@@ -7,7 +7,7 @@
 
 class Navigation {
 	constructor( containerId, options ) {
-		this.container = document.getElementById( containerId );
+		this.container = document.querySelector( '#' + containerId );
 		this.options   = options || {};
 	}
 
@@ -16,8 +16,8 @@ class Navigation {
 			return;
 		}
 
-		const menu   = this.container.getElementsByTagName( 'ul' )[0];
-		const button = this.container.getElementsByTagName( 'button' )[0];
+		const menu   = this.container.querySelector( 'ul.menu' );
+		const button = this.container.querySelector( 'button.menu-toggle' );
 
 		this.initializeMenuFocus( menu );
 		this.initializeSubmenuFocus( menu );
@@ -28,7 +28,7 @@ class Navigation {
 	initializeMenuFocus( menu ) {
 		let links;
 
-		if ( 'undefined' === typeof menu ) {
+		if ( ! menu ) {
 			return;
 		}
 
@@ -59,7 +59,7 @@ class Navigation {
 	initializeSubmenuFocus( menu ) {
 		let parentLinks;
 
-		if ( 'undefined' === typeof menu ) {
+		if ( ! menu ) {
 			return;
 		}
 
@@ -102,7 +102,7 @@ class Navigation {
 
 		let parentLinks;
 
-		if ( 'undefined' === typeof menu ) {
+		if ( ! menu ) {
 			return;
 		}
 
@@ -163,11 +163,12 @@ class Navigation {
 	initializeMenuToggle( button, menu ) {
 		const container = this.container;
 
-		if ( 'undefined' === typeof button ) {
+		if ( ! button ) {
+			container.classList.add( 'toggled' );
 			return;
 		}
 
-		if ( 'undefined' === typeof menu ) {
+		if ( ! menu ) {
 			button.style.display = 'none';
 			return;
 		}

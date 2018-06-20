@@ -14,7 +14,7 @@ $menu_slug         = $navbar->get_navigation_name();
 
 $extra_class         = super_awesome_theme_get_setting( 'navbar_justify_content' );
 $widgets_extra_class = '';
-if ( $navbar->is_sticky_allowed() ) {
+if ( ! $navbar->is_side() ) {
 	$extra_class          = 'is-flex ' . $extra_class;
 	$widgets_extra_class .= ' inline-widget-area';
 }
@@ -26,6 +26,15 @@ if ( 'header' === $branding_location && super_awesome_theme_use_page_header() ) 
 ?>
 
 <div id="site-navbar" class="site-navbar site-component <?php echo esc_attr( $extra_class ); ?>">
+	<?php if ( $navbar->is_side() ) : ?>
+		<button class="site-navbar-toggle" aria-controls="site-navbar" aria-expanded="false">
+			<?php
+			echo super_awesome_theme_get_svg( 'bars' ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+			echo super_awesome_theme_get_svg( 'close' ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+			echo '<span class="toggle-text">' . esc_html__( 'Menu', 'super-awesome-theme' ) . '</span>';
+			?>
+		</button>
+	<?php endif; ?>
 	<div class="site-component-inner">
 		<?php if ( 'navbar_right' !== $branding_location ) : ?>
 			<?php if ( 'navbar_left' === $branding_location ) : ?>
@@ -46,13 +55,15 @@ if ( 'header' === $branding_location && super_awesome_theme_use_page_header() ) 
 		<?php endif; ?>
 
 		<nav id="site-navigation" class="site-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'super-awesome-theme' ); ?>">
-			<button class="menu-toggle" aria-controls="site-navigation-content" aria-expanded="false">
-				<?php
-				echo super_awesome_theme_get_svg( 'bars' ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
-				echo super_awesome_theme_get_svg( 'close' ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
-				esc_html_e( 'Menu', 'super-awesome-theme' );
-				?>
-			</button>
+			<?php if ( ! $navbar->is_side() ) : ?>
+				<button class="menu-toggle" aria-controls="site-navigation-content" aria-expanded="false">
+					<?php
+					echo super_awesome_theme_get_svg( 'bars' ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+					echo super_awesome_theme_get_svg( 'close' ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+					echo '<span class="toggle-text">' . esc_html__( 'Menu', 'super-awesome-theme' ) . '</span>';
+					?>
+				</button>
+			<?php endif; ?>
 
 			<div id="site-navigation-content" class="site-navigation-content">
 				<div class="site-navigation-menu">

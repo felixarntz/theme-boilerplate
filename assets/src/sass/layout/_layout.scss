@@ -30,57 +30,6 @@
 			/ 1fr;
 	}
 
-	body.navbar-left &,
-	body.navbar-right & {
-		.site-navbar {
-			position: fixed;
-			top: 0;
-			bottom: 0;
-			z-index: 100;
-			overflow: hidden;
-			width: $site_navbar-vertical-width-collapsed;
-
-			@media (min-width: $site_breakpoint) {
-				width: $site_navbar-vertical-width;
-			}
-		}
-	}
-
-	body.admin-bar.navbar-left &,
-	body.admin-bar.navbar-right & {
-		.site-navbar {
-			top: 46px;
-
-			@media (min-width: 783px) {
-				top: 32px;
-			}
-		}
-	}
-
-	body.navbar-left & {
-		margin-left: $site_navbar-vertical-width-collapsed;
-
-		@media (min-width: $site_breakpoint) {
-			margin-left: $site_navbar-vertical-width;
-		}
-
-		.site-navbar {
-			left: 0;
-		}
-	}
-
-	body.navbar-right & {
-		margin-right: $site_navbar-vertical-width-collapsed;
-
-		@media (min-width: $site_breakpoint) {
-			margin-right: $site_navbar-vertical-width;
-		}
-
-		.site-navbar {
-			right: 0;
-		}
-	}
-
 	body.wrapped-layout & {
 		@include center-block();
 

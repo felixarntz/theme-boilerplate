@@ -91,7 +91,7 @@
 		}
 	}
 
-	ul.nav-menu {
+	ul.menu {
 		display: flex;
 		justify-content: center;
 
@@ -171,7 +171,7 @@
 	}
 
 	.js & {
-		ul.nav-menu {
+		ul.menu {
 			display: none;
 
 			ul {
@@ -208,7 +208,7 @@
 		}
 
 		&.toggled {
-			ul.nav-menu {
+			ul.menu {
 				display: block;
 			}
 
