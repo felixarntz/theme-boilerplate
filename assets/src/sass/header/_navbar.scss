@@ -39,6 +39,31 @@
 		text-align: right;
 	}
 
+	.site-navigation-content {
+		@media (min-width: $site_breakpoint) {
+			> * {
+				padding-right: $padding_horizontal;
+				padding-left: $padding_horizontal;
+
+				&:first-child {
+					padding-left: 0;
+				}
+
+				&:last-child {
+					padding-right: 0;
+				}
+			}
+		}
+	}
+
+	.site-navigation-extra {
+		margin-top: $spacing_vertical;
+
+		@media (min-width: $site_breakpoint) {
+			margin-top: 0;
+		}
+	}
+
 	.site-navbar-toggle {
 		position: absolute;
 		top: 0;

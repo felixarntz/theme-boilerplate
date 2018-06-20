@@ -1,8 +1,11 @@
+.search-form {
+	display: flex;
+}
+
 input[type="search"].search-field {
 	display: block;
 	padding: (0.5 * $padding_vertical) (0.5 * $padding_horizontal);
 	width: auto;
-	float: left;
 	border: 1px solid $color__background-button;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;

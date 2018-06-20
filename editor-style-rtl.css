@@ -1248,9 +1248,14 @@ select + span.field-notice {
 	margin-left: 0.5em;
 }
 
+.search-form {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
 input[type="search"].search-field {
 	display: block;
-	float: right;
 	width: auto;
 	padding: 0.375rem 0.5rem;
 	border: 1px solid #e6e6e6;
