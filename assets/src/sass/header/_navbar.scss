@@ -94,10 +94,10 @@
 	}
 
 	.site-navbar-toggle {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		bottom: 0;
-		z-index: 110;
+		z-index: 100;
 		display: none;
 		width: $site_navbar-vertical-width-collapsed;
 		background-color: rgba(0, 0, 0, 0.065);
@@ -123,7 +123,7 @@
 		position: fixed;
 		top: 0;
 		bottom: 0;
-		z-index: 100;
+		z-index: 10000;
 		overflow-x: hidden;
 		overflow-y: auto;
 		width: $site_navbar-vertical-width;
@@ -133,6 +133,42 @@
 
 			@media (min-width: $site_breakpoint) {
 				display: none;
+			}
+		}
+
+		.js & {
+			width: $site_navbar-vertical-width-collapsed;
+
+			@media (min-width: $site_breakpoint) {
+				width: $site_navbar-vertical-width;
+			}
+
+			> .site-component-inner {
+				display: none;
+
+				@media screen and (min-width: $site_breakpoint) {
+					display: block;
+				}
+			}
+
+			&.toggled {
+				width: $site_navbar-vertical-width;
+
+				> .site-component-inner {
+					display: block;
+
+					@media screen and (min-width: $site_breakpoint) {
+						display: block;
+					}
+				}
+
+				.site-navbar-toggle .icon-close {
+					display: inline-block;
+				}
+
+				.site-navbar-toggle .icon-bars {
+					display: none;
+				}
 			}
 		}
 	}
@@ -148,8 +184,14 @@
 			}
 		}
 
-		.site-navbar-toggle {
-			right: 0;
+		.js & {
+			.site-navbar-toggle {
+				left: 0;
+			}
+
+			&.toggled .site-navbar-toggle {
+				left: ($site_navbar-vertical-width - $site_navbar-vertical-width-collapsed);
+			}
 		}
 	}
 
@@ -164,53 +206,25 @@
 			}
 		}
 
-		.site-navbar-toggle {
-			left: 0;
+		.js & {
+			.site-navbar-toggle {
+				right: 0;
+			}
+
+			&.toggled .site-navbar-toggle {
+				right: ($site_navbar-vertical-width - $site_navbar-vertical-width-collapsed);
+			}
 		}
 	}
 
 	body.admin-bar.navbar-left &,
 	body.admin-bar.navbar-right & {
-		top: 46px;
+		&,
+		.site-navbar-toggle {
+			top: 46px;
 
-		@media (min-width: 783px) {
-			top: 32px;
-		}
-	}
-
-	.js body.navbar-left &,
-	.js body.navbar-right & {
-		width: $site_navbar-vertical-width-collapsed;
-
-		@media (min-width: $site_breakpoint) {
-			width: $site_navbar-vertical-width;
-		}
-
-		> .site-component-inner {
-			display: none;
-
-			@media screen and (min-width: $site_breakpoint) {
-				display: block;
-			}
-		}
-
-		&.toggled {
-			width: $site_navbar-vertical-width;
-
-			> .site-component-inner {
-				display: block;
-
-				@media screen and (min-width: $site_breakpoint) {
-					display: block;
-				}
-			}
-
-			.site-navbar-toggle .icon-close {
-				display: inline-block;
-			}
-
-			.site-navbar-toggle .icon-bars {
-				display: none;
+			@media (min-width: 783px) {
+				top: 32px;
 			}
 		}
 	}

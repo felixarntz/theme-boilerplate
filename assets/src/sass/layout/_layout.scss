@@ -223,3 +223,10 @@
 		width: 50%;
 	}
 }
+
+// Fix issue with sticky content and toolbar by always keeping it fixed.
+@media screen and (max-width: 600px) {
+	#wpadminbar {
+		position: fixed;
+	}
+}

@@ -41,7 +41,7 @@ if ( 'header' === $branding_location && super_awesome_theme_use_page_header() ) 
 				<div class="site-branding">
 					<?php get_template_part( 'template-parts/header/logo-and-title' ); ?>
 				</div><!-- .site-branding -->
-			<?php elseif ( $navbar->is_sticky_allowed() && $navbar->is_sticky() ) : ?>
+			<?php elseif ( ! $navbar->is_sticky_allowed() || $navbar->is_sticky() ) : ?>
 				<div class="site-branding sticky-content" aria-hidden="true">
 					<?php
 					super_awesome_theme_get_template_part(

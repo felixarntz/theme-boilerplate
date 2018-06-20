@@ -1857,6 +1857,12 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	text-align: left;
 }
 
+@media screen and (max-width: 600px) {
+	#wpadminbar {
+		position: fixed;
+	}
+}
+
 /* -------------------------------------------------------------
 # Header
 ------------------------------------------------------------- */
@@ -2143,10 +2149,10 @@ body.scrolled-past-header-site-branding .site-navbar .site-branding.sticky-conte
 }
 
 .site-navbar .site-navbar-toggle {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	bottom: 0;
-	z-index: 110;
+	z-index: 100;
 	display: none;
 	width: 3rem;
 	background-color: rgba(0, 0, 0, 0.065);
@@ -2177,7 +2183,7 @@ body.navbar-right .site-navbar {
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	z-index: 100;
+	z-index: 10000;
 	width: 20rem;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -2195,6 +2201,66 @@ body.navbar-right .site-navbar .site-navbar-toggle {
 	}
 }
 
+.js body.navbar-left .site-navbar,
+.js
+body.navbar-right .site-navbar {
+	width: 3rem;
+}
+
+@media (min-width: 48rem) {
+	.js body.navbar-left .site-navbar,
+	.js
+	body.navbar-right .site-navbar {
+		width: 20rem;
+	}
+}
+
+.js body.navbar-left .site-navbar > .site-component-inner,
+.js
+body.navbar-right .site-navbar > .site-component-inner {
+	display: none;
+}
+
+@media screen and (min-width: 48rem) {
+	.js body.navbar-left .site-navbar > .site-component-inner,
+	.js
+	body.navbar-right .site-navbar > .site-component-inner {
+		display: block;
+	}
+}
+
+.js body.navbar-left .site-navbar.toggled,
+.js
+body.navbar-right .site-navbar.toggled {
+	width: 20rem;
+}
+
+.js body.navbar-left .site-navbar.toggled > .site-component-inner,
+.js
+body.navbar-right .site-navbar.toggled > .site-component-inner {
+	display: block;
+}
+
+@media screen and (min-width: 48rem) {
+	.js body.navbar-left .site-navbar.toggled > .site-component-inner,
+	.js
+	body.navbar-right .site-navbar.toggled > .site-component-inner {
+		display: block;
+	}
+}
+
+.js body.navbar-left .site-navbar.toggled .site-navbar-toggle .icon-close,
+.js
+body.navbar-right .site-navbar.toggled .site-navbar-toggle .icon-close {
+	display: inline-block;
+}
+
+.js body.navbar-left .site-navbar.toggled .site-navbar-toggle .icon-bars,
+.js
+body.navbar-right .site-navbar.toggled .site-navbar-toggle .icon-bars {
+	display: none;
+}
+
 body.navbar-left .site-navbar {
 	right: 0;
 }
@@ -2209,8 +2275,12 @@ body.navbar-left .site-navbar > .site-component-inner {
 	}
 }
 
-body.navbar-left .site-navbar .site-navbar-toggle {
-	left: 0;
+.js body.navbar-left .site-navbar .site-navbar-toggle {
+	right: 0;
+}
+
+.js body.navbar-left .site-navbar.toggled .site-navbar-toggle {
+	right: 17rem;
 }
 
 body.navbar-right .site-navbar {
@@ -2227,71 +2297,28 @@ body.navbar-right .site-navbar > .site-component-inner {
 	}
 }
 
-body.navbar-right .site-navbar .site-navbar-toggle {
-	right: 0;
+.js body.navbar-right .site-navbar .site-navbar-toggle {
+	left: 0;
+}
+
+.js body.navbar-right .site-navbar.toggled .site-navbar-toggle {
+	left: 17rem;
 }
 
 body.admin-bar.navbar-left .site-navbar,
-body.admin-bar.navbar-right .site-navbar {
+body.admin-bar.navbar-left .site-navbar .site-navbar-toggle,
+body.admin-bar.navbar-right .site-navbar,
+body.admin-bar.navbar-right .site-navbar .site-navbar-toggle {
 	top: 46px;
 }
 
 @media (min-width: 783px) {
 	body.admin-bar.navbar-left .site-navbar,
-	body.admin-bar.navbar-right .site-navbar {
+	body.admin-bar.navbar-left .site-navbar .site-navbar-toggle,
+	body.admin-bar.navbar-right .site-navbar,
+	body.admin-bar.navbar-right .site-navbar .site-navbar-toggle {
 		top: 32px;
 	}
-}
-
-.js body.navbar-left .site-navbar,
-.js body.navbar-right .site-navbar {
-	width: 3rem;
-}
-
-@media (min-width: 48rem) {
-	.js body.navbar-left .site-navbar,
-	.js body.navbar-right .site-navbar {
-		width: 20rem;
-	}
-}
-
-.js body.navbar-left .site-navbar > .site-component-inner,
-.js body.navbar-right .site-navbar > .site-component-inner {
-	display: none;
-}
-
-@media screen and (min-width: 48rem) {
-	.js body.navbar-left .site-navbar > .site-component-inner,
-	.js body.navbar-right .site-navbar > .site-component-inner {
-		display: block;
-	}
-}
-
-.js body.navbar-left .site-navbar.toggled,
-.js body.navbar-right .site-navbar.toggled {
-	width: 20rem;
-}
-
-.js body.navbar-left .site-navbar.toggled > .site-component-inner,
-.js body.navbar-right .site-navbar.toggled > .site-component-inner {
-	display: block;
-}
-
-@media screen and (min-width: 48rem) {
-	.js body.navbar-left .site-navbar.toggled > .site-component-inner,
-	.js body.navbar-right .site-navbar.toggled > .site-component-inner {
-		display: block;
-	}
-}
-
-.js body.navbar-left .site-navbar.toggled .site-navbar-toggle .icon-close,
-.js body.navbar-right .site-navbar.toggled .site-navbar-toggle .icon-close {
-	display: inline-block;
-}
-
-.js body.navbar-left .site-navbar.toggled .site-navbar-toggle .icon-bars,
-.js body.navbar-right .site-navbar.toggled .site-navbar-toggle .icon-bars {
-	display: none;
 }
 
 .js .site-navbar .site-navigation .site-navigation-content {
