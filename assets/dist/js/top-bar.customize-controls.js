@@ -78,13 +78,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 29);
+	/******/return __webpack_require__(__webpack_require__.s = 33);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/0:
+	/***/1:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -215,13 +215,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/29:
+	/***/2:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+		/**
+   * File get-customize-action.js.
+   *
+   * Function to get the Customize action for a given panel.
+   */
+
+		/* harmony default export */
+		__webpack_exports__["a"] = function (panel) {
+			var _window$wp$i18n = window.wp.i18n,
+			    __ = _window$wp$i18n.__,
+			    sprintf = _window$wp$i18n.sprintf;
+
+			var panelInstance = panel && panel.length ? window.wp.customize.panel.instance(panel) : undefined;
+
+			if (panelInstance) {
+				return sprintf(__('Customizing &#9656; %s', 'super-awesome-theme'), panelInstance.params.title);
+			}
+
+			return __('Customizing', 'super-awesome-theme');
+		};
+
+		/***/
+	},
+
+	/***/33:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(0);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(1);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(2);
 		/**
    * File top-bar.customize-controls.js.
    *
@@ -239,14 +268,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					topBarJustifyContent.transport = 'postMessage';
 				});
 
-				api.control.add(new api.Control('top_bar_justify_content', {
-					setting: 'top_bar_justify_content',
-					section: 'layout',
-					label: __('Top Bar Justify Content', 'super-awesome-theme'),
-					description: __('Specify how the content in the top bar is aligned.', 'super-awesome-theme'),
-					type: 'radio',
-					choices: data.topBarJustifyContentChoices
-				}));
+				api.panel.instance('layout', function () {
+					api.section.add(new api.Section('top_bar', {
+						panel: 'layout',
+						title: __('Top Bar', 'super-awesome-theme'),
+						customizeAction: Object(__WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__["a" /* default */])('layout')
+					}));
+
+					api.control.add(new api.Control('top_bar_justify_content', {
+						setting: 'top_bar_justify_content',
+						section: 'top_bar',
+						label: __('Top Bar Justify Content', 'super-awesome-theme'),
+						description: __('Specify how the content in the top bar is aligned.', 'super-awesome-theme'),
+						type: 'radio',
+						choices: data.topBarJustifyContentChoices
+					}));
+				});
 
 				// Handle visibility of the top bar controls.
 				util.bindSettingToControls('sidebars_widgets[top]', ['top_bar_justify_content', 'sticky_top_bar', 'top_bar_text_color', 'top_bar_link_color', 'top_bar_background_color'], function (value, control) {

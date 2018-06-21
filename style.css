@@ -2661,6 +2661,14 @@ body.navbar-right .site {
 	display: block;
 }
 
+@media screen and (min-width: 48rem) {
+	.js .site-navigation.toggled ul.menu {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+	}
+}
+
 .js .site-navigation.toggled .menu-toggle .icon-close {
 	display: inline-block;
 }

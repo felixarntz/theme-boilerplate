@@ -78,13 +78,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 20);
+	/******/return __webpack_require__(__webpack_require__.s = 21);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/1:
+	/***/0:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -120,14 +120,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/20:
+	/***/21:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(1);
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__common_utils__ = __webpack_require__(21);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(0);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__common_utils__ = __webpack_require__(22);
 		/**
    * File customize-preview.js.
    *
@@ -197,39 +197,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			});
 
-			// Navbar position.
-			util.bindSetting('navbar_position', function (value) {
-				var classes = Object.keys(data.navbarPositionChoices).map(function (setting) {
-					return 'navbar-' + setting;
-				});
-				var index = classes.indexOf('navbar-' + value);
-
-				value = 'navbar-' + value;
-
-				if (index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return document.body.classList.remove(cssClass);
-					});
-					document.body.classList.add(value);
-				}
-			});
-
-			// Navbar Justify Content.
-			util.bindSetting('navbar_justify_content', function (value) {
-				var classes = Object.keys(data.navbarJustifyContentChoices);
-				var index = classes.indexOf(value);
-				var navbar = document.getElementById('site-navbar');
-
-				if (navbar && index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return navbar.classList.remove(cssClass);
-					});
-					navbar.classList.add(value);
-				}
-			});
-
 			// Wide footer widget area.
 			util.bindSetting('wide_footer_widget_area', function (value) {
 				Array.from(document.querySelectorAll('.footer-widget-column')).forEach(function (element) {
@@ -268,7 +235,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/21:
+	/***/22:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";

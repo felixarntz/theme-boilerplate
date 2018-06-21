@@ -1,9 +1,5 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /******/(function (modules) {
 	// webpackBootstrap
 	/******/ // The module cache
@@ -78,79 +74,82 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 24);
+	/******/return __webpack_require__(__webpack_require__.s = 31);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/0:
+	/***/2:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 		/**
-   * File customize-preview-util.js.
+   * File get-customize-action.js.
    *
-   * Class containing Customizer preview utility methods.
+   * Function to get the Customize action for a given panel.
    */
 
-		var CustomizePreviewUtil = function () {
-			function CustomizePreviewUtil(wpCustomize) {
-				_classCallCheck(this, CustomizePreviewUtil);
+		/* harmony default export */
+		__webpack_exports__["a"] = function (panel) {
+			var _window$wp$i18n = window.wp.i18n,
+			    __ = _window$wp$i18n.__,
+			    sprintf = _window$wp$i18n.sprintf;
 
-				this.customizer = wpCustomize || window.wp.customize;
+			var panelInstance = panel && panel.length ? window.wp.customize.panel.instance(panel) : undefined;
+
+			if (panelInstance) {
+				return sprintf(__('Customizing &#9656; %s', 'super-awesome-theme'), panelInstance.params.title);
 			}
 
-			_createClass(CustomizePreviewUtil, [{
-				key: 'bindSetting',
-				value: function bindSetting(settingId, callback) {
-					this.customizer(settingId, function (setting) {
-						setting.bind(callback);
-					});
-				}
-			}]);
-
-			return CustomizePreviewUtil;
-		}();
-
-		/* harmony default export */
-
-		__webpack_exports__["a"] = CustomizePreviewUtil;
+			return __('Customizing', 'super-awesome-theme');
+		};
 
 		/***/
 	},
 
-	/***/24:
+	/***/31:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(0);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_get_customize_action__ = __webpack_require__(2);
 		/**
-   * File bottom-bar.customize-preview.js.
+   * File sticky-elements.customize-controls.js.
    *
-   * Theme Customizer handling for bottom bar preview.
+   * Theme Customizer handling for sticky element controls.
    */
 
 		(function (wp, data) {
 			var api = wp.customize;
-			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__["a" /* default */](api);
+			var __ = wp.i18n.__;
 
-			util.bindSetting('bottom_bar_justify_content', function (value) {
-				var classes = Object.keys(data.bottomBarJustifyContentChoices);
-				var index = classes.indexOf(value);
-				var bottomBar = document.getElementById('site-bottom-bar');
 
-				if (bottomBar && index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return bottomBar.classList.remove(cssClass);
+			api.bind('ready', function () {
+
+				api.panel.instance('layout', function () {
+					api.section.add(new api.Section('sticky_elements', {
+						panel: 'layout',
+						title: __('Sticky Content', 'super-awesome-theme'),
+						customizeAction: Object(__WEBPACK_IMPORTED_MODULE_0__customize_get_customize_action__["a" /* default */])('layout')
+					}));
+
+					data.stickyElements.forEach(function (sticky) {
+						api.instance(sticky.setting, function (setting) {
+							setting.transport = 'postMessage';
+						});
+
+						api.control.add(new api.Control(sticky.setting, {
+							setting: sticky.setting,
+							section: 'sticky_elements',
+							label: sticky.label,
+							type: 'checkbox'
+						}));
 					});
-					bottomBar.classList.add(value);
-				}
+				});
 			});
-		})(window.wp, window.themeBottomBarPreviewData);
+		})(window.wp, window.themeStickyElementsControlsData);
 
 		/***/
 	}

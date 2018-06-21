@@ -505,6 +505,11 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 				Super_Awesome_Theme_Customize_Partial::PROP_RENDER_CALLBACK => array( $this, 'partial_' . $setting ),
 			) );
 		}
+
+		$this->wp_customize->add_panel( 'layout', array(
+			Super_Awesome_Theme_Customize_Panel::PROP_TITLE    => __( 'Layout', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Customize_Panel::PROP_PRIORITY => 45,
+		) );
 	}
 
 	/**

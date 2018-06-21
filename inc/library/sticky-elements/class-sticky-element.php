@@ -50,13 +50,6 @@ class Super_Awesome_Theme_Sticky_Element {
 	const PROP_LOCATION = 'location';
 
 	/**
-	 * Active callback property name.
-	 *
-	 * @since 1.0.0
-	 */
-	const PROP_ACTIVE_CALLBACK = 'active_callback';
-
-	/**
 	 * Identifier for the top location.
 	 *
 	 * @since 1.0.0
@@ -109,14 +102,6 @@ class Super_Awesome_Theme_Sticky_Element {
 	 * @var string
 	 */
 	protected $location;
-
-	/**
-	 * Callback to determine whether the sticky element can be sticky under the current circumstances.
-	 *
-	 * @since 1.0.0
-	 * @var callable|null
-	 */
-	protected $active_callback;
 
 	/**
 	 * Setting instance for this color.
@@ -216,21 +201,6 @@ class Super_Awesome_Theme_Sticky_Element {
 	}
 
 	/**
-	 * Checks whether the sticky element can be sticky under the current circumstances.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool True if element can be sticky, false otherwise.
-	 */
-	final public function is_active() {
-		if ( ! $this->active_callback ) {
-			return true;
-		}
-
-		return (bool) call_user_func( $this->active_callback );
-	}
-
-	/**
 	 * Gets the default sticky element definition properties to set.
 	 *
 	 * @since 1.0.0
@@ -242,11 +212,10 @@ class Super_Awesome_Theme_Sticky_Element {
 	 */
 	protected function get_defaults() {
 		return array(
-			self::PROP_SELECTOR        => '',
-			self::PROP_LABEL           => '',
-			self::PROP_DEFAULT         => false,
-			self::PROP_LOCATION        => self::LOCATION_TOP,
-			self::PROP_ACTIVE_CALLBACK => null,
+			self::PROP_SELECTOR => '',
+			self::PROP_LABEL    => '',
+			self::PROP_DEFAULT  => false,
+			self::PROP_LOCATION => self::LOCATION_TOP,
 		);
 	}
 }

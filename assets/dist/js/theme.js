@@ -78,11 +78,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 12);
+	/******/return __webpack_require__(__webpack_require__.s = 13);
 	/******/
 })(
 /************************************************************************/
-/******/[,,,,,,,,,,,,
+/******/[,,,,,,,,,,,,,
 /* 0 */
 /* 1 */
 /* 2 */
@@ -96,17 +96,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* 10 */
 /* 11 */
 /* 12 */
+/* 13 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__theme_skip_link_focus_fix__ = __webpack_require__(13);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__theme_navigation__ = __webpack_require__(14);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__theme_navbar__ = __webpack_require__(15);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__theme_comment_form__ = __webpack_require__(16);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__theme_modals__ = __webpack_require__(17);
-	/* harmony import */var __WEBPACK_IMPORTED_MODULE_5__theme_sticky__ = __webpack_require__(18);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__theme_skip_link_focus_fix__ = __webpack_require__(14);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__theme_navigation__ = __webpack_require__(15);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_2__theme_navbar__ = __webpack_require__(16);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_3__theme_comment_form__ = __webpack_require__(17);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_4__theme_modals__ = __webpack_require__(18);
+	/* harmony import */var __WEBPACK_IMPORTED_MODULE_5__theme_sticky__ = __webpack_require__(19);
 
 	(function (data) {
 		data = data || {};
@@ -134,7 +135,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 13 */
+/* 14 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -228,7 +229,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 14 */
+/* 15 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -436,7 +437,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 15 */
+/* 16 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -496,7 +497,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 16 */
+/* 17 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -765,7 +766,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 17 */
+/* 18 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -913,7 +914,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	/***/
 },
-/* 18 */
+/* 19 */
 /***/function (module, __webpack_exports__, __webpack_require__) {
 
 	"use strict";
@@ -930,9 +931,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 			_classCallCheck(this, Sticky);
 
-			var stickToTopSelectors = [],
-			    stickToBottomSelectors = [],
-			    selectors = void 0;
+			var selectors = void 0;
+
+			this.stickToTopSelectors = [];
+			this.stickToBottomSelectors = [];
 
 			this.options = options || {};
 
@@ -940,23 +942,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			selectors.forEach(function (selector) {
 				switch (true) {
 					case 'top' === _this.options[selector]:
-						stickToTopSelectors.push(selector);
+						_this.stickToTopSelectors.push(selector);
 						break;
 					case 'bottom' === _this.options[selector]:
-						stickToBottomSelectors.push(selector);
+						_this.stickToBottomSelectors.push(selector);
 						break;
 				}
 			});
 
 			this.pageWrap = document.getElementById('page');
-			this.stickToTopContainers = stickToTopSelectors.map(function (selector) {
+			this.stickToTopContainers = this.stickToTopSelectors.map(function (selector) {
 				return document.querySelector(selector);
 			}).filter(function (container) {
 				return container;
 			}).sort(function (a, b) {
 				return a.offsetTop < b.offsetTop ? -1 : 1;
 			});
-			this.stickToBottomContainers = stickToBottomSelectors.map(function (selector) {
+			this.stickToBottomContainers = this.stickToBottomSelectors.map(function (selector) {
 				return document.querySelector(selector);
 			}).filter(function (container) {
 				return container;
@@ -1084,6 +1086,65 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 
 				return toolbar.offsetHeight;
+			}
+		}, {
+			key: 'addRemoveStickyContainer',
+			value: function addRemoveStickyContainer(selector, location, remove) {
+				var container = document.querySelector(selector);
+				var selectorsHandle = void 0,
+				    containersHandle = void 0,
+				    offsetsHandle = void 0,
+				    exists = void 0;
+				if ('top' === location) {
+					selectorsHandle = 'stickToTopSelectors';
+					containersHandle = 'stickToTopContainers';
+					offsetsHandle = 'stickToTopOffsets';
+				} else if ('bottom' === location) {
+					selectorsHandle = 'stickToBottomSelectors';
+					containersHandle = 'stickToBottomContainers';
+					offsetsHandle = 'stickToBottomOffsets';
+				}
+
+				if (!container || !selectorsHandle || !containersHandle || !offsetsHandle) {
+					return;
+				}
+
+				exists = this[selectorsHandle].includes(selector);
+				if (!remove && exists || remove && !exists) {
+					return;
+				}
+
+				this.pageWrap.style.removeProperty('padding-top');
+				this[containersHandle].forEach(function (container) {
+					container.classList.remove('is-sticky', 'is-sticky-top', 'is-sticky-bottom');
+					container.style.removeProperty('top');
+					container.style.removeProperty('bottom');
+				});
+
+				if (remove) {
+					this[selectorsHandle].splice(this[selectorsHandle].findIndex(function (item) {
+						return item === selector;
+					}), 1);
+					this[containersHandle].splice(this[containersHandle].findIndex(function (item) {
+						return item === container;
+					}), 1);
+				} else {
+					this[selectorsHandle].push(selector);
+					this[containersHandle].push(container);
+				}
+
+				this[containersHandle] = this[containersHandle].sort(function (a, b) {
+					return a.offsetTop < b.offsetTop ? -1 : 1;
+				});
+				if ('bottom' === location) {
+					this[containersHandle] = this[containersHandle].reverse();
+				}
+
+				this[offsetsHandle] = this[containersHandle].map(function (container) {
+					return container.offsetTop + ('bottom' === location ? container.offsetHeight : 0);
+				});
+
+				this.checkStickyContainers();
 			}
 		}]);
 

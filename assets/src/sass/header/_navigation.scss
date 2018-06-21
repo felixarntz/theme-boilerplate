@@ -210,6 +210,10 @@
 		&.toggled {
 			ul.menu {
 				display: block;
+
+				@media screen and (min-width: $site_breakpoint) {
+					display: flex;
+				}
 			}
 
 			.menu-toggle .icon-close {

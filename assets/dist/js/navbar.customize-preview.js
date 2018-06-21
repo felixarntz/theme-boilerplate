@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 24);
+	/******/return __webpack_require__(__webpack_require__.s = 29);
 	/******/
 })(
 /************************************************************************/
@@ -120,7 +120,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/24:
+	/***/29:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -128,29 +128,76 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(0);
 		/**
-   * File bottom-bar.customize-preview.js.
+   * File navbar.customize-preview.js.
    *
-   * Theme Customizer handling for bottom bar preview.
+   * Theme Customizer handling for navbar preview.
    */
 
 		(function (wp, data) {
 			var api = wp.customize;
 			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__["a" /* default */](api);
 
-			util.bindSetting('bottom_bar_justify_content', function (value) {
-				var classes = Object.keys(data.bottomBarJustifyContentChoices);
-				var index = classes.indexOf(value);
-				var bottomBar = document.getElementById('site-bottom-bar');
+			function replaceNavbarClasses(navbar, isSide) {
+				var navbarExtra = navbar.querySelector('#site-navigation-extra');
+				var addRemove = isSide ? 'remove' : 'add';
+				var widgetClass = isSide ? '.widget' : '.inline-widget';
 
-				if (bottomBar && index > -1) {
+				navbar.classList[addRemove]('is-flex');
+
+				if (!navbarExtra) {
+					return;
+				}
+
+				navbarExtra.classList[addRemove]('inline-widget-area');
+				navbarExtra.querySelectorAll('.widget' === widgetClass ? '.inline-widget' : '.widget').forEach(function (widget) {
+					widget.classList.remove('.widget' === widgetClass ? 'inline-widget' : 'widget');
+					widget.classList.add(widgetClass);
+				});
+			}
+
+			util.bindSetting('navbar_position', function (value) {
+				var classes = Object.keys(data.navbarPositionChoices).map(function (setting) {
+					return 'navbar-' + setting;
+				});
+				var index = classes.indexOf('navbar-' + value);
+				var navbar = document.querySelector('#site-navbar');
+
+				value = 'navbar-' + value;
+
+				if (index > -1) {
 					classes.splice(index, 1);
 					classes.forEach(function (cssClass) {
-						return bottomBar.classList.remove(cssClass);
+						return document.body.classList.remove(cssClass);
 					});
-					bottomBar.classList.add(value);
+					document.body.classList.add(value);
+
+					if (!navbar) {
+						return;
+					}
+
+					if (['navbar-left', 'navbar-right'].includes(value)) {
+						replaceNavbarClasses(navbar, true);
+						return;
+					}
+
+					replaceNavbarClasses(navbar, false);
 				}
 			});
-		})(window.wp, window.themeBottomBarPreviewData);
+
+			util.bindSetting('navbar_justify_content', function (value) {
+				var classes = Object.keys(data.navbarJustifyContentChoices);
+				var index = classes.indexOf(value);
+				var navbar = document.querySelector('#site-navbar');
+
+				if (navbar && index > -1) {
+					classes.splice(index, 1);
+					classes.forEach(function (cssClass) {
+						return navbar.classList.remove(cssClass);
+					});
+					navbar.classList.add(value);
+				}
+			});
+		})(window.wp, window.themeNavbarPreviewData);
 
 		/***/
 	}

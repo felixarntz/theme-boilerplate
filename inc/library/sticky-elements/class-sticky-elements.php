@@ -98,8 +98,8 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 	public function __call( $method, $args ) {
 		switch ( $method ) {
 			case 'register_settings':
-			case 'register_customize_controls':
-			case 'add_customizer_script_data':
+			case 'register_customize_controls_js':
+			case 'register_customize_preview_js':
 			case 'add_main_script_data':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
@@ -119,52 +119,70 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 	}
 
 	/**
-	 * Registers Customizer controls for navbar behavior.
+	 * Registers scripts for the Customizer controls.
 	 *
 	 * @since 1.0.0
-	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function register_customize_controls( $customizer ) {
-		if ( empty( $this->sticky_elements ) ) {
-			return;
+	protected function register_customize_controls_js( $assets ) {
+		$data = array(
+			'stickyElements' => array(),
+		);
+
+		foreach ( $this->sticky_elements as $id => $sticky ) {
+			$props            = $sticky->get_props();
+			$props['setting'] = $sticky->get_setting()->get_prop( Super_Awesome_Theme_Setting::PROP_ID );
+
+			$data['stickyElements'][] = $props;
 		}
 
-		$customizer->add_section( 'layout', array(
-			Super_Awesome_Theme_Customize_Section::PROP_TITLE    => __( 'Layout', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Section::PROP_PRIORITY => 45,
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-sticky-elements-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/sticky-elements.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls', 'wp-i18n' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeStickyElementsControlsData',
+				Super_Awesome_Theme_Script::PROP_DATA         => $data,
+			)
 		) );
-
-		foreach ( $this->sticky_elements as $sticky ) {
-			$setting_id = 'sticky_' . $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_ID );
-
-			$customizer->set_setting_transport( $setting_id, Super_Awesome_Theme_Customize_Setting::TRANSPORT_REFRESH );
-			$customizer->add_control( $setting_id, array(
-				Super_Awesome_Theme_Customize_Control::PROP_SECTION => 'layout',
-				Super_Awesome_Theme_Customize_Control::PROP_TITLE   => $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_LABEL ),
-				Super_Awesome_Theme_Customize_Control::PROP_TYPE    => Super_Awesome_Theme_Customize_Control::TYPE_CHECKBOX,
-			) );
-		}
 	}
 
 	/**
-	 * Adds script data for Customizer functionality.
+	 * Registers scripts for the Customizer preview.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function add_customizer_script_data() {
-		$customizer = $this->get_dependency( 'customizer' );
+	protected function register_customize_preview_js( $assets ) {
+		$data = array(
+			'stickyElements' => array(),
+		);
 
-		$stickies = array();
-		foreach ( $this->sticky_elements as $sticky ) {
-			$stickies[] = array(
-				'setting'  => 'sticky_' . $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_ID ),
+		foreach ( $this->sticky_elements as $id => $sticky ) {
+			$data['stickyElements'][] = array(
+				'setting'  => $sticky->get_setting()->get_prop( Super_Awesome_Theme_Setting::PROP_ID ),
 				'selector' => $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR ),
 				'location' => $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_LOCATION ),
 			);
 		}
 
-		$preview_script = $customizer->get_preview_script();
-		$preview_script->add_data( 'stickyElements', $stickies );
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-sticky-elements-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/sticky-elements.customize-preview.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeStickyElementsPreviewData',
+				Super_Awesome_Theme_Script::PROP_DATA         => $data,
+			)
+		) );
 	}
 
 	/**
@@ -173,12 +191,11 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 	 * @since 1.0.0
 	 */
 	protected function add_main_script_data() {
-		$assets   = $this->get_dependency( 'assets' );
-		$settings = $this->get_dependency( 'settings' );
+		$assets = $this->get_dependency( 'assets' );
 
 		$stickies = array();
 		foreach ( $this->sticky_elements as $sticky ) {
-			if ( ! $sticky->is_active() || ! $settings->get( 'sticky_' . $sticky->get_prop( Super_Awesome_Theme_Sticky_Element::PROP_ID ) ) ) {
+			if ( ! $sticky->get_setting()->get_value() ) {
 				continue;
 			}
 
@@ -199,10 +216,10 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 	 */
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 100, 0 );
-		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 		add_action( 'wp_head', array( $this, 'add_main_script_data' ), 0, 0 );
 
 		$customizer = $this->get_dependency( 'customizer' );
-		$customizer->on_init( array( $this, 'register_customize_controls' ) );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
+		$customizer->on_js_preview_init( array( $this, 'register_customize_preview_js' ) );
 	}
 }

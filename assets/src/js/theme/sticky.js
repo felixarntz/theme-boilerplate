@@ -7,7 +7,10 @@
 
 class Sticky {
 	constructor( options ) {
-		let stickToTopSelectors = [], stickToBottomSelectors = [], selectors;
+		let selectors;
+
+		this.stickToTopSelectors = [];
+		this.stickToBottomSelectors = [];
 
 		this.options = options || {};
 
@@ -15,20 +18,20 @@ class Sticky {
 		selectors.forEach( selector => {
 			switch ( true ) {
 				case 'top' === this.options[ selector ]:
-					stickToTopSelectors.push( selector );
+					this.stickToTopSelectors.push( selector );
 					break;
 				case 'bottom' === this.options[ selector ]:
-					stickToBottomSelectors.push( selector );
+					this.stickToBottomSelectors.push( selector );
 					break;
 			}
 		});
 
 		this.pageWrap                = document.getElementById( 'page' );
-		this.stickToTopContainers    = stickToTopSelectors
+		this.stickToTopContainers    = this.stickToTopSelectors
 			.map( selector => document.querySelector( selector ) )
 			.filter( container => container )
 			.sort( ( a, b ) => a.offsetTop < b.offsetTop ? -1 : 1 );
-		this.stickToBottomContainers = stickToBottomSelectors
+		this.stickToBottomContainers = this.stickToBottomSelectors
 			.map( selector => document.querySelector( selector ) )
 			.filter( container => container )
 			.sort( ( a, b ) => a.offsetTop < b.offsetTop ? -1 : 1 )
@@ -145,6 +148,53 @@ class Sticky {
 		}
 
 		return toolbar.offsetHeight;
+	}
+
+	addRemoveStickyContainer( selector, location, remove ) {
+		const container = document.querySelector( selector );
+		let selectorsHandle, containersHandle, offsetsHandle, exists;
+		if ( 'top' === location ) {
+			selectorsHandle  = 'stickToTopSelectors';
+			containersHandle = 'stickToTopContainers';
+			offsetsHandle    = 'stickToTopOffsets';
+		} else if ( 'bottom' === location ) {
+			selectorsHandle  = 'stickToBottomSelectors';
+			containersHandle = 'stickToBottomContainers';
+			offsetsHandle    = 'stickToBottomOffsets';
+		}
+
+		if ( ! container || ! selectorsHandle || ! containersHandle || ! offsetsHandle ) {
+			return;
+		}
+
+		exists = this[ selectorsHandle ].includes( selector );
+		if ( ! remove && exists || remove && ! exists ) {
+			return;
+		}
+
+		this.pageWrap.style.removeProperty( 'padding-top' );
+		this[ containersHandle ].forEach( container => {
+			container.classList.remove( 'is-sticky', 'is-sticky-top', 'is-sticky-bottom' );
+			container.style.removeProperty( 'top' );
+			container.style.removeProperty( 'bottom' );
+		});
+
+		if ( remove ) {
+			this[ selectorsHandle ].splice( this[ selectorsHandle ].findIndex( item => item === selector ), 1 );
+			this[ containersHandle ].splice( this[ containersHandle ].findIndex( item => item === container ), 1 );
+		} else {
+			this[ selectorsHandle ].push( selector );
+			this[ containersHandle ].push( container );
+		}
+
+		this[ containersHandle ] = this[ containersHandle ].sort( ( a, b ) => a.offsetTop < b.offsetTop ? -1 : 1 );
+		if ( 'bottom' === location ) {
+			this[ containersHandle ] = this[ containersHandle ].reverse();
+		}
+
+		this[ offsetsHandle ] = this[ containersHandle ].map( container => container.offsetTop + ( 'bottom' === location ? container.offsetHeight : 0 ) );
+
+		this.checkStickyContainers();
 	}
 }
 

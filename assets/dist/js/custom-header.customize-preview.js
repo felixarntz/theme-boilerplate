@@ -84,7 +84,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /************************************************************************/
 /******/{
 
-	/***/1:
+	/***/0:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -126,7 +126,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(1);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(0);
 		/**
    * File custom-header.customize-preview.js.
    *

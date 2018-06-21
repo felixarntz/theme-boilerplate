@@ -86,17 +86,6 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	}
 
 	/**
-	 * Checks whether the navbar can be sticky, given the current circumstances.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return boolean True if navbar can be sticky, false otherwise.
-	 */
-	public function is_sticky_allowed() {
-		return ! $this->is_side();
-	}
-
-	/**
 	 * Gets the available choices for the 'navbar_position' setting.
 	 *
 	 * @since 1.0.0
@@ -143,8 +132,8 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 			case 'register_menus':
 			case 'register_colors':
 			case 'register_sticky':
-			case 'register_customize_controls':
-			case 'add_customizer_script_data':
+			case 'register_customize_controls_js':
+			case 'register_customize_preview_js':
 			case 'add_main_script_data':
 			case 'print_color_style':
 			case 'add_dropdown_icon_to_menu_link':
@@ -200,7 +189,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 			array(
 				Super_Awesome_Theme_Widget_Area::PROP_TITLE       => __( 'Navbar Extra', 'super-awesome-theme' ),
 				Super_Awesome_Theme_Widget_Area::PROP_DESCRIPTION => __( 'Add widgets here to appear as additional content in the navbar beside the main navigation menu.', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Widget_Area::PROP_INLINE      => $this->is_sticky_allowed(),
+				Super_Awesome_Theme_Widget_Area::PROP_INLINE      => ! $this->is_side(),
 			)
 		) );
 	}
@@ -220,7 +209,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 		) ) );
 
 		$menus->register_menu( new Super_Awesome_Theme_Menu( 'primary_df', array(
-			Super_Awesome_Theme_Menu::PROP_TITLE   => __( 'Primary Menu (Distraction-Free)', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Menu::PROP_TITLE   => __( 'Primary Menu (Landing Page)', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Menu::PROP_MENU_ID => 'primary-menu',
 		) ) );
 	}
@@ -267,49 +256,61 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 		$sticky_elements->register_sticky_element( new Super_Awesome_Theme_Sticky_Element(
 			'navbar',
 			array(
-				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR        => '#site-navbar',
-				Super_Awesome_Theme_Sticky_Element::PROP_LABEL           => __( 'Stick the navbar to the top of the page when scrolling?', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION        => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
-				Super_Awesome_Theme_Sticky_Element::PROP_ACTIVE_CALLBACK => array( $this, 'is_sticky_allowed' ),
+				Super_Awesome_Theme_Sticky_Element::PROP_SELECTOR => '#site-navbar',
+				Super_Awesome_Theme_Sticky_Element::PROP_LABEL    => __( 'Stick the navbar to the top of the page when scrolling?', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Sticky_Element::PROP_LOCATION => Super_Awesome_Theme_Sticky_Element::LOCATION_TOP,
 			)
 		) );
 	}
 
 	/**
-	 * Registers Customizer controls for navbar behavior.
+	 * Registers scripts for the Customizer controls.
 	 *
 	 * @since 1.0.0
-	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
-	 * @param Super_Awesome_Theme_Widgets    $widgets    Widgets handler instance.
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function register_customize_controls( $customizer, $widgets ) {
-		$customizer->add_control( 'navbar_position', array(
-			Super_Awesome_Theme_Customize_Control::PROP_SECTION => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
-			Super_Awesome_Theme_Customize_Control::PROP_TITLE   => __( 'Navbar Position', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_TYPE    => Super_Awesome_Theme_Customize_Control::TYPE_SELECT,
-			Super_Awesome_Theme_Customize_Control::PROP_CHOICES => $this->get_navbar_position_choices(),
-		) );
-
-		$customizer->add_control( 'navbar_justify_content', array(
-			Super_Awesome_Theme_Customize_Control::PROP_SECTION     => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
-			Super_Awesome_Theme_Customize_Control::PROP_TITLE       => __( 'Navbar Justify Content', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION => __( 'Specify how the widgets in the navbar are aligned.', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_TYPE        => Super_Awesome_Theme_Customize_Control::TYPE_RADIO,
-			Super_Awesome_Theme_Customize_Control::PROP_CHOICES     => $this->get_navbar_justify_content_choices(),
+	protected function register_customize_controls_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-navbar-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/navbar.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls', 'wp-i18n' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeNavbarControlsData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'navbarPositionChoices'       => $this->get_navbar_position_choices(),
+					'navbarJustifyContentChoices' => $this->get_navbar_justify_content_choices(),
+				),
+			)
 		) );
 	}
 
 	/**
-	 * Adds script data for Customizer functionality.
+	 * Registers scripts for the Customizer preview.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function add_customizer_script_data() {
-		$customizer = $this->get_dependency( 'customizer' );
-
-		$preview_script = $customizer->get_preview_script();
-		$preview_script->add_data( 'navbarPositionChoices', $this->get_navbar_position_choices() );
-		$preview_script->add_data( 'navbarJustifyContentChoices', $this->get_navbar_justify_content_choices() );
+	protected function register_customize_preview_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-navbar-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/navbar.customize-preview.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeNavbarPreviewData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'navbarPositionChoices'       => $this->get_navbar_position_choices(),
+					'navbarJustifyContentChoices' => $this->get_navbar_justify_content_choices(),
+				),
+			)
+		) );
 	}
 
 	/**
@@ -411,16 +412,18 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 0, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_colors' ), 6, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_sticky' ), 0, 0 );
-		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 		add_filter( 'body_class', array( $this, 'add_navbar_body_classes' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'add_main_script_data' ), 0, 0 );
 		add_filter( 'nav_menu_item_title', array( $this, 'add_dropdown_icon_to_menu_link' ), 10, 3 );
 
 		$widgets = $this->get_dependency( 'widgets' );
 		$widgets->on_init( array( $this, 'register_widget_areas' ) );
-		$widgets->on_customizer_init( array( $this, 'register_customize_controls' ) );
 
 		$menus = $this->get_dependency( 'menus' );
 		$menus->on_init( array( $this, 'register_menus' ) );
+
+		$customizer = $this->get_dependency( 'customizer' );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
+		$customizer->on_js_preview_init( array( $this, 'register_customize_preview_js' ) );
 	}
 }

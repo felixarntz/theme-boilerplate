@@ -62,33 +62,6 @@ import { findParent } from './common/utils';
 		}
 	});
 
-	// Navbar position.
-	util.bindSetting( 'navbar_position', value => {
-		const classes = Object.keys( data.navbarPositionChoices ).map( setting => 'navbar-' + setting );
-		const index   = classes.indexOf( 'navbar-' + value );
-
-		value = 'navbar-' + value;
-
-		if ( index > -1 ) {
-			classes.splice( index, 1 );
-			classes.forEach( cssClass => document.body.classList.remove( cssClass ) );
-			document.body.classList.add( value );
-		}
-	});
-
-	// Navbar Justify Content.
-	util.bindSetting( 'navbar_justify_content', value => {
-		const classes = Object.keys( data.navbarJustifyContentChoices );
-		const index   = classes.indexOf( value );
-		const navbar  = document.getElementById( 'site-navbar' );
-
-		if ( navbar && index > -1 ) {
-			classes.splice( index, 1 );
-			classes.forEach( cssClass => navbar.classList.remove( cssClass ) );
-			navbar.classList.add( value );
-		}
-	});
-
 	// Wide footer widget area.
 	util.bindSetting( 'wide_footer_widget_area', value => {
 		Array.from( document.querySelectorAll( '.footer-widget-column' ) ).forEach( element => {

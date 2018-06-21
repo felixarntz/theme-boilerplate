@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 24);
+	/******/return __webpack_require__(__webpack_require__.s = 32);
 	/******/
 })(
 /************************************************************************/
@@ -120,7 +120,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/24:
+	/***/32:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -128,29 +128,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(0);
 		/**
-   * File bottom-bar.customize-preview.js.
+   * File sticky-elements.customize-preview.js.
    *
-   * Theme Customizer handling for bottom bar preview.
+   * Theme Customizer handling for sticky element preview.
    */
 
 		(function (wp, data) {
 			var api = wp.customize;
 			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__["a" /* default */](api);
 
-			util.bindSetting('bottom_bar_justify_content', function (value) {
-				var classes = Object.keys(data.bottomBarJustifyContentChoices);
-				var index = classes.indexOf(value);
-				var bottomBar = document.getElementById('site-bottom-bar');
+			data.stickyElements.forEach(function (sticky) {
+				util.bindSetting(sticky.setting, function (value) {
+					if (!window.themeData) {
+						return;
+					}
 
-				if (bottomBar && index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return bottomBar.classList.remove(cssClass);
-					});
-					bottomBar.classList.add(value);
-				}
+					window.themeData.components.sticky.addRemoveStickyContainer(sticky.selector, sticky.location, !value);
+				});
 			});
-		})(window.wp, window.themeBottomBarPreviewData);
+		})(window.wp, window.themeStickyElementsPreviewData);
 
 		/***/
 	}
