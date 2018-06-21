@@ -4,12 +4,13 @@
  * Theme Customizer handling for Custom Header preview.
  */
 
-import CustomizeUtil from './customize/customize-util';
+import CustomizePreviewUtil from './customize/customize-preview-util';
 
 ( ( wp, data ) => {
-	const customizeUtil = new CustomizeUtil( wp.customize );
+	const api  = wp.customize;
+	const util = new CustomizePreviewUtil( api );
 
-	customizeUtil.bindSettingValue( 'header_textcolor', value => {
+	util.bindSetting( 'header_textcolor', value => {
 		if ( 'blank' === value ) {
 			Array.from( document.querySelectorAll( '.site-title, .site-description' ) ).forEach( element => {
 				element.style.setProperty( 'clip', 'rect(1px, 1px, 1px, 1px)' );
@@ -26,7 +27,7 @@ import CustomizeUtil from './customize/customize-util';
 		}
 	});
 
-	customizeUtil.bindSettingValue( 'header_textalign', value => {
+	util.bindSetting( 'header_textalign', value => {
 		const classes = Object.keys( data.headerTextalignChoices );
 		const index   = classes.indexOf( value );
 		const header  = document.querySelector( '.site-custom-header' );

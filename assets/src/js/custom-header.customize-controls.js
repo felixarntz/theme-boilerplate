@@ -9,8 +9,8 @@
 	const { __, _x } = wp.i18n;
 
 	api.bind( 'ready', () => {
-		api.when( 'branding_location', ( brandingLocation ) => {
-			brandingLocation.transport = 'refresh';
+		api.when( 'header_textalign', ( headerTextalign ) => {
+			headerTextalign.transport = 'postMessage';
 		});
 
 		api.control.add( new api.Control( 'branding_location', {

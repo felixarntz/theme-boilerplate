@@ -21,6 +21,12 @@ function super_awesome_theme_body_classes( $classes ) {
 		$classes[] = 'wrapped-layout';
 	}
 
+	// Add a class to indicate which post type applies to the current context.
+	$post_type = super_awesome_theme_get_post_type();
+	if ( ! empty( $post_type ) ) {
+		$classes[] = 'is-post-type-' . $post_type;
+	}
+
 	// Add a class to indicate that a page header is present.
 	if ( super_awesome_theme_use_page_header() ) {
 		$classes[] = 'has-page-header';

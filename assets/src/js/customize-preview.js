@@ -4,31 +4,38 @@
  * Theme Customizer handling for the preview.
  */
 
-import CustomizeUtil from './customize/customize-util';
+import CustomizePreviewUtil from './customize/customize-preview-util';
 import { findParent } from './common/utils';
 
 ( ( wp, data ) => {
-
-	const customizeUtil = new CustomizeUtil( wp.customize );
+	const api  = wp.customize;
+	const util = new CustomizePreviewUtil( api );
 
 	data = data || {};
 
+	api.bind( 'preview-ready', () => {
+		api.preview.bind( 'active', () => {
+			api.preview.send( 'hasWrappedLayout', document.body.classList.contains( 'wrapped-layout' ) );
+			api.preview.send( 'hasPageHeader', document.body.classList.contains( 'has-page-header' ) );
+		});
+	});
+
 	// Site title.
-	customizeUtil.bindSettingValue( 'blogname', value => {
+	util.bindSetting( 'blogname', value => {
 		Array.from( document.querySelectorAll( '.site-title a' ) ).forEach( element => {
 			element.textContent = value;
 		});
 	});
 
 	// Site description.
-	customizeUtil.bindSettingValue( 'blogdescription', value => {
+	util.bindSetting( 'blogdescription', value => {
 		Array.from( document.querySelectorAll( '.site-description' ) ).forEach( element => {
 			element.textContent = value;
 		});
 	});
 
 	// Sidebar mode.
-	customizeUtil.bindSettingValue( 'sidebar_mode', value => {
+	util.bindSetting( 'sidebar_mode', value => {
 		const classes = Object.keys( data.sidebarModeChoices ).map( setting => setting.replace( '_', '-' ) );
 		const index   = classes.indexOf( value.replace( '_', '-' ) );
 
@@ -42,7 +49,7 @@ import { findParent } from './common/utils';
 	});
 
 	// Sidebar size.
-	customizeUtil.bindSettingValue( 'sidebar_size', value => {
+	util.bindSetting( 'sidebar_size', value => {
 		const classes = Object.keys( data.sidebarSizeChoices ).map( setting => 'sidebar-' + setting );
 		const index   = classes.indexOf( 'sidebar-' + value );
 
@@ -56,7 +63,7 @@ import { findParent } from './common/utils';
 	});
 
 	// Navbar position.
-	customizeUtil.bindSettingValue( 'navbar_position', value => {
+	util.bindSetting( 'navbar_position', value => {
 		const classes = Object.keys( data.navbarPositionChoices ).map( setting => 'navbar-' + setting );
 		const index   = classes.indexOf( 'navbar-' + value );
 
@@ -70,7 +77,7 @@ import { findParent } from './common/utils';
 	});
 
 	// Navbar Justify Content.
-	customizeUtil.bindSettingValue( 'navbar_justify_content', value => {
+	util.bindSetting( 'navbar_justify_content', value => {
 		const classes = Object.keys( data.navbarJustifyContentChoices );
 		const index   = classes.indexOf( value );
 		const navbar  = document.getElementById( 'site-navbar' );
@@ -82,34 +89,8 @@ import { findParent } from './common/utils';
 		}
 	});
 
-	// Top Bar Justify Content.
-	customizeUtil.bindSettingValue( 'top_bar_justify_content', value => {
-		const classes = Object.keys( data.topBarJustifyContentChoices );
-		const index   = classes.indexOf( value );
-		const topBar  = document.getElementById( 'site-top-bar' );
-
-		if ( topBar && index > -1 ) {
-			classes.splice( index, 1 );
-			classes.forEach( cssClass => topBar.classList.remove( cssClass ) );
-			topBar.classList.add( value );
-		}
-	});
-
-	// Bottom Bar Justify Content.
-	customizeUtil.bindSettingValue( 'bottom_bar_justify_content', value => {
-		const classes   = Object.keys( data.bottomBarJustifyContentChoices );
-		const index     = classes.indexOf( value );
-		const bottomBar = document.getElementById( 'site-bottom-bar' );
-
-		if ( bottomBar && index > -1 ) {
-			classes.splice( index, 1 );
-			classes.forEach( cssClass => bottomBar.classList.remove( cssClass ) );
-			bottomBar.classList.add( value );
-		}
-	});
-
 	// Wide footer widget area.
-	customizeUtil.bindSettingValue( 'wide_footer_widget_area', value => {
+	util.bindSetting( 'wide_footer_widget_area', value => {
 		Array.from( document.querySelectorAll( '.footer-widget-column' ) ).forEach( element => {
 			if ( value === element.id ) {
 				element.classList.add( 'footer-widget-column-wide' );
@@ -119,7 +100,7 @@ import { findParent } from './common/utils';
 		});
 	});
 
-	wp.customize.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = wp.customize.selectiveRefresh.Partial.extend({
+	api.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = api.selectiveRefresh.Partial.extend({
 		placements: function() {
 			var partial = this, selector;
 
@@ -130,7 +111,7 @@ import { findParent } from './common/utils';
 			selector += '[data-customize-partial-id="' + partial.id + '"]';
 
 			return Array.from( document.querySelectorAll( selector ) ).map( element => {
-				return new wp.customize.selectiveRefresh.Placement({
+				return new api.selectiveRefresh.Placement({
 					partial: partial,
 					container: element,
 					context: {

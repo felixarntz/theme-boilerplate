@@ -221,8 +221,14 @@ gulp.task( 'compile-js', done => {
 		theme: './assets/src/js/theme.js',
 		'customize-controls': './assets/src/js/customize-controls.js',
 		'customize-preview': './assets/src/js/customize-preview.js',
+		'bottom-bar.customize-controls': './assets/src/js/bottom-bar.customize-controls.js',
+		'bottom-bar.customize-preview': './assets/src/js/bottom-bar.customize-preview.js',
+		'colors.customize-controls': './assets/src/js/colors.customize-controls.js',
 		'custom-header.customize-controls': './assets/src/js/custom-header.customize-controls.js',
 		'custom-header.customize-preview': './assets/src/js/custom-header.customize-preview.js',
+		'social-navigation.customize-controls': './assets/src/js/social-navigation.customize-controls.js',
+		'top-bar.customize-controls': './assets/src/js/top-bar.customize-controls.js',
+		'top-bar.customize-preview': './assets/src/js/top-bar.customize-preview.js',
 		'wp-i18n': './assets/src/js/wp-i18n.js',
 	};
 	gulp.src( './assets/src/js/theme.js' )

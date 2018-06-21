@@ -46,6 +46,7 @@ final class Super_Awesome_Theme_Social_Navigation extends Super_Awesome_Theme_Th
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Menus' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Icons' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Colors' );
@@ -141,6 +142,7 @@ final class Super_Awesome_Theme_Social_Navigation extends Super_Awesome_Theme_Th
 		switch ( $method ) {
 			case 'register_menu':
 			case 'register_colors':
+			case 'register_customize_controls_js':
 			case 'add_menu_social_icons':
 			case 'print_color_style':
 				return call_user_func_array( array( $this, $method ), $args );
@@ -180,20 +182,38 @@ final class Super_Awesome_Theme_Social_Navigation extends Super_Awesome_Theme_Th
 		$colors->register_group( 'social_colors', __( 'Social Icon Colors', 'super-awesome-theme' ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'social_text_color', array(
-			Super_Awesome_Theme_Color::PROP_GROUP           => 'social_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Social Icons Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#ffffff',
-			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'is_active' ),
+			Super_Awesome_Theme_Color::PROP_GROUP   => 'social_colors',
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Social Icons Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_DEFAULT => '#ffffff',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'social_background_color', array(
-			Super_Awesome_Theme_Color::PROP_GROUP           => 'social_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Social Icons Background Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#767676',
-			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'is_active' ),
+			Super_Awesome_Theme_Color::PROP_GROUP   => 'social_colors',
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Social Icons Background Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_DEFAULT => '#767676',
 		) ) );
 
 		$colors->register_color_style_callback( array( $this, 'print_color_style' ) );
+	}
+
+	/**
+	 * Registers scripts for the Customizer controls.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
+	 */
+	protected function register_customize_controls_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-social-navigation-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/social-navigation.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+			)
+		) );
 	}
 
 	/**
@@ -267,5 +287,8 @@ final class Super_Awesome_Theme_Social_Navigation extends Super_Awesome_Theme_Th
 
 		$menus = $this->get_dependency( 'menus' );
 		$menus->on_init( array( $this, 'register_menu' ) );
+
+		$customizer = $this->get_dependency( 'customizer' );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
 	}
 }

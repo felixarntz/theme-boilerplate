@@ -4,9 +4,11 @@
  * Theme Customizer handling for the interface.
  */
 
-import CustomizeUtil from './customize/customize-util';
+import CustomizeControlsUtil from './customize/customize-controls-util';
 
 ( ( wp, data ) => {
+	const api  = wp.customize;
+	const util = new CustomizeControlsUtil( api );
 
 	data = data || {};
 
@@ -18,11 +20,9 @@ import CustomizeUtil from './customize/customize-util';
 		});
 	}
 
-	wp.customize.bind( 'ready', () => {
-		const customizeUtil = new CustomizeUtil( wp.customize );
-
+	api.bind( 'ready', () => {
 		if ( data.inlineWidgetAreas.length ) {
-			wp.customize.section.each( section => {
+			api.section.each( section => {
 				if ( 'sidebar' !== section.params.type ) {
 					return;
 				}
@@ -33,7 +33,7 @@ import CustomizeUtil from './customize/customize-util';
 
 				section.expanded.bind( expanded => {
 					updateAvailableWidgets(
-						wp.customize.Widgets.availableWidgetsPanel.collection,
+						api.Widgets.availableWidgetsPanel.collection,
 						expanded
 					);
 				});
@@ -41,7 +41,7 @@ import CustomizeUtil from './customize/customize-util';
 		}
 
 		// Only show sidebar-related controls if a sidebar is enabled.
-		customizeUtil.bindSettingValueToControls( 'sidebar_mode', [ 'sidebar_size', 'blog_sidebar_enabled' ], ( value, control ) => {
+		util.bindSettingToControls( 'sidebar_mode', [ 'sidebar_size', 'blog_sidebar_enabled' ], ( value, control ) => {
 			if ( 'no_sidebar' === value ) {
 				control.container.slideUp( 180 );
 			} else {
@@ -50,7 +50,7 @@ import CustomizeUtil from './customize/customize-util';
 		});
 
 		// Show sidebar section that is enabled.
-		customizeUtil.bindSettingValueToSections( 'blog_sidebar_enabled', [ 'sidebar-widgets-primary', 'sidebar-widgets-blog' ], ( value, section ) => {
+		util.bindSettingToSections( 'blog_sidebar_enabled', [ 'sidebar-widgets-primary', 'sidebar-widgets-blog' ], ( value, section ) => {
 			if ( value ) {
 				if ( 'blog' === section.params.sidebarId ) {
 					section.activate();
@@ -67,7 +67,7 @@ import CustomizeUtil from './customize/customize-util';
 		});
 
 		// Disable blog sidebar enabled control when not active.
-		wp.customize.control( 'blog_sidebar_enabled', function( control ) {
+		api.control( 'blog_sidebar_enabled', function( control ) {
 			control.onChangeActive = function( active ) {
 				var noticeCode = 'blog_sidebar_not_available';
 
@@ -78,7 +78,7 @@ import CustomizeUtil from './customize/customize-util';
 				} else {
 					control.container.find( 'input[type="checkbox"]' ).prop( 'disabled', true );
 					control.container.find( '.description' ).slideUp( 180 );
-					control.notifications.add( noticeCode, new wp.customize.Notification( noticeCode, {
+					control.notifications.add( noticeCode, new api.Notification( noticeCode, {
 						type: 'info',
 						message: data.blogSidebarEnabledNotice,
 					}) );

@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 19);
+	/******/return __webpack_require__(__webpack_require__.s = 29);
 	/******/
 })(
 /************************************************************************/
@@ -215,7 +215,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/19:
+	/***/29:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -223,89 +223,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(0);
 		/**
-   * File customize-controls.js.
+   * File top-bar.customize-controls.js.
    *
-   * Theme Customizer handling for the interface.
+   * Theme Customizer handling for the top bar.
    */
 
 		(function (wp, data) {
 			var api = wp.customize;
 			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__["a" /* default */](api);
+			var __ = wp.i18n.__;
 
-			data = data || {};
-
-			function updateAvailableWidgets(collection, expanded) {
-				collection.each(function (widget) {
-					if (widget && !data.inlineWidgets.includes(widget.get('id_base'))) {
-						widget.set('is_disabled', expanded);
-					}
-				});
-			}
 
 			api.bind('ready', function () {
-				if (data.inlineWidgetAreas.length) {
-					api.section.each(function (section) {
-						if ('sidebar' !== section.params.type) {
-							return;
-						}
-
-						if (!data.inlineWidgetAreas.includes(section.params.sidebarId)) {
-							return;
-						}
-
-						section.expanded.bind(function (expanded) {
-							updateAvailableWidgets(api.Widgets.availableWidgetsPanel.collection, expanded);
-						});
-					});
-				}
-
-				// Only show sidebar-related controls if a sidebar is enabled.
-				util.bindSettingToControls('sidebar_mode', ['sidebar_size', 'blog_sidebar_enabled'], function (value, control) {
-					if ('no_sidebar' === value) {
-						control.container.slideUp(180);
-					} else {
-						control.container.slideDown(180);
-					}
+				api.when('top_bar_justify_content', function (topBarJustifyContent) {
+					topBarJustifyContent.transport = 'postMessage';
 				});
 
-				// Show sidebar section that is enabled.
-				util.bindSettingToSections('blog_sidebar_enabled', ['sidebar-widgets-primary', 'sidebar-widgets-blog'], function (value, section) {
-					if (value) {
-						if ('blog' === section.params.sidebarId) {
-							section.activate();
-						} else {
-							section.deactivate();
-						}
-					} else {
-						if ('blog' === section.params.sidebarId) {
-							section.deactivate();
-						} else {
-							section.activate();
-						}
-					}
-				});
+				api.control.add(new api.Control('top_bar_justify_content', {
+					setting: 'top_bar_justify_content',
+					section: 'layout',
+					label: __('Top Bar Justify Content', 'super-awesome-theme'),
+					description: __('Specify how the content in the top bar is aligned.', 'super-awesome-theme'),
+					type: 'radio',
+					choices: data.topBarJustifyContentChoices
+				}));
 
-				// Disable blog sidebar enabled control when not active.
-				api.control('blog_sidebar_enabled', function (control) {
-					control.onChangeActive = function (active) {
-						var noticeCode = 'blog_sidebar_not_available';
-
-						if (active) {
-							control.container.find('input[type="checkbox"]').prop('disabled', false);
-							control.container.find('.description').slideDown(180);
-							control.notifications.remove(noticeCode);
-						} else {
-							control.container.find('input[type="checkbox"]').prop('disabled', true);
-							control.container.find('.description').slideUp(180);
-							control.notifications.add(noticeCode, new api.Notification(noticeCode, {
-								type: 'info',
-								message: data.blogSidebarEnabledNotice
-							}));
-						}
-					};
+				// Handle visibility of the top bar controls.
+				util.bindSettingToControls('sidebars_widgets[top]', ['top_bar_justify_content', 'sticky_top_bar', 'top_bar_text_color', 'top_bar_link_color', 'top_bar_background_color'], function (value, control) {
+					control.active.set(!!value.length);
 				});
 			});
-		})(window.wp, window.themeCustomizeData);
+		})(window.wp, window.themeTopBarControlsData);
 
 		/***/
 	}

@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 19);
+	/******/return __webpack_require__(__webpack_require__.s = 24);
 	/******/
 })(
 /************************************************************************/
@@ -215,97 +215,160 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/19:
+	/***/24:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(0);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(25);
 		/**
-   * File customize-controls.js.
+   * File colors.customize-controls.js.
    *
-   * Theme Customizer handling for the interface.
+   * Theme Customizer handling for color controls.
    */
 
 		(function (wp, data) {
 			var api = wp.customize;
 			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__["a" /* default */](api);
-
-			data = data || {};
-
-			function updateAvailableWidgets(collection, expanded) {
-				collection.each(function (widget) {
-					if (widget && !data.inlineWidgets.includes(widget.get('id_base'))) {
-						widget.set('is_disabled', expanded);
-					}
-				});
-			}
+			var hasWrappedLayout = new api.Value(false);
+			var hasCustomHeader = new api.Value(false);
+			var hasPageHeader = new api.Value(false);
+			var hasFooterWidgets = new api.Value(false);
+			var hasFooterMenus = new api.Value(false);
 
 			api.bind('ready', function () {
-				if (data.inlineWidgetAreas.length) {
-					api.section.each(function (section) {
-						if ('sidebar' !== section.params.type) {
+
+				api.panel.instance('colors', function () {
+					data.groups.forEach(function (group) {
+						if (api.section.instance(group.id)) {
 							return;
 						}
 
-						if (!data.inlineWidgetAreas.includes(section.params.sidebarId)) {
-							return;
-						}
-
-						section.expanded.bind(function (expanded) {
-							updateAvailableWidgets(api.Widgets.availableWidgetsPanel.collection, expanded);
-						});
+						api.section.add(new api.Section(group.id, {
+							panel: 'colors',
+							title: group.title,
+							customizeAction: Object(__WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__["a" /* default */])('colors')
+						}));
 					});
-				}
 
-				// Only show sidebar-related controls if a sidebar is enabled.
-				util.bindSettingToControls('sidebar_mode', ['sidebar_size', 'blog_sidebar_enabled'], function (value, control) {
-					if ('no_sidebar' === value) {
-						control.container.slideUp(180);
-					} else {
-						control.container.slideDown(180);
-					}
+					data.colors.forEach(function (color) {
+						if (color.live_preview) {
+							api.instance(color.id, function (setting) {
+								setting.transport = 'postMessage';
+							});
+						}
+
+						api.control.add(new api.ColorControl(color.id, {
+							setting: color.id,
+							section: color.group,
+							label: color.title,
+							type: 'color'
+						}));
+					});
 				});
 
-				// Show sidebar section that is enabled.
-				util.bindSettingToSections('blog_sidebar_enabled', ['sidebar-widgets-primary', 'sidebar-widgets-blog'], function (value, section) {
-					if (value) {
-						if ('blog' === section.params.sidebarId) {
-							section.activate();
-						} else {
-							section.deactivate();
-						}
-					} else {
-						if ('blog' === section.params.sidebarId) {
-							section.deactivate();
-						} else {
-							section.activate();
-						}
-					}
+				// Handle the hasWrappedLayout value.
+				api.previewer.bind('hasWrappedLayout', function (value) {
+					hasWrappedLayout.set(value);
 				});
 
-				// Disable blog sidebar enabled control when not active.
-				api.control('blog_sidebar_enabled', function (control) {
-					control.onChangeActive = function (active) {
-						var noticeCode = 'blog_sidebar_not_available';
+				// Handle the hasCustomHeader value.
+				util.bindSettings(['header_image', 'header_video', 'external_header_video'], function (values) {
+					hasCustomHeader.set(!!(values.header_image && values.header_image.length && 'remove-header' !== values.header_image || values.header_video && values.header_video.length || values.external_header_video && values.external_header_video.length));
+				});
 
-						if (active) {
-							control.container.find('input[type="checkbox"]').prop('disabled', false);
-							control.container.find('.description').slideDown(180);
-							control.notifications.remove(noticeCode);
-						} else {
-							control.container.find('input[type="checkbox"]').prop('disabled', true);
-							control.container.find('.description').slideUp(180);
-							control.notifications.add(noticeCode, new api.Notification(noticeCode, {
-								type: 'info',
-								message: data.blogSidebarEnabledNotice
-							}));
-						}
-					};
+				// Handle the hasPageHeader value.
+				api.previewer.bind('hasPageHeader', function (value) {
+					hasPageHeader.set(value);
+				});
+
+				// Handle the hasFooterWidgets value.
+				util.bindSettings(data.footerWidgetAreas.map(function (widgetArea) {
+					return 'sidebars_widgets[' + widgetArea + ']';
+				}), function (values) {
+					var areasWithWidgets = Object.values(values).filter(function (widgets) {
+						return !!widgets.length;
+					});
+
+					hasFooterWidgets.set(!!areasWithWidgets.length);
+				});
+
+				// Handle the hasFooterMenus value.
+				util.bindSettings(['nav_menu_locations[social]', 'nav_menu_locations[footer]'], function (values) {
+					var locationsWithMenu = Object.values(values).filter(function (menuId) {
+						return !!menuId;
+					});
+
+					hasFooterMenus.set(!!locationsWithMenu.length);
+				});
+
+				// Handle visibility of the wrap background color control.
+				api.control.instance('wrap_background_color', function (control) {
+					function updateWrapBackgroundColorActive() {
+						control.active.set(hasWrappedLayout.get());
+					}
+					updateWrapBackgroundColorActive();
+					hasWrappedLayout.bind(updateWrapBackgroundColorActive);
+				});
+
+				// Handle visibility of the header background color control.
+				api.control.instance('header_background_color', function (control) {
+					function updateHeaderBackgroundColorActive() {
+						control.active.set(!hasCustomHeader.get() && !hasPageHeader.get());
+					}
+					updateHeaderBackgroundColorActive();
+					hasCustomHeader.bind(updateHeaderBackgroundColorActive);
+					hasPageHeader.bind(updateHeaderBackgroundColorActive);
+				});
+
+				// Handle visibility of the footer color controls.
+				api.control.instance('footer_text_color', 'footer_link_color', 'footer_background_color', function () {
+					var controls = Array.prototype.slice.call(arguments, 0, 3);
+
+					function updateFooterColorsActive() {
+						var value = hasFooterWidgets.get() || hasFooterMenus.get();
+
+						controls.forEach(function (control) {
+							control.active.set(value);
+						});
+					}
+
+					updateFooterColorsActive();
+					hasFooterWidgets.bind(updateFooterColorsActive);
+					hasFooterMenus.bind(updateFooterColorsActive);
 				});
 			});
-		})(window.wp, window.themeCustomizeData);
+		})(window.wp, window.themeColorsControlsData);
+
+		/***/
+	},
+
+	/***/25:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+		/**
+   * File get-customize-action.js.
+   *
+   * Function to get the Customize action for a given panel.
+   */
+
+		/* harmony default export */
+		__webpack_exports__["a"] = function (panel) {
+			var _window$wp$i18n = window.wp.i18n,
+			    __ = _window$wp$i18n.__,
+			    sprintf = _window$wp$i18n.sprintf;
+
+			var panelInstance = panel && panel.length ? window.wp.customize.panel.instance(panel) : undefined;
+
+			if (panelInstance) {
+				return sprintf(__('Customizing &#9656; %s', 'super-awesome-theme'), panelInstance.params.title);
+			}
+
+			return __('Customizing', 'super-awesome-theme');
+		};
 
 		/***/
 	}

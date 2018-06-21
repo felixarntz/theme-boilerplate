@@ -85,10 +85,9 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 			case 'register_widget_areas':
 			case 'register_colors':
 			case 'register_sticky':
-			case 'register_customize_controls':
-			case 'add_customizer_script_data':
+			case 'register_customize_controls_js':
+			case 'register_customize_preview_js':
 			case 'print_color_style':
-			case 'needs_colors':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
 	}
@@ -138,24 +137,21 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 		$colors->register_group( 'top_bar_colors', __( 'Top Bar Colors', 'super-awesome-theme' ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'top_bar_text_color', array(
-			Super_Awesome_Theme_Color::PROP_GROUP           => 'top_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Top Bar Text Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#ffffff',
-			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_colors' ),
+			Super_Awesome_Theme_Color::PROP_GROUP   => 'top_bar_colors',
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Top Bar Text Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_DEFAULT => '#ffffff',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'top_bar_link_color', array(
-			Super_Awesome_Theme_Color::PROP_GROUP           => 'top_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Top Bar Link Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#ffffff',
-			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_colors' ),
+			Super_Awesome_Theme_Color::PROP_GROUP   => 'top_bar_colors',
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Top Bar Link Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_DEFAULT => '#ffffff',
 		) ) );
 
 		$colors->register_color( new Super_Awesome_Theme_Color( 'top_bar_background_color', array(
-			Super_Awesome_Theme_Color::PROP_GROUP           => 'top_bar_colors',
-			Super_Awesome_Theme_Color::PROP_TITLE           => __( 'Top Bar Background Color', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Color::PROP_DEFAULT         => '#21759b',
-			Super_Awesome_Theme_Color::PROP_ACTIVE_CALLBACK => array( $this, 'needs_colors' ),
+			Super_Awesome_Theme_Color::PROP_GROUP   => 'top_bar_colors',
+			Super_Awesome_Theme_Color::PROP_TITLE   => __( 'Top Bar Background Color', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Color::PROP_DEFAULT => '#21759b',
 		) ) );
 
 		$colors->register_color_style_callback( array( $this, 'print_color_style' ) );
@@ -181,32 +177,51 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 	}
 
 	/**
-	 * Registers Customizer controls for top bar behavior.
+	 * Registers scripts for the Customizer controls.
 	 *
 	 * @since 1.0.0
-	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
-	 * @param Super_Awesome_Theme_Widgets    $widgets    Widgets handler instance.
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function register_customize_controls( $customizer, $widgets ) {
-		$customizer->add_control( 'top_bar_justify_content', array(
-			Super_Awesome_Theme_Customize_Control::PROP_SECTION     => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
-			Super_Awesome_Theme_Customize_Control::PROP_TITLE       => __( 'Top Bar Justify Content', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION => __( 'Specify how the widgets in the top bar are aligned.', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_TYPE        => Super_Awesome_Theme_Customize_Control::TYPE_RADIO,
-			Super_Awesome_Theme_Customize_Control::PROP_CHOICES     => $this->get_top_bar_justify_content_choices(),
+	protected function register_customize_controls_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-top-bar-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/top-bar.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls', 'wp-i18n' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeTopBarControlsData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'topBarJustifyContentChoices' => $this->get_top_bar_justify_content_choices(),
+				),
+			)
 		) );
 	}
 
 	/**
-	 * Adds script data for Customizer functionality.
+	 * Registers scripts for the Customizer preview.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function add_customizer_script_data() {
-		$customizer = $this->get_dependency( 'customizer' );
-
-		$preview_script = $customizer->get_preview_script();
-		$preview_script->add_data( 'topBarJustifyContentChoices', $this->get_top_bar_justify_content_choices() );
+	protected function register_customize_preview_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-top-bar-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/top-bar.customize-preview.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeTopBarPreviewData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'topBarJustifyContentChoices' => $this->get_top_bar_justify_content_choices(),
+				),
+			)
+		) );
 	}
 
 	/**
@@ -253,18 +268,6 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 	}
 
 	/**
-	 * Checks whether the top bar colors need to be used.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool True if the top bar colors need to be used, false otherwise.
-	 */
-	protected function needs_colors() {
-		$widgets = $this->get_dependency( 'widgets' );
-		return $widgets->get_registered_widget_area( 'top' )->is_active();
-	}
-
-	/**
 	 * Adds hooks and runs other processes required to initialize the component.
 	 *
 	 * @since 1.0.0
@@ -273,10 +276,12 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 0, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_colors' ), 7, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_sticky' ), 0, 0 );
-		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 
 		$widgets = $this->get_dependency( 'widgets' );
 		$widgets->on_init( array( $this, 'register_widget_areas' ) );
-		$widgets->on_customizer_init( array( $this, 'register_customize_controls' ) );
+
+		$customizer = $this->get_dependency( 'customizer' );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
+		$customizer->on_js_preview_init( array( $this, 'register_customize_preview_js' ) );
 	}
 }

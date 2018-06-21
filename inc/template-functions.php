@@ -129,6 +129,45 @@ function super_awesome_theme_use_wrapped_layout() {
 }
 
 /**
+ * Gets the post type from the current context.
+ *
+ * @since 1.0.0
+ *
+ * @return string Post type, or empty string if no post type could be detected.
+ */
+function super_awesome_theme_get_post_type() {
+	switch ( true ) {
+		case is_front_page():
+			return '';
+		case is_singular();
+			return get_post_type();
+		case is_home():
+			return 'post';
+		case is_category():
+		case is_tag():
+		case is_tax():
+			$term = get_queried_object();
+			if ( $term ) {
+				$taxonomy = get_taxonomy( $term->taxonomy );
+				if ( $taxonomy && ! empty( $taxonomy->object_type ) && count( $taxonomy->object_type ) === 1 ) {
+					return reset( $taxonomy->object_type );
+				}
+			}
+			break;
+		default:
+			$post_types = get_query_var( 'post_type' );
+			if ( ! empty( $post_types ) ) {
+				if ( is_array( $post_types ) ) {
+					return reset( $post_types );
+				}
+				return $post_types;
+			}
+	}
+
+	return '';
+}
+
+/**
  * Checks whether a page header should be used for the current context.
  *
  * @since 1.0.0
@@ -136,34 +175,7 @@ function super_awesome_theme_use_wrapped_layout() {
  * @return bool True if a page header should be used, false otherwise.
  */
 function super_awesome_theme_use_page_header() {
-	$post_type = '';
-
-	switch ( true ) {
-		case is_front_page():
-			break;
-		case is_singular();
-			$post_type = get_post_type();
-			break;
-		case is_home():
-			$post_type = 'post';
-			break;
-		case is_category():
-		case is_tag():
-		case is_tax():
-			$term = get_queried_object();
-			if ( $term ) {
-				$taxonomy = get_taxonomy( $term->taxonomy );
-				if ( $taxonomy && ! empty( $taxonomy->object_type ) ) {
-					$post_type = reset( $taxonomy->object_type );
-				}
-			}
-			break;
-		default:
-			$post_type = get_query_var( 'post_type' );
-			if ( is_array( $post_type ) ) {
-				$post_type = reset( $post_type );
-			}
-	}
+	$post_type = super_awesome_theme_get_post_type();
 
 	$use_page_header = false;
 	if ( ! empty( $post_type ) ) {

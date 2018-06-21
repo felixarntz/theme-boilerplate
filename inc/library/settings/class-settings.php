@@ -111,7 +111,7 @@ final class Super_Awesome_Theme_Settings extends Super_Awesome_Theme_Theme_Compo
 				Super_Awesome_Theme_Customize_Setting::PROP_CAPABILITY           => $setting->get_prop( Super_Awesome_Theme_Setting::PROP_CAPABILITY ),
 				Super_Awesome_Theme_Customize_Setting::PROP_TYPE                 => Super_Awesome_Theme_Customize_Setting::TYPE_THEME_MOD,
 				Super_Awesome_Theme_Customize_Setting::PROP_DEFAULT              => $setting->get_prop( Super_Awesome_Theme_Setting::PROP_DEFAULT ),
-				Super_Awesome_Theme_Customize_Setting::PROP_TRANSPORT            => Super_Awesome_Theme_Customize_Setting::TRANSPORT_POST_MESSAGE,
+				Super_Awesome_Theme_Customize_Setting::PROP_TRANSPORT            => Super_Awesome_Theme_Customize_Setting::TRANSPORT_REFRESH,
 				Super_Awesome_Theme_Customize_Setting::PROP_VALIDATE_CALLBACK    => array( $setting, 'validate_value' ),
 				Super_Awesome_Theme_Customize_Setting::PROP_SANITIZE_CALLBACK    => array( $setting, 'sanitize_value' ),
 				Super_Awesome_Theme_Customize_Setting::PROP_SANITIZE_JS_CALLBACK => array( $setting, 'parse_value' ),

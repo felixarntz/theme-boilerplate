@@ -78,91 +78,56 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 19);
+	/******/return __webpack_require__(__webpack_require__.s = 20);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/0:
+	/***/1:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 		/**
-   * File customize-util.js.
+   * File customize-preview-util.js.
    *
-   * Class containing Customizer utility methods.
+   * Class containing Customizer preview utility methods.
    */
 
-		var CustomizeUtil = function () {
-			function CustomizeUtil(wpCustomize) {
-				_classCallCheck(this, CustomizeUtil);
+		var CustomizePreviewUtil = function () {
+			function CustomizePreviewUtil(wpCustomize) {
+				_classCallCheck(this, CustomizePreviewUtil);
 
 				this.customizer = wpCustomize || window.wp.customize;
 			}
 
-			_createClass(CustomizeUtil, [{
-				key: 'bindSettingValue',
-				value: function bindSettingValue(id, callback) {
-					this.customizer(id, function (setting) {
+			_createClass(CustomizePreviewUtil, [{
+				key: 'bindSetting',
+				value: function bindSetting(settingId, callback) {
+					this.customizer(settingId, function (setting) {
 						setting.bind(callback);
-					});
-				}
-			}, {
-				key: 'bindSettingValueToPanels',
-				value: function bindSettingValueToPanels(id, panelIds, callback) {
-					this.bindSettingValueToComponents(id, panelIds, callback, 'panel');
-				}
-			}, {
-				key: 'bindSettingValueToSections',
-				value: function bindSettingValueToSections(id, sectionIds, callback) {
-					this.bindSettingValueToComponents(id, sectionIds, callback, 'section');
-				}
-			}, {
-				key: 'bindSettingValueToControls',
-				value: function bindSettingValueToControls(id, controlIds, callback) {
-					this.bindSettingValueToComponents(id, controlIds, callback, 'control');
-				}
-			}, {
-				key: 'bindSettingValueToComponents',
-				value: function bindSettingValueToComponents(id, componentIds, callback, componentType) {
-					var customizer = this.customizer;
-
-					componentType = componentType || 'control';
-
-					this.customizer(id, function (setting) {
-						function bindComponent(component) {
-							callback(setting.get(), component);
-							setting.bind(function () {
-								callback(setting.get(), component);
-							});
-						}
-
-						componentIds.forEach(function (componentId) {
-							customizer[componentType](componentId, bindComponent);
-						});
 					});
 				}
 			}]);
 
-			return CustomizeUtil;
+			return CustomizePreviewUtil;
 		}();
 
 		/* harmony default export */
 
-		__webpack_exports__["a"] = CustomizeUtil;
+		__webpack_exports__["a"] = CustomizePreviewUtil;
 
 		/***/
 	},
 
-	/***/19:
+	/***/20:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_util__ = __webpack_require__(0);
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__common_utils__ = __webpack_require__(20);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(1);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__common_utils__ = __webpack_require__(21);
 		/**
    * File customize-preview.js.
    *
@@ -170,27 +135,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
 
 		(function (wp, data) {
-
-			var customizeUtil = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_util__["a" /* default */](wp.customize);
+			var api = wp.customize;
+			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__["a" /* default */](api);
 
 			data = data || {};
 
+			api.bind('preview-ready', function () {
+				api.preview.bind('active', function () {
+					api.preview.send('hasWrappedLayout', document.body.classList.contains('wrapped-layout'));
+					api.preview.send('hasPageHeader', document.body.classList.contains('has-page-header'));
+				});
+			});
+
 			// Site title.
-			customizeUtil.bindSettingValue('blogname', function (value) {
+			util.bindSetting('blogname', function (value) {
 				Array.from(document.querySelectorAll('.site-title a')).forEach(function (element) {
 					element.textContent = value;
 				});
 			});
 
 			// Site description.
-			customizeUtil.bindSettingValue('blogdescription', function (value) {
+			util.bindSetting('blogdescription', function (value) {
 				Array.from(document.querySelectorAll('.site-description')).forEach(function (element) {
 					element.textContent = value;
 				});
 			});
 
 			// Sidebar mode.
-			customizeUtil.bindSettingValue('sidebar_mode', function (value) {
+			util.bindSetting('sidebar_mode', function (value) {
 				var classes = Object.keys(data.sidebarModeChoices).map(function (setting) {
 					return setting.replace('_', '-');
 				});
@@ -208,7 +180,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			});
 
 			// Sidebar size.
-			customizeUtil.bindSettingValue('sidebar_size', function (value) {
+			util.bindSetting('sidebar_size', function (value) {
 				var classes = Object.keys(data.sidebarSizeChoices).map(function (setting) {
 					return 'sidebar-' + setting;
 				});
@@ -226,7 +198,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			});
 
 			// Navbar position.
-			customizeUtil.bindSettingValue('navbar_position', function (value) {
+			util.bindSetting('navbar_position', function (value) {
 				var classes = Object.keys(data.navbarPositionChoices).map(function (setting) {
 					return 'navbar-' + setting;
 				});
@@ -244,7 +216,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			});
 
 			// Navbar Justify Content.
-			customizeUtil.bindSettingValue('navbar_justify_content', function (value) {
+			util.bindSetting('navbar_justify_content', function (value) {
 				var classes = Object.keys(data.navbarJustifyContentChoices);
 				var index = classes.indexOf(value);
 				var navbar = document.getElementById('site-navbar');
@@ -258,38 +230,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			});
 
-			// Top Bar Justify Content.
-			customizeUtil.bindSettingValue('top_bar_justify_content', function (value) {
-				var classes = Object.keys(data.topBarJustifyContentChoices);
-				var index = classes.indexOf(value);
-				var topBar = document.getElementById('site-top-bar');
-
-				if (topBar && index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return topBar.classList.remove(cssClass);
-					});
-					topBar.classList.add(value);
-				}
-			});
-
-			// Bottom Bar Justify Content.
-			customizeUtil.bindSettingValue('bottom_bar_justify_content', function (value) {
-				var classes = Object.keys(data.bottomBarJustifyContentChoices);
-				var index = classes.indexOf(value);
-				var bottomBar = document.getElementById('site-bottom-bar');
-
-				if (bottomBar && index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return bottomBar.classList.remove(cssClass);
-					});
-					bottomBar.classList.add(value);
-				}
-			});
-
 			// Wide footer widget area.
-			customizeUtil.bindSettingValue('wide_footer_widget_area', function (value) {
+			util.bindSetting('wide_footer_widget_area', function (value) {
 				Array.from(document.querySelectorAll('.footer-widget-column')).forEach(function (element) {
 					if (value === element.id) {
 						element.classList.add('footer-widget-column-wide');
@@ -299,7 +241,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				});
 			});
 
-			wp.customize.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = wp.customize.selectiveRefresh.Partial.extend({
+			api.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = api.selectiveRefresh.Partial.extend({
 				placements: function placements() {
 					var partial = this,
 					    selector;
@@ -311,7 +253,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					selector += '[data-customize-partial-id="' + partial.id + '"]';
 
 					return Array.from(document.querySelectorAll(selector)).map(function (element) {
-						return new wp.customize.selectiveRefresh.Placement({
+						return new api.selectiveRefresh.Placement({
 							partial: partial,
 							container: element,
 							context: {
@@ -326,7 +268,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/20:
+	/***/21:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";

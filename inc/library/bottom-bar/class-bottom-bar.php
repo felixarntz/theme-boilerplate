@@ -85,8 +85,8 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 			case 'register_widget_areas':
 			case 'register_colors':
 			case 'register_sticky':
-			case 'register_customize_controls':
-			case 'add_customizer_script_data':
+			case 'register_customize_controls_js':
+			case 'register_customize_preview_js':
 			case 'print_color_style':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
@@ -177,32 +177,51 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 	}
 
 	/**
-	 * Registers Customizer controls for bottom bar behavior.
+	 * Registers scripts for the Customizer controls.
 	 *
 	 * @since 1.0.0
-	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
-	 * @param Super_Awesome_Theme_Widgets    $widgets    Widgets handler instance.
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function register_customize_controls( $customizer, $widgets ) {
-		$customizer->add_control( 'bottom_bar_justify_content', array(
-			Super_Awesome_Theme_Customize_Control::PROP_SECTION     => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
-			Super_Awesome_Theme_Customize_Control::PROP_TITLE       => __( 'Bottom Bar Justify Content', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION => __( 'Specify how the widgets in the bottom bar are aligned.', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_TYPE        => Super_Awesome_Theme_Customize_Control::TYPE_RADIO,
-			Super_Awesome_Theme_Customize_Control::PROP_CHOICES     => $this->get_bottom_bar_justify_content_choices(),
+	protected function register_customize_controls_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-bottom-bar-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/bottom-bar.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls', 'wp-i18n' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeBottomBarControlsData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'bottomBarJustifyContentChoices' => $this->get_bottom_bar_justify_content_choices(),
+				),
+			)
 		) );
 	}
 
 	/**
-	 * Adds script data for Customizer functionality.
+	 * Registers scripts for the Customizer preview.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function add_customizer_script_data() {
-		$customizer = $this->get_dependency( 'customizer' );
-
-		$preview_script = $customizer->get_preview_script();
-		$preview_script->add_data( 'bottomBarJustifyContentChoices', $this->get_bottom_bar_justify_content_choices() );
+	protected function register_customize_preview_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-bottom-bar-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/bottom-bar.customize-preview.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeBottomBarPreviewData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'bottomBarJustifyContentChoices' => $this->get_bottom_bar_justify_content_choices(),
+				),
+			)
+		) );
 	}
 
 	/**
@@ -257,10 +276,12 @@ class Super_Awesome_Theme_Bottom_Bar extends Super_Awesome_Theme_Theme_Component
 		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 0, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_colors' ), 7, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_sticky' ), 0, 0 );
-		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 
 		$widgets = $this->get_dependency( 'widgets' );
 		$widgets->on_init( array( $this, 'register_widget_areas' ) );
-		$widgets->on_customizer_init( array( $this, 'register_customize_controls' ) );
+
+		$customizer = $this->get_dependency( 'customizer' );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
+		$customizer->on_js_preview_init( array( $this, 'register_customize_preview_js' ) );
 	}
 }

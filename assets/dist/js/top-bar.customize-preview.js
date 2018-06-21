@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 27);
+	/******/return __webpack_require__(__webpack_require__.s = 30);
 	/******/
 })(
 /************************************************************************/
@@ -120,7 +120,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/27:
+	/***/30:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -128,46 +128,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(1);
 		/**
-   * File custom-header.customize-preview.js.
+   * File top-bar.customize-preview.js.
    *
-   * Theme Customizer handling for Custom Header preview.
+   * Theme Customizer handling for top bar preview.
    */
 
 		(function (wp, data) {
 			var api = wp.customize;
 			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__["a" /* default */](api);
 
-			util.bindSetting('header_textcolor', function (value) {
-				if ('blank' === value) {
-					Array.from(document.querySelectorAll('.site-title, .site-description')).forEach(function (element) {
-						element.style.setProperty('clip', 'rect(1px, 1px, 1px, 1px)');
-						element.style.setProperty('position', 'absolute');
-					});
-				} else {
-					Array.from(document.querySelectorAll('.site-title, .site-description')).forEach(function (element) {
-						element.style.setProperty('clip', 'auto');
-						element.style.setProperty('position', 'relative');
-					});
-					Array.from(document.querySelectorAll('.site-title a, .site-description')).forEach(function (element) {
-						element.style.setProperty('color', value);
-					});
-				}
-			});
-
-			util.bindSetting('header_textalign', function (value) {
-				var classes = Object.keys(data.headerTextalignChoices);
+			util.bindSetting('top_bar_justify_content', function (value) {
+				var classes = Object.keys(data.topBarJustifyContentChoices);
 				var index = classes.indexOf(value);
-				var header = document.querySelector('.site-custom-header');
+				var topBar = document.getElementById('site-top-bar');
 
-				if (header && index > -1) {
+				if (topBar && index > -1) {
 					classes.splice(index, 1);
 					classes.forEach(function (cssClass) {
-						return header.classList.remove(cssClass);
+						return topBar.classList.remove(cssClass);
 					});
-					header.classList.add(value);
+					topBar.classList.add(value);
 				}
 			});
-		})(window.wp, window.themeCustomHeaderPreviewData);
+		})(window.wp, window.themeTopBarPreviewData);
 
 		/***/
 	}

@@ -50,13 +50,6 @@ final class Super_Awesome_Theme_Color {
 	const PROP_LIVE_PREVIEW = 'live_preview';
 
 	/**
-	 * Active callback property name.
-	 *
-	 * @since 1.0.0
-	 */
-	const PROP_ACTIVE_CALLBACK = 'active_callback';
-
-	/**
 	 * Unique string identifier for the color.
 	 *
 	 * @since 1.0.0
@@ -95,14 +88,6 @@ final class Super_Awesome_Theme_Color {
 	 * @var bool
 	 */
 	protected $live_preview;
-
-	/**
-	 * Active callback to check whether the color is active.
-	 *
-	 * @since 1.0.0
-	 * @var callable|null
-	 */
-	protected $active_callback;
 
 	/**
 	 * Setting instance for this color.
@@ -209,21 +194,6 @@ final class Super_Awesome_Theme_Color {
 	}
 
 	/**
-	 * Checks whether this color is active in the theme.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool True if the color is active, false otherwise.
-	 */
-	public function is_active() {
-		if ( is_callable( $this->active_callback ) ) {
-			return call_user_func( $this->active_callback );
-		}
-
-		return true;
-	}
-
-	/**
 	 * Gets the default color definition properties to set.
 	 *
 	 * @since 1.0.0
@@ -235,11 +205,10 @@ final class Super_Awesome_Theme_Color {
 	 */
 	protected function get_defaults() {
 		return array(
-			self::PROP_TITLE           => '',
-			self::PROP_GROUP           => 'colors',
-			self::PROP_DEFAULT         => '',
-			self::PROP_LIVE_PREVIEW    => true,
-			self::PROP_ACTIVE_CALLBACK => null,
+			self::PROP_TITLE        => '',
+			self::PROP_GROUP        => 'colors',
+			self::PROP_DEFAULT      => '',
+			self::PROP_LIVE_PREVIEW => true,
 		);
 	}
 }

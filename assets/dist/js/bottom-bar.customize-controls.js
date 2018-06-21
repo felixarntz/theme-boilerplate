@@ -74,51 +74,41 @@
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 26);
+	/******/return __webpack_require__(__webpack_require__.s = 22);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/26:
+	/***/22:
 	/***/function _(module, exports) {
 
 		/**
-   * File custom-header.customize-controls.js.
+   * File bottom-bar.customize-controls.js.
    *
-   * Theme Customizer handling for additional Custom Header controls.
+   * Theme Customizer handling for the bottom bar.
    */
 
 		(function (wp, data) {
 			var api = wp.customize;
-			var _wp$i18n = wp.i18n,
-			    __ = _wp$i18n.__,
-			    _x = _wp$i18n._x;
+			var __ = wp.i18n.__;
 
 
 			api.bind('ready', function () {
-				api.when('header_textalign', function (headerTextalign) {
-					headerTextalign.transport = 'postMessage';
+				api.when('bottom_bar_justify_content', function (bottomBarJustifyContent) {
+					bottomBarJustifyContent.transport = 'postMessage';
 				});
 
-				api.control.add(new api.Control('branding_location', {
-					setting: 'branding_location',
-					section: 'title_tagline',
-					label: __('Display Location', 'super-awesome-theme'),
-					description: __('Specify where to display the site logo, title and tagline.', 'super-awesome-theme'),
+				api.control.add(new api.Control('bottom_bar_justify_content', {
+					setting: 'bottom_bar_justify_content',
+					section: 'layout',
+					label: __('Bottom Bar Justify Content', 'super-awesome-theme'),
+					description: __('Specify how the content in the bottom bar is aligned.', 'super-awesome-theme'),
 					type: 'radio',
-					choices: data.brandingLocationChoices
-				}));
-
-				api.control.add(new api.Control('header_textalign', {
-					setting: 'header_textalign',
-					section: 'header_image',
-					label: _x('Text Alignment', 'custom header', 'super-awesome-theme'),
-					type: 'radio',
-					choices: data.headerTextalignChoices
+					choices: data.bottomBarJustifyContentChoices
 				}));
 			});
-		})(window.wp, window.themeCustomHeaderControlsData);
+		})(window.wp, window.themeBottomBarControlsData);
 
 		/***/
 	}
