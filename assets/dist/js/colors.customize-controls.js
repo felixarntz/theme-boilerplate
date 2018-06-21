@@ -89,6 +89,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		"use strict";
 		/**
+   * File get-customize-action.js.
+   *
+   * Function to get the Customize action for a given panel.
+   */
+
+		/* harmony default export */
+		__webpack_exports__["a"] = function (panel) {
+			var _window$wp$i18n = window.wp.i18n,
+			    __ = _window$wp$i18n.__,
+			    sprintf = _window$wp$i18n.sprintf;
+
+			var panelInstance = panel && panel.length ? window.wp.customize.panel.instance(panel) : undefined;
+
+			if (panelInstance) {
+				return sprintf(__('Customizing &#9656; %s', 'super-awesome-theme'), panelInstance.params.title);
+			}
+
+			return __('Customizing', 'super-awesome-theme');
+		};
+
+		/***/
+	},
+
+	/***/2:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+		/**
    * File customize-controls-util.js.
    *
    * Class containing Customizer controls utility methods.
@@ -215,42 +243,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/2:
-	/***/function _(module, __webpack_exports__, __webpack_require__) {
-
-		"use strict";
-		/**
-   * File get-customize-action.js.
-   *
-   * Function to get the Customize action for a given panel.
-   */
-
-		/* harmony default export */
-		__webpack_exports__["a"] = function (panel) {
-			var _window$wp$i18n = window.wp.i18n,
-			    __ = _window$wp$i18n.__,
-			    sprintf = _window$wp$i18n.sprintf;
-
-			var panelInstance = panel && panel.length ? window.wp.customize.panel.instance(panel) : undefined;
-
-			if (panelInstance) {
-				return sprintf(__('Customizing &#9656; %s', 'super-awesome-theme'), panelInstance.params.title);
-			}
-
-			return __('Customizing', 'super-awesome-theme');
-		};
-
-		/***/
-	},
-
 	/***/25:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(1);
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(2);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(2);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(1);
 		/**
    * File colors.customize-controls.js.
    *

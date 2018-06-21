@@ -95,15 +95,8 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	 * @return bool True if the blog sidebar can be displayed, false otherwise.
 	 */
 	public function allow_display_blog_sidebar() {
-		$result = false;
-
-		if ( is_singular() ) {
-			if ( 'post' === get_post_type() ) {
-				$result = true;
-			}
-		} elseif ( is_home() || is_category() || is_tag() || is_date() || 'post' === get_query_var( 'post_type' ) ) {
-			$result = true;
-		}
+		$post_type = super_awesome_theme_get_post_type();
+		$result    = 'post' === $post_type;
 
 		/**
 		 * Filters whether to allow displaying the blog sidebar on the current page.
@@ -159,8 +152,9 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 		switch ( $method ) {
 			case 'register_settings':
 			case 'register_widget_areas':
-			case 'register_customize_controls':
-			case 'add_customizer_script_data':
+			case 'register_customize_partial':
+			case 'register_customize_controls_js':
+			case 'register_customize_preview_js':
 				return call_user_func_array( array( $this, $method ), $args );
 			case 'add_sidebar_body_classes':
 				if ( empty( $args ) ) {
@@ -251,14 +245,16 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	}
 
 	/**
-	 * Registers Customizer controls for sidebar behavior.
+	 * Registers Customizer partial.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
-	 * @param Super_Awesome_Theme_Widgets    $widgets    Widgets handler instance.
 	 */
-	protected function register_customize_controls( $customizer, $widgets ) {
-		$customizer->add_control( 'sidebar_mode', array(
+	protected function register_customize_partial( $customizer ) {
+
+		// TODO: Implement these active callbacks via JavaScript. Then remove this method.
+		/*$customizer->add_control( 'sidebar_mode', array(
 			Super_Awesome_Theme_Customize_Control::PROP_SECTION         => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
 			Super_Awesome_Theme_Customize_Control::PROP_TITLE           => __( 'Sidebar Mode', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION     => __( 'Specify if and how the sidebar should be displayed.', 'super-awesome-theme' ),
@@ -282,7 +278,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION     => __( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Customize_Control::PROP_TYPE            => Super_Awesome_Theme_Customize_Control::TYPE_CHECKBOX,
 			Super_Awesome_Theme_Customize_Control::PROP_ACTIVE_CALLBACK => array( $this, 'allow_display_blog_sidebar' ),
-		) );
+		) );*/
 
 		$customizer->add_partial( 'blog_sidebar_enabled', array(
 			Super_Awesome_Theme_Customize_Partial::PROP_SELECTOR            => '#sidebar',
@@ -292,19 +288,53 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	}
 
 	/**
-	 * Adds script data for Customizer functionality.
+	 * Registers scripts for the Customizer controls.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function add_customizer_script_data() {
-		$customizer = $this->get_dependency( 'customizer' );
+	protected function register_customize_controls_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-sidebar-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/sidebar.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls', 'wp-i18n' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeSidebarControlsData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'sidebarModeChoices' => $this->get_sidebar_mode_choices(),
+					'sidebarSizeChoices' => $this->get_sidebar_size_choices(),
+				),
+			)
+		) );
+	}
 
-		$preview_script = $customizer->get_preview_script();
-		$preview_script->add_data( 'sidebarModeChoices', $this->get_sidebar_mode_choices() );
-		$preview_script->add_data( 'sidebarSizeChoices', $this->get_sidebar_size_choices() );
-
-		$controls_script = $customizer->get_controls_script();
-		$controls_script->add_data( 'blogSidebarEnabledNotice', __( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ) );
+	/**
+	 * Registers scripts for the Customizer preview.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
+	 */
+	protected function register_customize_preview_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-sidebar-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/sidebar.customize-preview.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeSidebarPreviewData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'sidebarModeChoices' => $this->get_sidebar_mode_choices(),
+					'sidebarSizeChoices' => $this->get_sidebar_size_choices(),
+				),
+			)
+		) );
 	}
 
 	/**
@@ -314,11 +344,14 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	 */
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 10, 0 );
-		add_action( 'init', array( $this, 'add_customizer_script_data' ), 10, 0 );
 		add_filter( 'body_class', array( $this, 'add_sidebar_body_classes' ), 10, 1 );
 
 		$widgets = $this->get_dependency( 'widgets' );
 		$widgets->on_init( array( $this, 'register_widget_areas' ) );
-		$widgets->on_customizer_init( array( $this, 'register_customize_controls' ) );
+
+		$customizer = $this->get_dependency( 'customizer' );
+		$customizer->on_init( array( $this, 'register_customize_partial' ) );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
+		$customizer->on_js_preview_init( array( $this, 'register_customize_preview_js' ) );
 	}
 }

@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 28);
+	/******/return __webpack_require__(__webpack_require__.s = 30);
 	/******/
 })(
 /************************************************************************/
@@ -243,7 +243,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/28:
+	/***/30:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -252,9 +252,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(2);
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(1);
 		/**
-   * File navbar.customize-controls.js.
+   * File sidebar.customize-controls.js.
    *
-   * Theme Customizer handling for the navbar.
+   * Theme Customizer handling for the sidebar.
    */
 
 		(function (wp, data) {
@@ -264,51 +264,96 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 			api.bind('ready', function () {
-				api.when('navbar_position', 'navbar_justify_content', function (navbarPosition, navbarJustifyContent) {
-					navbarPosition.transport = 'postMessage';
-					navbarJustifyContent.transport = 'postMessage';
+				api.when('sidebar_mode', 'sidebar_size', 'blog_sidebar_enabled', function (sidebarMode, sidebarSize, blogSidebarEnabled) {
+					sidebarMode.transport = 'postMessage';
+					sidebarSize.transport = 'postMessage';
+					blogSidebarEnabled.transport = 'postMessage';
 				});
 
 				api.panel.instance('layout', function () {
-					api.section.add(new api.Section('navbar', {
+					api.section.add(new api.Section('sidebar', {
 						panel: 'layout',
-						title: __('Navbar', 'super-awesome-theme'),
+						title: __('Sidebar', 'super-awesome-theme'),
 						customizeAction: Object(__WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__["a" /* default */])('layout')
 					}));
 
-					api.control.add(new api.Control('navbar_position', {
-						setting: 'navbar_position',
-						section: 'navbar',
-						label: __('Navbar Position', 'super-awesome-theme'),
+					api.control.add(new api.Control('sidebar_mode', {
+						setting: 'sidebar_mode',
+						section: 'sidebar',
+						label: __('Sidebar Mode', 'super-awesome-theme'),
+						description: __('Specify if and how the sidebar should be displayed.', 'super-awesome-theme'),
 						type: 'radio',
-						choices: data.navbarPositionChoices
+						choices: data.sidebarModeChoices
 					}));
 
-					api.control.add(new api.Control('navbar_justify_content', {
-						setting: 'navbar_justify_content',
-						section: 'navbar',
-						label: __('Navbar Justify Content', 'super-awesome-theme'),
-						description: __('Specify how the content in the navbar is aligned.', 'super-awesome-theme'),
+					api.control.add(new api.Control('sidebar_size', {
+						setting: 'sidebar_size',
+						section: 'sidebar',
+						label: __('Sidebar Size', 'super-awesome-theme'),
+						description: __('Specify the width of the sidebar.', 'super-awesome-theme'),
 						type: 'radio',
-						choices: data.navbarJustifyContentChoices
+						choices: data.sidebarSizeChoices
+					}));
+
+					api.control.add(new api.Control('blog_sidebar_enabled', {
+						setting: 'blog_sidebar_enabled',
+						section: 'sidebar',
+						label: __('Enable Blog Sidebar?', 'super-awesome-theme'),
+						description: __('If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme'),
+						type: 'checkbox'
 					}));
 				});
 
-				// Handle visibility of the sticky navbar control.
-				util.bindSettingToControls('navbar_position', ['sticky_navbar'], function (value, control) {
-					var isSide = ['left', 'right'].includes(value);
+				// Handle visibility of the sidebar controls.
+				util.bindSettingToControls('sidebar_mode', ['sidebar_size', 'blog_sidebar_enabled'], function (value, control) {
+					control.active.set('no_sidebar' !== value);
+				});
 
-					control.active.set(!isSide);
-
-					// If navbar is displayed on the side, also force the sticky navbar setting to change.
-					if (isSide) {
-						api.instance('sticky_navbar', function (setting) {
-							setting.set(false);
-						});
+				// Handle visibility of the actual sidebar widget area controls.
+				util.bindSettingToSections('blog_sidebar_enabled', ['sidebar-widgets-primary', 'sidebar-widgets-blog'], function (value, section) {
+					if (!!value === ('blog' === section.params.sidebarId)) {
+						section.activate();
+						return;
 					}
+
+					section.deactivate();
+				});
+
+				// Show a notification for the blog sidebar instead of hiding it.
+				api.control('blog_sidebar_enabled', function (control) {
+					var origOnChangeActive = control.onChangeActive;
+					var hasNotification = false;
+
+					control.onChangeActive = function (active) {
+						var noticeCode = 'blog_sidebar_not_available';
+
+						if (active) {
+							if (hasNotification) {
+								hasNotification = false;
+								control.container.find('input[type="checkbox"]').prop('disabled', false);
+								control.container.find('.description').slideDown(180);
+								control.notifications.remove(noticeCode);
+							}
+
+							origOnChangeActive.apply(this, arguments);
+						} else {
+							if ('no_sidebar' === api.instance('sidebar_mode').get()) {
+								origOnChangeActive.apply(this, arguments);
+								return;
+							}
+
+							hasNotification = true;
+							control.container.find('input[type="checkbox"]').prop('disabled', true);
+							control.container.find('.description').slideUp(180);
+							control.notifications.add(noticeCode, new api.Notification(noticeCode, {
+								type: 'info',
+								message: __('This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme')
+							}));
+						}
+					};
 				});
 			});
-		})(window.wp, window.themeNavbarControlsData);
+		})(window.wp, window.themeSidebarControlsData);
 
 		/***/
 	}

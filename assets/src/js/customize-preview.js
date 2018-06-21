@@ -7,11 +7,9 @@
 import CustomizePreviewUtil from './customize/customize-preview-util';
 import { findParent } from './common/utils';
 
-( ( wp, data ) => {
+( ( wp ) => {
 	const api  = wp.customize;
 	const util = new CustomizePreviewUtil( api );
-
-	data = data || {};
 
 	api.bind( 'preview-ready', () => {
 		api.preview.bind( 'active', () => {
@@ -32,34 +30,6 @@ import { findParent } from './common/utils';
 		Array.from( document.querySelectorAll( '.site-description' ) ).forEach( element => {
 			element.textContent = value;
 		});
-	});
-
-	// Sidebar mode.
-	util.bindSetting( 'sidebar_mode', value => {
-		const classes = Object.keys( data.sidebarModeChoices ).map( setting => setting.replace( '_', '-' ) );
-		const index   = classes.indexOf( value.replace( '_', '-' ) );
-
-		value = value.replace( '_', '-' );
-
-		if ( index > -1 ) {
-			classes.splice( index, 1 );
-			classes.forEach( cssClass => document.body.classList.remove( cssClass ) );
-			document.body.classList.add( value );
-		}
-	});
-
-	// Sidebar size.
-	util.bindSetting( 'sidebar_size', value => {
-		const classes = Object.keys( data.sidebarSizeChoices ).map( setting => 'sidebar-' + setting );
-		const index   = classes.indexOf( 'sidebar-' + value );
-
-		value = 'sidebar-' + value;
-
-		if ( index > -1 ) {
-			classes.splice( index, 1 );
-			classes.forEach( cssClass => document.body.classList.remove( cssClass ) );
-			document.body.classList.add( value );
-		}
 	});
 
 	// Wide footer widget area.
@@ -94,4 +64,4 @@ import { findParent } from './common/utils';
 			});
 		},
 	});
-})( window.wp, window.themeCustomizeData );
+})( window.wp );

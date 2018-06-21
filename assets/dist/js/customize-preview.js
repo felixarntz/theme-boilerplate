@@ -134,11 +134,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * Theme Customizer handling for the preview.
    */
 
-		(function (wp, data) {
+		(function (wp) {
 			var api = wp.customize;
 			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__["a" /* default */](api);
-
-			data = data || {};
 
 			api.bind('preview-ready', function () {
 				api.preview.bind('active', function () {
@@ -159,42 +157,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				Array.from(document.querySelectorAll('.site-description')).forEach(function (element) {
 					element.textContent = value;
 				});
-			});
-
-			// Sidebar mode.
-			util.bindSetting('sidebar_mode', function (value) {
-				var classes = Object.keys(data.sidebarModeChoices).map(function (setting) {
-					return setting.replace('_', '-');
-				});
-				var index = classes.indexOf(value.replace('_', '-'));
-
-				value = value.replace('_', '-');
-
-				if (index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return document.body.classList.remove(cssClass);
-					});
-					document.body.classList.add(value);
-				}
-			});
-
-			// Sidebar size.
-			util.bindSetting('sidebar_size', function (value) {
-				var classes = Object.keys(data.sidebarSizeChoices).map(function (setting) {
-					return 'sidebar-' + setting;
-				});
-				var index = classes.indexOf('sidebar-' + value);
-
-				value = 'sidebar-' + value;
-
-				if (index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return document.body.classList.remove(cssClass);
-					});
-					document.body.classList.add(value);
-				}
 			});
 
 			// Wide footer widget area.
@@ -230,7 +192,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					});
 				}
 			});
-		})(window.wp, window.themeCustomizeData);
+		})(window.wp);
 
 		/***/
 	},

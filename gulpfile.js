@@ -228,6 +228,8 @@ gulp.task( 'compile-js', done => {
 		'custom-header.customize-preview': './assets/src/js/custom-header.customize-preview.js',
 		'navbar.customize-controls': './assets/src/js/navbar.customize-controls.js',
 		'navbar.customize-preview': './assets/src/js/navbar.customize-preview.js',
+		'sidebar.customize-controls': './assets/src/js/sidebar.customize-controls.js',
+		'sidebar.customize-preview': './assets/src/js/sidebar.customize-preview.js',
 		'social-navigation.customize-controls': './assets/src/js/social-navigation.customize-controls.js',
 		'sticky-elements.customize-controls': './assets/src/js/sticky-elements.customize-controls.js',
 		'sticky-elements.customize-preview': './assets/src/js/sticky-elements.customize-preview.js',

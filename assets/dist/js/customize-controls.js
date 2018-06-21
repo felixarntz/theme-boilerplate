@@ -1,9 +1,5 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /******/(function (modules) {
 	// webpackBootstrap
 	/******/ // The module cache
@@ -84,144 +80,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /************************************************************************/
 /******/{
 
-	/***/1:
-	/***/function _(module, __webpack_exports__, __webpack_require__) {
-
-		"use strict";
-		/**
-   * File customize-controls-util.js.
-   *
-   * Class containing Customizer controls utility methods.
-   */
-
-		var CustomizeControlsUtil = function () {
-			function CustomizeControlsUtil(wpCustomize) {
-				_classCallCheck(this, CustomizeControlsUtil);
-
-				this.customizer = wpCustomize || window.wp.customize;
-			}
-
-			_createClass(CustomizeControlsUtil, [{
-				key: 'bindSetting',
-				value: function bindSetting(settingId, callback) {
-					this.customizer.instance(settingId, function (setting) {
-						callback(setting.get());
-						setting.bind(function () {
-							callback(setting.get());
-						});
-					});
-				}
-			}, {
-				key: 'bindSettingToComponents',
-				value: function bindSettingToComponents(settingId, componentIds, callback, componentType) {
-					var self = this;
-
-					componentType = componentType || 'control';
-
-					function listenToSetting() {
-						var components = Array.prototype.slice.call(arguments, 0, componentIds.length);
-
-						self.bindSetting(settingId, function (value) {
-							components.forEach(function (component) {
-								callback(value, component);
-							});
-						});
-					}
-
-					this.customizer[componentType].instance.apply(this.customizer[componentType], componentIds.concat([listenToSetting]));
-				}
-			}, {
-				key: 'bindSettingToPanels',
-				value: function bindSettingToPanels(settingId, panelIds, callback) {
-					this.bindSettingToComponents(settingId, panelIds, callback, 'panel');
-				}
-			}, {
-				key: 'bindSettingToSections',
-				value: function bindSettingToSections(settingId, sectionIds, callback) {
-					this.bindSettingToComponents(settingId, sectionIds, callback, 'section');
-				}
-			}, {
-				key: 'bindSettingToControls',
-				value: function bindSettingToControls(settingId, controlIds, callback) {
-					this.bindSettingToComponents(settingId, controlIds, callback, 'control');
-				}
-			}, {
-				key: 'bindSettings',
-				value: function bindSettings(settingIds, callback) {
-					function bindSettings() {
-						var settings = Array.prototype.slice.call(arguments, 0, settingIds.length);
-						var values = {};
-
-						function updateSetting(setting) {
-							values[setting.id] = setting.get();
-						}
-
-						settings.forEach(function (setting) {
-							updateSetting(setting);
-							setting.bind(function () {
-								updateSetting(setting);
-								callback(values);
-							});
-						});
-
-						callback(values);
-					}
-
-					this.customizer.instance.apply(this.customizer, settingIds.concat([bindSettings]));
-				}
-			}, {
-				key: 'bindSettingsToComponents',
-				value: function bindSettingsToComponents(settingIds, componentIds, callback, componentType) {
-					var self = this;
-
-					componentType = componentType || 'control';
-
-					function listenToSettings() {
-						var components = Array.prototype.slice.call(arguments, 0, componentIds.length);
-
-						self.bindSettings(settingIds, function (values) {
-							components.forEach(function (component) {
-								callback(values, component);
-							});
-						});
-					}
-
-					this.customizer[componentType].instance.apply(this.customizer[componentType], componentIds.concat([listenToSettings]));
-				}
-			}, {
-				key: 'bindSettingsToPanels',
-				value: function bindSettingsToPanels(settingIds, panelIds, callback) {
-					this.bindSettingsToComponents(settingIds, panelIds, callback, 'panel');
-				}
-			}, {
-				key: 'bindSettingsToSections',
-				value: function bindSettingsToSections(settingIds, sectionIds, callback) {
-					this.bindSettingsToComponents(settingIds, sectionIds, callback, 'section');
-				}
-			}, {
-				key: 'bindSettingsToControls',
-				value: function bindSettingsToControls(settingIds, controlIds, callback) {
-					this.bindSettingsToComponents(settingIds, controlIds, callback, 'control');
-				}
-			}]);
-
-			return CustomizeControlsUtil;
-		}();
-
-		/* harmony default export */
-
-		__webpack_exports__["a"] = CustomizeControlsUtil;
-
-		/***/
-	},
-
 	/***/20:
-	/***/function _(module, __webpack_exports__, __webpack_require__) {
+	/***/function _(module, exports) {
 
-		"use strict";
-
-		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(1);
 		/**
    * File customize-controls.js.
    *
@@ -230,7 +91,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		(function (wp, data) {
 			var api = wp.customize;
-			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__["a" /* default */](api);
 
 			data = data || {};
 
@@ -258,52 +118,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						});
 					});
 				}
-
-				// Only show sidebar-related controls if a sidebar is enabled.
-				util.bindSettingToControls('sidebar_mode', ['sidebar_size', 'blog_sidebar_enabled'], function (value, control) {
-					if ('no_sidebar' === value) {
-						control.container.slideUp(180);
-					} else {
-						control.container.slideDown(180);
-					}
-				});
-
-				// Show sidebar section that is enabled.
-				util.bindSettingToSections('blog_sidebar_enabled', ['sidebar-widgets-primary', 'sidebar-widgets-blog'], function (value, section) {
-					if (value) {
-						if ('blog' === section.params.sidebarId) {
-							section.activate();
-						} else {
-							section.deactivate();
-						}
-					} else {
-						if ('blog' === section.params.sidebarId) {
-							section.deactivate();
-						} else {
-							section.activate();
-						}
-					}
-				});
-
-				// Disable blog sidebar enabled control when not active.
-				api.control('blog_sidebar_enabled', function (control) {
-					control.onChangeActive = function (active) {
-						var noticeCode = 'blog_sidebar_not_available';
-
-						if (active) {
-							control.container.find('input[type="checkbox"]').prop('disabled', false);
-							control.container.find('.description').slideDown(180);
-							control.notifications.remove(noticeCode);
-						} else {
-							control.container.find('input[type="checkbox"]').prop('disabled', true);
-							control.container.find('.description').slideUp(180);
-							control.notifications.add(noticeCode, new api.Notification(noticeCode, {
-								type: 'info',
-								message: data.blogSidebarEnabledNotice
-							}));
-						}
-					};
-				});
 			});
 		})(window.wp, window.themeCustomizeData);
 
