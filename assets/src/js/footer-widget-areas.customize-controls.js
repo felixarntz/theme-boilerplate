@@ -34,7 +34,7 @@ import getCustomizeAction from './customize/get-customize-action';
 			}) );
 		});
 
-		// Handle visibility of the wide footer widget area control.
+		// Handle visibility and choices of the wide footer widget area control.
 		util.bindSettingsToControls( data.footerWidgetAreas.map( widgetArea => 'sidebars_widgets[' + widgetArea + ']' ), [ 'wide_footer_widget_area' ], ( values, control ) => {
 			let currentValue   = control.setting.get();
 			let hasWidgets     = false;

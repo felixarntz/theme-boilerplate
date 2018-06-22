@@ -285,7 +285,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					}));
 				});
 
-				// Handle visibility of the wide footer widget area control.
+				// Handle visibility and choices of the wide footer widget area control.
 				util.bindSettingsToControls(data.footerWidgetAreas.map(function (widgetArea) {
 					return 'sidebars_widgets[' + widgetArea + ']';
 				}), ['wide_footer_widget_area'], function (values, control) {
