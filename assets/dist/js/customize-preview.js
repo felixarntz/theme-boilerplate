@@ -159,17 +159,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				});
 			});
 
-			// Wide footer widget area.
-			util.bindSetting('wide_footer_widget_area', function (value) {
-				Array.from(document.querySelectorAll('.footer-widget-column')).forEach(function (element) {
-					if (value === element.id) {
-						element.classList.add('footer-widget-column-wide');
-					} else {
-						element.classList.remove('footer-widget-column-wide');
-					}
-				});
-			});
-
 			api.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = api.selectiveRefresh.Partial.extend({
 				placements: function placements() {
 					var partial = this,

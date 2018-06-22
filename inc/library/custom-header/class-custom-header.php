@@ -37,8 +37,8 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 	public function get_branding_location_choices() {
 		return array(
 			'header'       => __( 'In front of the header image', 'super-awesome-theme' ),
-			'navbar_left'  => __( 'On the left inside the navigation bar', 'super-awesome-theme' ),
-			'navbar_right' => __( 'On the right inside the navigation bar', 'super-awesome-theme' ),
+			'navbar_left'  => __( 'At the beginning of the navigation bar', 'super-awesome-theme' ),
+			'navbar_right' => __( 'At the end of the navigation bar', 'super-awesome-theme' ),
 		);
 	}
 

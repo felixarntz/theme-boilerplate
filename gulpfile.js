@@ -226,6 +226,8 @@ gulp.task( 'compile-js', done => {
 		'colors.customize-controls': './assets/src/js/colors.customize-controls.js',
 		'custom-header.customize-controls': './assets/src/js/custom-header.customize-controls.js',
 		'custom-header.customize-preview': './assets/src/js/custom-header.customize-preview.js',
+		'footer-widget-areas.customize-controls': './assets/src/js/footer-widget-areas.customize-controls.js',
+		'footer-widget-areas.customize-preview': './assets/src/js/footer-widget-areas.customize-preview.js',
 		'navbar.customize-controls': './assets/src/js/navbar.customize-controls.js',
 		'navbar.customize-preview': './assets/src/js/navbar.customize-preview.js',
 		'sidebar.customize-controls': './assets/src/js/sidebar.customize-controls.js',

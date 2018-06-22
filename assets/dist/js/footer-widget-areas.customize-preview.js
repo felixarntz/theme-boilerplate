@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 31);
+	/******/return __webpack_require__(__webpack_require__.s = 29);
 	/******/
 })(
 /************************************************************************/
@@ -120,7 +120,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/31:
+	/***/29:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -128,76 +128,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(0);
 		/**
-   * File navbar.customize-preview.js.
+   * File footer-widget-areas.customize-preview.js.
    *
-   * Theme Customizer handling for navbar preview.
+   * Theme Customizer handling for footer widget area preview.
    */
 
-		(function (wp, data) {
+		(function (wp) {
 			var api = wp.customize;
 			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__["a" /* default */](api);
 
-			function replaceNavbarClasses(navbar, isSide) {
-				var navbarExtra = navbar.querySelector('#site-navigation-extra');
-				var addRemove = isSide ? 'remove' : 'add';
-				var widgetClass = isSide ? '.widget' : '.inline-widget';
-
-				navbar.classList[addRemove]('is-flex');
-
-				if (!navbarExtra) {
-					return;
-				}
-
-				navbarExtra.classList[addRemove]('inline-widget-area');
-				navbarExtra.querySelectorAll('.widget' === widgetClass ? '.inline-widget' : '.widget').forEach(function (widget) {
-					widget.classList.remove('.widget' === widgetClass ? 'inline-widget' : 'widget');
-					widget.classList.add(widgetClass);
-				});
-			}
-
-			util.bindSetting('navbar_position', function (value) {
-				var classes = Object.keys(data.navbarPositionChoices).map(function (setting) {
-					return 'navbar-' + setting;
-				});
-				var index = classes.indexOf('navbar-' + value);
-				var navbar = document.querySelector('#site-navbar');
-
-				value = 'navbar-' + value;
-
-				if (index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return document.body.classList.remove(cssClass);
-					});
-					document.body.classList.add(value);
-
-					if (!navbar) {
-						return;
+			util.bindSetting('wide_footer_widget_area', function (value) {
+				Array.from(document.querySelectorAll('.footer-widget-column')).forEach(function (element) {
+					if (value === element.id) {
+						element.classList.add('footer-widget-column-wide');
+					} else {
+						element.classList.remove('footer-widget-column-wide');
 					}
-
-					if (['navbar-left', 'navbar-right'].includes(value)) {
-						replaceNavbarClasses(navbar, true);
-						return;
-					}
-
-					replaceNavbarClasses(navbar, false);
-				}
+				});
 			});
-
-			util.bindSetting('navbar_justify_content', function (value) {
-				var classes = Object.keys(data.navbarJustifyContentChoices);
-				var index = classes.indexOf(value);
-				var navbar = document.querySelector('#site-navbar');
-
-				if (navbar && index > -1) {
-					classes.splice(index, 1);
-					classes.forEach(function (cssClass) {
-						return navbar.classList.remove(cssClass);
-					});
-					navbar.classList.add(value);
-				}
-			});
-		})(window.wp, window.themeNavbarPreviewData);
+		})(window.wp);
 
 		/***/
 	}

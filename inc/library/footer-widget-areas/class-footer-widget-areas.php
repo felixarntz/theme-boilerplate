@@ -144,7 +144,8 @@ class Super_Awesome_Theme_Footer_Widget_Areas extends Super_Awesome_Theme_Theme_
 		switch ( $method ) {
 			case 'register_settings':
 			case 'register_widget_areas':
-			case 'register_customize_controls':
+			case 'register_customize_controls_js':
+			case 'register_customize_preview_js':
 				return call_user_func_array( array( $this, $method ), $args );
 		}
 	}
@@ -186,19 +187,47 @@ class Super_Awesome_Theme_Footer_Widget_Areas extends Super_Awesome_Theme_Theme_
 	}
 
 	/**
-	 * Registers Customizer controls for sidebar behavior.
+	 * Registers scripts for the Customizer controls.
 	 *
 	 * @since 1.0.0
-	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
-	 * @param Super_Awesome_Theme_Widgets    $widgets    Widgets handler instance.
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
-	protected function register_customize_controls( $customizer, $widgets ) {
-		$customizer->add_control( 'wide_footer_widget_area', array(
-			Super_Awesome_Theme_Customize_Control::PROP_SECTION         => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
-			Super_Awesome_Theme_Customize_Control::PROP_TITLE           => __( 'Wide Footer Column', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION     => __( 'If you like to reserve more space for one of your footer widget columns, you can select that one here.', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Customize_Control::PROP_TYPE            => Super_Awesome_Theme_Customize_Control::TYPE_SELECT,
-			Super_Awesome_Theme_Customize_Control::PROP_CHOICES         => $this->get_wide_footer_widget_area_choices(),
+	protected function register_customize_controls_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-footer-widget-areas-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/footer-widget-areas.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls', 'underscore', 'wp-i18n' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeFooterWidgetAreasControlsData',
+				Super_Awesome_Theme_Script::PROP_DATA         => array(
+					'footerWidgetAreas'           => $this->get_widget_area_names(),
+					'wideFooterWidgetAreaChoices' => $this->get_wide_footer_widget_area_choices(),
+				),
+			)
+		) );
+	}
+
+	/**
+	 * Registers scripts for the Customizer preview.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
+	 */
+	protected function register_customize_preview_js( $assets ) {
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-footer-widget-areas-customize-preview',
+			get_theme_file_uri( '/assets/dist/js/footer-widget-areas.customize-preview.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-preview' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+			)
 		) );
 	}
 
@@ -212,6 +241,9 @@ class Super_Awesome_Theme_Footer_Widget_Areas extends Super_Awesome_Theme_Theme_
 
 		$widgets = $this->get_dependency( 'widgets' );
 		$widgets->on_init( array( $this, 'register_widget_areas' ) );
-		$widgets->on_customizer_init( array( $this, 'register_customize_controls' ) );
+
+		$customizer = $this->get_dependency( 'customizer' );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
+		$customizer->on_js_preview_init( array( $this, 'register_customize_preview_js' ) );
 	}
 }
