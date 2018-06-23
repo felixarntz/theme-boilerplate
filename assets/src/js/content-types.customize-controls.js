@@ -118,7 +118,6 @@ import getCustomizeAction from './customize/get-customize-action';
 
 		// Handle the currentPostType value.
 		api.previewer.bind( 'currentPostType', value => {
-			console.log( value ); // eslint-disable-line no-console
 			currentPostType.set( value );
 		});
 

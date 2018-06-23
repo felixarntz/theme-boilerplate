@@ -237,7 +237,6 @@
 
 				// Handle the currentPostType value.
 				api.previewer.bind('currentPostType', function (value) {
-					console.log(value); // eslint-disable-line no-console
 					currentPostType.set(value);
 				});
 
