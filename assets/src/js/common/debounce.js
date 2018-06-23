@@ -1,22 +1,10 @@
 /**
- * File utils.js.
+ * File debounce.js.
  *
- * Contains common utility functions.
+ * Exports a function to debounce functionality.
  */
 
-export function findParent( element, selector ) {
-	while ( element && element !== document ) {
-		element = element.parentElement;
-
-		if ( element.matches( selector ) ) {
-			return element;
-		}
-	}
-
-	return null;
-}
-
-export function debounce( func, wait, immediate ) {
+export default function debounce( func, wait, immediate ) {
 	let timeout;
 
 	return () => {

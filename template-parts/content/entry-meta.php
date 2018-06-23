@@ -22,28 +22,41 @@ $time_string = sprintf( $time_string,
 ?>
 <div class="entry-meta">
 
-	<?php if ( super_awesome_theme_display_post_date() ) : ?>
+	<?php
+
+	/* translators: %s: post author */
+	$author_byline = _x( 'By %s', 'post author', 'super-awesome-theme' );
+
+	if ( super_awesome_theme_display_post_date() ) {
+
+		/* translators: %s: post author */
+		$author_byline = _x( 'by %s', 'post author', 'super-awesome-theme' );
+
+		?>
 		<span class="posted-on">
 			<?php
 			printf(
-				/* translators: %s: post date. */
+				/* translators: %s: post date */
 				esc_html_x( 'Posted on %s', 'post date', 'super-awesome-theme' ),
 				'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 			);
 			?>
 		</span>
-	<?php endif; ?>
+		<?php
+	}
 
-	<?php if ( super_awesome_theme_display_post_author() ) : ?>
+	if ( super_awesome_theme_display_post_author() ) {
+		?>
 		<span class="byline">
 			<?php
 			printf(
-				/* translators: %s: post author. */
-				esc_html_x( 'by %s', 'post author', 'super-awesome-theme' ),
+				esc_html( $author_byline ),
 				'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 			);
 			?>
 		</span>
-	<?php endif; ?>
+		<?php
+	}
+	?>
 
 </div><!-- .entry-meta -->

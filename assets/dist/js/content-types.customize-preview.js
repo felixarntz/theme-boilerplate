@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 38);
+	/******/return __webpack_require__(__webpack_require__.s = 27);
 	/******/
 })(
 /************************************************************************/
@@ -175,7 +175,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/38:
+	/***/27:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -183,25 +183,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(0);
 		/**
-   * File sticky-elements.customize-preview.js.
+   * File customize-preview.js.
    *
-   * Theme Customizer handling for sticky element preview.
+   * Theme Customizer handling for the preview.
    */
 
-		(function (wp, data) {
+		(function (wp) {
 			var api = wp.customize;
 			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__["a" /* default */](api);
 
-			data.stickyElements.forEach(function (sticky) {
-				util.bindSetting(sticky.setting, function (value) {
-					if (!window.themeData) {
-						return;
-					}
+			function getCurrentPostType() {
+				var matches = document.body.getAttribute('class').match(/is-post-type-([a-z0-9-_]+)/);
 
-					window.themeData.components.sticky.addRemoveStickyContainer(sticky.selector, sticky.location, !value);
+				if (!matches) {
+					return '';
+				}
+
+				return matches[1];
+			}
+
+			api.bind('preview-ready', function () {
+				api.preview.bind('active', function () {
+					api.preview.send('currentPostType', getCurrentPostType());
+					api.preview.send('hasPageHeader', document.body.classList.contains('has-page-header'));
 				});
 			});
-		})(window.wp, window.themeStickyElementsPreviewData);
+
+			util.providePostPartial(api.selectiveRefresh, 'SuperAwesomeThemePostPartial');
+		})(window.wp);
 
 		/***/
 	}

@@ -129,45 +129,6 @@ function super_awesome_theme_use_wrapped_layout() {
 }
 
 /**
- * Gets the post type from the current context.
- *
- * @since 1.0.0
- *
- * @return string Post type, or empty string if no post type could be detected.
- */
-function super_awesome_theme_get_post_type() {
-	switch ( true ) {
-		case is_front_page():
-			return '';
-		case is_singular();
-			return get_post_type();
-		case is_home():
-			return 'post';
-		case is_category():
-		case is_tag():
-		case is_tax():
-			$term = get_queried_object();
-			if ( $term ) {
-				$taxonomy = get_taxonomy( $term->taxonomy );
-				if ( $taxonomy && ! empty( $taxonomy->object_type ) && count( $taxonomy->object_type ) === 1 ) {
-					return reset( $taxonomy->object_type );
-				}
-			}
-			break;
-		default:
-			$post_types = get_query_var( 'post_type' );
-			if ( ! empty( $post_types ) ) {
-				if ( is_array( $post_types ) ) {
-					return reset( $post_types );
-				}
-				return $post_types;
-			}
-	}
-
-	return '';
-}
-
-/**
  * Checks whether a page header should be used for the current context.
  *
  * @since 1.0.0
@@ -175,23 +136,7 @@ function super_awesome_theme_get_post_type() {
  * @return bool True if a page header should be used, false otherwise.
  */
 function super_awesome_theme_use_page_header() {
-	$post_type = super_awesome_theme_get_post_type();
-
-	$use_page_header = false;
-	if ( ! empty( $post_type ) ) {
-		$use_page_header = super_awesome_theme()->get_component( 'content_types' )->should_use_page_header( $post_type );
-	}
-
-	/**
-	 * Filters whether a page header should be used for the current context.
-	 *
-	 * By default, this depends on the setting for the post type currently queried.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool $use_page_header Whether to use a page header.
-	 */
-	return apply_filters( 'super_awesome_theme_use_page_header', $use_page_header );
+	return super_awesome_theme()->get_component( 'content_types' )->should_use_page_header();
 }
 
 /**

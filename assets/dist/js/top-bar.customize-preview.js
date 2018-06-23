@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 38);
+	/******/return __webpack_require__(__webpack_require__.s = 40);
 	/******/
 })(
 /************************************************************************/
@@ -88,6 +88,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
+		/* harmony import */
+		var __WEBPACK_IMPORTED_MODULE_0__common_find_parent__ = __webpack_require__(1);
 		/**
    * File customize-preview-util.js.
    *
@@ -108,6 +110,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						setting.bind(callback);
 					});
 				}
+			}, {
+				key: 'providePostPartial',
+				value: function providePostPartial(selectiveRefresh, partialName) {
+					selectiveRefresh.partialConstructor[partialName] = selectiveRefresh.Partial.extend({
+						placements: function placements() {
+							var partial = this,
+							    selector;
+
+							selector = partial.params.selector || '';
+							if (selector) {
+								selector += ', ';
+							}
+							selector += '[data-customize-partial-id="' + partial.id + '"]';
+
+							return Array.from(document.querySelectorAll(selector)).map(function (element) {
+								return new selectiveRefresh.Placement({
+									partial: partial,
+									container: element,
+									context: {
+										post_id: parseInt(Object(__WEBPACK_IMPORTED_MODULE_0__common_find_parent__["a" /* default */])(element, 'article.hentry').id.replace('post-', ''), 10)
+									}
+								});
+							});
+						}
+					});
+				}
 			}]);
 
 			return CustomizePreviewUtil;
@@ -120,7 +148,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/38:
+	/***/1:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+		/* harmony export (immutable) */
+		__webpack_exports__["a"] = findParent;
+		/**
+   * File find-parent.js.
+   *
+   * Exports a function to get a specific parent element of an element.
+   */
+
+		function findParent(element, selector) {
+			while (element && element !== document) {
+				element = element.parentElement;
+
+				if (element.matches(selector)) {
+					return element;
+				}
+			}
+
+			return null;
+		}
+
+		/***/
+	},
+
+	/***/40:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";

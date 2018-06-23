@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 21);
+	/******/return __webpack_require__(__webpack_require__.s = 22);
 	/******/
 })(
 /************************************************************************/
@@ -88,6 +88,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
+		/* harmony import */
+		var __WEBPACK_IMPORTED_MODULE_0__common_find_parent__ = __webpack_require__(1);
 		/**
    * File customize-preview-util.js.
    *
@@ -108,6 +110,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						setting.bind(callback);
 					});
 				}
+			}, {
+				key: 'providePostPartial',
+				value: function providePostPartial(selectiveRefresh, partialName) {
+					selectiveRefresh.partialConstructor[partialName] = selectiveRefresh.Partial.extend({
+						placements: function placements() {
+							var partial = this,
+							    selector;
+
+							selector = partial.params.selector || '';
+							if (selector) {
+								selector += ', ';
+							}
+							selector += '[data-customize-partial-id="' + partial.id + '"]';
+
+							return Array.from(document.querySelectorAll(selector)).map(function (element) {
+								return new selectiveRefresh.Placement({
+									partial: partial,
+									container: element,
+									context: {
+										post_id: parseInt(Object(__WEBPACK_IMPORTED_MODULE_0__common_find_parent__["a" /* default */])(element, 'article.hentry').id.replace('post-', ''), 10)
+									}
+								});
+							});
+						}
+					});
+				}
 			}]);
 
 			return CustomizePreviewUtil;
@@ -120,14 +148,40 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/21:
+	/***/1:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+		/* harmony export (immutable) */
+		__webpack_exports__["a"] = findParent;
+		/**
+   * File find-parent.js.
+   *
+   * Exports a function to get a specific parent element of an element.
+   */
+
+		function findParent(element, selector) {
+			while (element && element !== document) {
+				element = element.parentElement;
+
+				if (element.matches(selector)) {
+					return element;
+				}
+			}
+
+			return null;
+		}
+
+		/***/
+	},
+
+	/***/22:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_preview_util__ = __webpack_require__(0);
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__common_utils__ = __webpack_require__(22);
 		/**
    * File customize-preview.js.
    *
@@ -141,7 +195,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			api.bind('preview-ready', function () {
 				api.preview.bind('active', function () {
 					api.preview.send('hasWrappedLayout', document.body.classList.contains('wrapped-layout'));
-					api.preview.send('hasPageHeader', document.body.classList.contains('has-page-header'));
 				});
 			});
 
@@ -158,84 +211,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					element.textContent = value;
 				});
 			});
-
-			api.selectiveRefresh.partialConstructor.SuperAwesomeThemePostPartial = api.selectiveRefresh.Partial.extend({
-				placements: function placements() {
-					var partial = this,
-					    selector;
-
-					selector = partial.params.selector || '';
-					if (selector) {
-						selector += ', ';
-					}
-					selector += '[data-customize-partial-id="' + partial.id + '"]';
-
-					return Array.from(document.querySelectorAll(selector)).map(function (element) {
-						return new api.selectiveRefresh.Placement({
-							partial: partial,
-							container: element,
-							context: {
-								post_id: parseInt(Object(__WEBPACK_IMPORTED_MODULE_1__common_utils__["a" /* findParent */])(element, 'article.hentry').id.replace('post-', ''), 10)
-							}
-						});
-					});
-				}
-			});
 		})(window.wp);
-
-		/***/
-	},
-
-	/***/22:
-	/***/function _(module, __webpack_exports__, __webpack_require__) {
-
-		"use strict";
-		/* harmony export (immutable) */
-		__webpack_exports__["a"] = findParent;
-		/* unused harmony export debounce */
-		/**
-   * File utils.js.
-   *
-   * Contains common utility functions.
-   */
-
-		function findParent(element, selector) {
-			while (element && element !== document) {
-				element = element.parentElement;
-
-				if (element.matches(selector)) {
-					return element;
-				}
-			}
-
-			return null;
-		}
-
-		function debounce(func, wait, immediate) {
-			var _this = this,
-			    _arguments = arguments;
-
-			var timeout = void 0;
-
-			return function () {
-				var context = _this;
-				var args = _arguments;
-				var later = function later() {
-					timeout = null;
-					if (!immediate) {
-						func.apply(context, args);
-					}
-				};
-				var callNow = immediate && !timeout;
-
-				clearTimeout(timeout);
-				timeout = setTimeout(later, wait);
-
-				if (callNow) {
-					func.apply(context, args);
-				}
-			};
-		}
 
 		/***/
 	}

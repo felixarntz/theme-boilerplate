@@ -84,7 +84,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /************************************************************************/
 /******/{
 
-	/***/1:
+	/***/2:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -112,7 +112,139 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/2:
+	/***/25:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+
+		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(3);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(2);
+		/**
+   * File colors.customize-controls.js.
+   *
+   * Theme Customizer handling for color controls.
+   */
+
+		(function (wp, data) {
+			var api = wp.customize;
+			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__["a" /* default */](api);
+			var hasWrappedLayout = new api.Value(false);
+			var hasCustomHeader = new api.Value(false);
+			var hasPageHeader = new api.Value(false);
+			var hasFooterWidgets = new api.Value(false);
+			var hasFooterMenus = new api.Value(false);
+
+			api.bind('ready', function () {
+
+				api.panel.instance('colors', function (panel) {
+					var customizeAction = Object(__WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__["a" /* default */])(panel.id);
+
+					data.groups.forEach(function (group) {
+						if (api.section.instance(group.id)) {
+							return;
+						}
+
+						api.section.add(new api.Section(group.id, {
+							panel: panel.id,
+							title: group.title,
+							customizeAction: customizeAction
+						}));
+					});
+
+					data.colors.forEach(function (color) {
+						if (color.live_preview) {
+							api.instance(color.id, function (setting) {
+								setting.transport = 'postMessage';
+							});
+						}
+
+						api.control.add(new api.ColorControl(color.id, {
+							setting: color.id,
+							section: color.group,
+							label: color.title,
+							type: 'color'
+						}));
+					});
+				});
+
+				// Handle the hasWrappedLayout value.
+				api.previewer.bind('hasWrappedLayout', function (value) {
+					hasWrappedLayout.set(value);
+				});
+
+				// Handle the hasCustomHeader value.
+				util.bindSettings(['header_image', 'header_video', 'external_header_video'], function (values) {
+					hasCustomHeader.set(!!(values.header_image && values.header_image.length && 'remove-header' !== values.header_image || values.header_video && values.header_video.length || values.external_header_video && values.external_header_video.length));
+				});
+
+				// Handle the hasPageHeader value.
+				api.previewer.bind('hasPageHeader', function (value) {
+					hasPageHeader.set(value);
+				});
+
+				// Handle the hasFooterWidgets value.
+				util.bindSettings(data.footerWidgetAreas.map(function (widgetArea) {
+					return 'sidebars_widgets[' + widgetArea + ']';
+				}), function (values) {
+					var areasWithWidgets = Object.values(values).filter(function (widgets) {
+						return !!widgets.length;
+					});
+
+					hasFooterWidgets.set(!!areasWithWidgets.length);
+				});
+
+				// Handle the hasFooterMenus value.
+				util.bindSettings(['nav_menu_locations[social]', 'nav_menu_locations[footer]'], function (values) {
+					var locationsWithMenu = Object.values(values).filter(function (menuId) {
+						return !!menuId;
+					});
+
+					hasFooterMenus.set(!!locationsWithMenu.length);
+				});
+
+				// Handle visibility of the wrap background color control.
+				api.control.instance('wrap_background_color', function (control) {
+					function updateWrapBackgroundColorActive() {
+						control.active.set(hasWrappedLayout.get());
+					}
+					updateWrapBackgroundColorActive();
+					hasWrappedLayout.bind(updateWrapBackgroundColorActive);
+				});
+
+				// Handle visibility of the header background color control.
+				api.control.instance('header_background_color', function (control) {
+					function updateHeaderBackgroundColorActive() {
+						control.active.set(!hasCustomHeader.get() && !hasPageHeader.get());
+					}
+					updateHeaderBackgroundColorActive();
+					hasCustomHeader.bind(updateHeaderBackgroundColorActive);
+					hasPageHeader.bind(updateHeaderBackgroundColorActive);
+				});
+
+				// Handle visibility of the footer color controls.
+				api.control.instance('footer_text_color', 'footer_link_color', 'footer_background_color', function () {
+					var controls = Array.prototype.slice.call(arguments, 0, 3);
+
+					function updateFooterColorsActive() {
+						var value = hasFooterWidgets.get() || hasFooterMenus.get();
+
+						controls.forEach(function (control) {
+							control.active.set(value);
+						});
+					}
+
+					updateFooterColorsActive();
+					hasFooterWidgets.bind(updateFooterColorsActive);
+					hasFooterMenus.bind(updateFooterColorsActive);
+				});
+			});
+		})(window.wp, window.themeColorsControlsData);
+
+		/***/
+	},
+
+	/***/3:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -239,136 +371,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* harmony default export */
 
 		__webpack_exports__["a"] = CustomizeControlsUtil;
-
-		/***/
-	},
-
-	/***/25:
-	/***/function _(module, __webpack_exports__, __webpack_require__) {
-
-		"use strict";
-
-		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(2);
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(1);
-		/**
-   * File colors.customize-controls.js.
-   *
-   * Theme Customizer handling for color controls.
-   */
-
-		(function (wp, data) {
-			var api = wp.customize;
-			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__["a" /* default */](api);
-			var hasWrappedLayout = new api.Value(false);
-			var hasCustomHeader = new api.Value(false);
-			var hasPageHeader = new api.Value(false);
-			var hasFooterWidgets = new api.Value(false);
-			var hasFooterMenus = new api.Value(false);
-
-			api.bind('ready', function () {
-
-				api.panel.instance('colors', function () {
-					data.groups.forEach(function (group) {
-						if (api.section.instance(group.id)) {
-							return;
-						}
-
-						api.section.add(new api.Section(group.id, {
-							panel: 'colors',
-							title: group.title,
-							customizeAction: Object(__WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__["a" /* default */])('colors')
-						}));
-					});
-
-					data.colors.forEach(function (color) {
-						if (color.live_preview) {
-							api.instance(color.id, function (setting) {
-								setting.transport = 'postMessage';
-							});
-						}
-
-						api.control.add(new api.ColorControl(color.id, {
-							setting: color.id,
-							section: color.group,
-							label: color.title,
-							type: 'color'
-						}));
-					});
-				});
-
-				// Handle the hasWrappedLayout value.
-				api.previewer.bind('hasWrappedLayout', function (value) {
-					hasWrappedLayout.set(value);
-				});
-
-				// Handle the hasCustomHeader value.
-				util.bindSettings(['header_image', 'header_video', 'external_header_video'], function (values) {
-					hasCustomHeader.set(!!(values.header_image && values.header_image.length && 'remove-header' !== values.header_image || values.header_video && values.header_video.length || values.external_header_video && values.external_header_video.length));
-				});
-
-				// Handle the hasPageHeader value.
-				api.previewer.bind('hasPageHeader', function (value) {
-					hasPageHeader.set(value);
-				});
-
-				// Handle the hasFooterWidgets value.
-				util.bindSettings(data.footerWidgetAreas.map(function (widgetArea) {
-					return 'sidebars_widgets[' + widgetArea + ']';
-				}), function (values) {
-					var areasWithWidgets = Object.values(values).filter(function (widgets) {
-						return !!widgets.length;
-					});
-
-					hasFooterWidgets.set(!!areasWithWidgets.length);
-				});
-
-				// Handle the hasFooterMenus value.
-				util.bindSettings(['nav_menu_locations[social]', 'nav_menu_locations[footer]'], function (values) {
-					var locationsWithMenu = Object.values(values).filter(function (menuId) {
-						return !!menuId;
-					});
-
-					hasFooterMenus.set(!!locationsWithMenu.length);
-				});
-
-				// Handle visibility of the wrap background color control.
-				api.control.instance('wrap_background_color', function (control) {
-					function updateWrapBackgroundColorActive() {
-						control.active.set(hasWrappedLayout.get());
-					}
-					updateWrapBackgroundColorActive();
-					hasWrappedLayout.bind(updateWrapBackgroundColorActive);
-				});
-
-				// Handle visibility of the header background color control.
-				api.control.instance('header_background_color', function (control) {
-					function updateHeaderBackgroundColorActive() {
-						control.active.set(!hasCustomHeader.get() && !hasPageHeader.get());
-					}
-					updateHeaderBackgroundColorActive();
-					hasCustomHeader.bind(updateHeaderBackgroundColorActive);
-					hasPageHeader.bind(updateHeaderBackgroundColorActive);
-				});
-
-				// Handle visibility of the footer color controls.
-				api.control.instance('footer_text_color', 'footer_link_color', 'footer_background_color', function () {
-					var controls = Array.prototype.slice.call(arguments, 0, 3);
-
-					function updateFooterColorsActive() {
-						var value = hasFooterWidgets.get() || hasFooterMenus.get();
-
-						controls.forEach(function (control) {
-							control.active.set(value);
-						});
-					}
-
-					updateFooterColorsActive();
-					hasFooterWidgets.bind(updateFooterColorsActive);
-					hasFooterMenus.bind(updateFooterColorsActive);
-				});
-			});
-		})(window.wp, window.themeColorsControlsData);
 
 		/***/
 	}

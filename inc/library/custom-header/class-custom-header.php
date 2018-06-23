@@ -74,6 +74,22 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 			case 'register_customize_preview_js':
 			case 'add_customizer_script_data':
 				return call_user_func_array( array( $this, $method ), $args );
+			case 'add_custom_header_body_classes':
+				if ( empty( $args ) ) {
+					return;
+				}
+
+				$classes = $args[0];
+
+				if ( has_header_image() ) {
+					$classes[] = 'has-header-image';
+				}
+
+				if ( has_header_video() && is_header_video_active() ) {
+					$classes[] = 'has-header-video-loading';
+				}
+
+				return $classes;
 		}
 	}
 
@@ -214,6 +230,7 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_feature' ), 10, 0 );
 		add_action( 'after_setup_theme', array( $this, 'register_settings' ), 0, 0 );
+		add_filter( 'body_class', array( $this, 'add_custom_header_body_classes' ), 10, 1 );
 
 		$customizer = $this->get_dependency( 'customizer' );
 		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );

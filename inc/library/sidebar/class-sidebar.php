@@ -26,6 +26,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Widgets' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Distraction_Free_Mode' );
+		$this->require_dependency_class( 'Super_Awesome_Theme_Content_Types' );
 	}
 
 	/**
@@ -95,7 +96,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	 * @return bool True if the blog sidebar can be displayed, false otherwise.
 	 */
 	public function allow_display_blog_sidebar() {
-		$post_type = super_awesome_theme_get_post_type();
+		$post_type = $this->get_dependency( 'content_types' )->detect_post_type();
 		$result    = 'post' === $post_type;
 
 		/**

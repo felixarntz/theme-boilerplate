@@ -78,13 +78,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 34);
+	/******/return __webpack_require__(__webpack_require__.s = 36);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/2:
+	/***/3:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -215,13 +215,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/34:
+	/***/36:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(2);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(3);
 		/**
    * File social-navigation.customize-controls.js.
    *

@@ -18,16 +18,18 @@ import getCustomizeAction from './customize/get-customize-action';
 
 	api.bind( 'ready', () => {
 
-		api.panel.instance( 'colors', () => {
+		api.panel.instance( 'colors', panel => {
+			const customizeAction = getCustomizeAction( panel.id );
+
 			data.groups.forEach( group => {
 				if ( api.section.instance( group.id ) ) {
 					return;
 				}
 
 				api.section.add( new api.Section( group.id, {
-					panel:           'colors',
+					panel:           panel.id,
 					title:           group.title,
-					customizeAction: getCustomizeAction( 'colors' ),
+					customizeAction: customizeAction,
 				}) );
 			});
 

@@ -10,6 +10,7 @@ import Sticky from './theme/sticky';
 
 	document.addEventListener( 'wp-custom-header-video-loaded', () => {
 		document.body.addClass( 'has-header-video' );
+		document.body.removeClass( 'has-header-video-loading' );
 	});
 
 	data.components = {

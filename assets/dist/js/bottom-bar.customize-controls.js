@@ -80,7 +80,7 @@
 /************************************************************************/
 /******/{
 
-	/***/1:
+	/***/2:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -114,7 +114,7 @@
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_get_customize_action__ = __webpack_require__(1);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_get_customize_action__ = __webpack_require__(2);
 		/**
    * File bottom-bar.customize-controls.js.
    *

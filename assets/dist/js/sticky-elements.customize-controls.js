@@ -74,13 +74,13 @@
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 35);
+	/******/return __webpack_require__(__webpack_require__.s = 37);
 	/******/
 })(
 /************************************************************************/
 /******/{
 
-	/***/1:
+	/***/2:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -108,13 +108,13 @@
 		/***/
 	},
 
-	/***/35:
+	/***/37:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
 
 		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_get_customize_action__ = __webpack_require__(1);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_get_customize_action__ = __webpack_require__(2);
 		/**
    * File sticky-elements.customize-controls.js.
    *
