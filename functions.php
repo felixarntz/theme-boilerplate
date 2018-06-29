@@ -43,11 +43,6 @@ require get_template_directory() . '/inc/setup.php';
 require get_template_directory() . '/inc/assets.php';
 
 /**
- * Utility functions.
- */
-require get_template_directory() . '/inc/utils.php';
-
-/**
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-hooks.php';
