@@ -38,11 +38,6 @@ require get_template_directory() . '/inc/library.php';
 require get_template_directory() . '/inc/setup.php';
 
 /**
- * Asset management functions.
- */
-require get_template_directory() . '/inc/assets.php';
-
-/**
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-hooks.php';

@@ -389,3 +389,22 @@ function super_awesome_theme_display_attachment_metadata( $field, $post = null )
 function super_awesome_theme_get_attachment_metadata_fields() {
 	return super_awesome_theme()->get_component( 'content_types' )->attachment_metadata()->get_fields();
 }
+
+/**
+ * Gets SVG markup for a specific icon.
+ *
+ * @since 1.0.0
+ *
+ * @param string $icon SVG icon identifier.
+ * @param array  $args {
+ *     Optional. Additional parameters for displaying the SVG.
+ *
+ *     @type string $title SVG title. Default empty.
+ *     @type string $desc  SVG description. Default empty.
+ *     @type bool   $fallback Whether to create fallback markup. Default false.
+ * }
+ * @return string SVG markup for the icon.
+ */
+function super_awesome_theme_get_svg( $icon, $args = array() ) {
+	return super_awesome_theme()->get_component( 'icons' )->get_svg( $icon, $args );
+}
