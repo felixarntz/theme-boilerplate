@@ -108,6 +108,8 @@ class Super_Awesome_Theme_Float_Setting extends Super_Awesome_Theme_Setting {
 	protected function get_defaults() {
 		$defaults                       = parent::get_defaults();
 		$defaults[ self::PROP_DEFAULT ] = 0.0;
+		$defaults[ self::PROP_MIN ]     = false;
+		$defaults[ self::PROP_MAX ]     = false;
 
 		return $defaults;
 	}
