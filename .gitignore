@@ -28,6 +28,7 @@ package-lock.json
 
 node_modules/
 vendor/
+!assets/vendor
 
 ############
 ## OSes

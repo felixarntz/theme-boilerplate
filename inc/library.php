@@ -67,6 +67,16 @@ require get_template_directory() . '/inc/library/colors/class-color-util.php';
 require get_template_directory() . '/inc/library/colors/class-color.php';
 
 /**
+ * Theme fonts.
+ */
+require get_template_directory() . '/inc/library/fonts/class-font-families.php';
+require get_template_directory() . '/inc/library/fonts/class-font-family-not-registered-exception.php';
+require get_template_directory() . '/inc/library/fonts/class-font-family.php';
+require get_template_directory() . '/inc/library/fonts/class-fonts.php';
+require get_template_directory() . '/inc/library/fonts/class-font-util.php';
+require get_template_directory() . '/inc/library/fonts/class-font.php';
+
+/**
  * Theme custom logo.
  */
 require get_template_directory() . '/inc/library/custom-logo/class-custom-logo.php';
