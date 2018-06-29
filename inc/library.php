@@ -176,13 +176,19 @@ require get_template_directory() . '/inc/library/footer-navigation/class-footer-
  *
  * @since 1.0.0
  *
+ * @param string $component Optional. If given, the component of that name is returned instead
+ *                          of the main theme class. Default empty string.
  * @return Super_Awesome_Theme_Theme Main theme class instance.
  */
-function super_awesome_theme() {
+function super_awesome_theme( $component = '' ) {
 	static $theme = null;
 
 	if ( null === $theme ) {
 		$theme = new Super_Awesome_Theme_Theme();
+	}
+
+	if ( ! empty( $component ) ) {
+		return $theme->get_component( $component );
 	}
 
 	return $theme;
