@@ -358,7 +358,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 		$data = array(
 			'groups'            => array(),
 			'colors'            => array(),
-			'footerWidgetAreas' => super_awesome_theme()->get_component( 'footer_widget_areas' )->get_widget_area_names(),
+			'footerWidgetAreas' => super_awesome_theme( 'footer_widget_areas' )->get_widget_area_names(),
 		);
 		foreach ( $this->groups as $id => $title ) {
 			$data['groups'][] = array(

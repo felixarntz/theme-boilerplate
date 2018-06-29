@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$footer_widget_areas = super_awesome_theme()->get_component( 'footer_widget_areas' );
+$footer_widget_areas = super_awesome_theme( 'footer_widget_areas' );
 
 if ( ! $footer_widget_areas->should_display() ) {
 	return;

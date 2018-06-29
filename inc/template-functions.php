@@ -57,7 +57,7 @@ function super_awesome_theme_get_template_part( $slug, $name = null, $data = nul
  * @return mixed Value for the setting, or null if setting is not registered.
  */
 function super_awesome_theme_get_setting( $id ) {
-	return super_awesome_theme()->get_component( 'settings' )->get( $id );
+	return super_awesome_theme( 'settings' )->get( $id );
 }
 
 /**
@@ -68,7 +68,7 @@ function super_awesome_theme_get_setting( $id ) {
  * @param string $id Unique string identifier for this widget area.
  */
 function super_awesome_theme_render_widget_area( $id ) {
-	super_awesome_theme()->get_component( 'widgets' )->get_registered_widget_area( $id )->render();
+	super_awesome_theme( 'widgets' )->get_registered_widget_area( $id )->render();
 }
 
 /**
@@ -80,7 +80,7 @@ function super_awesome_theme_render_widget_area( $id ) {
  * @return bool True if the widget area is active, false otherwise.
  */
 function super_awesome_theme_is_widget_area_active( $id ) {
-	return super_awesome_theme()->get_component( 'widgets' )->get_registered_widget_area( $id )->is_active();
+	return super_awesome_theme( 'widgets' )->get_registered_widget_area( $id )->is_active();
 }
 
 /**
@@ -91,7 +91,7 @@ function super_awesome_theme_is_widget_area_active( $id ) {
  * @param string $id Unique string identifier for this menu.
  */
 function super_awesome_theme_render_menu( $id ) {
-	super_awesome_theme()->get_component( 'menus' )->get_registered_menu( $id )->render();
+	super_awesome_theme( 'menus' )->get_registered_menu( $id )->render();
 }
 
 /**
@@ -103,7 +103,7 @@ function super_awesome_theme_render_menu( $id ) {
  * @return bool True if the menu is active, false otherwise.
  */
 function super_awesome_theme_is_menu_active( $id ) {
-	return super_awesome_theme()->get_component( 'menus' )->get_registered_menu( $id )->is_active();
+	return super_awesome_theme( 'menus' )->get_registered_menu( $id )->is_active();
 }
 
 /**
@@ -136,7 +136,7 @@ function super_awesome_theme_use_wrapped_layout() {
  * @return bool True if a page header should be used, false otherwise.
  */
 function super_awesome_theme_use_page_header() {
-	return super_awesome_theme()->get_component( 'content_types' )->should_use_page_header();
+	return super_awesome_theme( 'content_types' )->should_use_page_header();
 }
 
 /**
@@ -153,7 +153,7 @@ function super_awesome_theme_use_post_format_templates( $post = null ) {
 		return false;
 	}
 
-	return super_awesome_theme()->get_component( 'content_types' )->should_use_post_format_templates( $post->post_type );
+	return super_awesome_theme( 'content_types' )->should_use_post_format_templates( $post->post_type );
 }
 
 /**
@@ -170,7 +170,7 @@ function super_awesome_theme_display_post_navigation( $post = null ) {
 		return false;
 	}
 
-	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_navigation( $post->post_type );
+	return super_awesome_theme( 'content_types' )->should_display_post_navigation( $post->post_type );
 }
 
 /**
@@ -187,7 +187,7 @@ function super_awesome_theme_display_post_comments( $post = null ) {
 		return false;
 	}
 
-	if ( ! super_awesome_theme()->get_component( 'content_types' )->should_display_post_comments( $post->post_type ) ) {
+	if ( ! super_awesome_theme( 'content_types' )->should_display_post_comments( $post->post_type ) ) {
 		return false;
 	}
 
@@ -208,7 +208,7 @@ function super_awesome_theme_use_post_excerpt( $post = null ) {
 		return false;
 	}
 
-	return super_awesome_theme()->get_component( 'content_types' )->should_use_post_excerpt( $post->post_type );
+	return super_awesome_theme( 'content_types' )->should_use_post_excerpt( $post->post_type );
 }
 
 /**
@@ -225,7 +225,7 @@ function super_awesome_theme_display_post_date( $post = null ) {
 		return false;
 	}
 
-	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_date( $post->post_type );
+	return super_awesome_theme( 'content_types' )->should_display_post_date( $post->post_type );
 }
 
 /**
@@ -242,7 +242,7 @@ function super_awesome_theme_display_post_author( $post = null ) {
 		return false;
 	}
 
-	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_author( $post->post_type );
+	return super_awesome_theme( 'content_types' )->should_display_post_author( $post->post_type );
 }
 
 /**
@@ -260,7 +260,7 @@ function super_awesome_theme_display_post_taxonomy_terms( $taxonomy, $post = nul
 		return false;
 	}
 
-	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_taxonomy_terms( $taxonomy, $post->post_type );
+	return super_awesome_theme( 'content_types' )->should_display_post_taxonomy_terms( $taxonomy, $post->post_type );
 }
 
 /**
@@ -277,7 +277,7 @@ function super_awesome_theme_display_post_authorbox( $post = null ) {
 		return false;
 	}
 
-	return super_awesome_theme()->get_component( 'content_types' )->should_display_post_authorbox( $post->post_type );
+	return super_awesome_theme( 'content_types' )->should_display_post_authorbox( $post->post_type );
 }
 
 /**
@@ -313,7 +313,7 @@ function super_awesome_theme_display_author_posts_link( $post = null ) {
  * @return bool True if the sidebar should be displayed, false otherwise.
  */
 function super_awesome_theme_should_display_sidebar() {
-	return super_awesome_theme()->get_component( 'sidebar' )->should_display_sidebar();
+	return super_awesome_theme( 'sidebar' )->should_display_sidebar();
 }
 
 /**
@@ -324,7 +324,7 @@ function super_awesome_theme_should_display_sidebar() {
  * @return string The sidebar name.
  */
 function super_awesome_theme_get_sidebar_name() {
-	return super_awesome_theme()->get_component( 'sidebar' )->get_sidebar_name();
+	return super_awesome_theme( 'sidebar' )->get_sidebar_name();
 }
 
 /**
@@ -335,7 +335,7 @@ function super_awesome_theme_get_sidebar_name() {
  * @return string The primary navigation name, either 'primary' or 'primary_df'.
  */
 function super_awesome_theme_get_navigation_name() {
-	return super_awesome_theme()->get_component( 'navbar' )->get_navigation_name();
+	return super_awesome_theme( 'navbar' )->get_navigation_name();
 }
 
 /**
@@ -349,7 +349,7 @@ function super_awesome_theme_get_navigation_name() {
  * @return bool True if the current page should be displayed in distraction-free mode, false otherwise.
  */
 function super_awesome_theme_is_distraction_free() {
-	return super_awesome_theme()->get_component( 'distraction_free_mode' )->is_distraction_free();
+	return super_awesome_theme( 'distraction_free_mode' )->is_distraction_free();
 }
 
 /**
@@ -363,7 +363,7 @@ function super_awesome_theme_is_distraction_free() {
  * @return array|bool Attachment metadata, or false on failure.
  */
 function super_awesome_theme_get_attachment_metadata( $post = null ) {
-	return super_awesome_theme()->get_component( 'content_types' )->attachment_metadata()->get_for_post( $post );
+	return super_awesome_theme( 'content_types' )->attachment_metadata()->get_for_post( $post );
 }
 
 /**
@@ -376,7 +376,7 @@ function super_awesome_theme_get_attachment_metadata( $post = null ) {
  * @return bool True if the attachment metadata value should be displayed for the post, false otherwise.
  */
 function super_awesome_theme_display_attachment_metadata( $field, $post = null ) {
-	return super_awesome_theme()->get_component( 'content_types' )->attachment_metadata()->display_field_for_post( $field, $post );
+	return super_awesome_theme( 'content_types' )->attachment_metadata()->display_field_for_post( $field, $post );
 }
 
 /**
@@ -387,7 +387,7 @@ function super_awesome_theme_display_attachment_metadata( $field, $post = null )
  * @return array Associative array of `$field => $label` pairs.
  */
 function super_awesome_theme_get_attachment_metadata_fields() {
-	return super_awesome_theme()->get_component( 'content_types' )->attachment_metadata()->get_fields();
+	return super_awesome_theme( 'content_types' )->attachment_metadata()->get_fields();
 }
 
 /**
@@ -406,5 +406,5 @@ function super_awesome_theme_get_attachment_metadata_fields() {
  * @return string SVG markup for the icon.
  */
 function super_awesome_theme_get_svg( $icon, $args = array() ) {
-	return super_awesome_theme()->get_component( 'icons' )->get_svg( $icon, $args );
+	return super_awesome_theme( 'icons' )->get_svg( $icon, $args );
 }

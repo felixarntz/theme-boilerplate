@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$navbar = super_awesome_theme()->get_component( 'navbar' );
+$navbar = super_awesome_theme( 'navbar' );
 
 $branding_location = super_awesome_theme_get_setting( 'branding_location' );
 $menu_slug         = $navbar->get_navigation_name();

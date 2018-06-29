@@ -7,7 +7,7 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
-$bottom_bar  = super_awesome_theme()->get_component( 'widgets' )->get_registered_widget_area( 'bottom' );
+$bottom_bar  = super_awesome_theme( 'widgets' )->get_registered_widget_area( 'bottom' );
 $extra_class = super_awesome_theme_get_setting( 'bottom_bar_justify_content' );
 
 ?>

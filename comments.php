@@ -43,7 +43,7 @@ if ( post_password_required() ) {
 		<?php the_comments_navigation(); ?>
 
 		<ol class="comment-list">
-			<?php super_awesome_theme()->get_component( 'comments' )->render_comments(); ?>
+			<?php super_awesome_theme( 'comments' )->render_comments(); ?>
 		</ol><!-- .comment-list -->
 
 		<?php
