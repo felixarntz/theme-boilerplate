@@ -1,13 +1,11 @@
 /**
- * File customize-controls.js.
+ * File widgets.customize-controls.js.
  *
- * Theme Customizer handling for the interface.
+ * Theme Customizer handling for widget controls.
  */
 
 ( ( wp, data ) => {
 	const api = wp.customize;
-
-	data = data || {};
 
 	function updateAvailableWidgets( collection, expanded ) {
 		collection.each( widget => {
@@ -38,4 +36,4 @@
 		}
 	});
 
-} )( window.wp, window.themeCustomizeData );
+} )( window.wp, window.themeWidgetsControlsData );

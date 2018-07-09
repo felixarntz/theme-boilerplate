@@ -305,6 +305,7 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 		switch ( $method ) {
 			case 'ensure_inline_widgets_whitelist':
 			case 'register_customize_controls':
+			case 'register_customize_controls_js':
 				return call_user_func_array( array( $this, $method ), $args );
 			case 'trigger_customizer_init':
 				$this->customizer->add_section( self::CUSTOMIZER_SECTION, array(
@@ -407,15 +408,38 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	protected function register_customize_controls( $customizer ) {
 		$this->customizer = $customizer;
 
-		$controls_script = $this->customizer->get_controls_script();
-		$controls_script->add_data( 'inlineWidgetAreas', $this->inline_widget_areas );
-		$controls_script->add_data( 'inlineWidgets', $this->inline_widgets );
-
 		if ( is_admin() ) {
 			$this->trigger_customizer_init();
 		} else {
 			add_action( 'wp', array( $this, 'trigger_customizer_init' ), 10, 0 );
 		}
+	}
+
+	/**
+	 * Registers scripts for the Customizer controls.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
+	 */
+	protected function register_customize_controls_js( $assets ) {
+		$data = array(
+			'inlineWidgetAreas' => $this->inline_widget_areas,
+			'inlineWidgets'     => $this->inline_widgets,
+		);
+
+		$assets->register_asset( new Super_Awesome_Theme_Script(
+			'super-awesome-theme-widgets-customize-controls',
+			get_theme_file_uri( '/assets/dist/js/widgets.customize-controls.js' ),
+			array(
+				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls', 'wp-i18n' ),
+				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
+				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
+				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
+				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeWidgetsControlsData',
+				Super_Awesome_Theme_Script::PROP_DATA         => $data,
+			)
+		) );
 	}
 
 	/**
@@ -429,5 +453,6 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 
 		$customizer = $this->get_dependency( 'customizer' );
 		$customizer->on_init( array( $this, 'register_customize_controls' ) );
+		$customizer->on_js_controls_init( array( $this, 'register_customize_controls_js' ) );
 	}
 }

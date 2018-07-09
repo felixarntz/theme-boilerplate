@@ -219,7 +219,6 @@ gulp.task( 'lint-js', done => {
 gulp.task( 'compile-js', done => {
 	const files = {
 		theme: './assets/src/js/theme.js',
-		'customize-controls': './assets/src/js/customize-controls.js',
 		'customize-preview': './assets/src/js/customize-preview.js',
 		'bottom-bar.customize-controls': './assets/src/js/bottom-bar.customize-controls.js',
 		'bottom-bar.customize-preview': './assets/src/js/bottom-bar.customize-preview.js',
@@ -240,6 +239,7 @@ gulp.task( 'compile-js', done => {
 		'sticky-elements.customize-preview': './assets/src/js/sticky-elements.customize-preview.js',
 		'top-bar.customize-controls': './assets/src/js/top-bar.customize-controls.js',
 		'top-bar.customize-preview': './assets/src/js/top-bar.customize-preview.js',
+		'widgets.customize-controls': './assets/src/js/widgets.customize-controls.js',
 		'wp-i18n': './assets/src/js/wp-i18n.js',
 	};
 	gulp.src( './assets/src/js/theme.js' )

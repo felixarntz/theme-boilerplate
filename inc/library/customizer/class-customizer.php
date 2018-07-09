@@ -349,28 +349,6 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	}
 
 	/**
-	 * Gets the Customize preview script asset.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return Super_Awesome_Theme_Script Customize preview script.
-	 */
-	public function get_preview_script() {
-		return $this->get_dependency( 'assets' )->get_registered_asset( 'super-awesome-theme-customize-preview' );
-	}
-
-	/**
-	 * Gets the Customize controls script asset.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return Super_Awesome_Theme_Script Customize controls script.
-	 */
-	public function get_controls_script() {
-		return $this->get_dependency( 'assets' )->get_registered_asset( 'super-awesome-theme-customize-controls' );
-	}
-
-	/**
 	 * Magic call method.
 	 *
 	 * Handles the Customizer registration action hook callbacks.
@@ -403,7 +381,6 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 				 */
 				do_action( 'super_awesome_theme_customize_register_controls', $this );
 				break;
-			case 'register_scripts':
 			case 'register_preview_scripts':
 			case 'register_controls_scripts':
 				call_user_func_array( array( $this, $method ), $args );
@@ -418,11 +395,11 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	}
 
 	/**
-	 * Registers the Customizer preview and controls scripts.
+	 * Registers the Customizer preview scripts.
 	 *
 	 * @since 1.0.0
 	 */
-	private function register_scripts() {
+	private function register_preview_scripts() {
 		$assets = $this->get_dependency( 'assets' );
 
 		$assets->register_asset( new Super_Awesome_Theme_Script(
@@ -433,29 +410,8 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
 				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_PREVIEW,
 				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
-				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomizeData',
 			)
 		) );
-
-		$assets->register_asset( new Super_Awesome_Theme_Script(
-			'super-awesome-theme-customize-controls',
-			get_theme_file_uri( '/assets/dist/js/customize-controls.js' ),
-			array(
-				Super_Awesome_Theme_Script::PROP_DEPENDENCIES => array( 'customize-controls' ),
-				Super_Awesome_Theme_Script::PROP_VERSION      => SUPER_AWESOME_THEME_VERSION,
-				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
-				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
-				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeCustomizeData',
-			)
-		) );
-	}
-
-	/**
-	 * Registers the Customizer preview scripts.
-	 *
-	 * @since 1.0.0
-	 */
-	private function register_preview_scripts() {
 
 		/**
 		 * Fires when Customizer preview scripts should be registered.
@@ -464,7 +420,7 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 		 *
 		 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 		 */
-		do_action( 'super_awesome_theme_customize_register_preview_scripts', $this->get_dependency( 'assets' ) );
+		do_action( 'super_awesome_theme_customize_register_preview_scripts', $assets );
 	}
 
 	/**
@@ -519,7 +475,6 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 	 */
 	protected function run_initialization() {
 		add_action( 'customize_register', array( $this, 'trigger_init' ), 10, 1 );
-		add_action( 'after_setup_theme', array( $this, 'register_scripts' ), 10, 0 );
 		add_action( 'customize_preview_init', array( $this, 'register_preview_scripts' ), 0, 0 );
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'register_controls_scripts' ), 0, 0 );
 	}
