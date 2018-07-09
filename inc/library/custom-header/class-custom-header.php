@@ -90,6 +90,8 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 				}
 
 				return $classes;
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

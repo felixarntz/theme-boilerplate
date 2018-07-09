@@ -149,6 +149,8 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 				$classes[] = 'navbar-' . $settings->get( 'navbar_position' );
 
 				return $classes;
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

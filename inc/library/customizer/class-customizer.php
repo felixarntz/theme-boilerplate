@@ -391,6 +391,8 @@ final class Super_Awesome_Theme_Customizer extends Super_Awesome_Theme_Theme_Com
 			case 'partial_blogdescription':
 				bloginfo( 'description' );
 				break;
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

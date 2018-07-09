@@ -164,6 +164,8 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			case 'print_base_color_style_header':
 			case 'print_base_color_style_footer':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

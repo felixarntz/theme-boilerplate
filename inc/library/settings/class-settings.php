@@ -99,7 +99,11 @@ final class Super_Awesome_Theme_Settings extends Super_Awesome_Theme_Theme_Compo
 	 * @param array  $args   Method arguments.
 	 */
 	public function __call( $method, $args ) {
-		if ( 'register_in_customizer' !== $method || empty( $args ) ) {
+		if ( 'register_in_customizer' !== $method ) {
+			throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
+		}
+
+		if ( empty( $args ) ) {
 			return;
 		}
 

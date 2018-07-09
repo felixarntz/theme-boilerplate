@@ -141,6 +141,8 @@ final class Super_Awesome_Theme_Font_Families extends Super_Awesome_Theme_Theme_
 			case 'register_default_families':
 			case 'filter_font_family_stack':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

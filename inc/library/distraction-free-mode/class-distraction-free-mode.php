@@ -82,6 +82,8 @@ final class Super_Awesome_Theme_Distraction_Free_Mode extends Super_Awesome_Them
 
 			return $classes;
 		}
+
+		throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 	}
 
 	/**

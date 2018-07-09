@@ -37,6 +37,8 @@ final class Super_Awesome_Theme_Custom_Logo extends Super_Awesome_Theme_Theme_Co
 		switch ( $method ) {
 			case 'register_feature':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

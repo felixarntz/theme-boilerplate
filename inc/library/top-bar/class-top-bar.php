@@ -78,6 +78,8 @@ class Super_Awesome_Theme_Top_Bar extends Super_Awesome_Theme_Theme_Component_Ba
 			case 'register_customize_preview_js':
 			case 'print_color_style':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

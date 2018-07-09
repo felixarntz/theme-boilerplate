@@ -102,6 +102,8 @@ class Super_Awesome_Theme_Sticky_Elements extends Super_Awesome_Theme_Theme_Comp
 			case 'register_customize_preview_js':
 			case 'add_main_script_data':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

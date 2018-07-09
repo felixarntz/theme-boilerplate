@@ -97,6 +97,8 @@ final class Super_Awesome_Theme_Theme_Support extends Super_Awesome_Theme_Theme_
 			case 'set_content_width':
 			case 'register_default_features':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

@@ -162,6 +162,8 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			case 'register_base_fonts_general':
 			case 'print_base_font_style_general':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

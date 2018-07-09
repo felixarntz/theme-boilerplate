@@ -146,6 +146,8 @@ final class Super_Awesome_Theme_Social_Navigation extends Super_Awesome_Theme_Th
 			case 'add_menu_social_icons':
 			case 'print_color_style':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

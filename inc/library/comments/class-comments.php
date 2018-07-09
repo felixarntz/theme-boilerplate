@@ -123,6 +123,8 @@ class Super_Awesome_Theme_Comments extends Super_Awesome_Theme_Theme_Component_B
 			case 'add_main_script_data':
 			case 'maybe_enqueue_comment_reply_script':
 				return call_user_func_array( array( $this, $method ), $args );
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

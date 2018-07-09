@@ -357,6 +357,8 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 				 */
 				do_action( 'super_awesome_theme_register_widgets', $this );
 				break;
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 

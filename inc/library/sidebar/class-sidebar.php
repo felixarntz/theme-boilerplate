@@ -173,6 +173,8 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 				$classes[] = 'sidebar-' . $settings->get( 'sidebar_size' );
 
 				return $classes;
+			default:
+				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
 
