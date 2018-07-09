@@ -451,7 +451,6 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 	 */
 	protected function run_initialization() {
 		add_action( 'widgets_init', array( $this, 'trigger_init' ), 10, 0 );
-		add_filter( 'sidebars_widgets', array( $this, 'ensure_inline_widgets_whitelist' ), 10, 1 );
 
 		$customizer = $this->get_dependency( 'customizer' );
 		$customizer->on_init( array( $this, 'register_customize_controls' ) );

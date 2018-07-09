@@ -74,7 +74,7 @@ import getCustomizeAction from './customize/get-customize-action';
 			let hasNotification      = false;
 
 			control.onChangeActive = function( active ) {
-				var noticeCode = 'blog_sidebar_not_available';
+				const noticeCode = 'blog_sidebar_not_available';
 
 				if ( active ) {
 					if ( hasNotification ) {
