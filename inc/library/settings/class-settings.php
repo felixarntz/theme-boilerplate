@@ -97,9 +97,12 @@ final class Super_Awesome_Theme_Settings extends Super_Awesome_Theme_Theme_Compo
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		if ( 'register_in_customizer' !== $method ) {
+			/* translators: %s: method name */
 			throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 

@@ -64,6 +64,8 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
@@ -91,6 +93,7 @@ final class Super_Awesome_Theme_Custom_Header extends Super_Awesome_Theme_Theme_
 
 				return $classes;
 			default:
+				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}

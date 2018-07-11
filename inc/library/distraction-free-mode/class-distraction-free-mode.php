@@ -67,6 +67,8 @@ final class Super_Awesome_Theme_Distraction_Free_Mode extends Super_Awesome_Them
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		if ( 'add_distraction_free_body_class' === $method ) {
@@ -83,6 +85,7 @@ final class Super_Awesome_Theme_Distraction_Free_Mode extends Super_Awesome_Them
 			return $classes;
 		}
 
+		/* translators: %s: method name */
 		throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 	}
 

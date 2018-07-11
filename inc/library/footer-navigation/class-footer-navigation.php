@@ -45,12 +45,15 @@ final class Super_Awesome_Theme_Footer_Navigation extends Super_Awesome_Theme_Th
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
 			case 'register_menu':
 				return call_user_func_array( array( $this, $method ), $args );
 			default:
+				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}

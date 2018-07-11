@@ -148,6 +148,8 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
@@ -174,6 +176,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 
 				return $classes;
 			default:
+				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
@@ -255,9 +258,9 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
 	 */
 	protected function register_customize_partial( $customizer ) {
-
-		// TODO: Implement these active callbacks via JavaScript. Then remove this method.
-		/*$customizer->add_control( 'sidebar_mode', array(
+		/*
+		TODO: Implement these active callbacks via JavaScript. Then remove this method.
+		$customizer->add_control( 'sidebar_mode', array(
 			Super_Awesome_Theme_Customize_Control::PROP_SECTION         => Super_Awesome_Theme_Widgets::CUSTOMIZER_SECTION,
 			Super_Awesome_Theme_Customize_Control::PROP_TITLE           => __( 'Sidebar Mode', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION     => __( 'Specify if and how the sidebar should be displayed.', 'super-awesome-theme' ),
@@ -281,7 +284,8 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 			Super_Awesome_Theme_Customize_Control::PROP_DESCRIPTION     => __( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Customize_Control::PROP_TYPE            => Super_Awesome_Theme_Customize_Control::TYPE_CHECKBOX,
 			Super_Awesome_Theme_Customize_Control::PROP_ACTIVE_CALLBACK => array( $this, 'allow_display_blog_sidebar' ),
-		) );*/
+		) );
+		*/
 
 		$customizer->add_partial( 'blog_sidebar_enabled', array(
 			Super_Awesome_Theme_Customize_Partial::PROP_SELECTOR            => '#sidebar',

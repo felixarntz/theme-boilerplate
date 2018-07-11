@@ -19,7 +19,10 @@ if ( post_password_required() ) {
 
 <div id="comments" class="comments-area">
 
-	<?php if ( have_comments() ) : ?>
+	<?php
+
+	if ( have_comments() ) {
+		?>
 		<h2 class="comments-title">
 			<?php
 			$comment_count = (int) get_comments_number();
@@ -55,10 +58,10 @@ if ( post_password_required() ) {
 			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'super-awesome-theme' ); ?></p>
 			<?php
 		}
-
-	endif;
+	}
 
 	comment_form();
+
 	?>
 
 </div><!-- #comments -->

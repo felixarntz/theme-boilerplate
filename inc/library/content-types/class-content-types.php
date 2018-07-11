@@ -48,7 +48,7 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 					return 'post';
 				}
 				return 'page';
-			case is_singular();
+			case is_singular():
 				return get_post_type();
 			case is_home():
 				return 'post';
@@ -259,6 +259,8 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
@@ -317,6 +319,7 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 				get_template_part( 'template-parts/content/' . str_replace( '_', '-', substr( $method, 8 ) ), $post->post_type );
 				break;
 			default:
+				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
@@ -501,6 +504,8 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 				foreach ( $this->attachment_metadata->get_fields() as $field => $label ) {
 					$post_type_data['extraFields'][] = array(
 						'slug'  => 'attachment_show_metadata_' . $field,
+
+						/* translators: %s: field label */
 						'label' => sprintf( _x( 'Show %s?', 'attachment metadata', 'super-awesome-theme' ), $label ),
 					);
 				}

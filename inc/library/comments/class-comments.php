@@ -116,6 +116,8 @@ class Super_Awesome_Theme_Comments extends Super_Awesome_Theme_Theme_Component_B
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
@@ -124,6 +126,7 @@ class Super_Awesome_Theme_Comments extends Super_Awesome_Theme_Theme_Component_B
 			case 'maybe_enqueue_comment_reply_script':
 				return call_user_func_array( array( $this, $method ), $args );
 			default:
+				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}

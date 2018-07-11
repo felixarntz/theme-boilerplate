@@ -95,7 +95,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	public function get_navbar_position_choices() {
 		return array(
 			'above-header' => _x( 'Top of the page, above header', 'navbar position', 'super-awesome-theme' ),
-			'below-header' => _x( 'Top of the page, below header', 'super-awesome-theme' ),
+			'below-header' => _x( 'Top of the page, below header', 'navbar position', 'super-awesome-theme' ),
 			'left'         => _x( 'Left side of the page', 'navbar position', 'super-awesome-theme' ),
 			'right'        => _x( 'Right side of the page', 'navbar position', 'super-awesome-theme' ),
 		);
@@ -124,6 +124,8 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
@@ -150,6 +152,7 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 
 				return $classes;
 			default:
+				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}

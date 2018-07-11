@@ -146,6 +146,8 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
@@ -165,6 +167,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			case 'print_base_color_style_footer':
 				return call_user_func_array( array( $this, $method ), $args );
 			default:
+				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
@@ -197,7 +200,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 		$this->print_color_style_css();
 		$style = ob_get_clean();
 
-		$style = preg_replace( '/^(\s*)([a-z0-9\-\.\#\[\]"=: >+]+)(,| \{)$/mi', "$1.edit-post-visual-editor $2$3", $style );
+		$style = preg_replace( '/^(\s*)([a-z0-9\-\.\#\[\]"=: >+]+)(,| \{)$/mi', '$1.edit-post-visual-editor $2$3', $style );
 
 		$stylesheet->add_inline_style( $style, 'after' );
 	}

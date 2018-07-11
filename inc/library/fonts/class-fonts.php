@@ -150,6 +150,8 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 	 *
 	 * @param string $method Method name.
 	 * @param array  $args   Method arguments.
+	 *
+	 * @throws BadMethodCallException Thrown when method name is invalid.
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
@@ -163,6 +165,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			case 'print_base_font_style_general':
 				return call_user_func_array( array( $this, $method ), $args );
 			default:
+				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
 	}
@@ -195,7 +198,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 		$this->print_font_style_css();
 		$style = ob_get_clean();
 
-		$style = preg_replace( '/^(\s*)([a-z0-9\-\.\#\[\]"=: >+]+)(,| \{)$/mi', "$1.edit-post-visual-editor $2$3", $style );
+		$style = preg_replace( '/^(\s*)([a-z0-9\-\.\#\[\]"=: >+]+)(,| \{)$/mi', '$1.edit-post-visual-editor $2$3', $style );
 
 		$stylesheet->add_inline_style( $style, 'after' );
 	}
@@ -392,7 +395,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			input,
 			select,
 			textarea {
-				font-family: <?php echo str_replace( '&quot;', '"', esc_attr( $base_font['family'] ) ); ?>;
+				font-family: <?php echo esc_attr( str_replace( '&quot;', '"', esc_attr( $base_font['family'] ) ) ); ?>;
 				font-weight: <?php echo esc_attr( $base_font['weight'] ); ?>;
 				font-size: <?php echo esc_attr( '' . $base_font['size'] . 'rem' ); ?>;
 			}
@@ -407,7 +410,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			h4,
 			h5,
 			h6 {
-				font-family: <?php echo str_replace( '&quot;', '"', esc_attr( $heading_font['family'] ) ); ?>;
+				font-family: <?php echo esc_attr( str_replace( '&quot;', '"', esc_attr( $heading_font['family'] ) ) ); ?>;
 				font-weight: <?php echo esc_attr( $heading_font['weight'] ); ?>;
 			}
 
