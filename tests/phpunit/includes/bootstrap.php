@@ -16,7 +16,13 @@ $needs_custom_theme_dir = false;
 
 $theme_slug = false !== getenv( 'WP_CURRENT_THEME' ) ? getenv( 'WP_CURRENT_THEME' ) : 'super-awesome-theme';
 
-if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
+if ( false !== getenv( 'WP_TESTS_DIR' ) ) {
+	$test_root = getenv( 'WP_TESTS_DIR' );
+
+	if ( ! file_exists( dirname( dirname( $test_root ) ) . '/src/wp-content/themes/' . $theme_slug . '/functions.php' ) ) {
+		$needs_custom_theme_dir = true;
+	}
+} elseif ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 	$test_root = getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit';
 
 	if ( ! file_exists( getenv( 'WP_DEVELOP_DIR' ) . '/src/wp-content/themes/' . $theme_slug . '/functions.php' ) ) {
