@@ -419,7 +419,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			);
 		}
 
-		$theme_support->add_feature( new Super_Awesome_Theme_List_Theme_Feature( 'editor-color-palette', array_values( $color_palette ) ) );
+		$theme_support->add_feature( new Super_Awesome_Theme_List_Theme_Feature( 'editor-color-palette', array_values( $color_palette ), true ) );
 	}
 
 	/**
