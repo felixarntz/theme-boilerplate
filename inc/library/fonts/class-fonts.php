@@ -395,7 +395,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			input,
 			select,
 			textarea {
-				font-family: <?php echo esc_attr( str_replace( '&quot;', '"', esc_attr( $base_font['family'] ) ) ); ?>;
+				font-family: <?php echo str_replace( '&quot;', '"', esc_attr( $base_font['family'] ) ); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>;
 				font-weight: <?php echo esc_attr( $base_font['weight'] ); ?>;
 				font-size: <?php echo esc_attr( '' . $base_font['size'] . 'rem' ); ?>;
 			}
@@ -410,7 +410,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			h4,
 			h5,
 			h6 {
-				font-family: <?php echo esc_attr( str_replace( '&quot;', '"', esc_attr( $heading_font['family'] ) ) ); ?>;
+				font-family: <?php echo str_replace( '&quot;', '"', esc_attr( $heading_font['family'] ) ); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>;
 				font-weight: <?php echo esc_attr( $heading_font['weight'] ); ?>;
 			}
 

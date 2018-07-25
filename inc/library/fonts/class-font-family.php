@@ -12,7 +12,7 @@
  *
  * @since 1.0.0
  */
-final class Super_Awesome_Theme_Font_Family {
+class Super_Awesome_Theme_Font_Family {
 
 	/**
 	 * ID property name.
@@ -36,11 +36,25 @@ final class Super_Awesome_Theme_Font_Family {
 	const PROP_STACK = 'stack';
 
 	/**
+	 * Weights property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_WEIGHTS = 'weights';
+
+	/**
 	 * Group property name.
 	 *
 	 * @since 1.0.0
 	 */
 	const PROP_GROUP = 'group';
+
+	/**
+	 * Include property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_INCLUDE = 'include';
 
 	/**
 	 * System fonts group name.
@@ -109,12 +123,28 @@ final class Super_Awesome_Theme_Font_Family {
 	protected $stack;
 
 	/**
+	 * Supported font weights.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	protected $weights;
+
+	/**
 	 * Font family group.
 	 *
 	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $group;
+
+	/**
+	 * Whether to include this font family in the dropdown by default.
+	 *
+	 * @since 1.0.0
+	 * @var bool
+	 */
+	protected $include;
 
 	/**
 	 * Constructor.
@@ -219,9 +249,11 @@ final class Super_Awesome_Theme_Font_Family {
 	 */
 	protected function get_defaults() {
 		return array(
-			self::PROP_LABEL => '',
-			self::PROP_STACK => array(),
-			self::PROP_GROUP => self::GROUP_SANS_SERIF,
+			self::PROP_LABEL   => '',
+			self::PROP_STACK   => array(),
+			self::PROP_WEIGHTS => array( '400' ),
+			self::PROP_GROUP   => self::GROUP_SANS_SERIF,
+			self::PROP_INCLUDE => true,
 		);
 	}
 }

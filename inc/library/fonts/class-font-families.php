@@ -161,96 +161,118 @@ final class Super_Awesome_Theme_Font_Families extends Super_Awesome_Theme_Theme_
 
 			// System fonts.
 			new Super_Awesome_Theme_Font_Family( 'system', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'System Font', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SYSTEM,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'System Font', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '100', '200', '400', '500', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SYSTEM,
 			) ),
 
 			// Sans-serif fonts.
 			new Super_Awesome_Theme_Font_Family( 'arial', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Arial', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Arial', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Arial', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Arial', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'helvetica_neue', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Helvetica Neue', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Helvetica Neue', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '100', '200', '400', '500', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'libre_franklin', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Libre Franklin', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Libre Franklin', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Libre Franklin', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Libre Franklin', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '100', '200', '400', '500', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'tahoma', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Tahoma', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Tahoma', 'Geneva', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Tahoma', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Tahoma', 'Geneva', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'trebuchet_ms', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Trebuchet MS', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Trebuchet MS', 'Helvetica', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Trebuchet MS', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Trebuchet MS', 'Helvetica', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'verdana', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Verdana', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Verdana', 'Geneva', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Verdana', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Verdana', 'Geneva', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
 			) ),
 
 			// Serif fonts.
 			new Super_Awesome_Theme_Font_Family( 'georgia', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Georgia', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Georgia', 'serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Georgia', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Georgia', 'serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SERIF,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'palatino_linotype', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Palatino Linotype', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Palatino Linotype', 'Book Antiqua', 'Palatino', 'serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Palatino Linotype', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Palatino Linotype', 'Book Antiqua', 'Palatino', 'serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SERIF,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'times_new_roman', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Times New Roman', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Times New Roman', 'Times', 'serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SERIF,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Times New Roman', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Times New Roman', 'Times', 'serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_SERIF,
 			) ),
 
 			// Display fonts.
 			new Super_Awesome_Theme_Font_Family( 'impact', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Impact', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Impact', 'Charcoal', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_DISPLAY,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Impact', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Impact', 'Charcoal', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_DISPLAY,
 			) ),
 
 			// Handwriting fonts.
 			new Super_Awesome_Theme_Font_Family( 'comic_sans_ms', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Comic Sans MS', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Comic Sans MS', 'cursive', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_HANDWRITING,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Comic Sans MS', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Comic Sans MS', 'cursive', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_HANDWRITING,
 			) ),
 
 			// Monospace fonts.
 			new Super_Awesome_Theme_Font_Family( 'consolas', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Consolas', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', 'monospace' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Consolas', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', 'monospace' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'courier_new', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Courier New', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Courier New', 'Courier', 'monospace' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Courier New', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Courier New', 'Courier', 'monospace' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400', '700' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'lucida_console', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Lucida Console', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Lucida Console', 'Monaco', 'monospace' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Lucida Console', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Lucida Console', 'Monaco', 'monospace' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE,
 			) ),
 			new Super_Awesome_Theme_Font_Family( 'monaco', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Monaco', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', 'monospace' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE,
+				Super_Awesome_Theme_Font_Family::PROP_LABEL   => _x( 'Monaco', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK   => array( 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', 'monospace' ),
+				Super_Awesome_Theme_Font_Family::PROP_WEIGHTS => array( '400' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP   => Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE,
 			) ),
 		);
+
+		$apis = array( new Super_Awesome_Theme_Google_Webfont_API() );
+
+		foreach ( $apis as $api ) {
+			$families = array_merge( $families, $api->get_families() );
+		}
 
 		array_walk( $families, array( $this, 'register_family' ) );
 	}

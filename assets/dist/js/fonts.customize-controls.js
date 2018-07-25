@@ -123,6 +123,8 @@
 
 		(function (wp, data, _, $) {
 			var api = wp.customize;
+			var __ = wp.i18n.__;
+
 
 			api.SuperAwesomeThemeFontControl = api.Control.extend({
 				ready: function ready() {
@@ -133,8 +135,25 @@
 					var $weightSelect = this.container.find('[data-setting-property="weight"]');
 					var $sizeInput = this.container.find('[data-setting-property="size"]');
 
+					this.currentFontStack = new api.Value('');
+					this.currentFontWeights = new api.Value(['400']);
+
 					this.initializeFontFamilySelect($familySelect);
 					this.initializeFontWeightSelect($weightSelect);
+
+					this.currentFontWeights.bind(function () {
+						var currentFontWeights = _this.currentFontWeights.get();
+						var settingValue = _this.setting.get();
+
+						$weightSelect.selectWoo('destroy');
+						$weightSelect.html('');
+
+						_this.initializeFontWeightSelect($weightSelect);
+
+						if (!currentFontWeights.includes('' + settingValue.weight)) {
+							$weightSelect.val(currentFontWeights[0]).trigger('change');
+						}
+					});
 
 					if (value.family && value.family.length) {
 						$familySelect.val(value.family).trigger('change');
@@ -159,6 +178,10 @@
 					$sizeInput.on('change input', function () {
 						_this.saveValue('size', $sizeInput.val());
 					});
+
+					this.setting.bind(function () {
+						console.log(_this.setting.get()); // eslint-disable-line no-console
+					});
 				},
 
 				saveValue: function saveValue(prop, propVal) {
@@ -173,41 +196,105 @@
 					var _this2 = this;
 
 					var selectData = {};
+					var includedData = {};
+					var excludedData = {};
 					var settingValue = this.setting.get();
-
-					this.currentFontStack = '';
 
 					data.fontFamilyGroups.forEach(function (group) {
 						selectData[group.id] = {
+							id: group.id,
+							text: group.label,
+							children: []
+						};
+
+						includedData[group.id] = {
+							id: group.id,
+							text: group.label,
+							children: []
+						};
+
+						excludedData[group.id] = {
+							id: group.id,
 							text: group.label,
 							children: []
 						};
 					});
 
 					data.fontFamilies.forEach(function (family) {
+						var dataset = {
+							id: family.id,
+							text: family.label,
+							fontStack: family.stackString.replace(/"/g, '\''),
+							fontWeights: family.weights
+						};
+
+						if (family.files) {
+							dataset.fontFiles = family.files;
+						}
+
 						if (!selectData[family.group]) {
 							return;
 						}
 
-						if (settingValue === family.id) {
-							_this2.currentFontStack = family.stackString.replace(/"/g, '\'');
+						selectData[family.group].children.push(dataset);
+
+						if (settingValue.family === family.id) {
+							_this2.currentFontStack.set(family.stackString.replace(/"/g, '\''));
+							_this2.currentFontWeights.set(family.weights);
 						}
 
-						selectData[family.group].children.push({
-							id: family.id,
-							text: family.label,
-							fontStack: family.stackString.replace(/"/g, '\'')
-						});
+						if (settingValue.family === family.id || family.include) {
+							includedData[family.group].children.push(dataset);
+							return;
+						}
+
+						excludedData[family.group].children.push(dataset);
 					});
 
 					$element.selectWoo({
 						data: Object.values(selectData),
+						matcher: function matcher(params, data) {
+							var term = $.trim(params.term);
+							var regexp = new RegExp(term, 'i');
+							var filteredData = {};
+
+							if (!data.id || !data.text || !data.children) {
+								return null;
+							}
+
+							filteredData.id = data.id;
+							filteredData.text = data.text;
+							filteredData.children = [];
+
+							if (term.length > 3) {
+								filteredData.children = filteredData.children.concat(includedData[data.id].children.filter(function (dataset) {
+									return !!dataset.id.match(regexp);
+								}));
+								filteredData.children = filteredData.children.concat(excludedData[data.id].children.filter(function (dataset) {
+									return !!dataset.id.match(regexp);
+								}));
+							} else {
+								filteredData.children = filteredData.children.concat(includedData[data.id].children);
+							}
+
+							if (!filteredData.children.length) {
+								return null;
+							}
+
+							return filteredData;
+						},
 						templateResult: function templateResult(state) {
+							var extraIndicator = '';
+
 							if (!state.id || !state.fontStack) {
 								return state.text;
 							}
 
-							return $('<span style="font-family:' + state.fontStack + ';">' + state.text + '</span>');
+							if (state.fontFiles) {
+								extraIndicator += ' <small>' + __('(Web Font)', 'super-awesome-theme') + '</small>';
+							}
+
+							return $('<span style="font-family:' + state.fontStack + ';">' + state.text + '</span>' + extraIndicator);
 						}
 					});
 
@@ -216,30 +303,39 @@
 							return;
 						}
 
-						_this2.currentFontStack = event.params.data.fontStack;
+						_this2.currentFontStack.set(event.params.data.fontStack);
+						_this2.currentFontWeights.set(event.params.data.fontWeights);
 					});
 				},
 
 				initializeFontWeightSelect: function initializeFontWeightSelect($element) {
 					var _this3 = this;
 
-					var selectData = [];
+					function getSelectData(currentFontWeights) {
+						var selectData = [];
 
-					data.fontWeights.forEach(function (weight) {
-						selectData.push({
-							id: weight.id,
-							text: weight.label
+						data.fontWeights.forEach(function (weight) {
+							if (!currentFontWeights.includes('' + weight.id)) {
+								return;
+							}
+
+							selectData.push({
+								id: weight.id,
+								text: weight.label
+							});
 						});
-					});
+
+						return selectData;
+					}
 
 					$element.selectWoo({
-						data: selectData,
+						data: getSelectData(this.currentFontWeights.get()),
 						templateResult: function templateResult(state) {
 							if (!state.id) {
 								return state.text;
 							}
 
-							return $('<span style="font-family:' + _this3.currentFontStack + ';font-weight:' + state.id + ';">' + state.text + '</span>');
+							return $('<span style="font-family:' + _this3.currentFontStack.get() + ';font-weight:' + state.id + ';">' + state.text + '</span>');
 						}
 					});
 				}
