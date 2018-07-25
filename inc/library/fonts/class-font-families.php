@@ -121,10 +121,12 @@ final class Super_Awesome_Theme_Font_Families extends Super_Awesome_Theme_Theme_
 	 */
 	public function get_groups() {
 		return array(
-			Super_Awesome_Theme_Font_Family::GROUP_SYSTEM     => _x( 'System', 'font group', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF => _x( 'Sans-Serif', 'font group', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Font_Family::GROUP_SERIF      => _x( 'Serif', 'font group', 'super-awesome-theme' ),
-			Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE  => _x( 'Monospace', 'font group', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Font_Family::GROUP_SYSTEM      => _x( 'System', 'font group', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF  => _x( 'Sans-Serif', 'font group', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Font_Family::GROUP_SERIF       => _x( 'Serif', 'font group', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Font_Family::GROUP_DISPLAY     => _x( 'Display', 'font group', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Font_Family::GROUP_HANDWRITING => _x( 'Handwriting', 'font group', 'super-awesome-theme' ),
+			Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE   => _x( 'Monospace', 'font group', 'super-awesome-theme' ),
 		);
 	}
 
@@ -170,16 +172,6 @@ final class Super_Awesome_Theme_Font_Families extends Super_Awesome_Theme_Theme_
 				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Arial', 'sans-serif' ),
 				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
 			) ),
-			new Super_Awesome_Theme_Font_Family( 'comic_sans_ms', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Comic Sans MS', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Comic Sans MS', 'cursive', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
-			) ),
-			new Super_Awesome_Theme_Font_Family( 'impact', array(
-				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Impact', 'font family', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Impact', 'Charcoal', 'sans-serif' ),
-				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SANS_SERIF,
-			) ),
 			new Super_Awesome_Theme_Font_Family( 'helvetica_neue', array(
 				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Helvetica Neue', 'font family', 'super-awesome-theme' ),
 				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif' ),
@@ -221,6 +213,20 @@ final class Super_Awesome_Theme_Font_Families extends Super_Awesome_Theme_Theme_
 				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Times New Roman', 'font family', 'super-awesome-theme' ),
 				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Times New Roman', 'Times', 'serif' ),
 				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_SERIF,
+			) ),
+
+			// Display fonts.
+			new Super_Awesome_Theme_Font_Family( 'impact', array(
+				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Impact', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Impact', 'Charcoal', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_DISPLAY,
+			) ),
+
+			// Handwriting fonts.
+			new Super_Awesome_Theme_Font_Family( 'comic_sans_ms', array(
+				Super_Awesome_Theme_Font_Family::PROP_LABEL => _x( 'Comic Sans MS', 'font family', 'super-awesome-theme' ),
+				Super_Awesome_Theme_Font_Family::PROP_STACK => array( 'Comic Sans MS', 'cursive', 'sans-serif' ),
+				Super_Awesome_Theme_Font_Family::PROP_GROUP => Super_Awesome_Theme_Font_Family::GROUP_HANDWRITING,
 			) ),
 
 			// Monospace fonts.

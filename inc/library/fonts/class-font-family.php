@@ -54,7 +54,7 @@ final class Super_Awesome_Theme_Font_Family {
 	 *
 	 * @since 1.0.0
 	 */
-	const GROUP_SANS_SERIF = 'sans_serif';
+	const GROUP_SANS_SERIF = 'sans-serif';
 
 	/**
 	 * Serif group name.
@@ -62,6 +62,20 @@ final class Super_Awesome_Theme_Font_Family {
 	 * @since 1.0.0
 	 */
 	const GROUP_SERIF = 'serif';
+
+	/**
+	 * Display group name.
+	 *
+	 * @since 1.0.0
+	 */
+	const GROUP_DISPLAY = 'display';
+
+	/**
+	 * Handwriting group name.
+	 *
+	 * @since 1.0.0
+	 */
+	const GROUP_HANDWRITING = 'handwriting';
 
 	/**
 	 * Monospace group name.
