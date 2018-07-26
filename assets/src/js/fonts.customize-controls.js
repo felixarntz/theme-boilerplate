@@ -7,8 +7,7 @@
 import getCustomizeAction from './customize/get-customize-action';
 
 ( ( wp, data, _, $ ) => {
-	const api    = wp.customize;
-	const { __ } = wp.i18n;
+	const api = wp.customize;
 
 	api.SuperAwesomeThemeFontControl = api.Control.extend({
 		ready: function() {
@@ -104,8 +103,8 @@ import getCustomizeAction from './customize/get-customize-action';
 					fontWeights: family.weights,
 				};
 
-				if ( family.files ) {
-					dataset.fontFiles = family.files;
+				if ( family.api ) {
+					dataset.fontApi = family.api;
 				}
 
 				if ( ! selectData[ family.group ] ) {
@@ -166,8 +165,8 @@ import getCustomizeAction from './customize/get-customize-action';
 						return state.text;
 					}
 
-					if ( state.fontFiles ) {
-						extraIndicator += ' <small>' + __( '(Web Font)', 'super-awesome-theme' ) + '</small>';
+					if ( state.fontApi && data.apis[ state.fontApi ] ) {
+						extraIndicator += ' <small>(' + data.apis[ state.fontApi ] + ')</small>';
 					}
 
 					return $( '<span style="font-family:' + state.fontStack + ';">' + state.text + '</span>' + extraIndicator );

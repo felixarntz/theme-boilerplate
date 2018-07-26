@@ -31,6 +31,25 @@ final class Super_Awesome_Theme_Font_Families extends Super_Awesome_Theme_Theme_
 	private $sorted_dirty = false;
 
 	/**
+	 * Web font API instances.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	private $apis = array();
+
+	/**
+	 * Constructor.
+	 *
+	 * Instantiates the web font APIs.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct() {
+		$this->apis = array( new Super_Awesome_Theme_Google_Webfont_API() );
+	}
+
+	/**
 	 * Registers a theme font family.
 	 *
 	 * @since 1.0.0
@@ -128,6 +147,17 @@ final class Super_Awesome_Theme_Font_Families extends Super_Awesome_Theme_Theme_
 			Super_Awesome_Theme_Font_Family::GROUP_HANDWRITING => _x( 'Handwriting', 'font group', 'super-awesome-theme' ),
 			Super_Awesome_Theme_Font_Family::GROUP_MONOSPACE   => _x( 'Monospace', 'font group', 'super-awesome-theme' ),
 		);
+	}
+
+	/**
+	 * Gets the web font API instances available.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array List of Super_Awesome_Theme_Webfont_API instances.
+	 */
+	public function get_webfont_apis() {
+		return $this->apis;
 	}
 
 	/**
@@ -268,9 +298,7 @@ final class Super_Awesome_Theme_Font_Families extends Super_Awesome_Theme_Theme_
 			) ),
 		);
 
-		$apis = array( new Super_Awesome_Theme_Google_Webfont_API() );
-
-		foreach ( $apis as $api ) {
+		foreach ( $this->apis as $api ) {
 			$families = array_merge( $families, $api->get_families() );
 		}
 

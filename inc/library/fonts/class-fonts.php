@@ -65,9 +65,10 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 	public function get( $id ) {
 		if ( ! isset( $this->fonts[ $id ] ) ) {
 			return array(
-				'family' => '',
-				'weight' => '400',
-				'size'   => 1.0,
+				'family'       => '',
+				'weight'       => '400',
+				'size'         => 1.0,
+				'family_stack' => '',
 			);
 		}
 
@@ -155,6 +156,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 	 */
 	public function __call( $method, $args ) {
 		switch ( $method ) {
+			case 'load_webfonts':
 			case 'print_font_style':
 			case 'add_block_editor_font_style':
 			case 'print_font_style_css':
@@ -165,9 +167,93 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			case 'print_base_font_style_general':
 				return call_user_func_array( array( $this, $method ), $args );
 			default:
+				$font_families = $this->get_dependency( 'font_families' );
+				foreach ( $font_families->get_webfont_apis() as $api ) {
+					$slug = $api->get_slug();
+
+					if ( 'partial_webfont_loader_' . $slug === $method ) {
+						$webfonts = $this->group_webfonts( $this->fonts );
+						$fonts    = isset( $webfonts[ $slug ] ) ? $webfonts[ $slug ] : array();
+
+						$this->load_webfonts_for_api( $api, $fonts );
+						return;
+					}
+				}
+
 				/* translators: %s: method name */
 				throw new BadMethodCallException( sprintf( __( 'Call to undefined method %s', 'super-awesome-theme' ), __CLASS__ . '::' . $method . '()' ) );
 		}
+	}
+
+	/**
+	 * Loads the web fonts needed.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function load_webfonts() {
+		$font_families = $this->get_dependency( 'font_families' );
+
+		$webfonts = $this->group_webfonts( $this->fonts );
+
+		foreach ( $font_families->get_webfont_apis() as $api ) {
+			$slug  = $api->get_slug();
+			$fonts = isset( $webfonts[ $slug ] ) ? $webfonts[ $slug ] : array();
+
+			$this->load_webfonts_for_api( $api, $fonts );
+		}
+	}
+
+	/**
+	 * Loads given web fonts for a given API.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Super_Awesome_Theme_Webfont_API $api   Web font API instance.
+	 * @param array                           $fonts List of fonts to load.
+	 */
+	protected function load_webfonts_for_api( $api, array $fonts ) {
+		$id_attr = 'super-awesome-theme-' . $api->get_slug() . '-fonts-css';
+
+		$api->load_fonts( $id_attr, $fonts );
+	}
+
+	/**
+	 * Groups font values by their web font API.
+	 *
+	 * Fonts that aren't web fonts are excluded.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $fonts List of Super_Awesome_Theme_Font instances.
+	 * @return array Associative array of $api_slug => $values pairs, where $values is a list of
+	 *               associative arrays containing a `family` key with the font family instance,
+	 *               and a `weight` key with the desired font weight.
+	 */
+	protected function group_webfonts( $fonts ) {
+		$font_families = $this->get_dependency( 'font_families' );
+
+		$webfonts = array();
+
+		foreach ( $fonts as $font ) {
+			$value = $font->get_value();
+
+			if ( ! strpos( $value['family'], ':' ) ) {
+				continue;
+			}
+
+			list( $api_slug, $family ) = explode( ':', $value['family'], 2 );
+
+			if ( ! isset( $webfonts[ $api_slug ] ) ) {
+				$webfonts[ $api_slug ] = array();
+			}
+
+			$webfonts[ $api_slug ][] = array(
+				'family' => $font_families->get_registered_family( $value['family'] ),
+				'weight' => $value['weight'],
+			);
+		}
+
+		return $webfonts;
 	}
 
 	/**
@@ -276,6 +362,19 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 				Super_Awesome_Theme_Customize_Partial::PROP_CONTAINER_INCLUSIVE => false,
 				Super_Awesome_Theme_Customize_Partial::PROP_FALLBACK_REFRESH    => false,
 			) );
+
+			$font_families = $this->get_dependency( 'font_families' );
+			foreach ( $font_families->get_webfont_apis() as $api ) {
+				$slug = $api->get_slug();
+
+				$customizer->add_partial( 'super_awesome_theme_webfont_loader_' . $slug, array(
+					Super_Awesome_Theme_Customize_Partial::PROP_SETTINGS            => $partial_fonts,
+					Super_Awesome_Theme_Customize_Partial::PROP_SELECTOR            => '#super-awesome-theme-' . $slug . '-fonts-css',
+					Super_Awesome_Theme_Customize_Partial::PROP_RENDER_CALLBACK     => array( $this, 'partial_webfont_loader_' . $slug ),
+					Super_Awesome_Theme_Customize_Partial::PROP_CONTAINER_INCLUSIVE => true,
+					Super_Awesome_Theme_Customize_Partial::PROP_FALLBACK_REFRESH    => false,
+				) );
+			}
 		}
 	}
 
@@ -293,6 +392,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			'fontFamilyGroups' => array(),
 			'fontFamilies'     => array(),
 			'fontWeights'      => array(),
+			'apis'             => array(),
 		);
 		foreach ( $this->groups as $id => $title ) {
 			$data['groups'][] = array(
@@ -326,6 +426,10 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 				'id'    => $id,
 				'label' => $label,
 			);
+		}
+
+		foreach ( $font_families->get_webfont_apis() as $api ) {
+			$data['apis'][ $api->get_slug() ] = $api->get_title();
 		}
 
 		// This workaround ensures the selectWoo assets are properly enqueued.
@@ -388,21 +492,21 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 		$base_font    = $this->get( 'base_font' );
 		$heading_font = $this->get( 'heading_font' );
 
-		if ( ! empty( $base_font['family'] ) ) {
+		if ( ! empty( $base_font['family_stack'] ) ) {
 			?>
 			body,
 			button,
 			input,
 			select,
 			textarea {
-				font-family: <?php echo str_replace( '&quot;', '"', esc_attr( $base_font['family'] ) ); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>;
+				font-family: <?php echo str_replace( '&quot;', '"', esc_attr( $base_font['family_stack'] ) ); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>;
 				font-weight: <?php echo esc_attr( $base_font['weight'] ); ?>;
 				font-size: <?php echo esc_attr( '' . $base_font['size'] . 'rem' ); ?>;
 			}
 			<?php
 		}
 
-		if ( ! empty( $heading_font['family'] ) ) {
+		if ( ! empty( $heading_font['family_stack'] ) ) {
 			?>
 			h1,
 			h2,
@@ -410,7 +514,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 			h4,
 			h5,
 			h6 {
-				font-family: <?php echo str_replace( '&quot;', '"', esc_attr( $heading_font['family'] ) ); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>;
+				font-family: <?php echo str_replace( '&quot;', '"', esc_attr( $heading_font['family_stack'] ) ); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>;
 				font-weight: <?php echo esc_attr( $heading_font['weight'] ); ?>;
 			}
 
@@ -440,6 +544,7 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 	 */
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_base_fonts_general' ), 5, 0 );
+		add_action( 'wp_head', array( $this, 'load_webfonts' ), 0, 0 );
 		add_action( 'wp_head', array( $this, 'print_font_style' ), 10, 0 );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'add_block_editor_font_style' ), 0, 0 );
 		add_action( 'customize_register', array( $this, 'register_font_customize_control' ), 0 );

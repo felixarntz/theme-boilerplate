@@ -15,11 +15,26 @@
 class Super_Awesome_Theme_Webfont_Family extends Super_Awesome_Theme_Font_Family {
 
 	/**
+	 * API property name.
+	 *
+	 * @since 1.0.0
+	 */
+	const PROP_API = 'api';
+
+	/**
 	 * Files property name.
 	 *
 	 * @since 1.0.0
 	 */
 	const PROP_FILES = 'files';
+
+	/**
+	 * Slug of the API this font family belongs to.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	protected $api;
 
 	/**
 	 * Font family files.
@@ -42,6 +57,7 @@ class Super_Awesome_Theme_Webfont_Family extends Super_Awesome_Theme_Font_Family
 	protected function get_defaults() {
 		$defaults                       = parent::get_defaults();
 		$defaults[ self::PROP_INCLUDE ] = false;
+		$defaults[ self::PROP_API ]     = '';
 		$defaults[ self::PROP_FILES ]   = array();
 
 		return $defaults;

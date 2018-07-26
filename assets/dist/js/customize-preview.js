@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 21);
+	/******/return __webpack_require__(__webpack_require__.s = 20);
 	/******/
 })(
 /************************************************************************/
@@ -175,7 +175,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/***/
 	},
 
-	/***/21:
+	/***/20:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";

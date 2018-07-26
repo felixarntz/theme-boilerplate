@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 30);
+	/******/return __webpack_require__(__webpack_require__.s = 29);
 	/******/
 })(
 /************************************************************************/
@@ -108,6 +108,91 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 			return __('Customizing', 'super-awesome-theme');
 		};
+
+		/***/
+	},
+
+	/***/29:
+	/***/function _(module, __webpack_exports__, __webpack_require__) {
+
+		"use strict";
+
+		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(3);
+		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(2);
+		/**
+   * File footer-widget-areas.customize-controls.js.
+   *
+   * Theme Customizer handling for the footer widget areas.
+   */
+
+		(function (wp, data, _) {
+			var api = wp.customize;
+			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__["a" /* default */](api);
+			var __ = wp.i18n.__;
+
+
+			api.bind('ready', function () {
+				api.when('wide_footer_widget_area', function (wideFooterWidgetArea) {
+					wideFooterWidgetArea.transport = 'postMessage';
+				});
+
+				api.panel.instance('layout', function () {
+					api.section.add(new api.Section('footer_widgets', {
+						panel: 'layout',
+						title: __('Footer Widgets', 'super-awesome-theme'),
+						customizeAction: Object(__WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__["a" /* default */])('layout')
+					}));
+
+					api.control.add(new api.Control('wide_footer_widget_area', {
+						setting: 'wide_footer_widget_area',
+						section: 'footer_widgets',
+						label: __('Wide Footer Column', 'super-awesome-theme'),
+						description: __('If you like to reserve more space for one of your footer widget columns, you can select that one here.', 'super-awesome-theme'),
+						type: 'select',
+						choices: _.extend({}, data.wideFooterWidgetAreaChoices)
+					}));
+				});
+
+				// Handle visibility and choices of the wide footer widget area control.
+				util.bindSettingsToControls(data.footerWidgetAreas.map(function (widgetArea) {
+					return 'sidebars_widgets[' + widgetArea + ']';
+				}), ['wide_footer_widget_area'], function (values, control) {
+					var currentValue = control.setting.get();
+					var hasWidgets = false;
+					var newChoices = _.extend({}, data.wideFooterWidgetAreaChoices);
+					var newChoicesHtml = [];
+
+					_.each(values, function (value, settingId) {
+						var widgetAreaId = settingId.replace('sidebars_widgets[', '').replace(']', '');
+
+						if (value.length) {
+							hasWidgets = true;
+							return;
+						}
+
+						if (!newChoices[widgetAreaId]) {
+							return;
+						}
+
+						delete newChoices[widgetAreaId];
+					});
+
+					if (!newChoices[currentValue]) {
+						currentValue = Object.keys(newChoices)[0];
+						control.setting.set(currentValue);
+					}
+
+					_.each(newChoices, function (label, value) {
+						newChoicesHtml.push('<option value="' + value + '"' + (currentValue === value ? ' selected="selected"' : '') + '>' + label + '</option>');
+					});
+
+					control.active.set(hasWidgets);
+					control.params.choices = newChoices;
+					control.container.find('select').html(newChoicesHtml.join(''));
+				});
+			});
+		})(window.wp, window.themeFooterWidgetAreasControlsData, window._);
 
 		/***/
 	},
@@ -239,91 +324,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* harmony default export */
 
 		__webpack_exports__["a"] = CustomizeControlsUtil;
-
-		/***/
-	},
-
-	/***/30:
-	/***/function _(module, __webpack_exports__, __webpack_require__) {
-
-		"use strict";
-
-		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__ = __webpack_require__(3);
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__ = __webpack_require__(2);
-		/**
-   * File footer-widget-areas.customize-controls.js.
-   *
-   * Theme Customizer handling for the footer widget areas.
-   */
-
-		(function (wp, data, _) {
-			var api = wp.customize;
-			var util = new __WEBPACK_IMPORTED_MODULE_0__customize_customize_controls_util__["a" /* default */](api);
-			var __ = wp.i18n.__;
-
-
-			api.bind('ready', function () {
-				api.when('wide_footer_widget_area', function (wideFooterWidgetArea) {
-					wideFooterWidgetArea.transport = 'postMessage';
-				});
-
-				api.panel.instance('layout', function () {
-					api.section.add(new api.Section('footer_widgets', {
-						panel: 'layout',
-						title: __('Footer Widgets', 'super-awesome-theme'),
-						customizeAction: Object(__WEBPACK_IMPORTED_MODULE_1__customize_get_customize_action__["a" /* default */])('layout')
-					}));
-
-					api.control.add(new api.Control('wide_footer_widget_area', {
-						setting: 'wide_footer_widget_area',
-						section: 'footer_widgets',
-						label: __('Wide Footer Column', 'super-awesome-theme'),
-						description: __('If you like to reserve more space for one of your footer widget columns, you can select that one here.', 'super-awesome-theme'),
-						type: 'select',
-						choices: _.extend({}, data.wideFooterWidgetAreaChoices)
-					}));
-				});
-
-				// Handle visibility and choices of the wide footer widget area control.
-				util.bindSettingsToControls(data.footerWidgetAreas.map(function (widgetArea) {
-					return 'sidebars_widgets[' + widgetArea + ']';
-				}), ['wide_footer_widget_area'], function (values, control) {
-					var currentValue = control.setting.get();
-					var hasWidgets = false;
-					var newChoices = _.extend({}, data.wideFooterWidgetAreaChoices);
-					var newChoicesHtml = [];
-
-					_.each(values, function (value, settingId) {
-						var widgetAreaId = settingId.replace('sidebars_widgets[', '').replace(']', '');
-
-						if (value.length) {
-							hasWidgets = true;
-							return;
-						}
-
-						if (!newChoices[widgetAreaId]) {
-							return;
-						}
-
-						delete newChoices[widgetAreaId];
-					});
-
-					if (!newChoices[currentValue]) {
-						currentValue = Object.keys(newChoices)[0];
-						control.setting.set(currentValue);
-					}
-
-					_.each(newChoices, function (label, value) {
-						newChoicesHtml.push('<option value="' + value + '"' + (currentValue === value ? ' selected="selected"' : '') + '>' + label + '</option>');
-					});
-
-					control.active.set(hasWidgets);
-					control.params.choices = newChoices;
-					control.container.find('select').html(newChoicesHtml.join(''));
-				});
-			});
-		})(window.wp, window.themeFooterWidgetAreasControlsData, window._);
 
 		/***/
 	}

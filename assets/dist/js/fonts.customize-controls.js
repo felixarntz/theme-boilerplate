@@ -74,7 +74,7 @@
 	/******/__webpack_require__.p = "";
 	/******/
 	/******/ // Load entry module and return exports
-	/******/return __webpack_require__(__webpack_require__.s = 29);
+	/******/return __webpack_require__(__webpack_require__.s = 28);
 	/******/
 })(
 /************************************************************************/
@@ -108,7 +108,7 @@
 		/***/
 	},
 
-	/***/29:
+	/***/28:
 	/***/function _(module, __webpack_exports__, __webpack_require__) {
 
 		"use strict";
@@ -123,8 +123,6 @@
 
 		(function (wp, data, _, $) {
 			var api = wp.customize;
-			var __ = wp.i18n.__;
-
 
 			api.SuperAwesomeThemeFontControl = api.Control.extend({
 				ready: function ready() {
@@ -178,10 +176,6 @@
 					$sizeInput.on('change input', function () {
 						_this.saveValue('size', $sizeInput.val());
 					});
-
-					this.setting.bind(function () {
-						console.log(_this.setting.get()); // eslint-disable-line no-console
-					});
 				},
 
 				saveValue: function saveValue(prop, propVal) {
@@ -228,8 +222,8 @@
 							fontWeights: family.weights
 						};
 
-						if (family.files) {
-							dataset.fontFiles = family.files;
+						if (family.api) {
+							dataset.fontApi = family.api;
 						}
 
 						if (!selectData[family.group]) {
@@ -290,8 +284,8 @@
 								return state.text;
 							}
 
-							if (state.fontFiles) {
-								extraIndicator += ' <small>' + __('(Web Font)', 'super-awesome-theme') + '</small>';
+							if (state.fontApi && data.apis[state.fontApi]) {
+								extraIndicator += ' <small>(' + data.apis[state.fontApi] + ')</small>';
 							}
 
 							return $('<span style="font-family:' + state.fontStack + ';">' + state.text + '</span>' + extraIndicator);

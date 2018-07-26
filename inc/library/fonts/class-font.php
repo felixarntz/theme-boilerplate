@@ -222,7 +222,7 @@ final class Super_Awesome_Theme_Font {
 		 * @param string $stack_string Font family stack string to use in CSS, or empty string.
 		 * @param string $family_id    Font family identifier, or empty string.
 		 */
-		$value['family'] = apply_filters( 'super_awesome_theme_font_family_stack', '', $value['family'] );
+		$value['family_stack'] = apply_filters( 'super_awesome_theme_font_family_stack', '', $value['family'] );
 
 		return $value;
 	}

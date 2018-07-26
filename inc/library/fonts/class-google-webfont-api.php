@@ -28,6 +28,96 @@ class Super_Awesome_Theme_Google_Webfont_API extends Super_Awesome_Theme_Webfont
 	}
 
 	/**
+	 * Gets the title of the web font API.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string API title.
+	 */
+	public function get_title() {
+		return __( 'Google Fonts', 'super-awesome-theme' );
+	}
+
+	/**
+	 * Loads the fonts by printing out the necessary `<link>` tag or similar.
+	 *
+	 * In case of a Customizer preview, the markup needs to be printed even if no fonts are available.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $id_attr ID attribute to use for the outer tag to print. This has to be used in order
+	 *                        to support a Customizer partial.
+	 * @param array  $fonts   List of fonts to load. Each item is an associative arrays containing a `family`
+	 *                        key with the font family instance, and a `weight` key with the desired font
+	 *                        weight.
+	 */
+	public function load_fonts( $id_attr, array $fonts ) {
+		$font_families = array();
+
+		foreach ( $fonts as $font ) {
+			if ( ! $font['family'] instanceof Super_Awesome_Theme_Webfont_Family ) {
+				continue;
+			}
+
+			$family = $font['family']->get_prop( Super_Awesome_Theme_Webfont_Family::PROP_LABEL );
+			$files  = $font['family']->get_prop( Super_Awesome_Theme_Webfont_Family::PROP_FILES );
+
+			if ( ! isset( $files[ $font['weight'] ] ) ) {
+				continue;
+			}
+
+			$variants = array( $font['weight'] );
+			if ( isset( $files[ $font['weight'] . 'italic' ] ) ) {
+				$variants[] = $font['weight'] . 'i';
+			}
+
+			if ( isset( $font_families[ $family ] ) ) {
+				if ( ! strpos( $font_families[ $family ], $font['weight'] ) ) {
+					$font_families[ $family ] .= ',' . implode( ',', $variants );
+				}
+				continue;
+			}
+
+			$font_families[ $family ] = $family . ':' . implode( ',', $variants );
+		}
+
+		if ( empty( $font_families ) && ! is_customize_preview() ) {
+			return;
+		}
+
+		$url = add_query_arg( array(
+			'family' => urlencode( implode( '|', $font_families ) ),
+			'subset' => urlencode( 'latin,latin-ext' ),
+		), 'https://fonts.googleapis.com/css' );
+
+		echo '<link rel="stylesheet" id="' . esc_attr( $id_attr ) . '" href="' . esc_url( $url ) . '" type="text/css" media="all" />'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
+
+		if ( ! has_filter( 'wp_resource_hints', array( $this, 'filter_preconnect_resource_hints' ) ) ) {
+			add_filter( 'wp_resource_hints', array( $this, 'filter_preconnect_resource_hints' ), 10, 2 );
+		}
+	}
+
+	/**
+	 * Adds preconnect resource hints for Google fonts.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array  $urls          URLs to print for resource hints.
+	 * @param string $relation_type The relation type the URLs are printed.
+	 * @return array $urls Filtered URLs.
+	 */
+	public function filter_preconnect_resource_hints( $urls, $relation_type ) {
+		if ( 'preconnect' === $relation_type ) {
+			$urls[] = array(
+				'href' => 'https://fonts.gstatic.com',
+				'crossorigin',
+			);
+		}
+
+		return $urls;
+	}
+
+	/**
 	 * Fetches the available font families.
 	 *
 	 * @since 1.0.0
@@ -61,6 +151,8 @@ class Super_Awesome_Theme_Google_Webfont_API extends Super_Awesome_Theme_Webfont
 					$variant = '400';
 				} elseif ( 'italic' === $variant ) {
 					$variant = '400italic';
+				} else {
+					$variant = (string) $variant;
 				}
 
 				$files[ $variant ] = $file;
