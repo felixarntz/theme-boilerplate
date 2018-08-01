@@ -33,11 +33,6 @@ if ( version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
 require get_template_directory() . '/inc/library.php';
 
 /**
- * Theme setup.
- */
-require get_template_directory() . '/inc/setup.php';
-
-/**
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-hooks.php';
@@ -77,5 +72,7 @@ super_awesome_theme()
 	->register_component( new Super_Awesome_Theme_Footer_Widget_Areas() )
 	->register_component( new Super_Awesome_Theme_Social_Navigation() )
 	->register_component( new Super_Awesome_Theme_Footer_Navigation() )
+	->register_component( new Super_Awesome_Theme_Image_Sizes() )
+	->register_component( new Super_Awesome_Theme_AMP() )
 	->resolve_dependencies()
 	->initialize();

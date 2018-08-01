@@ -107,6 +107,17 @@ function super_awesome_theme_is_menu_active( $id ) {
 }
 
 /**
+ * Checks whether the current context is an AMP endpoint.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if an AMP endpoint, false otherwise.
+ */
+function super_awesome_theme_is_amp() {
+	return super_awesome_theme( 'amp' )->is_amp();
+}
+
+/**
  * Checks whether a wrapped layout should be used.
  *
  * @since 1.0.0

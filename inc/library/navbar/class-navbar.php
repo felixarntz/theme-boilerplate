@@ -359,7 +359,8 @@ class Super_Awesome_Theme_Navbar extends Super_Awesome_Theme_Theme_Component_Bas
 			background-color: <?php echo esc_attr( $navbar_background_color ); ?>;
 		}
 
-		.js .site-navbar .site-navigation .site-navigation-content {
+		.js .site-navbar .site-navigation .site-navigation-content,
+		.amp .site-navbar .site-navigation .site-navigation-content {
 			background-color: <?php echo esc_attr( $navbar_background_color ); ?>;
 		}
 		<?php

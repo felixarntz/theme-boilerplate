@@ -45,13 +45,37 @@ if ( post_password_required() ) {
 
 		<?php the_comments_navigation(); ?>
 
-		<ol class="comment-list">
-			<?php super_awesome_theme( 'comments' )->render_comments(); ?>
-		</ol><!-- .comment-list -->
+		<?php
+		if ( super_awesome_theme_is_amp() ) {
+			$comments_sort_attr = 'asc' === get_option( 'comment_order' ) ? ' sort="ascending"' : '';
+			$comments_per_page  = get_option( 'page_comments' ) ? get_option( 'comments_per_page' ) : 10000;
+
+			?>
+			<amp-live-list id="amp-live-comment-list-<?php the_ID(); ?>" class="live-list" layout="container"<?php echo $comments_sort_attr; /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?> data-poll-interval="15000" data-max-items-per-page="<?php echo esc_attr( $comments_per_page ); ?>">
+				<ol items class="comment-list">
+					<?php super_awesome_theme( 'comments' )->render_comments(); ?>
+				</ol><!-- .comment-list -->
+
+				<div update class="live-list-button">
+					<button class="button" on="tap:amp-live-comment-list-<?php the_ID(); ?>.update"><?php esc_html_e( 'New comment(s)', 'super-awesome-theme' ); ?></button>
+				</div>
+				<nav pagination>
+					<?php the_comments_navigation(); ?>
+				</nav>
+			</amp-live-list>
+			<?php
+		} else {
+			?>
+			<ol class="comment-list">
+				<?php super_awesome_theme( 'comments' )->render_comments(); ?>
+			</ol><!-- .comment-list -->
+			<?php
+
+			the_comments_navigation();
+		}
+		?>
 
 		<?php
-
-		the_comments_navigation();
 
 		if ( ! comments_open() ) {
 			?>

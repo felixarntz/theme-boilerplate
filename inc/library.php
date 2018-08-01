@@ -175,6 +175,16 @@ require get_template_directory() . '/inc/library/social-navigation/class-social-
 require get_template_directory() . '/inc/library/footer-navigation/class-footer-navigation.php';
 
 /**
+ * Theme image sizes.
+ */
+require get_template_directory() . '/inc/library/image-sizes/class-image-sizes.php';
+
+/**
+ * Theme AMP support.
+ */
+require get_template_directory() . '/inc/library/amp/class-amp.php';
+
+/**
  * Gets the main theme class instance.
  *
  * @since 1.0.0

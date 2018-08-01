@@ -84,6 +84,18 @@ class Super_Awesome_Theme_Script extends Super_Awesome_Theme_Asset {
 			throw Super_Awesome_Theme_Asset_Not_Enqueueable_Exception::from_handle( $this->handle );
 		}
 
+		/**
+		 * Filters whether a specific script should be enqueued.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool                       $enqueue Whether or not to enqueue the script.
+		 * @param Super_Awesome_Theme_Script $script  The script instance to enqueue.
+		 */
+		if ( ! apply_filters( 'super_awesome_theme_enqueue_script', true, $this ) ) {
+			return;
+		}
+
 		wp_enqueue_script( $this->handle );
 
 		if ( ! empty( $this->data_name ) && ! empty( $this->data ) ) {

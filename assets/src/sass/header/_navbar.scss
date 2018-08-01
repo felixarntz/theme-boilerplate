@@ -136,7 +136,8 @@
 			}
 		}
 
-		.js & {
+		.js &,
+		.amp & {
 			width: $site_navbar-vertical-width-collapsed;
 
 			@media (min-width: $site_breakpoint) {
@@ -184,7 +185,8 @@
 			}
 		}
 
-		.js & {
+		.js &,
+		.amp & {
 			.site-navbar-toggle {
 				left: 0;
 			}
@@ -206,7 +208,8 @@
 			}
 		}
 
-		.js & {
+		.js &,
+		.amp & {
 			.site-navbar-toggle {
 				right: 0;
 			}
@@ -229,7 +232,8 @@
 		}
 	}
 
-	.js & .site-navigation {
+	.js & .site-navigation,
+	.amp & .site-navigation {
 		.site-navigation-content {
 			position: absolute;
 			display: none;
@@ -279,7 +283,9 @@
 	}
 
 	.js body.navbar-left & .site-navigation,
-	.js body.navbar-right & .site-navigation {
+	.js body.navbar-right & .site-navigation,
+	.amp body.navbar-left & .site-navigation,
+	.amp body.navbar-right & .site-navigation {
 		a {
 			padding: (0.5 * $padding_vertical) 0;
 		}

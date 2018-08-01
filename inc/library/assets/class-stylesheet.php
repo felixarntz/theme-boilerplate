@@ -89,6 +89,18 @@ class Super_Awesome_Theme_Stylesheet extends Super_Awesome_Theme_Asset {
 			throw Super_Awesome_Theme_Asset_Not_Enqueueable_Exception::from_handle( $this->handle );
 		}
 
+		/**
+		 * Filters whether a specific stylesheet should be enqueued.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool                           $enqueue    Whether or not to enqueue the stylesheet.
+		 * @param Super_Awesome_Theme_Stylesheet $stylesheet The stylesheet instance to enqueue.
+		 */
+		if ( ! apply_filters( 'super_awesome_theme_enqueue_stylesheet', true, $this ) ) {
+			return;
+		}
+
 		wp_enqueue_style( $this->handle );
 	}
 

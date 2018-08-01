@@ -31,7 +31,12 @@ $extra_class = super_awesome_theme_get_setting( 'bottom_bar_justify_content' );
 				$credits_text = get_the_privacy_policy_link( '', ' | ' ) . $credits_text;
 			}
 
-			$bottom_bar->render_single_widget( 'WP_Widget_Text', array( 'text' => $credits_text ) );
+			$widget_class = 'WP_Widget_Text';
+			if ( super_awesome_theme_is_amp() && class_exists( 'AMP_Widget_Text' ) ) {
+				$widget_class = 'AMP_Widget_Text';
+			}
+
+			$bottom_bar->render_single_widget( $widget_class, array( 'text' => $credits_text ) );
 		}
 		?>
 	</div>
