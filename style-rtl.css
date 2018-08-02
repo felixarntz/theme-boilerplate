@@ -2359,6 +2359,7 @@ body.admin-bar.navbar-right .site-navbar .site-navbar-toggle {
 	top: 100%;
 	left: 0;
 	right: 0;
+	z-index: 2;
 	display: none;
 	padding: 0.75rem 0.5rem;
 	background-color: #eee;
@@ -2811,14 +2812,6 @@ body.no-sidebar
 .entry-footer {
 	max-width: 40rem;
 	margin: 0 auto 1em;
-}
-
-.generic-page-header .alignfull,
-.entry-header .alignfull,
-.entry-content .alignfull,
-.entry-footer .alignfull {
-	width: 100%;
-	max-width: 100%;
 }
 
 .entry-meta,

@@ -236,10 +236,11 @@
 	.amp & .site-navigation {
 		.site-navigation-content {
 			position: absolute;
-			display: none;
 			top: 100%;
 			right: 0;
 			left: 0;
+			z-index: 2;
+			display: none;
 			padding: $padding_vertical (0.5 * $padding_horizontal);
 			background-color: $color__background-navbar;
 
