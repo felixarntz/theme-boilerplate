@@ -120,6 +120,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 			case 'disable_special_page_styles':
 			case 'print_detect_js_svg_support_script':
 			case 'set_jed_locale_data':
+			case 'enhance_blocks':
 				return call_user_func_array( array( $this, $method ), $args );
 			case 'register':
 				foreach ( $this->assets as $asset ) {
@@ -314,6 +315,15 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 	}
 
 	/**
+	 * Enhances blocks with additional styles.
+	 *
+	 * @since 1.0.0
+	 */
+	private function enhance_blocks() {
+		wp_add_inline_script( 'wp-blocks', "wp.blocks.registerBlockStyle( 'core/button', { name: 'primary', label: wp.i18n.__( 'Primary' ) } );", 'after' );
+	}
+
+	/**
 	 * Adds hooks and runs other processes required to initialize the component.
 	 *
 	 * @since 1.0.0
@@ -323,6 +333,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 		add_action( 'get_header', array( $this, 'disable_special_page_styles' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'print_detect_js_svg_support_script' ), 0, 0 );
 		add_action( 'init', array( $this, 'set_jed_locale_data' ), 10, 0 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enhance_blocks' ) );
 
 		$location_hooks = array(
 			Super_Awesome_Theme_Asset::LOCATION_FRONTEND           => 'wp_enqueue_scripts',

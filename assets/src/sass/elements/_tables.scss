@@ -2,6 +2,7 @@ table {
 	margin: 0 0 $spacing_vertical;
 	width: 100%;
 	border-collapse: collapse;
+	overflow-x: auto;
 }
 
 tr {

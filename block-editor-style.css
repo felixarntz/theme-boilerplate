@@ -255,6 +255,19 @@ h5 + .edit-post-visual-editor h6 {
 	border-bottom: 2px solid #8f98a1;
 }
 
+.edit-post-visual-editor .wp-block-separator.is-style-wide {
+	max-width: none;
+}
+
+.edit-post-visual-editor .wp-block-separator.is-style-dots {
+	max-width: none;
+	border-bottom: 0;
+}
+
+.edit-post-visual-editor .wp-block-separator.is-style-dots:before {
+	color: #8f98a1;
+}
+
 .edit-post-visual-editor .wp-block-button {
 	margin-bottom: 1em;
 }
@@ -277,13 +290,13 @@ h5 + .edit-post-visual-editor h6 {
 	background-color: #d2d2d2;
 }
 
-.edit-post-visual-editor .wp-block-button.button-primary .wp-block-button__link {
+.edit-post-visual-editor .wp-block-button.is-style-primary .wp-block-button__link {
 	color: #fff;
 	background-color: #21759b;
 }
 
-.edit-post-visual-editor .wp-block-button.button-primary .wp-block-button__link:hover,
-.edit-post-visual-editor .wp-block-button.button-primary .wp-block-button__link:focus {
+.edit-post-visual-editor .wp-block-button.is-style-primary .wp-block-button__link:hover,
+.edit-post-visual-editor .wp-block-button.is-style-primary .wp-block-button__link:focus {
 	color: #fff;
 	background-color: #1a5c79;
 }
@@ -369,6 +382,14 @@ h5 + .edit-post-visual-editor h6 {
 	left: 0;
 	width: 100%;
 	height: 100%;
+}
+
+.edit-post-visual-editor p.wp-block-subhead {
+	color: #8f98a1;
+	font-size: 17.6px;
+	font-size: 1.1rem;
+	font-style: italic;
+	opacity: 1;
 }
 
 .edit-post-visual-editor .wp-block-embed {

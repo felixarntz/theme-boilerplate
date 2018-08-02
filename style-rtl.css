@@ -871,6 +871,7 @@ figure {
 table {
 	width: 100%;
 	margin: 0 0 1em;
+	overflow-x: auto;
 	border-collapse: collapse;
 }
 
@@ -3431,6 +3432,19 @@ object {
 	border-bottom: 2px solid #8f98a1;
 }
 
+.wp-block-separator.is-style-wide {
+	max-width: none;
+}
+
+.wp-block-separator.is-style-dots {
+	max-width: none;
+	border-bottom: 0;
+}
+
+.wp-block-separator.is-style-dots:before {
+	color: #8f98a1;
+}
+
 .wp-block-button {
 	margin-bottom: 1em;
 }
@@ -3453,13 +3467,13 @@ object {
 	background-color: #d2d2d2;
 }
 
-.wp-block-button.button-primary .wp-block-button__link {
+.wp-block-button.is-style-primary .wp-block-button__link {
 	color: #fff;
 	background-color: #21759b;
 }
 
-.wp-block-button.button-primary .wp-block-button__link:hover,
-.wp-block-button.button-primary .wp-block-button__link:focus {
+.wp-block-button.is-style-primary .wp-block-button__link:hover,
+.wp-block-button.is-style-primary .wp-block-button__link:focus {
 	color: #fff;
 	background-color: #1a5c79;
 }
@@ -3545,6 +3559,14 @@ object {
 	right: 0;
 	width: 100%;
 	height: 100%;
+}
+
+p.wp-block-subhead {
+	color: #8f98a1;
+	font-size: 17.6px;
+	font-size: 1.1rem;
+	font-style: italic;
+	opacity: 1;
 }
 
 /* -------------------------------------------------------------

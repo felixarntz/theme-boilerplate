@@ -657,6 +657,10 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 				border-bottom-color: <?php echo esc_attr( $text_light_color ); ?>;
 			}
 
+			.wp-block-separator.is-style-dots:before {
+				color: <?php echo esc_attr( $text_light_color ); ?>;
+			}
+
 			tr {
 				border-bottom-color: <?php echo esc_attr( $text_light_color ); ?>;
 			}
@@ -801,13 +805,13 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 				background-color: <?php echo esc_attr( $button_primary_background_focus_color ); ?>;
 			}
 
-			.wp-block-button.button-primary .wp-block-button__link {
+			.wp-block-button.is-style-primary .wp-block-button__link {
 				color: <?php echo esc_attr( $button_primary_text_color ); ?>;
 				background-color: <?php echo esc_attr( $button_primary_background_color ); ?>;
 			}
 
-			.wp-block-button.button-primary .wp-block-button__link:hover,
-			.wp-block-button.button-primary .wp-block-button__link:focus {
+			.wp-block-button.is-style-primary .wp-block-button__link:hover,
+			.wp-block-button.is-style-primary .wp-block-button__link:focus {
 				color: <?php echo esc_attr( $button_primary_text_color ); ?>;
 				background-color: <?php echo esc_attr( $button_primary_background_focus_color ); ?>;
 			}
