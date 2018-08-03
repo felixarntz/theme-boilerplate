@@ -275,7 +275,7 @@ final class Super_Awesome_Theme_Assets extends Super_Awesome_Theme_Theme_Compone
 		$locale_data = $this->get_jed_locale_data_for_domain( 'super-awesome-theme' );
 
 		$wp_i18n = $this->get_registered_asset( 'wp-i18n' );
-		$wp_i18n->add_inline_script( 'wp.i18n.setLocaleData( ' . json_encode( $locale_data ) . ' );' );
+		$wp_i18n->add_inline_script( 'wp.i18n.setLocaleData( ' . json_encode( $locale_data ) . ", 'super-awesome-theme' );" );
 	}
 
 	/**
