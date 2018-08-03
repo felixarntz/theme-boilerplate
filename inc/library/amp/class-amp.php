@@ -90,7 +90,6 @@ final class Super_Awesome_Theme_AMP extends Super_Awesome_Theme_Theme_Component_
 			case 'register_support':
 			case 'register_sanitizer':
 			case 'maybe_prevent_scripts':
-			case 'add_amp_indicator':
 			case 'fix_header_video_body_class':
 			case 'handle_sticky_elements':
 			case 'print_state':
@@ -153,18 +152,6 @@ final class Super_Awesome_Theme_AMP extends Super_Awesome_Theme_Theme_Component_
 
 		// Prevent any script from being enqueued.
 		add_filter( 'super_awesome_theme_enqueue_script', '__return_false' );
-	}
-
-	/**
-	 * Adds the AMP indicator lightning bolt by filtering the language attributes output.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $output String containing a list of language attributes.
-	 * @return string Filtered output.
-	 */
-	protected function add_amp_indicator( $output ) {
-		return '⚡ ' . $output;
 	}
 
 	/**
@@ -285,7 +272,6 @@ final class Super_Awesome_Theme_AMP extends Super_Awesome_Theme_Theme_Component_
 		add_action( 'after_setup_theme', array( $this, 'register_support' ), 10, 0 );
 		add_filter( 'amp_content_sanitizers', array( $this, 'register_sanitizer' ), 10, 1 );
 		add_action( 'wp', array( $this, 'maybe_prevent_scripts' ), 10, 0 );
-		add_filter( 'language_attributes', array( $this, 'add_amp_indicator' ), 10, 1 );
 		add_filter( 'body_class', array( $this, 'fix_header_video_body_class' ), 11, 1 );
 		add_action( 'wp_footer', array( $this, 'handle_sticky_elements' ), 0, 0 );
 		add_action( 'wp_footer', array( $this, 'print_state' ), 10, 0 );
