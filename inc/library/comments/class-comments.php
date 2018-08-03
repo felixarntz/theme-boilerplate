@@ -261,7 +261,7 @@ class Super_Awesome_Theme_Comments extends Super_Awesome_Theme_Theme_Component_B
 		 *
 		 * @param int $size The avatar height and width size in pixels.
 		 */
-		$comment_author_avatar_size = apply_filters( 'super_awesome_theme_comment_author_avatar_size', 32 );
+		$comment_author_avatar_size = apply_filters( 'super_awesome_theme_comment_author_avatar_size', 64 );
 
 		return array(
 			'walker'      => new Walker_Comment(),

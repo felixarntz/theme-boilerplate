@@ -5,10 +5,82 @@
 	}
 }
 
-.comment-content a {
-	word-wrap: break-word;
+.comment-list {
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none;
+
+	ol {
+		margin-left: (2 * $spacing_horizontal);
+		padding-left: 0;
+		list-style: none;
+	}
 }
 
-.bypostauthor {
-	display: block;
+.comment-body {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: (0.5 * $spacing_vertical);
+
+	.comment-avatar {
+		margin-right: (0.5 * $spacing_horizontal);
+	}
+
+	.comment-wrap {
+		flex: 1;
+	}
+}
+
+.comment-meta {
+	margin-bottom: (0.5 * $spacing_vertical);
+}
+
+.comment-author,
+.comment-date {
+	display: inline-block;
+	margin-left: (0.5 * $spacing_horizontal);
+
+	a {
+		text-decoration: none;
+	}
+
+	&:first-child {
+		margin-left: 0;
+	}
+}
+
+.comment-date {
+	font-size: 90%;
+}
+
+.comment-content {
+	p,
+	ul,
+	ol {
+		margin-bottom: (0.5 * $spacing_vertical);
+	}
+
+	a {
+		word-wrap: break-word;
+	}
+}
+
+.comment-action-links {
+	ul {
+		display: inline-block;
+		margin-bottom: 0;
+		margin-left: 0;
+		padding-left: 0;
+		list-style: none;
+
+		li {
+			display: inline;
+			margin-left: $spacing_horizontal;
+
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+	}
 }
