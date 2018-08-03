@@ -45,12 +45,5 @@
 # Blocks
 ------------------------------------------------------------- */
 .edit-post-visual-editor {
-	@import "plugin-compat/gutenberg";
-
-	// Reset.
-	.wp-block-embed {
-		position: static;
-		height: auto;
-		padding-top: 0;
-	}
+	@import "modules/blocks";
 }

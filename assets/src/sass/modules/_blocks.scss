@@ -122,7 +122,7 @@
 	width: 100%;
 }
 
-.wp-block-embed {
+html:not(.amp) .wp-block-embed {
 	position: relative;
 	height: 0;
 	padding-top: 56.25%;

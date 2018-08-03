@@ -152,7 +152,8 @@
 				}
 
 				li:hover,
-				li.focus {
+				li.focus,
+				li:focus-within {
 					> ul {
 						right: auto;
 						left: 100%;
@@ -161,7 +162,8 @@
 			}
 
 			li:hover,
-			li.focus {
+			li.focus,
+			li:focus-within {
 				> ul {
 					right: auto;
 					left: 0.5em;
