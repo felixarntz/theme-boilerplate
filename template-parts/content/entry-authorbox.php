@@ -7,6 +7,10 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
+if ( ! is_customize_preview() && ! super_awesome_theme_display_post_authorbox() ) {
+	return;
+}
+
 $social_icons = super_awesome_theme( 'social_navigation' )->get_social_links_icons();
 
 $social_links = array();

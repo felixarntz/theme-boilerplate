@@ -53,6 +53,10 @@ foreach ( $taxonomies as $taxonomy ) {
 	);
 }
 
+if ( empty( $terms ) && ! is_customize_preview() ) {
+	return;
+}
+
 ?>
 <div class="entry-terms">
 	<?php foreach ( $terms as $taxonomy_terms ) : ?>

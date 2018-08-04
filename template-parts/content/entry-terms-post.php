@@ -37,6 +37,10 @@ if ( super_awesome_theme_display_post_taxonomy_terms( 'post_tag' ) ) {
 	}
 }
 
+if ( empty( $terms ) && ! is_customize_preview() ) {
+	return;
+}
+
 ?>
 <div class="entry-terms">
 	<?php foreach ( $terms as $taxonomy_terms ) : ?>
