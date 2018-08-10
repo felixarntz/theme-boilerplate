@@ -53,11 +53,16 @@ final class Super_Awesome_Theme_Image_Sizes extends Super_Awesome_Theme_Theme_Co
 	 * @since 1.0.0
 	 */
 	protected function register_sizes() {
-		add_image_size( 'full-width', 2560, 9999 ); // Spans the full width for large screens.
-		add_image_size( 'site-width', 1152, 9999 ); // Spans the site maximum width of 72rem, with unlimited height.
-		add_image_size( 'content-width', 640, 9999 ); // Spans the content maximum width of 40rem, with unlimited height.
+		$rem = 16;
 
-		set_post_thumbnail_size( 640, 360, true ); // 640px is 40rem, which is the site maximum width. 360px makes it 16:9 format.
+		// The maximum site width is 72rem.
+		add_image_size( 'site-width', 72 * $rem, 9999 );
+
+		// The maximum content width is 40rem.
+		add_image_size( 'content-width', 40 * $rem, 9999 );
+
+		// Featured images span the maximum content width and should be in 16:9 aspect ratio.
+		set_post_thumbnail_size( 40 * $rem, ( ( 40 * $rem ) / 16 ) * 9, true );
 	}
 
 	/**
@@ -73,28 +78,70 @@ final class Super_Awesome_Theme_Image_Sizes extends Super_Awesome_Theme_Theme_Co
 		$settings = $this->get_dependency( 'settings' );
 		$sidebar  = $this->get_dependency( 'sidebar' );
 
-		$content_width_rem = 40;
-		$content_width_vw  = 100;
-		$content_width_max = '100vw';
+		$rem         = 16;
+		$image_width = $size[0];
 
 		if ( $sidebar->should_display_sidebar() ) {
+			$max_width      = 72 * $rem;
+			$double_padding = 2 * $rem;
+			$breakpoint     = 48 * $rem;
+
 			$sidebar_size = $settings->get( 'sidebar_size' );
-			if ( 'large' === $sidebar_size ) {
-				$multiplier = 0.5;
-			} elseif ( 'small' === $sidebar_size ) {
-				$multiplier = 0.75;
-			} else {
-				$multiplier = 0.6666666;
+			switch ( $sidebar_size ) {
+				case 'large':
+					$max_content_width    = 36 * $rem;
+					$max_content_width_vw = 50;
+					break;
+				case 'small':
+					$max_content_width    = 54 * $rem;
+					$max_content_width_vw = 75;
+					break;
+				default:
+					$max_content_width    = 48 * $rem;
+					$max_content_width_vw = 66.666666;
 			}
 
-			$content_width_rem = (int) floor( 72 * $multiplier ) - 2;
-			$content_width_vw  = (int) floor( 100 * $multiplier );
-			$content_width_max = '' . $content_width_rem . 'rem';
-		}
+			$max_content_width_minus_padding  = $max_content_width - $double_padding;
 
-		$image_width = $size[0];
-		if ( $image_width >= $content_width_rem * 16 ) {
-			$sizes = "(max-width: 40rem) 100vw, (max-width: 72rem) {$content_width_vw}vw, {$content_width_max}";
+			if ( $image_width > $breakpoint && $image_width > $max_content_width ) {
+				$sizes = "(max-width: {$breakpoint}px) calc(100vw - {$double_padding}px), (max-width: {$max_width}px) calc({$max_content_vw}vw - {$double_padding}px), {$max_content_width_minus_padding}px";
+			} else {
+				$sizes = "(max-width: {$breakpoint}px) calc(100vw - {$double_padding}px), {$image_width}px";
+			}
+		} else {
+			// WordPress doesn't expose the context, so we assume 'alignwide' as best bet.
+			$context = 'alignwide';
+
+			switch ( $context ) {
+				case 'alignwide':
+					$max_width      = 72 * $rem;
+					$double_padding = 2 * $rem;
+					break;
+				case 'alignfull':
+					$max_width      = 0;
+					$double_padding = 0;
+					break;
+				default:
+					$max_width      = 40 * $rem;
+					$double_padding = 2 * $rem;
+			}
+
+			$max_width_minus_padding  = $max_width - $double_padding;
+			$image_width_plus_padding = $image_width + $double_padding;
+
+			if ( $double_padding > 0 ) {
+				if ( $max_width > 0 && $image_width > $max_width ) {
+					$sizes = "(max-width: {$max_width}px) calc(100vw - {$double_padding}px), {$max_width_minus_padding}px";
+				} else {
+					$sizes = "(max-width: {$image_width_plus_padding}px) calc(100vw - {$double_padding}px), {$image_width}px";
+				}
+			} else {
+				if ( $max_width > 0 && $image_width > $max_width ) {
+					$sizes = "(max-width: {$max_width}px) 100vw, {$max_width}px";
+				} else {
+					$sizes = "(max-width: {$image_width}px) 100vw, {$image_width}px";
+				}
+			}
 		}
 
 		return $sizes;
