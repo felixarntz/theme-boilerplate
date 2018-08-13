@@ -271,11 +271,8 @@ gulp.task( 'compile-js', done => {
 		.on( 'end', () => {
 			gulp.src( './languages/' + config.textDomain + '.js.pot' )
 				.pipe( run( 'npx pot-to-php ./languages/' + config.textDomain + '.js.pot ./inc/js-i18n.php ' + config.textDomain ) )
-				.pipe( gulp.dest( './languages/' ) )
 				.on( 'end', () => {
-					del([
-						'./languages/' + config.textDomain + '.js.pot',
-					]);
+					del( [ 'languages/' + config.textDomain + '.js.pot' ] );
 					done();
 				});
 		});

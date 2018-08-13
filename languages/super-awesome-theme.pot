@@ -22,23 +22,27 @@ msgstr ""
 
 #. translators: 1: title.
 #. translators: 1: title.
-#: comments.php:29, inc/library/comments/class-comments.php:224
+#: comments.php:32, inc/library/comments/class-comments.php:229
 msgid "One thought on &ldquo;%1$s&rdquo;"
 msgstr ""
 
 #. translators: 1: comment count number, 2: title.
-#: comments.php:35
+#: comments.php:38
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:55
+#: comments.php:60
+msgid "New comment(s)"
+msgstr ""
+
+#: comments.php:82
 msgid "Comments are closed."
 msgstr ""
 
-#: header.php:25
+#: header.php:23
 msgid "Skip to content"
 msgstr ""
 
@@ -68,9 +72,153 @@ msgstr ""
 msgid "Super Awesome Theme requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
 msgstr ""
 
+#: inc/js-i18n.php:5, inc/library/bottom-bar/class-bottom-bar.php:116
+msgid "Bottom Bar"
+msgstr ""
+
+#: inc/js-i18n.php:8
+msgid "Bottom Bar Justify Content"
+msgstr ""
+
+#: inc/js-i18n.php:11
+msgid "Specify how the content in the bottom bar is aligned."
+msgstr ""
+
+#: inc/js-i18n.php:22
+msgid "Customizing &#9656; %s"
+msgstr ""
+
+#: inc/js-i18n.php:33
+msgid "Customizing"
+msgstr ""
+
+#: inc/js-i18n.php:36
+msgid "Use Page Header?"
+msgstr ""
+
+#: inc/js-i18n.php:39
+msgid "Use Excerpt in archives?"
+msgstr ""
+
+#: inc/js-i18n.php:42
+msgid "Show Date?"
+msgstr ""
+
+#: inc/js-i18n.php:45
+msgid "Show Author Name?"
+msgstr ""
+
+#: inc/js-i18n.php:48, inc/library/content-types/class-content-types.php:416
+msgid "Show Author Box?"
+msgstr ""
+
+#: inc/js-i18n.php:51
+msgid "Display Location"
+msgstr ""
+
+#: inc/js-i18n.php:54
+msgid "Specify where to display the site logo, title and tagline."
+msgstr ""
+
+#: inc/js-i18n.php:57
+msgid "Footer Widgets"
+msgstr ""
+
+#: inc/js-i18n.php:60
+msgid "Wide Footer Column"
+msgstr ""
+
+#: inc/js-i18n.php:63
+msgid "If you like to reserve more space for one of your footer widget columns, you can select that one here."
+msgstr ""
+
+#: inc/js-i18n.php:66
+msgid "Navbar"
+msgstr ""
+
+#: inc/js-i18n.php:69
+msgid "Navbar Position"
+msgstr ""
+
+#: inc/js-i18n.php:72
+msgid "Navbar Justify Content"
+msgstr ""
+
+#: inc/js-i18n.php:75
+msgid "Specify how the content in the navbar is aligned."
+msgstr ""
+
+#: inc/js-i18n.php:78
+msgid "Sidebar"
+msgstr ""
+
+#: inc/js-i18n.php:81
+msgid "Sidebar Mode"
+msgstr ""
+
+#: inc/js-i18n.php:84
+msgid "Specify if and how the sidebar should be displayed."
+msgstr ""
+
+#: inc/js-i18n.php:87
+msgid "Sidebar Size"
+msgstr ""
+
+#: inc/js-i18n.php:90
+msgid "Specify the width of the sidebar."
+msgstr ""
+
+#: inc/js-i18n.php:93
+msgid "Enable Blog Sidebar?"
+msgstr ""
+
+#: inc/js-i18n.php:96
+msgid "If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar."
+msgstr ""
+
+#: inc/js-i18n.php:99
+msgid "This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it."
+msgstr ""
+
+#: inc/js-i18n.php:102
+msgid "Sticky Content"
+msgstr ""
+
+#: inc/js-i18n.php:105, inc/library/top-bar/class-top-bar.php:116
+msgid "Top Bar"
+msgstr ""
+
+#: inc/js-i18n.php:108
+msgid "Top Bar Justify Content"
+msgstr ""
+
+#: inc/js-i18n.php:111
+msgid "Specify how the content in the top bar is aligned."
+msgstr ""
+
+#: inc/js-i18n.php:114
+msgctxt "taxonomy"
+msgid "Show %s?"
+msgstr ""
+
+#: inc/js-i18n.php:117
+msgctxt "custom header"
+msgid "Text Alignment"
+msgstr ""
+
+#: inc/js-i18n.php:120
+msgctxt "widget notice"
+msgid "This inline widget area contains widgets that are untested with it and thus may display incorrectly."
+msgstr ""
+
+#: inc/js-i18n.php:123
+msgctxt "widget notice"
+msgid "Untested with this widget area."
+msgstr ""
+
 #. translators: %s: post title
 #. translators: %s: post title
-#: inc/template-hooks.php:66, template-parts/content/entry-content.php:19
+#: inc/template-hooks.php:56, template-parts/content/entry-content.php:19
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
@@ -160,30 +308,25 @@ msgstr ""
 msgid "Super Awesome Theme already handles comment form submissions via AJAX out-of-the-box, so the plugin WP Ajaxify Comments conflicts with it and is not necessary. Please deactivate it."
 msgstr ""
 
-#. translators: %s: comment author link
-#: template-parts/content/comment.php:23
-msgid "%s <span class=\"says\">says:</span>"
-msgstr ""
-
 #. translators: 1: comment date, 2: comment time
-#: template-parts/content/comment.php:36
+#: template-parts/content/comment.php:34
 msgid "%1$s at %2$s"
 msgstr ""
 
-#: template-parts/content/comment.php:40, template-parts/content/pingback.php:14, template-parts/content/trackback.php:14
-msgid "Edit"
-msgstr ""
-
-#: template-parts/content/comment.php:45
+#: template-parts/content/comment.php:42
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: template-parts/content/entry-authorbox.php:72
+#: template-parts/content/comment.php:62, template-parts/content/pingback.php:14, template-parts/content/trackback.php:14
+msgid "Edit"
+msgstr ""
+
+#: template-parts/content/entry-authorbox.php:76
 msgid "Author:"
 msgstr ""
 
 #. translators: %s: author name
-#: template-parts/content/entry-authorbox.php:83
+#: template-parts/content/entry-authorbox.php:87
 msgid "View all posts by %s"
 msgstr ""
 
@@ -203,16 +346,22 @@ msgstr ""
 msgid "Edit<span class=\"screen-reader-text\"> %s</span>"
 msgstr ""
 
-#. translators: %s: post date.
-#: template-parts/content/entry-meta.php:30
-msgctxt "post date"
-msgid "Posted on %s"
+#. translators: %s: post author
+#: template-parts/content/entry-meta.php:28
+msgctxt "post author"
+msgid "By %s"
 msgstr ""
 
-#. translators: %s: post author.
-#: template-parts/content/entry-meta.php:42
+#. translators: %s: post author
+#: template-parts/content/entry-meta.php:33
 msgctxt "post author"
 msgid "by %s"
+msgstr ""
+
+#. translators: %s: post date
+#: template-parts/content/entry-meta.php:40
+msgctxt "post date"
+msgid "Posted on %s"
 msgstr ""
 
 #: template-parts/content/entry-terms-post.php:10, template-parts/content/entry-terms.php:34
@@ -253,7 +402,7 @@ msgstr ""
 msgid "Trackback:"
 msgstr ""
 
-#: template-parts/footer/footer-navigation.php:15, inc/library/footer-navigation/class-footer-navigation.php:65
+#: template-parts/footer/footer-navigation.php:15, inc/library/footer-navigation/class-footer-navigation.php:70
 msgid "Footer Menu"
 msgstr ""
 
@@ -279,7 +428,7 @@ msgstr ""
 msgid "https://super-awesome-author.org"
 msgstr ""
 
-#: template-parts/footer/social-navigation.php:15, inc/library/social-navigation/class-social-navigation.php:164
+#: template-parts/footer/social-navigation.php:15, inc/library/social-navigation/class-social-navigation.php:171
 msgid "Social Links Menu"
 msgstr ""
 
@@ -296,12 +445,41 @@ msgstr ""
 msgid "Nothing Found"
 msgstr ""
 
-#: template-parts/header/site-navbar.php:40, inc/library/navbar/class-navbar.php:143
+#: template-parts/header/site-navbar.php:34, template-parts/header/site-navbar.php:63
+msgid "Menu"
+msgstr ""
+
+#: template-parts/header/site-navbar.php:57, inc/library/navbar/class-navbar.php:211
 msgid "Primary Menu"
 msgstr ""
 
-#: template-parts/header/site-navbar.php:45
-msgid "Menu"
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#. translators: %s: method name
+#: inc/library/amp/class-amp.php:99, inc/library/assets/class-assets.php:136, inc/library/bottom-bar/class-bottom-bar.php:85, inc/library/colors/class-colors.php:171, inc/library/comments/class-comments.php:130, inc/library/content-types/class-content-types.php:323, inc/library/custom-background/class-custom-background.php:44, inc/library/custom-header/class-custom-header.php:97, inc/library/custom-logo/class-custom-logo.php:44, inc/library/customizer/class-customizer.php:398, inc/library/distraction-free-mode/class-distraction-free-mode.php:89, inc/library/fonts/class-font-families.php:180, inc/library/fonts/class-fonts.php:184, inc/library/footer-navigation/class-footer-navigation.php:57, inc/library/footer-widget-areas/class-footer-widget-areas.php:154, inc/library/image-sizes/class-image-sizes.php:46, inc/library/menus/class-menus.php:128, inc/library/navbar/class-navbar.php:156, inc/library/settings/class-settings.php:106, inc/library/sidebar/class-sidebar.php:180, inc/library/social-navigation/class-social-navigation.php:153, inc/library/sticky-elements/class-sticky-elements.php:109, inc/library/theme-support/class-theme-support.php:104, inc/library/top-bar/class-top-bar.php:85, inc/library/widgets/class-widgets.php:364
+msgid "Call to undefined method %s"
 msgstr ""
 
 #. translators: %s: asset handle
@@ -319,180 +497,168 @@ msgstr ""
 msgid "%1$s is not a valid property of the %2$s asset."
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:41, inc/library/navbar/class-navbar.php:69, inc/library/top-bar/class-top-bar.php:41
+#: inc/library/bottom-bar/class-bottom-bar.php:56, inc/library/navbar/class-navbar.php:113, inc/library/top-bar/class-top-bar.php:56
 msgctxt "alignment"
 msgid "Space Between"
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:42, inc/library/navbar/class-navbar.php:70, inc/library/top-bar/class-top-bar.php:42
+#: inc/library/bottom-bar/class-bottom-bar.php:57, inc/library/navbar/class-navbar.php:114, inc/library/top-bar/class-top-bar.php:57
 msgctxt "alignment"
 msgid "Centered"
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:96
-msgid "Bottom Bar"
-msgstr ""
-
-#: inc/library/bottom-bar/class-bottom-bar.php:97
+#: inc/library/bottom-bar/class-bottom-bar.php:117
 msgid "Add widgets here to appear in a narrow bar at the very bottom of the screen."
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:111
+#: inc/library/bottom-bar/class-bottom-bar.php:131
 msgid "Bottom Bar Colors"
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:115
+#: inc/library/bottom-bar/class-bottom-bar.php:135
 msgid "Bottom Bar Text Color"
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:121
+#: inc/library/bottom-bar/class-bottom-bar.php:141
 msgid "Bottom Bar Link Color"
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:127
+#: inc/library/bottom-bar/class-bottom-bar.php:147
 msgid "Bottom Bar Background Color"
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:146
+#: inc/library/bottom-bar/class-bottom-bar.php:166
 msgid "Stick the bottom bar to the bottom of the page when scrolling?"
 msgstr ""
 
-#: inc/library/bottom-bar/class-bottom-bar.php:162
-msgid "Bottom Bar Justify Content"
-msgstr ""
-
-#: inc/library/bottom-bar/class-bottom-bar.php:163
-msgid "Specify how the widgets in the bottom bar are aligned."
-msgstr ""
-
 #. translators: 1: property name, 2: color identifier
-#: inc/library/colors/class-color.php:159
+#: inc/library/colors/class-color.php:144
 msgid "%1$s is not a valid property of the %2$s color."
 msgstr ""
 
-#: inc/library/colors/class-colors.php:307
+#: inc/library/colors/class-colors.php:313
 msgid "Colors"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:314
+#: inc/library/colors/class-colors.php:320
 msgid "Other Colors"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:403
+#: inc/library/colors/class-colors.php:431
 msgid "General Colors"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:407
+#: inc/library/colors/class-colors.php:435
 msgid "Text Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:413
+#: inc/library/colors/class-colors.php:441
 msgid "Link Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:419
+#: inc/library/colors/class-colors.php:447
 msgid "Wrap Background Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:436
+#: inc/library/colors/class-colors.php:463
 msgid "Background Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:449
+#: inc/library/colors/class-colors.php:476
 msgid "Button Colors"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:453
+#: inc/library/colors/class-colors.php:480
 msgid "Button Text Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:459
+#: inc/library/colors/class-colors.php:486
 msgid "Button Background Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:465
+#: inc/library/colors/class-colors.php:492
 msgid "Primary Button Text Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:471
+#: inc/library/colors/class-colors.php:498
 msgid "Primary Button Background Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:484
+#: inc/library/colors/class-colors.php:511
 msgid "Header Colors"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:498
+#: inc/library/colors/class-colors.php:525
 msgid "Header Text Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:504
+#: inc/library/colors/class-colors.php:531
 msgid "Header Link Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:510
+#: inc/library/colors/class-colors.php:537
 msgid "Header Background Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:524
+#: inc/library/colors/class-colors.php:550
 msgid "Footer Colors"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:528
+#: inc/library/colors/class-colors.php:554
 msgid "Footer Text Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:535
+#: inc/library/colors/class-colors.php:560
 msgid "Footer Link Color"
 msgstr ""
 
-#: inc/library/colors/class-colors.php:542
+#: inc/library/colors/class-colors.php:566
 msgid "Footer Background Color"
 msgstr ""
 
-#: inc/library/comments/class-comments.php:172
+#: inc/library/comments/class-comments.php:177
 msgid "Thanks for commenting! Your comment has been sent for moderation and should be approved soon."
 msgstr ""
 
 #. translators: %s: comment URL
-#: inc/library/comments/class-comments.php:175
+#: inc/library/comments/class-comments.php:180
 msgid "Thanks for commenting! Your comment has been approved. <a href=\"%s\">Read your comment</a>"
 msgstr ""
 
-#: inc/library/comments/class-comments.php:188
+#: inc/library/comments/class-comments.php:193
 msgid "Your comment has been marked as spam."
 msgstr ""
 
-#: inc/library/comments/class-comments.php:195
+#: inc/library/comments/class-comments.php:200
 msgid "An unknown error occurred while trying to post your comment."
 msgstr ""
 
-#: inc/library/comments/class-comments.php:214
+#: inc/library/comments/class-comments.php:219
 msgid "Processing..."
 msgstr ""
 
-#: inc/library/comments/class-comments.php:215
+#: inc/library/comments/class-comments.php:220
 msgid "Bad response code."
 msgstr ""
 
-#: inc/library/comments/class-comments.php:216
+#: inc/library/comments/class-comments.php:221
 msgid "Invalid JSON response."
 msgstr ""
 
 #. translators: %s: edit comment URL
-#: inc/library/comments/class-comments.php:218
+#: inc/library/comments/class-comments.php:223
 msgid "Your comment was either a duplicate or you are posting too rapidly. <a href=\"%s\">Edit your comment</a>"
 msgstr ""
 
-#: inc/library/comments/class-comments.php:219
+#: inc/library/comments/class-comments.php:224
 msgid "There were errors in submitting your comment; complete the missing fields and try again!"
 msgstr ""
 
-#: inc/library/comments/class-comments.php:220
+#: inc/library/comments/class-comments.php:225
 msgid "This email address appears to be invalid."
 msgstr ""
 
-#: inc/library/comments/class-comments.php:221
+#: inc/library/comments/class-comments.php:226
 msgid "This is a required field."
 msgstr ""
 
@@ -551,40 +717,14 @@ msgctxt "attachment metadata"
 msgid "File Size"
 msgstr ""
 
-#: inc/library/content-types/class-content-types.php:299
+#: inc/library/content-types/class-content-types.php:383
 msgid "Content Types"
 msgstr ""
 
-#: inc/library/content-types/class-content-types.php:308
-msgid "Use Page Header?"
-msgstr ""
-
-#: inc/library/content-types/class-content-types.php:314
-msgid "Use Excerpt in archives?"
-msgstr ""
-
-#: inc/library/content-types/class-content-types.php:321
-msgid "Show Date?"
-msgstr ""
-
-#: inc/library/content-types/class-content-types.php:328
-msgid "Show Author Name?"
-msgstr ""
-
-#. translators: %s: metadata field label
-#: inc/library/content-types/class-content-types.php:338
+#. translators: %s: field label
+#: inc/library/content-types/class-content-types.php:509
 msgctxt "attachment metadata"
 msgid "Show %s?"
-msgstr ""
-
-#. translators: %s: taxonomy plural label
-#: inc/library/content-types/class-content-types.php:351
-msgctxt "taxonomy"
-msgid "Show %s?"
-msgstr ""
-
-#: inc/library/content-types/class-content-types.php:359
-msgid "Show Author Box?"
 msgstr ""
 
 #: inc/library/custom-header/class-custom-header.php:39
@@ -592,32 +732,24 @@ msgid "In front of the header image"
 msgstr ""
 
 #: inc/library/custom-header/class-custom-header.php:40
-msgid "On the left inside the navigation bar"
+msgid "At the beginning of the navigation bar"
 msgstr ""
 
 #: inc/library/custom-header/class-custom-header.php:41
-msgid "On the right inside the navigation bar"
+msgid "At the end of the navigation bar"
 msgstr ""
 
 #: inc/library/custom-header/class-custom-header.php:54
-msgid "Above the navigation bar"
-msgstr ""
-
-#: inc/library/custom-header/class-custom-header.php:55
-msgid "Below the navigation bar"
-msgstr ""
-
-#: inc/library/custom-header/class-custom-header.php:68
 msgctxt "alignment"
 msgid "Left"
 msgstr ""
 
-#: inc/library/custom-header/class-custom-header.php:69
+#: inc/library/custom-header/class-custom-header.php:55
 msgctxt "alignment"
 msgid "Center"
 msgstr ""
 
-#: inc/library/custom-header/class-custom-header.php:70
+#: inc/library/custom-header/class-custom-header.php:56
 msgctxt "alignment"
 msgid "Right"
 msgstr ""
@@ -642,6 +774,220 @@ msgstr ""
 msgid "Customizer method %1$s with ID %2$s cannot be called before Customizer initialization."
 msgstr ""
 
+#: inc/library/customizer/class-customizer.php:471
+msgid "Layout"
+msgstr ""
+
+#: inc/library/fonts/class-font-customize-control.php:71
+msgid "Font Family"
+msgstr ""
+
+#: inc/library/fonts/class-font-customize-control.php:72
+msgid "Select Font Family"
+msgstr ""
+
+#: inc/library/fonts/class-font-customize-control.php:74
+msgid "Font Weight"
+msgstr ""
+
+#: inc/library/fonts/class-font-customize-control.php:75
+msgid "Select Font Weight"
+msgstr ""
+
+#: inc/library/fonts/class-font-customize-control.php:77
+msgid "Font Size"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:122
+msgctxt "font weight"
+msgid "Ultra-Light"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:123
+msgctxt "font weight"
+msgid "Light"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:124
+msgctxt "font weight"
+msgid "Book"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:125
+msgctxt "font weight"
+msgid "Normal"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:126
+msgctxt "font weight"
+msgid "Medium"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:127
+msgctxt "font weight"
+msgid "Semi-Bold"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:128
+msgctxt "font weight"
+msgid "Bold"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:129
+msgctxt "font weight"
+msgid "Extra-Bold"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:130
+msgctxt "font weight"
+msgid "Ultra-Bold"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:143
+msgctxt "font group"
+msgid "System"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:144
+msgctxt "font group"
+msgid "Sans-Serif"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:145
+msgctxt "font group"
+msgid "Serif"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:146
+msgctxt "font group"
+msgid "Display"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:147
+msgctxt "font group"
+msgid "Handwriting"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:148
+msgctxt "font group"
+msgid "Monospace"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:194
+msgctxt "font family"
+msgid "System Font"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:202
+msgctxt "font family"
+msgid "Arial"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:208
+msgctxt "font family"
+msgid "Helvetica Neue"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:214
+msgctxt "font family"
+msgid "Libre Franklin"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:220
+msgctxt "font family"
+msgid "Tahoma"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:226
+msgctxt "font family"
+msgid "Trebuchet MS"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:232
+msgctxt "font family"
+msgid "Verdana"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:240
+msgctxt "font family"
+msgid "Georgia"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:246
+msgctxt "font family"
+msgid "Palatino Linotype"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:252
+msgctxt "font family"
+msgid "Times New Roman"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:260
+msgctxt "font family"
+msgid "Impact"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:268
+msgctxt "font family"
+msgid "Comic Sans MS"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:276
+msgctxt "font family"
+msgid "Consolas"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:282
+msgctxt "font family"
+msgid "Courier New"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:288
+msgctxt "font family"
+msgid "Lucida Console"
+msgstr ""
+
+#: inc/library/fonts/class-font-families.php:294
+msgctxt "font family"
+msgid "Monaco"
+msgstr ""
+
+#. translators: %s: font family identifier
+#: inc/library/fonts/class-font-family-not-registered-exception.php:27
+msgid "%s is not a registered font family."
+msgstr ""
+
+#. translators: 1: property name, 2: font identifier
+#. translators: 1: property name, 2: font identifier
+#: inc/library/fonts/class-font-family.php:188, inc/library/fonts/class-font.php:183
+msgid "%1$s is not a valid property of the %2$s font."
+msgstr ""
+
+#: inc/library/fonts/class-fonts.php:332
+msgid "Fonts"
+msgstr ""
+
+#: inc/library/fonts/class-fonts.php:338
+msgid "Other Fonts"
+msgstr ""
+
+#: inc/library/fonts/class-fonts.php:461
+msgid "General Fonts"
+msgstr ""
+
+#: inc/library/fonts/class-fonts.php:465
+msgid "Base Font"
+msgstr ""
+
+#: inc/library/fonts/class-fonts.php:475
+msgid "Heading Font"
+msgstr ""
+
+#: inc/library/fonts/class-google-webfont-api.php:38
+msgid "Google Fonts"
+msgstr ""
+
 #: inc/library/footer-widget-areas/class-footer-widget-areas.php:122
 msgctxt "widget area dropdown"
 msgid "None"
@@ -649,20 +995,12 @@ msgstr ""
 
 #. translators: %s: widget area number
 #. translators: %s: widget area number
-#: inc/library/footer-widget-areas/class-footer-widget-areas.php:127, inc/library/footer-widget-areas/class-footer-widget-areas.php:181
+#: inc/library/footer-widget-areas/class-footer-widget-areas.php:127, inc/library/footer-widget-areas/class-footer-widget-areas.php:187
 msgid "Footer %s"
 msgstr ""
 
-#: inc/library/footer-widget-areas/class-footer-widget-areas.php:182
+#: inc/library/footer-widget-areas/class-footer-widget-areas.php:188
 msgid "Add widgets here to appear in your footer."
-msgstr ""
-
-#: inc/library/footer-widget-areas/class-footer-widget-areas.php:198
-msgid "Wide Footer Column"
-msgstr ""
-
-#: inc/library/footer-widget-areas/class-footer-widget-areas.php:199
-msgid "If you like to reserve more space for one of your footer widget columns, you can select that one here."
 msgstr ""
 
 #. translators: %s: menu identifier
@@ -675,51 +1013,63 @@ msgstr ""
 msgid "%1$s is not a valid property of the %2$s menu."
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:127
+#: inc/library/navbar/class-navbar.php:97
+msgctxt "navbar position"
+msgid "Top of the page, above header"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:98
+msgctxt "navbar position"
+msgid "Top of the page, below header"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:99
+msgctxt "navbar position"
+msgid "Left side of the page"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:100
+msgctxt "navbar position"
+msgid "Right side of the page"
+msgstr ""
+
+#: inc/library/navbar/class-navbar.php:195
 msgid "Navbar Extra"
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:128
+#: inc/library/navbar/class-navbar.php:196
 msgid "Add widgets here to appear as additional content in the navbar beside the main navigation menu."
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:149
-msgid "Primary Menu (Distraction-Free)"
+#: inc/library/navbar/class-navbar.php:217
+msgid "Primary Menu (Landing Page)"
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:162
+#: inc/library/navbar/class-navbar.php:230
 msgid "Navbar Colors"
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:166
+#: inc/library/navbar/class-navbar.php:234
 msgid "Navbar Text Color"
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:172
+#: inc/library/navbar/class-navbar.php:240
 msgid "Navbar Link Color"
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:178
+#: inc/library/navbar/class-navbar.php:246
 msgid "Navbar Background Color"
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:197
+#: inc/library/navbar/class-navbar.php:265
 msgid "Stick the navbar to the top of the page when scrolling?"
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:213
-msgid "Navbar Justify Content"
-msgstr ""
-
-#: inc/library/navbar/class-navbar.php:214
-msgid "Specify how the widgets in the navbar are aligned."
-msgstr ""
-
-#: inc/library/navbar/class-navbar.php:245
+#: inc/library/navbar/class-navbar.php:334
 msgid "Expand child menu"
 msgstr ""
 
-#: inc/library/navbar/class-navbar.php:246
+#: inc/library/navbar/class-navbar.php:335
 msgid "Collapse child menu"
 msgstr ""
 
@@ -751,27 +1101,27 @@ msgstr ""
 msgid "Invalid value."
 msgstr ""
 
-#: inc/library/sidebar/class-sidebar.php:127
+#: inc/library/sidebar/class-sidebar.php:121
 msgid "No Sidebar"
 msgstr ""
 
-#: inc/library/sidebar/class-sidebar.php:128
+#: inc/library/sidebar/class-sidebar.php:122
 msgid "Left Sidebar"
 msgstr ""
 
-#: inc/library/sidebar/class-sidebar.php:129
+#: inc/library/sidebar/class-sidebar.php:123
 msgid "Right Sidebar"
 msgstr ""
 
-#: inc/library/sidebar/class-sidebar.php:142
+#: inc/library/sidebar/class-sidebar.php:136
 msgid "Small"
 msgstr ""
 
-#: inc/library/sidebar/class-sidebar.php:143
+#: inc/library/sidebar/class-sidebar.php:137
 msgid "Medium"
 msgstr ""
 
-#: inc/library/sidebar/class-sidebar.php:144
+#: inc/library/sidebar/class-sidebar.php:138
 msgid "Large"
 msgstr ""
 
@@ -791,43 +1141,15 @@ msgstr ""
 msgid "Blog Sidebar"
 msgstr ""
 
-#: inc/library/sidebar/class-sidebar.php:263
-msgid "Sidebar Mode"
-msgstr ""
-
-#: inc/library/sidebar/class-sidebar.php:264
-msgid "Specify if and how the sidebar should be displayed."
-msgstr ""
-
-#: inc/library/sidebar/class-sidebar.php:272
-msgid "Sidebar Size"
-msgstr ""
-
-#: inc/library/sidebar/class-sidebar.php:273
-msgid "Specify the width of the sidebar."
-msgstr ""
-
-#: inc/library/sidebar/class-sidebar.php:281
-msgid "Enable Blog Sidebar?"
-msgstr ""
-
-#: inc/library/sidebar/class-sidebar.php:282
-msgid "If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar."
-msgstr ""
-
-#: inc/library/sidebar/class-sidebar.php:307
-msgid "This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it."
-msgstr ""
-
-#: inc/library/social-navigation/class-social-navigation.php:180
+#: inc/library/social-navigation/class-social-navigation.php:187
 msgid "Social Icon Colors"
 msgstr ""
 
-#: inc/library/social-navigation/class-social-navigation.php:184
+#: inc/library/social-navigation/class-social-navigation.php:191
 msgid "Social Icons Color"
 msgstr ""
 
-#: inc/library/social-navigation/class-social-navigation.php:191
+#: inc/library/social-navigation/class-social-navigation.php:197
 msgid "Social Icons Background Color"
 msgstr ""
 
@@ -837,48 +1159,32 @@ msgid "%s is not a registered sticky element."
 msgstr ""
 
 #. translators: 1: property name, 2: sticky element identifier
-#: inc/library/sticky-elements/class-sticky-element.php:145
+#: inc/library/sticky-elements/class-sticky-element.php:157
 msgid "%1$s is not a valid property of the %2$s sticky element."
 msgstr ""
 
-#: inc/library/sticky-elements/class-sticky-elements.php:138
-msgid "Layout"
-msgstr ""
-
-#: inc/library/top-bar/class-top-bar.php:97
-msgid "Top Bar"
-msgstr ""
-
-#: inc/library/top-bar/class-top-bar.php:98
+#: inc/library/top-bar/class-top-bar.php:117
 msgid "Add widgets here to appear in a narrow bar at the very top of the screen."
 msgstr ""
 
-#: inc/library/top-bar/class-top-bar.php:112
+#: inc/library/top-bar/class-top-bar.php:131
 msgid "Top Bar Colors"
 msgstr ""
 
-#: inc/library/top-bar/class-top-bar.php:116
+#: inc/library/top-bar/class-top-bar.php:135
 msgid "Top Bar Text Color"
 msgstr ""
 
-#: inc/library/top-bar/class-top-bar.php:123
+#: inc/library/top-bar/class-top-bar.php:141
 msgid "Top Bar Link Color"
 msgstr ""
 
-#: inc/library/top-bar/class-top-bar.php:130
+#: inc/library/top-bar/class-top-bar.php:147
 msgid "Top Bar Background Color"
 msgstr ""
 
-#: inc/library/top-bar/class-top-bar.php:150
-msgid "Stick the top bar to the top of the page when scrolling?"
-msgstr ""
-
 #: inc/library/top-bar/class-top-bar.php:166
-msgid "Top Bar Justify Content"
-msgstr ""
-
-#: inc/library/top-bar/class-top-bar.php:167
-msgid "Specify how the widgets in the top bar are aligned."
+msgid "Stick the top bar to the top of the page when scrolling?"
 msgstr ""
 
 #: inc/library/widgets/class-login-links-widget.php:25
@@ -943,6 +1249,6 @@ msgstr ""
 msgid "%s is not a valid widget class."
 msgstr ""
 
-#: inc/library/widgets/class-widgets.php:312
+#: inc/library/widgets/class-widgets.php:315
 msgid "Widget Area Settings"
 msgstr ""
