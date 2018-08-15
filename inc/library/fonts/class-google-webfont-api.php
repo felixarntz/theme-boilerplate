@@ -15,6 +15,22 @@
 class Super_Awesome_Theme_Google_Webfont_API extends Super_Awesome_Theme_Webfont_API {
 
 	/**
+	 * Temporary internal storage to persist the ID attribute to load fonts with in the current request.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	protected $id_attr = '';
+
+	/**
+	 * Temporary internal storage to persist the fonts to load in the current request.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	protected $fonts = array();
+
+	/**
 	 * Gets the slug of the web font API.
 	 *
 	 * Font families part of this API will be prefixed with that slug and a colon.
@@ -39,9 +55,10 @@ class Super_Awesome_Theme_Google_Webfont_API extends Super_Awesome_Theme_Webfont
 	}
 
 	/**
-	 * Loads the fonts by printing out the necessary `<link>` tag or similar.
+	 * Loads the fonts.
 	 *
-	 * In case of a Customizer preview, the markup needs to be printed even if no fonts are available.
+	 * This enqueues the Google fonts stylesheet and adds a preconnect resource hint for it.
+	 * In case of a Customizer partial, the markup needs to be printed directly using a `<link>` tag.
 	 *
 	 * @since 1.0.0
 	 *
@@ -52,6 +69,73 @@ class Super_Awesome_Theme_Google_Webfont_API extends Super_Awesome_Theme_Webfont
 	 *                        weight.
 	 */
 	public function load_fonts( $id_attr, array $fonts ) {
+		if ( is_customize_preview() && ! empty( $_POST[ WP_Customize_Selective_Refresh::RENDER_QUERY_VAR ] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+			$url = $this->get_fonts_url( $fonts );
+			if ( empty( $url ) ) {
+				return;
+			}
+
+			echo '<link rel="stylesheet" id="' . esc_attr( $id_attr ) . '" href="' . esc_url( $url ) . '" type="text/css" media="all" />'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
+			return;
+		}
+
+		$this->id_attr = str_replace( '-css', '', $id_attr );
+		$this->fonts   = $fonts;
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_fonts' ), 0, 0 );
+		add_filter( 'wp_resource_hints', array( $this, 'filter_preconnect_resource_hints' ), 10, 2 );
+	}
+
+	/**
+	 * Enqueues the stylesheet for loading Google fonts.
+	 *
+	 * @since 1.0.0
+	 */
+	public function enqueue_fonts() {
+		if ( empty( $this->id_attr ) || empty( $this->fonts ) ) {
+			return;
+		}
+
+		$url = $this->get_fonts_url( $this->fonts );
+		if ( empty( $url ) ) {
+			return;
+		}
+
+		wp_enqueue_style( $this->id_attr, $url, array(), null );
+	}
+
+	/**
+	 * Adds preconnect resource hints for Google fonts.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array  $urls          URLs to print for resource hints.
+	 * @param string $relation_type The relation type the URLs are printed.
+	 * @return array $urls Filtered URLs.
+	 */
+	public function filter_preconnect_resource_hints( $urls, $relation_type ) {
+		if ( 'preconnect' === $relation_type ) {
+			$urls[] = array(
+				'href' => 'https://fonts.gstatic.com',
+				'crossorigin',
+			);
+		}
+
+		return $urls;
+	}
+
+	/**
+	 * Gets the Google Fonts URL to load the given fonts.
+	 *
+	 * In case of a Customizer preview, a URL is returned even if no fonts need to be loaded,
+	 * in order for the Customizer partial to work.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $fonts List of fonts to load. Each item is an associative arrays containing a `family`
+	 *                     key with the font family instance, and a `weight` key with the desired font weight.
+	 * @return string Fonts URL, or empty string if nothing should be loaded.
+	 */
+	protected function get_fonts_url( array $fonts ) {
 		$font_families = array();
 
 		foreach ( $fonts as $font ) {
@@ -82,39 +166,13 @@ class Super_Awesome_Theme_Google_Webfont_API extends Super_Awesome_Theme_Webfont
 		}
 
 		if ( empty( $font_families ) && ! is_customize_preview() ) {
-			return;
+			return '';
 		}
 
-		$url = add_query_arg( array(
+		return add_query_arg( array(
 			'family' => urlencode( implode( '|', $font_families ) ),
 			'subset' => urlencode( 'latin,latin-ext' ),
 		), 'https://fonts.googleapis.com/css' );
-
-		echo '<link rel="stylesheet" id="' . esc_attr( $id_attr ) . '" href="' . esc_url( $url ) . '" type="text/css" media="all" />'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
-
-		if ( ! has_filter( 'wp_resource_hints', array( $this, 'filter_preconnect_resource_hints' ) ) ) {
-			add_filter( 'wp_resource_hints', array( $this, 'filter_preconnect_resource_hints' ), 10, 2 );
-		}
-	}
-
-	/**
-	 * Adds preconnect resource hints for Google fonts.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array  $urls          URLs to print for resource hints.
-	 * @param string $relation_type The relation type the URLs are printed.
-	 * @return array $urls Filtered URLs.
-	 */
-	public function filter_preconnect_resource_hints( $urls, $relation_type ) {
-		if ( 'preconnect' === $relation_type ) {
-			$urls[] = array(
-				'href' => 'https://fonts.gstatic.com',
-				'crossorigin',
-			);
-		}
-
-		return $urls;
 	}
 
 	/**
