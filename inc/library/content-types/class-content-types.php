@@ -146,6 +146,10 @@ final class Super_Awesome_Theme_Content_Types extends Super_Awesome_Theme_Theme_
 	 * @return bool True if the post navigation should be displayed, false otherwise.
 	 */
 	public function should_display_post_navigation( $post_type ) {
+		if ( 'post' === $post_type ) {
+			return true;
+		}
+
 		$post_type_object = get_post_type_object( $post_type );
 		if ( ! $post_type_object ) {
 			return false;
