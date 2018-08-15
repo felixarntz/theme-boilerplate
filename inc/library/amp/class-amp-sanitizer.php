@@ -90,7 +90,11 @@ final class Super_Awesome_Theme_AMP_Sanitizer extends AMP_Base_Sanitizer {
 		$state_id = $this->args['state_id'];
 
 		$navigation = $this->dom->getElementById( 'site-navigation' );
-		$button     = $this->xpath->query( '//nav[@id = "site-navigation"]//button[ contains( @class, "menu-toggle" ) ]' );
+		if ( ! $navigation ) {
+			return;
+		}
+
+		$button = $this->xpath->query( '//nav[@id = "site-navigation"]//button[ contains( @class, "menu-toggle" ) ]' );
 
 		$navigation_class = $navigation->getAttribute( 'class' );
 
@@ -122,6 +126,10 @@ final class Super_Awesome_Theme_AMP_Sanitizer extends AMP_Base_Sanitizer {
 		$state_id = $this->args['state_id'];
 
 		$navbar = $this->dom->getElementById( 'site-navbar' );
+		if ( ! $navbar ) {
+			return;
+		}
+
 		$button = $this->xpath->query( '//div[@id = "site-navbar"]//button[ contains( @class, "site-navbar-toggle" ) ]' );
 
 		$navbar_class = $navbar->getAttribute( 'class' );
