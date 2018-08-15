@@ -67,6 +67,7 @@ final class Super_Awesome_Theme_Widgets extends Super_Awesome_Theme_Theme_Compon
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Customizer' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Menus' );
+		$this->require_dependency_class( 'Super_Awesome_Theme_Icons' );
 	}
 
 	/**
