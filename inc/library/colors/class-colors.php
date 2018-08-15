@@ -225,7 +225,7 @@ final class Super_Awesome_Theme_Colors extends Super_Awesome_Theme_Theme_Compone
 			$value        = $color->get_value();
 			$shaded_value = $this->util()->darken_color( $value, 25 );
 
-			if ( empty( $value ) ) {
+			if ( empty( $value ) || 'blank' === $value ) {
 				continue;
 			}
 
