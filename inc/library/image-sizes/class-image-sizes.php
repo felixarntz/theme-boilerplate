@@ -15,6 +15,14 @@
 final class Super_Awesome_Theme_Image_Sizes extends Super_Awesome_Theme_Theme_Component_Base {
 
 	/**
+	 * Selectable image sizes as `$slug => $label` pairs.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	protected $selectable_sizes = array();
+
+	/**
 	 * Constructor.
 	 *
 	 * Sets the required dependencies.
@@ -24,6 +32,56 @@ final class Super_Awesome_Theme_Image_Sizes extends Super_Awesome_Theme_Theme_Co
 	public function __construct() {
 		$this->require_dependency_class( 'Super_Awesome_Theme_Settings' );
 		$this->require_dependency_class( 'Super_Awesome_Theme_Sidebar' );
+	}
+
+	/**
+	 * Registers an image size.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string      $slug       Image size identifier.
+	 * @param int         $width      Image width in pixels.
+	 * @param int         $height     Image height in pixels.
+	 * @param bool        $crop       Optional. Whether to crop to the specified width. Default false.
+	 * @param bool|string $selectable Optional. Whether to make the size available for selection when
+	 *                                inserting an image into the editor. Passing a string will use that
+	 *                                value as label for the image size (recommended). Default false.
+	 */
+	public function add_size( $slug, $width, $height, $crop = false, $selectable = false ) {
+		add_image_size( $slug, $width, $height, $crop );
+
+		if ( $selectable ) {
+			$this->selectable_sizes[ $slug ] = is_string( $selectable ) ? $selectable : $slug;
+		}
+	}
+
+	/**
+	 * Checks if an image size exists.
+	 *
+	 * Only considers custom image sizes, not the WordPress built-in ones.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $slug Image size identifier.
+	 * @return bool True if the image size exists, false if not.
+	 */
+	public function has_size( $slug ) {
+		return has_image_size( $slug );
+	}
+
+	/**
+	 * Removes an image size.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $slug Image size identifier.
+	 */
+	public function remove_size( $slug ) {
+		if ( isset( $this->selectable_sizes[ $slug ] ) ) {
+			unset( $this->selectable_sizes[ $slug ] );
+		}
+
+		remove_image_size( $slug );
 	}
 
 	/**
@@ -39,6 +97,7 @@ final class Super_Awesome_Theme_Image_Sizes extends Super_Awesome_Theme_Theme_Co
 	public function __call( $method, $args ) {
 		switch ( $method ) {
 			case 'register_sizes':
+			case 'filter_selectable_sizes':
 			case 'calculate_content_image_sizes':
 				return call_user_func_array( array( $this, $method ), $args );
 			default:
@@ -56,13 +115,25 @@ final class Super_Awesome_Theme_Image_Sizes extends Super_Awesome_Theme_Theme_Co
 		$rem = 16;
 
 		// The maximum site width is 72rem.
-		add_image_size( 'site-width', 72 * $rem, 9999 );
+		$this->add_size( 'site-width', 72 * $rem, 9999, false, __( 'Site Width', 'super-awesome-theme' ) );
 
 		// The maximum content width is 40rem.
-		add_image_size( 'content-width', 40 * $rem, 9999 );
+		$this->add_size( 'content-width', 40 * $rem, 9999, false, __( 'Content Width', 'super-awesome-theme' ) );
 
 		// Featured images span the maximum content width and should be in 16:9 aspect ratio.
 		set_post_thumbnail_size( 40 * $rem, ( ( 40 * $rem ) / 16 ) * 9, true );
+	}
+
+	/**
+	 * Filters the selectable image sizes, including custom selectable sizes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $sizes Image sizes as `$slug => $label` pairs.
+	 * @return array Filtered image sizes.
+	 */
+	protected function filter_selectable_sizes( array $sizes ) {
+		return array_merge( $sizes, $this->selectable_sizes );
 	}
 
 	/**
@@ -154,6 +225,7 @@ final class Super_Awesome_Theme_Image_Sizes extends Super_Awesome_Theme_Theme_Co
 	 */
 	protected function run_initialization() {
 		add_action( 'after_setup_theme', array( $this, 'register_sizes' ), 10, 0 );
+		add_filter( 'image_size_names_choose', array( $this, 'filter_selectable_sizes' ), 10, 1 );
 		add_filter( 'wp_calculate_image_sizes', array( $this, 'calculate_content_image_sizes' ), 10, 2 );
 	}
 }
