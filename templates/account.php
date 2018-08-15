@@ -9,6 +9,9 @@
  * @link    https://super-awesome-author.org/themes/super-awesome-theme/
  */
 
+// Never index account pages.
+add_action( 'wp_head', 'wp_no_robots' );
+
 get_header();
 
 ?>

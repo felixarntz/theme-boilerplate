@@ -61,7 +61,7 @@ button.search-submit {
 		max-width: 20rem;
 	}
 
-	#loginform {
+	form {
 		overflow: hidden;
 
 		.login-remember {
@@ -74,6 +74,8 @@ button.search-submit {
 
 		+ .login-links {
 			@include font-size(0.9);
+
+			margin-top: $spacing_vertical;
 		}
 	}
 

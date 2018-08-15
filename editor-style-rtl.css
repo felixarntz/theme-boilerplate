@@ -1325,19 +1325,20 @@ body.no-sidebar .page-login-form {
 	max-width: 20rem;
 }
 
-.page-login-form #loginform {
+.page-login-form form {
 	overflow: hidden;
 }
 
-.page-login-form #loginform .login-remember {
+.page-login-form form .login-remember {
 	float: right;
 }
 
-.page-login-form #loginform .login-submit input[type="submit"] {
+.page-login-form form .login-submit input[type="submit"] {
 	float: left;
 }
 
-.page-login-form #loginform + .login-links {
+.page-login-form form + .login-links {
+	margin-top: 1em;
 	font-size: 14.4px;
 	font-size: 0.9rem;
 }
