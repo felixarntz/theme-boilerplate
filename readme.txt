@@ -27,11 +27,12 @@ Super Awesome Theme theme for WordPress.
 Super Awesome Theme supports the following plugins:
 
 * [Easy Digital Downloads](https://wordpress.org/plugins/easy-digital-downloads/)
-* [Give](https://wordpress.org/plugins/give/)
 * [Jetpack](https://wordpress.org/plugins/jetpack/)
 * [Torro Forms](https://wordpress.org/plugins/torro-forms/)
-* [WP Event Calendar](https://wordpress.org/plugins/wp-event-calendar/)
-* [WP Offload S3](https://wordpress.org/plugins/amazon-s3-and-cloudfront/)
+* [WooCommerce](https://wordpress.org/plugins/woocommerce/)
+* [WP Site Identity](https://wordpress.org/plugins/wp-site-identity/)
+* [WP Subtitle](https://wordpress.org/plugins/wp-subtitle/)
+* [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/)
 
 == Copyright ==
 
@@ -49,13 +50,13 @@ GNU General Public License for more details.
 
 Super Awesome Theme bundles the following third-party resources:
 
-HTML5 Shiv, Copyright 2014 Alexander Farkas
-Licenses: MIT/GPL2
-Source: https://github.com/aFarkas/html5shiv
-
 normalize.css, Copyright 2012-2016 Nicolas Gallagher and Jonathan Neal
 License: MIT
 Source: https://necolas.github.io/normalize.css/
+
+selectWoo, Copyright (c) 2012-2017 Kevin Brown, Igor Vaynberg, and Select2 contributors
+License: MIT,
+Source: https://github.com/woocommerce/selectWoo
 
 == Changelog ==
 
