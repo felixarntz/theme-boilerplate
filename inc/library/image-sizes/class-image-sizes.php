@@ -175,7 +175,7 @@ final class Super_Awesome_Theme_Image_Sizes extends Super_Awesome_Theme_Theme_Co
 			$max_content_width_minus_padding  = $max_content_width - $double_padding;
 
 			if ( $image_width > $breakpoint && $image_width > $max_content_width ) {
-				$sizes = "(max-width: {$breakpoint}px) calc(100vw - {$double_padding}px), (max-width: {$max_width}px) calc({$max_content_vw}vw - {$double_padding}px), {$max_content_width_minus_padding}px";
+				$sizes = "(max-width: {$breakpoint}px) calc(100vw - {$double_padding}px), (max-width: {$max_width}px) calc({$max_content_width_vw}vw - {$double_padding}px), {$max_content_width_minus_padding}px";
 			} else {
 				$sizes = "(max-width: {$breakpoint}px) calc(100vw - {$double_padding}px), {$image_width}px";
 			}
