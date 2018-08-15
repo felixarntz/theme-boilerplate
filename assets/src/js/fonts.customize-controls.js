@@ -4,8 +4,6 @@
  * Theme Customizer handling for font controls.
  */
 
-import getCustomizeAction from './customize/get-customize-action';
-
 ( ( wp, data, _, $ ) => {
 	const api = wp.customize;
 
@@ -216,36 +214,20 @@ import getCustomizeAction from './customize/get-customize-action';
 
 	api.bind( 'ready', () => {
 
-		api.panel.instance( 'fonts', panel => {
-			const customizeAction = getCustomizeAction( panel.id );
+		data.fonts.forEach( font => {
+			if ( font.live_preview ) {
+				api.instance( font.id, setting => {
+					setting.transport = 'postMessage';
+				});
+			}
 
-			data.groups.forEach( group => {
-				if ( api.section.instance( group.id ) ) {
-					return;
-				}
-
-				api.section.add( new api.Section( group.id, {
-					panel:           panel.id,
-					title:           group.title,
-					customizeAction: customizeAction,
-				}) );
-			});
-
-			data.fonts.forEach( font => {
-				if ( font.live_preview ) {
-					api.instance( font.id, setting => {
-						setting.transport = 'postMessage';
-					});
-				}
-
-				api.control.add( new api.SuperAwesomeThemeFontControl( font.id, {
-					id:      font.id,
-					setting: font.id,
-					section: font.group,
-					label:   font.title,
-					type:    'super_awesome_theme_font',
-				}) );
-			});
+			api.control.add( new api.SuperAwesomeThemeFontControl( font.id, {
+				id:      font.id,
+				setting: font.id,
+				section: font.group,
+				label:   font.title,
+				type:    'super_awesome_theme_font',
+			}) );
 		});
 	});
 

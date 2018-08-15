@@ -84,134 +84,134 @@ msgstr ""
 msgid "Specify how the content in the bottom bar is aligned."
 msgstr ""
 
-#: inc/js-i18n.php:22
+#: inc/js-i18n.php:21
 msgid "Customizing &#9656; %s"
 msgstr ""
 
-#: inc/js-i18n.php:33
+#: inc/js-i18n.php:31
 msgid "Customizing"
 msgstr ""
 
-#: inc/js-i18n.php:36
+#: inc/js-i18n.php:34
 msgid "Use Page Header?"
 msgstr ""
 
-#: inc/js-i18n.php:39
+#: inc/js-i18n.php:37
 msgid "Use Excerpt in archives?"
 msgstr ""
 
-#: inc/js-i18n.php:42
+#: inc/js-i18n.php:40
 msgid "Show Date?"
 msgstr ""
 
-#: inc/js-i18n.php:45
+#: inc/js-i18n.php:43
 msgid "Show Author Name?"
 msgstr ""
 
-#: inc/js-i18n.php:48, inc/library/content-types/class-content-types.php:416
+#: inc/js-i18n.php:46, inc/library/content-types/class-content-types.php:416
 msgid "Show Author Box?"
 msgstr ""
 
-#: inc/js-i18n.php:51
+#: inc/js-i18n.php:49
 msgid "Display Location"
 msgstr ""
 
-#: inc/js-i18n.php:54
+#: inc/js-i18n.php:52
 msgid "Specify where to display the site logo, title and tagline."
 msgstr ""
 
-#: inc/js-i18n.php:57
+#: inc/js-i18n.php:55
 msgid "Footer Widgets"
 msgstr ""
 
-#: inc/js-i18n.php:60
+#: inc/js-i18n.php:58
 msgid "Wide Footer Column"
 msgstr ""
 
-#: inc/js-i18n.php:63
+#: inc/js-i18n.php:61
 msgid "If you like to reserve more space for one of your footer widget columns, you can select that one here."
 msgstr ""
 
-#: inc/js-i18n.php:66
+#: inc/js-i18n.php:64
 msgid "Navbar"
 msgstr ""
 
-#: inc/js-i18n.php:69
+#: inc/js-i18n.php:67
 msgid "Navbar Position"
 msgstr ""
 
-#: inc/js-i18n.php:72
+#: inc/js-i18n.php:70
 msgid "Navbar Justify Content"
 msgstr ""
 
-#: inc/js-i18n.php:75
+#: inc/js-i18n.php:73
 msgid "Specify how the content in the navbar is aligned."
 msgstr ""
 
-#: inc/js-i18n.php:78
+#: inc/js-i18n.php:76
 msgid "Sidebar"
 msgstr ""
 
-#: inc/js-i18n.php:81
+#: inc/js-i18n.php:79
 msgid "Sidebar Mode"
 msgstr ""
 
-#: inc/js-i18n.php:84
+#: inc/js-i18n.php:82
 msgid "Specify if and how the sidebar should be displayed."
 msgstr ""
 
-#: inc/js-i18n.php:87
+#: inc/js-i18n.php:85
 msgid "Sidebar Size"
 msgstr ""
 
-#: inc/js-i18n.php:90
+#: inc/js-i18n.php:88
 msgid "Specify the width of the sidebar."
 msgstr ""
 
-#: inc/js-i18n.php:93
+#: inc/js-i18n.php:91
 msgid "Enable Blog Sidebar?"
 msgstr ""
 
-#: inc/js-i18n.php:96
+#: inc/js-i18n.php:94
 msgid "If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar."
 msgstr ""
 
-#: inc/js-i18n.php:99
+#: inc/js-i18n.php:97
 msgid "This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it."
 msgstr ""
 
-#: inc/js-i18n.php:102
+#: inc/js-i18n.php:100
 msgid "Sticky Content"
 msgstr ""
 
-#: inc/js-i18n.php:105, inc/library/top-bar/class-top-bar.php:116
+#: inc/js-i18n.php:103, inc/library/top-bar/class-top-bar.php:116
 msgid "Top Bar"
 msgstr ""
 
-#: inc/js-i18n.php:108
+#: inc/js-i18n.php:106
 msgid "Top Bar Justify Content"
 msgstr ""
 
-#: inc/js-i18n.php:111
+#: inc/js-i18n.php:109
 msgid "Specify how the content in the top bar is aligned."
 msgstr ""
 
-#: inc/js-i18n.php:114
+#: inc/js-i18n.php:112
 msgctxt "taxonomy"
 msgid "Show %s?"
 msgstr ""
 
-#: inc/js-i18n.php:117
+#: inc/js-i18n.php:115
 msgctxt "custom header"
 msgid "Text Alignment"
 msgstr ""
 
-#: inc/js-i18n.php:120
+#: inc/js-i18n.php:118
 msgctxt "widget notice"
 msgid "This inline widget area contains widgets that are untested with it and thus may display incorrectly."
 msgstr ""
 
-#: inc/js-i18n.php:123
+#: inc/js-i18n.php:121
 msgctxt "widget notice"
 msgid "Untested with this widget area."
 msgstr ""
@@ -478,7 +478,7 @@ msgstr ""
 #. translators: %s: method name
 #. translators: %s: method name
 #. translators: %s: method name
-#: inc/library/amp/class-amp.php:99, inc/library/assets/class-assets.php:136, inc/library/bottom-bar/class-bottom-bar.php:85, inc/library/colors/class-colors.php:171, inc/library/comments/class-comments.php:130, inc/library/content-types/class-content-types.php:323, inc/library/custom-background/class-custom-background.php:44, inc/library/custom-header/class-custom-header.php:97, inc/library/custom-logo/class-custom-logo.php:44, inc/library/customizer/class-customizer.php:398, inc/library/distraction-free-mode/class-distraction-free-mode.php:89, inc/library/fonts/class-font-families.php:180, inc/library/fonts/class-fonts.php:184, inc/library/footer-navigation/class-footer-navigation.php:57, inc/library/footer-widget-areas/class-footer-widget-areas.php:154, inc/library/image-sizes/class-image-sizes.php:46, inc/library/menus/class-menus.php:128, inc/library/navbar/class-navbar.php:156, inc/library/settings/class-settings.php:106, inc/library/sidebar/class-sidebar.php:180, inc/library/social-navigation/class-social-navigation.php:153, inc/library/sticky-elements/class-sticky-elements.php:109, inc/library/theme-support/class-theme-support.php:104, inc/library/top-bar/class-top-bar.php:85, inc/library/widgets/class-widgets.php:364
+#: inc/library/amp/class-amp.php:99, inc/library/assets/class-assets.php:136, inc/library/bottom-bar/class-bottom-bar.php:85, inc/library/colors/class-colors.php:171, inc/library/comments/class-comments.php:130, inc/library/content-types/class-content-types.php:323, inc/library/custom-background/class-custom-background.php:44, inc/library/custom-header/class-custom-header.php:97, inc/library/custom-logo/class-custom-logo.php:44, inc/library/customizer/class-customizer.php:398, inc/library/distraction-free-mode/class-distraction-free-mode.php:89, inc/library/fonts/class-font-families.php:180, inc/library/fonts/class-fonts.php:184, inc/library/footer-navigation/class-footer-navigation.php:57, inc/library/footer-widget-areas/class-footer-widget-areas.php:154, inc/library/image-sizes/class-image-sizes.php:105, inc/library/menus/class-menus.php:128, inc/library/navbar/class-navbar.php:156, inc/library/settings/class-settings.php:106, inc/library/sidebar/class-sidebar.php:180, inc/library/social-navigation/class-social-navigation.php:153, inc/library/sticky-elements/class-sticky-elements.php:109, inc/library/theme-support/class-theme-support.php:104, inc/library/top-bar/class-top-bar.php:85, inc/library/widgets/class-widgets.php:365
 msgid "Call to undefined method %s"
 msgstr ""
 
@@ -964,23 +964,23 @@ msgstr ""
 msgid "%1$s is not a valid property of the %2$s font."
 msgstr ""
 
-#: inc/library/fonts/class-fonts.php:332
-msgid "Fonts"
-msgstr ""
-
-#: inc/library/fonts/class-fonts.php:338
+#: inc/library/fonts/class-fonts.php:343
 msgid "Other Fonts"
 msgstr ""
 
-#: inc/library/fonts/class-fonts.php:461
+#: inc/library/fonts/class-fonts.php:349, inc/library/fonts/class-fonts.php:354
+msgid "Fonts"
+msgstr ""
+
+#: inc/library/fonts/class-fonts.php:471
 msgid "General Fonts"
 msgstr ""
 
-#: inc/library/fonts/class-fonts.php:465
+#: inc/library/fonts/class-fonts.php:475
 msgid "Base Font"
 msgstr ""
 
-#: inc/library/fonts/class-fonts.php:475
+#: inc/library/fonts/class-fonts.php:485
 msgid "Heading Font"
 msgstr ""
 
@@ -1001,6 +1001,14 @@ msgstr ""
 
 #: inc/library/footer-widget-areas/class-footer-widget-areas.php:188
 msgid "Add widgets here to appear in your footer."
+msgstr ""
+
+#: inc/library/image-sizes/class-image-sizes.php:118
+msgid "Site Width"
+msgstr ""
+
+#: inc/library/image-sizes/class-image-sizes.php:121
+msgid "Content Width"
 msgstr ""
 
 #. translators: %s: menu identifier
@@ -1245,10 +1253,10 @@ msgid "Title"
 msgstr ""
 
 #. translators: %s: widget class name
-#: inc/library/widgets/class-widgets.php:131
+#: inc/library/widgets/class-widgets.php:132
 msgid "%s is not a valid widget class."
 msgstr ""
 
-#: inc/library/widgets/class-widgets.php:315
+#: inc/library/widgets/class-widgets.php:316
 msgid "Widget Area Settings"
 msgstr ""

@@ -327,30 +327,40 @@ final class Super_Awesome_Theme_Fonts extends Super_Awesome_Theme_Theme_Componen
 	 * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
 	 */
 	protected function register_customize_partial( $customizer ) {
-		if ( ! empty( $this->groups ) ) {
-			$customizer->add_panel( 'fonts', array(
-				Super_Awesome_Theme_Customize_Panel::PROP_TITLE    => __( 'Fonts', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Customize_Panel::PROP_PRIORITY => 41,
-			) );
-
-			$customizer->add_section( 'fonts', array(
-				Super_Awesome_Theme_Customize_Section::PROP_PANEL    => 'fonts',
-				Super_Awesome_Theme_Customize_Section::PROP_TITLE    => __( 'Other Fonts', 'super-awesome-theme' ),
-				Super_Awesome_Theme_Customize_Section::PROP_PRIORITY => 40,
-			) );
-
-			foreach ( $this->groups as $id => $title ) {
-				$customizer->add_section( $id, array(
-					Super_Awesome_Theme_Customize_Section::PROP_PANEL => 'fonts',
-					Super_Awesome_Theme_Customize_Section::PROP_TITLE => $title,
-				) );
-			}
-		}
-
-		$partial_fonts = array();
+		$partial_fonts     = array();
+		$has_default_group = false;
 		foreach ( $this->fonts as $id => $font ) {
 			if ( $font->get_prop( Super_Awesome_Theme_Font::PROP_LIVE_PREVIEW ) ) {
 				$partial_fonts[] = $id;
+			}
+			if ( 'fonts' === $font->get_prop( Super_Awesome_Theme_Font::PROP_GROUP ) ) {
+				$has_default_group = true;
+			}
+		}
+
+		$groups = $this->groups;
+		if ( $has_default_group ) {
+			$groups['fonts'] = __( 'Other Fonts', 'super-awesome-theme' );
+		}
+
+		if ( ! empty( $groups ) ) {
+			if ( count( $groups ) === 1 ) {
+				$customizer->add_section( key( $groups ), array(
+					Super_Awesome_Theme_Customize_Section::PROP_TITLE    => __( 'Fonts', 'super-awesome-theme' ),
+					Super_Awesome_Theme_Customize_Section::PROP_PRIORITY => 41,
+				) );
+			} else {
+				$customizer->add_panel( 'fonts', array(
+					Super_Awesome_Theme_Customize_Panel::PROP_TITLE    => __( 'Fonts', 'super-awesome-theme' ),
+					Super_Awesome_Theme_Customize_Panel::PROP_PRIORITY => 41,
+				) );
+
+				foreach ( $groups as $id => $title ) {
+					$customizer->add_section( $id, array(
+						Super_Awesome_Theme_Customize_Section::PROP_PANEL => 'fonts',
+						Super_Awesome_Theme_Customize_Section::PROP_TITLE => $title,
+					) );
+				}
 			}
 		}
 

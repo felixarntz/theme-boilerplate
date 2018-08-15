@@ -13,7 +13,6 @@ $generated_i18n_strings = array(
 	// Reference: bottom-bar.customize-controls.js:83
 	// Reference: colors.customize-controls.js:83
 	// Reference: content-types.customize-controls.js:83
-	// Reference: fonts.customize-controls.js:83
 	// Reference: footer-widget-areas.customize-controls.js:83
 	// Reference: navbar.customize-controls.js:83
 	// Reference: sidebar.customize-controls.js:83
@@ -24,7 +23,6 @@ $generated_i18n_strings = array(
 	// Reference: bottom-bar.customize-controls.js:86
 	// Reference: colors.customize-controls.js:86
 	// Reference: content-types.customize-controls.js:86
-	// Reference: fonts.customize-controls.js:86
 	// Reference: footer-widget-areas.customize-controls.js:86
 	// Reference: navbar.customize-controls.js:86
 	// Reference: sidebar.customize-controls.js:86

@@ -80,41 +80,9 @@
 /************************************************************************/
 /******/{
 
-	/***/2:
-	/***/function _(module, __webpack_exports__, __webpack_require__) {
-
-		"use strict";
-		/**
-   * File get-customize-action.js.
-   *
-   * Function to get the Customize action for a given panel.
-   */
-
-		/* harmony default export */
-		__webpack_exports__["a"] = function (panel) {
-			var _window$wp$i18n = window.wp.i18n,
-			    __ = _window$wp$i18n.__,
-			    sprintf = _window$wp$i18n.sprintf;
-
-			var panelInstance = panel && panel.length ? window.wp.customize.panel.instance(panel) : undefined;
-
-			if (panelInstance) {
-				return sprintf(__('Customizing &#9656; %s', 'super-awesome-theme'), panelInstance.params.title);
-			}
-
-			return __('Customizing', 'super-awesome-theme');
-		};
-
-		/***/
-	},
-
 	/***/29:
-	/***/function _(module, __webpack_exports__, __webpack_require__) {
+	/***/function _(module, exports) {
 
-		"use strict";
-
-		Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-		/* harmony import */var __WEBPACK_IMPORTED_MODULE_0__customize_get_customize_action__ = __webpack_require__(2);
 		/**
    * File fonts.customize-controls.js.
    *
@@ -337,36 +305,20 @@
 
 			api.bind('ready', function () {
 
-				api.panel.instance('fonts', function (panel) {
-					var customizeAction = Object(__WEBPACK_IMPORTED_MODULE_0__customize_get_customize_action__["a" /* default */])(panel.id);
+				data.fonts.forEach(function (font) {
+					if (font.live_preview) {
+						api.instance(font.id, function (setting) {
+							setting.transport = 'postMessage';
+						});
+					}
 
-					data.groups.forEach(function (group) {
-						if (api.section.instance(group.id)) {
-							return;
-						}
-
-						api.section.add(new api.Section(group.id, {
-							panel: panel.id,
-							title: group.title,
-							customizeAction: customizeAction
-						}));
-					});
-
-					data.fonts.forEach(function (font) {
-						if (font.live_preview) {
-							api.instance(font.id, function (setting) {
-								setting.transport = 'postMessage';
-							});
-						}
-
-						api.control.add(new api.SuperAwesomeThemeFontControl(font.id, {
-							id: font.id,
-							setting: font.id,
-							section: font.group,
-							label: font.title,
-							type: 'super_awesome_theme_font'
-						}));
-					});
+					api.control.add(new api.SuperAwesomeThemeFontControl(font.id, {
+						id: font.id,
+						setting: font.id,
+						section: font.group,
+						label: font.title,
+						type: 'super_awesome_theme_font'
+					}));
 				});
 			});
 		})(window.wp, window.themeFontsControlsData, window._, window.jQuery);
