@@ -42,11 +42,6 @@ require get_template_directory() . '/inc/template-hooks.php';
  */
 require get_template_directory() . '/inc/template-functions.php';
 
-/**
- * Plugin compatibility.
- */
-require get_template_directory() . '/inc/plugin-compat.php';
-
 super_awesome_theme()
 	->register_component( new Super_Awesome_Theme_Theme_Support() )
 	->register_component( new Super_Awesome_Theme_Settings() )
@@ -76,3 +71,8 @@ super_awesome_theme()
 	->register_component( new Super_Awesome_Theme_AMP() )
 	->resolve_dependencies()
 	->initialize();
+
+/**
+ * Plugin compatibility.
+ */
+require get_template_directory() . '/inc/plugin-compat.php';
