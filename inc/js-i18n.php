@@ -72,28 +72,34 @@ $generated_i18n_strings = array(
 	// Reference: navbar.customize-controls.js:251
 	__( 'Specify how the content in the navbar is aligned.', 'super-awesome-theme' ),
 
-	// Reference: sidebar.customize-controls.js:236
+	// Reference: sidebar.customize-controls.js:241
 	__( 'Sidebar', 'super-awesome-theme' ),
 
-	// Reference: sidebar.customize-controls.js:243
+	// Reference: sidebar.customize-controls.js:248
 	__( 'Sidebar Mode', 'super-awesome-theme' ),
 
-	// Reference: sidebar.customize-controls.js:244
+	// Reference: sidebar.customize-controls.js:249
 	__( 'Specify if and how the sidebar should be displayed.', 'super-awesome-theme' ),
 
-	// Reference: sidebar.customize-controls.js:252
+	// Reference: sidebar.customize-controls.js:257
 	__( 'Sidebar Size', 'super-awesome-theme' ),
 
-	// Reference: sidebar.customize-controls.js:253
+	// Reference: sidebar.customize-controls.js:258
 	__( 'Specify the width of the sidebar.', 'super-awesome-theme' ),
 
-	// Reference: sidebar.customize-controls.js:261
+	// Reference: sidebar.customize-controls.js:266
 	__( 'Enable Blog Sidebar?', 'super-awesome-theme' ),
 
-	// Reference: sidebar.customize-controls.js:262
+	// Reference: sidebar.customize-controls.js:267
 	__( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
 
-	// Reference: sidebar.customize-controls.js:310
+	// Reference: sidebar.customize-controls.js:275
+	__( 'Enable Shop Sidebar?', 'super-awesome-theme' ),
+
+	// Reference: sidebar.customize-controls.js:276
+	__( 'If you enable the shop sidebar, it will be shown beside your shop and single product content instead of the primary sidebar.', 'super-awesome-theme' ),
+
+	// Reference: sidebar.customize-controls.js:337
 	__( 'This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it.', 'super-awesome-theme' ),
 
 	// Reference: sticky-elements.customize-controls.js:115

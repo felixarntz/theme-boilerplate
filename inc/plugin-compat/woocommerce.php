@@ -69,31 +69,50 @@ function super_awesome_theme_woocommerce_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'super_awesome_theme_woocommerce_enqueue_scripts', 11 );
 
 /**
- * Registers additional Customizer functionality for WooCommerce.
+ * Registers WooCommerce sidebar settings.
+ *
+ * @since 1.0.0
+ */
+function super_awesome_theme_woocommerce_register_settings() {
+	$settings = super_awesome_theme( 'settings' );
+
+	$settings->register_setting( new Super_Awesome_Theme_Boolean_Setting(
+		'shop_sidebar_enabled',
+		array( Super_Awesome_Theme_Boolean_Setting::PROP_DEFAULT => false )
+	) );
+}
+add_action( 'after_setup_theme', 'super_awesome_theme_woocommerce_register_settings', 10, 0 );
+
+/**
+ * Sets a flag so that the shop sidebar control is rendered in the Customizer.
  *
  * @since 1.0.0
  *
- * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+ * @param array $data Associative data array to pass to the script.
+ * @return array Filtered array.
  */
-function super_awesome_theme_woocommerce_customize_register( $wp_customize ) {
-	$wp_customize->add_setting( 'shop_sidebar_enabled', array(
-		'default'           => '',
-		'transport'         => 'postMessage',
-	) );
-	$wp_customize->add_control( 'shop_sidebar_enabled', array(
-		'section'         => 'sidebars',
-		'label'           => __( 'Enable Shop Sidebar?', 'super-awesome-theme' ),
-		'description'     => __( 'If you enable the shop sidebar, it will be shown beside your shop content instead of the primary sidebar.', 'super-awesome-theme' ),
-		'type'            => 'checkbox',
-		'active_callback' => 'is_woocommerce',
-	) );
-	$wp_customize->selective_refresh->add_partial( 'shop_sidebar_enabled', array(
-		'selector'            => '#sidebar',
-		'render_callback'     => 'get_sidebar',
-		'container_inclusive' => true,
+function super_awesome_theme_woocommerce_set_sidebar_control_flag( $data ) {
+	$data['displayShopSidebarEnabledSetting'] = true;
+
+	return $data;
+}
+add_filter( 'super_awesome_theme_sidebar_controls_data', 'super_awesome_theme_woocommerce_set_sidebar_control_flag', 10, 1 );
+
+/**
+ * Registers WooCommerce sidebar Customizer partial.
+ *
+ * @since 1.0.0
+ *
+ * @param Super_Awesome_Theme_Customizer $customizer Customizer instance.
+ */
+function super_awesome_theme_woocommerce_customize_register( $customizer ) {
+	$customizer->add_partial( 'shop_sidebar_enabled', array(
+		Super_Awesome_Theme_Customize_Partial::PROP_SELECTOR            => '#sidebar',
+		Super_Awesome_Theme_Customize_Partial::PROP_RENDER_CALLBACK     => 'get_sidebar',
+		Super_Awesome_Theme_Customize_Partial::PROP_CONTAINER_INCLUSIVE => true,
 	) );
 }
-add_action( 'customize_register', 'super_awesome_theme_woocommerce_customize_register', 11 );
+super_awesome_theme( 'customizer' )->on_init( 'super_awesome_theme_woocommerce_customize_register' );
 
 /**
  * Overrides the name of the sidebar to display on the current page, if necessary.

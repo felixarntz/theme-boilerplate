@@ -302,6 +302,18 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 	 * @param Super_Awesome_Theme_Assets $assets Assets instance.
 	 */
 	protected function register_customize_controls_js( $assets ) {
+		/**
+		 * Filters the data to pass to the sidebar controls script.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $sidebar_controls_data Associative data array to pass to the script.
+		 */
+		$sidebar_controls_data = apply_filters( 'super_awesome_theme_sidebar_controls_data', array(
+			'sidebarModeChoices' => $this->get_sidebar_mode_choices(),
+			'sidebarSizeChoices' => $this->get_sidebar_size_choices(),
+		) );
+
 		$assets->register_asset( new Super_Awesome_Theme_Script(
 			'super-awesome-theme-sidebar-customize-controls',
 			get_theme_file_uri( '/assets/dist/js/sidebar.customize-controls.js' ),
@@ -311,10 +323,7 @@ class Super_Awesome_Theme_Sidebar extends Super_Awesome_Theme_Theme_Component_Ba
 				Super_Awesome_Theme_Script::PROP_LOCATION     => Super_Awesome_Theme_Script::LOCATION_CUSTOMIZE_CONTROLS,
 				Super_Awesome_Theme_Script::PROP_MIN_URI      => true,
 				Super_Awesome_Theme_Script::PROP_DATA_NAME    => 'themeSidebarControlsData',
-				Super_Awesome_Theme_Script::PROP_DATA         => array(
-					'sidebarModeChoices' => $this->get_sidebar_mode_choices(),
-					'sidebarSizeChoices' => $this->get_sidebar_size_choices(),
-				),
+				Super_Awesome_Theme_Script::PROP_DATA         => $sidebar_controls_data,
 			)
 		) );
 	}

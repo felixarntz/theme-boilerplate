@@ -12,6 +12,11 @@ import getCustomizeAction from './customize/get-customize-action';
 	const util   = new CustomizeControlsUtil( api );
 	const { __ } = wp.i18n;
 
+	const sidebarModeDependants = [ 'sidebar_size', 'blog_sidebar_enabled' ];
+	if ( data.displayShopSidebarEnabledSetting ) {
+		sidebarModeDependants.push( 'shop_sidebar_enabled' );
+	}
+
 	api.bind( 'ready', () => {
 		api.when( 'sidebar_mode', 'sidebar_size', 'blog_sidebar_enabled', ( sidebarMode, sidebarSize, blogSidebarEnabled ) => {
 			sidebarMode.transport        = 'postMessage';
@@ -51,22 +56,44 @@ import getCustomizeAction from './customize/get-customize-action';
 				description: __( 'If you enable the blog sidebar, it will be shown beside your blog and single post content instead of the primary sidebar.', 'super-awesome-theme' ),
 				type:        'checkbox',
 			}) );
+
+			if ( data.displayShopSidebarEnabledSetting ) {
+				api.control.add( new api.Control( 'shop_sidebar_enabled', {
+					setting:     'shop_sidebar_enabled',
+					section:     'sidebar',
+					label:       __( 'Enable Shop Sidebar?', 'super-awesome-theme' ),
+					description: __( 'If you enable the shop sidebar, it will be shown beside your shop and single product content instead of the primary sidebar.', 'super-awesome-theme' ),
+					type:        'checkbox',
+				}) );
+			}
 		});
 
 		// Handle visibility of the sidebar controls.
-		util.bindSettingToControls( 'sidebar_mode', [ 'sidebar_size', 'blog_sidebar_enabled' ], ( value, control ) => {
+		util.bindSettingToControls( 'sidebar_mode', sidebarModeDependants, ( value, control ) => {
 			control.active.set( 'no_sidebar' !== value );
 		});
 
-		// Handle visibility of the actual sidebar widget area controls.
-		util.bindSettingToSections( 'blog_sidebar_enabled', [ 'sidebar-widgets-primary', 'sidebar-widgets-blog' ], ( value, section ) => {
-			if ( !! value === ( 'blog' === section.params.sidebarId ) ) {
+		// Handle visibility of the actual blog sidebar widget area.
+		util.bindSettingToSections( 'blog_sidebar_enabled', [ 'sidebar-widgets-blog' ], ( value, section ) => {
+			if ( value ) {
 				section.activate();
 				return;
 			}
 
 			section.deactivate();
 		});
+
+		// Handle visibility of the actual shop sidebar widget area.
+		if ( data.displayShopSidebarEnabledSetting ) {
+			util.bindSettingToSections( 'shop_sidebar_enabled', [ 'sidebar-widgets-shop' ], ( value, section ) => {
+				if ( value ) {
+					section.activate();
+					return;
+				}
+
+				section.deactivate();
+			});
+		}
 
 		// Show a notification for the blog sidebar instead of hiding it.
 		api.control( 'blog_sidebar_enabled', function( control ) {

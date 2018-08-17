@@ -108,7 +108,7 @@ msgstr ""
 msgid "Show Author Name?"
 msgstr ""
 
-#: inc/js-i18n.php:46, inc/library/content-types/class-content-types.php:416
+#: inc/js-i18n.php:46, inc/library/content-types/class-content-types.php:420
 msgid "Show Author Box?"
 msgstr ""
 
@@ -177,41 +177,49 @@ msgid "If you enable the blog sidebar, it will be shown beside your blog and sin
 msgstr ""
 
 #: inc/js-i18n.php:97
-msgid "This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it."
+msgid "Enable Shop Sidebar?"
 msgstr ""
 
 #: inc/js-i18n.php:100
-msgid "Sticky Content"
+msgid "If you enable the shop sidebar, it will be shown beside your shop and single product content instead of the primary sidebar."
 msgstr ""
 
-#: inc/js-i18n.php:103, inc/library/top-bar/class-top-bar.php:116
-msgid "Top Bar"
+#: inc/js-i18n.php:103
+msgid "This page doesn&#8217;t support the blog sidebar. Navigate to the blog page or another page that supports it."
 msgstr ""
 
 #: inc/js-i18n.php:106
-msgid "Top Bar Justify Content"
+msgid "Sticky Content"
 msgstr ""
 
-#: inc/js-i18n.php:109
-msgid "Specify how the content in the top bar is aligned."
+#: inc/js-i18n.php:109, inc/library/top-bar/class-top-bar.php:116
+msgid "Top Bar"
 msgstr ""
 
 #: inc/js-i18n.php:112
+msgid "Top Bar Justify Content"
+msgstr ""
+
+#: inc/js-i18n.php:115
+msgid "Specify how the content in the top bar is aligned."
+msgstr ""
+
+#: inc/js-i18n.php:118
 msgctxt "taxonomy"
 msgid "Show %s?"
 msgstr ""
 
-#: inc/js-i18n.php:115
+#: inc/js-i18n.php:121
 msgctxt "custom header"
 msgid "Text Alignment"
 msgstr ""
 
-#: inc/js-i18n.php:118
+#: inc/js-i18n.php:124
 msgctxt "widget notice"
 msgid "This inline widget area contains widgets that are untested with it and thus may display incorrectly."
 msgstr ""
 
-#: inc/js-i18n.php:121
+#: inc/js-i18n.php:127
 msgctxt "widget notice"
 msgid "Untested with this widget area."
 msgstr ""
@@ -226,15 +234,15 @@ msgstr ""
 msgid "Account Page"
 msgstr ""
 
-#: templates/account.php:27
+#: templates/account.php:30
 msgid "You must be logged in to view the content of this page."
 msgstr ""
 
-#: templates/account.php:33, templates/login.php:39
+#: templates/account.php:36, templates/login.php:167, templates/login.php:186, templates/login.php:206
 msgid "Register"
 msgstr ""
 
-#: templates/account.php:36, templates/login.php:42
+#: templates/account.php:39, templates/login.php:194, templates/login.php:209
 msgid "Lost your password?"
 msgstr ""
 
@@ -250,12 +258,72 @@ msgstr ""
 msgid "Login Page"
 msgstr ""
 
-#: templates/login.php:27
+#: templates/login.php:35, templates/login.php:164, templates/login.php:192
+msgid "Log In"
+msgstr ""
+
+#: templates/login.php:40
+msgid "Lost Password"
+msgstr ""
+
+#: templates/login.php:41
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgstr ""
+
+#: templates/login.php:45
+msgid "Your password reset link appears to be invalid. Please request a new link below."
+msgstr ""
+
+#: templates/login.php:48
+msgid "Your password reset link has expired. Please request a new link below."
+msgstr ""
+
+#: templates/login.php:59
+msgid "Registration Form"
+msgstr ""
+
+#: templates/login.php:72
 msgid "You are now logged out."
 msgstr ""
 
-#: templates/login.php:50
-msgid "Logout"
+#: templates/login.php:78
+msgid "Click here to register."
+msgstr ""
+
+#: templates/login.php:81
+msgid "User registration is currently not allowed."
+msgstr ""
+
+#: templates/login.php:87
+msgid "Check your email for the confirmation link."
+msgstr ""
+
+#: templates/login.php:90
+msgid "Check your email for your new password."
+msgstr ""
+
+#: templates/login.php:93
+msgid "Registration complete. Please check your email."
+msgstr ""
+
+#: templates/login.php:154
+msgid "Username or Email Address"
+msgstr ""
+
+#: templates/login.php:158
+msgid "Get New Password"
+msgstr ""
+
+#: templates/login.php:177
+msgid "Username"
+msgstr ""
+
+#: templates/login.php:181
+msgid "Email"
+msgstr ""
+
+#: templates/login.php:184
+msgid "Registration confirmation will be emailed to you."
 msgstr ""
 
 #. translators: 1: theme component identifier, 2: dependency identifier
@@ -280,20 +348,12 @@ msgstr ""
 msgid "Shop Sidebar"
 msgstr ""
 
-#: inc/plugin-compat/woocommerce.php:85
-msgid "Enable Shop Sidebar?"
-msgstr ""
-
-#: inc/plugin-compat/woocommerce.php:86
-msgid "If you enable the shop sidebar, it will be shown beside your shop content instead of the primary sidebar."
-msgstr ""
-
-#: inc/plugin-compat/woocommerce.php:267
+#: inc/plugin-compat/woocommerce.php:286
 msgid "View your shopping cart"
 msgstr ""
 
 #. translators: %s: number of items in the cart
-#: inc/plugin-compat/woocommerce.php:275
+#: inc/plugin-compat/woocommerce.php:294
 msgid "%s item"
 msgid_plural "%s items"
 msgstr[0] ""
@@ -478,7 +538,7 @@ msgstr ""
 #. translators: %s: method name
 #. translators: %s: method name
 #. translators: %s: method name
-#: inc/library/amp/class-amp.php:99, inc/library/assets/class-assets.php:136, inc/library/bottom-bar/class-bottom-bar.php:85, inc/library/colors/class-colors.php:171, inc/library/comments/class-comments.php:130, inc/library/content-types/class-content-types.php:323, inc/library/custom-background/class-custom-background.php:44, inc/library/custom-header/class-custom-header.php:97, inc/library/custom-logo/class-custom-logo.php:44, inc/library/customizer/class-customizer.php:398, inc/library/distraction-free-mode/class-distraction-free-mode.php:89, inc/library/fonts/class-font-families.php:180, inc/library/fonts/class-fonts.php:184, inc/library/footer-navigation/class-footer-navigation.php:57, inc/library/footer-widget-areas/class-footer-widget-areas.php:154, inc/library/image-sizes/class-image-sizes.php:105, inc/library/menus/class-menus.php:128, inc/library/navbar/class-navbar.php:156, inc/library/settings/class-settings.php:106, inc/library/sidebar/class-sidebar.php:180, inc/library/social-navigation/class-social-navigation.php:153, inc/library/sticky-elements/class-sticky-elements.php:109, inc/library/theme-support/class-theme-support.php:104, inc/library/top-bar/class-top-bar.php:85, inc/library/widgets/class-widgets.php:365
+#: inc/library/amp/class-amp.php:99, inc/library/assets/class-assets.php:136, inc/library/bottom-bar/class-bottom-bar.php:85, inc/library/colors/class-colors.php:171, inc/library/comments/class-comments.php:130, inc/library/content-types/class-content-types.php:327, inc/library/custom-background/class-custom-background.php:44, inc/library/custom-header/class-custom-header.php:97, inc/library/custom-logo/class-custom-logo.php:44, inc/library/customizer/class-customizer.php:398, inc/library/distraction-free-mode/class-distraction-free-mode.php:89, inc/library/fonts/class-font-families.php:180, inc/library/fonts/class-fonts.php:184, inc/library/footer-navigation/class-footer-navigation.php:57, inc/library/footer-widget-areas/class-footer-widget-areas.php:154, inc/library/image-sizes/class-image-sizes.php:105, inc/library/menus/class-menus.php:128, inc/library/navbar/class-navbar.php:156, inc/library/settings/class-settings.php:106, inc/library/sidebar/class-sidebar.php:180, inc/library/social-navigation/class-social-navigation.php:153, inc/library/sticky-elements/class-sticky-elements.php:109, inc/library/theme-support/class-theme-support.php:104, inc/library/top-bar/class-top-bar.php:85, inc/library/widgets/class-widgets.php:365
 msgid "Call to undefined method %s"
 msgstr ""
 
@@ -717,12 +777,12 @@ msgctxt "attachment metadata"
 msgid "File Size"
 msgstr ""
 
-#: inc/library/content-types/class-content-types.php:383
+#: inc/library/content-types/class-content-types.php:387
 msgid "Content Types"
 msgstr ""
 
 #. translators: %s: field label
-#: inc/library/content-types/class-content-types.php:509
+#: inc/library/content-types/class-content-types.php:513
 msgctxt "attachment metadata"
 msgid "Show %s?"
 msgstr ""
@@ -984,7 +1044,7 @@ msgstr ""
 msgid "Heading Font"
 msgstr ""
 
-#: inc/library/fonts/class-google-webfont-api.php:38
+#: inc/library/fonts/class-google-webfont-api.php:54
 msgid "Google Fonts"
 msgstr ""
 
