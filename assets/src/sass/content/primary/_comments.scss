@@ -17,6 +17,22 @@
 	}
 }
 
+.comment {
+	margin-bottom: $spacing_vertical;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.bypostauthor {
+	border: 1px solid $color__lightgray;
+
+	.comment-body .comment-avatar {
+		padding: 2px;
+	}
+}
+
 .comment-body {
 	display: flex;
 	align-items: flex-start;

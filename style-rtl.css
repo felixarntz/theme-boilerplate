@@ -3134,6 +3134,22 @@ body.no-sidebar .comments-area {
 	list-style: none;
 }
 
+.comment {
+	margin-bottom: 1em;
+}
+
+.comment:last-child {
+	margin-bottom: 0;
+}
+
+.bypostauthor {
+	border: 1px solid #ccc;
+}
+
+.bypostauthor .comment-body .comment-avatar {
+	padding: 2px;
+}
+
 .comment-body {
 	align-items: flex-start;
 	-ms-flex-align: start;
