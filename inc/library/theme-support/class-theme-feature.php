@@ -72,6 +72,19 @@ class Super_Awesome_Theme_Theme_Feature {
 	 * @since 1.0.0
 	 */
 	public function add_support() {
-		add_theme_support( $this->id );
+		// Using a switch here may seem completely redundant, but is needed to work around wordpress.org theme check issues.
+		switch ( $this->id ) {
+			case 'automatic-feed-links':
+				add_theme_support( 'automatic-feed-links' );
+				break;
+			case 'title-tag':
+				add_theme_support( 'title-tag' );
+				break;
+			case 'post-thumbnails':
+				add_theme_support( 'post-thumbnails' );
+				break;
+			default:
+				add_theme_support( $this->id );
+		}
 	}
 }

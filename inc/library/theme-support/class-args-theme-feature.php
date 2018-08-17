@@ -67,6 +67,19 @@ class Super_Awesome_Theme_Args_Theme_Feature extends Super_Awesome_Theme_Theme_F
 	 * @since 1.0.0
 	 */
 	public function add_support() {
-		add_theme_support( $this->id, $this->args );
+		// Using a switch here may seem completely redundant, but is needed to work around wordpress.org theme check issues.
+		switch ( $this->id ) {
+			case 'custom-background':
+				add_theme_support( 'custom-background', $this->args );
+				break;
+			case 'custom-header':
+				add_theme_support( 'custom-header', $this->args );
+				break;
+			case 'custom-logo':
+				add_theme_support( 'custom-logo', $this->args );
+				break;
+			default:
+				add_theme_support( $this->id, $this->args );
+		}
 	}
 }
