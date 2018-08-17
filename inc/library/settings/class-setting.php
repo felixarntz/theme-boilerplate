@@ -187,7 +187,7 @@ class Super_Awesome_Theme_Setting {
 	 *
 	 * @param WP_Error $validity Error object to add validation errors to.
 	 * @param mixed    $value    Value to validate.
-	 * @return bool|WP_Error True on success, error object on failure.
+	 * @return WP_Error Error object with or without errors.
 	 */
 	final public function validate_value( WP_Error $validity, $value ) {
 		$validity = $this->default_validation_callback( $validity, $value );
@@ -197,9 +197,6 @@ class Super_Awesome_Theme_Setting {
 		}
 
 		if ( is_wp_error( $validity ) ) {
-			if ( empty( $validity->errors ) ) {
-				$validity = true;
-			}
 			return $validity;
 		}
 
@@ -207,7 +204,7 @@ class Super_Awesome_Theme_Setting {
 			return new WP_Error( 'invalid_value', __( 'Invalid value.', 'super-awesome-theme' ) );
 		}
 
-		return true;
+		return new WP_Error();
 	}
 
 	/**
