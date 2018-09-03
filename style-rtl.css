@@ -2016,30 +2016,6 @@ body.no-sidebar .site-content > .site-component-inner .site-sidebar {
 	overflow-x: hidden;
 }
 
-.site-main .comment-navigation,
-.site-main
-.posts-navigation,
-.site-main
-.post-navigation {
-	margin: 0 0 1.5em;
-	overflow: hidden;
-}
-
-.comment-navigation .nav-previous,
-.posts-navigation .nav-previous,
-.post-navigation .nav-previous {
-	float: right;
-	width: 50%;
-}
-
-.comment-navigation .nav-next,
-.posts-navigation .nav-next,
-.post-navigation .nav-next {
-	float: left;
-	width: 50%;
-	text-align: left;
-}
-
 @media screen and (max-width: 600px) {
 	#wpadminbar {
 		position: fixed;
@@ -3074,17 +3050,41 @@ body.no-sidebar
 	text-align: center;
 }
 
-.nav-links {
+.navigation.comment-navigation,
+.navigation.posts-navigation,
+.navigation.post-navigation {
+	overflow: hidden;
+}
+
+.navigation.comment-navigation .nav-previous,
+.navigation.posts-navigation .nav-previous,
+.navigation.post-navigation .nav-previous {
+	float: right;
+	width: 50%;
+}
+
+.navigation.comment-navigation .nav-next,
+.navigation.posts-navigation .nav-next,
+.navigation.post-navigation .nav-next {
+	float: left;
+	width: 50%;
+	text-align: left;
+}
+
+.navigation.pagination .nav-links,
+.navigation.comments-pagination .nav-links {
 	display: inline-block;
 	border: 1px solid #ccc;
 }
 
-.nav-links .page-numbers {
+.navigation.pagination .nav-links .page-numbers,
+.navigation.comments-pagination .nav-links .page-numbers {
 	display: inline-block;
 	padding: 0.75rem 1rem;
 }
 
-.nav-links .page-numbers.current {
+.navigation.pagination .nav-links .page-numbers.current,
+.navigation.comments-pagination .nav-links .page-numbers.current {
 	font-weight: 700;
 }
 

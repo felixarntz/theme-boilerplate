@@ -79,18 +79,38 @@
 .navigation {
 	margin-bottom: $spacing_vertical;
 	text-align: center;
-}
 
-.nav-links {
-	display: inline-block;
-	border: 1px solid $color__lightgray;
+	&.comment-navigation,
+	&.posts-navigation,
+	&.post-navigation {
+		overflow: hidden;
 
-	.page-numbers {
-		display: inline-block;
-		padding: $padding_vertical $padding_horizontal;
+		.nav-previous {
+			float: left;
+			width: 50%;
+		}
 
-		&.current {
-			font-weight: $font__weight-strong;
+		.nav-next {
+			float: right;
+			text-align: right;
+			width: 50%;
+		}
+	}
+
+	&.pagination,
+	&.comments-pagination {
+		.nav-links {
+			display: inline-block;
+			border: 1px solid $color__lightgray;
+
+			.page-numbers {
+				display: inline-block;
+				padding: $padding_vertical $padding_horizontal;
+
+				&.current {
+					font-weight: $font__weight-strong;
+				}
+			}
 		}
 	}
 }

@@ -204,26 +204,6 @@
 	overflow-x: hidden;
 }
 
-.comment-navigation,
-.posts-navigation,
-.post-navigation {
-	.site-main & {
-		margin: 0 0 1.5em;
-		overflow: hidden;
-	}
-
-	.nav-previous {
-		float: left;
-		width: 50%;
-	}
-
-	.nav-next {
-		float: right;
-		text-align: right;
-		width: 50%;
-	}
-}
-
 // Fix issue with sticky content and toolbar by always keeping it fixed.
 @media screen and (max-width: 600px) {
 	#wpadminbar {
